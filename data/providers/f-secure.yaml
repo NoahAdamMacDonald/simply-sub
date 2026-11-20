@@ -1,0 +1,1414 @@
+# Researched by hand on 2026-11-20 (M11.15, security batch 2), read from Canada with Edge and a plain fetch: f-secure.com's
+# global (/en), US (/us-en) and UK (/gb-en) sites and its German, French, Italian, Dutch and Spanish ones, its shop
+# (onlineshop.f-secure.com, run by Cleverbridge), its user guide (help.f-secure.com, Total for Windows), knowledge base
+# (kb.f-secure.com), legal pages, company and investor sites, and AV-TEST's page. Pages, each quoted where it's used:
+# Pricing: each site's product pages (/total, /internet-security, /vpn, /id-protection, /total/scam-protection), whose buy
+# blocks show 1, 3 and 5 devices for 1 year and 2 years (the 2 years tab's prices are in the served page). "F-Secure
+# honest pricing": "New or renew, the price is the same. No pricing games: your renewal price is the same as what any new
+# customer pays." (its tooltip on every card), so the prices shown are the regular ones. The 2-year term renews for 2
+# years at the same price (Canada's checkout: "This is a subscription order with a fee of €124.99 per 24 months.",
+# "This subscription renews automatically at the price and frequency shown in the cart above."), so both periods are
+# stored. Scam Protection is monthly only ("Scam Protection is currently only available as a monthly subscription.").
+# Which country: the US and UK sites price in USD and GBP; the global site, which a Canadian reader gets, prices in euros
+# ("country":"global"), and the German, French, Italian, Dutch and Spanish sites show the same euro prices. Canada's
+# checkout (read from Quebec) charged the euro price plus GST and QST, so the euro prices are GLOBAL, for Canada too; that
+# checkout also lets the buyer pick Canadian dollars at a converted amount (CA$196.26 for €124.99), not a price list of
+# its own (currencies, below). Its user guide's "Where can I buy F-Secure Total?" lists Canada, Australia and New Zealand.
+# Tax: the UK's Internet Security, VPN, ID Protection and Scam Protection pages say "*All prices include VAT." (taxIncluded
+# on those UK prices); the US pages carry the same words, which aren't US sales tax, and the Total pages don't say it.
+# Region checklist for CA and US, 2026-11-20: 1. its hreflang links name en-US and en-GB sites only (no Canadian one); 2.
+# no country picker beyond its site list ("Global" for Canada); 3. its page data names the site's country ("country":
+# "global", "us"); 4. the checkout, up to the payment form, named Quebec, Canada, euros and GST/QST; 5. its knowledge base
+# (payments, renewals, refunds); 6. Edge and a plain fetch; 7. no bill offered.
+# Not drafted: its 2-, 7-, 10-, 15-, 20- and 25-device options ("Show all options"), ID Protection's 3- and 5-device
+# options (their only difference is how many of each item it watches: in the plan's notes), Kiren by F-Secure (its
+# mobile app, formerly F-Secure Mobile Security, sold in the app stores with no price on kiren.com), F-Secure Anti-Virus
+# and the old Internet Security (no longer sold: "purchased before February 14th, 2023"), and its free tools (Identity
+# Theft Checker, Link Checker, Online Shopping Checker, Deepfake Detector, IP checker).
+# Bundles: none; Total is its own suite (a plan with its own features). Official resellers: none named. Its resellers page
+# speaks of "2,500+ retail and e‑tail partners" without naming them, and a knowledge-base article names "a 3rd party
+# provider, such as Bredband2, Power or EDV Buchversand" only as examples of where an automatic renewal may have been
+# bought. Cleverbridge is the online reseller that runs f-secure.com's own shop, not a shop of its own. Operators that
+# bill F-Secure in their own packages (Eastlink, Frontier, Ziply Fiber, TDS, altafiber, SaskTel and others, its privacy
+# notices' and newsroom's partners) and the app stores are partners: noted, not listed.
+# Free use: Online Scanner (its plan below).
+
+id: f-secure
+name: F-Secure
+website: https://www.f-secure.com
+category: security
+spendCategory: software
+billingCurrency: { US: USD, GB: GBP, GLOBAL: EUR }
+# Its knowledge base's "How to end or cancel my F-Secure subscription?" (My F-Secure > Subscription > Cancel automatic
+# renewal).
+cancelUrl: https://kb.f-secure.com/s/article/How-to-cancel-F-Secure-SAFE-or-TOTAL-subscription-and-auto-renewal-feature?language=en_US
+sources: { pricing: https://www.f-secure.com/en/total }
+# Owner (M11.2), read 2026-11-20: its company site's "Our story" (rule 2: the consumer business demerged from WithSecure in
+# 2022 as F-Secure Corporation, listed in Helsinki); its products' pages name Finland. Shares: its investor site's share
+# information (one series of shares, ticker FSECURE). Its largest shareholder, Risto Siilasmaa, held 34.35% on 30 October
+# 2026 (its shareholder list), so no majority holder.
+owner:
+  name: F-Secure Corporation
+  page:
+    name: Our story (F-Secure company site)
+    url: https://company.f-secure.com/en/about-us/our-story
+  quotes:
+    - 'In a demerger completed on 30 June 2022, the former consumer security business is separated into a new independent company, F‑Secure Corporation, and is listed on Nasdaq Helsinki on 1 July 2022.'
+  country:
+    code: FI
+    page:
+      name: F-Secure Total
+      url: https://www.f-secure.com/en/total
+    quotes:
+      - 'Based in Finland, we handle your personal information according to the strict European General Data Protection Regulation (GDPR)'
+    lastVerified: 2026-11-20
+  stock:
+    listings:
+      - { exchange: Nasdaq Helsinki, symbol: FSECURE }
+    page:
+      name: Share information (F-Secure investors)
+      url: https://investors.f-secure.com/en/share_and_shareholders/share_information
+    quotes:
+      - 'Shares are listed on Nasdaq Helsinki Ltd.'
+      - 'FSECURE'
+    lastVerified: 2026-11-20
+  lastVerified: 2026-11-20
+# Ways to pay and card networks (M11.5), read 2026-11-20: its shop's checkout (Total, read from Canada, up to the payment
+# form) offers a credit or debit card (Visa, MasterCard, American Express, JCB) and PayPal; its knowledge base explains
+# paying a renewal by wire transfer; its user guide sells Total through Google Play and the App Store too. No page read
+# names Apple Pay or Google Pay.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://onlineshop.f-secure.com/789/purl-fs-buynow?cart=248271,248272,248273&plans=12M,24M&quantities=1,2,3,5,7,10,15,20,25&quantity=1&currency=EUR&language=en&x-myaccount-promotionid=280&packagediscount=fixedregularnoshow2024&x-option=TOTAL-PP&scope=checkout
+    quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
+paymentMethods:
+  - methods: [card, paypal]
+    page: 'Checkout (F-Secure Total, read from Canada)'
+    url: https://onlineshop.f-secure.com/789/purl-fs-buynow?cart=248271,248272,248273&plans=12M,24M&quantities=1,2,3,5,7,10,15,20,25&quantity=1&currency=EUR&language=en&x-myaccount-promotionid=280&packagediscount=fixedregularnoshow2024&x-option=TOTAL-PP&scope=checkout
+    quotes:
+      - 'Credit/Debit card'
+      - 'PayPal'
+  - methods: [bank-transfer]
+    page: 'How do I pay for my F-Secure subscription renewal with wire transfer payment method?'
+    url: https://kb.f-secure.com/s/article/How-do-I-pay-for-my-subscription-renewal-with-wire-transfer-payment-method?language=en_US
+    quotes:
+      - 'I have chosen to pay my F-Secure renewal with wire transfer payment method.'
+  - methods: [app-store]
+    page: 'Where can I buy F-Secure Total?'
+    url: https://help.f-secure.com/product.html#home/total-windows/latest/en/concept_256260A46C8040388A34EDE7C61D5EB7-latest-en
+    quotes:
+      - 'You can also buy F-Secure Total for Android on the Google Play Store and for iOS on the Apple App Store.'
+# Currencies beyond its prices (M11.5): its checkout's currency menu, read 2026-11-20 from Canada, charges Canadian dollars
+# at a converted amount (and lists some fifty other currencies, which its saved text doesn't show).
+currencies:
+  - codes: [CAD]
+    methods: [card, paypal]
+    page: 'Checkout (F-Secure Total, read from Canada)'
+    url: https://onlineshop.f-secure.com/789/purl-fs-buynow?cart=248271,248272,248273&plans=12M,24M&quantities=1,2,3,5,7,10,15,20,25&quantity=1&currency=EUR&language=en&x-myaccount-promotionid=280&packagediscount=fixedregularnoshow2024&x-option=TOTAL-PP&scope=checkout
+    quotes:
+      - 'Canadian Dollar'
+# Renewal day (M11.5): its pages say a subscription renews automatically "at the price and frequency shown" and stays
+# active "until your current subscription expires", and its trial checkout that "a fee of $79.99 is due every 12
+# Month(s)"; none names the day or a charge before it. Cleverbridge's own terms, which its checkout links, showed this
+# machine a bot check when read on their own (2026-11-20).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://kb.f-secure.com/s/article/How-to-cancel-F-Secure-SAFE-or-TOTAL-subscription-and-auto-renewal-feature?language=en_US
+    - https://help.f-secure.com/product.html#home/total-windows/latest/en/task_28F0FC0AC8D845849A94D3853BDF874B-latest-en
+    - https://onlineshop.f-secure.com/789/purl-fs-buynow?cart=248271,248272,248273&plans=12M,24M&quantities=1,2,3,5,7,10,15,20,25&quantity=1&currency=EUR&language=en&x-myaccount-promotionid=280&packagediscount=fixedregularnoshow2024&x-option=TOTAL-PP&scope=checkout
+  lastVerified: 2026-11-20
+# Lab results (M11.2), read 2026-11-20: AV-TEST's newest Windows test of home-user products with F-Secure in it, July and
+# August 2026 (report 261408, F-Secure Total 26.6; its September and October page lists no F-Secure product yet).
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/f-secure-total-26.6-261408/
+    tested: Total 26.6, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/f-secure-total-26.6-261408/
+    tested: Total 26.6, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/f-secure-total-26.6-261408/
+    tested: Total 26.6, Windows 11
+
+# General features, read 2026-11-20. Platforms: "Total supports Windows 11, Windows 10 version 22H2 or later, Windows on
+# ARM64 version 24H2 or later, macOS 13 (Ventura) or later, iOS 18 or later, and Android 12 or later." (its FAQ; the VPN
+# and ID Protection pages say the same: "Available for PC, Mac, Android and iOS"); its browser extensions are part of the
+# app ("Browsing protection requires browser extensions"), not sold apart. Sign-in: My F-Secure's password with optional
+# 2-step verification from "an authentication app, such as Google Authenticator or Duo Mobile" (its user guide); a login
+# confirmation email on a new device only tells you. Support: "Chat with one of our support experts or meet our new
+# chatbot." "Availability: 24/7" "Language: English" (its support page) and its Help Forum (community.f-secure.com).
+# App languages: "You can choose the product language from more than 20 supported languages." with its FAQ's list
+# (English, français, Deutsch, italiano, español, português, 日本語, 繁體中文 (香港) among them; no Korean, Hindi or Arabic).
+# No pause. Parental controls: its Windows guide's Family Protection (content filtering) "is not available in all versions
+# of the app", its privacy notice ties parental controls to versions "enabled by your service provider partner", and no
+# plan page lists them, so none of these plans has them.
+features:
+  account.sign-in: [password, totp]
+  support.channels: [chat, community, 24-7]
+  languages.interface: [en, fr, de, it, es, pt, ja, zh]
+
+# Perks (M11.6): what the plan pages list that no feature describes, in their words.
+perks:
+  - id: scam-scanner
+    name: Scam Scanner
+  - id: ad-blocker
+    name: Ad Blocker
+  - id: cookie-popup-blocker
+    name: Cookie Popup Blocker
+  - id: privacy-advisor
+    name: Privacy advisor
+  - id: identity-theft-help
+    name: Identity Theft Help
+
+# Features (read 2026-11-20): each product page's "Compare subscription options" (its ticks are images, read from the
+# page's own data and a screenshot), the Total for Windows user guide and the VPN and ID Protection FAQs.
+# - Internet Security and Total: antivirus ("viruses, trojans, ransomware, adware, keyloggers, spyware"), Ransomware
+#   protection (blocking; no page offers to recover encrypted files), Gaming mode, Device lock check, Outdated OS check,
+#   Privacy advisor; Scam protection's Shopping, Browsing, SMS scam, Phishing and Banking protection, Wi-Fi protection
+#   (alerts about risky networks on phones), Ad Blocker, Cookie Popup Blocker and Scam Scanner. Real-time ("Automatic
+#   scanning protects your computer in real time"), scans you start ("Quick scan" and "Full scan") and scheduled scans
+#   ("Daily", "Weekly", "Monthly") from its Windows guide; behaviour-based blocking inferred from its "Allowing blocked
+#   applications". No firewall of its own (Windows' is used), and no rescue scan, anti-theft, spam filter, webcam or
+#   optimizer on any page.
+# - VPN (Total and VPN): "unlimited VPN service", "Kill switch" (Windows, Mac, Android), apps and websites that bypass the
+#   VPN, "Change your virtual location" in 27 countries (its guide's list, "over 20 countries" on the VPN page), protocols
+#   "Hydra, Wireguard, OpenVPN, OpenVPN (TCP)" or "OpenVPN, OpenVPN (TCP), IKEv2" by app version (Hydra is the newer VPN's
+#   own), "we do not create traffic logs" (the VPN page). No RAM-only servers, multi-hop, P2P rules, port forwarding or
+#   published audit on any page; "Trusted Wi-Fi networks" let local devices bypass the VPN, which isn't a mesh. The VPN
+#   plan's "Security: Limited" in the comparison isn't itemised, so no security feature is claimed for it.
+# - Password vault (Total and ID Protection): passwords, payment cards and notes ("credit and debit card details and
+#   personal notes", its privacy notice), weak and reused passwords flagged, import from "Dashlane", "Google Chrome",
+#   "KeePassX V2", "LastPass", "Microsoft Edge", "Mozilla Firefox", "True Key" and others' exports, export "as plain
+#   text" (ExportedPasswords.fsk) on Windows and Mac, a master password F-Secure never sees. No 2FA codes, sharing,
+#   emergency access or offline use on any page. ID monitoring: "24/7 dark web monitoring" and breach alerts.
+
+plans:
+  - id: f-secure.total-1-device
+    name: Total (1 device)
+    link: https://www.f-secure.com/en/total
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.included: true
+      antivirus.devices: 1
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 27
+      vpn.protocols: [wireguard, openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      password-manager: true
+      password-manager.item-types: [login, credit-card, secure-note]
+      password-manager.health: [weak, reused]
+      password-manager.import: [other-managers]
+      password-manager.export: [text]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor, identity-theft-help]
+    featureLabels:
+      antivirus.secure-browser: Banking Protection
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages don’t name it. Its Windows guide says the app can stop a safe app from running "because the application tries to make system changes that might be potentially harmful", which is behaviour-based blocking.'
+        page:
+          name: Allowing blocked applications (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+    notes: 'Antivirus, scam protection, VPN, password vault and ID monitoring for 1 device (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/total
+      - region: GB
+        currency: GBP
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/total
+      - region: GLOBAL
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/total
+      - region: US
+        currency: USD
+        amount: 124.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/total
+      - region: GB
+        currency: GBP
+        amount: 107.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/total
+      - region: GLOBAL
+        currency: EUR
+        amount: 124.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/total
+  - id: f-secure.total
+    name: Total
+    link: https://www.f-secure.com/en/total
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.included: true
+      antivirus.devices: 3
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+      vpn.included: true
+      vpn.devices: 3
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 27
+      vpn.protocols: [wireguard, openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      password-manager: true
+      password-manager.item-types: [login, credit-card, secure-note]
+      password-manager.health: [weak, reused]
+      password-manager.import: [other-managers]
+      password-manager.export: [text]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor, identity-theft-help]
+    featureLabels:
+      antivirus.secure-browser: Banking Protection
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages don’t name it. Its Windows guide says the app can stop a safe app from running "because the application tries to make system changes that might be potentially harmful", which is behaviour-based blocking.'
+        page:
+          name: Allowing blocked applications (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+    notes: 'Antivirus, scam protection, VPN, password vault and ID monitoring for 3 devices (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/total
+      - region: GB
+        currency: GBP
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/total
+      - region: GLOBAL
+        currency: EUR
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/total
+      - region: US
+        currency: USD
+        amount: 144.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/total
+      - region: GB
+        currency: GBP
+        amount: 143.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/total
+      - region: GLOBAL
+        currency: EUR
+        amount: 159.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/total
+  - id: f-secure.total-5-devices
+    name: Total (5 devices)
+    link: https://www.f-secure.com/en/total
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.included: true
+      antivirus.devices: 5
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 27
+      vpn.protocols: [wireguard, openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      password-manager: true
+      password-manager.item-types: [login, credit-card, secure-note]
+      password-manager.health: [weak, reused]
+      password-manager.import: [other-managers]
+      password-manager.export: [text]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor, identity-theft-help]
+    featureLabels:
+      antivirus.secure-browser: Banking Protection
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages don’t name it. Its Windows guide says the app can stop a safe app from running "because the application tries to make system changes that might be potentially harmful", which is behaviour-based blocking.'
+        page:
+          name: Allowing blocked applications (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+    notes: 'Antivirus, scam protection, VPN, password vault and ID monitoring for 5 devices (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 84.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/total
+      - region: GB
+        currency: GBP
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/total
+      - region: GLOBAL
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/total
+      - region: US
+        currency: USD
+        amount: 149.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/total
+      - region: GB
+        currency: GBP
+        amount: 179.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/total
+      - region: GLOBAL
+        currency: EUR
+        amount: 179.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/total
+  - id: f-secure.internet-security-1-device
+    name: Internet Security (1 device)
+    link: https://www.f-secure.com/en/internet-security
+    features:
+      antivirus.included: true
+      antivirus.devices: 1
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+    perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor]
+    featureLabels:
+      antivirus.secure-browser: Banking Protection
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages don’t name it. Its Windows guide says the app can stop a safe app from running "because the application tries to make system changes that might be potentially harmful", which is behaviour-based blocking.'
+        page:
+          name: Allowing blocked applications (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+    notes: 'Antivirus with scam, browsing and banking protection for 1 device (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/internet-security
+      - region: GB
+        currency: GBP
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/internet-security
+      - region: GLOBAL
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/internet-security
+      - region: US
+        currency: USD
+        amount: 89.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/internet-security
+      - region: GB
+        currency: GBP
+        amount: 69.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/internet-security
+      - region: GLOBAL
+        currency: EUR
+        amount: 89.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/internet-security
+  - id: f-secure.internet-security
+    name: Internet Security
+    link: https://www.f-secure.com/en/internet-security
+    features:
+      antivirus.included: true
+      antivirus.devices: 3
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+    perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor]
+    featureLabels:
+      antivirus.secure-browser: Banking Protection
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages don’t name it. Its Windows guide says the app can stop a safe app from running "because the application tries to make system changes that might be potentially harmful", which is behaviour-based blocking.'
+        page:
+          name: Allowing blocked applications (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+    notes: 'Antivirus with scam, browsing and banking protection for 3 devices (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/internet-security
+      - region: GB
+        currency: GBP
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/internet-security
+      - region: GLOBAL
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/internet-security
+      - region: US
+        currency: USD
+        amount: 114.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/internet-security
+      - region: GB
+        currency: GBP
+        amount: 109.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/internet-security
+      - region: GLOBAL
+        currency: EUR
+        amount: 124.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/internet-security
+  - id: f-secure.internet-security-5-devices
+    name: Internet Security (5 devices)
+    link: https://www.f-secure.com/en/internet-security
+    features:
+      antivirus.included: true
+      antivirus.devices: 5
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+    perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor]
+    featureLabels:
+      antivirus.secure-browser: Banking Protection
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages don’t name it. Its Windows guide says the app can stop a safe app from running "because the application tries to make system changes that might be potentially harmful", which is behaviour-based blocking.'
+        page:
+          name: Allowing blocked applications (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+    notes: 'Antivirus with scam, browsing and banking protection for 5 devices (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/internet-security
+      - region: GB
+        currency: GBP
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/internet-security
+      - region: GLOBAL
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/internet-security
+      - region: US
+        currency: USD
+        amount: 124.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/internet-security
+      - region: GB
+        currency: GBP
+        amount: 144.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/internet-security
+      - region: GLOBAL
+        currency: EUR
+        amount: 144.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/internet-security
+  - id: f-secure.vpn-1-device
+    name: VPN (1 device)
+    link: https://www.f-secure.com/en/vpn
+    categories: [vpn]
+    features:
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 27
+      vpn.protocols: [wireguard, openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    notes: 'F-Secure VPN (formerly FREEDOME VPN) for 1 device, in 27 countries. Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/vpn
+      - region: GB
+        currency: GBP
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/vpn
+      - region: GLOBAL
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/vpn
+      - region: US
+        currency: USD
+        amount: 89.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/vpn
+      - region: GB
+        currency: GBP
+        amount: 69.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/vpn
+      - region: GLOBAL
+        currency: EUR
+        amount: 89.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/vpn
+  - id: f-secure.vpn
+    name: VPN
+    link: https://www.f-secure.com/en/vpn
+    categories: [vpn]
+    features:
+      vpn.included: true
+      vpn.devices: 3
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 27
+      vpn.protocols: [wireguard, openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    notes: 'F-Secure VPN (formerly FREEDOME VPN) for 3 devices, in 27 countries. Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/vpn
+      - region: GB
+        currency: GBP
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/vpn
+      - region: GLOBAL
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/vpn
+      - region: US
+        currency: USD
+        amount: 114.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/vpn
+      - region: GB
+        currency: GBP
+        amount: 109.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/vpn
+      - region: GLOBAL
+        currency: EUR
+        amount: 124.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/vpn
+  - id: f-secure.vpn-5-devices
+    name: VPN (5 devices)
+    link: https://www.f-secure.com/en/vpn
+    categories: [vpn]
+    features:
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 27
+      vpn.protocols: [wireguard, openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    notes: 'F-Secure VPN (formerly FREEDOME VPN) for 5 devices, in 27 countries. Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/vpn
+      - region: GB
+        currency: GBP
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/vpn
+      - region: GLOBAL
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/vpn
+      - region: US
+        currency: USD
+        amount: 124.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/vpn
+      - region: GB
+        currency: GBP
+        amount: 144.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/vpn
+      - region: GLOBAL
+        currency: EUR
+        amount: 144.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/vpn
+  - id: f-secure.id-protection
+    name: ID Protection
+    link: https://www.f-secure.com/en/id-protection
+    categories: [security, passwords]
+    features:
+      antivirus.included: false
+      password-manager: true
+      password-manager.item-types: [login, credit-card, secure-note]
+      password-manager.health: [weak, reused]
+      password-manager.import: [other-managers]
+      password-manager.export: [text]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    perks: [identity-theft-help]
+    notes: 'A password vault and 24/7 data-breach monitoring of your email addresses, usernames, card and bank numbers, phone, passport, licence and Social Security numbers, for 1 device. 3 devices cost US$64.99, £59.99 or €69.99 a year, 5 devices US$69.99, £79.99 or €79.99.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/id-protection
+      - region: GB
+        currency: GBP
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/id-protection
+      - region: GLOBAL
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/id-protection
+  - id: f-secure.scam-protection
+    name: Scam Protection
+    link: https://www.f-secure.com/en/total/scam-protection
+    features:
+      antivirus.included: false
+    perks: [scam-scanner, ad-blocker, cookie-popup-blocker]
+    notes: 'Scam protection only, for 5 devices and monthly only: shopping, browsing, phishing and banking protection, SMS scam filtering and Wi-Fi alerts on phones, with no antivirus. Its 7-day free trial turns into the monthly subscription.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/us-en/total/scam-protection
+      - region: GB
+        currency: GBP
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'All prices include VAT.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/gb-en/total/scam-protection
+      - region: GLOBAL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/total/scam-protection
+  # Its Online Scanner, free: "Online Scanner finds and removes viruses, malware and spyware on your Windows PC." with
+  # "Running the scan doesn’t leave anything on your computer." (en/online-scanner), read 2026-11-20.
+  - id: f-secure.online-scanner
+    name: Online Scanner (free)
+    link: https://www.f-secure.com/en/online-scanner
+    features:
+      platforms: [windows]
+      antivirus.included: true
+      antivirus.scans: [on-demand]
+    notes: "A free one-time scan that finds and removes malware on a Windows PC. It doesn't protect you in real time."
+    prices:
+      - region: GLOBAL
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.f-secure.com/en/online-scanner
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-20 with a plain fetch and Edge: its License terms (October 2025, which
+# the account form ("By pressing the Accept and create account button, you agree to F-Secure End User License Terms.")
+# and the checkout ("you agree to the Terms & Conditions and Privacy Policy of F-Secure") name), the F-Secure Total
+# privacy notice (May 2026, every plan's app), its Privacy statement (December 2025, which the checkout links), its
+# website privacy policy (cookies), its VPN terms of service (April 2014, "subject to F‑Secure end user license terms"),
+# its user guide's account, renewal, licence and vault topics, its knowledge base's refund, cancel and reminder articles,
+# the product pages' trial and pricing notes, its security principles and ISO 27001 news. Read for no topic beyond these:
+# its Acceptable use policy (the VPN terms' list), its support-tool and surveys privacy notices (support sessions and
+# surveys only). Not read: Cleverbridge's Terms & Conditions and Right of Revocation, which its checkout links (the
+# shop's pages showed a bot check when opened on their own), and the third-party VPN provider's and breach-data
+# provider's own policies (neither is named). Its security advisories link led to cve.org.
+policies:
+  links:
+    - name: 'F-Secure Total privacy notice'
+      url: https://www.f-secure.com/en/legal/privacy/total
+    - name: 'Privacy statement'
+      url: https://www.f-secure.com/en/legal/privacy/statement
+    - name: 'Website privacy policy (cookies)'
+      url: https://www.f-secure.com/en/legal/privacy/websites
+    - name: 'Deleting your F-Secure account'
+      url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_62B0BC649449495FB3E6E9D22131D79D-latest-en
+    - name: 'Exporting Password Vault data'
+      url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_6630C28AADDF4746A3021E3FE0900730-latest-en
+    - name: 'How to create an F-Secure account'
+      url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_6B729A85248245E4A139763C1F603225-latest-en
+    - name: 'Canceling automatic subscription renewal'
+      url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_28F0FC0AC8D845849A94D3853BDF874B-latest-en
+    - name: '30-day money-back guarantee'
+      url: https://kb.f-secure.com/s/article/How-can-I-use-the-30-day-money-back-guarantee-I-am-not-satisfied-with-the-F-Secure-product-and-want-a-refund?language=en_US
+    - name: 'F-Secure Total (US)'
+      url: https://www.f-secure.com/us-en/total
+    - name: 'Checkout (Total, read from Canada)'
+      url: https://onlineshop.f-secure.com/789/purl-fs-buynow?cart=248271,248272,248273&plans=12M,24M&quantities=1,2,3,5,7,10,15,20,25&quantity=1&currency=EUR&language=en&x-myaccount-promotionid=280&packagediscount=fixedregularnoshow2024&x-option=TOTAL-PP&scope=checkout
+    - name: 'Scam Protection'
+      url: https://www.f-secure.com/en/total/scam-protection
+    - name: 'Renewal reminder email'
+      url: https://kb.f-secure.com/s/article/I-stopped-receiving-the-renewal-reminder-email-for-my-F-Secure-SAFE-or-Internet-Security-subscription?language=en_US
+    - name: 'Buying more licenses'
+      url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_4F80876A0F304F56AA8AC7331E80D7F4-latest-en
+    - name: 'Licence terms'
+      url: https://www.f-secure.com/en/legal/terms
+    - name: 'VPN terms of service'
+      url: https://www.f-secure.com/en/legal/terms/vpn
+    - name: 'Security principles'
+      url: https://company.f-secure.com/en/about-us/security-and-compliance
+    - name: 'ISO/IEC 27001 certification'
+      url: https://www.f-secure.com/en/partners/insights/f-secure-achieves-iso-iec-27001-certification
+    - name: 'Sharing protection with a family member or friend'
+      url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_E9B92BABDBC64E5998B26E0A84E020DB-latest-en
+    - name: 'Releasing a license from a device'
+      url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_E344387038544DD89F7A606448E8986E-latest-en
+    - name: 'Viewing the latest updates'
+      url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_438BAEED433241F492F28C2A11418548-latest-en
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send statistics about your device and how you use them, and it reuses that data to improve its products. Extra usage data is your choice in settings, but the rest is always sent.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'service statistics per device, e.g. how many times the user has locked or unlocked the device or what kind of setting profiles the user has enabled or created;'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'We also reuse the above service data and security data for data analytics purposes.'
+        - url: https://www.f-secure.com/en/legal/privacy/statement
+          quote: 'You can opt out at any time from the subsequent collection of analytical data that is non-essential to our service provisioning.'
+      action:
+        name: 'How to stop sending usage data'
+        url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_27E538EE2529461BB15E297E4E5CE8EC-latest-en
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell your data, but it shares phone ad IDs with its analytics and marketing partners, and their cookies on its sites show you its ads elsewhere. You can only limit that per browser or phone.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/statement
+          quote: 'We have to exchange some data (such as “Android marketing identifier” and other like identifiers) with our online analytics and marketing partners to enable our digital analytics and marketing activities.'
+        - url: https://www.f-secure.com/en/legal/privacy/websites
+          quote: 'These cookies are generated by our marketing partners and used to display personalized F‑Secure-related advertisements on other websites.'
+        - url: https://www.f-secure.com/en/legal/privacy/websites
+          quote: 'We do not sell your personal data to any third parties.'
+      action:
+        name: 'How to change your cookie choices'
+        url: https://www.f-secure.com/en/legal/privacy/websites
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its apps show no ads, but its websites track what you do with cookies to show you its ads on other sites. Turning that off is a cookie choice you make again in each browser.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/websites
+          quote: 'In practice, this means that when you visit our site or a third-party website we have partnered with, or click an advertisement for F‑Secure products or services, your activity may be tracked through cookies.'
+        - url: https://www.f-secure.com/en/legal/privacy/websites
+          quote: 'If you delete your cookies or switch to a different web browser, you will need to set your preferences again.'
+      action:
+        name: 'How to change your cookie choices'
+        url: https://www.f-secure.com/en/legal/privacy/websites
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy notices don’t say your content trains AI models. They say only that scam texts, made anonymous, help its own scam filter learn.'
+      pages:
+        - https://www.f-secure.com/en/legal/privacy/total
+        - https://www.f-secure.com/en/legal/privacy/statement
+      lastVerified: 2026-11-20
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your password vault is locked with your master password, which never leaves your device, so F-Secure can’t read what you keep in it.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'The encryption key is the end-user master password, and this master password is never exposed outside the service on your device.'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'In summary, in their stored format, the files hosted by F‑Secure are not decryptable or identifiable in terms of who they belong to.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your account data while you subscribe and six months after, then deletes or anonymizes it. Some data has set times, but it may keep data longer when it still needs it.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'Personally identifiable user data is retained for the duration of an active service subscription plus for the grace period of six months thereafter.'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'other similar circumstances, where there continues to be a legitimate need for the ongoing storage of personal data.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself in My F-Secure at any time, and it’s removed at once, with your personal data deleted or made anonymous. It also ends your subscription.'
+      sources:
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_62B0BC649449495FB3E6E9D22131D79D-latest-en
+          quote: 'Your account has been deleted permanently. Your subscription has expired and all the devices protected by this account are no longer protected.'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'This removal leads to the deletion or anonymization of any personal data related to the account.'
+      action:
+        name: 'How to delete your F-Secure account'
+        url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_62B0BC649449495FB3E6E9D22131D79D-latest-en
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask support for a copy of the data you gave it, in a common format. On Windows and Mac you can save your password vault to a file yourself, in its own format.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'You may request the data in a structured, commonly used, and machine-readable format and further that the data is transmitted to another controller, where technically feasible.'
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_6630C28AADDF4746A3021E3FE0900730-latest-en
+          quote: 'You can export your data from Password Vault to a decrypted file.'
+      action:
+        name: 'How to export your password vault'
+        url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_6630C28AADDF4746A3021E3FE0900730-latest-en
+      lastVerified: 2026-11-20
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives authorities your data only when the law requires it, and checks each request. It doesn’t promise to tell you or to publish a report.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'We provide information to the authorities when it is required of us under law, but not otherwise.'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'We carefully review the lawfulness of each request and ensure that our users’ constitutional rights to privacy are protected.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      tier: good
+      reason: 'It keeps your more sensitive data in Finland or elsewhere in Europe, and moves data out of Europe only under the EU’s approved safeguards.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'We store more sensitive customer data within Finland or the European Economic Area and keep it under our own control.'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'We do this by imposing appropriate technical and contractual safeguards on relevant subcontractors and F‑Secure group companies, for example by using data transfer clauses that are approved by the European Union'
+      lastVerified: 2026-11-20
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Its account asks for your name, your email address and a password, and buying adds your address and payment details.'
+      sources:
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_6B729A85248245E4A139763C1F603225-latest-en
+          quote: 'Fill in your name and email address in the relevant fields, if not prefilled.'
+      lastVerified: 2026-11-20
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can turn off automatic renewal in My F-Secure in a couple of clicks, and keep your protection until the time you paid for runs out.'
+      sources:
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_28F0FC0AC8D845849A94D3853BDF874B-latest-en
+          quote: 'Under Manage your subscriptions, select Cancel auto-renewal.'
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_28F0FC0AC8D845849A94D3853BDF874B-latest-en
+          quote: 'Your subscription remains valid and active until your current subscription expires.'
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get your money back within 30 days of buying from its own shop, by contacting support. It doesn’t say the same for renewals, and app-store purchases are left to the store.'
+      sources:
+        - url: https://kb.f-secure.com/s/article/How-can-I-use-the-30-day-money-back-guarantee-I-am-not-satisfied-with-the-F-Secure-product-and-want-a-refund?language=en_US
+          quote: 'If you purchased your product directly with F-Secure within the past 30-days and wish to apply for a refund, please contact our F-Secure customer care and provide the reference number of the order that can be found in the confirmation email from Cleverbridge.'
+        - url: https://kb.f-secure.com/s/article/How-can-I-use-the-30-day-money-back-guarantee-I-am-not-satisfied-with-the-F-Secure-product-and-want-a-refund?language=en_US
+          quote: 'However, F-Secure products purchased through third party (e.g. resellers, retailers, vendors, services, etc.) such as Apple AppStore, are not eligible for this 30-day money-back guarantee from F-Secure.'
+      lastVerified: 2026-11-20
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'Renewing costs what a new customer pays, and its shop says your subscription renews at the price shown when you bought. It doesn’t say how much notice you’d get of a price rise.'
+      sources:
+        - url: https://www.f-secure.com/us-en/total
+          quote: 'New or renew, the price is the same. No pricing games: your renewal price is the same as what any new customer pays.'
+        - url: https://onlineshop.f-secure.com/789/purl-fs-buynow?cart=248271,248272,248273&plans=12M,24M&quantities=1,2,3,5,7,10,15,20,25&quantity=1&currency=EUR&language=en&x-myaccount-promotionid=280&packagediscount=fixedregularnoshow2024&x-option=TOTAL-PP&scope=checkout
+          quote: 'This subscription renews automatically at the price and frequency shown in the cart above.'
+      lastVerified: 2026-11-20
+    - topic: billing.free-trials
+      tier: good
+      reason: 'Its 30-day trial becomes a paid subscription unless you cancel, which you can do at any time, and it tells you before the first payment.'
+      sources:
+        - url: https://www.f-secure.com/us-en/total
+          quote: 'Decide later — Try everything for 30 days. Cancel anytime with no charges. We’ll let you know when your first payment is approaching.'
+      lastVerified: 2026-11-20
+    - topic: billing.free-trials
+      plans: [f-secure.scam-protection]
+      tier: neutral
+      reason: 'Its 7-day trial turns into a monthly subscription unless you cancel; its page doesn’t promise a reminder first.'
+      sources:
+        - url: https://www.f-secure.com/en/total/scam-protection
+          quote: 'After 7 days your trial will turn into a monthly subscription at €4.99 per month unless cancelled.'
+      lastVerified: 2026-11-20
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails a reminder about a month before your subscription runs out.'
+      sources:
+        - url: https://kb.f-secure.com/s/article/I-stopped-receiving-the-renewal-reminder-email-for-my-F-Secure-SAFE-or-Internet-Security-subscription?language=en_US
+          quote: 'Be aware that you will receive the reminder approximately one month before your current subscription expires.'
+      lastVerified: 2026-11-20
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages list no fees beyond the price and taxes.'
+      pages:
+        - https://onlineshop.f-secure.com/789/purl-fs-buynow?cart=248271,248272,248273&plans=12M,24M&quantities=1,2,3,5,7,10,15,20,25&quantity=1&currency=EUR&language=en&x-myaccount-promotionid=280&packagediscount=fixedregularnoshow2024&x-option=TOTAL-PP&scope=checkout
+        - https://www.f-secure.com/us-en/total
+      lastVerified: 2026-11-20
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Upgrading to Total works at once and keeps the time you had left, and extra devices cost only for the time left. It doesn’t say how to move down.'
+      sources:
+        - url: https://www.f-secure.com/us-en/total
+          quote: 'Your subscription will be upgraded immediately, and the new subscription period will be added on top of your current subscription.'
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_4F80876A0F304F56AA8AC7331E80D7F4-latest-en
+          quote: "You'll be charged a prorated amount for the additional licenses until the end of your current subscription period."
+      lastVerified: 2026-11-20
+    - topic: billing.plan-changes
+      plans: [f-secure.scam-protection]
+      tier: bad
+      reason: 'To move from Scam Protection to another F-Secure plan, you buy that one separately with a different email address; nothing carries over.'
+      sources:
+        - url: https://www.f-secure.com/en/total/scam-protection
+          quote: 'NOTE: if you buy a different F‑Secure product from our web pages, you need to insert a different email than the one you used when signing up for your F‑Secure Scam Protection subscription.'
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to courts in Finland, or in New York for US buyers, with no private referee (arbitration). People in the EU can also use their country’s consumer dispute body.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'The courts of Finland shall have the exclusive jurisdiction and venue to adjudicate any dispute arising out of these Terms.'
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'In such cases, the exclusive jurisdiction and venue to adjudicate any dispute arising out of these Terms shall be of the federal and state courts located in New York.'
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'In the event that you are a consumer residing in the EU, and a conflict concerning these Terms cannot be resolved by you and F‑Secure or F‑Secure’s respective distributor in amicable negotiations, you may resort to your local national dispute resolution body for consumer disputes.'
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'When its licence changes, its app asks you to accept the new version before you can keep updating. It doesn’t say how far ahead it tells you.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'As the Software is likely to evolve during your subscription, F‑Secure may need to revise these Terms in connection with updates and the revised Terms shall upon acceptance apply to the corresponding versions of the Software.'
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'The use of the Software with updates is not possible without accepting the updated Terms when required.'
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      plans:
+        [
+          f-secure.total,
+          f-secure.total-1-device,
+          f-secure.total-5-devices,
+          f-secure.vpn,
+          f-secure.vpn-1-device,
+          f-secure.vpn-5-devices,
+        ]
+      tier: bad
+      reason: 'Its VPN rules say they’ll be changed from time to time, and don’t say you’ll be told first.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/terms/vpn
+          quote: 'We will change and adjust the above from time to time based on new features and to keep the service clean.'
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can end your licence without notice if you break its rules, or early if its deal with the company that sold it to you ends, and it says you get no refund.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'F‑Secure may terminate your license to the Software immediately without notice if you are in breach of any of these Terms or use the Software’s functions for purposes other than those indicated in the official documentation.'
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'In the event that the agreement between F‑Secure and F‑Secure’s distributor providing you with the Soft­ware is terminated, F‑Secure or its distributor may notify you of premature termination of your license.'
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'You shall not be entitled to a refund, damages, or other compensation from F‑Secure as a result of such termination.'
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Its updates can add or take away features, and it may stop supporting older versions.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'Such changes may include, but are not limited to adding new features or removing existing features.'
+      lastVerified: 2026-11-20
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.f-secure.com/en/legal/terms
+        - https://www.f-secure.com/en/legal/privacy/total
+      lastVerified: 2026-11-20
+    - topic: legal.content-rights
+      status: not-stated
+      reason: 'Its licence takes no rights over what you keep in your password vault; it speaks only of feedback you send.'
+      pages:
+        - https://www.f-secure.com/en/legal/terms
+        - https://www.f-secure.com/en/legal/privacy/total
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      tier: good
+      reason: 'You may use its apps on as many devices as you paid for, and you may not copy, resell or take them apart beyond what copyright law allows.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'install and use the Soft­ware only on as many units (typically handheld devices, personal computers, servers, or other hard­ware, jointly referred to as “Device”)'
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'decompile, reverse engineer, disassemble, or otherwise reduce the Soft­ware and/or related files (including but not limited to databases, news, descriptions, and communications between applications) to any human-perceivable form (except to the limited extent permitted under mandatory copyright legislation)'
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      plans: [f-secure.online-scanner]
+      tier: poor
+      reason: 'For its free scanner, F-Secure may end your licence, change its features or start charging for them at any time.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'F‑Secure may at any time terminate your license to the Soft­ware or the availability thereof, terminate or change any of its features, or limit or convert free features to chargeable.'
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      tier: good
+      reason: 'An outside auditor certifies how it manages security (ISO 27001), and it runs a bug bounty for people who find security holes in its products.'
+      sources:
+        - url: https://company.f-secure.com/en/about-us/security-and-compliance
+          quote: 'As a proof, our ISO 27001 certification for security management covers all our operations and products.'
+        - url: https://company.f-secure.com/en/about-us/security-and-compliance
+          quote: 'We run continuous security assessments on all our products and operate a bug bounty program open to both the public and our own people.'
+        - url: https://www.f-secure.com/en/partners/insights/f-secure-achieves-iso-iec-27001-certification
+          quote: 'The recent certification audit conducted by KPMG has now formally recognized the effectiveness of our efforts.'
+      lastVerified: 2026-11-20
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'Its VPN doesn’t log the sites you visit, but it keeps when you connect, for how long, how much data you use and your own IP address for 90 days. No outside audit is published.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'We do not keep any logs about connections established through the VPN service to external addresses.'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'To protect the service against fraudulent use, we maintain temporary logs that contain the duration of the VPN sessions, VPN connection timestamps, the amount of data transferred, the device ID, source public IP address of the user, and host name from where the VPN client connects to our service.'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'The logs are stored for 90 days, and can be used to deal with any misuse of our service or attacks against F‑Secure.'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      tier: great
+      reason: 'You can share your subscription with family or friends: each gets an account of their own and protects their devices with your licences.'
+      sources:
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_E9B92BABDBC64E5998B26E0A84E020DB-latest-en
+          quote: 'When you invite family members or friends to your group, the invited persons get their own user account that allows them to protect their devices using your licenses.'
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      tier: good
+      reason: 'Each licence protects one device, and you can free it yourself from a device you no longer use, to use it on another.'
+      sources:
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_E344387038544DD89F7A606448E8986E-latest-en
+          quote: 'If you have a device that no longer needs a license, we recommend that you release the license. Only then can the license be used on another device.'
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      tier: poor
+      reason: 'Its apps update themselves whenever you’re online, and it may upgrade them and change their features; no page says you can turn that off.'
+      sources:
+        - url: https://help.f-secure.com/product.html#home/total-windows/latest/en/task_438BAEED433241F492F28C2A11418548-latest-en
+          quote: 'The product retrieves the latest updates to your computer automatically when you are connected to the internet.'
+        - url: https://www.f-secure.com/en/legal/terms
+          quote: 'Hence, F‑Secure reserves the right to upgrade and make changes to the Software from time to time.'
+      lastVerified: 2026-11-20
+    - topic: other.notable
+      title: 'Its newer VPN runs on another company’s'
+      tier: neutral
+      reason: 'Its newer VPN app runs on another company’s service, which also handles your VPN data. Its privacy notice doesn’t name the company.'
+      sources:
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'F‑Secure engages a third-party provider for the purposes of providing the VPN feature to you.'
+        - url: https://www.f-secure.com/en/legal/privacy/total
+          quote: 'To provide the service to you, both F‑Secure and the third-party provider process the data described in the above sections.'
+      lastVerified: 2026-11-20
