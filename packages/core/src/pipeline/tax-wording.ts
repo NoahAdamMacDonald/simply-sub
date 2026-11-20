@@ -12,12 +12,12 @@ const taxName = String.raw`(?:(?:sales|consumption)\s+)?tax(?:es)?|vat|gst|hst|p
 
 /**
  * Words that say a price includes tax, before the tax's name ("Including VAT.", "Inklusive MwSt.", "Inclusief BTW.",
- * "y compris la TVA") or after it ("Sales tax included.", "TVA incluse.", "IVA incluido.", "IVA inclusa.", "moms
- * ingår"), or "TTC". A "not", "non" or "no" between them leaves no match, as in "VAT not included" and "TVA non
- * incluse".
+ * "y compris la TVA", "Todos los precios incluyen IVA", "I prezzi includono l'IVA") or after it ("Sales tax
+ * included.", "TVA incluse.", "IVA incluido.", "IVA inclusa.", "moms ingår"), or "TTC". A "not", "non" or "no" between
+ * them leaves no match, as in "VAT not included" and "TVA non incluse".
  */
 const includedTax = new RegExp(
-  String.raw`(?<!\bnon[-\s]?)\b(?:includ(?:es|ing|e)|incl\.?|inclusive\s+of(?:\s+all)?|inklusive|inkl\.?|inclusief|incluant|y\s+compris)\s+(?:(?:all|any|applicable|the|local|de\s+la|la|le|les|die|der)\s+)*(?:${taxName})(?![\p{L}])|\b(?:${taxName})[\s-]*(?:included|incl\.?|inclusive|inclus(?:e|es)?|compris(?:e|es)?|inbegriffen|enthalten|inclusief|incluid[oa]s?|inclus[ao]|compres[ao]|inkluderad|ingår)(?![\p{L}])|\bttc\b|\btoutes\s+taxes\s+comprises\b`,
+  String.raw`(?<!\bnon[-\s]?|\bno\s)\b(?:includ(?:es|ing|e|ono)|incluy(?:e|en)|incl\.?|inclusive\s+of(?:\s+all)?|inklusive|inkl\.?|inclusief|incluant|y\s+compris)\s+(?:(?:all|any|applicable|the|local|de\s+la|la|le|les|die|der|el)\s+|l['’])*(?:${taxName})(?![\p{L}])|\b(?:${taxName})[\s-]*(?:included|incl\.?|inclusive|inclus(?:e|es)?|compris(?:e|es)?|inbegriffen|enthalten|inclusief|incluid[oa]s?|inclus[ao]|compres[ao]|inkluderad|ingår)(?![\p{L}])|\bttc\b|\btoutes\s+taxes\s+comprises\b`,
   'iu',
 );
 
