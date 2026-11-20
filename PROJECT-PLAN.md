@@ -2293,6 +2293,11 @@ in every D1 `json` column search parses.
     (`mozilla-vpn`, sold in the 57 countries its terms list), Cloudflare (`cloudflare`: its free 1.1.1.1 resolver, WARP
     and WARP+), PureVPN (`purevpn`) and hide.me (`hide-me`). Atlas VPN closed in 2024 and Mullvad's public DNS on
     2026-11-02.
+  - **Passwords, batch 1** (2026-11-19): authenticators (included, import, export), password managers' import, export,
+    emergency access and offline vaults, and what is end-to-end encrypted in the registry, with every password plan's
+    value; Bitwarden (`bitwarden`, with its Authenticator), 1Password (`1password`), Ente (`ente`: Auth beside Photos),
+    2FAS (`2fas`), Aegis (`aegis`), KeePass (`keepass`), KeePassXC (`keepassxc`) and KeePassDX (`keepassdx`), volunteer
+    projects; LastPass (`lastpass`) and NordPass (`nordpass`), which NordVPN's Complete and higher plans include.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)
