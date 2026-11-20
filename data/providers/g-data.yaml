@@ -1,0 +1,1302 @@
+# Researched by hand on 2026-11-20 (M11.15, security batch 2), read from Canada with Edge and a plain fetch: G DATA's
+# international English site (gdata.de/en, where gdatasoftware.com leads), its German site (gdata.de), its country sites
+# for France, Italy and the Netherlands (gdata.fr, .it, .nl), Spain's (gdata.es, which answers this machine with 403 and
+# was read 2026-11-20 through a Spanish exit), the North American site of its US company G DATA Software, Inc.
+# (gdata-software.com, whose checkout is FastSpring's), its shop (shop.gdata.de), its help centre (gdata.de/help-en), its
+# legal pages and AV-TEST's page. Pages, each quoted where it's used:
+# Pricing: each product page holds its shop's price list for 1 to 10 devices and 1 or 2 years (and 18 months in
+# Germany), its list price ("uvp") beside any campaign price. gdata.de/en prices in US dollars for its international shop
+# ("currency":"USD"), gdata.de in euros (Germany and Austria), and gdata.fr, .it, .nl and .es in euros on their own
+# pages. The North American site prices in US dollars through FastSpring, whose checkout named Canada ("country":"CA",
+# "taxType":"GST") read from Canada and the US ("country":"US") through a US exit, read 2026-11-20 up to the payment
+# form. Renewal prices, from the carts and checkouts, read up to the payment form: the shop's cart shows the renewal under
+# each item ("Subscription activated", "from 20 Nov 2027", "US$39.95 / 12 months"; Germany's "ab 20.11.2027", "39,95 € /
+# 12 Monate" under Black Weeks' 40% first-term coupon; France's "Abonnement activé", "39,95 € / 12 mois"), and
+# FastSpring's checkout data its next charge ("nextChargeTotal":"US$39.95", "intervalUnit":"year" for Internet
+# Security). Regular prices are those renewal prices: Germany's Black Weeks coupons (BLACKWEEKS30, BLACKWEEKS40) are a
+# first term's offer, and the North American site's struck "54.95 USD" over "39.95 USD" isn't what renews. The North
+# American site's subscription popup still says "you will receive a discount of 30% from the second year onwards", which
+# its checkout's next charge (the full price) contradicts: the checkout wins (notes.md). A 2-year term (and Germany's
+# 18 months) renews yearly ("Duration in month: 24", "from 20 Nov 2028", "US$39.95 / 12 months"), so it's a first term:
+# only yearly prices are stored (Norton's precedent). No monthly billing. Taxes: Germany's "Alle Preise inkl. MwSt.",
+# France's "Tous les prix sont indiqués en TTC", Italy's "Tutti i prezzi si intendono IVA inclusa" and the Netherlands'
+# "Alle prijzen zijn inclusief btw" are taxIncluded; Spain's "Todos los precios incluyen IVA" says so too, but core's tax
+# wording doesn't read "incluyen" yet, so Spain's prices have none; the North American site says "plus VAT if
+# applicable." Each plan is priced for one device, and more devices are extra-device add-ons (ESET's precedent): every
+# store's price list rises by the same amount for each device (see addOns).
+# Region checklist for CA and US, 2026-11-20: 1. gdata.de/en has no country paths, and its hreflang links name only en,
+# de and de-CH; 2. the shop's currency picker (US-Dollar, Swiss francs, Euro); 3. the price data names USD, EUR or CHF,
+# not a country; 4. the international shop's checkout country list has neither Canada nor the United States (read from
+# Canada and through a US exit), while the North American site's FastSpring checkout names each (above); 5. the help
+# centre's payment and contract articles; 6. Edge and a plain fetch; 7. no bill offered. Its facts page: "G DATA is
+# available in more than 90 countries worldwide, including Germany (.de), Brazil, and the USA."
+# Other regions: the UK, Ireland, Australia and New Zealand have no G DATA page of their own (gdata.co.uk doesn't
+# answer, gdata.com.au is another company); the international shop's checkout lists them and sells in US dollars, which
+# isn't priced here (no country page; notes.md).
+# Bundles: none sold as bundles of plans; the shop's "Bundle" is a security plan with the VPN or ID Protection add-on
+# (addOns). Official resellers: none named for home users (its partner pages are for business resellers). FastSpring is
+# the online reseller that runs the North American site's checkout ("Sold and fulfilled by FastSpring — an authorized
+# reseller."), not a shop of its own. Google Play bills Mobile Security's in-app purchases: a partner, noted, not listed.
+# Free use: Mobile Security Android Light, free after a 30-day trial of Premium (its plan below). The free trials of the
+# Windows and Mac apps end after 30 days.
+# Not drafted: Mobile Security iOS (gdata.fr, .it and .nl's pages show no price; Internet Security and Total Security
+# cover iOS), the 18-month and 2-year first terms, Switzerland's CHF prices (not a catalog region) and business products.
+
+# Coverage: g-data.vpn in CA and US: the North American site sells no VPN, and the international shop's checkout lists
+# neither country (read 2026-11-20 from Canada and through a US exit).
+
+id: g-data
+name: G DATA
+aliases: [G Data, GDATA]
+website: https://www.gdata.de
+domains: [gdata-software.com, gdata.fr, gdata.it, gdata.nl, gdata.es]
+category: security
+spendCategory: software
+billingCurrency: { CA: USD, US: USD, DE: EUR, FR: EUR, IT: EUR, NL: EUR, ES: EUR, GLOBAL: USD }
+# Its cancellation form ("Cancel contract", every page's footer), which My G DATA's "Cancel contract" also opens.
+cancelUrl: https://www.gdata.de/en/cancel-contract
+sources: { pricing: https://www.gdata.de/en/consumer/shop }
+# Owner (M11.2), read 2026-11-20: its facts page (rule 1). G DATA CyberDefense AG of Bochum (its imprint) sells in Europe
+# and its US company G DATA Software, Inc. (Newark, Delaware: gdata-software.com's imprint) in North America. No page
+# read names an exchange listing: no stock.
+owner:
+  name: G DATA CyberDefense AG
+  page:
+    name: 'Facts (G DATA CyberDefense AG)'
+    url: https://www.gdata.de/en/facts
+  quotes:
+    - 'G DATA CyberDefense AG is a German software company that develops cybersecurity solutions for private and business customers and is regarded as the inventor of the first commercial antivirus software.'
+  country:
+    code: DE
+    page:
+      name: 'Facts (G DATA CyberDefense AG)'
+      url: https://www.gdata.de/en/facts
+    quotes:
+      - 'Location Königsallee 178 a, 44799 Bochum, Germany'
+    lastVerified: 2026-11-20
+  lastVerified: 2026-11-20
+# Ways to pay and card networks (M11.5), read 2026-11-20: My G DATA's contract help names Visa, Mastercard, PayPal, Apple
+# Pay and direct debit (the shop's payment page: "Payment by credit card", "Payment by ApplePay", "Payment by PayPal"). The
+# North American checkout is FastSpring's: its terms name cards, and its form showed card logos (Visa, Mastercard, American
+# Express, UnionPay), PayPal and Google Pay as images, with no words naming them, so only cards are listed there. Google
+# Play bills Mobile Security's in-app purchases (its mobile privacy policy).
+acceptedNetworks:
+  DE: &networks
+    networks: [visa, mastercard]
+    url: https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
+    quotes:
+      - 'You can choose between Visa, Mastercard, PayPal, Apple Pay, and direct debit.'
+  FR: *networks
+  IT: *networks
+  NL: *networks
+  ES: *networks
+paymentMethods:
+  - methods: [card, paypal, apple-pay, bank-transfer]
+    regions: [DE, FR, IT, NL, ES]
+    page: 'View "My contract" (My G DATA help)'
+    url: https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
+    quotes:
+      - 'You can choose between Visa, Mastercard, PayPal, Apple Pay, and direct debit.'
+  - methods: [card]
+    regions: [CA, US]
+    page: 'Terms of Sale (FastSpring)'
+    url: https://www.fastspring.com/terms-sale-us.html
+    quotes:
+      - 'FastSpring will charge credit or debit cards on dispatch of the Product.'
+  - methods: [app-store]
+    regions: [CA, US, DE, FR, IT, NL, ES]
+    page: 'Privacy Policy - G DATA Mobile Applications'
+    url: https://www.gdata.de/en/privacy/mobile
+    quotes:
+      - 'When purchasing the app via the Google Play Store, the purchase is made via the Google account stored on the end device.'
+# Renewal day (M11.5): its terms renew a subscription at the end of its term ("tacitly extended for an indefinite
+# period" after the basic term), and the carts show the next charge a year to the day ("from 20 Nov 2027" for a purchase
+# on 20 Nov 2026), but no page states the day in words core reads: not-stated.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://secure.gd/shop-terms-conditions-en
+    - https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
+  lastVerified: 2026-11-20
+# Lab results (M11.2), read 2026-11-20: AV-TEST's newest Windows test with G DATA, May and June 2026 (report 261309);
+# it isn't in the July and August 2026 test. AV-Comparatives' and SE Labs' aren't listed (data/raters.yaml).
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-06
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/june-2026/g-data-internet-security-25.5-261309/
+    tested: Internet Security 25.5, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 5.5/6.0
+    date: 2026-06
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/june-2026/g-data-internet-security-25.5-261309/
+    tested: Internet Security 25.5, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-06
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/june-2026/g-data-internet-security-25.5-261309/
+    tested: Internet Security 25.5, Windows 11
+
+# General features, read 2026-11-20. Sign-in: My G DATA's username and password ("change the password used for your My G
+# DATA account", its account settings help); no page names two-factor sign-in. Support: "Whether chat or contact form -
+# your G DATA customer service is already looking forward to your inquiry!" (its contact help), "by phone or email" (who
+# we are) and "Support: 24 hours a day, 7 days a week, 365 days a year" (every product page). App languages: My G DATA's
+# "You can choose between German, English, French, Italian, and Dutch." (Dutch isn't a registry value yet), and its
+# Spanish and Portuguese sites (gdata.es, gdata.pt) and help centres. No pause (a subscription runs on until cancelled).
+features:
+  account.sign-in: [password]
+  support.channels: [chat, email, phone, 24-7]
+  languages.interface: [de, en, fr, it, es, pt]
+
+# Perks (M11.6): what the comparison table and plan pages list that no feature describes, in their words.
+perks:
+  - id: exploit-protection
+    name: Protection against critical security vulnerabilities
+  - id: usb-keyboard-guard
+    name: Protection against tampered USB devices
+  - id: device-control
+    name: Access control for USB devices
+  - id: encryption
+    name: Encrypt local data
+  - id: backup
+    name: Backups
+  - id: browser-cleaner
+    name: Browser cleaner
+  - id: app-control
+    name: App Control
+  - id: sim-protection
+    name: SIM card protection
+
+# Features (read 2026-11-20): each plan page's key features, the international shop's "Compare our security software"
+# table, and the help centre.
+# - Windows (Antivirus, Internet Security, Total Security): the help's "Virus protection" interface page, which covers
+#   all three ("the G DATA idle scan and the G DATA virus guard, which is constantly active in the background",
+#   "Scheduled virus checks", "Boot medium", "Behavioural Monitoring"); "Our technologies, DeepRay® and BEAST, use
+#   artificial intelligence and behavioral analysis to detect disguised and previously unknown malware." The table:
+#   every plan has "Browser protection against phishing", "Secure online banking and shopping" (BankGuard) and "Email
+#   protection"; Internet Security and Total Security add "Protection against critical security vulnerabilities",
+#   "Protection against ransomware", "Protection against tampered USB devices" and "Strong firewall"; Total Security
+#   adds "Performance-Tuner", "Encrypt local data" and "Access control for USB devices". Internet Security's page adds
+#   Anti-Spam and Parental Controls ("Set time limits and let your children browse only on verified websites"), and both
+#   help indexes list the Shredder. The free-trial page's "with exploit protection" for Antivirus disagrees with the table,
+#   which decides (notes.md). Total Security's Backups ("locally on your PC or in the Cloud") are a perk; the help's end
+#   of life list stopped Cloud Backup in 12.2022, which the plan page doesn't reflect.
+# - Total Security's password manager: "Feature is no longer supported: G DATA Password Manager." from 01.09.2026 (the
+#   end of life list), though the free-trial page still names "a password manager": none.
+# - Antivirus Mac: "Real-time detection stops viruses, Trojans, spyware, keyloggers, and other malware before they can
+#   become active.", web protection "(Firefox & Google Chrome)", scans you start (its scan help); behaviour monitoring
+#   from its privacy policy ("including malware scan, behavior monitoring"). No scheduled scan named.
+# - Mobile Security Android: its help's table (Premium: Anti-Theft's "Find my device", "Lock screen", "SIM card
+#   protection", Web Protection, App Control) and its page ("locate lost smartphones or remotely wipe their contents"). No
+#   page says it scans in real time.
+# - None names a VPN in a security plan (it's an add-on), cryptomining, anti-tracking, webcam or vulnerability scans.
+plans:
+  - id: g-data.antivirus
+    name: Antivirus
+    link: https://www.gdata.de/en/consumer/antivirus-windows
+    features:
+      platforms: [windows]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.devices: 1
+      antivirus.web-protection: true
+      antivirus.secure-browser: true
+    featureLabels:
+      antivirus.secure-browser: 'BankGuard'
+    notes: 'For Windows. Priced for 1 device: each extra device, up to 5, is an extra-device add-on (6 to 10 devices cost more). The VPN and, in Germany, ID Protection can be added at a lower price.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: US
+        currency: USD
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: DE
+        currency: EUR
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/antivirus-windows
+      - region: FR
+        currency: EUR
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tous les prix sont indiqués en TTC'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.fr/antivirus-windows
+      - region: IT
+        currency: EUR
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tutti i prezzi si intendono IVA inclusa'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.it/antivirus-windows
+      - region: NL
+        currency: EUR
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle prijzen zijn inclusief btw'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.nl/antivirus-windows
+      - region: ES
+        currency: EUR
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.es/antivirus-windows
+    addOnIds: [g-data.extra-device-antivirus, g-data.vpn-with-security, g-data.id-protection]
+    addOnLimit: 6
+  - id: g-data.internet-security
+    name: Internet Security
+    link: https://www.gdata.de/en/consumer/internet-security
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.devices: 1
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock]
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      security.file-shredder: true
+    perks: [exploit-protection, usb-keyboard-guard]
+    featureLabels:
+      antivirus.secure-browser: 'BankGuard'
+    inferred:
+      antivirus.anti-theft:
+        reason: 'Its page covers Android but lists only Windows features. Its licence protects Android devices with Mobile Security, whose paid version finds and locks a lost phone (Find my device, Lock screen).'
+        page:
+          name: 'G DATA Mobile Security Android: features (help)'
+          url: https://www.gdata.de/help-en/consumer/Products/MobileSecurity/Android/featureOverview/
+        lastVerified: 2026-11-20
+    notes: 'For Windows, macOS, Android and iOS. Priced for 1 device: each extra device, up to 10, is an extra-device add-on. The VPN and, in Germany, ID Protection can be added at a lower price.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: US
+        currency: USD
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: DE
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/internet-security
+      - region: FR
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tous les prix sont indiqués en TTC'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.fr/internet-security
+      - region: IT
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tutti i prezzi si intendono IVA inclusa'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.it/internet-security
+      - region: NL
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle prijzen zijn inclusief btw'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.nl/internet-security
+      - region: ES
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.es/internet-security
+    addOnIds: [g-data.extra-device, g-data.vpn-with-security, g-data.id-protection]
+    addOnLimit: 11
+  - id: g-data.total-security
+    name: Total Security
+    link: https://www.gdata.de/en/consumer/total-security
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.devices: 1
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock]
+      antivirus.optimizer: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      security.file-shredder: true
+    perks:
+      [exploit-protection, usb-keyboard-guard, device-control, encryption, backup, browser-cleaner]
+    featureLabels:
+      antivirus.secure-browser: 'BankGuard'
+      antivirus.optimizer: 'Performance-Tuner'
+    inferred:
+      antivirus.anti-theft:
+        reason: 'Its page covers Android but lists only Windows features. Its licence protects Android devices with Mobile Security, whose paid version finds and locks a lost phone (Find my device, Lock screen).'
+        page:
+          name: 'G DATA Mobile Security Android: features (help)'
+          url: https://www.gdata.de/help-en/consumer/Products/MobileSecurity/Android/featureOverview/
+        lastVerified: 2026-11-20
+    notes: 'For Windows, macOS, Android and iOS. Priced for 1 device: each extra device, up to 10, is an extra-device add-on. Its password manager was withdrawn on 1 September 2026. The VPN and, in Germany, ID Protection can be added at a lower price.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: US
+        currency: USD
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: DE
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/total-security
+      - region: FR
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tous les prix sont indiqués en TTC'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.fr/total-security
+      - region: IT
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tutti i prezzi si intendono IVA inclusa'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.it/total-security
+      - region: NL
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle prijzen zijn inclusief btw'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.nl/total-security
+      - region: ES
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.es/total-security
+    addOnIds: [g-data.extra-device, g-data.vpn-with-security, g-data.id-protection]
+    addOnLimit: 11
+  - id: g-data.antivirus-mac
+    name: Antivirus Mac
+    link: https://www.gdata.de/en/consumer/antivirus-macos
+    features:
+      platforms: [macos]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand]
+      antivirus.devices: 1
+      antivirus.web-protection: true
+    notes: 'For macOS. Priced for 1 device: each extra device, up to 10, is an extra-device add-on. Its web protection works in Firefox and Chrome.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: US
+        currency: USD
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: DE
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/antivirus-macos
+      - region: FR
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tous les prix sont indiqués en TTC'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.fr/antivirus-mac
+      - region: IT
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tutti i prezzi si intendono IVA inclusa'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.it/antivirus-mac
+      - region: NL
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle prijzen zijn inclusief btw'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.nl/antivirus-mac
+      - region: ES
+        currency: EUR
+        amount: 39.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.es/antivirus-mac
+    addOnIds: [g-data.extra-device, g-data.vpn-with-security, g-data.id-protection]
+    addOnLimit: 11
+  - id: g-data.mobile-security
+    name: Mobile Security Android
+    link: https://www.gdata.de/en/consumer/mobile-security-android
+    features:
+      platforms: [android]
+      antivirus.included: true
+      antivirus.scans: [on-demand]
+      antivirus.devices: 1
+      antivirus.web-protection: true
+      antivirus.anti-theft: [locate, lock, wipe]
+    perks: [app-control, sim-protection]
+    notes: 'The paid ("Premium") version of its Android app. Priced for 1 device: each extra device, up to 10, is an extra-device add-on. In North America the first year is US$15.95, with a one-time US$4 setup fee in its checkout.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 11.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/mobile-security-android
+      - region: US
+        currency: USD
+        amount: 11.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/mobile-security-android
+      - region: DE
+        currency: EUR
+        amount: 9.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/mobile-security-android
+      - region: FR
+        currency: EUR
+        amount: 9.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tous les prix sont indiqués en TTC'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.fr/mobile-security-android
+      - region: IT
+        currency: EUR
+        amount: 9.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tutti i prezzi si intendono IVA inclusa'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.it/mobile-security-android
+      - region: NL
+        currency: EUR
+        amount: 9.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle prijzen zijn inclusief btw'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.nl/mobile-security-android
+      - region: ES
+        currency: EUR
+        amount: 9.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.es/mobile-security-android
+    addOnIds: [g-data.extra-device-mobile]
+    addOnLimit: 9
+  # Free use (the owner's item), read 2026-11-20: "MSA Light is free of charge and provides you with only a subset of the
+  # features of MSA Premium." After a 30-day trial of Premium, "the functions will be limited to those of the Light
+  # version": its virus scan, without Anti-Theft, Web Protection or App Control (its help's feature table).
+  - id: g-data.mobile-security-light
+    name: Mobile Security Android Light (free)
+    link: https://www.gdata.de/help-en/consumer/Products/MobileSecurity/Android/featureOverview/
+    features:
+      platforms: [android]
+      antivirus.included: true
+      antivirus.scans: [on-demand]
+    notes: 'The free version of its Android app, from Google Play: virus scans only. Anti-theft, web protection and app control are in the paid version.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/help-en/consumer/Products/MobileSecurity/Android/featureOverview/
+  # G DATA VPN, read 2026-11-20 (its page and help): "you can use G DATA VPN on up to 10 devices", "unlimited, encrypted
+  # data traffic", "we do not keep any logs of your web activities (no-log policy)", "the built-in kill switch
+  # (currently available only for Windows)", "IKEv2, OpenVPN, IPSec", split tunneling (its help, on Windows), and servers
+  # in 50 countries (its page's location list, "over 75 locations"). It runs on IPVanish's infrastructure (its privacy
+  # policy). No page names an audit, RAM-only servers, P2P, multi-hop or connecting your own devices.
+  - id: g-data.vpn
+    name: VPN
+    link: https://www.gdata.de/en/consumer/vpn
+    categories: [vpn]
+    features:
+      platforms: [windows, macos, android, ios]
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 50
+      vpn.protocols: [openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    notes: 'For up to 10 devices, with unlimited data and servers in 50 countries; its kill switch is on Windows only. Sold alone in Europe, or at half price with a G DATA security plan (an add-on).'
+    prices:
+      - region: DE
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/vpn
+      - region: FR
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tous les prix sont indiqués en TTC'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.fr/vpn
+      - region: IT
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tutti i prezzi si intendono IVA inclusa'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.it/vpn
+      - region: NL
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle prijzen zijn inclusief btw'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.nl/vpn
+      - region: ES
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.es/vpn
+
+# Add-ons, read 2026-11-20. Extra devices: every store's price list rises by the same amount for each device on one
+# subscription, as the product pages' "1 device", "3 devices" and "5 devices" show: Antivirus by 5 (US$ and €) up to 5
+# devices (its 6th device jumps to US$79.95 or 79,95 €), Internet Security, Total Security and Antivirus Mac by 8 up to 10,
+# and Mobile Security by 10 up to 10; priced in Canada, the US (the North American site's price lists) and Germany (its
+# price data), not read for the other euro countries' larger device counts. The VPN with a security plan: "When purchased
+# as a bundle, you receive a 50% discount on our VPN software." (the VPN page), US$29.97 a year in the international
+# shop's cart ("from 20 Nov 2027", "US$29.97 / 12 months"), and "+ 29,97 €" on each euro country's product pages; it
+# grants the VPN plan. ID Protection: Germany's add-on ("Identitätsschutz", "Warnt Sie, wenn Ihre persönlichen Daten im
+# Internet auftauchen"), "an add-on product" that watches five email addresses, five bank details, five card numbers,
+# five phone numbers, a driving licence, two PayPal accounts and up to 15 social media accounts for leaks (its help),
+# 14,97 € a year with a security plan (Germany's cart: "ab 20.11.2027", "14,97 € / 12 Monate"); never sold alone, so
+# it's a price-only add-on. Each plan's addOnLimit is its extra devices plus one VPN and one ID Protection.
+addOns:
+  - id: g-data.extra-device-antivirus
+    name: Extra device (Antivirus)
+    prices:
+      - region: CA
+        currency: USD
+        amount: 5
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: US
+        currency: USD
+        amount: 5
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: DE
+        currency: EUR
+        amount: 5
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/antivirus-windows
+  - id: g-data.extra-device
+    name: Extra device
+    prices:
+      - region: CA
+        currency: USD
+        amount: 8
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: US
+        currency: USD
+        amount: 8
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/shop
+      - region: DE
+        currency: EUR
+        amount: 8
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/internet-security
+  - id: g-data.extra-device-mobile
+    name: Extra device (Mobile Security)
+    prices:
+      - region: CA
+        currency: USD
+        amount: 10
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/mobile-security-android
+      - region: US
+        currency: USD
+        amount: 10
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata-software.com/mobile-security-android
+      - region: DE
+        currency: EUR
+        amount: 10
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/mobile-security-android
+  - id: g-data.vpn-with-security
+    name: VPN with a security plan
+    grantsPlan: g-data.vpn
+    prices:
+      - region: DE
+        currency: EUR
+        amount: 29.97
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/internet-security
+      - region: FR
+        currency: EUR
+        amount: 29.97
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tous les prix sont indiqués en TTC'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.fr/internet-security
+      - region: IT
+        currency: EUR
+        amount: 29.97
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Tutti i prezzi si intendono IVA inclusa'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.it/internet-security
+      - region: NL
+        currency: EUR
+        amount: 29.97
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle prijzen zijn inclusief btw'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.nl/internet-security
+      - region: ES
+        currency: EUR
+        amount: 29.97
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.es/internet-security
+  - id: g-data.id-protection
+    name: ID Protection
+    prices:
+      - region: DE
+        currency: EUR
+        amount: 14.97
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: 'Alle Preise inkl. MwSt.'
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.gdata.de/privatperson/internet-security
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-20 with a plain fetch and Edge: its shop's Terms and Conditions
+# (English, March 2026; the German AGB of April 2026 says the same for Germany and Austria, and adds Switzerland's), its
+# cancellation (withdrawal) policy and payment page, its licence (Software Licensing Agreement, 2019; the North American
+# site's is the same, governed by North Carolina's law instead of Germany's), its website privacy policy and its
+# product privacy policies (Windows, Mac, mobile apps, VPN), the North American site's privacy policy, FastSpring's Terms
+# of Sale (the North American checkout's seller), its trust centre, vulnerability reporting page and disclosure policy,
+# and its help centre's contract, cancellation, deletion and end-of-life articles. Read for no topic beyond the same
+# grades: the German AGB (the same clauses), the North American licence (the same text under North Carolina's law), and
+# its cancellation (withdrawal) policy: a 14-day withdrawal that ends once you agree to start the download. Not read:
+# the checkout's own confirmation screens past the payment form, and Google Play's terms for in-app purchases.
+policies:
+  links:
+    - name: Terms and conditions
+      url: https://secure.gd/shop-terms-conditions-en
+    - name: Licence (EULA)
+      url: https://www.gdata.de/en/eula
+    - name: Privacy policy (website)
+      url: https://www.gdata.de/en/privacy
+    - name: Privacy policy (Windows products)
+      url: https://www.gdata.de/en/privacy/windows
+    - name: Privacy policy (Antivirus Mac)
+      url: https://www.gdata.de/en/privacy/mac
+    - name: Privacy policy (mobile apps)
+      url: https://www.gdata.de/en/privacy/mobile
+    - name: Privacy policy (VPN)
+      url: https://www.gdata.de/en/privacy/vpn
+    - name: Privacy policy (North America)
+      url: https://www.gdata-software.com/privacy
+    - name: Terms of Sale (FastSpring, North America)
+      url: https://www.fastspring.com/terms-sale-us.html
+    - name: Imprint
+      url: https://www.gdata.de/en/imprint
+    - name: Trust Center
+      url: https://www.gdata.de/en/trust-center
+    - name: Report a security vulnerability
+      url: https://www.gdata.de/en/report-security-vulnerability
+    - name: Vulnerability Disclosure Policy
+      url: https://www.gdata.de/en/privacy/vulnerability-disclosure
+    - name: Who we are
+      url: https://www.gdata.de/en/who-we-are
+    - name: 'View "My contract" (help)'
+      url: https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
+    - name: Cancelling a subscription (help)
+      url: https://www.gdata.de/help-en/consumer/MyGdata/MyGDataFAQ/terminateLicenseViaMyGDATA/
+    - name: Reducing your devices (help)
+      url: https://www.gdata.de/help-en/consumer/FAQ/licenseVolumeReductionFAQ/
+    - name: Protecting more devices (help)
+      url: https://www.gdata.de/help-en/consumer/FAQ/protectAdditionalDevicesFAQ/
+    - name: Deleting your personal data (help)
+      url: https://www.gdata.de/help-en/general/GeneralInformation/DeletePersData/
+    - name: End of life (help)
+      url: https://www.gdata.de/help-en/general/GeneralInformation/eol/
+    - name: Mobile Security Light and Premium (help)
+      url: https://www.gdata.de/help-en/consumer/Products/MobileSecurity/Android/featureOverview/
+    - name: Free trials
+      url: https://www.gdata.de/en/consumer/free-antivirus-trial-version
+    - name: Antivirus for Windows
+      url: https://www.gdata.de/en/consumer/antivirus-windows
+    - name: VPN
+      url: https://www.gdata.de/en/consumer/vpn
+    - name: Internet Security (North America)
+      url: https://www.gdata-software.com/internet-security
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send statistics about the malware they find, and its Android app how you use it; you can turn both off in the app. Its mobile and VPN apps also send crash reports, with no setting to stop them.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'You may object to the statistical analysis of your data by adjusting the relevant settings in the G DATA antivirus software.'
+        - url: https://www.gdata.de/en/privacy/mobile
+          quote: 'If you do not wish your app usage to be analyzed, you can deactivate the option at any time in G DATA Mobile Security for Android under the menu item "Information" with effect for the future or object here.'
+        - url: https://www.gdata.de/en/privacy/vpn
+          quote: 'The app sends crash and error reports to analyze app crashes and improve the stability of our app.'
+      action:
+        name: 'How to object, in its privacy policy'
+        url: https://www.gdata.de/en/privacy/windows
+      lastVerified: 2026-11-20
+    - topic: privacy.data-collection
+      plans: [g-data.antivirus, g-data.antivirus-mac]
+      tier: neutral
+      reason: 'Its Windows and Mac apps send statistics about the malware they find, to improve detection. You can turn that off in the app’s settings.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'You may object to the statistical analysis of your data by adjusting the relevant settings in the G DATA antivirus software.'
+        - url: https://www.gdata.de/en/privacy/mac
+          quote: 'you can use the corresponding opt-out option in the settings of the G DATA antivirus software.'
+      action:
+        name: 'How to turn it off, in its privacy policy'
+        url: https://www.gdata.de/en/privacy/windows
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'Its apps don’t pass your data to other companies, except when the law requires it. Its European websites let advertising partners track you only if you agree.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'In principle, no personal data is transferred to external recipients for the provision of G DATA antivirus software.'
+        - url: https://www.gdata.de/en/privacy
+          quote: 'The basis for data processing is your consent, provided you have given it (pursuant to Art. 6 para. 1 lit. a) GDPR).'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      regions: [CA, US]
+      tier: poor
+      reason: 'Its North American website sends your visit to Google and other ad companies by default. To stop it, you must opt out on each device and browser.'
+      sources:
+        - url: https://www.gdata-software.com/privacy
+          quote: 'Our website uses a pixel, which establishes a direct connection to the Google servers.'
+        - url: https://www.gdata-software.com/privacy
+          quote: 'If you use our website with multiple devices you must opt-out from the use of retargeting and tracking tools for each device separately, as we cannot assign multiple devices to individual visitors.'
+      action:
+        name: 'Opt out of remarketing and tracking'
+        url: https://www.gdata-software.com/privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'Its apps show no ads. Its European websites follow you with ads elsewhere only if you agree in the cookie banner.'
+      sources:
+        - url: https://www.gdata.de/en/privacy
+          quote: 'Retargeting is a tracking process in which visitors to our website are marked and then targeted again on other websites with targeted advertising.'
+        - url: https://www.gdata.de/en/privacy
+          quote: 'The basis for data processing is your consent, provided you have given it (pursuant to Art. 6 para. 1 lit. a) GDPR).'
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      regions: [CA, US]
+      tier: poor
+      reason: 'Its North American website tracks your visit to show you its ads on other sites, by default. Turning it off sets a cookie, so you must do it on each device.'
+      sources:
+        - url: https://www.gdata-software.com/privacy
+          quote: 'Depending on the respective user group, we address website visitors on other websites or in apps with personalized advertising about our products and services.'
+        - url: https://www.gdata-software.com/privacy
+          quote: 'After clicking the link, we store an opt-out cookie with an unlimited validity on your device.'
+      action:
+        name: 'Opt out of remarketing and tracking'
+        url: https://www.gdata-software.com/privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policies and licence don’t say whether your data trains AI models.'
+      pages:
+        - https://www.gdata.de/en/privacy
+        - https://www.gdata.de/en/privacy/windows
+        - https://www.gdata.de/en/eula
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'It deletes your account details within three months of your licence ending, and website logs within 7 days. It keeps billing records 10 years, as the law requires.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'We store your registration and user data for the entire duration of your license and delete it no later than three months after the end of your license.'
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'We delete further contract- and tax-related data in accordance with the legal requirements of 10 years from the calendar year of the license’s expiration.'
+        - url: https://www.gdata.de/en/privacy
+          quote: 'Log data is regularly deleted promptly, but at the latest after 7 days.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      plans: [g-data.vpn]
+      tier: neutral
+      reason: 'Its VPN’s privacy policy keeps your data only as long as needed or the law requires, with no stated time.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/vpn
+          quote: 'The data will only be stored for as long as is necessary to provide the service or for as long as there are statutory retention obligations.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to delete your data, through My G DATA’s contact form or by email, but it doesn’t say how soon.'
+      sources:
+        - url: https://www.gdata.de/help-en/general/GeneralInformation/DeletePersData/
+          quote: 'Under Article 17 GDPR, you have the right to erasure of your personal data stored by us.'
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'You have the right to request that we erase your personal data.'
+      action:
+        name: 'How to have your data deleted'
+        url: https://www.gdata.de/help-en/general/GeneralInformation/DeletePersData/
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of the data you gave it, in a format other apps can read.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'You have the right to receive the personal data concerning you that we hold in a structured, commonly used, and machine-readable format, provided that the data processing is based on your consent or a contract.'
+      action:
+        name: 'How to use your privacy rights'
+        url: https://www.gdata.de/en/privacy/windows
+      lastVerified: 2026-11-20
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives your data to others only when the law requires or allows it, such as in court cases. It doesn’t promise to tell you or publish a report.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'Data is transferred to external recipients only in individual cases, provided that we, as G DATA, are entitled or obligated to do so for legal reasons (e.g., in the event of legal disputes).'
+        - url: https://www.gdata.de/en/privacy
+          quote: 'Public authorities - authorities and state institutions, such as public prosecutors, courts or tax authorities, to which personal data may have to be transmitted in individual cases.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Its security apps’ data isn’t meant to leave Europe. Its website’s service providers may be elsewhere, but only under the EU’s approved safeguards.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'Data transfers to third countries are not intended in the context of G DATA antivirus software.'
+        - url: https://www.gdata.de/en/privacy
+          quote: 'G DATA transfers personal data to third countries outside the EEA on the basis of an adequacy decision by the European Commission.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      plans: [g-data.vpn]
+      tier: neutral
+      reason: 'Its VPN’s connection data is handled in the US by IPVanish, under the EU’s standard contract clauses.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/vpn
+          quote: 'The processing of certain connection data is carried out by our sub-processor IPVANISH, Inc, 114 5th Ave,15th Floor, New York, NY 10011, USA.'
+        - url: https://www.gdata.de/en/privacy/vpn
+          quote: 'is therefore based on the standard contractual clauses of the EU Commission pursuant to Art. 46 para. 2 lit. c GDPR.'
+      lastVerified: 2026-11-20
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'It needs your name and email address to activate your licence.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/windows
+          quote: 'To activate your product, we ask you for your name and email address during the registration process.'
+      lastVerified: 2026-11-20
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online in My G DATA, but at least a month before your term ends, or it carries on. After that, you can cancel at any time with a month’s notice.'
+      sources:
+        - url: https://secure.gd/shop-terms-conditions-en
+          quote: 'If the subscription contract is not terminated by one of the parties 1 month before the end of the basic term'
+        - url: https://secure.gd/shop-terms-conditions-en
+          quote: 'The extended contractual relationship can be terminated at any time with a notice period of 1 month (unless a shorter period is stipulated in the respective offer).'
+        - url: https://www.gdata.de/help-en/consumer/MyGdata/MyGDataFAQ/terminateLicenseViaMyGDATA/
+          quote: 'After successfully logging in, navigate to the "My Contract" view and click on Cancel contract .'
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get your money back if you ask within 30 days of buying, once for each product. It doesn’t say the same for a renewal.'
+      sources:
+        - url: https://secure.gd/shop-terms-conditions-en
+          quote: 'We will refund the purchase price you paid for your purchased product for private users if you request a refund within 30 days of the purchase date.'
+        - url: https://secure.gd/shop-terms-conditions-en
+          quote: 'Applies once per customer per product type.'
+      lastVerified: 2026-11-20
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms don’t say whether it tells you before raising the price of a subscription.'
+      pages:
+        - https://secure.gd/shop-terms-conditions-en
+        - https://www.gdata.de/en/eula
+        - https://www.fastspring.com/terms-sale-us.html
+      lastVerified: 2026-11-20
+    - topic: billing.free-trials
+      tier: great
+      reason: 'Its 30-day trials are free and need no payment. The Android app falls back to its free version after the trial, so nothing turns into a paid plan by itself.'
+      sources:
+        - url: https://www.gdata.de/en/consumer/free-antivirus-trial-version
+          quote: 'Try the full versions of our software for free and see for yourself how it enhances the security of your devices.'
+        - url: https://www.gdata.de/help-en/consumer/Products/MobileSecurity/Android/featureOverview/
+          quote: 'After this trial period, the functions will be limited to those of the Light version.'
+      lastVerified: 2026-11-20
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and help pages don’t say it reminds you before a subscription renews.'
+      pages:
+        - https://secure.gd/shop-terms-conditions-en
+        - https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
+      lastVerified: 2026-11-20
+    - topic: billing.fees
+      tier: good
+      reason: 'It charges nothing beyond the price. Paying from outside the EU, your bank’s transfer or exchange fees are yours.'
+      sources:
+        - url: https://secure.gd/shop-terms-conditions-en
+          quote: '6.2 Since the product is downloaded, no shipping costs accrue.'
+        - url: https://secure.gd/shop-terms-conditions-en
+          quote: 'If delivery is made to countries outside of the European Union, we may incur unreasonable additional costs, such as duties, taxes or money transfer fees (transfer or foreign exchange fees charged by the banks), which you must bear.'
+      lastVerified: 2026-11-20
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'You can add devices or products at once in My G DATA. Taking devices off needs a form to its accounting team, and it doesn’t say how the price changes.'
+      sources:
+        - url: https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
+          quote: 'By clicking on Edit contract , you can purchase additional products and protect additional devices.'
+        - url: https://www.gdata.de/help-en/consumer/FAQ/licenseVolumeReductionFAQ/
+          quote: 'Unlike increasing the number of devices covered by a license, reducing the number cannot be carried out in an automated manner and requires the involvement of our accounting department.'
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      tier: good
+      reason: 'German law applies, without taking away your own country’s consumer protections, and disputes go to court. It won’t use consumer arbitration boards.'
+      sources:
+        - url: https://secure.gd/shop-terms-conditions-en
+          quote: 'German law shall apply.'
+        - url: https://www.gdata.de/en/imprint
+          quote: 'We are neither willing nor obliged to participate in dispute resolution proceedings before consumer arbitration boards.'
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      regions: [CA, US]
+      tier: poor
+      reason: 'In North America you buy from FastSpring, whose terms send disputes to a private referee (an arbitrator), one person at a time, with no class actions. You can opt out by email within 30 days.'
+      sources:
+        - url: https://www.fastspring.com/terms-sale-us.html
+          quote: 'the arbitration of any Dispute shall proceed on an individual basis, and neither you nor FastSpring may bring a claim as a part of a class'
+        - url: https://www.fastspring.com/terms-sale-us.html
+          quote: 'opt out of this agreement to arbitrate by contacting support@fastspring.com within 30 days of first accepting these Terms.'
+      action:
+        name: 'How to opt out of FastSpring’s arbitration'
+        url: https://www.fastspring.com/terms-sale-us.html
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'Its licence can only be changed by a new written agreement that both of you sign.'
+      sources:
+        - url: https://www.gdata.de/en/eula
+          quote: 'This license agreement may only be modified by a License Certificate or any other written and mutually signed agreements that accompanies or follows this license agreement.'
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its licence, the licence ends at once, and nothing says you get money back.'
+      sources:
+        - url: https://www.gdata.de/en/eula
+          quote: 'This License Agreement shall terminate upon USERs breach of any term contained herein.'
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It took the password manager out of Total Security in September 2026, saying browsers no longer support it. Its pages don’t mention money back.'
+      sources:
+        - url: https://www.gdata.de/help-en/general/GeneralInformation/eol/
+          quote: 'Feature is no longer supported: G DATA Password Manager.'
+        - url: https://www.gdata.de/help-en/general/GeneralInformation/eol/
+          quote: 'The browser extension G DATA Password Manager is no longer supported by browser vendors.'
+      lastVerified: 2026-11-20
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms, licence and privacy policies don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://secure.gd/shop-terms-conditions-en
+        - https://www.gdata.de/en/eula
+        - https://www.gdata.de/en/privacy
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its licence forbids taking its apps apart, with no exception for what the law allows, and limits use to your own "internal business operations".'
+      sources:
+        - url: https://www.gdata.de/en/eula
+          quote: '(iii) to reverse engineer, decompile or disassemble the SOFTWARE'
+        - url: https://www.gdata.de/en/eula
+          quote: 'solely for USERs internal business operations'
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      tier: good
+      reason: 'An outside body certifies its security (ISO 27001). It has a process for reporting security bugs, publishes advisories, and thanks finders with a gift, not money.'
+      sources:
+        - url: https://www.gdata.de/en/trust-center
+          quote: 'ISO/IEC 27001:2022'
+        - url: https://www.gdata.de/en/privacy/vulnerability-disclosure
+          quote: 'A security advisory may also be created and published on our website.'
+        - url: https://www.gdata.de/en/report-security-vulnerability
+          quote: 'Individuals who have reported a confirmed security vulnerability will receive a gift of appreciation from G DATA.'
+      lastVerified: 2026-11-20
+    - topic: service.activity-logging
+      tier: neutral
+      reason: 'Its VPN keeps no record of what you do online, it says, but a scrambled form of your IP address, how long you connect and how much data you use are kept as long as needed. No outside check is published.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/vpn
+          quote: 'Hash value of your IP address (to establish the connection), connection duration, amount of data transferred (in bytes)'
+        - url: https://www.gdata.de/en/consumer/vpn
+          quote: 'Your data traffic is never logged.'
+        - url: https://www.gdata.de/en/privacy/vpn
+          quote: 'The data will only be stored for as long as is necessary to provide the service or for as long as there are statutory retention obligations.'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You can protect your family’s devices with your licence and manage them all from your My G DATA account, up to the devices you paid for.'
+      sources:
+        - url: https://www.gdata-software.com/internet-security
+          quote: 'From now on, you can easily manage all of your family members’ security solutions in your personal My G DATA area.'
+        - url: https://www.gdata.de/help-en/consumer/FAQ/protectAdditionalDevicesFAQ/
+          quote: 'With your G DATA license, you can protect up to 10 devices.'
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      tier: good
+      reason: 'Each paid device is one installation, and you can add devices in My G DATA at any time.'
+      sources:
+        - url: https://www.gdata.de/en/eula
+          quote: 'USER is not entitled to use or install the software on more PC than stated in the License Certificate.'
+        - url: https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
+          quote: 'By clicking on Edit contract , you can purchase additional products and protect additional devices.'
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps update themselves during your licence, and you can choose when and where your PC downloads updates.'
+      sources:
+        - url: https://www.gdata.de/en/eula
+          quote: 'This Right of use expressly includes the use of all Signature-Updates and Software–Updates referring to the SOFTWARE G DATA will release to the public during the duration stated in the License Certificate.'
+        - url: https://www.gdata.de/en/consumer/antivirus-windows
+          quote: 'Specify when and where your PC loads updates.'
+      lastVerified: 2026-11-20
+    - topic: other.notable
+      title: Promises no backdoors
+      tier: good
+      reason: 'It promises its software has no hidden way in for anyone, not even government agencies.'
+      sources:
+        - url: https://www.gdata.de/en/trust-center
+          quote: 'Guaranteed to be free of backdoors.'
+        - url: https://www.gdata.de/en/who-we-are
+          quote: 'No backdoors—not even for government agencies'
+      lastVerified: 2026-11-20
+    - topic: other.notable
+      title: Its VPN is built on another company's
+      plans: [g-data.vpn]
+      tier: neutral
+      reason: 'Its VPN runs on the servers of IPVanish, a US company, which handles your connection details for it.'
+      sources:
+        - url: https://www.gdata.de/en/privacy/vpn
+          quote: 'For the technical provision of the VPN service, we use the infrastructure of our sub-processor IPVanish, Inc., a US technology provider based at 114 5th Ave,15th Floor, New York, NY 10011, USA .'
+      lastVerified: 2026-11-20
