@@ -28,6 +28,7 @@ import { dateText, dayText } from '../../shared/date-text';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { MiniCalendar, type CalendarCharge } from '../../shared/mini-calendar/mini-calendar';
 import { amountText, intervalSpoken } from '../../shared/price-tag/price-text';
+import { YearlyTotalSwitch } from '../../shared/yearly-total-switch/yearly-total-switch';
 import { OptimizationsLink } from '../lists/optimizations-link';
 import { importedText } from '../settings/backup-text';
 
@@ -57,6 +58,7 @@ const comingDays = 14;
     MiniCalendar,
     OptimizationsLink,
     RouterLink,
+    YearlyTotalSwitch,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',

@@ -293,6 +293,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.30 | Cost breakdowns on the bars (added 2026-10-30, the owner's request): every budget bar (Home, the Lists overview and its cards, List view, the Calendar's month and year, Payment's card limits) opens what it adds up: each subscription's charges in the bar's period, with its price, sales tax and FX fee, and the exchange rate of a converted one, then the totals of each. Hovering the bar shows it and a click or tap keeps it; a breakdown button beside the bar does the same by keyboard, and Escape closes it (P2, P3, P4, P10, P11) | Home's this-month bar lists Mullvad's €5.00 at its rate with its 2.5% FX fee and Netflix's tax, and their sum is the bar's total |
 | M10.31 | Subscribed since the day it's added (added 2026-10-30, the owner's TODO): a new item's Subscribed since starts as the day it's added, so its totals don't count every month back to January; the user can clear it or pick an earlier day, and items already saved keep what they have (P6) | Netflix added on Oct 30 counts nothing before Oct 30 in this year's total; a cleared Subscribed since saves none |
 | M10.32 | Wide screens (added 2026-11-19, the owner's 21:9 feedback): the pages of cards (Home, Search, Lists, List view, Features, Calendar, Payment) take the whole width with their cards in columns, Settings its groups side by side, and a month view's days grow taller; the list editor and Custom subscriptions keep 960 px (BLUEPRINT §8.1) | At 3440 px List view has four cards a row and Search's expanded card leaves its neighbours' heights alone; the year view has two rows of six; 1280 px looks as before |
+| M10.35 | One yearly total everywhere (added 2026-11-19, the owner's feedback): the Yearly total switch on Home's Budgets and the Lists overview's totals as on List view, and every page's totals following the one device setting, so it's chosen once (P2, P3, P4; BLUEPRINT §8.1.1, §14) | Next 12 months chosen on Home shows on the Lists overview, its cards and List view; the annual warning still checks this year; the initial bundle is unchanged |
 
 #### M10 specs
 
@@ -3087,8 +3088,9 @@ back):
 group: one tab stop, the arrows choose) of **This year** and **Next 12 months**, This year by default. Next 12 months
 makes the annual line the next 12 months' total (§3.1) against the annual budget, "$516.47 of $500.00 in the next 12
 months", its bar and breakdown the same period; the annual budget warning still checks this calendar year, as Home's
-does. The choice is this device's (`settings.yearlyTotal`, which sync leaves alone), saved at once; Home and the Lists
-page keep this year. `check-list-view-yearly.cjs` (browser-check skill).
+does. The choice is this device's (`settings.yearlyTotal`, which sync leaves alone), saved at once. Since M10.35 Home
+and the Lists page have the switch too and every page follows the one choice. `check-list-view-yearly.cjs`
+(browser-check skill).
 
 BLUEPRINT §14 has the details.
 
