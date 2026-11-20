@@ -694,6 +694,48 @@
   source: own
   status: done
   date: 2026-11-19
+- id: emsisoft
+  name: Emsisoft
+  website: https://www.emsisoft.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
+- id: webroot
+  name: Webroot
+  website: https://www.webroot.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
+- id: sophos-home
+  name: Sophos Home
+  website: https://home.sophos.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
+- id: trend-micro
+  name: Trend Micro
+  website: https://www.trendmicro.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
+- id: f-secure
+  name: F-Secure
+  website: https://www.f-secure.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
+- id: g-data
+  name: G DATA
+  website: https://www.gdata.de
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
 - id: psono
   name: Psono
   website: https://psono.com
@@ -1762,7 +1804,9 @@
   source: wikidata
   wikidata: Q2639453
   sitelinks: 9
-  status: queued
+  status: rejected
+  date: 2026-11-20
+  note: "A plan of Emsisoft (emsisoft), by the brand rule, not a provider of its own"
 - id: kugou
   name: KuGou
   website: https://www.kugou.com
