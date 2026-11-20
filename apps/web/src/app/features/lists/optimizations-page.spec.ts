@@ -6,7 +6,9 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import type { CatalogData, ListItem, Settings, SubscriptionList } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
+import { OptimizerService } from '../../core/optimizer/optimizer-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { DismissedSuggestionsRepository } from '../../core/storage/dismissed-suggestions-repository';
 import { DraftsRepository } from '../../core/storage/drafts-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
@@ -121,6 +123,21 @@ describe('OptimizationsPage', () => {
     );
     expect(text(red?.querySelector('.unranked ul'))).toBe('Ad free');
     expect(button('How suggestions are chosen')?.getAttribute('aria-describedby')).toBeTruthy();
+  });
+
+  it('says when the suggestions can’t be worked out, rather than looking for ever (M10.37)', async () => {
+    vi.spyOn(TestBed.inject(OptimizerService), 'run').mockRejectedValue(new Error('No rate'));
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    await plant();
+    await open(work.id);
+    await until(
+      () => text(page().querySelector('.note[role="status"]')) !== 'Looking for savings…',
+    );
+    expect(text(page().querySelector('.note[role="status"]'))).toBe(
+      "The suggestions couldn't be worked out. Reload the page to try again.",
+    );
+    expect(logged).toHaveBeenCalled();
+    logged.mockRestore();
   });
 
   it('names the third-party claims a card rests on, each linked (M11.16)', async () => {
@@ -281,6 +298,40 @@ describe('OptimizationsPage', () => {
     });
     await until(() => shown().length === 4);
     expect(page().querySelector('.show-dismissed')).toBeNull();
+  });
+
+  it('keeps a card of several changes dismissed from before M10.33 hidden, and shows one again alone (M10.37)', async () => {
+    // Both cards were once one, whose fingerprint was dismissed.
+    const optimizer = TestBed.inject(OptimizerService);
+    const run = optimizer.run.bind(optimizer);
+    vi.spyOn(optimizer, 'run').mockImplementation(async (input) => {
+      const result = await run(input);
+      return {
+        ...result,
+        suggestions: result.suggestions.map((suggestion) => ({
+          ...suggestion,
+          groupFingerprint: '0123456789abcdef',
+        })),
+      };
+    });
+    await plant();
+    const dismissals = TestBed.inject(DismissedSuggestionsRepository);
+    await dismissals.dismiss('0123456789abcdef', work.id);
+    await open(work.id);
+    await until(() => text(page().querySelector('.show-dismissed')) === 'Show dismissed (2)');
+    expect(page().querySelectorAll('ss-suggestion-card')).toHaveLength(0);
+
+    const show = page().querySelector<HTMLInputElement>('.show-dismissed input');
+    show?.click();
+    await until(() => shown().length === 4);
+    button('Show again: Switch Netflix Standard')?.click();
+    await until(() => text(page().querySelector('.show-dismissed')) === 'Show dismissed (1)');
+    show?.click();
+    await until(() => shown().length === 2);
+    expect(shown()[1]).toMatch(/^Switch Netflix Standard to annual billing/);
+    // The other stays dismissed under its own fingerprint; the old card's is gone.
+    expect(dismissals.fingerprints().has('0123456789abcdef')).toBe(false);
+    expect(dismissals.fingerprints().size).toBe(1);
   });
 
   it('shows what the list’s accounts could earn in Accounts, each information only, and no cost-only card (M11.13)', async () => {

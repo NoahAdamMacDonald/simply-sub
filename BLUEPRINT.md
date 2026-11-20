@@ -5136,6 +5136,13 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   host are one change: the host's add-on. Applying cards one at a time found that Optimizations offers Disney+ Standard
   into the bundle with Disney+ Premium while `itemReplacements` took a bundle over only from its exact plans: it now
   takes over from any plan of a provider it includes, as suites did.
+  **Since M10.37:** a card split from a group carries the group's fingerprint (`groupFingerprint`), which the optimizer
+  still works out, so a group dismissed before M10.33 keeps its cards hidden (core's `isDismissed`) until the list
+  changes, and Show again on one dismisses the others under their own. Cards that give up more together were looked
+  for in 2,000 random lists of the optimizer's fixtures (4,181 cards): none, since a split only separates changes their
+  plan passed together, so cards carry no warning about each other. An item with a charge there's no exchange rate for
+  is kept as it is: its "keep" option was refused as foreign, which left the search nothing to start from and stopped
+  Optimizations at "Looking for savings…"; a run that fails now says so.
 - **The coverage map** (section 10.1) is 12 slots, a month each from today, with a bit per slot an item is active
   in (`optimizer/coverage.ts`): Ongoing from its start date until its end date, a window through its end, copied
   into each year when it repeats.
