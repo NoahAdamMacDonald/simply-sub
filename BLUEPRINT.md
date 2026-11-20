@@ -3106,6 +3106,12 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
 - **Shell:** a fixed left sidebar (logo, Home, Lists, Payment, Features, Calendar, then Search, with the settings
   cog and theme toggle at the bottom) and a main content area. The active nav item gets an underline in the
   accent colour. On narrow screens the sidebar collapses into a drawer.
+- **Wide screens** (the owner's 21:9 feedback, 2026-11-19): the pages of cards take the main area's whole width, with
+  no maximum, and put their cards in columns: Search's and List view's at least 600 px each (a card's wide layout),
+  the Lists overview's 560 px, Features' 26rem, Payment's tiles 340 px, and the year view's months six a row at most.
+  Home puts budgets, Coming up and the calendar in one row from 1800 px, Settings its groups side by side from 1700 px,
+  and a month view's days grow from 104 px to 180 px tall. At 1280 px every page looks as before. The list editor
+  and Custom subscriptions are one form or table each, and keep their 960 px.
 - **Theme tokens.** These are CSS custom properties fed into the Material 3 theme. The suggested palette below
   keeps your colours and fixes readability.
   - **The problem:** neon yellow, cyan and green text on `#D9D9D9` grey is very hard to read (roughly 1.1–1.5:1
@@ -5104,6 +5110,15 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   never conflict and their savings add up; a card in a looser section can be an alternative to one in a stricter
   section for the same item (Disney+ billed yearly in Free, Standard billed yearly in Red). "Save up to" is the
   yellow plan's savings.
+  **A change a card** (M10.33, the owner's feedback of 2026-11-19, when a yellow card held seven removals): each change
+  in a group is a card of its own whenever it saves and is allowed alone, judged against the list as it is and shown in
+  the section of what it alone gives up, so a looser plan's change can be a card in a stricter section. A group stays
+  one card only when one of its changes isn't allowed without the others, in its plan's section. The same change from
+  two plans is one card. Cards in a section may then overlap (two services that each give what the other does), but
+  the page works the suggestions out again after every Apply, so what's left is judged with it. Two extra members on one
+  host are one change: the host's add-on. Applying cards one at a time found that Optimizations offers Disney+ Standard
+  into the bundle with Disney+ Premium while `itemReplacements` took a bundle over only from its exact plans: it now
+  takes over from any plan of a provider it includes, as suites did.
 - **The coverage map** (section 10.1) is 12 slots, a month each from today, with a bit per slot an item is active
   in (`optimizer/coverage.ts`): Ongoing from its start date until its end date, a window through its end, copied
   into each year when it repeats.

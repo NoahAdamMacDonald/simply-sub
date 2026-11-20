@@ -1,6 +1,5 @@
 :host {
   display: block;
-  max-width: 1200px;
 }
 
 .note,
@@ -39,9 +38,10 @@ ss-empty-state {
   }
 }
 
+// One column of cards, or more side by side on a wide screen.
 .cards {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 560px), 1fr));
   gap: 16px;
   margin: 0 0 16px;
   padding: 0;

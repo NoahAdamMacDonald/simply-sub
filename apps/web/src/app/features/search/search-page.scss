@@ -1,6 +1,5 @@
 :host {
   display: block;
-  max-width: 1280px;
 }
 
 // The search bar stays at the top while the results scroll under it (M5.7), below the top bar under 960 px. It isn't
@@ -152,12 +151,20 @@ input[type='search']::-webkit-search-cancel-button {
 }
 
 // Its own stacking context, so nothing in a card (Material raises its buttons' labels) paints over the pinned bar.
+// One column of cards, or more side by side on a wide screen: each at least 600 px, where a card has its wide layout,
+// so a 1280 px window keeps one and a 21:9 one has four. A card that opens its details leaves its neighbours' heights
+// alone.
 .results {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 600px), 1fr));
   gap: 12px;
+  align-items: start;
   isolation: isolate;
   grid-area: results;
+
+  ss-empty-state {
+    grid-column: 1 / -1;
+  }
 }
 
 // A card that opens or closes its details scrolls itself into view below the pinned bar (ss-sub-card).

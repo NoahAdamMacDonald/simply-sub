@@ -48,30 +48,59 @@
     }
   </ul>
 
-  @if (suggestion().lostServices.length > 0 || suggestion().lost.length > 0) {
-    <p class="features">
-      <span class="label">You lose:</span>
-      @for (service of suggestion().lostServices; track service.itemId) {
-        <span class="feature">{{ service.title }} itself</span>
-      }
-      @for (change of suggestion().lost; track change.key) {
-        <span class="feature">
-          <ss-rank-dot [rank]="change.rank" />
-          {{ change.label }} ({{ rankNames[change.rank] }})
-        </span>
-      }
-    </p>
+  <!-- What you ranked comes first, by rank; the features you haven't ranked are folded under it (M10.34). -->
+  @if (suggestion().lostServices.length > 0 || lost().length > 0) {
+    <div class="effect lose">
+      <p class="label" [id]="id() + '-lose'">You lose</p>
+      <ul class="ranked" [attr.aria-labelledby]="id() + '-lose'">
+        @for (service of suggestion().lostServices; track service.itemId) {
+          <li class="service">
+            <mat-icon aria-hidden="true">block</mat-icon>&ngsp;
+            <span>{{ service.title }} itself</span>
+          </li>
+        }
+        @for (change of lost(); track change.key) {
+          <li>
+            <ss-rank-chip class="rank" [rank]="change.rank" />&ngsp;
+            <span>{{ change.label }}</span>
+          </li>
+        }
+      </ul>
+    </div>
   }
-  @if (suggestion().gained.length > 0) {
-    <p class="features">
-      <span class="label">You gain:</span>
-      @for (change of suggestion().gained; track change.key) {
-        <span class="feature">
-          <ss-rank-dot [rank]="change.rank" />
-          {{ change.label }} ({{ rankNames[change.rank] }})
-        </span>
+  @if (gained().length > 0) {
+    <div class="effect gain">
+      <p class="label" [id]="id() + '-gain'">You gain</p>
+      <ul class="ranked" [attr.aria-labelledby]="id() + '-gain'">
+        @for (change of gained(); track change.key) {
+          <li>
+            <ss-rank-chip class="rank" [rank]="change.rank" />&ngsp;
+            <span>{{ change.label }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+  @if (unranked(); as more) {
+    <details class="unranked">
+      <summary>{{ more.summary }}</summary>
+      @if (more.lost.length > 0) {
+        <p class="label" [id]="id() + '-lose-more'">Loses</p>
+        <ul class="plain" [attr.aria-labelledby]="id() + '-lose-more'">
+          @for (change of more.lost; track change.key) {
+            <li>{{ change.label }}</li>
+          }
+        </ul>
       }
-    </p>
+      @if (more.gained.length > 0) {
+        <p class="label" [id]="id() + '-gain-more'">Gains</p>
+        <ul class="plain" [attr.aria-labelledby]="id() + '-gain-more'">
+          @for (change of more.gained; track change.key) {
+            <li>{{ change.label }}</li>
+          }
+        </ul>
+      }
+    </details>
   }
   @if (suggestion().thirdParty; as claims) {
     <p class="features">

@@ -71,6 +71,26 @@
   }
 }
 
+// On a wide screen the groups go side by side, in up to four columns of at least 560 px, the cards as wide as theirs.
+@media (min-width: 1700px) {
+  .layout {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .content {
+    columns: 4 560px;
+    column-gap: 32px;
+  }
+
+  .group {
+    break-inside: avoid;
+  }
+
+  .content .card {
+    max-width: none;
+  }
+}
+
 // A group's heading over its cards, which a jump link lands on below the top bar.
 .group {
   margin-bottom: 24px;

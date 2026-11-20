@@ -186,7 +186,8 @@ describe('optimize: third-party values (M11.16)', () => {
     expect(cards(bundled)).toMatchInlineSnapshot(`
       [
         "free | Replace Disney+ Premium and Crave Premium with Disney+ and Crave Premium Bundle | save 122.72",
-        "yellow | Downgrade Disney+ Premium → Standard, annual billing + Remove Crave Premium | save 354.78 | lose Crave Premium, video.quality=4k (not-ranked), video.hdr (not-ranked)",
+        "red | Downgrade Disney+ Premium → Standard, annual billing | save 77.58 | lose video.quality=4k (not-ranked), video.hdr (not-ranked)",
+        "yellow | Remove Crave Premium | save 277.20 | lose Crave Premium",
       ]
     `);
     expect([...standard.suggestions, ...bundled.suggestions].some((s) => s.thirdParty)).toBe(false);

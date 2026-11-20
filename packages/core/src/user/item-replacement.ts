@@ -17,7 +17,8 @@ export interface ItemReplacement {
 
 /**
  * Each ending item's replacement in its list, by its id: an item that ends on a day when, in the same list, a bundle
- * that includes its plan, or a suite that includes its plan or provider, has started, or an extra member joins another
+ * that includes a plan of its provider (as Optimizations offers one: Disney+ Standard into a bundle with Premium), or a
+ * suite that includes its plan or provider, has started, or an extra member joins another
  * plan of its provider (an add-on whose `since` is that day).
  */
 export function itemReplacements(
@@ -41,7 +42,9 @@ export function itemReplacements(
       if (other.source.kind === 'bundle') {
         const { bundleId } = other.source;
         const bundle = catalog.bundles.find(({ id }) => id === bundleId);
-        return started && bundle?.includes.includes(planId) ? 'bundle' : undefined;
+        return started && bundle?.includes.some((id) => id.startsWith(`${providerId}.`))
+          ? 'bundle'
+          : undefined;
       }
       if (other.source.kind !== 'catalog') return undefined;
       if (
