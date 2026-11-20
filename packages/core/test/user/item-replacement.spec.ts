@@ -30,6 +30,23 @@ describe('itemReplacements', () => {
     expect(found.has(bundle.id)).toBe(false);
   });
 
+  it('finds a bundle with another plan of the item’s provider, as Optimizations offers one (M10.33)', () => {
+    // Disney+ Standard goes into the bundle with Disney+ Premium, which gives everything it does.
+    const standard = ending('disney-plus.standard', '2026-11-20');
+    const bundle = item('bundle.disney-crave-premium', {
+      anchorDate: '2026-11-05',
+      startDate: '2026-11-05',
+    });
+    expect(itemReplacements([standard, bundle], catalog).get(standard.id)).toEqual({
+      kind: 'bundle',
+      itemId: bundle.id,
+      on: '2026-11-20',
+    });
+    // Netflix isn't in it.
+    const netflix = ending('netflix.standard', '2026-11-20');
+    expect(itemReplacements([netflix, bundle], catalog).has(netflix.id)).toBe(false);
+  });
+
   it('finds the account an extra member joins on the day another one ends', () => {
     const mine = item(
       'netflix.standard',

@@ -24,6 +24,8 @@
            960 px, above Types and Features, as List view's own; under it, above the cards. -->
       @if (anyItems() && global(); as global) {
         <div class="money">
+          <!-- The yearly total, as on Home and List view: one choice for every page (M10.35). -->
+          <ss-yearly-total-switch />
           <ss-budget-totals [metrics]="global" />
         </div>
       }

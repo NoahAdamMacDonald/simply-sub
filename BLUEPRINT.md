@@ -3223,7 +3223,8 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
 |---|---|
 | **Home** | **All lists combined** against the monthly and annual budgets |
 | **Lists overview: each list card** | **That list's share** of the total budget (its own cost ÷ budget) |
-| **View list** | Only **that list's** cost against the budgets; its yearly total this year's or, as chosen on the device, the next 12 months' against the annual budget (PROJECT-PLAN P4) |
+| **View list** | Only **that list's** cost against the budgets (PROJECT-PLAN P4) |
+| *(all three)* | The yearly total is this year's or, as chosen on the device with the Yearly total switch on any of them, the next 12 months' against the annual budget (M10.35) |
 | **Calendar** | **The displayed month only**: spent so far (payments dated up to today) against the month's total, for the lists currently shown, with a tick mark at the monthly budget (none when the budget is past the month's total). Its colour compares the month's total with the budget |
 
 **Colours (M7.7, the user's choice):** a bar's fill is one colour, which changes gradually with how far along its
@@ -3938,6 +3939,11 @@ None.
   the arrows choose), `ss-budget-totals`' `yearly` input for the annual line's total, words ("in the next 12 months"),
   bar and breakdown, and `settings.yearlyTotal` (`next-12-months`, left out for this year), a device-only setting as the
   theme is: not in `sharedSettingsFields`. The initial bundle is unchanged (499.50 kB).
+- **Everywhere (M10.35, the owner's feedback of 2026-11-19):** the switch is on Home's Budgets card and the Lists
+  overview's totals too (`shared/yearly-total-switch/`), and `ss-budget-totals` reads `settings.yearlyTotal` itself, its
+  `yearly` input gone, so Home, the Lists overview and its cards, and List view all show the choice made on any of them.
+  The annual budget warning still checks this calendar year. The Calendar's year view stays a calendar year: its year
+  is the one picked. The initial bundle is unchanged (499.78 kB).
 
 **Resolved (2026-11-10, the nightly bot in parts)**
 - **What failed:** the Workflow runs of 2026-11-07, 11-08 and 11-09 each ended "Errored" after about 42 minutes. Their
@@ -5121,6 +5127,15 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   never conflict and their savings add up; a card in a looser section can be an alternative to one in a stricter
   section for the same item (Disney+ billed yearly in Free, Standard billed yearly in Red). "Save up to" is the
   yellow plan's savings.
+  **A change a card** (M10.33, the owner's feedback of 2026-11-19, when a yellow card held seven removals): each change
+  in a group is a card of its own whenever it saves and is allowed alone, judged against the list as it is and shown in
+  the section of what it alone gives up, so a looser plan's change can be a card in a stricter section. A group stays
+  one card only when one of its changes isn't allowed without the others, in its plan's section. The same change from
+  two plans is one card. Cards in a section may then overlap (two services that each give what the other does), but
+  the page works the suggestions out again after every Apply, so what's left is judged with it. Two extra members on one
+  host are one change: the host's add-on. Applying cards one at a time found that Optimizations offers Disney+ Standard
+  into the bundle with Disney+ Premium while `itemReplacements` took a bundle over only from its exact plans: it now
+  takes over from any plan of a provider it includes, as suites did.
 - **The coverage map** (section 10.1) is 12 slots, a month each from today, with a bit per slot an item is active
   in (`optimizer/coverage.ts`): Ongoing from its start date until its end date, a window through its end, copied
   into each year when it repeats.
