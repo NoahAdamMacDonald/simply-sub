@@ -1,0 +1,804 @@
+# Researched by hand on 2026-11-20 (the full catalog run, security batch 2). zonealarm.com answered this machine's Edge
+# once, then showed its "Let's confirm you are human" check to every second page in a session and a plain fetch HTTP 202
+# with no page, so its pages were read one page per browser session, read 2026-11-20 through a Canadian exit (no check
+# was clicked); its help centre (support.zonealarm.com, Zendesk) through its API over an ordinary connection, and Check
+# Point's disclosure pages through a US exit. Pages, each quoted where it's used:
+# Pricing: each product page's buy box (Extreme Security NextGen, Pro Antivirus + Firewall, Anti-Ransomware) shows a
+# device menu and a "1 year" or "2 years" menu, a struck-through price and the first payment's lower one, with "Discount
+# applies for 1st payment only"; its compare page names the lower one "For the first year". The struck price is the
+# list price (the compare page's script calls the two "listPrice" and "promoPrice"), so it is stored. Its terms renew a
+# subscription "for additional one (1) year periods", so the 2-year option is a first term that renews yearly: only
+# yearly prices are stored (Kaspersky's and Avira's precedent), and the 2-year list prices are in each plan's notes.
+# Currency: every page prices in US dollars by default; its currency menu converts the same prices into euros, Canadian,
+# Australian and Hong Kong dollars and pounds (5 devices of Extreme: US$114.95, CA$158.88, €98.16, £85.50, each a fixed
+# ratio of the US price, read 2026-11-20), so they are conversions, not price lists: one GLOBAL price in US dollars, the
+# others in `currencies` (Mullvad's precedent for converted amounts). Its checkout (estore.zonealarm.com, run by
+# 2Checkout) priced Canada in US dollars and added Canadian sales tax ("Total TAX (5%)" to "(13%)" by the exit's
+# province): prices are before tax. No page states the renewal amount itself, and the checkout's own figures don't match
+# the product pages' (5 devices of Extreme: a US$104.95 subtotal with no coupon, the page's first-payment price; 1 device:
+# US$89.95 before its "renewal" coupon, against the page's US$98.95 and US$84.95), so the list price is a judgment call.
+# Plans: Extreme Security NextGen (Windows, macOS, Android, iOS), Pro Antivirus + Firewall NextGen (Windows) and
+# Anti-Ransomware (Windows) for 1, 3, 5 or 10 devices, a plan per device count (Norton's precedent: what a plan protects
+# differs by count); their 25- and 50-device options are left out (more devices than a household), and so is Mobile
+# Security sold alone (its app stores' in-app plans, Avira's precedent; it comes with Extreme). Free: Free Antivirus and
+# Free Firewall (Windows).
+# Region checklist for CA and US, 2026-11-20: 1. no country paths (/de, /fr, /es, /it, /hk are languages); 2. its
+# language and currency menu (conversions, above); 3. no price data names a country; 4. the checkout, up to the payment
+# form, listed Canada and charged it in US dollars; 5. its help centre's tax articles (2Checkout's US states and EU VAT);
+# 6. Edge, a plain fetch (refused) and a Canadian exit; 7. no bill. The US: the same US-dollar prices.
+# Bundles: none (Extreme includes Anti-Ransomware and Mobile Security, its own products). Official resellers: none named;
+# its "Partners" page is a service-provider programme. Google Play and the App Store bill Mobile Security sold alone.
+# Lab results: AV-TEST's newest ZoneAlarm test on its site is of October 2016 (Free Antivirus + Firewall 15.0), and it
+# isn't in AV-TEST's Windows tests of 2026, so no rating is listed.
+# Its End of Support notice (2024): older ZoneAlarm versions had to be replaced by the NextGen ones to meet "US Department
+# of Commerce regulations described in document 2024-13532" (the ruling that ended Kaspersky's US sales), and valid
+# Extreme and Pro subscriptions were upgraded free.
+
+id: zonealarm
+name: ZoneAlarm
+aliases: [ZoneAlarm Extreme Security, ZoneAlarm Free Firewall, Check Point ZoneAlarm]
+website: https://www.zonealarm.com
+category: security
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help article on stopping subscription payments (myAccount, My Products, "Turn off/on auto renewal").
+cancelUrl: https://support.zonealarm.com/hc/en-us/articles/360060711231-How-can-I-stop-subscription-payments-cancel-automatic-renewal
+sources: { pricing: https://www.zonealarm.com/software/extreme-security-nextgen }
+# Owner (M11.2), read 2026-11-20: its about page names Check Point and its listing; its privacy policy names Check Point
+# Software Technologies Ltd. in Tel Aviv as "ZoneAlarm’s mother company" (its terms name Zone Labs, L.L.C., "a Check
+# Point Software Technologies, Inc. Company", as the site's operator). No page read names a majority holder.
+owner:
+  name: Check Point Software Technologies Ltd.
+  website: https://www.checkpoint.com
+  page:
+    name: About ZoneAlarm
+    url: https://www.zonealarm.com/about
+  quotes:
+    - 'ZoneAlarm is the consumer brand of Check Point Software Technologies Inc. (NASDAQ: CHKP).'
+  country:
+    code: IL
+    page:
+      name: ZoneAlarm Privacy Policy
+      url: https://www.zonealarm.com/privacy
+    quotes:
+      - 'Check Point’s (ZoneAlarm’s mother company) registered office may be contacted using the following contact information:'
+      - '5 Shlomo Kaplan Street, Tel Aviv 67897, Israel'
+    lastVerified: 2026-11-20
+  stock:
+    listings:
+      - { exchange: NASDAQ, symbol: CHKP }
+  lastVerified: 2026-11-20
+# Ways to pay (M11.5), read 2026-11-20 in its help centre: cards, PayPal, and a check or money order at checkout (other).
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover]
+    url: https://support.zonealarm.com/hc/en-us/articles/115001840231-What-payment-methods-are-accepted
+    quotes: ['Visa, MasterCard, American Express, Discover.']
+paymentMethods:
+  - methods: [card, paypal]
+    page: What payment methods are accepted
+    url: https://support.zonealarm.com/hc/en-us/articles/115001840231-What-payment-methods-are-accepted
+    quotes:
+      - 'Visa, MasterCard, American Express, Discover.'
+      - 'PayPal'
+  - methods: [other]
+    page: Can I purchase ZoneAlarm with a Money Order or Personal check?
+    url: https://support.zonealarm.com/hc/en-us/articles/115001846752-Can-I-purchase-ZoneAlarm-with-a-Money-Order-or-Personal-check
+    quotes:
+      - 'Yes you can select to pay for your purchase with a check or money order at the time of check out.'
+# Currencies (M11.5): its currency menu converts the US-dollar prices into these at the day's rate (above).
+currencies:
+  - codes: [EUR, CAD, AUD, GBP, HKD]
+    page: ZoneAlarm home page (currency menu)
+    url: https://www.zonealarm.com/
+    quotes:
+      - 'EUR - Euro'
+      - 'CAD - Canadian Dollar'
+      - 'AUD - Australian Dollar'
+      - 'GBP - GB Pound'
+      - 'HKD - 港元'
+# Renewal day (M11.5, M11.21): its terms renew a subscription for a year at a time and may charge 30 days before the new
+# year starts, so a new yearly item is charged 30 days early.
+renewalAnchor:
+  kind: same-date
+  page: ZoneAlarm Terms of Use
+  url: https://www.zonealarm.com/terms
+  quotes:
+    - 'You may be automatically billed thirty (30) days prior to the start of a Renewal Term.'
+  chargedBefore: { days: 30 }
+  lastVerified: 2026-11-20
+
+# General features, read 2026-11-20. Platforms: Windows for every plan (its system requirements), with Extreme's own list
+# below. Sign-in: myAccount takes an email address or order number and a password ("Enter your email address/order
+# number and password."); no page offers two-step sign-in. Support channels and app languages: not read (left out). No
+# pause (auto-renewal is turned off instead).
+features:
+  platforms: [windows]
+  account.sign-in: [password]
+
+# Perks (M11.6): its product pages' and compare page's lines no feature describes, in their words.
+perks:
+  - id: threat-emulation
+    name: Threat Emulation
+  - id: threat-extraction
+    name: Threat Extraction
+  - id: anti-bot
+    name: Anti-Bot
+
+# Features, read 2026-11-20 (the product pages, the compare page's ticks, read from its screenshot, and the help centre):
+# - Extreme Security NextGen: "Advanced Real-Time Antivirus", "Advanced Firewall" ("Monitors programs for suspicious
+#   behavior"), "Two-way Firewall", "Anti-Phishing" and "Web Monitor", "Content Filtering" ("Blocks unwanted content
+#   according to your selected preferences, covering categories such as violence, drugs, pornography"), "Anti-Ransomware"
+#   ("detect Ransomware attacks, block them and immediately restore any encrypted files"), Threat Extraction and Threat
+#   Emulation; Mobile Security for Android ("malicious apps and unsafe networks", anti-phishing "across all apps") and
+#   iOS ("Warns you if your device is connected to unencrypted or unsecured WiFi networks. Blocks attempts to remotely
+#   seize control of your camera, mic, and more."). Scans: "Critical Scan" and "Full Scan" started by hand ("Scan
+#   computer for viruses") and on a schedule ("Set a scheduled scan": "Once, Daily, Weekly or Monthly"); no rescue scan.
+#   Windows, "macOS NEW", Android and iOS, and the Web Secure extension for Chrome, Edge, Firefox and Brave.
+# - Pro Antivirus + Firewall NextGen: the same antivirus, firewalls, anti-phishing (Web Secure), Threat Extraction and
+#   Emulation and scans on Windows; the compare page crosses out Content Filtering, Anti-Ransomware, Mac and Mobile
+#   Security, and its help says "Antivirus alone cannot do this." of ransomware (so no ransomware feature).
+# - Anti-Ransomware: "analyzes all suspicious activities on your PC. It detects Ransomware attacks, blocks them and
+#   immediately restores any encrypted files", "always running and always monitoring", and "Traditional scanning of your
+#   PC like Antivirus does is not needed" (no scans); "compatible with all antivirus solutions", so it's labelled as
+#   ransomware protection beside another antivirus. Its Web Secure extension adds anti-phishing and content filtering.
+#   Its product page says "Windows 11/10"; the help centre's system requirements also list "ZoneAlarm Anti-Ransomware for
+#   Mac" (left out: the product page is the plan card).
+# - Free Antivirus: "Antivirus and Anti-Spyware", "Personal Firewall", "Customizable Scan Modes", Anti-Bot (ticked on the
+#   compare page) and the same Critical and Full scans by hand and on a schedule ("Note: The following article only
+#   applies to the NEW v3.5 ZoneAlarm Free Antivirus +Firewall."); the compare page crosses out "Real-Time Cloud
+#   Security", Anti-Phishing and the rest, so real-time protection is false. Whether its "Advanced Firewall" row is
+#   ticked was hidden under the cookie notice in the screenshot: behaviour-based detection is left out.
+# - Free Firewall: a two-way firewall with Anti-Bot and no antivirus.
+# No VPN, password manager, identity protection, anti-theft, spam filter or optimizer on any ZoneAlarm page.
+plans:
+  - id: zonealarm.free-antivirus
+    name: Free Antivirus
+    link: https://www.zonealarm.com/software/free-antivirus
+    features:
+      antivirus.included: true
+      antivirus.real-time: false
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.network: [firewall]
+      antivirus.devices: 1
+    perks: [anti-bot]
+    notes: 'Free for one Windows PC: an antivirus you run by hand or on a schedule, with ZoneAlarm’s two-way firewall. No real-time cloud protection, anti-phishing or ransomware protection.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/free-antivirus
+
+  - id: zonealarm.free-firewall
+    name: Free Firewall
+    link: https://www.zonealarm.com/software/free-firewall
+    features:
+      antivirus.included: false
+    perks: [anti-bot]
+    notes: 'Free for Windows: a two-way firewall that watches traffic in and out of your PC and blocks bots. No antivirus.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/free-firewall
+
+  - id: zonealarm.pro-antivirus-firewall
+    name: Pro Antivirus + Firewall (1 PC)
+    link: https://www.zonealarm.com/software/pro-antivirus-firewall
+    features:
+      platforms: [windows, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.devices: 1
+    perks: [threat-emulation, threat-extraction, anti-bot]
+    notes: 'For 1 Windows PC. A 2-year first term costs US$98.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 64.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/pro-antivirus-firewall
+
+  - id: zonealarm.pro-antivirus-firewall-3-pcs
+    name: Pro Antivirus + Firewall (3 PCs)
+    link: https://www.zonealarm.com/software/pro-antivirus-firewall
+    features:
+      platforms: [windows, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.devices: 3
+    perks: [threat-emulation, threat-extraction, anti-bot]
+    notes: 'For 3 Windows PCs. A 2-year first term costs US$129.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/pro-antivirus-firewall
+
+  - id: zonealarm.pro-antivirus-firewall-5-pcs
+    name: Pro Antivirus + Firewall (5 PCs)
+    link: https://www.zonealarm.com/software/pro-antivirus-firewall
+    features:
+      platforms: [windows, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.devices: 5
+    perks: [threat-emulation, threat-extraction, anti-bot]
+    notes: 'For 5 Windows PCs. A 2-year first term costs US$149.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 84.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/pro-antivirus-firewall
+
+  - id: zonealarm.pro-antivirus-firewall-10-pcs
+    name: Pro Antivirus + Firewall (10 PCs)
+    link: https://www.zonealarm.com/software/pro-antivirus-firewall
+    features:
+      platforms: [windows, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.devices: 10
+    perks: [threat-emulation, threat-extraction, anti-bot]
+    notes: 'For 10 Windows PCs. A 2-year first term costs US$299.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 159.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/pro-antivirus-firewall
+
+  - id: zonealarm.extreme-security
+    name: Extreme Security NextGen (1 device)
+    link: https://www.zonealarm.com/software/extreme-security-nextgen
+    features:
+      platforms: [windows, macos, android, ios, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.network: [firewall, wifi-check]
+      antivirus.devices: 1
+      parental-control: [content-filtering]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+    featureLabels:
+      security.webcam-protection: Camera and microphone, on iPhone and iPad
+      antivirus.network: Two-way firewall on PCs; Wi-Fi checks on phones
+    perks: [threat-emulation, threat-extraction, anti-bot]
+    notes: 'For 1 device: Windows, Mac, Android or iPhone. Includes Anti-Ransomware and Mobile Security. A 2-year first term costs US$129.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 98.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/extreme-security-nextgen
+
+  - id: zonealarm.extreme-security-3-devices
+    name: Extreme Security NextGen (3 devices)
+    link: https://www.zonealarm.com/software/extreme-security-nextgen
+    features:
+      platforms: [windows, macos, android, ios, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.network: [firewall, wifi-check]
+      antivirus.devices: 3
+      parental-control: [content-filtering]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+    featureLabels:
+      security.webcam-protection: Camera and microphone, on iPhone and iPad
+      antivirus.network: Two-way firewall on PCs; Wi-Fi checks on phones
+    perks: [threat-emulation, threat-extraction, anti-bot]
+    notes: 'For 3 devices: Windows, Mac, Android or iPhone. Includes Anti-Ransomware and Mobile Security. A 2-year first term costs US$164.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 104.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/extreme-security-nextgen
+
+  - id: zonealarm.extreme-security-5-devices
+    name: Extreme Security NextGen (5 devices)
+    link: https://www.zonealarm.com/software/extreme-security-nextgen
+    features:
+      platforms: [windows, macos, android, ios, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.network: [firewall, wifi-check]
+      antivirus.devices: 5
+      parental-control: [content-filtering]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+    featureLabels:
+      security.webcam-protection: Camera and microphone, on iPhone and iPad
+      antivirus.network: Two-way firewall on PCs; Wi-Fi checks on phones
+    perks: [threat-emulation, threat-extraction, anti-bot]
+    notes: 'For 5 devices: Windows, Mac, Android or iPhone. Includes Anti-Ransomware and Mobile Security. A 2-year first term costs US$179.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 114.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/extreme-security-nextgen
+
+  - id: zonealarm.extreme-security-10-devices
+    name: Extreme Security NextGen (10 devices)
+    link: https://www.zonealarm.com/software/extreme-security-nextgen
+    features:
+      platforms: [windows, macos, android, ios, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.network: [firewall, wifi-check]
+      antivirus.devices: 10
+      parental-control: [content-filtering]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+    featureLabels:
+      security.webcam-protection: Camera and microphone, on iPhone and iPad
+      antivirus.network: Two-way firewall on PCs; Wi-Fi checks on phones
+    perks: [threat-emulation, threat-extraction, anti-bot]
+    notes: 'For 10 devices: Windows, Mac, Android or iPhone. Includes Anti-Ransomware and Mobile Security. A 2-year first term costs US$399.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 219.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/software/extreme-security-nextgen
+
+  - id: zonealarm.anti-ransomware
+    name: Anti-Ransomware (1 PC)
+    link: https://www.zonealarm.com/anti-ransomware
+    features:
+      platforms: [windows, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.devices: 1
+      parental-control: [content-filtering]
+      account.parental-controls: true
+    featureLabels:
+      antivirus.included: Ransomware protection only, made to run beside another antivirus
+    perks: [threat-emulation, threat-extraction]
+    notes: 'For 1 Windows PC: blocks ransomware and restores files it encrypted, with anti-phishing and content filtering in your browser. Not an antivirus: it runs beside one. A 2-year first term costs US$94.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 54.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/anti-ransomware
+
+  - id: zonealarm.anti-ransomware-3-pcs
+    name: Anti-Ransomware (3 PCs)
+    link: https://www.zonealarm.com/anti-ransomware
+    features:
+      platforms: [windows, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.devices: 3
+      parental-control: [content-filtering]
+      account.parental-controls: true
+    featureLabels:
+      antivirus.included: Ransomware protection only, made to run beside another antivirus
+    perks: [threat-emulation, threat-extraction]
+    notes: 'For 3 Windows PCs, beside another antivirus. A 2-year first term costs US$129.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 69.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/anti-ransomware
+
+  - id: zonealarm.anti-ransomware-5-pcs
+    name: Anti-Ransomware (5 PCs)
+    link: https://www.zonealarm.com/anti-ransomware
+    features:
+      platforms: [windows, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.devices: 5
+      parental-control: [content-filtering]
+      account.parental-controls: true
+    featureLabels:
+      antivirus.included: Ransomware protection only, made to run beside another antivirus
+    perks: [threat-emulation, threat-extraction]
+    notes: 'For 5 Windows PCs, beside another antivirus. A 2-year first term costs US$149.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 89.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/anti-ransomware
+
+  - id: zonealarm.anti-ransomware-10-pcs
+    name: Anti-Ransomware (10 PCs)
+    link: https://www.zonealarm.com/anti-ransomware
+    features:
+      platforms: [windows, browser-extension]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.devices: 10
+      parental-control: [content-filtering]
+      account.parental-controls: true
+    featureLabels:
+      antivirus.included: Ransomware protection only, made to run beside another antivirus
+    perks: [threat-emulation, threat-extraction]
+    notes: 'For 10 Windows PCs, beside another antivirus. A 2-year first term costs US$279.95, then it renews yearly.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 149.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.zonealarm.com/anti-ransomware
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-20: its Terms of Use (the website and its
+# software, which includes the privacy policy), Privacy Policy, Cookies notice and 30-day return policy, and the help
+# centre's billing articles. Its apps' End User License Agreement is shown only in the installer ("Review the ZoneAlarm
+# End-User License Agreement and Click Agree"); no page of its sites or Check Point's links it, so it wasn't read (the
+# installer wasn't run). The privacy policy's California notice is Check Point's (checkpoint.com/privacy/ccpa-notice),
+# which answered a plain fetch with no page: unread. Security: Check Point's Vulnerability Disclosure Policy covers its
+# products; its bug bounty covers only the "Check Point Portal". Checkout: 2Checkout's (estore.zonealarm.com).
+policies:
+  links:
+    - name: Terms of Use
+      url: https://www.zonealarm.com/terms
+    - name: Privacy Policy
+      url: https://www.zonealarm.com/privacy
+    - name: Cookies
+      url: https://www.zonealarm.com/cookies
+    - name: Returns Policy
+      url: https://www.zonealarm.com/returns
+    - name: Changing auto-renewal preferences
+      url: https://support.zonealarm.com/hc/en-us/articles/360060287112-Changing-auto-renewal-preferences
+    - name: What happens when my license expires
+      url: https://support.zonealarm.com/hc/en-us/articles/115001828651-What-to-happens-to-ZoneAlarm-when-my-license-expires
+    - name: Trial downloads
+      url: https://support.zonealarm.com/hc/en-us/articles/115001792532-I-would-like-to-download-a-trial-version-of-ZoneAlarm
+    - name: Install Free Antivirus + Firewall
+      url: https://support.zonealarm.com/hc/en-us/articles/360054414651-Install-ZoneAlarm-Free-Antivirus-Firewall
+    - name: Web Secure extension FAQs
+      url: https://support.zonealarm.com/hc/en-us/articles/4405990837531-FAQs-ZoneAlarm-Web-Secure-extension
+    - name: Upgrade message
+      url: https://support.zonealarm.com/hc/en-us/articles/29463826696731-I-m-getting-an-upgrade-message-is-it-from-ZoneAlarm
+    - name: Checkout
+      url: https://estore.zonealarm.com/order/checkout.php?PRODS=36245101&QTY=1&OPTIONS36245101=5d_es%2C1y&CART=1&CARD=1&CURRENCY=USD&DCURRENCY=USD&LANG=en&COUPON=renewal&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
+    - name: Extreme Security NextGen
+      url: https://www.zonealarm.com/software/extreme-security-nextgen
+    - name: Vulnerability Disclosure Policy (Check Point)
+      url: https://www.checkpoint.com/vulnerability-disclosure-policy/
+  ratings:
+    # Product data and the website's analytics serve "improvement" and statistics; no page offers a way to say no, and
+    # only Europe's and the UK's rights let you object.
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'It uses data from its apps, website and cookies to improve its products and for statistics, and gives no way to say no.'
+      sources:
+        - url: https://www.zonealarm.com/privacy
+          quote: 'Information we receive through our products (“ZoneAlarm Products”), support, mobile security solutions and/or cloud-based services'
+        - url: https://www.zonealarm.com/privacy
+          quote: 'for improvement of our products and services.'
+        - url: https://www.zonealarm.com/cookies
+          quote: 'We use this collected data for the purposes of troubleshooting, internet based advertising, informing you about products or services that may be of interest to you and improving the services offered.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-collection
+      regions: [EU, GB]
+      tier: poor
+      reason: 'In Europe and the UK you can object to how it uses your data, but only by writing to its privacy officer.'
+      sources:
+        - url: https://www.zonealarm.com/privacy
+          quote: 'If you are located in the EEA or the UK, you have additional rights described below.'
+        - url: https://www.zonealarm.com/privacy
+          quote: 'You may exercise these rights by contacting us using the contact details at the end of this Privacy Policy.'
+      action:
+        name: 'Contact its privacy officer (privacy policy)'
+        url: https://www.zonealarm.com/privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It may share your data with its sellers and partners for any use its policy names, marketing included, and its advertising cookies send data to other companies. You can only block cookies in each browser.'
+      sources:
+        - url: https://www.zonealarm.com/privacy
+          quote: 'Partners and Affiliates. We may share any information with our distributors, partners, corporate affiliates, parents, or subsidiaries for any purpose described in this Privacy Policy.'
+        - url: https://www.zonealarm.com/cookies
+          quote: 'Targeting or advertising cookies'
+        - url: https://www.zonealarm.com/cookies
+          quote: 'If you wish to amend your cookie preferences for the Webpages, you can do this at any time and by changing your browser settings.'
+      action:
+        name: 'How to block its cookies (cookie notice)'
+        url: https://www.zonealarm.com/cookies
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its websites use advertising cookies as soon as you visit, and use them to show you ads and offers. You can only turn them off in each browser.'
+      sources:
+        - url: https://www.zonealarm.com/cookies
+          quote: 'By using the Webpages and/or closing the pop-up cookie notice, you consent to the use of cookies on the Webpages.'
+        - url: https://www.zonealarm.com/cookies
+          quote: 'We use this collected data for the purposes of troubleshooting, internet based advertising, informing you about products or services that may be of interest to you and improving the services offered.'
+      action:
+        name: 'How to block its cookies (cookie notice)'
+        url: https://www.zonealarm.com/cookies
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether your data trains AI models.'
+      pages:
+        - https://www.zonealarm.com/privacy
+        - https://www.zonealarm.com/terms
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data until it no longer needs it, and gives no set times.'
+      sources:
+        - url: https://www.zonealarm.com/privacy
+          quote: 'We take measures to delete your Personal Data or keep it in a form that does not permit identifying you when this information is no longer necessary for the purposes for which we process it unless we are required by law to keep this information for a longer period.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'Only people in Europe and the UK are offered a way to have their data deleted, by writing to it. It offers no way for everyone else.'
+      sources:
+        - url: https://www.zonealarm.com/privacy
+          quote: 'If you are located in the EEA or the UK, you have additional rights described below.'
+        - url: https://www.zonealarm.com/privacy
+          quote: 'You may request access the Personal Data we maintain about you, update and correct inaccuracies in your Personal Data, restrict or object to the processing of your Personal Data, have your Personal Data anonymized or deleted, as appropriate, or exercise your right to data portability to easily transfer your Personal Data to another company.'
+      action:
+        name: 'Contact its privacy officer (privacy policy)'
+        url: https://www.zonealarm.com/privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Outside Europe and the UK, its privacy policy offers no way to get a copy of your data.'
+      pages:
+        - https://www.zonealarm.com/privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      regions: [EU, GB]
+      tier: neutral
+      reason: 'In Europe and the UK you can ask it for your data to take elsewhere, by writing to its privacy officer.'
+      sources:
+        - url: https://www.zonealarm.com/privacy
+          quote: 'You may request access the Personal Data we maintain about you, update and correct inaccuracies in your Personal Data, restrict or object to the processing of your Personal Data, have your Personal Data anonymized or deleted, as appropriate, or exercise your right to data portability to easily transfer your Personal Data to another company.'
+      action:
+        name: 'Contact its privacy officer (privacy policy)'
+        url: https://www.zonealarm.com/privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may give police your data whenever it thinks that’s “appropriate”, not only when the law requires.'
+      sources:
+        - url: https://www.zonealarm.com/privacy
+          quote: 'We may access, preserve, and disclose your Personal Data if we believe doing so is required or appropriate to: (i) comply with law enforcement requests and legal process, such as a court order or subpoena; (ii) respond to your requests; or (iii) protect your, our, or others’ rights, property, or safety.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can go to other countries. For Europe and the UK it uses the EU’s approved safeguards, such as its standard contracts.'
+      sources:
+        - url: https://www.zonealarm.com/privacy
+          quote: 'That means that we may transfer your Personal Data to locations outside of your country.'
+        - url: https://www.zonealarm.com/privacy
+          quote: 'the recipient might have signed a contract based on applicable “model contractual clauses” approved by the European Commission, obliging them to protect your Personal Data;'
+      lastVerified: 2026-11-20
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To buy, its checkout asks for your full name, email address and country, then your payment details. Its free apps need no account.'
+      sources:
+        - url: https://estore.zonealarm.com/order/checkout.php?PRODS=36245101&QTY=1&OPTIONS36245101=5d_es%2C1y&CART=1&CARD=1&CURRENCY=USD&DCURRENCY=USD&LANG=en&COUPON=renewal&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
+          quote: 'Full name:'
+        - url: https://estore.zonealarm.com/order/checkout.php?PRODS=36245101&QTY=1&OPTIONS36245101=5d_es%2C1y&CART=1&CARD=1&CURRENCY=USD&DCURRENCY=USD&LANG=en&COUPON=renewal&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
+          quote: 'Email:'
+      lastVerified: 2026-11-20
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can turn off automatic renewal in your account at any time, but its terms say you must tell it in writing 45 days before your year ends.'
+      sources:
+        - url: https://support.zonealarm.com/hc/en-us/articles/360060287112-Changing-auto-renewal-preferences
+          quote: 'You can now turn off or on the auto renewal for each product you own by clicking the Turn off/on auto renewal link beneath each product with this option enabled.'
+        - url: https://www.zonealarm.com/terms
+          quote: 'If you have selected an autorenewal option, your subscription and these terms and conditions shall automatically renew for additional one (1) year periods (each a “Renewal Term”), unless you provide written notice of your intent not to renew your subscription forty-five (45) days before the expiration of the then-current term.'
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get all your money back if you ask within 30 days of buying. It doesn’t say the same for an automatic renewal.'
+      sources:
+        - url: https://www.zonealarm.com/returns
+          quote: 'If you are not 100% satisfied with your purchase, we will be happy to accept a return for a full refund.'
+        - url: https://www.zonealarm.com/returns
+          quote: 'You can return your purchase for up to 30 days from the purchase date.'
+      lastVerified: 2026-11-20
+    - topic: billing.price-changes
+      tier: bad
+      reason: 'Its terms let it change its prices at any time without telling you.'
+      sources:
+        - url: https://www.zonealarm.com/terms
+          quote: 'ZoneAlarm reserves the right to change these terms and conditions, and the products, services, prices, and programs mentioned on the Site at any time, at its sole discretion, without notice and your continued use of the Site constitutes your acceptance of such revised terms.'
+      lastVerified: 2026-11-20
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its pages offer trial downloads but don’t say whether one turns into a paid plan.'
+      pages:
+        - https://www.zonealarm.com/software/extreme-security-nextgen
+        - https://support.zonealarm.com/hc/en-us/articles/115001792532-I-would-like-to-download-a-trial-version-of-ZoneAlarm
+      lastVerified: 2026-11-20
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and help say subscriptions renew on their own, but not that it reminds you first.'
+      pages:
+        - https://www.zonealarm.com/terms
+        - https://support.zonealarm.com/hc/en-us/articles/360060287112-Changing-auto-renewal-preferences
+      lastVerified: 2026-11-20
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages name no fees beyond the price and taxes.'
+      pages:
+        - https://www.zonealarm.com/terms
+        - https://www.zonealarm.com/returns
+      lastVerified: 2026-11-20
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its pages don’t say what happens to the time you paid for when you move to another product.'
+      pages:
+        - https://www.zonealarm.com/terms
+        - https://support.zonealarm.com/hc/en-us/articles/360060287112-Changing-auto-renewal-preferences
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts in San Francisco, under California law, with no private referee (arbitration).'
+      sources:
+        - url: https://www.zonealarm.com/terms
+          quote: 'You agree and hereby submit to the exclusive personal jurisdiction and venue of the Superior Court of San Francisco County in California and the United States District Court for the Northern District of California, with respect to such matters.'
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      tier: bad
+      reason: 'It can change its terms at any time without telling you, and using its site afterwards means you accept them.'
+      sources:
+        - url: https://www.zonealarm.com/terms
+          quote: 'ZoneAlarm reserves the right to change these terms and conditions, and the products, services, prices, and programs mentioned on the Site at any time, at its sole discretion, without notice and your continued use of the Site constitutes your acceptance of such revised terms.'
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      status: not-stated
+      reason: 'Its website terms only end your right to use the site’s materials if you break them; its app licence, which would say more, is shown only in the installer.'
+      pages:
+        - https://www.zonealarm.com/terms
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change its products at any time. If you stop paying, it keeps working only as a basic firewall.'
+      sources:
+        - url: https://www.zonealarm.com/terms
+          quote: 'ZoneAlarm reserves the right to change these terms and conditions, and the products, services, prices, and programs mentioned on the Site at any time, at its sole discretion, without notice and your continued use of the Site constitutes your acceptance of such revised terms.'
+        - url: https://support.zonealarm.com/hc/en-us/articles/115001828651-What-to-happens-to-ZoneAlarm-when-my-license-expires
+          quote: 'If you do not renew your license, ZoneAlarm will continue to work and protect your computer as a basic firewall only and you will not be able to get any support for the product.'
+      lastVerified: 2026-11-20
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.zonealarm.com/terms
+        - https://www.zonealarm.com/privacy
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      status: not-stated
+      reason: 'Its apps’ licence is shown only in the installer, and its website doesn’t publish it.'
+      pages:
+        - https://www.zonealarm.com/terms
+        - https://support.zonealarm.com/hc/en-us/articles/360054414651-Install-ZoneAlarm-Free-Antivirus-Firewall
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      tier: neutral
+      reason: 'Its owner Check Point takes reports of security flaws in its products by email, but names no outside audit of ZoneAlarm and pays no bounty for its apps.'
+      sources:
+        - url: https://www.checkpoint.com/vulnerability-disclosure-policy/
+          quote: 'Check Point Software Technologies Ltd. (“Check Point”, “us” “our”) is committed to ensuring the security of its products.'
+        - url: https://www.checkpoint.com/vulnerability-disclosure-policy/
+          quote: 'Report a vulnerability specific to a Check Point product: security-alert@checkpoint.com'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its plans cover a number of devices but don’t say whose devices they may be.'
+      pages:
+        - https://www.zonealarm.com/software/extreme-security-nextgen
+        - https://www.zonealarm.com/terms
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its pages set no limits beyond each plan’s number of devices.'
+      pages:
+        - https://www.zonealarm.com/software/extreme-security-nextgen
+        - https://www.zonealarm.com/terms
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      tier: poor
+      reason: 'Installing it adds its extension to your browsers without asking, and it can push upgrades you must accept.'
+      sources:
+        - url: https://support.zonealarm.com/hc/en-us/articles/4405990837531-FAQs-ZoneAlarm-Web-Secure-extension
+          quote: 'ZoneAlarm Web Secure will be installed automatically in your Chrome, Firefox, Brave and Edge browsers.'
+        - url: https://support.zonealarm.com/hc/en-us/articles/29463826696731-I-m-getting-an-upgrade-message-is-it-from-ZoneAlarm
+          quote: 'The upgrade message you received is from ZoneAlarm and is not an optional upgrade.'
+      lastVerified: 2026-11-20
