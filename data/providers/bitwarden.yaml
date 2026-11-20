@@ -328,6 +328,8 @@ policies:
       url: https://bitwarden.com/help/payment-methods/
     - name: 'Pricing'
       url: https://bitwarden.com/pricing/
+    - name: 'Bitwarden Authenticator'
+      url: https://bitwarden.com/products/authenticator/
     - name: 'Cancel a subscription'
       url: https://bitwarden.com/help/cancel-a-subscription/
     - name: 'Premium renewal'
