@@ -29,10 +29,12 @@ import {
 
 // optimize (BLUEPRINT §10): a pure function the app runs for one list. It finds the cheapest valid combination of
 // changes at each severity (free, red, orange, yellow), its plans, and splits each into cards that can be applied on
-// their own (PROJECT-PLAN P14). Each section lists its own plan's cards of its severity: within a section the cards
-// never conflict, and a card in a looser section can be an alternative to one in a stricter section for the same
-// item (Disney+ billed yearly, or Standard billed yearly). A looser plan's card that gives up less than its section
-// is left out: it's a stricter plan's card, or an alternative to one, rearranged around the looser changes. With the
+// their own (PROJECT-PLAN P14): a change a card each (the owner's feedback, M10.33), judged alone against the list as
+// it is and shown in the section of what it gives up alone, so a change in a looser plan can be a card in a stricter
+// section. Changes that only work together (removing a VPN that's safe only once a suite brings one) share a card,
+// shown only in its own plan's section. The same change from two plans is one card. A card in a looser section can
+// be an alternative to one in a stricter section for the same item (Disney+ billed yearly, or Standard billed
+// yearly), and the page works the cards out again after each Apply, so what's left is judged with it. With the
 // user's payment cards, a better card for an item is a free saving of its own (M9.3, card-suggestions.ts), and so is
 // paying in another currency its seller lets the buyer pick (M9.6, currency-suggestions.ts), for an item no other free
 // change is about. "Save up to" adds those of the items the best plan keeps as they are.
@@ -46,17 +48,28 @@ export function optimize(input: OptimizerInput): OptimizerResult {
     .map((item) => itemSignature(item.resolved))
     .sort()
     .join('\n');
-  const suggestions: Suggestion[] = [];
+  const byFingerprint = new Map<string, Suggestion>();
+  const judge = (card: readonly number[]) => {
+    const signature = card
+      .map((option) => model.options[option].signature)
+      .sort()
+      .join('|');
+    return suggestionOf(model, checks, card, fingerprintOf(list, signature));
+  };
   plans.forEach((plan, level) => {
     for (const card of cardsOf(model, checks, plan)) {
-      const signature = card
-        .map((option) => model.options[option].signature)
-        .sort()
-        .join('|');
-      const suggestion = suggestionOf(model, checks, card, fingerprintOf(list, signature));
-      if (suggestion?.severity === severities[level]) suggestions.push(suggestion);
+      const alone = card.map((option) => judge([option]));
+      const parts = alone.every((suggestion) => suggestion !== undefined)
+        ? alone
+        : [judge(card)].filter((suggestion) => suggestion?.severity === severities[level]);
+      for (const suggestion of parts) {
+        if (suggestion && !byFingerprint.has(suggestion.fingerprint)) {
+          byFingerprint.set(suggestion.fingerprint, suggestion);
+        }
+      }
     }
   });
+  const suggestions = [...byFingerprint.values()];
   const cards = input.cards ?? [];
   const room =
     cards.length > 0 ? cardRoom(model, cards, input.cardLoads, input.context) : undefined;
