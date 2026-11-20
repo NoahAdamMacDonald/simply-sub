@@ -1,0 +1,632 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 2), read with Edge from Canada (strongboxsafe.com
+# answers a plain fetch with a SiteGround "sgcaptcha" redirect, an automatic check that Edge passes on its own): its home,
+# Pro and pricing section, German Pro page, comparison (whose ticks and crosses are images, read from screenshots), about,
+# business, academic licence, support, terms of use and privacy policy pages, its blog's posts on Applause, the founder's
+# message, Strongbox Sync and Strongbox Zero; and with a plain fetch its help desk (strongbox.reamaze.com, 24 articles:
+# licensing, cancelling, Family Sharing, which app to download, import, sharing, passkeys, backups and export, security
+# audit, network connections, cryptography, sync, Wi-Fi Sync, AutoFill and 2FA codes, browser extensions, migration) and
+# its GitHub repository.
+# Pricing: strongboxsafe.com/pro/#pricing, Strongbox Pro "One license for all of your devices", "Family Sharing with up to
+# 6 people", "Cancel anytime": Monthly "$2.99 / month", Yearly "3 month free trial available" "$24.99 / year", Lifetime
+# "One time purchase" "$124.99", and "All prices in US Dollars. Your price may vary depending upon the country you use for
+# your App Store." Its German page (/de/strongbox-pro/) gives "2,99 € / Monat", "24,99 € / Jahr" and "89,99 €"
+# (Lebenslang), "Alle Preise sind in Euros angegeben. Ihr Preis kann je nach dem Land, das Sie für Ihren App Store
+# verwenden, variieren." Pro is sold only through Apple's App Store, as an in-app subscription in the free app ("a free
+# version with monthly and annual auto-renewable subscriptions", its help desk) or as a separate "Strongbox Pro (Lifetime)"
+# app bought once. So the US's prices are the English page's (US) and Germany's the German page's (DE); neither page says
+# its price includes tax. Lifetime is a one-time purchase, left out (categories.md), and so is Strongbox Zero, "a
+# separate, custom-built, stripped-down edition" sold "for a single price" (its blog).
+# Every other country (Infuse's precedent, the owner's choice of 2026-11-19): no Strongbox page prices them, so each is
+# the App Store's page for the app in that country's storefront (apps.apple.com/<country>/app/strongbox-password-manager/
+# id897283731, its In-App Purchases list, read 2026-11-19 with a plain fetch), whose own data names the storefront's
+# currency ("priceCurrency":"CAD"…). The list shows several Yearly products at different prices (older ones kept for
+# existing subscribers); the first-listed Monthly and Yearly are the current ones, as the US's ($2.99, $24.99) and
+# Germany's (2,99 €, 24,99 €) agree with Strongbox's own pages. Canada $3.99 and $34.99 (CAD); the UK £2.99 and £24.99;
+# Ireland, France, the Netherlands, Spain and Italy €2.99 and €24.99; Australia $4.99 and $39.99 (AUD); New Zealand $4.99
+# and $49.99 (NZD). No page says the prices include tax, so no taxIncluded. The App Store's description also names
+# "3-monthly" subscriptions, but no storefront's list and no Strongbox page shows one, so none is listed.
+# Region checklist for CA, 2026-11-19: 1. language paths only (English, Deutsch), no country paths; 2. no country or
+# currency picker; 3. no price data in the page; 4. the checkout is the App Store's, inside the app: not opened; 5. no
+# prices-by-country article in its help desk; 6. Edge from Canada (a plain fetch meets the automatic check), and the
+# Canadian App Store page with a plain fetch; 7. no bill offered.
+# Its personal plans: Free ("a free version of Strongbox available for non commercial use and lacking some convenience
+# features") and Pro (monthly or yearly). Strongbox for Business ("No. of Licenses: (Minimum: 5)", custom pricing) is out
+# of scope. Setapp, a subscription service of other apps, can activate it ("If you activate Strongbox through Setapp",
+# privacy policy): another company's subscription, noted, not a plan or a reseller.
+# Bundles: none. Official resellers: none (the App Store bills it; Setapp above). Students and activists can apply for "A
+# Free 1 Year Pro Subscription", once (academic licence page), not listed.
+# Free use: its Free plan.
+
+id: strongbox
+name: Strongbox
+website: https://strongboxsafe.com
+# Its help desk, which its support page links for every help article.
+domains: [strongbox.reamaze.com]
+category: passwords
+spendCategory: software
+billingCurrency:
+  {
+    GLOBAL: USD,
+    US: USD,
+    CA: CAD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: AUD,
+    NZ: NZD,
+  }
+# Its help article on cancelling: Pro is cancelled in the App Store's subscriptions ("Your subscription is managed by
+# Apple.").
+cancelUrl: https://strongbox.reamaze.com/kb/strongbox-pro/how-do-i-cancel-my-subscription
+sources: { pricing: https://strongboxsafe.com/pro/ }
+
+# Ways to pay (M11.5), read 2026-11-19: Apple's App Store only (its pricing page and help desk). The App Store's own ways
+# to pay are Apple's. No card networks are listed: Strongbox's pages name none.
+paymentMethods:
+  - methods: [app-store]
+    page: 'Strongbox Pro pricing'
+    url: https://strongboxsafe.com/pro/
+    quotes:
+      - 'All prices in US Dollars. Your price may vary depending upon the country you use for your App Store.'
+# Renewal day (M11.5), read 2026-11-19: Apple renews the subscription; no Strongbox page says on which day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://strongboxsafe.com/pro/
+    - https://strongboxsafe.com/terms/
+    - https://strongbox.reamaze.com/kb/strongbox-pro/how-do-i-cancel-my-subscription
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: Phoebe Code Limited, which its founder incorporated and which "wholly owned" Strongbox
+# (about page), joined the Applause group, a New York team of indie app developers, in March 2025 ("Strongbox Joins
+# Applause", posted March 13, 2025; the founder's message of March 15, 2025). Its privacy policy (updated 15 October 2026)
+# still says "Strongbox is provided by Phoebe Code Limited, based in the UK." No page names Applause's company or a
+# listing, so no stock.
+owner:
+  name: Phoebe Code Limited, part of the Applause group
+  page:
+    name: Founders message
+    url: https://strongboxsafe.com/founders-message/
+  quotes:
+    - 'eventually we incorporated as Phoebe Code Limited and expanded the team beyond myself'
+    - 'To that end, I am happy to say that after a long search for a new home for Strongbox, we have joined the very capable Applause group.'
+  country:
+    code: GB
+    page:
+      name: About
+      url: https://strongboxsafe.com/about/
+    quotes:
+      - 'Strongbox is wholly owned by Phoebe Code Limited a UK company registered in England & Wales (No. 12501317).'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+# Source code (M11.5): its help desk's audit article links its GitHub repository ("Strongbox Source Code:"), AGPL-3.0;
+# its README says the repository leaves out what's needed to build the app ("this repo are not compliant with the OSI
+# definition of Open Source"; "Others might use the term "Source Available"."), so source-available.
+sourceRepo:
+  url: https://github.com/strongbox-password-safe/Strongbox
+  page:
+    name: Has Strongbox ever been audited?
+    url: https://strongbox.reamaze.com/kb/security-and-privacy/security-audit
+  quotes:
+    - 'Strongbox Source Code: https://github.com/strongbox-password-safe/Strongbox'
+  lastVerified: 2026-11-19
+notes: >-
+  A KeePass and Password Safe app for iPhone, iPad and Mac. Your passwords stay in a KeePass file you keep wherever you
+  like (on the device, iCloud, Dropbox, Google Drive, OneDrive, WebDAV, SFTP or its free Strongbox Sync). Pro is bought
+  in the App Store; it’s also sold for life, paid once, which isn’t listed.
+
+# Perks (M11.6): what Pro adds that no feature describes, in its Pro page's words.
+perks:
+  - id: premium-support
+    name: Premium Support
+  - id: duress-pin
+    name: Duress PIN
+  - id: wi-fi-sync
+    name: Wi-Fi Sync
+  - id: watch-app
+    name: Apple Watch App
+
+# General features, read 2026-11-19. Platforms: iPhone, iPad and Mac ("the most secure and powerful KeePass password
+# manager on iPhone, iPad and Mac", home page), with browser extensions for Chrome and Firefox on Mac (help desk), which
+# fill only with Pro ("AutoFill (MacOS Big Sur+)" is Pro's on macOS, comparison), so the Free plan lists iOS and macOS. No
+# account: you unlock a database with its master password, a key file ("Key File Support", both) or a YubiKey ("YubiKey
+# (KeePass only)", Pro), so password and security-key, Free password only (KeePassXC's reading of an unlock). Support: its
+# help desk's contact form and email, and Reddit r/strongbox, which its README names under "Help / Tech Support"; Pro adds
+# "Premium Support" (a perk). App languages: its README's translators list Chinese, French, German, Italian, Japanese,
+# Portuguese (PT-BR) and Spanish among others, besides English. Source available (above). Not self-hostable: there's no
+# server to run (it syncs through your own storage, or Apple's CloudKit for Strongbox Sync). No pause; no parental
+# controls.
+features:
+  platforms: [ios, macos, browser-extension]
+  account.sign-in: [password, security-key]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, de, it, pt, ja, zh]
+  software.open-source: source-available
+  software.self-hostable: false
+
+# Password manager features, read 2026-11-19 (comparison table, Pro page and the help articles named):
+# - Items: KeePass entries with logins, "Attachments & Custom Fields", "Markdown Notes", "TOTP (QR Code, RFC 6238,
+#   Steam)" and passkeys ("You can save passkeys directly to your Strongbox database"); SSH keys with Pro's SSH Agent on
+#   Mac. Passkeys are Free's on iOS but Pro's on macOS (comparison): Free keeps them, on its iPhone app.
+# - Health: "Audit (Find Weaknesses)" on both ("Find and fix duplicate passwords, weak, common and short passwords", home);
+#   "Have I Been Pwned? Audit" is Pro's: breached. It checks your passwords against Have I Been Pwned when you turn it on,
+#   not a monitoring service, so no dark web monitoring (Bitwarden's and KeePassXC's reading).
+# - Sharing: a database on Strongbox Sync is shared with other people by an invitation link to their Apple Account
+#   ("you can now edit, view and manage the database along with other people"), free ("Strongbox Sync provides easy and
+#   reliable cross device sync and sharing for all our users. What’s more, it’s completely free."): share-to-user and
+#   share-vault.
+# - Import: a KeePass or Password Safe database opens as it is (kdbx), "Generic CSV", "Bitwarden (JSON)", Enpass's JSON and
+#   1Password's 1PUX (Import Your Existing Passwords): csv, json, kdbx and other-managers. Export: "Import & Export (CSV,
+#   Encrypted)" (comparison), and the database itself is a KeePass file other apps open ("Use your Strongbox database with
+#   any KeePass compatible client on any platform."): csv, kdbx, encrypted. No page names the Credential Exchange Format.
+# - No emergency access. Offline: "Offline Viewing" on both, "Offline Editing" Pro's on iOS (comparison).
+# - Authenticator: "TOTP (QR Code, RFC 6238, Steam)" on both: otpauth. No page says how 2FA secrets leave it other than
+#   inside the database, so authenticator.export is left empty.
+# - End-to-end encryption: its pages say the database is encrypted on your device ("The only place your database is
+#   decrypted is on device for use there.", Strongbox Sync post) but don't use the words end-to-end or zero-knowledge, so
+#   encryption.end-to-end is left out (KeePassXC's precedent); privacy.content-access grades the same fact.
+plans:
+  - id: strongbox.free
+    name: Free
+    link: https://strongboxsafe.com/
+    features:
+      platforms: [ios, macos]
+      account.sign-in: [password]
+      password-manager: true
+      password-manager.item-types: [login, totp, passkey, secure-note]
+      password-manager.health: [weak, reused]
+      password-manager.sharing: [share-to-user, share-vault]
+      password-manager.import: [csv, json, kdbx, other-managers]
+      password-manager.export: [csv, kdbx, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+    notes: >-
+      For non-commercial use. Unlimited entries and databases, AutoFill on iPhone and iPad, 2FA codes and free Strongbox
+      Sync; no Face ID or Touch ID unlock, YubiKey or offline editing on iPhone.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://strongboxsafe.com/pro/,
+        }
+
+  - id: strongbox.pro
+    name: Pro
+    link: https://strongboxsafe.com/pro/
+    features:
+      account.users: 6
+      password-manager: true
+      password-manager.item-types: [login, totp, passkey, secure-note, ssh-key]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-vault]
+      password-manager.import: [csv, json, kdbx, other-managers]
+      password-manager.export: [csv, kdbx, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+    perks: [premium-support, duress-pin, wi-fi-sync, watch-app]
+    notes: >-
+      Face ID and Touch ID unlock, YubiKey, AutoFill on Mac, SFTP and WebDAV sync on Mac, the SSH agent and the Apple Watch
+      app. Shared with up to 5 others through Apple’s Family Sharing. Bought in the App Store; the yearly plan starts with
+      a 3-month free trial.
+    prices:
+      - region: US
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://strongboxsafe.com/pro/
+      - region: US
+        currency: USD
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://strongboxsafe.com/pro/
+      - region: DE
+        currency: EUR
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://strongboxsafe.com/de/strongbox-pro/
+      - region: DE
+        currency: EUR
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://strongboxsafe.com/de/strongbox-pro/
+      - region: CA
+        currency: CAD
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/ca/app/strongbox-password-manager/id897283731
+      - region: CA
+        currency: CAD
+        amount: 34.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/ca/app/strongbox-password-manager/id897283731
+      - region: GB
+        currency: GBP
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/gb/app/strongbox-password-manager/id897283731
+      - region: GB
+        currency: GBP
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/gb/app/strongbox-password-manager/id897283731
+      - region: IE
+        currency: EUR
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/ie/app/strongbox-password-manager/id897283731
+      - region: IE
+        currency: EUR
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/ie/app/strongbox-password-manager/id897283731
+      - region: FR
+        currency: EUR
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/fr/app/strongbox-password-manager/id897283731
+      - region: FR
+        currency: EUR
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/fr/app/strongbox-password-manager/id897283731
+      - region: NL
+        currency: EUR
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/nl/app/strongbox-password-manager/id897283731
+      - region: NL
+        currency: EUR
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/nl/app/strongbox-password-manager/id897283731
+      - region: ES
+        currency: EUR
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/es/app/strongbox-password-manager/id897283731
+      - region: ES
+        currency: EUR
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/es/app/strongbox-password-manager/id897283731
+      - region: IT
+        currency: EUR
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/it/app/strongbox-password-manager/id897283731
+      - region: IT
+        currency: EUR
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/it/app/strongbox-password-manager/id897283731
+      - region: AU
+        currency: AUD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/au/app/strongbox-password-manager/id897283731
+      - region: AU
+        currency: AUD
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/au/app/strongbox-password-manager/id897283731
+      - region: NZ
+        currency: NZD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/nz/app/strongbox-password-manager/id897283731
+      - region: NZ
+        currency: NZD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/nz/app/strongbox-password-manager/id897283731
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge: its terms of use (undated; they cover the website and
+# purchases, and their refund and price clauses say they apply "only to purchases made outside of Apple’s App Store"),
+# its privacy policy ("Last Update: 15 October 2026"), its help desk's articles on cancelling, Family Sharing, network
+# connections, audits and backups, and its GitHub README. Every agreement a user accepts (the owner's rule, 2026-11-03):
+# there's no sign-up and no Strongbox account; Pro is bought in the App Store, so Apple's Media Services Terms apply to the
+# purchase: the shared document apple-media-services (Infuse's precedent), and the worse of each topic's two grades
+# shows. Its apps' licence is the App Store's (part of Apple's terms); its code is published under the AGPL. Not read:
+# the privacy policies of RevenueCat, Superwall and Sentry, which it links; Setapp's terms. Calibrated against KeePassXC,
+# KeePassDX and Infuse.
+policies:
+  shared: [apple-media-services]
+  links:
+    - name: 'Terms of use'
+      url: https://strongboxsafe.com/terms/
+    - name: 'Privacy policy'
+      url: https://strongboxsafe.com/privacy/
+    - name: 'Strongbox Pro'
+      url: https://strongboxsafe.com/pro/
+    - name: 'Home'
+      url: https://strongboxsafe.com/
+    - name: 'Cancel your subscription'
+      url: https://strongbox.reamaze.com/kb/strongbox-pro/how-do-i-cancel-my-subscription
+    - name: 'Share Strongbox Pro with your family'
+      url: https://strongbox.reamaze.com/kb/strongbox-pro/does-strongbox-support-apples-family-sharing
+    - name: 'What network connections can Strongbox make?'
+      url: https://strongbox.reamaze.com/kb/security-and-privacy/what-possible-network-connections-can-strongbox-make
+    - name: 'Has Strongbox ever been audited?'
+      url: https://strongbox.reamaze.com/kb/security-and-privacy/security-audit
+    - name: 'Compare features'
+      url: https://strongboxsafe.com/comparison/
+    - name: 'Strongbox (GitHub)'
+      url: https://github.com/strongbox-password-safe/Strongbox
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Crash reports are on until you switch them off in its settings. But its free iPhone app also sends how you use it to Superwall, which runs its upgrade offers, and nothing turns that off.'
+      sources:
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'Crash reporting is enabled by default on a fresh installation and can be turned off in settings.'
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'Superwall processes technical information, app-usage events and purchase status for these purposes.'
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'The crash-reporting switch does not disable Superwall or RevenueCat.'
+      action:
+        name: 'What it collects and how to turn off crash reports'
+        url: https://strongboxsafe.com/privacy/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its free iPhone app tells RevenueCat when you install and buy, to match them to its ads on Apple’s ad network. No setting stops that; you’d have to ask it.'
+      sources:
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'The iOS freemium app also uses RevenueCat for Apple Ads attribution, associating installations and purchases with advertising campaigns.'
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'Contact us through the Strongbox support page to exercise your rights.'
+      action:
+        name: 'Ask it through its support page'
+        url: https://strongboxsafe.com/support/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'Its privacy policy names no ads in its apps, and its website counts visits without cookies and doesn’t use those counts for advertising.'
+      sources:
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'Plausible does not use cookies, and we do not use these website statistics for advertising or marketing.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say anything about training AI. It can’t read your passwords; an AI app you connect yourself gets only what you let it see.'
+      pages: [https://strongboxsafe.com/privacy/, https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your passwords are locked and unlocked only on your own device. Strongbox can’t open them, or reset your master password.'
+      sources:
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'Strongbox encrypts your password databases on your device and decrypts them locally when you unlock them.'
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'We cannot reset your database master password or decrypt your database without its required credentials.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'Your passwords stay where you keep them. Its service providers keep purchase, usage, crash and support records, and its privacy policy gives no time limits.'
+      sources:
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'Uninstalling Strongbox does not necessarily delete those files or purchase, analytics, diagnostic and support records held by service providers.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'Your passwords are yours to delete. To have its other records about you deleted, you ask through its support page, and it gives no time frame.'
+      sources:
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'Contact us to request deletion of information processed under our responsibility.'
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'You control databases and backups stored locally or with your chosen storage provider.'
+      action:
+        name: 'Ask through its support page'
+        url: https://strongboxsafe.com/support/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'Your passwords are kept in the standard KeePass file, which other KeePass apps on any system open, and you can also export them as a CSV file.'
+      sources:
+        - url: https://strongboxsafe.com/
+          quote: 'Use your Strongbox database with any KeePass compatible client on any platform.'
+        - url: https://strongboxsafe.com/comparison/
+          quote: 'Import & Export (CSV, Encrypted)'
+      action:
+        name: 'Backups and exports of your database'
+        url: https://strongbox.reamaze.com/kb/faqs/does-strongbox-store-backups-how-can-i-export-them
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say what it does when the police or a government asks for data. It holds no passwords to hand over.'
+      pages: [https://strongboxsafe.com/privacy/, https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your passwords stay wherever you keep the file. Its privacy policy doesn’t say in which countries its service providers keep purchase, crash and usage records.'
+      sources:
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'You can store databases locally or use a supported cloud service, WebDAV or SFTP.'
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'We use Apple and RevenueCat to manage purchases and subscriptions, check access to paid features, restore purchases and determine offer eligibility.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no Strongbox account to make: you install it and use it without giving it your name or email.'
+      sources:
+        - url: https://strongboxsafe.com/privacy/
+          quote: 'Strongbox does not require a Strongbox account, and we do not supply RevenueCat or Superwall with a custom Strongbox account identifier.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'Pro is cancelled in your Apple account’s subscriptions, on your iPhone, iPad or Mac, at any time.'
+      sources:
+        - url: https://strongbox.reamaze.com/kb/strongbox-pro/how-do-i-cancel-my-subscription
+          quote: 'Your subscription is managed by Apple. To cancel, simply follow the instructions below:'
+        - url: https://strongbox.reamaze.com/kb/strongbox-pro/how-do-i-cancel-my-subscription
+          quote: 'Tap Cancel Subscription at the bottom.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      status: not-stated
+      reason: 'Its terms give refunds only as the law requires, and only for purchases made outside Apple’s App Store; for Pro bought in the App Store, Apple’s terms decide.'
+      pages: [https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms promise 30 days’ emailed notice of a new price only for purchases made outside Apple’s App Store; for Pro bought in the App Store, Apple’s terms decide.'
+      pages: [https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'The yearly plan starts with a 3-month free trial in the App Store. Strongbox’s pages don’t say whether it reminds you before the trial is charged; Apple’s terms cover it.'
+      pages: [https://strongboxsafe.com/pro/, https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its pages don’t say it reminds you before Pro renews.'
+      pages: [https://strongboxsafe.com/pro/, https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages name no fees beyond the App Store’s price.'
+      pages: [https://strongboxsafe.com/pro/, https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes about its website or what you buy from it go to the courts of England, under English law, with no private referee. That may be far from where you live.'
+      sources:
+        - url: https://strongboxsafe.com/terms/
+          quote: 'Any dispute related in any way to your visit to this website or to products you purchase from us shall be arbitrated by the law of England and the English Courts and you consent to exclusive jurisdiction and venue of such courts.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      status: not-stated
+      reason: 'Its terms don’t say how it changes them; Apple’s terms cover the App Store purchase.'
+      pages: [https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      status: not-applicable
+      reason: 'There’s no Strongbox account to close: your passwords are in your own file, and Pro belongs to your Apple account, under Apple’s terms.'
+      pages: [https://strongboxsafe.com/privacy/]
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      status: not-applicable
+      reason: 'Your passwords never go to Strongbox: they stay in your own file, so it takes no rights over them.'
+      pages: [https://strongboxsafe.com/privacy/, https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      status: not-stated
+      reason: 'Its terms don’t say whether it may change or remove what Pro includes; Apple’s terms cover the App Store purchase.'
+      pages: [https://strongboxsafe.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no Strongbox account to close for not using it.'
+      pages: [https://strongboxsafe.com/privacy/]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: good
+      reason: 'Its code is published for anyone to read, under an open-source licence, but its makers hold back parts needed to build the app, so the copy you use is the App Store’s.'
+      sources:
+        - url: https://github.com/strongbox-password-safe/Strongbox
+          quote: 'Please note this repo are not compliant with the OSI definition of Open Source, because we have never provided an easy way to build our native App directly from this repo for anti-piracy reasons.'
+        - url: https://github.com/strongbox-password-safe/Strongbox
+          quote: 'The code is provided here in the spirit of transparency, security and openness.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: neutral
+      reason: 'It passes a yearly outside check (CASA Tier 2) of automated code scans and procedures, but says it hasn’t had a deeper independent audit, and names no bug bounty.'
+      sources:
+        - url: https://strongbox.reamaze.com/kb/security-and-privacy/security-audit
+          quote: 'Strongbox performs a yearly CASA Tier 2 level audit as a requirement for integration with a certain third party storage provider.'
+        - url: https://strongbox.reamaze.com/kb/security-and-privacy/security-audit
+          quote: "Outside of the above CASA 2 audit, we haven't had a more rigorous independent code level audit."
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: great
+      reason: 'Pro can be shared with up to 5 other people in your Apple family group, whichever way you bought it.'
+      sources:
+        - url: https://strongbox.reamaze.com/kb/strongbox-pro/does-strongbox-support-apples-family-sharing
+          quote: 'You can share Strongbox Pro with up to 5 other family members!'
+        - url: https://strongbox.reamaze.com/kb/strongbox-pro/does-strongbox-support-apples-family-sharing
+          quote: 'Strongbox supports Apple Family Sharing for all versions of its Apps and for all license types (monthly, yearly, lifetime in-app purchase and lifetime outright). No exceptions.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its pages don’t say how its apps update or whether they change anything else on your device. App Store apps update through the App Store.'
+      pages:
+        - https://strongboxsafe.com/privacy/
+        - https://strongbox.reamaze.com/kb/security-and-privacy/what-possible-network-connections-can-strongbox-make
+      lastVerified: 2026-11-19
