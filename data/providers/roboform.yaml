@@ -1,0 +1,659 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 2), read with Edge from Canada: roboform.com's
+# personal pricing page (roboform.com/pricing-personal), its Premium, Family, download, about, locations and security
+# pages, its License Agreement (its terms of use and apps' licence), Privacy Policy, GDPR statement and Vulnerability
+# Disclosure Policy, its checkout (online.roboform.com, read up to the payment form, typing nothing), and 40 of its help
+# centre's articles through its Zendesk API (help.roboform.com, a plain fetch; its pages answer a plain fetch with 403).
+# Pricing: the page prices by where the visitor is. Its cards show this year's new-user offer ("BLACK FRIDAY & CYBER
+# MONDAY SALE! 40% off new RoboForm subscriptions."): "New users: C$25.10 for the first year Then renews at
+# C$41.88/yr" (Premium) and "C$43.20 … Then renews at C$72.00/yr" (Family); the renewal price is stored, the offer
+# isn't. The checkout's order summary names the country and the regular price ("1-year plan C$41.88", "Country:
+# Canada"; "Your subscription will automatically renew 14 days before the end of each term at the regular price then in
+# effect (currently C$41.88/year)"). It also sells "2-year plan" and "3-year plan", at exactly 2 and 3 times the yearly
+# price (C$83.76, C$125.64; Family C$144.00, C$216.00) before the new-user discount, and no page says what they renew
+# as, so only the year is stored (the plans' notes say the longer terms exist). Read 2026-11-19 from Canada
+# (and through Vancouver and Calgary exits), and through US, UK, Irish, German, French, Dutch, Spanish, Italian,
+# Australian and New Zealand exits: the US $29.88 and $47.75 a year, the UK £23.88 and £37.90, every euro country €29.88
+# and €47.75 (VAT added at checkout: "VAT (Ireland, 23%)"; its checkout placed the German exit in Sweden and the Spanish
+# one in Romania, in euros at the same prices), Australia A$47.88 and A$76.00, New Zealand US$29.88 and US$47.75. Its
+# help centre: "Depending on where you are located, purchases of RoboForm products may be subject to sales tax or Value
+# Added Tax (VAT)." No price includes tax.
+# Region checklist for CA and US, 2026-11-19: 1. language paths only (/fr, /de…); 2. the checkout's country menu
+# (defaults to the visitor's); 3. no price data in the page's code; 4. the checkout's order summary, both countries; 5.
+# its sales tax and VAT articles; 6. Edge from Canada and through exits; 7. no bill offered.
+# Plans: Free, Premium and Family (five Premium accounts). RoboForm for Business is out of scope. Gifts are Premium only
+# and "Gift sales are final and non-refundable."
+# Bundles: none. Official resellers: its partner and affiliate programmes are for businesses and referrals; no page
+# names a shop selling personal plans. App stores (Apple, Google Play) bill it: partners, not listed.
+# Free use: RoboForm Free, a plan of its own ("Unlimited passwords on a single device").
+
+id: roboform
+name: RoboForm
+aliases: [robo form, siber systems]
+website: https://www.roboform.com
+# Its help centre, whose articles state its billing, features and policies.
+domains: [help.roboform.com]
+category: passwords
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help article on cancelling ("toggle option for Auto Renewal Status to the "OFF" position").
+cancelUrl: https://help.roboform.com/hc/en-us/articles/115003064811-How-do-I-cancel-auto-renewal-for-my-RoboForm-Subscription
+sources: { pricing: https://www.roboform.com/pricing-personal }
+# Ways to pay (M11.5), read 2026-11-19: "Credit or debit card" at its checkout (its card logos name no network in
+# words, so no acceptedNetworks), PayPal on its website and the app stores (its cancelling article and licence).
+paymentMethods:
+  - methods: [card, paypal]
+    page: 'License Agreement'
+    url: https://www.roboform.com/license
+    quotes:
+      - "Siber shall charge it automatically to Customer's credit card or other payment method from the original purchase that was stored in payment system database (Stripe, Paypal, Apple, Google, etc)."
+  - methods: [app-store]
+    page: 'How do I cancel auto-renewal for my RoboForm Subscription?'
+    url: https://help.roboform.com/hc/en-us/articles/115003064811-How-do-I-cancel-auto-renewal-for-my-RoboForm-Subscription
+    quotes:
+      - 'If you subscribed to an automatically renewed plan on the iOS App Store, you must manage your subscription within your Apple account.'
+# Renewal day (M11.5, M11.21), read 2026-11-19: a card or PayPal renewal is charged 14 days before the term ends, the date
+# you signed up a year on (app store renewals on the day itself).
+renewalAnchor:
+  kind: same-date
+  page: License Agreement
+  url: https://www.roboform.com/license
+  quotes:
+    - 'Automatic renewal of license shall occur 14 days before the expiration date for Credit Cards and Paypal and on the day of expiration for Apple Store and Google Play.'
+  chargedBefore: { days: 14 }
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its privacy policy. Siber Systems is private: no page names a listing.
+owner:
+  name: Siber Systems Inc.
+  page:
+    name: Privacy Policy
+    url: https://www.roboform.com/privacy-policy
+  quotes:
+    - 'RoboForm is wholly owned and operated by Siber Systems Inc. (Siber), a Virginia Corporation located at 3701 Pender Drive, Suite 400, Fairfax, VA 22030, United States.'
+  country:
+    code: US
+  lastVerified: 2026-11-19
+notes: Billed once a year (2- and 3-year terms cost the same per year). Card and PayPal renewals are charged 14 days before the term ends.
+
+# Perks (M11.6): what no feature describes, in its pages' words.
+perks:
+  - id: local-only-mode
+    name: Local only mode
+
+# General features, read 2026-11-19. Platforms: "RoboForm works on Windows, Mac, Android, iOS, Linux, and Chrome OS.
+# Extensions are available for all major desktop browsers" (its Premium page's FAQ), with web access on Premium and
+# Family ("Web access", not on Free). Sign-in: a Master Password, then "Email, SMS, authenticator app, passkey, trusted
+# device, hardware security key" (every plan's "Advanced two-factor authentication (2FA)"). Support: Free "24/7 email
+# support"; Premium and Family "24/7 Priority email support Monday-Friday live chat, phone support". App languages: its
+# site's language versions (/br, /cn, /de, /es, /fr, /it, /jp, /nl, /pl, /ru, /se: Dutch, Polish, Russian and Swedish
+# have no registry value). Closed source: "RoboForm is the proprietary product of Siber". No pause; no parental controls.
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension]
+  account.sign-in: [password, passkey, totp, security-key, sms, email-code, trusted-device]
+  support.channels: [email, 24-7]
+  languages.interface: [en, pt, zh, de, es, fr, it, ja]
+  software.open-source: proprietary
+
+# Password manager features, read 2026-11-19 (the pricing page's three cards, read from its screenshot for Free's ticks
+# and crosses, its "Features included with every RoboForm account", and the help articles named):
+# - Every plan: "Unlimited password storage", "Offline access", "Password audit", "Export / Import", "Passkey
+#   management", "Safenotes"; logins, Identities ("Person", "Business", "Passport", "Address", "Credit Card", "Bank
+#   Account", "Car"), Safenotes and bookmarks; "Monitor for compromised passwords" and "Integrated TOTP authenticator"
+#   ticked on Free too. Free: "Unlimited passwords on a single device"; "Access on all devices", "Web access", "Data
+#   Breach Monitoring for 5 emails", "Local only mode", "Emergency Access" and "Securely share items and folders" crossed.
+# - Health: its Security Center finds "weak, reused, or compromised passwords" (security page).
+# - Sharing (Premium, Family): items and shared folders with other RoboForm users ("Share passwords securely in folders or
+#   individually, assigning access levels based on user needs."). No link sharing.
+# - Import: CSV ("How to Import from a CSV"), other managers' exports (its guides for 1Password, Bitwarden, Dashlane,
+#   Keeper, LastPass, NordPass, Proton Pass, KeePass's CSV…), and Apple Passwords on iOS ("Select "RoboForm" as the
+#   export destination": Credential Exchange). No KDBX.
+# - Export: "RoboForm exports item names, folder paths, and the following saved data to its extended CSV format",
+#   logins (with "TOTP authentication keys used by RoboForm Authenticator to generate one-time codes" and passkeys),
+#   bookmarks and Safenotes.
+# - Emergency access: "Granting Emergency Access is a premium feature available to RoboForm Premium users with an active
+#   subscription." (Free users can receive it.)
+# - Offline: "Offline access" on every account.
+# - Authenticator (every plan): a site's key or QR code, and Google Authenticator's export ("How to Import TOTP QR Codes
+#   from Google Authenticator into RoboForm"); its CSV export carries the keys (plain).
+# - End-to-end: "All decryption happens on your device and not on our servers." (security page): passwords.
+# - Data Breach Monitoring (Premium, Family): "scans for data breaches containing your email addresses and personal
+#   information": dark web monitoring.
+plans:
+  - id: roboform.free
+    name: Free
+    link: https://www.roboform.com/pricing-personal
+    features:
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, identity, credit-card, bank-account, passport, secure-note]
+      password-manager.health: [breached, weak, reused]
+      password-manager.import: [csv, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      authenticator.export: [plain-backup]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: false
+    notes: 'Unlimited passwords on one device, with no web access, sharing or emergency access.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+  - id: roboform.premium
+    name: Premium
+    link: https://www.roboform.com/premium
+    features:
+      support.channels: [email, chat, phone, 24-7]
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, identity, credit-card, bank-account, passport, secure-note]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-vault, role-permissions]
+      password-manager.import: [csv, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      authenticator.export: [plain-backup]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    perks: [local-only-mode]
+    notes: 'All your devices and the web, with sharing, emergency access and breach monitoring for 5 email addresses. A 30-day money-back guarantee.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 41.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: US
+        currency: USD
+        amount: 29.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: GB
+        currency: GBP
+        amount: 23.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: AU
+        currency: AUD
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: NZ
+        currency: USD
+        amount: 29.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: IE
+        currency: EUR
+        amount: 29.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: DE
+        currency: EUR
+        amount: 29.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: FR
+        currency: EUR
+        amount: 29.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: NL
+        currency: EUR
+        amount: 29.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: ES
+        currency: EUR
+        amount: 29.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: IT
+        currency: EUR
+        amount: 29.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+  - id: roboform.family
+    name: Family
+    link: https://www.roboform.com/family
+    features:
+      account.users: 5
+      support.channels: [email, chat, phone, 24-7]
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, identity, credit-card, bank-account, passport, secure-note]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-vault, role-permissions]
+      password-manager.import: [csv, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      authenticator.export: [plain-backup]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    perks: [local-only-mode]
+    notes: 'Up to 5 Premium accounts, one for each person. A 30-day money-back guarantee.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 72.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: US
+        currency: USD
+        amount: 47.75
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: GB
+        currency: GBP
+        amount: 37.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: AU
+        currency: AUD
+        amount: 76.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: NZ
+        currency: USD
+        amount: 47.75
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: IE
+        currency: EUR
+        amount: 47.75
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: DE
+        currency: EUR
+        amount: 47.75
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: FR
+        currency: EUR
+        amount: 47.75
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: NL
+        currency: EUR
+        amount: 47.75
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: ES
+        currency: EUR
+        amount: 47.75
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+      - region: IT
+        currency: EUR
+        amount: 47.75
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.roboform.com/pricing-personal
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge: its License Agreement ("RoboForm License and Terms of
+# Use", which its checkout names as its "Terms of Service": "By purchasing, I agree to RoboForm Terms of Service &
+# Privacy Policy", and which holds a privacy policy of its own), its Privacy Policy, GDPR statement, security page and
+# Vulnerability Disclosure Policy, and its help centre's billing, deletion, export, analytics and audit articles. Its
+# Partner License Agreement is for partners. No page names a transparency report or law-enforcement policy.
+policies:
+  links:
+    - name: 'License Agreement'
+      url: https://www.roboform.com/license
+    - name: 'Privacy Policy'
+      url: https://www.roboform.com/privacy-policy
+    - name: 'Security'
+      url: https://www.roboform.com/security
+    - name: 'Has RoboForm undergone a third-party security audit?'
+      url: https://help.roboform.com/hc/en-us/articles/15888502834061-Has-RoboForm-undergone-a-third-party-security-audit
+    - name: 'How do I disable trackers on the Android app?'
+      url: https://help.roboform.com/hc/en-us/articles/13532577855245-How-do-I-disable-trackers-on-the-Android-app
+    - name: 'How do I cancel auto-renewal?'
+      url: https://help.roboform.com/hc/en-us/articles/115003064811-How-do-I-cancel-auto-renewal-for-my-RoboForm-Subscription
+    - name: 'How do I upgrade to a Family Plan?'
+      url: https://help.roboform.com/hc/en-us/articles/115000398131-How-do-I-upgrade-from-an-individual-Premium-subscription-to-a-Family-Plan
+    - name: 'How to delete your RoboForm Account'
+      url: https://help.roboform.com/hc/en-us/articles/360004469652-How-to-delete-your-RoboForm-Account
+    - name: 'What data and fields can I export?'
+      url: https://help.roboform.com/hc/en-us/articles/49807281668877-What-data-and-fields-can-I-export-from-RoboForm
+    - name: 'Checkout'
+      url: https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+    - name: 'Premium'
+      url: https://www.roboform.com/premium
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its Android app sends usage and crash data by default; you can switch that off in the app. Everything you say to its support, calls and chats included, is recorded and kept.'
+      sources:
+        - url: https://help.roboform.com/hc/en-us/articles/13532577855245-How-do-I-disable-trackers-on-the-Android-app
+          quote: 'The RoboForm Android app uses Google Firebase for analytics and crash reporting.'
+        - url: https://help.roboform.com/hc/en-us/articles/13532577855245-How-do-I-disable-trackers-on-the-Android-app
+          quote: '3) Toggle the "Disable analytics and crash reporting" option to the ON (blue) position.'
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'For quality assurance, training, and support purposes, all communication conducted through support channels, including emails, support tickets, live chats, and phone calls, is recorded and retained.'
+      action:
+        name: 'Turn off the Android app’s analytics'
+        url: https://help.roboform.com/hc/en-us/articles/13532577855245-How-do-I-disable-trackers-on-the-Android-app
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its website shares what you do with Google for its ads (remarketing), and lets advertisers set cookies. The only opt-out it names is Google’s, for each browser.'
+      sources:
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'RoboForm Web Site utilizes Google Analytics features, including Remarketing with Google Analytics, Google Display Network Impression Reporting, and Google Analytics Demographics and Interest Reporting and Customer consents to this.'
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'RoboForm affiliates and advertisers may also use cookies and Customer agrees to that.'
+      action:
+        name: 'Its privacy policy (Google’s opt-out)'
+        url: https://www.roboform.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its website tracks visitors to show its ads elsewhere, and its apps show offers, its own and other companies’, after an update. Opting out is only Google’s, per browser.'
+      sources:
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'RoboForm Web Site utilizes Google Analytics features, including Remarketing with Google Analytics, Google Display Network Impression Reporting, and Google Analytics Demographics and Interest Reporting and Customer consents to this.'
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'Siber will also present infrequent offers of Siber and 3rd party software on post-update web page that is shown when user installs new version of RoboForm.'
+      action:
+        name: 'Its privacy policy (Google’s opt-out)'
+        url: https://www.roboform.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its licence and privacy policy don’t say whether anything you send trains AI. It can’t read what’s in your vault.'
+      pages: [https://www.roboform.com/license, https://www.roboform.com/privacy-policy]
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your data is unlocked only on your own device with your Master Password, so RoboForm can’t read it.'
+      sources:
+        - url: https://www.roboform.com/security
+          quote: 'All decryption happens on your device and not on our servers. We have no way of knowing your Master Password or accessing your data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It names no times for keeping your data. It keeps recordings of your support contacts, and may delete your synced data 30 days after a missed payment.'
+      sources:
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'For quality assurance, training, and support purposes, all communication conducted through support channels, including emails, support tickets, live chats, and phone calls, is recorded and retained.'
+        - url: https://www.roboform.com/license
+          quote: "Siber has a right to delete all Customer's data from Siber servers, if Customer's account remains unpaid for more than 30 days."
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself in its browser extension or phone apps, which erases your data for good.'
+      sources:
+        - url: https://help.roboform.com/hc/en-us/articles/360004469652-How-to-delete-your-RoboForm-Account
+          quote: 'NOTE: Account deletion is irreversible.'
+        - url: https://help.roboform.com/hc/en-us/articles/360004469652-How-to-delete-your-RoboForm-Account
+          quote: 'Once deleted, your data cannot be recovered.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your logins, 2FA keys, passkeys, notes and bookmarks yourself as a CSV file.'
+      sources:
+        - url: https://help.roboform.com/hc/en-us/articles/49807281668877-What-data-and-fields-can-I-export-from-RoboForm
+          quote: 'RoboForm exports item names, folder paths, and the following saved data to its extended CSV format:'
+        - url: https://help.roboform.com/hc/en-us/articles/49807281668877-What-data-and-fields-can-I-export-from-RoboForm
+          quote: 'TOTP authentication keys used by RoboForm Authenticator to generate one-time codes'
+      action:
+        name: 'What you can export'
+        url: https://help.roboform.com/hc/en-us/articles/49807281668877-What-data-and-fields-can-I-export-from-RoboForm
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its licence and privacy policy don’t say what it does when police or governments ask for your data.'
+      pages: [https://www.roboform.com/license, https://www.roboform.com/privacy-policy]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your account data is kept on its servers in the US. Data from Europe, the UK and Switzerland is covered by the EU-US Data Privacy Framework.'
+      sources:
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'Personal data of Customers that purchase RoboForm licenses is stored on Siber servers in the data center located in USA.'
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'Siber Systems complies with the EU-U.S. Data Privacy Framework (EU-U.S. DPF) and the UK Extension to the EU-U.S. DPF, and the Swiss-U.S. Data Privacy Framework (Swiss-U.S. DPF) as set forth by the U.S. Department of Commerce.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You give an email address for your account and, to pay, your card and name. Its policy says it also collects phone numbers for support.'
+      sources:
+        - url: https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+          quote: 'Enter your RoboForm account email.'
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'Siber collects names, email addresses, and phone numbers to provide account management and customer support.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You switch off automatic renewal yourself in its settings, at any time.'
+      sources:
+        - url: https://help.roboform.com/hc/en-us/articles/115003064811-How-do-I-cancel-auto-renewal-for-my-RoboForm-Subscription
+          quote: 'Then, toggle option for Auto Renewal Status to the "OFF" position (gray).'
+        - url: https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+          quote: "Turn off auto-renewal anytime under 'License & Billing' in your RoboForm account."
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: good
+      reason: 'You get all your money back if you ask within 30 days of buying or of a renewal. After that, nothing.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: "If termination has occurred after 30 days since the last renewal then no money shall be refunded, but Siber shall not charge the customer's credit card on the next renewal cycle."
+        - url: https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+          quote: 'Full refund available within 30 days of purchase.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'It renews at "the regular price then in effect", but its pages don’t say it tells you before a price goes up.'
+      pages:
+        - https://www.roboform.com/license
+        - https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its pages offer to "Try Premium" but don’t say how long the trial is, whether it needs a card or what happens when it ends.'
+      pages: [https://www.roboform.com/premium, https://www.roboform.com/license]
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its licence and checkout say a plan renews by itself, charged 14 days before it ends, but not that it reminds you first.'
+      pages:
+        - https://www.roboform.com/license
+        - https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its licence and checkout name no fees beyond the price and sales tax or VAT.'
+      pages:
+        - https://www.roboform.com/license
+        - https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to Family counts the days left on your Premium plan toward it, though you pay for a full new year.'
+      sources:
+        - url: https://help.roboform.com/hc/en-us/articles/115000398131-How-do-I-upgrade-from-an-individual-Premium-subscription-to-a-Family-Plan
+          quote: 'The upgrade price is calculated based on the number of days left in your current individual license.'
+        - url: https://help.roboform.com/hc/en-us/articles/115000398131-How-do-I-upgrade-from-an-individual-Premium-subscription-to-a-Family-Plan
+          quote: 'In order to upgrade, you have to renew for a full year.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts of Virginia, where the company is, not a private referee.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: 'All disputes hereunder shall be resolved in the applicable state or federal courts of Virginia.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It may change its privacy terms whenever it chooses and only posts the new version, so you have to check back yourself.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: 'This privacy policy is subject to change at the sole discretion of Siber Systems, Inc. When we modify the privacy policy, we will post the changes in a revised policy statement.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'Your licence ends at once, without warning, if you break any of its terms, and its terms promise no refund then.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: 'This License will terminate immediately without notice from Siber if Customer fails to comply with any provision of this License agreement.'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'It takes no rights over what you save: your data is sent to it only to back it up and sync it between your devices.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: 'Also in this case RoboForm shall transmit RoboForm Password Data over the Internet, for the purposes of storing backup copy of Customer RoboForm Password data on RoboForm server and for purposes of synchronization of said data between Customer computers and mobile devices.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Its free version isn’t guaranteed for any length of time: it can limit or end it whenever it chooses. Its pages say nothing about removing paid features.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: "Customer's right and license to access, use, execute, and deploy any free or trial versions of RoboForm Products are not guaranteed for any period of time."
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its licence and privacy policy don’t say it closes accounts you haven’t used (a missed payment is another matter: see Notable).'
+      pages: [https://www.roboform.com/license, https://www.roboform.com/privacy-policy]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: neutral
+      reason: 'Premium is for one person on their own devices, not a company, and you may not take its apps apart.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: '- Customer is a physical person and not a company or organization or government institution.'
+        - url: https://www.roboform.com/license
+          quote: 'Customer shall not cause or permit reverse engineering, disassembly, or decompilation of RoboForm.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'An outside firm, Secfault Security, has tested it twice and it publishes summaries, and it rewards people who report bugs. It publishes no past incidents.'
+      sources:
+        - url: https://help.roboform.com/hc/en-us/articles/15888502834061-Has-RoboForm-undergone-a-third-party-security-audit
+          quote: 'RoboForm has successfully undergone two comprehensive security audit and penetration tests conducted by Secfault Security.'
+        - url: https://www.roboform.com/security
+          quote: 'Confirmed issues are evaluated and rewarded based on severity and impact.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Premium is for one person, on devices that all belong to them. Family gives up to 5 people a Premium account each instead.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: '- All these computers and devices belong to the same Customer, and'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'It installs its own extension in your browsers, which you agree to, and suggests updates rather than installing them by itself.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: "RoboForm and RoboForm2Go may install Toolbar, Browser Helper Object or Extension into Customer's browsers."
+        - url: https://www.roboform.com/privacy-policy
+          quote: 'If it finds a version that is newer than the version that is currently installed, RoboForm will suggest that Customer upgrades to the more recent version.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Synced data can be deleted after a missed payment
+      tier: poor
+      reason: 'If a renewal isn’t paid, or a payment is reversed, it may delete everything on its servers after 30 days. Keep an export, or local copies, if you might stop paying.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: "If Annual Subscription fee is not paid on time or if payment of Annual Subscription fee is reversed by any means (including void, refund, chargeback) then License becomes null and void and in addition to that Siber has a right to delete all Customer's data from Siber servers, if Customer's account remains unpaid for more than 30 days."
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: You may pay its legal costs
+      tier: poor
+      reason: 'In any lawsuit over RoboForm, its licence says Siber is entitled to all its legal costs and lawyers’ fees.'
+      sources:
+        - url: https://www.roboform.com/license
+          quote: "In any litigation arising out of this Agreement or related to use or function of RoboForm, Siber shall be entitled to all legal costs and attorney's fees incurred in mediation, arbitration, suit and on appeal."
+      lastVerified: 2026-11-19
