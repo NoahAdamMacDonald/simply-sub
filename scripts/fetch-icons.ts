@@ -2,8 +2,9 @@
 // copies them
 // (BLUEPRINT §6.3, §4.9). It works for any website: it collects the icons the home page declares, the well-known paths
 // (/apple-touch-icon.png, /favicon.ico) and the icon services (Google, DuckDuckGo), downloads each, and keeps the
-// largest square PNG of at least 32 pixels, using @simply-sub/core's icon functions. A site without one keeps no
-// logo, and the app shows its first letter.
+// largest square PNG of at least 32 pixels, using @simply-sub/core's icon functions. One nearly square (its sides
+// within a quarter of each other, Cloudflare's 99×96) is centred on a transparent square first. A site without one
+// keeps no logo, and the app shows its first letter.
 //
 //   npm run data:icons                            every provider and reseller that has no logo yet
 //   npm run data:icons -- netflix serialcart      these providers or resellers, replacing their logos
@@ -20,6 +21,7 @@ import {
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 import { loadCatalogFiles, plural, repoRoot } from './lib/catalog-files';
 
 const userAgent = 'SimplySubBot/1.0 (+https://sub.simplely.ca/)';
@@ -29,6 +31,8 @@ const maxPageBytes = 2_000_000;
 const maxIconFileBytes = 1_000_000;
 /** A page can declare a dozen sizes; its largest few are enough. */
 const maxDeclaredIcons = 6;
+/** How much longer one side of an icon may be than the other for it to be made square. */
+const maxAspect = 1.25;
 
 interface Target {
   id: string;
@@ -129,10 +133,32 @@ async function findIcon(website: string): Promise<{ icon?: Candidate; tried: num
     const file = await download(url, maxIconFileBytes, 'image/*');
     const image = file && readIconImage(file.bytes);
     if (image) {
-      candidates.push({ ...image, url });
+      candidates.push({ ...(await squared(image)), url });
     }
   }
   return { icon: pickIcon(candidates), tried: unique.length };
+}
+
+/** A nearly square icon centred on a transparent square, as wide as its longer side; any other as it is. */
+async function squared(image: IconImage): Promise<IconImage> {
+  const { width, height } = image;
+  const side = Math.max(width, height);
+  if (width === height || side > Math.min(width, height) * maxAspect) {
+    return image;
+  }
+  const left = Math.floor((side - width) / 2);
+  const top = Math.floor((side - height) / 2);
+  const png = await sharp(image.png)
+    .extend({
+      left,
+      right: side - width - left,
+      top,
+      bottom: side - height - top,
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
+    .png()
+    .toBuffer();
+  return { png: new Uint8Array(png), width: side, height: side };
 }
 
 /**
