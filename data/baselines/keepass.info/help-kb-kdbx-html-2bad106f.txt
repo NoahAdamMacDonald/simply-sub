@@ -1,0 +1,421 @@
+url: https://keepass.info/help/kb/kdbx.html
+method: fetch
+saved: 2026-11-19
+
+KDBX File Format Specification - KeePass
+KeePass Help Center
+KeePass Home |
+Downloads |
+Translations |
+Plugins |
+Donate
+Help Center Home |
+Forums |
+Awards |
+Links
+KeePass Help Center
+Help Center Home
+Forums
+First Steps Tutorial
+Acknowledgements
+KeePass 1.x
+Installation / Portability
+Translations
+Plugins
+Compatibility
+Error Codes
+License
+KeePass 2.x
+Installation / Portability
+Translations
+Plugins
+Compatibility
+Application Policy
+Auto-Type Obfuscation
+Synchronization
+Triggers
+XML Replace
+User Interface:
+Database Settings
+Entry
+Interface Options
+Load/Save From/To URL
+License
+Features
+Accessibility
+Auto-Type
+Command Line Options
+Configuration
+Field References
+Import / Export
+Integration
+Master Key
+Multiple Users
+Password Generator
+Placeholders
+Repair Databases
+Search
+Secure Edit Controls
+Security
+TAN Support
+URL Field
+Using Stored Passwords
+FAQs and Info
+Administrative FAQ
+Technical FAQ
+Additional FAQ
+Backup
+Development
+Customization (1.x)
+Customization (2.x)
+Scripting (2.x)
+Creating Plugins (1.x)
+Creating Plugins (2.x)
+Key Providers (1.x)
+Key Providers (2.x)
+KDBX File Format
+Support KeePass
+Donate
+KDBX File Format Specification
+Definition of the KDBX 4.1 file format.
+General
+Overall Structure
+Header
+Variant Dictionary
+Computation of Keys
+HMAC-Protected Block Stream
+Inner Header
+Inner Encryption
+XML Document
+General
+KDBX is the KeePass 2.x database file format, which is used for storing
+user data (user names, passwords, URLs, etc.).
+It features encryption, data authentication (for detecting
+corruptions/manipulations), compression, attachment deduplication
+and extensibility (plugins and ports can store custom data).
+This specification defines the latest version (4.1)
+of the KDBX file format.
+Some general notes on the KDBX file format and this specification:
+Integers are stored in little-endian byte order, i.e. the least
+significant byte is stored first.
+For example, the integer 0x12345678 is stored as the byte sequence
+(0x78, 0x56, 0x34, 0x12).
+A boolean is stored as one byte. False = 0x00, true = 0x01.
+Strings are stored in UTF-8 encoding, without a byte-order mark (BOM)
+and without a null terminator (the length is clear from the context).
+A UUID is a unique identifier consisting of 16 bytes (128 bits).
+In this specification, we list the bytes of a UUID in hexadecimal form,
+without a prefix. For example, 31C1F2E6BF714350BE5805216AFC5AFF =
+(0x31, 0xC1, 0xF2, 0xE6, 0xBF, 0x71, 0x43, 0x50,
+0xBE, 0x58, 0x05, 0x21, 0x6A, 0xFC, 0x5A, 0xFF).
+In the XML document, UUIDs are stored in Base64 encoding.
+In this specification, we use the symbol '‖' for the concatenation
+of two byte sequences, with implicit conversion of the arguments to
+byte sequences, without padding. Example:
+(0xAB, 0xCD, 0xEF) ‖ 0x12345678 ‖ "Abc" =
+(0xAB, 0xCD, 0xEF, 0x78, 0x56, 0x34, 0x12, 0x41, 0x62, 0x63).
+Items marked with a '⟳' symbol should be regenerated each time
+the KDBX file is saved.
+The abbreviation 'KDB' stands for 'KeePass Database'. The 'X' indicates
+that XML is used.
+Overall Structure
+Overview of a KDBX file:
+Header.
+SHA-256 hash of the header.
+HMAC-SHA-256 hash of the header.
+In HMAC-protected block stream:
+Encrypted:
+Compressed (optional):
+Inner header.
+XML document.
+The SHA-256 hash of the header can be used for checking the integrity
+of the header, without knowing the master key.
+It allows detecting unintentional corruptions.
+The HMAC-SHA-256 hash of the header can be used for checking the integrity
+and the authenticity of the header. The correct master key is required for
+verifying the HMAC. See the section 'Computation of Keys'
+for details about the computation of the HMAC key.
+The input data for the HMAC-protected block stream is encrypted,
+i.e. we have an Encrypt-then-MAC scheme.
+Header
+A KDBX file starts as follows:
+Name Type Description
+Signature (1)
+UInt32
+Must be 0x9AA2D903.
+Signature (2)
+UInt32
+Must be 0xB54BFB67.
+Format version
+UInt32
+The high word is the major version, and the low word is the minor version.
+An application can load the file if it supports the major version.
+If the minor version of the file is greater than the one that the application
+supports, the application may try to load the file, ignoring any unknown items.
+Certain data may be lost in this case, thus showing a confirmation/warning
+is recommended.
+For KDBX 4.1, the format version value is 0x00040001.
+Fields
+ID-value pairs
+One or more header fields. See below.
+A header field consists of an ID t (byte) and a value V
+(type depends on t ). Let s be the size of V
+in bytes, as Int32 (the maximum is about 2 GB).
+Each header field is stored as follows:
+t ‖ s ‖ V .
+The following header fields are supported:
+Name ID Type Description
+End of header
+0
+Byte[4]
+Indicates the end of the header. Must be present exactly once, as the last
+header field. The value should be the byte array (0x0D, 0x0A, 0x0D, 0x0A).
+Encryption algorithm
+2
+UUID
+The following encryption algorithms are supported by KeePass
+(built-in, without a plugin):
+31C1F2E6BF714350BE5805216AFC5AFF: AES-256 (NIST FIPS 197, CBC mode, PKCS #7 padding).
+D6038A2B8B6F4CB5A524339A31DBB59A: ChaCha20 (RFC 8439).
+Plugins can provide more encryption algorithms.
+Compression algorithm
+3
+UInt32
+0 = no compression, 1 = GZip.
+Master salt/seed (⟳)
+4
+Byte[32]
+Salt/seed for computing the keys.
+Encryption IV/nonce (⟳)
+7
+Byte[]
+Initialization vector or nonce for the encryption algorithm.
+16 bytes for AES-256, 12 bytes for ChaCha20.
+KDF parameters
+11
+Variant dictionary
+Parameters for the key derivation function (KDF). See below.
+Public custom data
+12
+Variant dictionary
+Custom data of plugins/ports.
+The name of an item should be unique, e.g. "PluginName_ItemName".
+In this header field, only data that must be readable without decryption should
+be stored (e.g. data by a key provider plugin required for decryption).
+All other custom data should be stored in the encrypted
+XML document (elements //Meta/CustomData,
+//Group/CustomData and //Entry/CustomData).
+The IDs 1, 5, 6, 8, 9 and 10 were used in previous versions of the KDBX
+file format.
+Key derivation function (KDF) parameters.
+The KDF parameters are stored in a variant dictionary.
+The following parameters are supported:
+Name Type Description
+All KDFs:
+$UUID
+UUID
+UUID of the KDF. The following KDFs are supported by KeePass
+(built-in, without a plugin):
+C9D9F39A628A4460BF740D08C18A4FEA: AES-KDF.
+EF636DDF8C29444B91F7A9A403E30A0C: Argon2d.
+9E298B1956DB4773B23DFC3EC6F0A1E6: Argon2id.
+Plugins can provide more KDFs.
+AES-KDF:
+S (⟳)
+Byte[32]
+Salt/seed.
+R
+UInt64
+Rounds.
+Argon2:
+V
+UInt32
+Version. 0x10 (version 1.0) or 0x13 (version 1.3), as defined in the
+Argon2 specification. 0x13 is recommended.
+S (⟳)
+Byte[]
+Salt. Size: minimum 8, maximum 0x3FFFFFFF, recommended 32.
+I
+UInt64
+Iterations. Minimum 1, maximum 0xFFFFFFFF.
+M
+UInt64
+Memory, in bytes. Minimum 8192, maximum 0x7FFFFFFF.
+P
+UInt32
+Parallelism. Minimum 1, maximum 0x00FFFFFF.
+Variant Dictionary
+A variant dictionary is a name-value dictionary, where the name is a string
+and the type of the value depends on the item. It is stored as follows:
+Format version, as UInt16.
+The high byte is the major version. It is critical, i.e. an application
+must refuse to load the file if the major version is unsupported.
+The low byte is the minor version. It can be ignored, but when encountering
+an unsupported value type, a confirmation/warning should be displayed or
+loading should fail.
+The current version is 1.0, i.e. 0x0100.
+Zero or more items (see below).
+Null terminator byte.
+An item looks as follows:
+Name Type Description
+Value type t
+Byte
+Supported value types are:
+0x04: UInt32.
+0x05: UInt64.
+0x08: Boolean.
+0x0C: Int32.
+0x0D: Int64.
+0x18: String.
+0x42: Byte[].
+Name size r
+Int32
+Size of U in bytes.
+Name U
+String ( r bytes)
+Name of the item.
+Value size s
+Int32
+Size of V in bytes.
+Value V
+t ( s bytes)
+Value of the item.
+The order of the items is arbitrary.
+Computation of Keys
+For some of the cryptographic primitives used in the KDBX file format,
+a key is required. The keys are computed as follows:
+Let R be the SHA-256 hash of the concatenation of the
+components of the master key that the user has provided (each optional,
+in the following order):
+SHA-256 hash of the master password
+(encoded using UTF-8).
+Key stored in a key file.
+Key provided by a key provider plugin.
+Key protected using the Windows user account
+(DPAPI).
+Let T be the result of transforming R using a
+key derivation function.
+The function and parameters for it are stored in the
+header.
+With T and the master salt/seed S (stored in the header),
+the final keys can be computed:
+If the encryption algorithm needs a 256-bit key (such as AES-256 and ChaCha20),
+the key is:
+SHA-256( S ‖ T ).
+If the encryption algorithm needs a key smaller than 256 bits, the key consists
+of the first bytes of SHA-256( S ‖ T ).
+The key for the HMAC-SHA-256 hash of the header is:
+SHA-512(0xFFFFFFFFFFFFFFFF ‖ SHA-512( S ‖ T ‖ 0x01)).
+The key for the HMAC-SHA-256 hash of the i -th block (zero-based index,
+type UInt64) of the HMAC-protected block stream is:
+SHA-512( i ‖ SHA-512( S ‖ T ‖ 0x01)).
+The inner encryption key is stored in the inner header
+and does not depend on the master key.
+For details, see the description of the inner encryption.
+HMAC-Protected Block Stream
+When loading the content of a KDBX file, KeePass first verifies the integrity
+and the authenticity of the data before decrypting, decompressing and parsing it.
+For this, HMACs are used. Computing only one HMAC for the whole data would be
+problematic when the data is large.
+KeePass would either need to read the whole data into the process memory
+(i.e. a lot of process memory would be required)
+or read the whole data twice (which would be a problem when I/O is slow,
+e.g. when loading the KDBX file over a slow network/Internet connection,
+and temporary files should of course be avoided for multiple reasons).
+Solution: splitting the data into blocks and protecting each block using a HMAC.
+When saving a KDBX file, KeePass splits the input data for this stream into blocks.
+Let M be the i -th input block (zero-based index,
+type UInt64) and let s be the size of M (in bytes,
+as Int32), then an output block (to be stored in the file) looks as follows:
+HMAC-SHA-256( i ‖ s ‖ M ) ‖
+s ‖ M .
+For computing the HMAC-SHA-256 hash, a key is required. See the section
+'Computation of Keys' for details about the computation of
+the key.
+A very small block size results in a large KDBX file (due to the additional
+HMACs and size values).
+A very large block size requires a lot of process memory.
+So, except in special cases (e.g. a small block at the end of the file),
+neither the minimum nor the maximum is a good choice for the block size;
+a good size is in the "middle".
+When saving a KDBX file, KeePass currently uses 1048576 (i.e. 1 MB) as size
+for every input block except the last one (which may be smaller).
+The HMAC-protected block stream is terminated by an output block
+for an empty input block (i.e. M empty, s = 0).
+Inner Header
+The inner header (which is called "inner" because it is compressed and
+encrypted) consists of one or more header fields.
+A header field consists of an ID t (byte) and a value V
+(type depends on t ). Let s be the size of V
+in bytes, as Int32.
+Each header field is stored as follows:
+t ‖ s ‖ V .
+The following header fields are supported:
+Name ID Type Description
+End of header
+0
+–
+Indicates the end of the header. Must be present exactly once, as the last
+header field. The value should be empty.
+Inner encryption algorithm
+1
+Int32
+2 = Salsa20, 3 = ChaCha20 (default, recommended). See 'Inner Encryption'.
+Inner encryption key (⟳)
+2
+Byte[]
+See 'Inner Encryption'.
+Binary content
+3
+Byte[]
+The value is f ‖ C , where f is a
+flags byte and C is the content of a binary
+(attachment).
+The flag 0x01 indicates that the binary content should be protected in the
+process memory. A binary content is referenced in the
+XML document by its index in the inner header
+(the first binary content has index 0, the second one has index 1, etc.).
+Inner Encryption
+Most XML parsers work with regular strings, which may be difficult to erase
+from the process memory. So, if sensitive data would be stored unencryptedly in
+the XML document, a
+process memory protection could
+not be realized properly.
+Solution: all data that should be protected in the process memory is stored in
+encrypted form in the XML document. For this, the encryption algorithm and key
+stored in the inner header are used.
+The encryption algorithm is a stream cipher and its state is not reset
+for each data to be protected (thus the order in which the data to be protected
+appears is important).
+For example, if there is an entry A with a password consisting of 23 UTF-8 bytes
+and an entry B with a password consisting of 19 UTF-8 bytes
+(and A appears before B), then the password of A is encrypted using the first
+23 output bytes of the stream cipher and the password of B is encrypted using
+the next (not first) 19 output bytes of the stream cipher.
+When loading a KDBX file, an application typically decrypts the protected data
+and immediately protects it using a method suitable for the current operating
+system (e.g. DPAPI on Windows).
+We emphasize that the only purpose of the inner encryption is to support the
+process memory protection. The inner encryption has no effect on the
+cryptographic security of the KDBX file format.
+Let K be the inner encryption key stored in the
+inner header.
+The parameters for the inner encryption algorithm are derived as follows:
+Salsa20. K should consist of 32 bytes.
+The key for Salsa20 is SHA-256( K ), and the nonce is
+(0xE8, 0x30, 0x09, 0x4B, 0x97, 0x20, 0x5D, 0x2A).
+ChaCha20. K should consist of 64 bytes.
+Compute H := SHA-512( K ).
+The key for ChaCha20 is ( H [0], ..., H [31]),
+and the nonce is ( H [32], ..., H [43]).
+XML Document
+The KDBX XML document contains most of the user data.
+The format of the KDBX XML document is specified by the following
+XML schema (including annotations):
+KDBX_XML.xsd
+(KDBX 4.1 XML Schema).
+Copyright © 2003-2026 Dominik Reichl.
+[Legal Contact / Imprint]
+[Terms & Privacy]
+[Acknowledgements]
+[Donate]

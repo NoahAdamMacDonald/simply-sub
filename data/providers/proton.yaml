@@ -173,6 +173,45 @@ sourceRepo:
 # admin for the vault", /support/pass-family-share-items; inferred for Free, whose vaults share the same way). Paid
 # plans share single items and secure links (/pass/pricing: "Securely share individual items", "Secure link sharing"),
 # whose expiry and number of views you set (/support/secure-link-sharing-android: "Restrict number of views").
+# The password and authenticator features and end-to-end encryption added 2026-11-19 (the owner's design,
+# categories.md), read that day with Edge from Canada on proton.me:
+# - Pass imports from other managers ("With our import tool, you can migrate passwords and other items from most major
+#   password managers in just a few minutes.", Import passwords to Proton Pass), among them Chrome's CSV ("This will
+#   download your Chrome passwords as a .csv file.", /support/pass-import-chrome) and Bitwarden's JSON ("Ensure File
+#   format: .json is selected", /support/pass-import-bitwarden), and KeePass through its XML export ("select KeePass
+#   (xml) from the dropdown Provider list", /support/pass-import-keepass), not a .kdbx file. No page offers the
+#   Credential Exchange.
+# - Pass exports "A ZIP file containing a PGP-encrypted JSON file", "An unencrypted ZIP file" or "A CSV file"
+#   (/support/pass-export).
+# - Emergency access on every paid plan: "Emergency Access is available on all paid Proton plans."
+#   (/support/emergency-access), and it opens Pass too ("your trusted contacts will be able to securely access your
+#   Proton data, including emails, passwords, and files.", /blog/emergency-access). Not on Free.
+# - Offline: "Paid users can even access the app offline." (How to use the Proton Pass desktop app, where
+#   /support/pass-offline-access leads): Pass Plus, Unlimited, Duo and Family. Mail Plus, Drive Plus, VPN Plus and Lumo
+#   Plus come with "Proton Pass Free" (/support/proton-plans), so theirs is false like Free's, inferred (notes.md).
+# - Authenticator: Pass Plus's "Built-in 2FA authenticator" and "Unlimited 2FA codes", and Free's "Up to three 2FA
+#   items" (/support/proton-pass-plans-explained), which every plan with Pass Free has (its label), so their item types
+#   have totp too. Codes go in from a QR code or key ("Tap inside the 2FA secret (TOTP) field → Scan code.", "paste in
+#   the 2FA key you copied from the website", /support/pass-2fa). Out, inferred: Proton Authenticator's import page
+#   lists Proton Pass among the apps "You can export 2FA codes from" (/support/import-2fa-codes), and Pass's export is
+#   PGP-encrypted or plain.
+# - End-to-end encryption on every plan, each of which has Proton's free apps at least ("Proton Free gives you access to
+#   Proton Mail (and all other Proton services) under one account.", and /support/proton-plans lists "Proton Docs" under
+#   Drive, "Proton Meet Free" and "Proton Lumo Free" under each plan it explains): Mail ("Zero-access encryption means
+#   we never see your inbox, on any plan.", /mail), Calendar ("Proton Calendar automatically secures all your events
+#   with end-to-end encryption.", /calendar), Drive ("End-to-end encrypted cloud storage from Switzerland.", /drive),
+#   Pass ("the end-to-end encrypted password manager", /pass), Docs ("the end-to-end encrypted, real-time collaborative
+#   document editor", /drive/docs), Meet ("End-to-end encryption ensures your audio, video, and chats stay private, even
+#   from Proton.", /meet) and Lumo's chats ("They’re stored on your device and synced to Proton servers using
+#   zero-access encryption.", /support/lumo-privacy).
+# - Proton Authenticator (proton.authenticator, added): "Proton Authenticator is completely free to use on all
+#   platforms. No ads and no tracking." and "No account signup, phone number, or email address needed."
+#   (/authenticator), "Open source two factor authentication app for iPhone, iPad, Apple Watch, Mac, Android, Linux and
+#   Windows." It imports "from various authenticator apps including Google authenticator, 2FAS, Aegis Authenticator,
+#   Bitwarden Authenticator, Ente Auth, LastPass Authenticator" and sites' codes ("Scan the QR code or enter the key
+#   into Proton Authenticator."); out, "You can also export your codes from Proton Authenticator." in a format no page
+#   names, and "end-to-end encrypted backups" (/authenticator), so an encrypted backup only. Its codes "benefit from the
+#   same robust end-to-end encryption that protects the rest of our ecosystem" (Proton Authenticator FAQs).
 plans:
   - id: proton.free
     name: Proton Free
@@ -204,11 +243,27 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
     featureLabels:
       email.aliases: Hide-my-email aliases
+      authenticator.included: Up to three 2FA items
+    inferred:
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     notes: Up to 5 GB of Drive storage and 1 GB of Mail storage.
     prices:
       - region: GLOBAL
@@ -253,11 +308,33 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
     featureLabels:
       email.aliases: Hide-my-email aliases
+      authenticator.included: Up to three 2FA items
+    inferred:
+      password-manager.offline:
+        reason: 'This plan comes with Proton Pass Free, and Pass’s desktop app says only paid users can open it offline, so it’s taken not to.'
+        page:
+          name: 'How to use the Proton Pass desktop app'
+          url: https://proton.me/support/how-to-use-proton-pass-desktop-app
+        lastVerified: 2026-11-19
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     prices:
       - region: GLOBAL
         currency: USD
@@ -356,11 +433,33 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
     featureLabels:
       email.aliases: Hide-my-email aliases
+      authenticator.included: Up to three 2FA items
+    inferred:
+      password-manager.offline:
+        reason: 'This plan comes with Proton Pass Free, and Pass’s desktop app says only paid users can open it offline, so it’s taken not to.'
+        page:
+          name: 'How to use the Proton Pass desktop app'
+          url: https://proton.me/support/how-to-use-proton-pass-desktop-app
+        lastVerified: 2026-11-19
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     prices:
       - region: GLOBAL
         currency: USD
@@ -466,11 +565,33 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
     featureLabels:
       email.aliases: Hide-my-email aliases
+      authenticator.included: Up to three 2FA items
+    inferred:
+      password-manager.offline:
+        reason: 'This plan comes with Proton Pass Free, and Pass’s desktop app says only paid users can open it offline, so it’s taken not to.'
+        page:
+          name: 'How to use the Proton Pass desktop app'
+          url: https://proton.me/support/how-to-use-proton-pass-desktop-app
+        lastVerified: 2026-11-19
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     prices:
       - region: GLOBAL
         currency: USD
@@ -597,9 +718,24 @@ plans:
       password-manager.health: [breached, weak, reused]
       password-manager.sharing:
         [share-to-user, share-vault, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
       security.dark-web-monitoring: true
     featureLabels:
       email.aliases: Hide-my-email aliases
+    inferred:
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     prices:
       - region: GLOBAL
         currency: USD
@@ -666,6 +802,31 @@ plans:
         lastVerified: 2026-10-23
         sourceUrl: https://proton.me/pricing
 
+  # Proton Authenticator: free, on its own and with no account needed (a Proton Account only syncs codes between
+  # devices), so a free plan of its own with no password manager (read 2026-11-19 on proton.me/authenticator and its
+  # help articles).
+  - id: proton.authenticator
+    name: Proton Authenticator
+    link: https://proton.me/authenticator
+    categories: [passwords]
+    features:
+      platforms: [windows, macos, linux, android, ios]
+      password-manager: false
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator, other-apps]
+      authenticator.export: [encrypted-backup]
+      encryption.end-to-end: [passwords]
+    notes: 'Free: a 2FA code app for Windows, macOS, Linux, Android and iPhone, with no ads and no account needed. Sign in to a Proton Account to sync your codes between devices, or back them up encrypted.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://proton.me/authenticator
+
   - id: proton.lumo-plus
     name: Lumo Plus
     link: https://proton.me/lumo/pricing
@@ -697,11 +858,33 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
     featureLabels:
       email.aliases: Hide-my-email aliases
+      authenticator.included: Up to three 2FA items
+    inferred:
+      password-manager.offline:
+        reason: 'This plan comes with Proton Pass Free, and Pass’s desktop app says only paid users can open it offline, so it’s taken not to.'
+        page:
+          name: 'How to use the Proton Pass desktop app'
+          url: https://proton.me/support/how-to-use-proton-pass-desktop-app
+        lastVerified: 2026-11-19
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     perks:
       [
         lumo-max-usage,
@@ -843,11 +1026,26 @@ plans:
       password-manager.health: [breached, weak, reused]
       password-manager.sharing:
         [share-to-user, share-vault, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
       security.dark-web-monitoring: true
       includes-subscription:
         [proton.mail-plus, proton.drive-plus, proton.vpn-plus, proton.pass-plus]
     featureLabels:
       email.aliases: Hide-my-email aliases
+    inferred:
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     notes: Storage is shared across Proton apps.
     prices:
       - region: GLOBAL
@@ -983,10 +1181,25 @@ plans:
       password-manager.health: [breached, weak, reused]
       password-manager.sharing:
         [share-to-user, share-vault, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
       security.dark-web-monitoring: true
       includes-subscription: [proton.unlimited]
     featureLabels:
       email.aliases: Hide-my-email aliases
+    inferred:
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     notes: Storage is shared between the 2 users. Each user gets 10 VPN devices.
     prices:
       - region: GLOBAL
@@ -1122,10 +1335,25 @@ plans:
       password-manager.health: [breached, weak, reused]
       password-manager.sharing:
         [share-to-user, share-vault, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [files, email, calendar, passwords, notes, messages, chats]
       security.dark-web-monitoring: true
       includes-subscription: [proton.unlimited]
     featureLabels:
       email.aliases: Hide-my-email aliases
+    inferred:
+      authenticator.export:
+        reason: 'Proton Authenticator’s import page lists Proton Pass among the apps you can export 2FA codes from, and Pass exports a PGP-encrypted or a plain file, so its codes leave in those.'
+        page:
+          name: 'How to import 2FA codes into Proton Authenticator'
+          url: https://proton.me/support/import-2fa-codes
+        lastVerified: 2026-11-19
     notes: Storage is shared between up to 6 users. Each user gets 10 VPN devices.
     prices:
       - region: GLOBAL

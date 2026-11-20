@@ -1,0 +1,323 @@
+url: https://bitwarden.com/open-source/
+method: fetch
+saved: 2026-11-19
+
+Open Source Password Manager | Bitwarden
+NEW! Protect privileged credentials with time-bound credential leasing, automated password rotation, and access rules: Learn how >
+Business
+Personal
+Pricing
+Downloads
+Resources
+Search
+Get Started FreeTalk to SalesLog In
+Back to main menuBusiness Plans
+
+Teams and Businesses Get secure sharing and event logs
+Get secure sharing and event logs
+
+Enterprise Add SSO, policies, and self-hosting
+Add SSO, policies, and self-hosting
+Products
+
+Password Manager From small teams to enterprise
+
+Secrets Manager For developers and DevOps teams
+For developers and DevOps teams
+Key Features
+
+Access Intelligence Actionable view of vault security
+Actionable view of vault security
+
+Centralized Ownership Secure the credential lifecycle
+Secure the credential lifecycle
+
+Least-privilege Sharing Share across teams without exposure
+Share across teams without exposure
+
+SSO Integration Easy provisioning and access
+Easy provisioning and access
+
+Self-hosting Bitwarden On-prem or private cloud
+On-prem or private cloud
+
+See All Integrations
+
+See All Tools and Features See All Features
+Solutions
+Agentic AI
+Identity Security
+Industries
+Public Sector
+Healthcare
+Financial Services
+IT/Saas
+Legal
+Marketing
+Explore Plans
+ Help and Resources|Community
+Back to main menuPersonal Plans
+
+Individual Security for yourself
+Security for yourself
+
+Family A shared vault for six users
+A shared vault for six users
+Do more with Bitwarden
+Password Generator Strong passwords in one click
+Strong passwords in one click
+Integrated TOTP Autofill 2FA codes with passwords
+Autofill 2FA codes with passwords
+Secure Sharing Files that disappear after viewing
+Files that disappear after viewing
+Passwordless Passkey management and unlock with biometrics
+Passkey management and unlock with biometrics
+Vault Health Find at-risk passwords fast
+Find at-risk passwords fast
+Get Premium Protection
+Never worry about your passwords again.
+Create Your Account
+Explore Plans
+Explore Plans
+ Help and Resources|Community
+Back to main menuResources Resource Library
+Resource Center
+Blog
+Events
+Success Stories
+Comparison
+Security & Trust
+Security Compliance
+Open Source
+Bug Bounty Program
+Open Source Security Summit
+Bitwarden Security Whitepaper
+Training
+Help Center
+Courses
+Community Forum
+Enterprise Services
+Business
+Plans
+
+Teams and Businesses Get secure sharing and event logs
+Get secure sharing and event logs
+
+Enterprise Add SSO, policies, and self-hosting
+Add SSO, policies, and self-hosting
+Products
+
+Password Manager From small teams to enterprise
+
+Secrets Manager For developers and DevOps teams
+For developers and DevOps teams
+Key Features
+
+Access Intelligence Actionable view of vault security
+Actionable view of vault security
+
+Centralized Ownership Secure the credential lifecycle
+Secure the credential lifecycle
+
+Least-privilege Sharing Share across teams without exposure
+Share across teams without exposure
+
+SSO Integration Easy provisioning and access
+Easy provisioning and access
+
+Self-hosting Bitwarden On-prem or private cloud
+On-prem or private cloud
+
+See All Integrations
+
+See All Tools and Features See All Features
+Solutions
+Agentic AI
+Identity Security
+Industries
+Public Sector
+Healthcare
+Financial Services
+IT/Saas
+Legal
+Marketing
+Explore Plans
+ Help and Resources|Community
+Personal
+Plans
+
+Individual Security for yourself
+Security for yourself
+
+Family A shared vault for six users
+A shared vault for six users
+Do more with Bitwarden
+Password Generator Strong passwords in one click
+Strong passwords in one click
+Integrated TOTP Autofill 2FA codes with passwords
+Autofill 2FA codes with passwords
+Secure Sharing Files that disappear after viewing
+Files that disappear after viewing
+Passwordless Passkey management and unlock with biometrics
+Passkey management and unlock with biometrics
+Vault Health Find at-risk passwords fast
+Find at-risk passwords fast
+Get Premium Protection
+Never worry about your passwords again.
+Create Your Account
+Explore Plans
+Explore Plans
+ Help and Resources|Community
+Pricing
+Downloads
+Resources
+Resource Library
+Resource Center
+Blog
+Events
+Success Stories
+Comparison
+Security & Trust
+Security Compliance
+Open Source
+Bug Bounty Program
+Open Source Security Summit
+Bitwarden Security Whitepaper
+Training
+Help Center
+Courses
+Community Forum
+Enterprise Services
+Get Started FreeGet Started FreeTalk to SalesTalk to SalesLog InLog In
+Open source password manager built for transparency and security
+The source code for Bitwarden is hosted on GitHub and everyone is free to review, audit, and contribute to the Bitwarden codebase.
+Check out Bitwarden on Github
+GitHub Code Repositories
+View all repositories
+Server
+The Bitwarden Server project contains the APIs, database, and other core infrastructure items needed for the "backend" of all bitwarden client applications.
+Browser
+The Bitwarden browser extension is written using the Web Extension API and Angular.
+Web
+The Bitwarden web project is an Angular application that powers the web vault
+Mobile
+The Bitwarden mobile application is written in C# with Xamarin Android, Xamarin iOS, and Xamarin Forms.
+Desktop
+The Bitwarden desktop app is written using Electron and Angular. The application installs on Windows, macOS, and Linux distributions.
+CLI
+The Bitwarden CLI is a powerful, full-featured command-line interface (CLI) tool to access and manage a Bitwarden vault.
+How is open source different from other proprietary software password managers?
+Proprietary , or closed-source, password managers don’t share their source code publicly. That means users can’t independently verify how their data is secured or how the software works behind the scenes. Open source solutions offer greater transparency, giving users the confidence that security claims can be reviewed and validated. Proprietary tools also have restrictive licensing, making them less flexible for advanced customization for teams with specific needs. They may also come with licensing fees and limited options for customization, making them less flexible for teams with specific needs.
+View Bitwarden open source licensing
+Why is code published online for review?
+To provide transparency, security, and community collaboration.
+Transparency - A core value of transparency builds trust, as users can verify the security claims made by Bitwarden, such as its use of end-to-end encryption to protect sensitive data.
+Security - Allowing anyone to inspect, audit, and contribute to the code can lead to faster identification and resolution of vulnerabilities.
+Community collaboration - A community of engaged developers and users who contribute to the software's development drive innovation and enhance security, improving the overall product.
+What is an open source password manager?
+In an open source password manager like Bitwarden, every line of code is published online where thousands of security enthusiasts and third-party auditors review it.
+Why choose an open source solution?
+Open source security tools, such as an enterprise password manager or password vault, provide the transparency needed to build trust, along with strong security and a community that drives innovation.
+Besides transparency and community innovation, open source solutions are also generally more accessible and cost-effective, making them a great option for organizations with limited resources.
+Recommended by Bitwarden users
+Bitwarden trusted open source security
+Bitwarden has been recognized for its ease of use and robust security. Top security features include:
+Zero knowledge, end-to-end AES-256 bit encryption.
+Multifactor cloud encryption.
+PBKDF2 SHA-256 authentication process.
+In addition, Bitwarden partners with third parties such as Cure53 to conduct regular security audits, cryptographic analysis, and penetration testing. Bitwarden is SOC 2, GDPR, CCPA, HIPAA, and Data Privacy Framework (DPF) compliant.
+Host It Yourself
+Don‘t want to use the Bitwarden cloud? You don‘t have to.
+With Docker you can easily host Bitwarden‘s entire infrastructure stack on the platform of your choice.
+Learn about our open beta for a simplified deploymentRead complete self-hosting documentation
+Linux / MacOS
+$ curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh \
+&& chmod +x bitwarden.sh
+$ ./bitwarden.sh install
+$ ./bitwarden.sh start
+Windows
+> Invoke-RestMethod -OutFile bitwarden.ps1 `
+-Uri https://go.btwrdn.co/bw-ps
+> .\bitwarden.ps1 -install
+> .\bitwarden.ps1 -start
+Community
+Swing by our community forums to ask questions or discuss product features.
+Online Forums
+Additional Resources
+Read our blog
+Help center
+Resources
+Contributor Guidelines
+See why Bitwarden is the Trusted Open Source Password Manager
+Bitwarden is a prime example of a product that effectively leverages open source principles. The product strengthens the overall security posture of a company and has a superb command line interface that can be used for a multitude of automations.
+Shane Rodness, MaRS Discovery District Systems Administrator
+Bitwarden is a solution to the enterprise-class headache. No more uncertainty and process approximation around password management. No more unsecured sharing. It has all the functionality you expect from an open source platform.
+Alberto Gaiga, Intesys CEO
+" You could easily mistake Alec Harris for a spy or an escaped prisoner, given all of the tradecraft he devotes to being unfindable. Mail addressed to him goes to a UPS Store. To buy things online, he uses a YubiKey, a small piece of hardware resembling a thumb drive, to open Bitwarden, a password manager that stores his hundreds of unique, long, random passwords."
+How to Disappear
+Read article
+"Weak passwords are a hacker’s best friend. Enforce strong, unique passwords and use a password manager like Bitwarden. Combine this with multifactor authentication (MFA) on every account possible."
+Outdated Software: The Hidden Time Bomb In Your Business
+Read article
+“Some password managers, the type of encryption that they use isn't quite as strong as others. I'd make sure you're using a reputable password manager. There are a lot out there. The one that I think is really interesting is Bitwarden because it's open source and it's free for everyday folks. And the open source is cool because it means it's been vetted by the security community over and over again.”
+CNN Terms of Service with Clare Duffy: Remembering All Your Passwords is Hard. Let's Make It Easier
+Read article
+Learn more about Bitwarden commitment to security, privacy, and compliance with international standards.
+Read Bitwarden Security and Compliance
+Solutions
+For IT Teams
+For healthcare
+For financial services
+For law firms
+For marketing agencies
+For government
+For the public sector
+For agentic AI security
+For MSPs
+Bitwarden across industries
+For Developers
+Developer hub
+Secrets Manager
+Passwordless.dev and passkeys
+Products
+Plans and pricing
+Integrations
+Downloads
+Self-hosting
+Business
+Enterprise
+Teams and Businesses
+Personal
+Families
+Individuals
+Bitwarden Authenticator
+Bitwarden Send
+Passkeys and passwordless
+Resources
+Resource center
+Help and documentation
+Case studies
+Security compliance
+Open source
+Bitwarden vs. alternatives
+Blog
+Courses
+Community forums
+Open Source Security Summit
+Creator collaborations
+Survey room
+Newsfeed
+Free Tools
+Password generator
+Passphrase generator
+Password strength tester
+Username generator
+Company
+About
+Careers
+Press Room
+Partners
+Events
+Contact support
+© 2026 Bitwarden, Inc.TermsPrivacyCookie SettingsSitemap
+Language English ( United States ) English ( United Kingdom ) Deutsch ( Deutschland ) Español ( Latinoamérica ) Français ( France ) Italiano ( Italia ) 日本語 ( 日本 ) Nederlands ( Nederland ) Português ( Brasil ) Svenska ( Sverige )

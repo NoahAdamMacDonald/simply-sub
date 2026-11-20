@@ -1,0 +1,1181 @@
+url: https://keepassxc.org/docs/KeePassXC_UserGuide
+method: browser
+saved: 2026-11-19
+
+KeePassXC: User Guide
+KeePassXC Team
+team@keepassxc.org
+Version 2.8.0
+Table of Contents
+License and Disclaimers
+Disclaimer of Warranty
+Limitation of Liability
+Interface Overview
+Application Layout
+Toolbar
+Screenshot Security
+View Options
+Application Settings
+Keyboard Shortcuts
+Command-Line Options
+Environment Variables
+Installer Options
+Command Line Tool
+Database Operations
+Creating Your First Database
+Storing Your Database
+Opening an Existing Database
+Quick Unlock
+Entry Handling
+Advanced Entry Handling
+Search
+Merging Databases
+Advanced Save Options
+Database Backup Options
+Automatic Database Opening
+Database Settings
+Database Maintenance
+Remote database support
+Sync with remote database
+Password Generator
+Generating Passwords
+Generating Passphrases
+Importing Databases
+Importing CSV File
+Importing from Other Applications
+Importing KeePass 1 Database
+Importing Remote Database
+Exporting Databases
+Database Sharing with KeeShare
+Enable Sharing
+Setup a Shared Group
+Using Shared Credentials
+Technical Details and Limitations of Sharing
+Browser Integration
+Install the Browser Extension
+Configure KeePassXC-Browser
+Using the Browser Extension
+Generate Passwords
+Browser Integration Report
+Additional Fill-In Fields
+Clearing Remembered Sites
+Advanced Usage
+Advanced Setup
+Passkeys
+Browser Passkey Support
+Create a New Passkey
+Login With a Passkey
+Advanced Usage
+Auto-Type
+Configure Global Auto-Type
+Configure Auto-Type Sequences
+Performing Global Auto-Type
+Performing Entry-Level Auto-Type
+Wayland Support
+Secret Service Integration
+Enabling the Integration
+Implementation Details
+SSH Agent Integration
+OpenSSH Agent on Linux
+OpenSSH Agent on macOS
+OpenSSH Agent and Pageant on Windows
+Setup SSH Agent Integration
+Generating an SSH Key
+Adding SSH Key to an Entry
+Administrative Options
+User Settings Locations
+Group Policy Settings Enforcement (Windows)
+Reference
+Entry Placeholders
+Entry Cross-Reference
+Auto-Type Actions
+Backup Path Placeholders
+Creating a YubiKey backup
+License and Disclaimers
+KeePassXC is licensed with the GNU General Public License Version 3. All copyrights and additional licenses are recorded in COPYING.
+Disclaimer of Warranty
+THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. Except when otherwise stated in writing the copyright holders and/or other parties provide the program "as is" without Warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of Merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the program Is with you. Should the program prove defective, you assume the cost of all necessary servicing, repair or correction.
+Limitation of Liability
+In no event unless required by applicable law or agreed to in writing will any copyright holder, or any other party Who modifies and/or conveys the program as permitted above, be liable to you for damages, including any general, Special, incidental or consequential damages arising out of the use or inability to use the program (including but not Limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of The program to operate with any other programs), even if such holder or other party has been advised of the possibility Of such damages.
+Interface Overview
+Application Layout
+The KeePassXC interface is designed for simplicity and easy access to your information. The main database view is split into four main partitions detailed below. You can open multiple databases at the same time, they will appear in tabs.
+Figure 1. Main database interface
+(A) Groups – Organize your entries into discrete groups to bring order to all of your sensitive information. Groups can be nested under each other to create a hierarchy. Settings from parent groups get applied to their children. You can hide this panel on the View menu.
+(B) Searches and Tags – Dynamic groups of entries that can be quickly displayed with one click. Any number of custom tags can be added when editing an entry. This panel also includes useful pre-defined and custom saved searches, such as finding expired and weak passwords.
+(C) Entries – Entries contain all the information for a website or application you are storing in KeePassXC. This view shows all the entries in the selected group. Each column can be resized, reordered, and shown or hidden based on your preference. Right-click the header row to see all available options.
+(D) Preview – Shows a preview of the selected group or entry. You can interact with most information stored in an entry from here without opening the entry for editing. You can temporarily hide this preview using the down-arrow button on the right hand side or completely disable it from the View menu.
+Starting with version 2.7.0, double-click copying of entry usernames and passwords is disabled by default.
+To enable it:
+Open KeePassXC, and navigate to Tools → Settings.
+In the left sidebar, select General.
+Under Entry Management, check the box for "Copy data on double clicking field in entry view".
+Toolbar
+The toolbar provides a quick way to perform common tasks with your database. Some entries in the toolbar are dynamically disabled based on the information contained in the selected entry. Every common action in KeePassXC can be controlled with a keyboard shortcut as well.
+Figure 2. Toolbar overview
+(A) Database – Open Database, Save Database, Lock Database
+(B) Entries – Create Entry, Edit Entry, Delete Selected Entries
+(C) Entry Data – Copy Username, Copy Password, Copy URL, Perform Auto-Type
+(D) Tools – Database Settings, Reports, Password Generator, Application Settings
+(E) Search
+Screenshot Security
+By default, KeePassXC prevents recordings and screenshots of the application window on Windows and macOS. This prevents inadvertent spillage of information during meetings and disallows other applications to capture the window contents. If you would like to enable screen capture temporarily, navigate to View menu and select Allow Screen Capture. Alternatively, you can start the application with the --allow-screencapture command line flag.
+View Options
+You can customize the appearance of KeePassXC to your liking. The following options are available in the View menu:
+Themes
+KeePassXC ships with light and dark themes specifically designed to meet accessibility standards. In most cases, the appropriate theme for your system will be determined automatically, but you can always set a specific theme by using the View menu. When a new theme is selected you will be prompted to restart KeePassXC to apply the theme immediately.
+Figure 3. Setting the theme
+Compact Mode
+For users with smaller screens or those who desire seeing more entries at once, KeePassXC offers a compact view mode. This mode shows smaller toolbar, group, and entry icons. The effect of compact mode (left side) can be seen below.
+Figure 4. Compact mode comparison
+Application Settings
+Users can configure KeePassXC to their personal tastes with a wide variety of general and security settings that apply to the whole application. These settings are accessible from Tools → Settings or the cog wheel icon from the toolbar. Settings include: startup options, file management, entry management, user interface, language, security controls, and integration settings (Auto-Type, Browser, etc).
+Keyboard Shortcuts
+On macOS please substitute Ctrl with Cmd (AKA ⌘).
+Action Keyboard Shortcut
+Settings
+Ctrl+,
+Open Database
+Ctrl+O
+Save Database
+Ctrl+S
+Save Database As
+Ctrl+Shift+S
+New Database
+Ctrl+Shift+N
+Close Database
+Ctrl+W
+or
+Ctrl+F4
+Lock Current Database
+Ctrl+L
+Lock All Databases
+Ctrl+Shift+L
+Database Settings
+Ctrl+Shift+,
+Database Reports
+Ctrl+Shift+R
+Quit
+Ctrl+Q
+New Entry
+Ctrl+N
+Edit Entry
+Enter
+or
+Ctrl+E
+Delete Entry
+Del
+Clone Entry
+Ctrl+D
+Copy Username
+Ctrl+B
+Copy Password
+Ctrl+C
+Copy URL
+Ctrl+U
+Open URL
+Ctrl+Shift+U
+Copy TOTP
+Ctrl+T
+Copy Password and TOTP
+Ctrl+Y
+Show TOTP
+Ctrl+Shift+T
+Trigger AutoType
+Ctrl+Shift+V
+Add key to SSH Agent
+Ctrl+H
+Remove key from SSH Agent
+Ctrl+Shift+H
+Jump to Group (from search)
+Ctrl+Shift+J
+Move entry up (if unsorted)
+Alt+Up
+Move entry down (if unsorted)
+Alt+Down
+Sort Groups A-Z
+Ctrl+Down
+Sort Groups Z-A
+Ctrl+Up
+Minimize Window
+Ctrl+M
+Hide Window
+Ctrl+Shift+M
+Select Next Database Tab
+Ctrl+Tab
+or
+Ctrl+PgDn
+Select Previous Database Tab
+Ctrl+Shift+Tab
+or
+Ctrl+PgUp
+Select the nth database
+Ctrl+<n>, where <n> is the number of the database tab
+Toggle Passwords Hidden
+Ctrl+Shift+C
+Toggle Usernames Hidden
+Ctrl+Shift+B
+Focus Groups (edit if focused)
+F1
+Focus Entries (edit if focused)
+F2
+Focus Search
+F3
+or
+Ctrl+F
+Clear Search
+Esc
+Show Keyboard Shortcuts
+Ctrl+/
+Command-Line Options
+You can use the following command line options to tailor the application to your preferences:
+Usage: keepassxc.exe [options] [filename(s)]
+KeePassXC – cross-platform password manager
+Options:
+-?, -h, --help Displays help on commandline options.
+--help-all Displays help including Qt specific options.
+-v, --version Displays version information.
+--config <config> path to a custom config file
+--localconfig <localconfig> path to a custom local config file
+--lock lock all open databases
+--keyfile <keyfile> key file of the database
+--pw-stdin read password of the database from stdin
+--debug-info Displays debugging information.
+--allow-screencapture Allow screen recording and screenshots
+Arguments:
+filename(s) filenames of the password databases to open (*.kdbx)
+Environment Variables
+Additionally, the following environment variables may be useful when running the application:
+Env Var Description
+KPXC_CONFIG
+Override default path to roaming configuration file
+KPXC_CONFIG_LOCAL
+Override default path to local configuration file
+KPXC_INITIAL_DIR
+Override initial location picking for databases
+SSH_AUTH_SOCK
+Path of the unix file socket that the agent uses for communication with other processes (SSH Agent)
+QT_SCALE_FACTOR [numeric]
+Defines a global scale factor for the whole application, including point-sized fonts.
+QT_SCREEN_SCALE_FACTORS [list]
+Specifies scale factors for each screen. See https://doc.qt.io/qt-5/highdpi.html#high-dpi-support-in-qt
+QT_SCALE_FACTOR_ROUNDING_POLICY
+Control device pixel ratio rounding to the nearest integer. See https://doc.qt.io/qt-5/highdpi.html#high-dpi-support-in-qt
+Installer Options
+The following options can be set when running the Windows Installer MSI in an unattended installation:
+LAUNCHAPPONEXIT – Launch KeePassXC after install (default ON)
+AUTOSTARTPROGRAM – KeePassXC will auto-start on login (default ON)
+INSTALLDESKTOPSHORTCUT – A desktop icon will be installed (default OFF)
+Example: msiexec.exe /q /i KeePassXC-Y.Y.Y-WinZZ.msi AUTOSTARTPROGRAM=0
+Command Line Tool
+KeePassXC comes with the command line tool keepassxc-cli to access, view, and manipulate your database directly from a terminal window. The tool is documented through a separate man page, which can be shown using man keepassxc-cli, or through the on-demand help using keepassxc-cli [command] -h. An online version of the man page is available on GitHub.
+Database Operations
+Creating Your First Database
+To start using KeePassXC, you need to first create a database that will store the password and other details.
+To create a database, perform the following steps:
+Open your KeePassXC application. Click the create new database button (A):
+Figure 5. Create database – Welcome screen
+The database creation wizard appears. Enter the desired database name and a short description (optional):
+Figure 6. Create database – General information
+Click Continue. The Encryption Settings screen appears, we don’t recommend making any changes besides increasing or decreasing the decryption time using the slider. Setting the Decryption Time slider at higher values means that the database will have higher level of protection but the time taken by the database to open will increase.
+Figure 7. Create database – Encryption settings
+Click the Continue button. The Database Credentials screen appears, enter your desired database password. We recommend using a long, randomized password.
+Figure 8. Create database – Database credentials
+(A) Open the password generator
+(B) Toggle password visibility
+Keep this password for your database safe. Either memorize it or note it down somewhere. Losing the database password might result in permanent locking of your database and you will not be able to retrieve information stored in the database.
+Click Done. You will be prompted to select a location to save your database file. The database file is saved on to your computer with the default .kdbx extension. You can store your database wherever you wish, it is fully encrypted at all times preventing unauthorized access.
+Storing Your Database
+The database file that you create might contain highly sensitive data and must be stored in a very secure way. You must make sure that the database is always protected with a strong and long password. The database file that is protected with a strong and long password is secure and encrypted while stored on your computer or cloud storage service.
+Make sure that you or someone else does not accidentally delete the database file. Deletion of the database file will result in the total loss of all your information (including all your passwords!) and a lot of inconvenience to manually retrieve your logins for various web applications. Do not share the credentials to access your database file with anyone unless you absolutely trust them (spouse, child, etc.).
+You can safely store your database file in the cloud (OneDrive, Dropbox, Google Drive, Nextcloud, Syncthing, etc.). The database file is always fully encrypted; unencrypted data is never written to disk and is never accessible to your cloud storage provider. We recommend using a storage service that keeps automatic backups (version history) of your database file in the event of corruption or accidental deletion.
+Opening an Existing Database
+To open an existing database, perform the following steps:
+Open your KeePassXC application. Click the Open existing database button (A) or select a recent database from the Recent Databases list (B).
+Figure 9. Open an existing database
+Navigate to the location of the database on your computer and open the database file. The database unlock screen will appear:
+Figure 10. Database unlock screen
+Enter the password for your database.
+(Optional) Click I have a key file (A) if you have one as an additional authentication factor for your database.
+(Optional) Plug in your configured YubiKey or OnlyKey to use it as an additional authentication factor. If you don’t see it listed, press the refresh button (B).
+Click OK. The database opens and the following screen is displayed:
+Figure 11. Unlocked database
+Quick Unlock
+On Windows and macOS, subject to hardware availability, your credentials can be securely stored to enable subsequent unlocking of your database through biometric authentication. This is enabled by default on Windows using Windows Hello and on macOS using Touch ID or Apple Watch services. You can disable this feature in the Application Settings under the Security section.
+On Windows, you will be prompted to authenticate to Windows Hello after unlocking your database with full credentials. This is required to setup Quick Unlock. If you cancel this prompt then Quick Unlock will not be enabled and your database will continue to unlock.
+Figure 12. Windows Hello example
+When your database is locked, you will see the following unlock dialog. Simply press Enter or click on Unlock Database to initiate the biometric authentication process. If you are using a hardware key (e.g. YubiKey), it must be connected to your computer to complete the unlock.
+Figure 13. Quick Unlock
+By default, KeePassXC will show entries that are expired or will be expiring within 3 days after unlocking the database. This feature allows you to change your passwords before they expire and be aware of passwords that are no longer valid. You can disable or change this feature in the Application Settings.
+Entry Handling
+Entries in KeePassXC are the fundamental units where all your sensitive information is stored. Each entry can contain various fields such as usernames, passwords, URLs, attachments, and notes. You can create, edit, clone, and delete entries as needed. Additionally, KeePassXC supports advanced features like TOTP for two-factor authentication, custom attributes, and entry history to track changes over time. Proper management of entries ensures that your data is organized, secure, and easily accessible when needed.
+Adding an Entry
+All the details such as usernames, passwords, URLs, attachments, notes, and so on are stored in database entries. You can create as many entries as you want in the database.
+To add an entry, perform the following step:
+Navigate to Entries > New Entry (or press Ctrl+N). The following screen appears:
+Figure 14. Adding a new entry
+Enter a desired title for the entry, username, password, URL, and notes on this screen.
+Your most frequently used usernames will automatically be available in the username drop-down menu. They will also auto-complete for you when typing.
+You can generate a secure random password by clicking the dice icon in the password field to launch the password generator. Reveal the password by clicking the eye icon.
+After you add a URL to an entry you can press the download button to automatically download the website’s icon for this entry.
+(Optional) Add tags to the entry to quickly search for it using the tags panel on the main database view. You can easily add new tags or select existing ones from the drop-down list.
+(Optional) Select the Expires check-box to set the expiry date for the password. You can manually enter the date and time or click the Presets button to select an expiry date and time for your password.
+Click OK to add the entry to your database.
+Editing an Entry
+To edit the details in an entry, perform the following steps:
+Select the entry you want to edit.
+Press Enter, click the edit toolbar icon, or right-click and select Edit Entry from the menu.
+Make the desired changes.
+Click OK.
+Adding TOTP to an Entry
+Timed One-Time Passwords (TOTP) are a popular choice for two-factor authentication methods. These codes are typically six digits long and change every 30 seconds. They are derived from a shared secret value and the current time. Once set up, KeePassXC can calculate TOTP codes like any authenticator app, such as Google Authenticator. The codes can be used with copy/paste, browser extension, and Auto-Type.
+Your computer time must be synchronized with an internet time source to generate valid TOTP codes, read more here.
+Storing TOTP codes in the same database as the password will eliminate the advantages of two-factor authentication. If you desire maximum security, we recommend keeping TOTP codes in a separate database that you only unlock when needed.
+To add TOTP to a database entry, you must first retrieve the secret string from the website or application you are authenticating to. Often this secret is accompanied with a QR code and can be copy/pasted below. Example:
+Figure 15. Example TOTP Secret
+Once obtained, right-click the desired entry (1), choose TOTP → Set up TOTP…​ (2), and the setup dialog will appear. In that dialog, paste the secret code from the website (3), setup any custom settings (rare) (4), then press OK to save the settings.
+Figure 16. TOTP Setup Process
+After an entry is configured with TOTP, you will see a clock icon in that entry’s row and have the ability to reveal the current code in the preview pane. Additionally, you can navigate to the entry’s TOTP menu to show the code in a separate window. You can also view the secret and configuration as a QR code for exporting to a mobile device. TOTP codes can be entered into forms with the browser extension, with Auto-Type by using the {TOTP} placeholder, or via menu options in the Auto-Type selection dialog.
+Figure 17. TOTP Usage
+Entry Icons
+You can select an icon to be displayed with each entry for easy identification. KeePassXC comes with a set of default icons that you can use or you can use your own custom icons. If you defined a URL with an entry, you can also download the favorite icon for that particular website.
+To delete a custom icon, go to Database Maintenance where you can purge unused icons and delete one or more icons at a time.
+Figure 18. Entry icon selection
+Each KeePass application has different default icons. If you use a mobile app or KeePass2, be aware that the default icons may not be exactly correspond to the KeePassXC icons.
+Deleting an Entry
+To delete an entry, perform the following steps:
+Select the entry you want to delete and press the Del button on your keyboard.
+You will be prompted to move the entry to the Recycle Bin (if enabled).
+You can disable the recycle bin within the Database Settings. If the recycle bin is disabled then deleted entries will be permanently removed from the database.
+To permanently delete the entry, navigate to the Recycle Bin, select the entry you want to delete and press the Del button on your keyboard.
+Clone an Entry
+Creating a clone of an entry provides you a ready-to-use template for creating new entries with similar details of a master entry.
+To create a clone of an existing entry, perform the following steps:
+Right-click on the entry for which you want to create a clone and select Clone Entry. Alternatively, select the desired entry and press Ctrl+K.
+Figure 19. Clone entry from context menu
+The clone dialog will appear.
+Figure 20. Clone entry dialog
+Select the Append ‘ - Clone’ to title check-box to create a new entry with the word Clone as the suffix to the name of the new entry.
+Select the Replace username and password with references check-box to create the new entry where the username and the password fields contain the references to the username and password to the master entry.
+Select the Copy history checkbox to copy the history of the master entry to the clone.
+If you chose to replace username and password entries with references, then the new entry will point these fields to the original entry’s values. Changing the original entry will automatically change the resolved value of the cloned entry. This is useful if you have multiple accounts for the same service that use a similar username or password combination.
+Figure 21. References in a cloned entry
+You can create your own references using the Entry Reference Syntax
+Entry URL Handling
+KeePassXC can handle URLs in various ways. Standard URLs will be opened in your default browser. URLs that start with schemas handled by your Operating System will launch the associated application, for example ftp:// or ssh://. You can also use the following URL schemas to perform specific actions:
+Schema Example Description
+cmd://
+cmd://ssh {USERNAME}@example.com -p 2222
+Launches the specified command line executable with the specified arguments. The executable must be present on your PATH or an absolute path must be specified.
+kdbx://
+kdbx://~/dbs/passwords.kdbx
+Opens the specified database file. Set the entry’s username to the keyfile path (if required) and password to the database password. The database will open in a new tab.
+Advanced Entry Handling
+KeePassXC offers several advanced options for managing your database entries. Additional Attributes allow you to store extra information required by some applications and websites. Attachments enable you to attach files to entries, stored as encrypted binaries, which can be previewed directly in the application (text and images). Icons can be selected or downloaded for easy identification of entries. The Properties section lets you view basic properties such as creation, modification, and last accessed times, and retrieve an entry’s UUID for references. KeePassXC also maintains a history of changes to entries, allowing you to view, restore, or delete previous versions of an entry.
+Additional Attributes
+A lot of applications and web sites now require providing additional information when you create accounts. The additional information is used to block hackers if any suspicious activity is detected. In addition, the additional information you provide can be used to reset passwords if you forget them. You can also store arbitrary information here that can be copied to the clipboard or Auto-Typed using the {S:<ATTR_NAME>} action code.
+To protect an attribute from being displayed by default, activate the Protect checkbox (A). To show the contents of the attribute while keeping it protected, press the Reveal button (B).
+Figure 22. Additional attributes example
+Attachments
+You can attach files to any entry in your database by pressing the Add button (A). These files are added to the database and stored as encrypted binaries. You can open, save, or delete attachments from this interface (B).
+When you try to open the attached file, KeePassXC extracts the attachment to a temporary file and opens it using the default application associated with the file type. After finishing viewing or editing the file, you can choose between importing or discarding the changes that you made to the temporary file. KeePassXC securely deletes the temporary file by overwriting it.
+Figure 23. Attachments interface
+Foreground and Background Color
+You can change the foreground (A) and/or background (B) color that this entry will use in the entry lists. Click the corresponding box to open the color picker dialog.
+Figure 24. Color picker dialog
+Properties
+KeePassXC lets you view the basic properties such as date and time of creation, modification, and when last accessed. This is also where you can retrieve an entry’s UUID for use in references.
+Figure 25. Entry properties view
+History
+KeePassXC maintains a history of changes you make to your entries. Each time you change an entry, KeePassXC automatically creates a backup copy of the current, non-modified entry before saving the new values. You can view the changes you made previously, restore, and delete the history of changes you made. The age of the history item, the changes that were made, and the entry’s size are shown in the table view.
+Show: Display this history item for review, a read-only copy of the entry will be shown.
+Restore: Reinstate the selected history item as the active entry details.
+Delete: Delete the selected history item.
+Delete All: Delete the entire history for this entry.
+Figure 26. Entry history view
+Restoring an old history item will store the current entry settings as a new history item.
+Search
+KeePassXC provides a robust search that enables you to find specific entries in the databases using different modifiers, wild card characters, and logical operators. By default, search considers the following fields when matching your query: Title, Username, URL, Tags, and Notes. To include other fields and/or narrow your search to specific fields, you can use the search syntax described below.
+Modifiers and Fields
+Modifier Description
+-
+Exclude this term from results
+!
+Exclude this term from results
++
+Match this term exactly
+*
+Term is handled as a regular expression
+The following fields can be searched along with their abbreviated name in parentheses:
+Title (t)
+Username (u)
+Password (p, pw)
+URL (url)
+Notes (n)
+Attribute names and values (attr)
+Attachment (attach)
+Group (g)
+Tags (tag)
+Entry State (is:expired, is:weak)
+Wild Card Characters and Logical Operators
+Wild Card Character Description
+*
+Match anything
+?
+Match one character
+|
+Logical OR
+Sample Search Queries
+The following tables lists a few samples search queries for your reference:
+Query Description
+user:johnsmith url:www.google.com
+Searches the Username field for johnsmith and the URL field for www.google.com.
+user:john|smith
+Searches the Username field for john OR smith.
++user:johnsmith -url:www.google.com *notes:"secret note \d"
+Search the username field for exactly johnsmith, the URL must not contain www.google.com, and notes contains secret note [digit].
++attr:mystring123
+Searches all additional attributes for any name OR value equal to mystring123.
++tag:personal
+Search exactly for the 'personal' tag and do not include tags such as 'my personal'.
+is:expired is:weak
+Searches for all expired entries with weak passwords.
+Merging Databases
+KeePassXC allows you to merge entries from one database into another through the Database → Merge From Database menu item. When merging, entries from the specified database will be imported into your currently open database. The merge process compares entries based on their unique identifiers (UUIDs) and modified timestamp. When an entry UUID matches, no matter which group it is in, the most recently modified version will be made the current and the previous version will be placed into the entry’s history. Any new entries and/or groups will be added to the open database. This feature is useful for consolidating multiple databases or synchronizing databases from conflict files in a cloud storage system.
+When you delete entries, a record of that deletion (the entry UUID) is stored to prevent that entry from reappearing from a merge operation. An existing entry that has the same UUID as a deleted item will be removed from the database without prompt.
+Advanced Save Options
+There are three ways that KeePassXC can handle database files. This behavior is set in the Application Settings under File Operations.
+(Default) Safe saves create a temporary database file alongside the existing one and atomically move it into place when all writing is complete. This prevents database corruption in the case of application crashes, loss of power, or other interruptions.
+Temporary file saves create a database in the temporary files folder. This database is then moved into place overtop of the existing file. Although rare, interruptions in this move process could leave your database in an unknown state. This option is useful for overcoming poorly behaved cloud sync tools.
+Direct-write saves write directly to the existing database file. This is an unsafe operation since any interruption can leave your entire database inaccessible. We only recommend using this option when interfacing with Linux GVFS services (e.g. Google Cloud on Gnome) and other types of storage services that host a virtual drive system.
+Database Backup Options
+In addition to these save options, KeePassXC can create a backup of your existing database file just prior to saving. This backup will be saved at the path specified in the Backup destination field. This path can be absolute or relative. The latter will be resolved according to the databases path. It is possible to specify a custom naming scheme with placeholders. See Backup Path Placeholders for available placeholders and examples.
+Alternatively, backups can be created on-demand using the Database → Save Database Backup…​ menu feature.
+Figure 27. Saving a database backup
+Automatic Database Opening
+You can setup one or more databases to open automatically when you unlock a single database. This is done by (1) defining a special group named AutoOpen with (2) entries that contain the file path and credentials for each database that should be opened. There is no limit to the number of databases that can be opened.
+Case matters with auto open, the group name must be exactly AutoOpen and it must be a child of the root group.
+Figure 28. AutoOpen Group and Entries
+To setup an entry for auto open perform the following steps:
+Create a new entry and give it any title you wish.
+If your database has a key file, enter its absolute or relative path in the username field.
+If your database has a password, enter it in the password field
+Enter the absolute or relative path to the database file in the url field. You can also use the {DB_DIR} placeholder to reference the absolute path of the current database file.
+To restrict auto open to particular devices, go to the advanced category and enter the following:
+Create a new attribute named IfDevice.
+Enter hostnames in a comma separated list to define computers that will open this database.
+Prepend an exclamation mark (!) to explicitly exclude a device.
+Examples: LAPTOP, DESKTOP will auto open on a computer named LAPTOP or DESKTOP. !LAPTOP will auto open on all devices not named LAPTOP.
+Figure 29. Auto open IfDevice example
+You can setup an entry to open on double click of the URL field by prepending kdbx:// to the relative or absolute path to the database file. You may also have to add file:// to access network shares (e.g., kdbx://file://share/database.kdbx).
+Database Settings
+At any point of time, you can change the settings for your database. To make changes to the general settings, perform the following steps:
+Navigate to Database → Database settings. The following screen appears:
+Figure 30. Database settings
+Click the General button in the left-hand menu bar to access the following settings:
+Database name: This is the default identifier for your database and is shown in the tab bar and title bar (when active). You can change this name as desired.
+Database description: Provide some meaningful description for your database.
+Default username: Provide a default username for all new entries that you create in this database.
+Public Database Metadata: Here you can set a public (unencrypted) name, icon, and color for your database. This is used on the database unlock screen to help distinguish multiple databases from each other.
+Max history items: This is the maximum number of history items that are stored for each entry. When you set this to 0, no history will be saved. Set this value to a low value to prevent the database from getting too large (we recommend no more than 10).
+Max. history size: When the history of an entry gets above this size, it is truncated. For example, this happens when entries have large attachments. Set this value small to prevent the database from getting too large (we recommend 6 MiB).
+Use recycle bin: Select this check-box if you want deleted entries to move to the recycle bin instead of being permanently removed. The recycle bin will be created if it does not already exist after your first deletion. To delete entries permanently, you must empty the recycle bin manually.
+Enable compression: KeePassXC databases can be compressed before being encrypted. Compression reduces the size of the database and does not have any appreciable affect on speed. It is recommended to always save databases with compression.
+Autosave delay: Customize the automatic database save operation by delaying it for a set time since the last change. By default, this option is disabled for fast saving, but can be useful for large databases to avoid delays after each change.
+Click the Security button in the left-hand menu bar to change your database credentials and change encryption settings.
+Figure 31. Database security
+Here you can change your database password or add/remove additional credentials to protect your database. KeePassXC supports adding a randomly generated, static key file and hardware keys such as YubiKey and OnlyKey. To add a key file, click Add Key File and either browse for an existing file or generate a new one (A). To add a hardware key, click Add YubiKey Challenge-Response, plug in your hardware key, then click refresh (B).
+Figure 32. Database credentials
+Consider creating a backup of your YubiKey. Please refer to Creating a YubiKey backup
+Encryption settings allow you to change the average time it takes to encrypt and decrypt the database. The longer time that is chosen, the harder it will be to brute force attack your database. We recommend a setting of one second.
+Figure 33. Database encryption
+Encryption time is dependent on your computer’s hardware. If sharing a database with a mobile device, be mindful that it will likely take two to four times longer to access and save your database than on your home computer.
+Advanced encryption settings can be accessed by clicking the Advanced Settings checkbox in the lower left-hand corner. These settings are only meant for people who know what they mean. We do not recommend touching these settings.
+Figure 34. Database encryption advanced settings
+The following key derivation functions are supported:
+AES-KDF (KDBX 4 and KDBX 3.1): This key derivation function is based on iterating AES. Users can change the number of iterations. The more iterations, the harder are dictionary and guessing attacks, but also database loading/saving takes more time (linearly). KDBX 3.1 only supports AES-KDF; any other key derivation function, like for instance Argon2, requires KDBX 4.
+Argon2 (KDBX 4 – recommended): KDBX 4, the Argon2 key derivation function can be used for transforming the composite master key (as protection against dictionary attacks). The main advantage of Argon2 over AES-KDF is that it provides a better resistance against GPU/ASIC attacks (due to being a memory-hard function). The number of iterations scales linearly with the required time. By increasing the memory parameter, GPU/ASIC attacks become harder and the required time increases. The parallelism parameter can be used to specify how many threads should be used. We recommend using Argon2id to prevent against timing-based attacks. Argon2d offers maximum compatibility with other KeePass-based apps, the default settings provide sufficient protection against any known attacks.
+Database Maintenance
+KeePassXC offers some maintenance features that can be applied to clean up your database. Navigate to Database → Database settings then click on Maintenance on the left hand panel. The following screen appears. On this screen you can delete multiple icons at once and purge any unused icons in your database.
+Remote database support
+KeePassXC provides support for syncing database files that reside in a remote location. If you can download/upload the database file via a commandline tool (e.g. rsync, ssh, scp etc.) KeePassXC offers easy to use functionality to sync the remote database.
+Sync with remote database
+Open the remote sync settings via Database > Database Settings… > Remote to create commands to sync a local database or a temporary local copy of a remote database.
+Define a name for your sync command and specify a download (A) as well as an upload command (B). The command and/or input need a {TEMP_DATABASE} placeholder specified where the remote database is temporarily stored. Do not forget to save the command settings with the save button (C). Remote settings are added as menu entries below the Remote Sync… menu for quick access.
+If your download or upload command require a password prompt, the command will most likely not succeed. In case of an SSH connection (e.g. sftp), it is recommended to use SSH agent so that no password prompt is needed.
+Figure 35. Remote sync settings
+Select the remote sync command from the Database > Remote Sync… menu to start the syncing process and a progress bar will show up in the lower right corner.
+In case the remote database is changed by another user/process after the downloading command finishes and before uploading again, those changes will be overwritten. Syncing is not an atomic operation.
+Password Generator
+This password generator helps you to generate random strong passwords and passphrases that you can use for your applications and websites you visit.
+Generating Passwords
+To generate random passwords, specify the characters to be used in your choice of password (for example, upper-case letters, digits, special characters, and so on) and KeePassXC will randomly pick characters out of the set.
+To generate the random password using Password Generator, perform the following steps:
+Open KeePassXC.
+Navigate to Tools > Password Generator. The following screen appears:
+Figure 36. Password Generator
+Select the length of the desired password by dragging the Length slider.
+Select the character-sets that you want to include in your password.
+Use the regenerate button (Ctrl+R) to make a new password using the chosen options.
+Use the clipboard button (Ctrl+C) to copy the generated password to the clipboard.
+Click the Advanced button to specify additional conditions for your desired password.
+Figure 37. Advanced Password Generator Options
+Generating Passphrases
+A passphrase is a sequence of words or other text used to control access to your applications and data. A passphrase is specifically designed to be simple to remember but hard to guess. For this reason, we do not recommend making passphrases too complex; if you require something that is more complex than you could easily remember, it is better to use a randomly generated password instead.
+From the password generator, click the Passphrase tab. The following screen appears:
+Figure 38. Passphrase Generator
+Select the number of words you want to be included in your passphrase by dragging the Word Count slider.
+In the Word Separator field, enter a character, word, number, or space that you want to use as a separator between the words in your passphrase.
+(Optional) You can choose a word case between lower, upper, and title case options.
+(Optional) You can also load your own custom word lists. Click the plus sign button to the right of the wordlist selection dialog to choose a custom word list. You can download alternative lists from the EFF’s Website or from GitHub.
+Click the Regenerate button (Ctrl+R) to generate a new random passphrase.
+Click the Clipboard button (Ctrl+C) to copy the passphrase to the clipboard.
+Importing Databases
+KeePassXC allows you to import external databases from the following options:
+Comma Separated Values (.csv)
+1Password Export (.1pux)
+1Password Vault (.opvault)
+Bitwarden (.json)
+Proton Pass (.json)
+KeePass 1 Database (.kdb)
+Remote database (.kdbx)
+To import any of these files, start KeePassXC and either click the Import File button on the welcome screen or use the menu Database > Import…​ to launch the Import Wizard.
+Figure 39. Import Wizard
+For each of the import options, you will be prompted to select the file to import and then provide credentials to unlock the file, if necessary. You can then choose to import the file into a new database or into an existing database that is already unlocked in KeePassXC.
+Importing CSV File
+A CSV file is unencrypted and you should securely delete this file after successfully importing it into KeePassXC.
+Follow the steps above and click Continue. The CSV import wizard will appear.
+On this dialog you can choose the various options for properly importing the data. Analyze the output in the preview at the bottom to determine the correct import settings. You may need to re-map the column associations to match the data in your CSV file.
+Figure 40. CSV Import Wizard
+Click Done to complete the import. If you chose to create a new database, the New Database dialog will appear. Otherwise your entries will be nested under the group you chose for the existing database.
+Importing from Other Applications
+KeePassXC allows you to import databases from various applications including 1Password (1PUX and OPVault), Bitwarden, and Proton Pass. Each import option involves selecting the file, providing necessary credentials (if required), and choosing to import into a new or existing database. Note that CSV, 1Password Export, Bitwarden, and Proton Pass files are unencrypted and should be securely deleted after import.
+1Password Export
+A 1Password Export file is unencrypted and you should securely delete this file after successfully importing it into KeePassXC.
+Open the Import Wizard as shown above. Select the 1Password Export option.
+Click Continue to unlock and preview the import. Click Done to complete the import.
+1Password OPVault
+You must have 1Password version 7 or 8 to export your data to an OPVault. If you are using a newer version of 1Password, you should use the 1Password Export (1PUX) format instead.
+Save your 1Password Vault locally to create an OPVault directory. Please see 1Password instructions on how to do this. Once an OPVault is created, perform the following steps:
+Open the Import Wizard as shown above. Select the 1Password Vault option.
+Enter the password for your vault and click Continue to unlock and preview the import. Click Done to complete the import.
+Bitwarden
+A Bitwarden Export file may be unencrypted and you should securely delete this file after successfully importing it into KeePassXC.
+Open the Import Wizard as shown above. Select the Bitwarden option.
+Optionally provide a password to decrypt the Bitwarden export file. You should only need to do this if you have chosen the encrypted json export option within Bitwarden.
+Click Continue to unlock and preview the import. Click Done to complete the import.
+Proton Pass
+A Proton Pass Export file is unencrypted and you should securely delete this file after successfully importing it into KeePassXC.
+Open the Import Wizard as shown above. Select the Proton Pass option.
+Click Continue to preview the import. Click Done to complete the import.
+Importing KeePass 1 Database
+KeePass 1 database is an older format of the database created using a legacy version of KeePass. KeePassXC lets your import this older format of the database and you can seamlessly start using this database in your new KeePassXC application.
+To import a KeePass 1 database file in KeePassXC, perform the following steps:
+Open the Import Wizard as shown above. Select the KeePass1 Database option.
+Enter the password for your database and optionally provide a key file if it was configured for your KeePass1 database.
+Click Continue to unlock and preview the import. Click Done to complete the import.
+Importing Remote Database
+Database files that are stored in a remote location can be imported or opened with KeePassXC if you provide a command to download the file from the remote location.
+To import (or temporarily open) a remote database file in KeePassXC, perform the following steps:
+Open the Import Wizard as shown above. Select the Remote Database option.
+Enter a command to download the remote database. If necessary, enter input that needs to be passed to the command. The command and/or input need a {TEMP_DATABASE} placeholder specified where the remote database is temporarily stored.
+Enter the password for your database and optionally provide a key file.
+Click Continue to unlock and preview the import. Click Done to complete the import.
+Opening without importing a remote database is possible by selecting Temporary Database in the Import Into section of the wizard.
+Exporting Databases
+KeePassXC supports multiple ways to export your database for transfer to another program or to print out and archive.
+These exports do not contain all the information in your database due to various limitations in the export format. For example, the CSV export does not support attachments, advanced attributes, Auto-Type settings, or custom icons. The XML export does not support attachments. The HTML export is mainly for printing and does not support attachments and some custom data fields.
+Exporting your database will result in all of your passwords and sensitive information being stored in an unencrypted format. We do not recommend saving your exported database for long periods of time as that can cause a compromise of sensitive information.
+Figure 41. Database export menu
+The HTML export file is intended to be human-readable (viewed/printed in a web browser) rather than machine-readable (re-imported into another database file). The intention of HTML export is to provide a "paper backup" functionality for those who want to ensure access to their passwords in case of catastrophic failure of IT infrastructure. To create a paper backup, export the database to an HTML file, print the file with your web browser, then delete the file.
+Creating a paper backup exposes your passwords to potentially insecure components, like printer drivers on your computer or software inside the printer. Make sure all these components can be trusted.
+For more information, check out the blog article about paper backups.
+Database Sharing with KeeShare
+KeeShare allows you to share a subset of your credentials with others and vice versa.
+Enable Sharing
+To use sharing, you need to enable it for the application.
+Go to Tools → Settings. Select the KeeShare category on the left sidebar (1).
+Check Allow import if you want to import shared credentials. Check Allow export if you want to share credentials. (2)
+(Optional) Click Generate (3) to create your own signing certificate. If you are using signed shares then your signing certificate will be used to generate the signature. This feature is deprecated and will be removed in a future version.
+Figure 42. KeeShare Application Settings
+Setup a Shared Group
+If you checked Allow export in the Sharing settings you can now share a group of passwords. Sharing is always defined on a particular group. If you enable sharing on a group, every entry under this group, and its children, are shared. If you enable sharing on the root node, every password inside your database gets shared!
+KeeShare does not synchronize group structure after the initial share is created. At this time, KeeShare operates at the entry level; shared entries moved outside of a shared group are still synchronized.
+Open the edit sheet on a group you want to share.
+Select the KeeShare category on the left toolbar.
+Choose a sharing type:
+Inactive – Disable sharing this group
+Import – Read-only import of entries, merge changes
+Export – Write-only export of entries, no merge
+Synchronize – Read/Write entries from the share, merge changes
+Choose a path to store the shared credentials to.
+The password to use for this share container.
+The export file will not be generated automatically. Instead, each time the database is saved, the file gets written. The file should be written to a location that is accessible by others. An easy setup is a network share or storing the file in cloud storage.
+Figure 43. KeeShare Group Settings
+Using Shared Credentials
+KeeShare watches the container for changes and merges them into your database when necessary (Import and Synchronize modes). Entries merge in time order; older data is moved to the history of the entry.
+A shared group shows a cloud icon badge over the group icon (A) and a banner is displayed showing the sharing mode and file location (B). If the share is disabled or unavailable, the cloud icon will show as red with a white X.
+Figure 44. KeeShare shared group
+Technical Details and Limitations of Sharing
+Sharing relies on the combination of file exports and imports as well as the synchronization mechanism provided by KeePassXC. Since the merge algorithm uses the history of entries to prevent data loss, this history must be enabled and have a sufficient size. Furthermore, the merge algorithm is location independent, therefore it does not matter if entries are moved outside of an import group. These entries will be updated nonetheless. Moving entries outside of export groups will prevent a further export of the entry, but it will not ensure that the already shared data will be removed from any client.
+KeeShare uses a custom certification mechanism to ensure that the source of the data is the expected one. This ensures that the data was exported by the signer but it is not possible to detect if someone replaced the data with an older version from a valid signer. To prevent this, the container could be placed at a location which is only writeable for valid signers.
+Browser Integration
+The KeePassXC-Browser extension is installed within your web browser so that you can automatically pull usernames and passwords from KeePassXC and fill them directly into website fields. It is a very useful and secure extension that enhances your productivity while using KeePassXC. With this extension, you do not need to manually copy the data from your KeePassXC database and paste it into the website fields. The KeePassXC-Browser extension is available on the following web browsers:
+Google Chrome, Vivaldi, and Brave
+Mozilla Firefox and Tor-Browser
+Microsoft Edge
+Chromium
+On Linux, Flatpak and Snap based browsers are generally not supported. Ubuntu’s Firefox Snap is currently the only known exception.
+Install the Browser Extension
+You can download the KeePassXC-Browser extension from your web browser. To download the KeePassXC-Browser extension, perform the following steps:
+Click the link corresponding to your browser:
+Chrome, Chromium, Vivaldi, and Brave
+Mozilla Firefox and Tor-Browser
+Microsoft Edge
+Click the button to install/add the extension to the browser. Accept any confirmation dialogs.
+For the most up-to-date troubleshooting advice on all platforms, please read our Troubleshooting Guide.
+When Microsoft Edge is installed as a managed application, system administrators are required to deploy a custom native messaging configuration. Instructions for this are found in the advanced section below.
+Configure KeePassXC-Browser
+To start using KeePassXC-Browser, you must configure it so that it can communicate with the KeePassXC application on your desktop.
+To configure KeePassXC-Browser, perform the following steps:
+Open the KeePassXC application on your desktop and navigate to Tools > Settings.
+Click the Browser Integration option on the left-hand side (1). The following screen appears:
+Figure 45. Browser Settings
+Click the Enable browser integration checkbox (2). Then select the browsers for which you have downloaded the KeePassXC-Browser extension (3) and click OK.
+Ensure your database is unlocked, then open (or restart) your browser.
+Click the KeePassXC-Browser extension icon (A) in your browser (see figure below). A pop-up window appears.
+Figure 46. Connect Extension to KeePassXC
+Click the Connect button (B) in the pop-up window to complete integrating the KeePassXC-Browser extension with your KeePassXC desktop application.
+You are now prompted to enter a unique name to identify the connection between this browser and your database. Enter a unique name in the field (e.g., firefox-laptop) and click the Save and allow access button.
+Figure 47. Extension Association Dialog
+If you reuse a connection name in a database, the previous browser connection will be overwritten and prevent access.
+Using the Browser Extension
+The KeePassXC-Browser extension lets you automatically fill the entries from your KeePassXC database into the fields on websites you visit. To do so, perform the following steps:
+Open your KeePassXC desktop application and unlock your database.
+Open your web browser. The KeePassXC-Browser extension icon in your browser window will change based on its connection state. The figure below shows the different states.
+(A) KeePassXC is not running or is disconnected.
+(B) KeePassXC is running, but KeePassXC Browser Extension is not connected to the current database.
+(C) Connected to KeePassXC, but database is locked.
+(D) Connected to KeePassXC and ready to use. If the icon is shown with a number, it indicates the number of credentials found for the current site.
+Figure 48. Extension Icon States
+If the KeePassXC desktop application is not connected with the KeePassXC-Browser extension, click the extension icon in your web browser and click Reload from the pop-up window as shown in the following screen.
+Figure 49. Reload Extension Connection
+Open the URL for which you want to use with your database. If you have previously created an entry in your database then the KeePassXC-Browser Confirm Access dialog may appear:
+Figure 50. Confirm Access Dialog
+Ensure the credentials you want to use are checked, then click (A) Remember (optional), then click Allow Selected (B).
+In your website, the KeePassXC icon will appear in the username field of the login form (A). Click the icon to populate the field with your stored credentials. If you have more than one credential for this website, a dropdown will appear to choose the one to use.
+Figure 51. Fill Credentials
+Generate Passwords
+The KeePassXC-Browser Extension also lets you generate passwords directly in your browser. This feature can be used for websites with existing credentials as well as for new websites. You can then choose to update/add the credentials to your KeePassXC database directly from the Browser.
+Ensure your database is unlocked and configured to use the Browser extension as shown above.
+Right click on a password field and from the KeePassXC sub-menu choose Show Password Generator. The standard KeePassXC password generator will appear.
+Configure the password generation options and click Apply Password when done. The generated password will be filled into the previously selected field.
+When you have successfully submitted the password on the website, a popup will appear asking you to either update an existing entry or add a new one.
+Browser Integration Report
+You can see a cross-section of all browser-related settings applied to entries within a database through the Browser Statistics report. To access, use the Database → Database reports…​ menu option then click on Browser Statistics on the left-hand menu. From here you can see all entries with URLs applied to them, explicitly allowed and denied URLs, and any entries with custom browser settings.
+You can delete remembered site settings from the report by right clicking the entry you want to reset and selecting "Delete plugin data from entry".
+Figure 52. Browser Integration Report
+Additional Fill-In Fields
+Sometimes login pages have additional fields you would like to fill (e.g., account number). Use the following instructions to add them:
+Edit the entry you want to add fields to. Go to the advanced tab and add the attributes you need. Each attribute must start with KPH: followed by a space, but otherwise the name does not matter. If multiple KPH attributes are defined, they are used in alphabetical order (i.e., the order shown in KeePassXC).
+Within the browser, navigate to the page you want to use the additional fields on. Select the "Choose Custom Login Fields" button from the extension popup window. Choose Username, Password and String Field(s). Confirm the selections.
+Refresh the web page. The new KPH attribute(s) should be filled to the extra fields.
+String Fields Selection in Browser
+Clearing Remembered Sites
+Entries that you have chosen to remember allow/deny rules are stored in their respect custom data fields. You can clear all of these remembered settings at once through the database settings. Follow these steps:
+Go to Database → Database Settings or click the database settings icon in the toolbar.
+Go to the Browser Integration tab, then click on the Forget all site-specific settings on entries button.
+Confirm this action in the popup dialog. This cannot be undone once the database is saved.
+Figure 53. Clear Remembered Sites
+Advanced Usage
+You can configure unique browser integration behavior for each entry. This allows you to add multiple URLs to an entry, hide an entry from the browser integration, and more. To access these settings, open an entry for editing then click on Browser Integration option in the left-hand menu (1).
+After opening the settings you can add any number of additional URLs by clicking the Add button (2) and typing the URL in the list to the left (3).
+Additional URLs also supports wildcards (with KeePassXC 2.7.10 and later). You can use URLs like:
+https://*.example.com
+https://example.com/*/path
+https://sub.*.example.com/path/*
+Figure 54. Entry browser settings
+To set options for all entries within a group, edit the group and go to the browser integration section (1). Here you can explicitly disable access to all entries under a group hierarchy to the browser extension. You can set other useful options for groups of entries as well.
+Figure 55. Group browser settings
+Database-wide operations are available in the database settings. To access these use the Database → Database settings…​ menu option. Click on Browser Integration on the left-hand menu. From here you can disconnect all browsers, convert legacy KeePass-HTTP settings, reset all entry-level settings, and refresh the database root group ID (useful when making copies of your database file).
+Figure 56. Database browser settings
+Finally, advanced application-wide settings are available in the Browser Integration tab of the application settings.
+We do not recommend changing any of these settings as they may break the browser integration plugin.
+Figure 57. Advanced browser settings
+Advanced Setup
+Custom Browser option
+It is possible to enable support for a custom browser (e.g. LibreWolf, WaterFox, Arc, beta and nightly browsers, etc.) using this feature. This feature is only available for Linux and macOS.
+Figure 58. Custom browser configuration
+The native messaging script file needed for the custom browser depends on the browser type. For Firefox based browsers like Librefox the Browser type must be Firefox. For Arc, Opera, etc. the type must be set to Chromium.
+Config location must have the exact path for the browser’s native-messaging-hosts folder. If you are unsure, refer to our Troubleshooting Guide for listing of the most common paths, and a few ways for finding a path when it’s not known.
+When a Custom Browser has been successfully set, KeePassXC will automatically write the needed native messaging script file to the folder.
+If you wish to support multiple custom browsers, you can copy the native messaging script files manually to the native-messaging-hosts folder from other browsers.
+Managed Microsoft Edge on Windows
+Deploy org.keepassxc.keepassxc_browser_edge.json to, for example, C:\ProgramData\KeePassXC\ on all managed platforms.
+{
+"allowed_origins": [
+"chrome-extension://pdffhmdngciaglkoonimfcmckehcpafo/"
+],
+"description": "KeePassXC integration with native messaging support",
+"name": "org.keepassxc.keepassxc_browser",
+"path": "C:\\Program Files\\KeePassXC\\keepassxc-proxy.exe",
+"type": "stdio"
+}
+Configure GPO options (see Microsoft Edge Native Messaging Policies for more information.):
+Windows Registry Editor Version 5.00
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Edge\NativeMessagingHosts\org.keepassxc.keepassxc_browser]
+@="C:\ProgramData\KeepassXC\org.keepassxc.keepassxc_browser_edge.json"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge]
+"NativeMessagingUserLevelHosts"=dword:00000000
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallAllowlist]
+"1"="pdffhmdngciaglkoonimfcmckehcpafo"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge\NativeMessagingAllowlist]
+"1"="org.keepassxc.keepassxc_browser"
+Managed Microsoft Edge on macOS
+Deploy org.keepassxc.keepassxc_browser_edge.json to /Library/Microsoft/Edge/NativeMessagingHosts.
+You may need to configure Edge to allowlist the extension and native messaging host. See Microsoft Edge Native Messaging Policies for more information.
+Passkeys
+Passkeys are a secure way for replacing passwords that is supported by all major browser vendors and an increasing number of websites. For more information on what passkeys are and how they work, please go to the FIDO Alliance’s documentation: https://fidoalliance.org/passkeys/
+Browser Passkey Support
+KeePassXC supports passkeys directly through the Browser Integration service. Passkeys are only supported with the use of the KeePassXC Browser Extension and a properly connected database. To enable passkey support on the extension, you must check the Enable Passkeys option in the extension settings page.
+Figure 59. Enable Passkey Support in the KeePassXC Browser Extension
+Optionally, you can disable falling back to the built-in passkey support from your browser and operating system. If left enabled, the extension will show the default passkey dialogs if KeePassXC cannot handle the request or the request is canceled.
+Create a New Passkey
+Creating a new passkey and authenticating with it is a simple process. This workflow will be demonstrated using GitHub as an example site. Please note that GitHub allows two use cases for passkeys, one for 2FA only and the other for replacement of username and password entirely. We will be configuring the latter use case in this example.
+After navigating to GitHub’s Settings → Password and authentication, there is a separate section shown for passkeys.
+Figure 60. GitHub’s Passkey Registration
+After clicking the Add a passkey button, the user is redirected to another page showing the actual configuration option.
+Figure 61. Configure Passwordless Authentication
+Clicking the Add passkey button now shows the following popup dialog for the user, asking confirmation for creating a new passkey.
+Figure 62. Passkey Registration Confirmation Dialog
+After the passkey has been registered, a new entry is created to the database under KeePassXC-Browser Passwords with (passkey) added to the entry title. The entry holds additional attributes that are used for authenticating the passkey.
+After registration, GitHub will ask a name for the passkey. This is only relevant for the server.
+Figure 63. GitHub’s Passkey Nickname
+Now the passkey should be shown on the GitHub’s passkey section.
+Figure 64. Registered Passkeys on GitHub
+Login With a Passkey
+The passkey created in the previous section can now be used to login to GitHub. Instead of logging in with normal credentials, choose Sign in with a passkey at the bottom of GitHub’s login page.
+Figure 65. GitHub’s login page with a Passkey option
+After clicking the button, KeePassXC-Browser detects the passkeys authentication and KeePassXC shows the following dialog for confirmation.
+Figure 66. Passkey authentication confirmation dialog
+After confirmation user is now authenticated and logged into GitHub.
+Advanced Usage
+Multiple Passkeys for a Site
+Multiple passkeys can be created for a single site. When registering a new passkey with a different username, KeePassXC shows an option to register a new passkey or update the previous one. Updating a passkey will override the existing entry, so this option should be only used when actually needed.
+Figure 67. Passkey authentication confirmation dialog
+Exporting Passkeys
+All passkeys in a database can be viewed and accessed from the Database → Passkeys…​ menu item. The page shows both Import and Export buttons for passkeys.
+Figure 68. Passkeys Overview
+After selecting one or more entries, the following dialog is shown. One or multiple passkeys can be selected for export from the previously selected list of entries.
+Figure 69. Passkeys Export Dialog
+Exported passkeys are stored in JSON format using the .passkey file extension. The file includes all relevant information for importing a passkey to another database or saving a backup.
+The exported passkey file is unencrypted and should be securely stored.
+Importing Passkeys
+An exported passkey can be imported directly to a database or to an entry. To import directly, use the Database → Import Passkey menu item. When right-clicking an entry, a separate menu item for Import Passkey is shown. This is useful if user wants to import a previously created passkey to an existing entry.
+Figure 70. Import Passkey to an Entry
+After selecting a passkey file to import, a separate dialog is shown where you can select which database, group, and entry to target. By default, the group is set to Imported Passkeys. The default action is to create a new entry that contains the imported passkey.
+Figure 71. Passkey import dialog
+Auto-Type
+The Auto-Type feature acts like a virtual keyboard to populate data from your entries directly into the corresponding websites or applications that you use. You can use the Auto-Type feature on a global level or entry level. Each entry can be configured to be associated with a particular window title and multiple Auto-Type sequences can be pre-defined and selected upon use.
+Auto-Type is a completely separate feature from Browser Integration. You do not need to have the KeePassXC browser extension installed in your browser to use Auto-Type.
+Configure Global Auto-Type
+You can define a global Auto-Type hotkey that starts the Auto-Type process. To configure the hotkey, perform the following steps:
+Navigate to Tools → Settings → Auto-Type tab (1). Click into the Global Auto-Type shortcut box and press the desired key combination that will trigger the Auto-Type process (2).
+Figure 72. Auto-Type settings
+You can configure additional Auto-Type settings in this window such as start delay, inter-key typing delay, and matching options. If Auto-Type is not working well for you, try adjusting the default delays.
+You can also set the time to remember the last used entry between presses of the global Auto-Type hotkey. This is useful for typing parts of a sequence during complex login workflows without having to find the specific each time.
+Configure Auto-Type Sequences
+Each entry in your database can have multiple Auto-Type sequences associated with various window titles. Simulated key presses can be sent to any other currently open window of your choice (web browser windows, login dialogs boxes, and so on). When the Global Auto-Type hotkey is pressed, KeePassXC will search your database for entries matching the current selected window title.
+The default Auto-Type sequence is {USERNAME}{TAB}{PASSWORD}{ENTER}. This means that it first types the username of the selected entry, then presses the Tab key, then types the password of the entry and finally presses the Enter key.
+To change the default Auto-Type sequence for all entries of your database, edit the root (top-most) group of your database and set a specific sequence. Child groups and entries will inherit this sequence by default.
+To configure Auto-Type sequences for your entries, perform the following steps:
+Navigate to the entries list and open the desired entry for editing. Click the Auto-Type item from the left-hand menu bar (1). Press the + button (2) to add a new sequence entry. Select the desired window using the drop-down menu, or simply type a window title in the box (3).
+You can use an asterisk (*) as a wildcard (e.g., when a window title contains a dynamic file or website name). Set the window title to * to match all windows. Leave the window title blank to offer additional sequences for every matching window. This is useful for typing individual custom attributes, for example.
+To use a standard regular expression for window title matching, the window title must start and end with two forward slashes (e.g., //^Secure Login - .*$//).
+Figure 73. Auto-Type entry sequences
+(Optional) Define a custom Auto-Type sequence for each window title match by selecting the Use specific sequence for this association checkbox. Sequence action codes and field placeholders are detailed in the following table. Beyond the most important ones detailed below, there are additional action codes and placeholders available: Auto-Type Actions Reference and Entry Placeholders Reference. Action codes and placeholders are not case sensitive.
+Placeholder Description
+{TITLE}
+Entry Title
+{USERNAME}
+Username
+{PASSWORD}
+Password
+{URL}
+URL
+{NOTES}
+Notes
+{TOTP}
+Current TOTP value (if configured)
+{S:ATTRIBUTE_NAME}
+Value for the given attribute name (e.g., {S:Address})
+Action Code Description
+{TAB}, {ENTER}, {SPACE}, {INSERT}, {DELETE}, {HOME}, {END}, {PGUP}, {PGDN}, {BACKSPACE}, {CAPSLOCK}, {ESC}
+Press the corresponding keyboard key
+{UP}, {DOWN}, {LEFT}, {RIGHT}
+Press the corresponding arrow key
+{LEFTBRACE}, {RIGHTBRACE}
+Press { or }, respectively
+{<KEY> X}
+Repeat <KEY> X times (e.g., {SPACE 5} inserts five spaces)
+{DELAY=X}
+Set delay between key presses to X milliseconds
+{DELAY X}
+Pause typing for X milliseconds
+{CLEARFIELD}
+Clear the input field
+{PICKCHARS}
+Pick specific password characters from a dialog
+{MODE=VIRTUAL}
+(Experimental) Use virtual key presses on Windows, useful for virtual machines
+Modifier Description
++
+SHIFT
+^
+CTRL
+%
+ALT
+#
+WIN/CMD
+Use modifiers to hold down special keys before typing the next character. For example, to type CTRL+SHIFT+D use: ^+d. This is useful if you need to activate certain actions in a program or on your desktop.
+Performing Global Auto-Type
+The global Auto-Type keyboard shortcut is used when you have focus on the window you want to type into. To make use of this feature, you must have previously configured an Auto-Type hotkey.
+When you press the global Auto-Type hotkey, KeePassXC searches all unlocked databases for entries that match the focused window title. The selection dialog will appear when there are no matches, multiple matches, the active window title is not available, or "Always ask before performing Auto-Type" is enabled. The selection is remembered for a short while to help retype with the same entry in quick succession.
+Figure 74. Auto-Type sequence selection
+Perform the selected Auto-Type sequence by double clicking the desired row or pressing Enter. Press the up and down arrows to navigate the list. Sequences can be filtered through the text edit field.
+Figure 75. Auto-Type search database
+Search the unlocked databases by activating Search Database radio button. Use the text edit field to issue search queries using the same syntax as database searching.
+Figure 76. Additional Auto-Type choices
+The option to type just the username, password, or current TOTP value is available by right-clicking the desired row or expanding the Type Sequence button options. You can also copy these values to the clipboard.
+On Windows, you will see an option to use a virtual keyboard in this sub-menu. This is an experimental feature that allows you to type into virtual machines by simulating actual keyboard presses. Some international keyboards may be unsupported due to limitations in the Windows API.
+Performing Entry-Level Auto-Type
+You can quickly activate the default Auto-Type sequence for a particular entry using Entry-Level Auto-Type. For this operation, the KeePassXC window will be minimized and the Auto-Type sequence occurs in the previously selected window. You can perform Entry-Level Auto-Type from the toolbar icon (A), entry context menu (B), or by pressing Ctrl+Shift+V.
+Be careful when using Entry-Level Auto-Type as you can inadvertently type into the wrong window. For example, a chat window or email.
+Figure 77. Entry-Level Auto-Type
+Wayland Support
+On Linux, Auto-Type uses XDG Desktop Portals when running under a Wayland compositor. An implementation of the Remote Desktop Portal and Global Shortcuts Portal must be available on your system for Auto-Type to be available. The following desktop environments are known to provide full or partial support:
+KDE Plasma 6.6+ — Supported since 5.27: reconfiguration before 6.6 is done via System Settings → Shortcuts → KeePassXC; before 6.4 have a bug that brings up the configuration dialog on every start.
+GNOME 51+ — Supported since 48: reconfiguration from 48 to 50 is done via GNOME Settings → Apps → KeePassXC.
+Other compositors (Sway, labwc, Hyprland, etc.) — May require a custom XDG Desktop Portal implementation to provide Remote Desktop and Global Shortcuts services. A generic Python-based implementation, xdg-desktop-portal-pyrtal, can be used as a workaround until official implementations are available.
+When running under Wayland, the following limitations apply:
+No window title matching. Wayland does not expose the active window title to applications. When you press the global Auto-Type shortcut, the selection dialog will show all available entries from your unlocked databases. Use the keyboard to filter entries quickly. The "remember last used entry" feature is especially useful in this workflow.
+No active window tracking. KeePassXC does not track the focused window on Wayland. If keyboard focus changes during an Auto-Type sequence, the typing will not be interrupted and will continue into the newly focused window.
+IME / Input Method compatibility. Some input method frameworks (e.g., fcitx5, ibus) may interfere with key simulation, particularly for CJK or virtual keyboard setups. This can cause character corruption or modifier key state issues. These issues are caused by the compositor or the input method framework, not by KeePassXC. If you experience problems, try disabling your IME temporarily during Auto-Type, or check your desktop environment’s virtual keyboard settings. Please report any issues directly to your compositor or input method project.
+Additional configuration options are available in the Auto-Type settings when using the desktop portal backend:
+Keep remote desktop connection open after performing Auto-Type — When enabled, the remote desktop session remains open after typing, allowing subsequent Auto-Type operations without re-requesting permission.
+Remote desktop mode — Controls how long the remote desktop authorization is persisted: never remember (authorization is forgotten immediately), remember until exit (authorization persists until KeePassXC closes), or remember until revoked by desktop (authorization persists until the desktop environment revokes it).
+Use remote desktop for clipboard access — Experimental option to use the remote desktop session for clipboard operations (copy and clearing).
+Experimental: Prefer desktop portals (Wayland implementation) — When enabled on X11, attempts to use the desktop portal backend instead of the native X11 implementation. This is unlikely to work on most setups and is provided for completeness to support legacy X11 desktops with portals if available.
+Secret Service Integration
+This feature allows KeePassXC to act as a Secret Service provider over DBus. It enables applications to store and retrieve secrets securely via the Secret Storage specification. While running, KeePassXC acts as a Secret Service server registered on DBus so clients like seahorse, python-secretstorage, secret-tool, or other implementations can connect and access the exposed database in KeePassXC.
+Enabling the Integration
+Only one secret service provider can be enabled at a time. You may have to disable other providers, such as GNOME Keyring or KWallet, to use KeePassXC as a secret service provider. You will see a notice when attempting to enable KeePassXC as the secret service provider if another is already running.
+To replace most third party secret service providers with KeePassXC, run the following shell snippet:
+mkdir -p "${XDG_DATA_HOME:-${HOME}/.local/share}/dbus-1/services"
+cat > "${XDG_DATA_HOME:-${HOME}/.local/share}/dbus-1/services/org.freedesktop.secrets.service" <<EOF
+[D-BUS Service]
+Name=org.freedesktop.secrets
+Exec=/usr/bin/keepassxc
+EOF
+You may need to restart your session or log out and back in for the changes to take effect.
+Open KeePassXC → Tools → Settings → Secret Service Integration → check Enable KeePassXC Freedesktop.org Secret Service Integration. Then press OK to save this setting and enable the integration. Go back into this settings screen to see currently open databases that you can unlock and edit their exposure to secret service.
+Figure 78. Secret Service Settings
+Either click the pencil icon in the previous settings screen, or go to Database → Database Settings → Secret Service Integration. Enable Expose entries under this group, and select the desired group. All entries within this group and all subgroups will be exposed to the service.
+Figure 79. Secret Service Database Settings
+Use apps that integrate with secret service to start saving and using credentials within KeePassXC. If you enabled confirmation prior to access, you will see the following dialog:
+Figure 80. Secret Service Access Confirmation Dialog
+When applications use secret-tool and you have access confirmation enabled, then you will be prompted each time credentials are requested. This is due to secret-tool obtaining a new process id each time it is run.
+Implementation Details
+The user can specify the database and group that is exposed to the service.
+Desktop notifications when a secret is retrieved and access confirmation dialogs.
+FdoSecrets::Service is the top level DBus service. There is one FdoSecrets::Collection per opened database tab and each entry under the exposed database group has a corresponding FdoSecrets::Item DBus object.
+The following entry attributes are exposed to the secret service: Title, Username, Password, URL, Notes, TOTP, and non-protected Custom Attributes.
+SSH Agent Integration
+SSH (Secure Shell) is a widely used remote secure shell protocol and is considered an industry standard for secure remote access to UNIX-like systems including Linux, BSDs, macOS and more recently even Windows received native support. SSH supports multiple types of authentication and the most widely used ones are either interactive keyboard input with a password or a public-key cryptography pair of keys.
+KeePassXC SSH Agent integration is built to manage SSH keys in a secure manner by either storing them completely within your KeePassXC database or by having only the decryption key of a key file that is stored elsewhere. SSH Agent integration does not provide an agent itself but works as a client for any agent implementation that is OpenSSH compatible.
+OpenSSH Agent on Linux
+If you are using a modern desktop Linux distribution it is very likely the OpenSSH agent is already configured and running when you have logged in to a graphical desktop session. This should be true for distributions like Debian, Ubuntu (including Kubuntu, Xubuntu and Lubuntu), Linux Mint, Fedora, ElementaryOS and Manjaro.
+First, open a terminal and check the output of ssh-add -l:
+$ ssh-add -l
+The agent has no identities.
+If you either got a list of fingerprints or the message above the agent is already running and no further setup is required. If instead you got a message saying "Could not open a connection to your authentication agent." that means the agent is either misconfigured or not running at all.
+Since every distribution and desktop environment is configured differently there is no general guide how to properly set it up yourself. The general rule of thumb, however, is that ssh-agent needs to be started as part of the startup programs for a session in a way its environment variables are exposed to all processes started by the desktop environment. One of the easiest ways to achieve this is to enable GNOME Keyring which should in turn start the agent as part of its services.
+There are many guides on the internet how to hack your login shell to start an agent but it is very prone to errors and is not a supported configuration. If you prefer the login shell startup hack you need to set it up with a static socket path and use the SSH_AUTH_SOCK override option in SSH Agent settings to match that.
+GNU Privacy Guard (gpg) with its SSH agent implementation is not compatible with KeePassXC as it does not support removing keys that have been added to it making it impossible to use any external tool to manage key lifetime.
+GNOME Keyring prior to release 3.27.92 had its own custom implementation of an agent which does not support modern key types and was known to be buggy. It does not support any constraints you may want to configure for an added key. If you are running a modern distribution the custom agent has been removed and replaced with the stock OpenSSH agent which is feature complete.
+OpenSSH Agent on macOS
+Apple has made OpenSSH an integrated part of macOS with automatic agent startup when it is first used. No further configuration is needed.
+OpenSSH Agent and Pageant on Windows
+The SSH Agent integration on Windows supports both PuTTY Pageant and OpenSSH for Windows 10. Since Pageant is currently still the most widely used implementation and is easily installable on any version of Windows, it is the default on KeePassXC. However, Microsoft includes a native OpenSSH client implementation with Windows 10 since autumn 2018 that can be used instead. If you would like to self-manage your OpenSSH version you can use the builds offered via their official GitHub repository.
+Pageant
+Download Pageant from the official PuTTY home page at https://www.chiark.greenend.org.uk/~sgtatham/putty/
+To use Pageant with KeePassXC, simply start it and it will minimize into the system tray and is ready to use. PuTTY and compatible tools will use Pageant automatically.
+OpenSSH
+Make sure your Windows version has at least update 1809 installed. For more details consult the official documentation.
+To use Windows OpenSSH the OpenSSH Authentication Agent service has to be enabled first:
+Open the Services application via the Start Menu, it is located in the Windows Administrative Tools section
+Select the OpenSSH Authentication Agent and open its Properties
+Set the Startup type to Automatic and start the service
+Alternatively, you can use a Windows PowerShell running as Administrator to enable and start the service:
+PS C:\Users\user> Get-Service ssh-agent | Set-Service -StartupType Automatic
+PS C:\Users\user> Start-Service ssh-agent
+KeePassXC and other compatible tools can now use the Windows OpenSSH agent. To use it with KeePassXC, update the settings explained in Setup SSH Agent Integration.
+Setup SSH Agent Integration
+By default the SSH Agent integration plugin is disabled. To enable integration, follow the steps below to access the settings:
+Select Tools > Settings from the menu
+Select SSH Agent category on the left sidebar
+Figure 81. SSH Agent Application Settings Page
+On the settings page you can enable the integration by checking Enable SSH Agent integration. When the integration is enabled coming back to the settings page also shows if connection to the agent is working.
+On Windows, you have the option to select Pageant and/or OpenSSH for Windows. On macOS and Linux, the system ssh-agent will be used automatically and the settings page shows the current value of SSH_AUTH_SOCK environment variable which is used to connect to the running agent and an option to manually override the automatically detected path.
+If the value of SSH_AUTH_SOCK is empty it means the agent is not properly configured and KeePassXC will be unable to connect to it unless you provide a static override path to the socket.
+Generating an SSH Key
+KeePassXC only supports keys in the OpenSSH format. On Windows, PuTTYgen saves keys in its own format by default and you will need to convert them to OpenSSH format before being used. In this guide we are going to generate a standard RSA key in the default size.
+Generating a key on Linux or macOS
+Open a terminal window and type the following command to generate a key:
+$ ssh-keygen -o -f keepassxc -C johndoe@example
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in keepassxc
+Your public key has been saved in keepassxc.pub
+The key fingerprint is:
+SHA256:pN+o5AqUmijYBDUrFV/caMus9oIR61+MiWLa8fcsVYI johndoe@example
+The key's randomart image is:
++---[RSA 3072]----+
+| =. ..o |
+| o + .+ . |
+|o . .+ o. |
+| o.. Eo. . |
+| +o .. So |
+|o*o.o+ ..o |
+|Bo=+o.+.o . |
+|+oo+.++o |
+|. ..++ooo |
++----[SHA256]-----+
+Now we can see two files were generated:
+$ ls -l keepassxc*
+-rw------- 1 user group 2.6K Apr 5 07:36 keepassxc
+-rw-r--r-- 1 user group 569 Apr 5 07:36 keepassxc.pub
+With KeePassXC you only need the first file listed.
+Generating a key on Windows
+On Windows you can generate key pairs with PuTTYgen and with ssh-keygen, depending on whether you installed PuTTY and your Windows version.
+Using PuTTYgen
+Please read the manual on how to use PuTTYgen for details on generate a key: https://the.earth.li/~sgtatham/putty/0.74/htmldoc/Chapter8.html#pubkey-puttygen. Once generated, you must save the key in the new OpenSSH format, see image below.
+Figure 82. Generating a key with PuTTYgen
+Using ssh-keygen
+Open Command Prompt or Windows PowerShell and type the following command to generate a key:
+PS C:\Users\user> ssh-keygen.exe -o -f keepassxc -C johndoe@example
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in keepassxc
+Your public key has been saved in keepassxc.pub
+The key fingerprint is:
+SHA256:pN+o5AqUmijYBDUrFV/caMus9oIR61+MiWLa8fcsVYI johndoe@example
+The key's randomart image is:
++---[RSA 3072]----+
+| =. ..o |
+| o + .+ . |
+|o . .+ o. |
+| o.. Eo. . |
+| +o .. So |
+|o*o.o+ ..o |
+|Bo=+o.+.o . |
+|+oo+.++o |
+|. ..++ooo |
++----[SHA256]-----+
+Now we can see two files were generated:
+PS C:\Users\user> dir keepassxc*
+Directory C:\Users\user
+Mode LastWriteTime Length Name
+---- ------------- ------ ----
+-a---- 9/19/2021 12:08 PM 2655 keepassxc
+-a---- 9/19/2021 12:08 PM 570 keepassxc.pub
+With KeePassXC you only need the first file listed.
+Adding SSH Key to an Entry
+The last step is to setup an entry to contain the SSH Agent settings and key file you generated.
+Create a new entry, or open an existing entry in edit mode.
+Set the password you used for the key file in the password field.
+Go to the advanced category and attach the key file you generated previously.
+Go to the SSH Agent category (1) and select the attachment from the list (2).
+Alternatively, you can load an external file dynamically using the file selection.
+Choose the options for this key.
+Press OK to accept the entry. Depending on the options you chose, KeePassXC will load the key and present it for use.
+Figure 83. SSH Agent Entry Settings Page
+If you chose to not autoload the key on database unlock, you can manually make the key available by using the context menu from the entry list.
+Figure 84. SSH Agent Load Key from Context Menu
+Administrative Options
+User Settings Locations
+KeePassXC’s user settings are stored in INI files in the user’s home directory. The exact path differs depending on the platform:
+Windows: %AppData%\KeePassXC\keepassxc.ini
+macOS: ~/Library/Application Support/KeePassXC/keepassxc.ini
+Linux: ${XDG_CONFIG_HOME}/keepassxc/keepassxc.ini (typically: ~/.config/keepassxc/keepassxc.ini)
+Additional application state is stored in the following locations:
+Windows: %LocalAppData%\KeePassXC\keepassxc.ini
+macOS: ~/Library/Caches/KeePassXC/keepassxc.ini
+Linux: ${XDG_STATE_HOME}/keepassxc/keepassxc.ini (typically: ~/.local/state/keepassxc/keepassxc.ini)
+The default configuration and state locations can be overridden by setting the KPXC_CONFIG and KPXC_CONFIG_LOCAL environment variables to different paths.
+Group Policy Settings Enforcement (Windows)
+On Windows, administrators can enforce certain user settings by Group Policy overrides. To enforce a setting globally for all users, a corresponding value needs to be created in the Windows registry under HKEY_LOCAL_MACHINE\SOFTWARE\Policies\KeePassXC. The value’s name must correspond to an existing INI setting. Hierarchical INI settings containing slashes must be represented as subkeys. For example, the following Group Policy overrides correspond to the INI settings BackupBeforeSave, BackupFilePathPattern, and Security/LockDatabaseIdle:
+Windows Registry Editor Version 5.00
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\KeePassXC]
+"BackupBeforeSave"=dword:00000001
+"BackupFilePathPattern"="{DB_FILENAME}.old.kdbx"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\KeePassXC\Security]
+"LockDatabaseIdle"=dword:00000001
+Overriding a setting will enforce the set value for all users and disable the setting in the KeePassXC user interface.
+User shortcuts cannot be overridden.
+Reference
+This section contains full details on advanced features available in KeePassXC.
+Entry Placeholders
+Placeholder Description
+{TITLE}
+Entry Title
+{USERNAME}
+Username
+{PASSWORD}
+Password
+{URL}
+URL
+{NOTES}
+Notes
+{TOTP}
+Current TOTP value (if configured)
+{S:<ATTRIBUTE_NAME>}
+Value for the given attribute (case sensitive)
+{T-CONV:/<PLACEHOLDER>/<METHOD>/}
+Text conversion for resolved placeholder (e.g., {USERNAME}) using the following methods: UPPER, LOWER, BASE64, HEX, URI, URI-DEC
+{T-REPLACE-RX:/<PLACEHOLDER>/<REGEX>/<REPLACE>/}
+Use a regular expression to find and replace data from a resolved placeholder (e.g., {USERNAME}). Refer to match groups using $1, $2, etc.
+{URL:RMVSCM}
+URL without scheme (e.g., https)
+{URL:WITHOUTSCHEME}
+URL without scheme
+{URL:SCM}
+URL Scheme
+{URL:SCHEME}
+URL Scheme
+{URL:HOST}
+URL Host (e.g., example.com)
+{URL:PORT}
+URL Port
+{URL:PATH}
+URL Path (e.g., /path/to/page.html)
+{URL:QUERY}
+URL Query String
+{URL:FRAGMENT}
+URL Fragment
+{URL:USERINFO}
+URL Username:Password
+{URL:USERNAME}
+URL Username
+{URL:PASSWORD}
+URL Password
+{DT_SIMPLE}
+Current Date-Time (yyyyMMddhhmmss)
+{DT_YEAR}
+Current Year (yyyy)
+{DT_MONTH}
+Current Month (MM)
+{DT_DAY}
+Current Day (dd)
+{DT_HOUR}
+Current Hour (hh)
+{DT_MINUTE}
+Current Minutes (mm)
+{DT_SECOND}
+Current Seconds (ss)
+{DT_UTC_SIMPLE}
+Current UTC Date-Time (yyyyMMddhhmmss)
+{DT_UTC_YEAR}
+Current UTC Year (yyyy)
+{DT_UTC_MONTH}
+Current UTC Month (MM)
+{DT_UTC_DAY}
+Current UTC Day (dd)
+{DT_UTC_HOUR}
+Current UTC Hour (hh)
+{DT_UTC_MINUTE}
+Current UTC Minutes (mm)
+{DT_UTC_SECOND}
+Current UTC Seconds (ss)
+{DB_DIR}
+Absolute directory path of database file
+You can insert literal placeholder strings by escaping the beginning and ending curly braces. For example, to insert the string {USERNAME}, you would type \{USERNAME\}.
+Entry Cross-Reference
+A reference to another entry’s field is possible using the shorthand syntax: {REF:<FIELD>@<SEARCH_IN>:<SEARCH_TEXT>}
+<FIELD> and <SEARCH_IN> can be one of following:
+T – Title
+U – Username
+P – Password
+A – URL
+N – Notes
+I – UUID (found on entry properties page)
+O – Custom Attribute (SEARCH_IN only)
+Examples:
+{REF:U@I:033054D445C648C59092CC1D661B1B71}
+{REF:P@T:Other Entry}
+{REF:A@O:Attribute 1}
+Auto-Type Actions
+Action Code Description
+{TAB}, {ENTER}, {SPACE}, {INSERT}, {DELETE}, {HOME}, {END}, {PGUP}, {PGDN}, {BACKSPACE}, {CAPSLOCK}, {ESC}
+Press the corresponding keyboard key
+{UP}, {DOWN}, {LEFT}, {RIGHT}
+Press the corresponding arrow key
+{F1}, {F2}, …​, {F16}
+Press F1, F2, etc.
+{LEFTBRACE}, {RIGHTBRACE}
+Press { or }, respectively
+{<KEY> X}
+Repeat <KEY> X times (e.g., {SPACE 5} inserts five spaces)
+{DELAY=X}
+Set delay between key presses to X milliseconds
+{DELAY X}
+Pause typing for X milliseconds
+{CLEARFIELD}
+Clear the input field
+{PICKCHARS}
+Pick specific password characters from a dialog
+Modifier Description
++
+Shift
+^
+Ctrl
+%
+Alt
+#
+Win/Cmd
+Text Conversions:
+{T-CONV:/<PLACEHOLDER>/<METHOD>/}
+Convert resolved placeholder (e.g., {USERNAME}, {PASSWORD}, etc.) using the following methods: UPPER, LOWER, BASE64, HEX, URI, URI-DEC.
+{T-REPLACE-RX:/<PLACEHOLDER>/<SEARCH>/<REPLACE>/}
+Use regular expressions to find and replace data from a resolved placeholder. Refer to match groups using $1, $2, etc.
+Backup Path Placeholders
+Database Backup Path Placeholder Description
+{DB_FILENAME}
+The database’s filename without extension
+{TIME}
+The current time formatted as dd_MM_yyyy_hh-mm-ss.
+{TIME:<format>}
+The current time formatted according to the format string specified by <format>. See https://doc.qt.io/qt-5/qtime.html#toString for a list of available placeholders.
+Backup path example Location of backup(s)
+{DB_FILENAME}-{TIME}.bak.kdbx
+C:\Users\MyUsername\MyDatabase-02_01_2022_03-04-05.bak.kdbx
+C:\Users\MyUsername\MyDatabase-05_01_2022_12-10-00.bak.kdbx
+backups\{DB_FILENAME}.bak.kdbx
+C:\Users\MyUsername\backups\MyDatabase.bak.kdbx
+C:\Backups\{TIME:dd.MM.yyyy}\{DB_FILENAME}.kdbx
+C:\Backups\02.01.2022\MyDatabase.kdbx
+C:\Backups\05.01.2022\MyDatabase.kdbx
+C:\Backups\{DB_FILENAME}\{TIME:MM-dd-yyyy}.kdbx
+C:\Backups\MyDatabase\01-02-2022.kdbx
+C:\Backups\MyDatabase\01-05-2022.kdbx
+Creating a YubiKey backup
+It is advisable to have a backup replica YubiKey In case your main YubiKey gets damaged, lost, or stolen. The same HMAC key will need to be written to both keys. To do this you can either use the YubiKey Personalization Tool GUI or the ykpersonalize CLI tool. The steps for the CLI tool are shown:
+Create a 20 byte HMAC key:
+dd status=none if=/dev/random bs=20 count=1 | xxd -p -c 40
+Write the HMAC key to slot 2 (Set through the first switch. Out of the box the YubiKey OTP resides in slot 1):
+ykpersonalize -2 -a -ochal-resp -ochal-hmac -ohmac-lt64 -oserial-api-visible -oallow-update
+You will be asked to enter the HMAC key you created earlier, copy/paste they key output in the first step. Repeat step 2 for your second YubiKey using the same HMAC key from before. We recommend storing your HMAC key in a safe place (e.g., printed on paper) in case you need to recreate another key.
+Version 2.8.0
+Last updated 2026-10-22 12:15:23 UTC

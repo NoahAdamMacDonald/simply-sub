@@ -1,0 +1,157 @@
+url: https://support.1password.com/membership-billing-policy/
+method: fetch
+saved: 2026-11-19
+
+About 1Password subscription billing | 1Password Support Skip to main content
+Your browser is out of date. For the best experience, upgrade your browser now.
+Menu Home
+Tour
+Families
+Business
+Developers
+Pricing
+Security
+Download
+Support
+Blog
+Sign in
+Sign in
+Get started free
+1Password Support
+Popular searches
+Export
+Forgot password
+Virtual cards
+Secret Key
+Passkeys
+Emergency Kit
+Two-factor authentication
+Change password
+On this page
+Billing
+Subscription management
+About 1Password subscription billing
+[billing]
+About 1Password subscription billing Learn everything you need to know about how subscription billing works for your 1Password account.
+BillingSubscription management Important
+If the subscription for your account is managed by a 1Password Business representative, contact your Account Manager or the 1Password Business team for information about the terms of your subscription.
+1Password subscription billing is flexible and fair. With the subscription for your 1Password account, you can:
+Get all the 1Password apps for free.
+Choose monthly or annual billing.
+Invite people to your family or team at any time.
+Keep your account data and promotions even if you cancel.
+If you don’t have a 1Password account yet, you can try 1Password for free.
+If you have a 1Password account with a subscription you manage yourself, learn more about how 1Password subscription billing works.
+Get all the 1Password apps for free
+Every 1Password subscription includes the latest versions of all the 1Password apps so you can use 1Password anywhere you need it:
+In your browser with 1Password for Chrome, Firefox, Edge, Brave, and Safari.
+On your computer with 1Password for Mac, Windows, and Linux.
+On your mobile device with 1Password for iOS and Android.
+Learn more about the benefits of a 1Password membership.
+Choose monthly or annual billing
+You can choose monthly or annual billing to suit your budgeting needs.
+Monthly: You’ll be billed every month on the same day and time you received your first invoice. For example, if your subscription starts on May 15 at 9:00 AM, you’ll receive your next monthly invoice on June 15 at 9:00 AM.
+Annual: You’ll be billed every year on the same day and time you received your first invoice. For example, if your subscription starts on May 15 at 9:00 AM, you’ll receive your next annual invoice on May 15 at 9:00 AM the following year.
+If you start with a free trial, you’ll receive your first invoice within 48 hours after your free trial ends.
+You can change your subscription frequency at any time. Learn more about managing your 1Password subscription.
+Invite people to your family or team at any time
+You can invite people to join your family or team account at any time. Your subscription may include a set number of family or team members and guests in the base price.
+1Password Families
+Your subscription includes 5 family members and 5 guests. You’ll be charged a prorated amount for each additional family member who accepts an invitation to join your account. Learn more about 1Password Families pricing.
+1Password Teams Starter Pack
+Your subscription includes 10 team members and 5 guests. Contact 1Password Support if you need to invite additional team members or guests. Learn more about 1Password Teams Starter Pack pricing.
+1Password Business
+Your subscription bills for each team member and includes 20 guests. You’ll be charged a prorated amount for each team member who accepts an invitation and for additional guests if you have more than 20. Learn more about 1Password Business pricing.
+When you add someone to your account, you’ll be charged a prorated amount based on the date they join your account and the time left in your current monthly or annual billing cycle. You’ll be billed the prorated amount within 48 hours of when each person accepts their invitation.
+Learn more about adding people to your account if you’re using 1Password with a free trial.
+Remove someone from your family or team
+You can remove people from your family or team account at any time.
+If your subscription includes a set number of people, your subscription billing will remain the same if you remove people within that set number. For example, if you have a family account with five family members and you remove one person, your subscription billing won’t change.
+If your subscription bills per person, or if you have more than the included number of family or team members and guests in your account, the behavior depends on the type of account you have: In family accounts, removed family members are given 30 days to migrate their personal items to a new account. After 30 days have passed, or after they finish their migration, you’ll see the change reflected in your following invoice.
+In team and business accounts, removing a team member or guest will reflect in your next monthly or annual invoice.
+In team and business accounts, you can add another person in place of the person you removed within the same monthly or annual billing period without any changes to your subscription billing. A team member can only be replaced with another team member, and a guest can only be replaced with another guest. Any amount already charged is nonrefundable.
+Learn more about removing people from your account if you’re using 1Password with a free trial.
+Keep your account data and perks even if you cancel
+Your data is yours. Even if you cancel your subscription and your 1Password account is frozen, you can still sign in to 1Password.com or the apps to view and export your data, as long as you don’t delete your account.
+If you have a credit or any other perks when you cancel your subscription, they will remain in your account. As long as you don’t delete your account, you can use the credit or other perks if you start your subscription again later. Unused credits are nonrefundable.
+Try 1Password for free
+You can try 1Password for free for 14 days. To get started, decide whether you want to use 1Password on your own, with your family, or with your team at work.
+1Password Families or 1Password Business
+If you try 1Password Families or 1Password Business, you can add or remove as many people as you’d like during your free trial. At the end of your trial, your first invoice will bill you for the number of active family members, team members, and guests in your account, according to what’s included in your subscription.
+The number of active users for all accounts is calculated daily at 7:00 PM ET, so your first invoice may include people who were added up to 24 hours before your subscription is set to start. For example, if you start your free trial on May 1 at 9:00 AM ET, the final number of active users in your account will be calculated on May 14 at 7:00 PM ET. Your first invoice will be sent to you when your subscription starts on May 15 at 9:00 AM ET and will include the number of active users calculated on May 14 at 7:00 PM ET.
+You won’t be charged for people who have been suspended, deleted, or invited but haven’t joined. If you choose to cancel your subscription before your trial ends, you won’t be charged at all.
+1Password Teams Starter Pack
+If you try the 1Password Teams Starter Pack, you can add up to 10 team members during your free trial. If you want to add more people, you’ll need to remove team members first before you can add more, or contact 1Password Support for help.
+Get help
+If you need to make changes to your subscription, learn how to manage your 1Password subscription.
+For more information about the terms of your 1Password subscription, see the 1Password Terms of Service.
+If you have any other questions about subscription billing for your 1Password account, contact 1Password Support.
+Learn more
+About 1Password membership
+Manage your 1Password subscription
+If your 1Password account is frozen
+1Password refund policy
+1Password Terms of Service
+Was this article helpful?
+Yes, thanks!
+Not really
+Glad to hear it! If you have anything you'd like to add, feel free to contact us.
+Sorry to hear that. Please contact us if you'd like to provide more details.
+Published: October 21, 2026
+1Password
+Pricing
+Families
+Teams
+Business
+Small Business
+Enterprise
+Watchtower
+Developers
+Learn more
+Tour
+Password Generator
+Username Generator
+Security
+Privacy
+Customers
+Password Manager
+Resources
+Webinars
+1Password University
+Secrets Management
+Support
+Help & Documentation
+Community
+Contact Support
+Locations
+Europe
+Canada
+United States
+Company
+About
+Partnerships
+Affiliate
+Press
+Gift Cards
+We’re Hiring!
+Podcast
+Newsletter
+Legal Center
+Downloads
+macOS
+iOS
+Windows
+Android
+Linux
+Web Browser
+Command Line
+Browser extensions
+© 2026 1Password. All rights reserved.
+Terms of Service
+- Privacy Policy
+- Cookie Policy
+- Accessibility
+- Your Privacy Choices
+4711 Yonge St, 10th Floor, Toronto, Ontario, M2N 6K8, Canada.
+Find us on
+1Password on Mastodon

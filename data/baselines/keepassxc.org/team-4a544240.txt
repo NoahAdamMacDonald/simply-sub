@@ -1,0 +1,56 @@
+url: https://keepassxc.org/team/
+method: fetch
+saved: 2026-11-19
+
+The Team – KeePassXC
+Download
+Blog
+Screenshots
+Docs / FAQ
+The Team
+KeePassXC
+Download
+Blog
+Screenshots
+Docs / FAQ
+The Team
+The Team
+The KeePassXC team is formed by
+droidmonkey
+phoerious
+hifi
+louib
+varjolintu
+Contact
+You can contact us via [matrix], a free chat protocol. We have two channels, one for user questions and one for development-related discussions:
+#keepassxc:mozilla.org Element.io web chat (user's channel)
+#keepassxc-dev:mozilla.org Element.io web chat (developer's channel)
+Please be patient when asking a question! You may not get an immediate answer, but someone will respond to you eventually.
+In case you prefer it old-school, we also have the two equivalent IRC channels #keepassxc and #keepassxc-dev on
+irc.libera.chat, which are synced with the [matrix] channels above.
+#keepassxc Libera web chat (user's channel)
+#keepassxc-dev Libera web chat (developer's channel)
+If you need to report a security issue, please open a GitHub advisory (preferred) or send us a private (encrypted) message on [matrix] or email us. Please do not (!) send user questions, bug reports or support requests
+that way (that's what the public [matrix] and IRC channels and our GitHub issue tracker are for).
+Legal Info / Impressum
+Janek Bevendorff
+Friesstr. 1
+99423 Weimar, Germany
+[email protected]
+No user questions via email, please! Legal or otherwise confidential correspondence only!
+Team email PGP key: 105D 8D57 BB97 46BD
+Please note: We are an international team who speak a few different languages, and we will use Google Translate if needed (mind your privacy!), but it's easiest for us to respond to English emails. Thank you!
+KeePassXC Password Manager
+KeePassXC is released under the GPLv3.
+© 2016 – 2026 KeePassXC Team
+Donate
+Blog
+Security Audits
+Privacy
+Contact
+Legal Info / Impressum
+GitHub
+Bluesky
+Mastodon
+Community Chat (Matrix)
+Development Chat (Matrix)

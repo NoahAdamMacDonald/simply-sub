@@ -1,0 +1,936 @@
+url: https://keepass.info/help/kb/faq.html
+method: fetch
+saved: 2026-11-19
+
+Additional FAQ - KeePass
+KeePass Help Center
+KeePass Home |
+Downloads |
+Translations |
+Plugins |
+Donate
+Help Center Home |
+Forums |
+Awards |
+Links
+KeePass Help Center
+Help Center Home
+Forums
+First Steps Tutorial
+Acknowledgements
+KeePass 1.x
+Installation / Portability
+Translations
+Plugins
+Compatibility
+Error Codes
+License
+KeePass 2.x
+Installation / Portability
+Translations
+Plugins
+Compatibility
+Application Policy
+Auto-Type Obfuscation
+Synchronization
+Triggers
+XML Replace
+User Interface:
+Database Settings
+Entry
+Interface Options
+Load/Save From/To URL
+License
+Features
+Accessibility
+Auto-Type
+Command Line Options
+Configuration
+Field References
+Import / Export
+Integration
+Master Key
+Multiple Users
+Password Generator
+Placeholders
+Repair Databases
+Search
+Secure Edit Controls
+Security
+TAN Support
+URL Field
+Using Stored Passwords
+FAQs and Info
+Administrative FAQ
+Technical FAQ
+Additional FAQ
+Backup
+Development
+Customization (1.x)
+Customization (2.x)
+Scripting (2.x)
+Creating Plugins (1.x)
+Creating Plugins (2.x)
+Key Providers (1.x)
+Key Providers (2.x)
+KDBX File Format
+Support KeePass
+Donate
+Additional FAQ
+Additional frequently asked questions.
+This page answers more questions that are not listed on the
+Technical FAQ and the
+Administrative FAQ pages.
+You might first want to read the standard FAQ pages.
+Setup / Configuration:
+Is there a 64-bit version (x64/ARM64)?
+How to verify the digital signatures?
+Why is KeePass blocked by SmartScreen?
+What do the 2.x installation options/components mean in detail?
+What is ShInstUtil.exe?
+What is a KeePass emergency sheet?
+How to create a global hot-key?
+Auto-Type:
+How can auto-type perform a two-step login?
+Can auto-type answer security questions?
+Can auto-type be disabled for a specific window?
+What to do if the input focus is lost when switching between windows?
+Can auto-type work together with PhraseExpress?
+Why doesn't my auto-type target window filter work for Microsoft Edge?
+Usage:
+Can some entries be marked as favorites?
+How to search for multiple terms and exclude terms?
+Does the quick search box support regular expressions?
+How does 'Delete Duplicate Entries' work exactly?
+How to find large entries?
+Why is my database file so large?
+Should I generate passwords until I get one with a high estimated quality?
+Can the password generator be used stand-alone?
+Why does the internal editor corrupt some RTF texts?
+Is there a list of keyboard shortcuts?
+Integration:
+Why can't KeePass open URLs like 'keepass.info'?
+How can KeePass mount network drives?
+How can multiple programs be started using one URL?
+How to send data over StdIn?
+Security:
+Is storing the database file in a public place a security problem?
+Does KeePass support one-time passwords?
+Where do the clipboard options apply?
+Why is the clipboard not cleared after the specified time or when exiting?
+Can I create a database without a master key?
+Would client-server login behaviors increase security?
+Shouldn't password generation profiles be stored in the database?
+Open / Save / Sync / Import / Export:
+Can a specific database be opened when KeePass starts?
+Can specific entries be displayed when opening a database?
+Can the database be saved automatically?
+Why save/sync fails with a temporary Internet files error?
+What is a file transaction?
+How to import/export a KDB file that is encrypted using Twofish?
+Can specific entries be exported/printed?
+Where are Windows favorites exported to?
+Triggers:
+How to avoid storing credentials in triggers unencryptedly?
+Is there a 64-bit version (x64/ARM64)?
+KeePass 1.x Only
+No. The 32-bit application also runs fine on a 64-bit operating system though.
+KeePass 2.x Only
+KeePass 2.x runs natively on most operating systems (i.e. without compatibility layer
+and without emulation):
+On an x86 (x86-32) operating system, KeePass runs as x86 (x86-32) application.
+On an x64 (x86-64) operating system, KeePass runs as x64 (x86-64) application
+(i.e. no WoW64).
+On an ARM64 (AArch64) operating system, KeePass runs as ARM64 (AArch64) application
+(i.e. no x64 emulation, on Windows 11 24H2 and later).
+There are no separate installers/packages.
+Note that this is independent of where KeePass is started from.
+Even if the setup program installed KeePass into the 'Program Files (x86)'
+folder, KeePass still runs as 64-bit application on a 64-bit operating system.
+How to verify the digital signatures?
+All KeePass files containing executable code (files with the extension
+'exe' or 'dll') are digitally signed using Authenticode.
+A digital signature of a file can be verified as follows.
+In Windows File Explorer, right-click onto the file &rarr;
+'Properties' &rarr; tab 'Digital Signatures'.
+Select one of the digital signatures and click the 'Details' button.
+At the top of the details dialog, it should be indicated that
+the digital signature is ok. The signer name should be
+'Open Source Developer, Dominik Reichl'.
+Time-stamping is used. With this, the digital signature can be
+verified even after the certificate has expired. For details, see
+Time-Stamping Authenticode Signatures.
+When running the KeePass setup program ('KeePass-X.YY-Setup.exe'),
+the User Account Control (UAC) dialog of Windows should show
+'Open Source Developer, Dominik Reichl' as verified publisher.
+Why is KeePass blocked by SmartScreen?
+Windows SmartScreen
+blocks all files that it does not know.
+When a new KeePass version is released, these files are unknown to
+SmartScreen and thus SmartScreen warns about them.
+As more and more users install the new KeePass version,
+SmartScreen learns that the files are good.
+As soon as enough users have installed the new version,
+SmartScreen does not warn about it anymore.
+If you want to install a new KeePass version on a PC where you
+cannot ignore the SmartScreen warning, simply wait a few days until
+SmartScreen has learned that the files are good.
+SmartScreen does not support a whitelist, to which we could request
+a new KeePass version to be added before publishing it.
+What do the 2.x installation options/components mean in detail?
+KeePass core files.
+This installs the files that are required to run KeePass.
+The option cannot be turned off.
+User manual.
+This installs a copy of the product documentation that was up-to-date when
+the KeePass version was released.
+By default, KeePass shows the product documentation available in the online
+help center (which is always up-to-date).
+If a local copy of the product documentation is installed, users can choose
+to use this instead of the online one in 'Help' &rarr; 'Help Source'
+(which is useful for instance when no Internet connection is available).
+Native support library.
+This library provides native implementations of some functions/algorithms
+(such as key derivation functions),
+which are usually a bit faster than managed implementations of them.
+It is recommended to install this library.
+XSL stylesheets for KDBX XML files.
+KeePass can export
+databases by applying
+XSL stylesheet transformations onto
+the inner XML format of KDBX files.
+Using this, you can for instance generate various HTML files (detailed lists,
+compact tabular lists, ...) or a text file containing only the passwords.
+This is a feature for experts and is not required for standard KeePass use.
+Optimize KeePass performance.
+If this option is turned on,
+NGen
+is used to generate a native image of the KeePass assembly.
+When such a native image is available, KeePass starts and runs faster.
+Only few additional hard disk space is required (about the size of
+KeePass.exe) and this does not negatively affect the
+computer's performance (KeePass is not running in the background all the time,
+and the option does not make KeePass start automatically at system
+start-up). Security is unaffected.
+Optimize KeePass start-up performance.
+If this option is turned on, KeePass is started and immediately terminated
+when the system is started.
+On Windows XP and earlier, this can reduce the on-demand start-up time of
+KeePass a lot (because all required .NET Framework assemblies have been
+loaded once already).
+On Windows Vista and higher, the effect is not that huge, but it still
+can reduce the time slightly.
+As KeePass terminates immediately, no memory is blocked.
+Security is unaffected.
+What is ShInstUtil.exe?
+ShInstUtil is a small helper application used by KeePass 2.x during installation
+and uninstallation.
+The tool checks whether .NET is installed. Furthermore, if the user selects
+the options in the setup program, the tool optimizes the KeePass performance using
+NGen and/or registers for loading at start-up.
+The source code of ShInstUtil can be found in the KeePass source code package.
+What is a KeePass emergency sheet?
+A KeePass emergency sheet contains all important information that is
+required to open your database. It should be printed, filled out and stored
+in a secure location, where only you and possibly a few other people that
+you trust have access to.
+It is recommended that you create an emergency sheet for your database.
+KeePass 2.x offers to print an emergency sheet after changing the master
+key (or when creating a new database).
+Users who take other precautions can turn this off (via 'Tools' &rarr;
+'Options' &rarr; tab 'Interface' &rarr; turn off the option
+'Ask whether to create an emergency sheet').
+An emergency sheet can also be printed at any time via
+'File' &rarr; 'Print' &rarr; 'Print Emergency Sheet'.
+When printing an emergency sheet, KeePass fills out some fields already
+that are not security-critical
+(e.g. the database file path, the key file
+path, and the name of the Windows user account).
+Other fields like the master password field are not filled out already
+(due to security reasons) and must be filled out by hand.
+How to create a global hot-key?
+KeePass supports many useful command line options,
+e.g. to open a specific database, open an entry's URL, lock the KeePass workspace
+or exit KeePass.
+If you frequently use such a function, you might want to create global
+(system-wide) hot-key for it.
+In order to create a global hot-key for running KeePass with specific command
+line options, follow these steps:
+In Windows File Explorer, navigate to the KeePass application directory,
+right-click on KeePass.exe and click 'Create Shortcut'.
+Rename the shortcut to indicate its function (for example, if the shortcut
+will lock the KeePass workspace, you could rename it to 'Lock KeePass').
+Move the new shortcut either onto the desktop or into a folder of the
+start menu (using drag&drop).
+Right-click on the shortcut, click 'Properties' and switch to the
+'Shortcut' tab.
+In the field 'Target', append a space and the command line options of
+your choice.
+In the field 'Shortcut key', specify the global hot-key that you wish
+to use.
+Click [OK].
+When you now press the global hot-key, Windows runs KeePass using the
+specified command line options.
+Example.
+In order to create a global hot-key for locking the KeePass
+workspace, in step 2 rename the shortcut to 'Lock KeePass' and in step
+5 append a space and '--lock-all' (without the single quotes).
+A complete list of all supported command line options can be found on
+the Command Line Options help page.
+How can auto-type perform a two-step login?
+Examples how to perform multi-step logins using auto-type can be found here:
+Auto-Type Sequences - Examples.
+Can auto-type answer security questions?
+Some websites require users to answer a randomly chosen security question
+as part of the login. The number of possible questions is usually limited
+and the correct answers are specified by the user at registration time
+(e.g. the user's first pet name, favorite color, ...).
+In order to automate such logins using
+auto-type, create an
+auto-type window/sequence association for each security question,
+where the keystroke sequence is something like
+{C:TheQuestion}{USERNAME}{TAB}{PASSWORD}{TAB}TheAnswer{ENTER}
+Here, TheQuestion should identify the question being asked, and
+TheAnswer should be the correct answer.
+The sequence types the user name, presses Tab,
+types the password, presses Tab, types the answer
+to the security question and presses Enter.
+This can of course be customized.
+When pressing the global auto-type hot key,
+KeePass displays a dialog to choose one of the sequences.
+Click the item matching the question being asked
+(you can identify the item by looking at the comment {C:TheQuestion})
+and KeePass fills out and submits the login form
+(including the answer to the security question).
+Can auto-type be disabled for a specific window?
+Assume that you want to prevent that global auto-type is executed
+accidentally in a window "Example Window Title".
+In order to realize this, create a new entry that has an empty
+password field and an auto-type definition associating the window title
+"Example Window Title" with the sequence
+{PASSWORD}.
+When you now (accidentally) initiate global auto-type in the
+"Example Window Title" window, either nothing happens
+(when only the new entry matches) or an auto-type sequence selection
+window appears (when multiple entries match), which you can close
+using the [Cancel] button.
+So, accidental auto-type is prevented.
+KeePass 2.x Only
+Abort During Auto-Type (For Experts).
+If you have an auto-type sequence that switches between different
+windows, you might be interested in specifying target windows
+that cause auto-type to abort (while auto-typing).
+Such windows can be specified via the
+AutoTypeAbortOnWindows
+configuration node.
+What to do if the input focus is lost when switching between windows?
+When an input control in a browser window has the focus and the user
+switches to a different window and afterwards back to the browser, the
+browser typically redirects the focus to the input control again.
+In other words, when switching between windows, browsers usually restore
+the input focus exactly to where it was before leaving the window.
+However, rarely there are websites with buggy scripts that make
+the input control lose the focus
+(i.e. when switching back to the browser, the input focus is not where it
+was before).
+This can be a problem for auto-type if windows are switched during the
+auto-type process (e.g. when multiple matching auto-type sequences/entries exist
+and KeePass shows the selection dialog to pick one).
+Solutions:
+Prevent switching.
+Make sure that only one auto-type sequence/entry matches and use the
+global auto-type hot key.
+In this case, no window switching occurs during the auto-type process and
+thus the input focus loss is not a problem.
+Of course this approach is only a solution if you only have one account
+for the website.
+Adjust sequence.
+Try to find out the exact behavior and adjust the auto-type sequence
+accordingly.
+In some cases, the input focus is set to a different control
+(which might be invisible, thus looking as if the focus was lost completely).
+You can try to find out how many times {TAB} needs to be pressed
+to move the input focus to the correct control again.
+Note this approach is rather volatile, because controls/links might be added
+on the website in the future, which can break your auto-type sequence.
+Plugin.
+Use one of the integration plugins.
+Most integration plugins use different data transfer methods
+that are not affected by the focus loss problem.
+Can auto-type work together with PhraseExpress?
+PhraseExpress by default intercepts Tab and
+Enter keypresses. This makes KeePass' auto-type fail;
+Tab and Enter keypresses do not
+reach the target application.
+In order to make the Tab and Enter
+keys work correctly, in PhraseExpress go 'Tools' &rarr; 'Settings' &rarr;
+node 'Expert Options', deactivate the option 'Route Enter and Tab-key
+through PhraseExpress', and click [OK].
+Why doesn't my auto-type target window filter work for Microsoft Edge?
+Let's assume you specified a custom auto-type window/sequence association
+with the target window filter 'Test Form - KeePass - *'
+(entered manually) for the Test Form page.
+This works for all major browsers (Google Chrome, Mozilla Firefox,
+Internet Explorer, etc.) except Microsoft Edge.
+The reason why it doesn't work for Edge is that the
+target window title only appears to be
+'Test Form - KeePass - Microsoft Edge', but it actually is
+(on systems with text written left-to-right):
+'Test Form - KeePass ' ‖ U+200E ‖ '- Microsoft Edge'
+The Unicode character U+200E is an invisible
+left-to-right mark.
+On systems with text written right-to-left, you might get U+200F instead.
+Edge is the only major browser that inserts such an invisible character.
+Solution.
+You can make the auto-type target window filter slightly
+more generic, such that the asterisk wildcard also includes the U+200E (or U+200F)
+character. For example, for the test form page it could be
+'Test Form - KeePass *'.
+Can some entries be marked as favorites?
+KeePass 1.x Only
+No.
+KeePass 2.x Only
+Yes, by using a tag. See 'Tags'.
+How to search for multiple terms and exclude terms?
+See the Search help page.
+Does the quick search box support regular expressions?
+Yes, see the Search help page.
+How does 'Delete Duplicate Entries' work exactly?
+When running the 'Delete Duplicate Entries' command (in 'Tools' &rarr;
+'Database Tools'), KeePass compares all entries in the currently opened
+database with each other and deletes any duplicates.
+Entries are considered to be equal when their strings (standard and custom
+string fields) and attachments are the same. All other data is ignored.
+If one of two equal entries is in the recycle bin, it is deleted preferably;
+otherwise the decision is based on the last modification time.
+How to find large entries?
+KeePass 2.x Only
+In order to find entries that require a lot of memory
+(for instance due to large attachments), you can follow these steps:
+Method 1.
+In the main menu, go 'Find' &rarr; 'Large Entries'.
+Method 2.
+Go 'View' &rarr; 'Configure Columns'. Turn on the column 'Size'
+(in the category 'More').
+In the entry list of the main window, click the 'Size' column (in order
+to sort by this column), and go 'Find' &rarr; 'All' in the main menu.
+Now you see a list of all entries, sorted by their size
+(but grouped, if grouping is turned on).
+If you have many groups and want to ignore them (i.e. if you wish entries
+to be displayed sorted by their size independent of their groups),
+you can turn off grouping via 'View' &rarr; 'Grouping in Entry List' &rarr; 'Off'.
+The 'Size' of an entry is the sum of the estimated memory required by the
+entry data (strings, attachments, history entries, etc.), without compression.
+Why is my database file so large?
+The most common reasons for a large database file (multiple MB) are:
+Many/large files attached to entries.
+In this case, consider removing the
+attached files.
+For ways to find large entries, see the section
+'How to find large entries?'.
+Many/large history entries.
+See the section 'History' on the
+entry dialog help page.
+For ways to find large entries, see the section
+'How to find large entries?'.
+Many/large custom icons.
+Check whether your database contains many/large
+custom icons
+in the icon selection dialog (open the entry dialog for any entry and click
+the icon button) and consider to delete them.
+You can delete unused custom icons via the main menu
+'Tools' &rarr; 'Database Tools' &rarr; 'Delete Unused Custom Icons'.
+Many/large plugin data.
+Plugins can store data in entries.
+For each entry, you can inspect and delete this data in the entry dialog
+(on the tab page 'Properties').
+For ways to find large entries, see the section
+'How to find large entries?'.
+Plugins can store data in groups. For each group, you can inspect
+and delete this data in the group dialog (on the tab page 'Plugin Data').
+Plugins can store data in the database. You can inspect
+and delete this data in 'Tools' &rarr; 'Database Tools' &rarr;
+'Database Maintenance' &rarr; tab page 'Plugin Data'.
+Duplicate entries.
+If you imported entries and are unsure whether there are
+duplicates now, you might be interested in the command
+'Delete Duplicate Entries' (in the menu 'Tools' &rarr;
+'Database Tools').
+A lot of deleted object information.
+If you frequently delete objects (entries, groups, icons, ...),
+you might want to consider deleting the deleted objects information
+(in 'Tools' &rarr; 'Database Tools' &rarr; 'Database Maintenance').
+This may affect database synchronizations;
+please carefully read the warning that is displayed in the database
+maintenance dialog.
+Database compression deactivated.
+By default, the database compression is activated. If you have
+deactivated it, you can activate it again via 'File' &rarr;
+'Database Settings' &rarr; tab page 'Compression'.
+We recommend the GZip algorithm (which is the default).
+Should I generate passwords until I get one with a high estimated quality?
+After generating a password,
+KeePass may show its estimated quality.
+When generating multiple passwords (based on the same
+profile),
+the estimated quality may vary slightly.
+Let us assume that you generate passwords until you get one with a high
+estimated quality and then use this one. If an attacker knows that you are using
+this approach, he can focus on trying the passwords that have a high estimated
+quality. So, this approach reduces the security and thus is
+not recommended.
+The quality estimation should be used only as a rough approximation of the
+quality. For a given profile, you should not "optimize" your passwords
+based on the quality estimation. Also, no filter based on the quality estimation
+will be implemented for the password generator.
+Can the password generator be used stand-alone?
+KeePass 1.x Only
+Yes. Go 'Tools' &rarr; 'Password Generator' (this is available even when no
+database is opened).
+KeePass 2.x Only
+Yes. Go 'Tools' &rarr; 'Generate Password' (this is available even when no
+database is opened). To generate passwords, click the 'Generate' tab (or the
+'Preview' tab when a database is opened).
+Why does the internal editor corrupt some RTF texts?
+Symptoms.
+When editing an RTF file using the
+internal editor,
+some characters may get corrupted.
+Cause.
+This problem typically occurs when the Windows option 'Beta: Use Unicode
+UTF-8 for worldwide language support' is turned on.
+In this case, the Windows rich text box may return RTF data
+that starts with '{\urtf' instead of
+the usual '{\rtf' (and the code page is set to 65001,
+which means UTF-8). However, the Rtf property
+of the RichTextBox class of the .NET Framework requires the
+RTF data to start with '{\rtf'; trying to set
+'{\urtf' RTF data results in an exception being thrown.
+So, the RTF round-trip is broken.
+As a workaround, KeePass removes the 'u' from the start of
+the RTF data.
+As the syntax of '{\urtf' and '{\rtf' RTF
+documents is the same, the resulting RTF data is valid (and for instance
+can be loaded fine by LibreOffice Writer).
+However, this combination ('{\rtf' together with the UTF-8
+code page 65001) causes Windows to corrupt certain characters:
+the actual code page of a character (selected explicitly using
+'\fN') is ignored and its value is reinterpreted
+as Unicode character, which is incorrect for most characters.
+For example, the Cyrillic character 'Г' (U+0413) can be corrupted
+to an 'Ã', because 'Г' has the value 195 (hex. 0xC3) in the
+Cyrillic code page 1251 and Windows reinterprets it as Unicode
+character U+00C3 (which is 'Ã') instead of properly
+converting it to the correct Unicode character U+0413.
+Resolution.
+Turn off the Windows option 'Beta: Use Unicode UTF-8 for
+worldwide language support'
+(in the Windows system settings &rarr; 'Time & Language' &rarr;
+'Language' &rarr; link 'Administrative language settings' &rarr;
+tab 'Administrative' &rarr; button 'Change system locale').
+Is there a list of keyboard shortcuts?
+Yes, here: Keyboard Shortcuts.
+Why can't KeePass open URLs like 'keepass.info'?
+When entering 'keepass.info' into the URL field of an entry and
+trying to open this URL, KeePass shows an error message that the system
+cannot find the specified file.
+The reason for this is that 'keepass.info' is not a complete URL.
+An URL consists of a protocol identifier (scheme name), a
+colon and slashes, a host (domain name or IP address), optionally a port number,
+and the full path to the file.
+KeePass passes the contents of the URL field to the system shell.
+The system shell doesn't know how to interpret 'keepass.info';
+it could be a local file or specify a host (in this case it's furthermore
+unclear which protocol to use to connect to the host).
+The solution is to complete the URL, e.g. enter 'https://keepass.info/' instead.
+Browsers typically assume HTTP when not specifying a protocol.
+However, KeePass cannot make such an assumption, because its URL field is
+more flexible: by passing the contents of the URL field to the system shell,
+KeePass can open/run local files, UNC paths, all kinds of URLs, etc.;
+additionally, placeholders
+(like environment variables, entry field references, ...) can be used.
+For example, without specifying a protocol 'WinSCP.com' runs the WinSCP
+command line executable, not the web page http://winscp.com/.
+How can KeePass mount network drives?
+Create a new KeePass entry and set its user name and password fields
+to the credentials for the network share. Set its
+URL field to something like the following:
+cmd://NET USE Z: \\Server\Path {PASSWORD} /User:{USERNAME}
+When double-clicking the entry's URL cell in the entry list of the
+main window, KeePass replaces the {USERNAME} and
+{PASSWORD} placeholders
+and mounts the network
+share identified by the UNC path \\Server\Path to the
+drive Z:.
+How can multiple programs be started using one URL?
+Multiple programs can be started by executing the command interpreter
+(part of Windows; its path is stored in the environment variable COMSPEC)
+with the option /C and a command line specifying the programs
+separated by a '&'.
+For example, the following URL runs Notepad and Windows File Explorer sequentially
+(i.e. Windows File Explorer is started after Notepad has been closed):
+cmd://%COMSPEC% /C "%WINDIR%\Notepad.exe & %WINDIR%\Explorer.exe"
+The following URL runs Notepad and Windows File Explorer in parallel:
+cmd://%COMSPEC% /C "START %WINDIR%\Notepad.exe & START %WINDIR%\Explorer.exe"
+The following URL runs Notepad, waits 5 seconds (independent of whether
+Notepad is still running or not) and runs Windows File Explorer:
+cmd://%COMSPEC% /C "START %WINDIR%\Notepad.exe & TIMEOUT /T 5 & START %WINDIR%\Explorer.exe"
+More information:
+Cmd.exe – Command Interpreter
+Command Shell Overview
+START Command
+TIMEOUT Command
+How to send data over StdIn?
+In order to run an application 'C:\MyProgram.exe' and
+send a string 'DATA' to its standard input stream (StdIn), set the
+URL field of an entry to the following:
+cmd://%COMSPEC% /C ECHO DATA|C:\MyProgram.exe
+When executing the URL field (e.g. by double-clicking its cell in the
+entry list of the main window), KeePass runs the command interpreter
+(part of Windows), which runs 'C:\MyProgram.exe'
+and sends 'DATA' to its StdIn stream.
+Is storing the database file in a public place a security problem?
+A KeePass database is a regular file, which users can store wherever
+they want. KeePass does not require Internet/cloud access. Anyway, some
+users prefer to store their database file in a public place
+(such as a shared network drive, a webserver, a cloud storage like e.g. Dropbox,
+...), in order to always have access to their database whenever an
+Internet connection is available.
+If you use a strong master key, storing the database file in a public
+place is not a problem.
+When opening a database file, KeePass loads the complete database file
+(in encrypted form) into its process memory and decrypts it there.
+All work (like editing an entry, creating a group, etc.) is performed
+with the data in process memory.
+When the 'Save' command is invoked, KeePass encrypts the data and sends
+the encrypted data to disk/server.
+This means that your data is transferred and stored only in encrypted form;
+the disk/server and network never see your unencrypted data.
+Does KeePass support one-time passwords?
+KeePass 1.x Only
+No.
+KeePass 2.x Only
+Yes. KeePass 2.x supports both generation and consumption of one-time passwords.
+Generation.
+KeePass can generate HMAC-based and time-based one-time passwords
+according to RFC 4226 and 6238. See the
+one-time password placeholders.
+There are plugins
+that add support for non-standard OTPs (e.g. Steam) and
+provide additional functions related to OTPs.
+Consumption.
+Your KeePass database can be protected such that one-time passwords are
+required to open it. See the
+OtpKeyProv plugin.
+Where do the clipboard options apply?
+The clipboard options of KeePass (in 'Tools' &rarr; 'Options')
+apply to entry clipboard commands in the main window
+(like 'Copy User Name' and 'Copy Password').
+Other clipboard operations (like pressing Ctrl+C
+in a text box of the entry editing dialog) are handled by the
+framework and the operating system; the clipboard options of KeePass
+do not apply here.
+Why is the clipboard not cleared after the specified time or when exiting?
+Both KeePass 1.x and 2.x have options for clearing the clipboard
+after a specified time and/or when exiting.
+Own Content.
+The clipboard is only cleared if it still contains the last data
+copied by KeePass.
+For example, let the clearing delay be 30 seconds. When you copy a password
+to the clipboard, the countdown begins.
+If you copy something else to the clipboard before the 30 seconds have
+elapsed, KeePass will not clear the clipboard,
+because the password has been overwritten anyway.
+Primary Commands.
+See above.
+Interfering Applications.
+On all modern operating systems (Windows, Linux, ...), the clipboard
+is designed to be accessible by all applications.
+Other applications may save the clipboard contents and prevent
+the clipboard from being cleared.
+ClipMate.
+You can prevent ClipMate from saving clipboard contents by
+KeePass: in ClipMate Explorer, go 'Tools' &rarr; 'Application Profile',
+expand the 'KEEPASS' node and turn off all formats.
+Ditto.
+Ditto can be prevented from saving clipboard contents by
+KeePass as follows: open the Ditto options dialog
+&rarr; tab 'General' &rarr; in the group box 'Accepted Copy Applications'
+enter 'KeePass.exe' in the 'Exclude' field.
+Klipper.
+If you're using Klipper (clipboard manager for KDE), this tool might
+prevent the clipboard from being cleared.
+You can disable this (i.e. allow clearing) by clicking the
+Klipper tray icon &rarr; 'Configure Klipper' &rarr;
+deactivate 'Prevent empty clipboard'. In this dialog, you furthermore might
+want to deactivate 'Save clipboard contents on exit' and
+reduce 'Clipboard history size' to 1, in order to prevent any sensitive
+data (e.g. passwords) from being saved.
+Parcellite.
+You can disable history saving by right-clicking the Parcellite
+tray icon &rarr; 'Preferences' &rarr; deactivate 'Save history'.
+KeePass 2.x Only
+If your clipboard manager does not support excluding applications,
+you could try turning on the KeePass option 'Use Clipboard Viewer Ignore
+clipboard format' (in 'Tools' &rarr; 'Options' &rarr; tab 'Security').
+When this option turned on, some clipboard managers ignore the
+clipboard contents stored by KeePass.
+However, please note that some applications may be confused by
+the format and may crash (for example, some old versions of Microsoft
+Office are known to crash).
+Can I create a database without a master key?
+All KeePass databases are encrypted; a master key is mandatory.
+If you don't want to enter a master key during opening a database,
+there are two alternatives to achieve this:
+If the database is protected using a master password only, create a batch
+file or a shortcut to KeePass.exe, specifying the database path
+and the master password as command line options.
+Once such a batch file or shortcut has been created, double-clicking it
+is sufficient to open the database; the master key dialog doesn't appear.
+By default, KeePass remembers the location of
+key files.
+You could make your database being protected using a key file only.
+It then is sufficient to simply click the [OK] button in the master key
+dialog (as the key file location has been remembered and is preselected).
+Would client-server login behaviors increase security?
+Most login behaviors known from client-server systems would not
+increase the security of KeePass.
+When an attacker gets a copy of your database file (which is reasonable
+to assume, especially due to the trend towards cloud storage), most client-server login
+behaviors can be circumvented by an attacker by writing an own program that
+simply does not perform these behaviors.
+Examples:
+Artificial delays.
+When entering an incorrect password, some systems artificially delay
+the key verification in order to slow down an attacker trying to guess
+the password.
+Implementing this in KeePass would be useless, because an attacker can
+write an own program that does not perform these delays.
+Self-destruct / Permanent block (with stronger key).
+After entering several incorrect passwords, some systems destroy themselves
+or require a stronger key for unlocking (known especially from mobile phones).
+Implementing this in KeePass would be useless, because an attacker can
+write an own program that does not perform the self-destruct or permanent block.
+Instead of such behaviors, users should use a strong master key and
+use the protections offered by KeePass (relying on cryptography),
+which in contrast to the above behaviors cannot be circumvented easily.
+For example, by specifying a high number of master key transformation
+rounds, the key derivation requires more computations (more time) and thus reduces
+an attacker's capability to guess the master password; see
+Protection against Dictionary Attacks
+for details.
+Shouldn't password generation profiles be stored in the database?
+The password generation profiles
+must be stored independent of any database, such that they are always
+available (for all databases, and in the case when no database is opened).
+You should always assume that an attacker knows the profile
+that was used for generating a password.
+For example, profiles are often specified by the website that the password is for,
+and thus the profile is public.
+Trying to keep the profile secret would be security by obscurity, i.e.
+would be ineffective.
+Security comes from picking a random password from the space of passwords
+fulfilling the public constraints.
+You should always use a profile that restricts passwords as few as possible.
+Can a specific database be opened when KeePass starts?
+By default, the option 'Remember and automatically open last used
+database on startup' is enabled.
+If you are frequently using multiple databases,
+it may be more convenient though to automatically
+open a specific database instead of the last used one.
+This can be realized using a shortcut:
+Using Windows File Explorer, create a shortcut to the KeePass.exe
+file (which is stored in the KeePass application directory).
+Move the shortcut to a location of your choice, e.g. onto the desktop.
+Right-click on the shortcut &rarr; 'Properties' &rarr; tab 'Shortcut'.
+In the 'Target' textbox, append a space and the path of the database file that KeePass
+should open. If the database file path contains spaces, it must be enclosed
+in quotes (").
+When you now double-click the shortcut, KeePass starts and attempts
+to open the database specified in the shortcut.
+For advanced options (e.g. preselecting a key file), see the
+command line documentation.
+KeePass 2.x Only
+For KeePass 2.x, there exists an alternative solution using a trigger:
+Turn off the option 'Remember and automatically open last used
+database on startup' (in 'Tools' &rarr; 'Options' &rarr; tab 'Advanced').
+Go 'Tools' &rarr; 'Triggers' &rarr; button 'Add'.
+Enter a name for the new trigger, e.g. 'Open specific database'.
+Switch to the 'Events' tab and add the event 'Application started and ready'.
+Switch to the 'Actions' tab and add an 'Open database file' action.
+In the action details, set the parameter 'File/URL' to the path of the
+database file that KeePass should open when it is started.
+KeePass 2.x Only
+Opening multiple specific databases at KeePass startup can for example be
+realized using the trigger approach above (with multiple trigger actions) or
+using the KeeAutoExec plugin.
+Can specific entries be displayed when opening a database?
+By default, KeePass remembers the view (selected group and scroll positions)
+when saving the database file. When opening the database file the next time,
+this view is restored.
+So, if you want a specific view when opening the database file, make sure
+that this view is active when saving the database file.
+Alternatively, you can specify the entries explicitly that you want
+to be displayed when opening a database file. See the help section
+'Tags'.
+Can the database be saved automatically?
+There are multiple ways to save a database automatically:
+Save when closing.
+If you want the database to be saved automatically when closing/locking it,
+turn on the option 'Automatically save when closing/locking the database'
+(in 'Tools' &rarr; 'Options' &rarr; tab 'Advanced').
+If this option is turned off, KeePass asks whether you want to save
+the database.
+After modifying an entry.
+If you want the database to be saved immediately after creating or
+modifying an entry, turn on the option 'Automatically save after modifying
+an entry using the entry editing dialog'
+(in 'Tools' &rarr; 'Options' &rarr; tab 'Advanced').
+Periodic.
+If you want the database to be saved periodically, you can create a
+trigger for this
+(with the event 'Time - Periodic').
+This approach is for experts; for most users, the two options above
+are recommended instead.
+Why save/sync fails with a temporary Internet files error?
+Symptoms.
+When trying to save/sync a database file opened from a mobile device or server,
+an error message is shown that the access to a path is denied and the path
+looks like
+C:\Users\User\AppData\Local\Microsoft\Windows\Temporary Internet
+Files\Content.IE5\ABCDEFGH\Database.kdb(x)
+Cause.
+The mobile device / server does not allow direct access to the file.
+Windows downloads the file into the temporary Internet files directory and
+lets KeePass open this local copy.
+However, Windows cannot copy modified versions of the local file back to
+the mobile device / server and thus prevents write access to the local file
+(and therefore KeePass shows that access to the file has been denied).
+Resolutions.
+Find a way to open the file of the mobile device / server regularly, i.e.
+using a standard path (consisting of a drive letter, ":\", path,
+database file name).
+There might be drivers coming with the mobile device / service
+that provide this.
+With such a driver, all applications (including KeePass) can open and save
+files normally.
+Alternatively, store your database in a cloud storage service.
+For example, for almost all mobile devices there is Dropbox available;
+opening and saving databases from/to Dropbox usually works well.
+If your database master key is strong, storing the database in the cloud
+is not a security problem.
+What is a file transaction?
+For writing a database file or a configuration file, KeePass can perform a
+file transaction. If file transactions are enabled (which is the case by default),
+KeePass first writes the new content to a temporary file and then replaces the
+database/configuration file by the temporary file.
+This approach reduces the risk of data loss significantly.
+If any error occurs while writing to the temporary file (computer crash,
+power failure, etc.), the existing file is still intact.
+However, there are a few scenarios where file transactions are unsuitable.
+Examples:
+If there is insufficient free disk space for the temporary file,
+a file transaction fails.
+Recommended solution:
+ensure that there is sufficient free disk space.
+If the file is stored on a server (including NAS systems), renaming the
+temporary file may fail.
+Recommended solution:
+ask the administrator of the server. Most standard protocols (WebDAV, FTP, ...)
+support renaming files, so this problem is probably specific to the server.
+Under certain circumstances, file properties (attributes such as 'Hidden',
+access control list, etc.) may be lost.
+Recommended solution:
+assign the properties to the parent folder instead of the file.
+In the case of a custom access control list, ensure inheritance.
+Note:
+if the restoration of file properties fails, no error message is displayed,
+for two reasons.
+Firstly, setting file properties often fails. For example, other software that
+opens/manipulates the file (anti-virus, cloud synchronization, backup, ...)
+may interfere.
+Secondly, setting file properties may be disallowed (e.g. when an administrator
+has specified an access control list for the parent folder that disallows
+setting file properties), and KeePass cannot know whether this is intended or not.
+If there is a problem with file transactions on your system and if there
+is no other solution, consider disabling file transactions
+(main menu 'Tools' &rarr; 'Options' &rarr; tab 'Advanced' &rarr; deactivate
+'Use file transactions for writing databases' and/or
+'Use file transactions for writing configuration settings').
+This increases the compatibility, but also increases the risk of data loss.
+In any case, create backups regularly.
+How to import/export a KDB file that is encrypted using Twofish?
+KeePass 2.x does not include an implementation of the Twofish encryption
+algorithm by default.
+If you are using KeePass 2.x and want to import a KeePass 1.x KDB file that
+has been encrypted using Twofish, there are two different approaches:
+Open your KDB file in KeePass 1.x, click 'File' &rarr; 'Database Settings',
+change the encryption algorithm to the Advanced Encryption Standard (AES) and
+save the file. You can then import the KDB file with KeePass 2.x.
+Alternatively, install the
+Twofish Cipher plugin, which
+adds support for the Twofish encryption algorithm.
+KeePass 2.x uses Twofish when exporting a KDB file if and only if the
+KDBX file is encrypted using Twofish.
+Can specific entries be exported/printed?
+You can export/print specific
+entries as follows:
+Make sure that all entries that you want to export/print are displayed
+in the entry list of the main window
+(e.g. by performing a search,
+selecting a tag
+or showing all entries via the main menu item 'Find' &rarr; 'All').
+Select the entries that you want to export/print (e.g. all by using the
+command 'Select All' / Ctrl+A).
+In the main menu, click 'Entry' &rarr; 'Data Exchange' &rarr;
+'Export Entries' or 'Print Entries'.
+If you want to export/print all entries of a specific group instead, select
+the group and click the main menu item 'Group' &rarr; 'Data Exchange' &rarr;
+'Export Group' or 'Print Group'.
+If you want to export/print all entries instead, click the main menu item
+'File' &rarr; 'Export' or 'Print'.
+Where are Windows favorites exported to?
+KeePass 2.x supports two export formats
+"Windows Favorites (Folder 'KeePass')"
+and "Windows Favorites (Root Directory)".
+For both formats the export destination is determined already by the type,
+thus the 'Export to' field is disabled.
+The first format creates a folder 'KeePass' within the root directory
+of your Windows favorites, and creates groups and entry links in this folder.
+In contrast, the second format creates groups and entry links
+directly in the root directory of your Windows favorites.
+If you want to try out these exports, it is recommended to try
+the 'KeePass' folder format first (because if you don't like it, you
+can simply delete the 'KeePass' folder).
+In Internet Explorer, the favorites are shown in the 'Favorites' menu.
+How to avoid storing credentials in triggers unencryptedly?
+For some trigger actions, credentials can
+be specified as parameters
+(e.g. the 'Open database file' trigger action optionally allows to specify
+the master password for the database file to be opened using the
+'Password' parameter).
+Trigger parameters are stored unencryptedly in the
+configuration file,
+because KeePass doesn't have any key to encrypt them
+(the user enters the master key for a database; there is no key for the
+whole application).
+When the trigger runs, often there currently is a database
+file opened. In this case, instead of storing credentials directly in the trigger
+parameters, you can store them in the opened database
+and reference them in the trigger parameters using
+field references.
+For example, assume that you wish to automatically open a file B.kdbx
+after opening a file A.kdbx. You can store the master password
+for B.kdbx in the password field of an entry with title 'B.kdbx Info'
+in the A.kdbx file. Then, create a trigger for the event
+'Opened database file' with the file/URL containing 'A.kdbx', and
+add an action 'Open database file' for B.kdbx with the
+'Password' parameter being set to '{REF:P@T:B.kdbx Info}'.
+When the trigger runs, KeePass automatically retrieves the master password
+for B.kdbx from the entry in A.kdbx;
+only the reference is stored in the configuration file.
+Copyright © 2003-2026 Dominik Reichl.
+[Legal Contact / Imprint]
+[Terms & Privacy]
+[Acknowledgements]
+[Donate]

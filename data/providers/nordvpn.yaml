@@ -33,7 +33,7 @@
 # article ("Our pricing is shown in USD, GBP, AUD ... and CAD, depending on the country you are accessing our website.");
 # 6. Edge, and a plain fetch (403); 7. no bill offered.
 # Bundles: none sold as a bundle of separate catalog plans; its plans include NordPass and NordLocker (Complete and up),
-# which aren't catalog providers yet, so they're features (password-manager, storage.cloud), not includes-subscription.
+# NordPass is a catalog provider now (includes-subscription, below); NordLocker isn't yet, so it's storage.cloud.
 # Official resellers: nordvpn.com/retail/ ("Where to buy") names BestBuy, Staples, MicroCenter, NewEgg and Amazon in the
 # US, Amazon in the UK, BestBuy, Staples, NewEgg, London Drugs, The Source and Amazon in Canada, MediaMarkt, Saturn,
 # Euronics and Amazon in Germany, Licentie2GO in the Netherlands and Amazon in Italy, France and Spain; their offers
@@ -127,6 +127,10 @@ renewalAnchor:
     - 'Such payments are billed annually (up to 14 days before the renewal) or monthly depending on your billing cycle.'
   chargedBefore: { days: 14, upTo: true }
   lastVerified: 2026-11-19
+# NordPass (2026-11-20): Complete and every plan built on it include NordPass, now its own provider, so they list it in
+# includes-subscription (the owner's standing rule for a perk that is another provider's plan). No Nord page names the
+# tier; it's taken to be NordPass Premium (inferred, as the password features below): the comparison's "Syncs and backs
+# up passwords across all your devices automatically." against NordPass Free's "one active session on one device".
 # Owner (M11.2), read 2026-11-19: its press page says "NordVPN is brought to you by Nord Security"; nordsecurity.com's
 # trademark policy (quoted, the review of 2026-11-19) defines it as "NordSec B.V. and/or its affiliates (together “Nord
 # Security”)", and its privacy policy gives NordSec B.V.'s Amsterdam address (the country). Its General Terms and
@@ -231,6 +235,25 @@ perks:
 # "Cross-platform password manager" (NordPass), "1 TB of encrypted cloud storage" (NordLocker) and "Dark Web Monitor
 # Pro™"; every plan has "Dark Web Monitor™" ("Monitor up to 5 emails"). Categories (M11.3): Basic is a VPN; Complete and
 # up are also an antivirus (security), a password manager (passwords) and cloud storage (storage).
+# The password and authenticator features and end-to-end encryption added 2026-11-19 (the owner's design,
+# categories.md), read that day with Edge from Canada (nordvpn.com/pricing) and in NordPass's help centre, for Complete
+# and up's NordPass and NordLocker:
+# - NordPass imports other managers' files ("LastPass: CSV", "Keeper: CSV, JSON", "Bitwarden: CSV, JSON" and more;
+#   KeePass's as "CSV, XML", not .kdbx) and, on iOS, by the Credential Exchange ("For apps that don’t support CXP, use
+#   the NordPass browser extension to import a CSV file."), How to import passwords to NordPass. It exports "the .CSV
+#   file" (How to export passwords from NordPass?).
+# - Offline: "you can still access your items with Offline Mode even if you are not connected to a network" (How to use
+#   Offline Mode).
+# - Emergency access and the authenticator, inferred: they're Premium's ("The Premium version also offers additional
+#   security features, such as:" "Authenticator" and "Emergency Access", Premium vs Free version of NordPass), and the
+#   plans' password manager "Syncs and backs up passwords across all your devices automatically." (the pricing page's
+#   comparison), where "NordPass Free: This version only allows users to have one active session on one device." No page
+#   names the NordPass plan included (notes.md). Its authenticator takes a code or a QR code ("Alternatively, if you are
+#   using a mobile application, tap the “Scan QR code” button", How to use NordPass Authenticator); no export of the
+#   codes is named. Premium's item types, password health and sharing (nordpass.premium's) are inferred the same way.
+# - End-to-end: NordPass ("With zero-knowledge architecture, you're the only one who can see what's in your vault", What
+#   is a zero-knowledge architecture?) and NordLocker ("Secures all types of files with end-to-end encryption and keeps
+#   them handy in a private, zero-knowledge cloud.", the pricing page).
 plans:
   - id: nordvpn.basic
     name: Basic
@@ -431,6 +454,7 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features: &complete
+      includes-subscription: [nordpass.premium]
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -453,8 +477,51 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, email-alias]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [files, passwords]
       storage.cloud: 1000
       security.dark-web-monitoring: true
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.item-types:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, whose item types these are.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.health:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which checks for breached, weak, reused and old passwords.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.sharing:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which shares with other users and by link, with expiry, view limits and access roles.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     notes: 'The VPN with a next-gen antivirus (desktop only), scam protection for email, calls and texts, a password manager, 1 TB of encrypted cloud storage and Dark Web Monitor Pro. In the US it also monitors your bank and card transactions.'
     addOnIds: [nordvpn.dedicated-ip]
     prices:
@@ -633,6 +700,7 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features:
+      includes-subscription: [nordpass.premium]
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -655,9 +723,52 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, email-alias]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [files, passwords]
       storage.cloud: 1000
       security.dark-web-monitoring: true
       security.data-exposure: [removal]
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.item-types:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, whose item types these are.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.health:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which checks for breached, weak, reused and old passwords.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.sharing:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which shares with other users and by link, with expiry, view limits and access roles.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     notes: 'Complete plus Incogni Standard, which asks data brokers and people search sites to remove your personal data.'
     addOnIds: [nordvpn.dedicated-ip]
     prices:
@@ -717,6 +828,7 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features:
+      includes-subscription: [nordpass.premium]
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -739,11 +851,54 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, email-alias]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [files, passwords]
       storage.cloud: 1000
       security.dark-web-monitoring: true
       security.identity-theft-insurance: 1
       security.credit-monitoring: 1
       security.identity-restoration: true
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.item-types:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, whose item types these are.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.health:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which checks for breached, weak, reused and old passwords.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.sharing:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which shares with other users and by link, with expiry, view limits and access roles.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     perks:
       [
         credit-freeze-assistance,
@@ -778,6 +933,37 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features: *complete
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.item-types:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, whose item types these are.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.health:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which checks for breached, weak, reused and old passwords.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.sharing:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which shares with other users and by link, with expiry, view limits and access roles.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     perks: [dedicated-ip, cyber-insurance]
     notes: 'Complete plus a dedicated IP address and cyber insurance for scam losses and identity theft recovery (up to £5,000 in the UK).'
     prices:
@@ -851,6 +1037,37 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features: *complete
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.item-types:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, whose item types these are.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.health:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which checks for breached, weak, reused and old passwords.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.sharing:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which shares with other users and by link, with expiry, view limits and access roles.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     perks: [dedicated-ip]
     notes: 'Complete plus a dedicated IP address.'
     prices:

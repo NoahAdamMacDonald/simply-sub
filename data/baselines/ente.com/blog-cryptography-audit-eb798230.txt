@@ -1,0 +1,49 @@
+url: https://ente.com/blog/cryptography-audit/
+method: fetch
+saved: 2026-11-19
+
+Ente successfully completes a security audit
+Download
+PricingBlogAboutHelpLogin
+PricingBlogAboutDownloadHelp
+30k Sign up
+Ente successfully completes a security audit
+March 22, 2023
+vishnu@ente.com
+We're happy to announce that Ente's architecture and source
+code have been successfully audited by Cure53, in
+collaboration with Symbolic Software.
+Cure53 is a leading German cybersecurity firm and Symbolic
+Software is a French software consultancy that
+focuses on applied cryptography and building incredibly hard puzzles.
+Together they have certified that Ente's architecture is sound and that our
+implementation across all clients is cryptographically accurate.
+We are proud to have received this attestation from two prestigious
+organizations. Your data is and always has been end-to-end encrypted on Ente.
+The only high severity issue that was discovered during the audit was that we
+were allowing users to set weak passwords within our web app. This is a high
+severity issue because weak passwords can be brute forced. We've deployed a
+fix that prevents setting of
+weak passwords, and this has been verified by the auditors.
+The two medium severity issues that were pointed out were already known and have
+limited impact in the present day. Implementing these recommendations will
+harden our protocols further by scoping the impact of compromised encryption
+keys, so we intend to incorporate them in the future.
+We would like to take this opportunity to credit
+libsodium, the library we rely on to perform all
+of our cryptographic operations. It exposes high level primitives that make it
+hard to make mistakes, and we strongly recommend anyone attempting to build an
+end-to-end encrypted service to read their documentation.
+Coming back to the audit, you can find the original report that was shared with
+us here.
+We are grateful that we got an opportunity to work with Dr. Nadim Kobeiassi and
+Dr.-Ing. Mario Heiderich. They are masters of their domain, and we hope for more
+opportunities to collaborate in the future.
+Back to all posts
+CompanyAboutNewsJobsMedia Kit
+ProductsPhotosAuthLockerEnsu
+ExploreFriendsToysShopTalks
+Open SourceMobileWebDesktopCLI
+TechnologyEncryptionReplicationMachine learning
+CompareGoogle Photos vs EnteApple Photos vs EnteDropbox vs Ente
+ContactHelpArticlesPrivacyTerms

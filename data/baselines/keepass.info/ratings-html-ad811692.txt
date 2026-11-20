@@ -1,0 +1,293 @@
+url: https://keepass.info/ratings.html
+method: browser
+saved: 2026-11-19
+
+KeePass
+Password Safe
+Home
+Home & News
+Forums
+Feature List
+Screenshots
+Getting KeePass
+Downloads
+Translations
+Plugins / Ext.
+Information / WWW
+Help
+FAQ
+Security
+Awards
+Links
+Support KeePass
+Donate
+Awards, Ratings and Opinions
+Awards and Ratings
+Awards and Ratings (Archive)
+User Opinions
+Awards and Ratings
+The German Federal Office for Information Security (Bundesamt für Sicherheit in der Informationstechnik, BSI) and mgm security partners have sponsored and performed a code analysis of KeePass 2.x. No security vulnerabilities classified as medium, high or critical were found, but various minor improvements were implemented. For details, see the KeePass 2.57.1 changelog and the KeePass 2.57.1 release notes.
+KeePass has received the Certification de Sécurité de Premier Niveau (CSPN) by the French Cybersecurity Agency (Agence Nationale de la Sécurité des Systèmes d'Information, ANSSI).
+Furthermore, KeePass is on the list of recommended free software for French public agencies (Socle Interministériel de Logiciels Libres, SILL) of the French Interministerial Digital Directorate (Direction Interministérielle du Numérique, DINUM).
+Furthermore, KeePass is recommended by Cybermalveillance.gouv.fr.
+The European Commission has sponsored bounties for finding security vulnerabilities in KeePass 2.x (EU-FOSSA 2 project) in 2019-2020. A few minor issues were found and fixed.
+KeePass has been audited in the European Commission's Free and Open Source Software Auditing (EU-FOSSA 1) project. No security issues were found, see the Project Deliveries (KeePass Summary and the full Code Review Results Report).
+KeePass is one of the winners of the Second ZEISS FOSS Funding Campaign.
+KeePass has received the Open Source Excellence award of SourceForge.
+KeePass is on the Best Windows Software list on MakeUseOf.
+KeePass is the #1 Recommended Password Manager on HowToAnswer.
+KeePass is the Default Recommendation as 'Password Management' software in RadarSync.
+Rated (Excellent) at SnapFiles.com.
+Best Pick award of BetaNews FileForum.
+KeePass is certified by Softpedia.com. It has been rated Excellent by users at Softpedia.com.
+KeePass is rated 5/5 by FossHub/DownloadBestSoft.
+Rated 6/6 at WinTotal.de. KeePass 1.x has received the 05-34 award.
+Rated 6/6 at WinTotal.de. KeePass 2.x has received the 10-21 award.
+KeePass has received the pricetip award in the "Password Safes" category by CHIP.de.
+KeePass is a Top Download and Editor's Tip at Computer Bild.
+KeePass is Editor's Pick at Top 4 Download.
+KeePass has received the Top Download award by Winsoftware.
+KeePass is Editor's Pick at Windows7Download.
+KeePass is Editor's Pick at Software Informer.
+KeePass is Editors' Pick at Download3k.
+KeePass is rated 5/5 at Soft Famous.
+KeePass is rated 5/5 at GearDownload.
+KeePass won in the Best Password managers category in 2010 on Download3k.
+KeePass is rated 5/5 at GIGA.
+KeePass is rated 5/5 by users on UpdateStar.
+KeePass is rated 5/5 at Programosy.
+KeePass is Editors Choice at Instalki.pl.
+KeePass is rated 5/5 (Essential) by the editors at FindMySoft.
+KeePass is rated Very Good at Netzsieger.
+KeePass is Editor's Pick at FileSoul.
+KeePass is rated 5/5 at ILoveFreeSoftware.
+KeePass is rated 5/5 at Download.io (Download.hr).
+KeePass is rated 5/5 by the editors at VPN Pick.
+KeePass is rated 5/5 by the editors at ListOfFreeware.
+KeePass is rated 5/5 at FileHorse.
+KeePass is rated Excellent (5/5) at Place77.
+KeePass is rated Very Good at Softonic.
+KeePass is Editor's Choice at ProPrivacy.
+KeePass is Editors Pick at Netzwelt.
+KeePass is rated 10/10 at Comparitech.
+KeePass is rated 5/5 at VPN Crew.
+KeePass is Editor's Choice at CardRates.
+KeePass has received the Developers' Choice award of HostingAdvice.
+KeePass is a Leader in the Password Manager Software category on G2.
+KeePass is Editors' Pick at Windows 10 Download.
+KeePass is Editor's Pick at Sooftware.
+KeePass is rated Excellent (5/5) at Lo4d.com.
+KeePass is Editor's Choice at MadDownload.
+KeePass is the #1 Password Manager at WindowsHelper.
+KeePass is rated 5/5 at Files Mint.
+KeePass is rated 5/5 at Softonline.
+KeePass is rated 5/5 at SoftFamed.
+KeePass has received the High Rating award of Downzen.
+KeePass is Editors' Pick at TechSpot.
+KeePass has received the Best Software award of GraphicsFamily.
+KeePass is Top Pick at RushRadar.
+Awards and Ratings (Archive)
+KeePass has been granted the following awards and ratings, but the websites do not exist anymore.
+KeePass is the recommended password manager in the BSI Cyber Security Recommendations BSI-CS 003 2.0 by the German Federal Office for Information Security (Bundesamt für Sicherheit in der Informationstechnik, BSI).
+https://www.allianz-fuer-cybersicherheit.de/SharedDocs/Downloads/Webs/ACS/DE/BSI-CS/BSI-CS_003.html
+[On Archive.org]
+KeePass is recommended by the Swiss Federal Office of Information Technology, Systems and Telecommunication (FOITT/BIT) and the Federal IT Steering Unit (FITSU/ISB). It is installed by default on all PCs of the federal administration of Switzerland.
+https://www.bit.admin.ch/bit/de/home/dokumentation/kundenzeitschrift-eisbrecher/eisbrecher-archiv/kundenzeitschrift-eisbrecher-ausgabe-68/keepass.html
+[On Archive.org]
+Furthermore, see Eisbrecher 75: Sichere Passwörter.
+KeePass has been rated and is the #1 Editor's Choice in the 'Secure Password Management' category at All-Internet-Security.
+http://www.all-internet-security.com/secure_password_manager.asp
+[On Archive.org]
+KeePass has received the Pricelessware Award 2006 in the 'Password Managers' category.
+http://www.pricelesswarehome.org/2006/PL2006SECURITY.php#3995-PW
+[On Archive.org]
+KeePass has been reviewed in Lockergnome's Windows Fanatics Newsletter.
+http://channels.lockergnome.com/windows/backissues/20040316.phtml
+[On Archive.org]
+KeePass is on the Best Portable Apps list on MakeUseOf.
+http://www.makeuseof.com/pages/best-portable-apps
+[On Archive.org]
+Rated 5 of 5 by Download Picks.
+http://www.download-picks.com/22435/details-keepass-password-safe.html
+[On Archive.org]
+Rated 5 of 5 stars by FileFirm.
+http://www.filefirm.com/8864/details-keepass-password-safe.html
+[On Archive.org]
+KeePass was Freeware des Tages at Softwareload.
+http://download.softwareload.de/KeePass-Password-Safe/25246
+[On Archive.org]
+KeePass is Editor's Choice at Software Cocktail.
+http://www.softwarecocktail.com/keepass-password-safe-download-10649.html
+[On Archive.org]
+KeePass is rated Excellent at ComputerBacking.
+http://www.computerbacking.pytalhost.com/Joomla/index.php?option=com_content&view=article&id=351&Itemid=1
+[On Archive.org]
+KeePass is rated 5/5 at Softoxi.
+http://www.softoxi.com/keepass.html
+[On Archive.org]
+Rated 5/5 by LemonFiles.com.
+http://www.lemonfiles.com/22435/details-keepass-password-safe.html
+[On Archive.org]
+Rated 5/5 by Free-To-Try.com.
+http://www.free-to-try.com/22435/
+[On Archive.org]
+KeePass has received a 5/5 (Excellent) award by SoftDownload22.
+http://softdownload22.com/pagina_produs.php?variabila1=2840
+[On Archive.org]
+KeePass has received the Freeware Award by SoftwareKaufen.de.
+http://www.softwarekaufen.de/2009/06/keepass/
+[On Archive.org]
+KeePass is rated 5 of 5 stars at Download98.
+http://www.download98.com/Windows/Security-Privacy/Encryption-Tools/KeePass-Password-Safe_853.html
+[Not on Archive.org]
+KeePass has received the Best Free Software award by Zwodnik.
+http://www.zwodnik.com/software/windows/keepass/
+[Not on Archive.org]
+KeePass is rated 5/5 at DownloadsLava.
+http://www.downloadslava.com/download/keepass-2x
+[On Archive.org]
+KeePass is rated Best by the editors at Free Software Gallery.
+http://www.freesoftwaregallery.com/free-password-manager-software.html
+[On Archive.org]
+KeePass is rated 5/5 at SoftWorld.
+http://www.softworld.com/windows/security-software/password-managers/keepass/
+[On Archive.org]
+KeePass has been awarded and recommended as a top rated password manager software by Web Hosting Search.
+http://www.webhostingsearch.com/tools/keepass.php
+[On Archive.org]
+Best Of recommendation award in password management category by Netzwelt.
+http://www.netzwelt.de/news/72565_4-beste-sicherheits-freeware.html
+[On Archive.org]
+Rated 5 out of 5 WebTechGeeks at WebTechGeek.com.
+http://www.webtechgeek.com/Windows-Software-Review-Download-138.htm
+[On Archive.org]
+Rated 5 of 5 by DownloadMost.com.
+http://www.downloadmost.com/freeware/software/?KeePass%20Password%20Safe-8586.html
+[On Archive.org]
+KeePass is Editor's Pick at WareSeeker.
+http://wareseeker.com/Security-Privacy/keepass-password-safe-2.08.zip/36683552f
+[On Archive.org]
+KeePass is rated 5/5 at Freewarenetz.
+http://www.freewarenetz.de/keepass.html
+[On Archive.org]
+KeePass is Editor's Choice at SoftManiax.
+http://www.softmaniax.com/download/KeePass-2-x-/
+[On Archive.org]
+KeePass is rated 5/5 by the editors at Softmonk.
+http://en.softmonk.com/windows/keepass-password-safe/
+[On Archive.org]
+KeePass has been reviewed and has received the 5/5 stars award at FiberDownload.
+http://www.fiberdownload.com/Download/17738/KeePass
+[On Archive.org]
+KeePass is a 5/5 Featured Download at CHIP.eu.
+http://download.chip.eu/en/KeePass-Password-Safe-Professional_115574.html
+[On Archive.org]
+KeePass is rated Excellent by RoxySoft.
+http://www.roxysoft.com/download/KeePass_Password_Safe/
+[On Archive.org]
+KeePass is Editor's Choice at Download Atlas.
+http://www.downloadatlas.com/freeware-53677749.html
+[On Archive.org]
+KeePass has received an Excellent award by Download Route.
+http://www.downloadroute.com/KeePass-Password-Safe-Dominik-Reichl.html
+[On Archive.org]
+Editor's Pick of Brothersoft.
+http://www.brothersoft.com/keepass-password-safe-61477.html
+[On Archive.org]
+KeePass is a Top Product on pFind.
+http://www.pfind.com/profiles/keepass
+[On Archive.org]
+KeePass is rated 5/5 by PC District.
+https://www.pcdistrict.com/keepass-password-safe-prod110084.html
+[On Archive.org]
+KeePass is rated 5/5 at DownloadPipe.
+http://keepass.downloadpipe.com/
+[On Archive.org]
+KeePass is rated 5/5 at Pandia.
+http://www.pandia.com/password-management-software/keepass.html
+[On Archive.org]
+KeePass is the #1 password manager at InformedMag.
+https://informedmag.com/best-password-manager/
+[On Archive.org]
+KeePass is the #1 Recommended Password Manager on 2kReviews.
+https://www.2kreviews.com/10-best-password-managers-of-2018-stay-safe-and-secure-online/
+[On Archive.org]
+KeePass is rated 5/5 at Soft-Go.
+https://www.soft-go.com/view/KeePass-Password-Safe_103721.html
+[On Archive.org]
+KeePass is rated 5 of 5 stars at RoSoftDownload.
+https://www.rosoftdownload.com/download/Windows/KeePass-Password-Safe
+[On Archive.org]
+KeePass has received the Download Pick award of CNET Download.com.
+http://download.cnet.com/KeePass-Password-Safe-Professional/3000-2092_4-10916116.html
+[On Archive.org]
+KeePass is rated 5/5 stars at FileCroco.
+http://www.filecroco.com/download-keepass
+[On Archive.org]
+KeePass is Editors' Pick at FileCluster.
+http://www.filecluster.com/Security/Password-Managers/Download-KeePass-Password-Safe.html
+[On Archive.org]
+BluStor has chosen KeePass as password manager for their Identity Vault Card (formerly CyberGate Password Vault).
+https://identitycard.com/
+[On Archive.org] [On Amazon.com]
+KeePass is rated 5/5 at TopFreeware.
+https://win.topfreeware.com/keepass-password-safe/
+[On Archive.org]
+KeePass has received the Excellent award by Best Malware Removal Tools.
+http://www.bestmalwareremovaltools.com/awards/
+[On Archive.org]
+KeePass has received the Gold award by Thoroughly Reviewed.
+https://thoroughlyreviewed.com/software/best-password-manager/
+[On Archive.org]
+KeePass has been granted the Famous Software Award by FamousWhy.
+http://download.famouswhy.com/keepass_password_safe/
+[On Archive.org]
+KeePass is Editor's Pick at Download Typhoon.
+https://www.downloadtyphoon.com/portable-keepass-password-safe/infoargpqrfp
+[On Archive.org]
+KeePass has received the Five Star Award by DownloadsArea.
+http://www.downloadsarea.com/KeePass-2-x/
+[On Archive.org]
+Rated 5/5 by Shareup.com.
+http://www.shareup.com/KeePass-download-28456.html
+[On Archive.org]
+KeePass is rated 4.9/5 by the editors of Freeware.de.
+https://www.freeware.de/download/keepass-password-safe/
+[On Archive.org]
+Rated 5 of 5 (excellent) by Soft82.com.
+http://www.soft82.com/download/windows/keepass/
+[On Archive.org]
+KeePass is rated 5/5 at DownloadAstro.
+https://keepass.en.downloadastro.com/
+[On Archive.org]
+KeePass is rated 5/5 at Nowload.
+https://www.nowload.de/details/keepass-2-31/
+[On Archive.org]
+KeePass is Editor's Pick at SoftSea.
+https://www.softsea.com/review/KeePass-Password-Safe.html
+[On Archive.org]
+KeePass is rated 5 of 5 stars at Soft32Download.
+[On Archive.org]
+KeePass is rated 5/5 at FindSoft.
+[On Archive.org]
+KeePass is Editors' Pick at CanadianContent.
+[On Archive.org]
+KeePass is rated 5/5 by the editors at Rocky Bytes.
+[On Archive.org]
+KeePass is Editor's Pick at Windows 8 Downloads.
+[On Archive.org]
+User Opinions
+Jeb54321 in the KeePass forums:
+KeePass gives me a sense of security I haven't found in any other product (2 page long comment).
+Erez Zukerman in his article 'Review: KeePass makes strong passwords and keeps them safe':
+If you adopt just one security tool this year, make it KeePass. This free and open-source password manager is available for Windows, with unofficial ports for iOS, Android, Linux, and Mac OS X. A secure, lengthy, completely random password goes a long way towards improving your security - and having a separate password for each and every website and service you use is the single most important thing you can do to keep secure.
+KeePass has been recommended in an article by security.itworld.com:
+One password vault that is receiving quite a bit of attention and has been getting good reviews is "KeePass". KeePass is an open source password vault for Windows. It appears to be developed with attention to security and features some very useful functions, such as cut and pasting of passwords with a clipboard wipe after a few moments, strong encryption and the ability to access password databases stored on network servers instead of local hard disks. If this technology interests you, KeePass might be a good place to start looking.
+Nicholas at SnapFiles.com in his review 'Private fort knox':
+Yes! This is the one! After trying a few other (awkward) password keepers I discovered KeePass and found out quickly that this program is useful, reliable, user friendly and very safe. It reveals passwords and other secrets only for a very short time on the clipboard, just long enough to paste it into a waiting password field. From now on I never have to click buttons with texts like: Forget Password? Very valuable and free!
+NothinsEasy at SnapFiles.com in his review 'Excellent security tool':
+KeePass ranks with the best freeware software and surpasses many commercial products. I've evaluated software and security for many years, and one truth is, that any effective security effort reduces convenience. Passwords are so inconvenient that we are all tempted to use and reuse passwords that are "weak", duplicate and virtually useless. Today's hacking and identity theft events should be enough to encourage most to try a product like KeePass. The only sensible way to start is to read over the comprehensive KeePass documentation and try to learn enough so that the methods that you choose to create, organize and use numerous passwords are consistent with, and exploit KeePass features. This chore should be less unpleasant since KeePass is a well documented, well designed, apparently reliable product.
+Chameleon Web Services:
+KeePass is our number 1 choice of password safe software as the features that it offers, coupled with the fact that it is a free open source application, give us complete satisfaction and peace of mind.
+Note: most of the images above are copyrighted by the linked sites. The author of the KeePass website (including this page) is not responsible for the contents of the linked pages; visit on your own risk.
+Copyright © 2003-2026 Dominik Reichl. [Legal Contact / Imprint] [Terms & Privacy] [Acknowledgements] [Donate]

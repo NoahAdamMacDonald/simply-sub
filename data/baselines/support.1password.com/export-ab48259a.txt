@@ -1,0 +1,200 @@
+url: https://support.1password.com/export/
+method: fetch
+saved: 2026-11-19
+
+How to export your data from the 1Password apps | 1Password Support Skip to main content
+Your browser is out of date. For the best experience, upgrade your browser now.
+Menu Home
+Tour
+Families
+Business
+Developers
+Pricing
+Security
+Download
+Support
+Blog
+Sign in
+Sign in
+Get started free
+1Password Support
+Popular searches
+Export
+Forgot password
+Virtual cards
+Secret Key
+Passkeys
+Emergency Kit
+Two-factor authentication
+Change password
+On this page
+Using 1Password
+Learn more
+How to export your data from the 1Password apps
+[export]
+How to export your data from the 1Password apps You can export your information from the 1Password apps if you want to move it to a different app.
+Using 1PasswordLearn more Tip
+Keeping your data in 1Password? You don’t have to export anything. There’s an easier way to move your data within 1Password. You can also download the 1Password app to access it on another device.
+Instructions for
+Mac
+Windows
+iOS
+Android
+Linux
+Important
+Exported data files are not encrypted. They are stored in plaintext. Anyone with access to your exported data files will be able to read your passwords. Do not email exported data files or store them online. Delete them when you are done with them.
+1Password 8
+1Password 8 exports to the 1Password Unencrypted Export (.1pux) format or a comma-separated values (CSV) file. The CSV format supports a limited set of fields and will only export Login and Password items. To export your 1Password data in 1Password 8:
+Open and unlock the 1Password app on your Mac.
+Select File > Export in the menu bar and choose the account you want to export.
+Enter your account password. If you unlock 1Password with SSO, select Sign in with [your identity provider] and follow the steps to sign in.
+Choose an export format (1PUX or CSV), then select Export Data.
+Choose where you want to export your 1Password data, then select Open.
+1Password 7
+Important
+Starting in early 2027, 1Password 7 will be retired. If you continue to use 1Password 7 after this time, it’ll no longer reflect any changes you make in your 1Password account.
+Learn how to upgrade to 1Password 8 to avoid any disruptions to your 1Password experience.
+To export your 1Password data from 1Password 7:
+Open and unlock the 1Password app on your Mac.
+Choose the vault you want to export. It’s not possible to export from “All Vaults”, so you’ll need to switch to a specific vault.
+Select File > Export > All Items in the menu bar. If you belong to a team account, there may be some vaults where you don’t have the “Export items” permission. Ask your team administrator.
+Enter your 1Password account password.
+Choose a file format: 1Password Interchange Format (.1pif) to move data to another copy of 1Password.
+Comma Delimited Text (.csv) to move data to a different app.
+Tab Delimited Text (.txt) to move data to a different app.
+Select Save.
+Important
+Exporting data in 1Password for iOS requires iOS or iPadOS 26 or later.
+1Password for iOS exports through the Credential Exchange standard. This allows you to transfer a copy of your data directly to other supported apps, including your passkeys. Your items stay in 1Password after you transfer the copy.
+To export your 1Password data in 1Password for iOS:
+Open and unlock the 1Password app on your iPhone or iPad.
+Select the icon for your account or collection at the top left, then select Settings.
+Select Advanced, then select Start Export and follow the onscreen instructions.
+Important
+Exported data files are not encrypted. They are stored in plaintext. Anyone with access to your exported data files will be able to read your passwords. Do not email exported data files or store them online. Delete them when you are done with them.
+1Password 8
+1Password 8 exports to the 1Password Unencrypted Export (.1pux) format or a comma-separated values (CSV) file. The CSV format supports a limited set of fields and will only export Login and Password items. To export your 1Password data in 1Password 8:
+Open and unlock the 1Password app on your PC.
+Select the ellipsis at the top of the sidebar, then Export and choose the account you want to export.
+Enter your account password. If you unlock 1Password with SSO, select Sign in with [your identity provider] and follow the steps to sign in.
+Choose an export format (1PUX or CSV), then select Export Data.
+Choose where you want to export your 1Password data, then select Open.
+If you need your data in a format you can import into 1Password, follow the steps to export to a 1PIF file using 1Password 7. 1Password 7 can import from 1PIF files.
+1Password 7
+Important
+Starting in early 2027, 1Password 7 will be retired. If you continue to use 1Password 7 after this time, it’ll no longer reflect any changes you make in your 1Password account.
+Learn how to upgrade to 1Password 8 to avoid any disruptions to your 1Password experience.
+To export your 1Password data in 1Password 7:
+Open and unlock the 1Password app on your PC.
+Choose the items you want to export. Select multiple items by holding down the Ctrl key when selecting them. Select all the items by pressingCtrlA after selecting one of the items in the list.
+Right-click the selected item(s), then select Export.
+Enter your account password.
+Choose where you want to export your 1Password data and choose an export format: 1Password Interchange Format (.1pif) to move data to another copy of 1Password.
+Comma Delimited Text (.csv) to move data to a different app.
+Tab Delimited Text (.txt) to move data to a different app.
+Enter a filename, then select Save.
+1Password 4
+To export your 1Password data in 1Password 4:
+Open 1Password and unlock the vault you want to export.
+Select File > Export in the menu bar.
+Choose a format: 1Password Interchange Format (.1pif) to move data to another copy of 1Password.
+Comma Delimited Text (.csv) to move Login items to a different app. Only Login items are exported in this format.
+Enter a filename, then select Save.
+Important
+Exporting data in 1Password for Android requires Android 14 or later.
+1Password for Android exports through the Credential Exchange standard. This allows you to transfer a copy of your data directly to other supported apps, including your passkeys. Your items stay in 1Password after you transfer the copy.
+To export your 1Password data in 1Password for Android:
+Follow the steps to import your data in another password manager that supports Credential Exchange, like Dashlane.
+Select 1Password as the source to import from, then follow the onscreen instructions.
+Important
+Exported data files are not encrypted. They are stored in plaintext. Anyone with access to your exported data files will be able to read your passwords. Do not email exported data files or store them online. Delete them when you are done with them.
+1Password for Linux exports to the 1Password Unencrypted Export (.1pux) format or a comma-separated values (CSV) file. The CSV format supports a limited set of fields and will only export Login and Password items. To export your 1Password data in 1Password 8:
+Open and unlock the 1Password app on your computer.
+Select the ellipsis at the top of the sidebar, then select Export and choose the account you want to export.
+Enter your account password. If you unlock 1Password with SSO, select Sign in with [your identity provider] and follow the steps to sign in.
+Choose an export format (1PUX or CSV), then select Export Data.
+Choose where you want to export your 1Password data, then select OK.
+Get help
+The CSV export only includes the following fields:
+Title
+Website
+Username
+Password
+One-time password
+Favorite status
+Archived status
+Tags
+Notes
+The CSV export does not include:
+Security questions
+Linked items
+Linked apps
+Custom fields*
+* Custom fields include things such as security questions and two-factor authentication backup codes.
+If you need to export additional fields, use the 1Password Unencrypted Export (.1pux) format.
+You can only export passkeys in 1Password for iOS and Android at this time. If you choose to export your 1Password data with the 1Password desktop apps, make sure to also follow the steps to create new passkeys on each website where you saved a passkey in 1Password. Then save the new passkeys in a different location, like in your device’s built-in passkey manager.
+Was this article helpful?
+Yes, thanks!
+Not really
+Glad to hear it! If you have anything you'd like to add, feel free to contact us.
+Sorry to hear that. Please contact us if you'd like to provide more details.
+Published: November 4, 2026
+1Password
+Pricing
+Families
+Teams
+Business
+Small Business
+Enterprise
+Watchtower
+Developers
+Learn more
+Tour
+Password Generator
+Username Generator
+Security
+Privacy
+Customers
+Password Manager
+Resources
+Webinars
+1Password University
+Secrets Management
+Support
+Help & Documentation
+Community
+Contact Support
+Locations
+Europe
+Canada
+United States
+Company
+About
+Partnerships
+Affiliate
+Press
+Gift Cards
+We’re Hiring!
+Podcast
+Newsletter
+Legal Center
+Downloads
+macOS
+iOS
+Windows
+Android
+Linux
+Web Browser
+Command Line
+Browser extensions
+Français
+🌐 English
+© 2026 1Password. All rights reserved.
+Terms of Service
+- Privacy Policy
+- Cookie Policy
+- Accessibility
+- Your Privacy Choices
+4711 Yonge St, 10th Floor, Toronto, Ontario, M2N 6K8, Canada.
+Find us on
+1Password on Mastodon

@@ -1,0 +1,550 @@
+url: https://bitwarden.com/help/licensing-on-premise/
+method: fetch
+saved: 2026-11-19
+
+License Organizations or Premium | Bitwarden
+...
+Log In
+Get Started
+Business Sales
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Business salesGet startedLog In
+Docs Courses
+Self-host
+DocsCourses
+HomeRelease Notes Account Access Create a Bitwarden Account
+Choose My Server
+My Master Password
+Forgot My Master Password
+Can't Access Two-Step Login
+Log in & Unlock Understand Log in vs. Unlock
+Automatic Logout or Lock
+New Device Login Protection
+Log in to Multiple Accounts
+Use Single Sign-On Log in with SSO
+Add a Trusted Device
+Link SSO
+More Log in & Unlock Methods Log in with Device
+Log in & Unlock with Passkeys
+Synchronized Unlock
+Unlock with Biometrics
+Unlock with PIN
+Two-Step Login Why Use Two-Step Login?
+Set up Two-Step Login Two-Step Login Methods
+Authenticator Two-Step Login
+Email Two-Step Login
+Duo Two-Step Login
+YubiKey OTP Two-Step Login
+Passkey Two-Step Login
+Recovery Code for Two-Step Login
+Can't Access Two-Step Login
+Two-Step Login FAQs
+Emergency Access About Emergency Access
+Add & Manage Trusted Emergency Contacts
+Request & Grant Emergency Access
+Password Manager Password Manager Overview
+Get Started Password Manager Web App
+Password Manager Browser Extensions
+Password Manager Mobile Apps
+Password Manager Desktop Apps
+Your Vault Vault Items Vault Items
+File Attachments
+Custom Fields
+Vault Navigation Search your Vault
+Filter your Vault
+Folders
+Favorites
+Security Tools Integrated Authenticator
+Username & Password Generator
+Password & Generator History
+Vault Health Reports
+Browser Extension Vault Health Reports
+Change At-Risk Passwords
+Master Password Re-Prompt
+Manage Devices
+Appearance Change App Appearance
+Localization
+Sync your Vault
+Client App Settings
+Keyboard Shortcuts
+Autofill Autofill From... Autofill from Browser Extension
+Autosave from Browser Extension
+Autofill from iOS App
+Autofill from Android App
+More Autofill Options Fill Assist
+Autofill Passkeys
+Autofill Cards & Identities
+Autofill Custom Fields
+Autofill Basic Auth Prompts
+Block Autofill on Specific Sites
+Block Autosave on Specific Sites
+Troubleshoot Autofill Form URIs for Autofill
+Deactivate My Browser's Built-in Password Manager
+Troubleshoot Android Autofill
+Autofill FAQs
+Import & Export Import to your Vault or Collections
+Import Guides Import from LastPass
+Import from 1Password
+Import from Keeper
+Import from Dashlane
+Import from Chrome, Edge, & Chromium Browsers
+Import from macOS & Safari
+Import from Firefox
+Import from KeePass
+Import from Password Safe
+Import from Myki
+Export Vault Data
+Encrypted Exports
+Import from a Custom File
+Import & Export FAQs
+Organization Members Share Items
+My Items
+Transfer Items to Organization
+Change At-Risk Passwords
+Bitwarden Send About Send
+Create & Edit a Send
+Receive a Send
+Send Lifespan
+Send Privacy
+Send from CLI
+Send Encryption
+Developer Tools API Password Manager APIs
+CLI Password Manager CLI
+CLI Authentication via API Key
+CLI Authentication Challenges
+SSH About SSH
+SSH Agent
+More More Platforms Using Bitwarden Offline
+Bitwarden on Apple Watch
+Bitwarden for DuckDuckGo macOS Browser
+Use Bitwarden in Firefox Private Windows
+Safari Web Extension
+Troubleshooting uMatrix and NoScript access rules
+Troubleshoot Mobile with Bitwarden Support
+Desktop App Feature Support
+Password Manager FAQs
+Bitwarden Authenticator Bitwarden Authenticator
+Sync Verification Codes
+Import & Export Authenticator Data
+Secrets Manager Secrets Manager Overview
+Get Started Secrets Manager Quick Start
+Developer Quick Start
+Log in to Secrets Manager
+Manage your Organization
+Your Secrets Projects
+Secrets
+Machine Accounts
+Access Tokens
+Secret Decryption
+Import & Export Import Data
+Export Data
+Developer Tools Secrets Manager CLI
+Secrets Manager SDK
+Integrations Ansible
+GitHub Actions
+GitLab CI/CD
+Jenkins Integration
+Secrets Manager Kubernetes Operator
+Terraform Provider
+More Secrets Manager FAQs
+Admin Console Organizations Overview
+Organizations Quick Start
+Manage Shared Items Collections About Collections
+Create Collections
+Assign Users to Collections
+Collection Permissions
+Collection Settings
+Import Organization Items Import to an Organization
+Import from a Custom File
+Export Organization Items Export Organization Items
+Encrypted Exports
+Share Items
+Hyperlink Organization Items
+Manage Members Invite & Manage Members
+Member Roles
+Groups
+Automatic Confirmation
+Change Members’ Account Email & Name
+Revoke & Remove Temporarily Revoke Access
+Permanently Remove Access
+Delete Organization Member Accounts
+Account Recovery About Account Recovery
+Set Up Account Recovery
+Recover a Member Account
+My Account Was Recovered
+Sponsored Families Sponsored Families for Members
+Sponsored Families for Non-Members
+Sponsored Families FAQs
+SCIM About SCIM
+JumpCloud SCIM
+Microsoft Entra ID SCIM
+Okta SCIM
+OneLogin SCIM Integration
+Ping Identity SCIM Integration
+Directory Connector About Directory Connector
+Directory Connector Desktop App
+Directory Connector CLI
+Directory Connector File Storage
+Sync Options and Filters
+Clear Sync Cache
+Schedule a Sync
+LDAP or Active Directory
+Sync with Microsoft Entra ID
+Google Workspace Directory
+Sync with Okta
+Sync with OneLogin
+Onboarding and Succession Guide
+Oversight & Visibility SIEM Integrations Blumira SIEM
+Elastic SIEM
+Huntress SIEM
+Microsoft Sentinel SIEM
+Panther SIEM
+Rapid7 SIEM
+Splunk SIEM
+Sumo Logic SIEM
+Generic HEC Integration
+Non-native SIEM
+Event Logging Event Logs
+Monitoring Event Logs
+Claimed Domains Claimed Domains
+Claimed Accounts
+Access Intelligence
+Enterprise Policies
+Vault Health Reports
+Custom Fill Assist Rules
+Single Sign-On About Single Sign-On
+SSO Decryption Options
+Add Members with JIT
+SSO Guides ADFS SAML
+ADFS OIDC
+Auth0 SAML
+AWS SAML
+Cloudflare Zero Trust SSO
+Duo SAML
+Generic SAML
+Generic OIDC
+Google SAML
+JumpCloud SAML
+Keycloak SAML
+Microsoft Entra ID SAML
+Microsoft Entra ID OIDC
+Okta SAML
+Okta OIDC
+OneLogin SAML
+Ping Identity SAML
+Ping Identity OIDC
+Trusted Devices About Trusted Devices
+Setup SSO with Trusted Devices
+Approve a Trusted Device
+SSO FAQs
+Onboarding Customer Success Hub
+Bitwarden Onboarding Playbook
+Customer Activation Kit
+Member Signup Workflows
+Deploy Client Apps Deploy Browser Extensions using GPOs, Linux Policies, & .plist Files
+Deploy Browser Extensions with Intune
+Deploy Desktop Apps with Intune
+Deploy Mobile Apps with Intune
+Connect Managed Devices
+Deactivate Browser Password Managers Using Device Management
+Bitwarden Public API
+More Organizations FAQs
+Product highlights and recent updates
+Bitwarden for Enterprise Features Datasheet
+Teams and Enterprise Migration Guide
+LastPass Enterprise Migration Guide
+Ownerless Organizations
+Proof-of-Concept Project Checklist
+Prepare your Trial Organization for Production
+Provider Portal Provider Portal Overview
+Provider Portal Quick Start
+Provider Users
+Start a Client Organization
+Ongoing Administration
+Unlink Client Organization
+Provider Event Logs
+Provider Billing
+Providers FAQs
+Business Unit Portal Business Unit Portal
+Business Unit Portal Quick Start
+Self-host Plan for Deployment Self-host Bitwarden
+Self-host Checklist
+Self-host an Organization
+Migrate to a New Server
+Deploy & Configure Deploy with Docker Linux Standard Deployment
+Linux Manual Deployment
+Linux Offline Deployment
+Windows Standard Deployment
+Windows Offline Deployment
+Lite Deployment
+Marketplace Deployments
+Configure Self-hosted environment with forward proxy
+Deploy with Helm Self-host with Helm
+Traffic Routing
+AWS EKS Deployment
+Azure AKS Deployment
+OpenShift Deployment
+Add rawManifest Files
+Configuration Options Environment Variables
+Certificate Options
+Database Options
+Connect to an External MSSQL Database
+Migrate from Default to External MSSQL
+Configure Push Relay
+Kerberos Integration
+Kubernetes Service Accounts
+SMTP Configurations
+Optional Features Self-hosting Send
+Self-hosting SCIM
+Self-hosting Families Sponsorships
+Connect Clients Connect Managed Devices
+Connect Individual Clients
+Key Connector About Key Connector
+Deploy Key Connector
+System Administrator Portal
+License Organizations or Premium
+Update a Server
+Backup Server Data
+Networking Requirements
+Server Logs
+Self-host FAQs
+Security Bitwarden Security Whitepaper
+Data Encrypted Data
+Administrative Data
+Data Storage
+Data Privacy for Website Icons
+Encryption Encryption Protocols
+Encryption Key Derivation
+Invoked Crypto Libraries
+Encryption Key Rotation
+Account Fingerprint Phrase
+Software Development Server & Client Versioning
+Software Release Support
+Trusted Communications About Trusted Communications
+Bitwarden Domains, Endpoints, & URLs
+Identify Legitimate Emails from Bitwarden
+Emails from Bitwarden Servers
+Compliance, Audits, and Certifications
+Bitwarden Subprocessors
+Server Regions
+Security FAQs
+Plans & Pricing Password Manager Password Manager Plans
+Upgrade from Individual to Organization
+Premium Renewal
+Organization Renewal
+Secrets Manager Secrets Manager Plans
+Sign up for Secrets Manager
+View & Update Billing Details
+Payment Methods
+Invoices & Receipts
+Taxes on Bitwarden Purchases
+Manage Subscription Seats in Your Organization
+Delete an Account or Organization
+Cancel a Subscription
+Billing FAQs
+Self-host
+On this page
+Individual license
+Retrieve individual license
+Apply individual license
+Update individual license
+Organization license
+Retrieve organization license
+Apply organization license
+Update organization license
+On this page
+Contact support
+Page Options
+License Organizations or Premium
+Self-hosting Bitwarden is free, however some features must be unlocked in your self-hosted instance with a registered license file. To use your upgraded subscription's features on a self-hosted server:
+Download the license file from the Bitwarden account that was created and upgraded via the web app.
+Apply the license file to your self-hosted server, following the steps below for either an individual license or an organization license.
+note
+The procedures in this article assume you already started a paid subscription to Bitwarden. If you haven't, refer to About Bitwarden Plans and What Plan is Right for Me?
+Individual license
+Follow these procedures when working with an individual license for a premium subscription. You'll be working in both the cloud web vault and your self-hosted web vault, and your account email addresses should match.
+Retrieve individual license
+After you create an account on your self-hosted server, retrieve your license from the cloud web app:
+Log in and select Settings → Subscription from the navigation.
+Select the Download license button:
+Download personal license
+Apply individual license
+Next, log in to your self-hosted Bitwarden server to apply the downloaded license:
+If you haven't already, verify your email address. You will need to have configured SMTP-related environment variables to do so.
+Select Settings → Subscription from the navigation.
+In the License file section, select the Browse... or Choose file button button and add the downloaded license file.
+Select the Submit button to apply your premium license.
+Update individual license
+If for any reason you need to update your individual license file, for example when it expires:
+Follow the steps to Retrieve your license again.
+Follow the steps to Apply your license again, only this time you will see an Update license button rather than a button to browse for a new license.
+Organization license
+Follow these procedures when working with an organization license for a Families or Enterprise organization. You must be an organization owner to retrieve, apply, and update a license. Per the Bitwarden terms of service, one organization deployment is permitted per subscription.
+Retrieve organization license
+Before starting an organization on your self-hosted server, retrieve your organization license from the cloud web app:
+In the Bitwarden web app, open the Admin Console and go to Billing → Subscription.
+Scroll down and select Download license:
+Defaults to image title if unset
+When prompted, enter the installation ID that was used to install your self-hosted server and select Submit. If you don't know the installation ID off-hand, you can retrieve it from ./bwdata/env/global.override.env:
+Defaults to image title if unset
+note
+Make sure that the installation ID you retrieved from bitwarden.com/host uses the same data region as where your organization exists.
+Apply organization license
+Applying your license in a self-hosted server is the means by which you'll create a self-hosted organization. From your self-hosted web vault:
+Start a new organization by selecting the Add organization button.
+Select the Browse... or Choose file button, add the downloaded license file, and select Submit:
+Defaults to image title if unset
+note
+If you receive a version not supported error message, update your server and try uploading your license file again. To update your server, make a backup of the bwdata directory and follow these instructions.
+Update organization license
+There are a few scenarios when organizations need to update the license file used by their self-hosted server:
+Add user seats: Self-hosted organization seat counts are set by the license. To add user seats, first add them to your associated cloud organization, and then update the license used by your self-hosted organization.
+When your organization's billing renews: A self-hosted organization's license must be updated within 60 days of renewal. If the license is not updated after 60 days, the organization will be disabled.
+note
+Cloud and self-hosted license expiration dates don't match due to the 60-day grace period, which is provided to prevent the inadvertent loss of organization functionality.
+There are two methods for updating a self-hosted organization's license. Families organizations can only update their license manually.
+Automatic sync Manual update
+Automatic sync:
+Eliminates the need for organization admins to manually re-upload licenses. Once setup, admins will only need to trigger a sync from the Organization → Billing when an update to the license used by the self-hosted organization is required.
+Makes Families sponsorships possible for members of self-hosted organizations. Sync for these sponsorships will automatically occur per day.
+Cannot be setup by organizations still in a free trial period.
+To set up automatic sync:
+Step 1: Enable cloud communication
+note
+This step must be completed by someone with access to your self-hosted instance's configuration files.
+Configure your server to allow communication with Bitwarden cloud systems by setting the following lines in bwdata/env/global.override.env:
+Bash Copy
+globalSettings__enableCloudCommunication=true
+globalSettings__baseServiceUri__cloudRegion=US
+If your cloud organization was created on EU servers, you'll need make the following changes to configure for communication with EU cloud servers:
+C hange the second of these lines to globalSettings__baseServiceUri__cloudRegion=EU.
+Set the following 3 additional values:
+Bash Copy
+globalSettings__installation__identityUri=https://identity.bitwarden.eu
+globalSettings__installation__apiUri=https://api.bitwarden.eu
+globalSettings__pushRelayBaseUri=https://push.bitwarden.eu
+note
+Make sure before proceeding that your configuration correctly correlates to the data region selected when retrieving your installation ID & key as described above.
+Once you have set these value, apply your change by running the ./bitwarden.sh rebuild command. Start your server again with the ./bitwarden.sh start command.
+note
+Enabling automatic sync requires communication with Bitwarden's cloud systems. If your environment uses a firewall to block outbound traffic, you will need to allow https://api.bitwarden.com or .eu and https://identity.bitwarden.com or .eu.
+Step 2: Retrieve billing sync token
+Once cloud communication is enabled at the server-level, a sync token needs to be passed from the cloud organization that is associated with your self-hosted organization. To retrieve your sync token from the cloud web app:
+Open the cloud Admin Console and navigate to Billing → Subscription.
+In the self-hosting section, select Set up billing sync.
+Enter your master password and select Generate token.
+Copy the generated token.
+Step 3: Apply billing sync token
+To apply the billing sync token to your self-hosted organization:
+Open the self-hosted Admin Console and navigate to Billing → Subscription.
+In the License and billing management section, choose the Automatic sync option.
+Select the Manage billing sync button.
+Paste your generated Billing Sync Token and select Save.
+note
+Sync for Families for Enterprise will occur once daily once you've triggered your first sync. The Last sync field in this section will report Never until you trigger your first sync.
+Sync for license updates must always be done manually by selecting the Sync license button (see the next section for details).
+Step 4: Trigger sync
+Trigger a sync once you've completed setup and each time you need to update your license. Sync for Familes for Enterprise will occur once daily. To trigger a sync:
+Open the self-hosted Admin Console and navigate to Organization → Billing.
+Select the Sync license button.
+note
+If you receive a version not supported error message, update your server and try uploading your license file again. To update your server, make a backup of the bwdata directory and follow these instructions.
+To manually re-upload a license file:
+Follow the steps to Retrieve your license again.
+Open the self-hosted Admin Console and navigate to Billing → Subscription.
+In the License and billing management section, choose the Manual upload option.
+Select the Browse... or Choose file button to add your license file.
+Select Submit.
+note
+If you receive a version not supported error message, update your server and try uploading your license file again. To update your server, make a backup of the bwdata directory and follow these instructions.
+Suggest changes to this page
+Suggest changes to this page
+How can we improve this page for you?
+For technical, billing, and product questions, please contact support
+Page Options
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Cloud Status
+Check status
+On this page
+Individual license
+Retrieve individual license
+Apply individual license
+Update individual license
+Organization license
+Retrieve organization license
+Apply organization license
+Update organization license
+On this page
+Solutions
+For IT Teams
+For healthcare
+For financial services
+For law firms
+For marketing agencies
+For government
+For the public sector
+For agentic AI security
+For MSPs
+Bitwarden across industries
+For Developers
+Developer hub
+Secrets Manager
+Passwordless.dev and passkeys
+Products
+Plans and pricing
+Integrations
+Downloads
+Self-hosting
+Business
+Enterprise
+Teams and Businesses
+Personal
+Families
+Individuals
+Bitwarden Authenticator
+Bitwarden Send
+Passkeys and passwordless
+Resources
+Resource center
+Help and documentation
+Case studies
+Security compliance
+Open source
+Bitwarden vs. alternatives
+Blog
+Courses
+Community forums
+Open Source Security Summit
+Creator collaborations
+Survey room
+Newsfeed
+Free Tools
+Password generator
+Passphrase generator
+Password strength tester
+Username generator
+Company
+About
+Careers
+Press Room
+Partners
+Events
+Contact support
+© 2026 Bitwarden, Inc.TermsPrivacyCookie SettingsSitemap
+Language English ( United States ) English ( United Kingdom ) Deutsch ( Deutschland ) Español ( Latinoamérica ) Français ( France ) Italiano ( Italia ) 日本語 ( 日本 ) Nederlands ( Nederland ) Português ( Brasil ) Svenska ( Sverige )

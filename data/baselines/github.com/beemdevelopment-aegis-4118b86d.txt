@@ -1,0 +1,214 @@
+url: https://github.com/beemdevelopment/Aegis
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Navigation Menu
+Products
+Developers
+Businesses
+Resources
+Pricing
+Search
+/
+Sign in
+Sign up
+beemdevelopment
+Aegis
+Repository navigation
+Code
+Issues
+121
+(121)
+Pull requests
+16
+(16)
+Actions
+Projects
+Wiki
+Security and quality
+1
+(1)
+Insights
+Aegis
+Public
+Sponsor
+Notifications
+Fork626
+(626)
+Star13.6k
+(13.6k)
+master
+5 Branches
+74 Tags
+Code
+Latest commit
+alexbakker
+Release v3.4.3
+d6f4e59
+·
+History
+1,686 Commits
+Folders and files
+Name Last commit message Last commit date
+.github
+Bump target SDK version
+app
+Release v3.4.3
+docs
+Update vault documentation
+gradle/wrapper
+Bump target SDK version
+metadata/en-US
+Add preview for every icon pack to README
+.gitignore
+Add example Crowdin CLI config file
+CONTRIBUTING.md
+Use the new syntax for GitHub issue forms
+FAQ.md
+[FAQ] clarified about which password to use when importing your vault…
+LICENSE
+Initial commit
+README.md
+Add preview for every icon pack to README
+build.gradle
+Update gradle, update dependencies and bump minSdkVersion to 23
+crowdin.yml
+Add Crowdin config file and update crowdin-cli
+gradle.properties
+Update dependencies
+gradlew
+Bump target SDK version
+gradlew.bat
+Bump target SDK version
+settings.gradle
+Request storage permissions in the intro
+Repository files navigation
+README
+Contributing
+GPL-3.0 license
+Aegis Authenticator
+Aegis Authenticator is a free, secure and open source 2FA app for Android. It aims to provide a secure authenticator for your online services, while also including some features missing in existing authenticator apps, like proper encryption and backups. Aegis supports HOTP and TOTP, making it compatible with thousands of services.
+For a list of frequently asked questions, please check out the FAQ.
+The security design of the app and the vault format is described in detail in this document.
+Features
+Free and open source
+Secure
+The vault is encrypted (AES-256-GCM), and can be unlocked with:
+Password (scrypt)
+Biometrics (Android Keystore)
+Screen capture prevention
+Tap to reveal
+Compatible with Google Authenticator
+Supports industry standard algorithms: HOTP and TOTP
+Lots of ways to add new entries
+Scan a QR code or an image of one
+Enter details manually
+Import from other authenticator apps: 2FAS Authenticator, Authenticator Plus, Authy, andOTP, FreeOTP, FreeOTP+, Google Authenticator, Microsoft Authenticator, Plain text, Steam, TOTP Authenticator and WinAuth (root access is required for some of these)
+Organization
+Alphabetic/custom sorting
+Custom or automatically generated icons
+Group entries together
+Advanced entry editing
+Search by name/issuer
+Material design with multiple themes: Light, Dark, AMOLED
+Export (plaintext or encrypted)
+Automatic backups of the vault to a location of your choosing
+Screenshots
+Downloads
+Aegis is available on the Google Play Store and on F-Droid.
+Verification
+APK releases on Google Play and GitHub are signed using the same key. They can be verified using apksigner:
+apksigner verify --print-certs --verbose aegis.apk
+The output should look like:
+Verifies
+Verified using v1 scheme (JAR signing): true
+Verified using v2 scheme (APK Signature Scheme v2): true
+The certificate fingerprints should correspond to the ones listed below:
+Owner: CN=Beem Development
+Issuer: CN=Beem Development
+Serial number: 172380c
+Valid from: Sat Feb 09 14:05:49 CET 2019 until: Wed Feb 03 14:05:49 CET 2044
+Certificate fingerprints:
+MD5: AA:EE:86:DB:C7:B8:88:9F:1F:C9:D0:7A:EC:37:36:32
+SHA1: 59:FB:63:B7:1F:CE:95:74:6C:EB:1E:1A:CB:2C:2E:45:E5:FF:13:50
+SHA256: C6:DB:80:A8:E1:4E:52:30:C1:DE:84:15:EF:82:0D:13:DC:90:1D:8F:E3:3C:F3:AC:B5:7B:68:62:D8:58:A8:23
+Icon packs
+Aegis supports icon packs to make it easier to assign icons to the entries in your vault. There are no official icon packs, but the community maintains a number of third-party icon packs you may want to check out. To learn how to create your own Aegis-compatible icon pack, see the documentation.
+aegis-icons
+Unofficial monochrome-styled 2FA icons.
+delta-aegis-icons
+Delta version of the unofficial monochrome-styled 2FA icon pack aegis-icons.
+aegis-simple-icons *
+This project periodically generates an icon pack for Aegis based on Simple Icons.
+aegis-simple-icons-outlined *
+This is a variant on the aegis-simple-icons pack where the icons contain no solid background and just the outlines are being used.
+* The icons are automatically generated, so not all of them are as high quality as the ones you'll find in aegis-icons.
+Contributing
+Looking to contribute to Aegis? That's great! There are a couple of ways to help out. Translations, bug reports and pull requests are all greatly appreciated. Please refer to our contributing guidelines to get started.
+Swing by our Matrix room to interact with other contributors: #aegis:matrix.org.
+License
+This project is licensed under the GNU General Public License v3.0. See the LICENSE file for details.
+A couple of libraries vendored in Aegis' repository are licensed under a different license:
+TextDrawable
+TrustedIntents
+About
+A free, secure and open source app for Android to manage your 2-step verification tokens.
+getaegis.app
+Topics
+2fa
+android
+authenticator
+encryption
+fingerprint
+hotp
+otp
+secure
+totp
+Resources
+Readme
+GPL-3.0 license
+Contributing
+Contributing
+Activity
+Custom properties
+Stars
+13.6k stars
+Watchers
+109 watching
+Forks
+626 forks
+Report repository
+Releases
+74
+(74)
+v3.4.3
+Latest
++ 73 releases
+Sponsor this project
+buymeacoffee.com/beemdevelopment
+https://www.blockchain.com/btc/address/bc1q26kyxqjkc6tu477pzy0whagwhs4ypv93qls22n
+https://nanocrawler.cc/explorer/account/nano_1aegisc559b1x4p3839egnu579jkd4htpidy14eo9e31gzqmwuafypnj4q94
+Contributors
+64
+(64)
++ 50 contributors
+Languages
+Java
+96%
+HTML
+2.4%
+Roff
+1.6%
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information

@@ -1,0 +1,66 @@
+url: https://2fas.com/auth/privacy-policy/
+method: browser
+saved: 2026-11-19
+
+PASSWORD MANAGER
+AUTHENTICATOR
+ABOUT US
+HELP CENTER
+GET THE APPS
+Privacy Policy - 2FAS Auth
+Effective Date: June 27, 2025
+Last updated: June 27, 2025
+Two Factor Authentication Service, Inc. (“2FAS,” “we,” or “us”) provides 2FAS Auth, a mobile application and browser extension that enables users to generate TOTP and HOTP tokens for two-factor authentication. This Privacy Policy describes how we handle personal information in connection with 2FAS Auth.
+1. Data We Collect
+We may process anonymous technical information for diagnostic purposes, such as: crash reports via Firebase Crashlytics (you may disable this in your device settings); troubleshooting logs when you voluntarily send them to help us resolve issues (including app version, device information, and trace logs); extension installation data (e.g., operating system, browser type and version). This information is used solely to maintain and improve the functionality of the app and extension. It is not linked to any individual user.
+2. Data We Do Not Collect
+All authentication data is stored locally on your device and is never transmitted to our servers. We do not collect: your authentication tokens or secrets; your email address or contact information (unless you contact us directly); usage analytics, tracking IDs, tracking tools, or advertising data;
+3. Third Parties
+If you enable crash reporting or push notifications, technical data may be transmitted to third-party infrastructure providers such as Firebase. These providers process data only as necessary to deliver their services to us. We do not sell, rent, or trade your data to anyone.
+4. Your Rights
+We do not maintain user accounts or databases for 2FAS Auth. If you contact us and provide personal information (e.g., via email), you may request deletion of that data at any time by contacting privacy@2fas.com.
+5. Changes
+We may update this Privacy Policy. If we do, we will post the updated version on our website or within the app. Continued use after an update constitutes acceptance of the revised terms.
+About us
+Press kit
+Terms of Service
+Privacy Policy
+Open-source Licenses
+SITE SETTINGS
+ENGLISH
+Authenticator
+PRODUCTS
+2FAS Auth Mobile App
+2FAS Auth Browser Extension
+RESOURCES
+Donations
+How to enable 2FA
+Quick Browser Extension Check
+Check generated token
+Your branding
+Your 2FA guide
+Open-source Licenses
+COMPARISONS
+Google Authenticator vs. 2FAS Auth
+Authy vs. 2FAS Auth
+Microsoft Authenticator vs. 2FAS Auth
+Duo vs. 2FAS Auth
+POLICIES
+2FAS Auth Privacy Policy
+2FAS Auth EULA
+Password manager
+PRODUCTS
+2FAS Pass Mobile App
+2FAS Pass Browser Extension
+RESOURCES
+2FAS Pass Pricing
+2FAS Pass Recovery
+Open-source Licenses
+POLICIES
+2FAS Pass Privacy Policy
+2FAS Pass EULA
+Support
+Help Center
+Support
+Connect
+© 2026 Two Factor Authentication Service, Inc. All rights reserved.

@@ -143,6 +143,10 @@ features:
   account.sign-in: [password, sso]
   support.channels: [email]
 
+# End-to-end encryption (the owner's design, categories.md), read 2026-11-19 with Edge from Canada on venice.ai/privacy:
+# the paid plans' E2EE models ("End-to-End Encrypted. Your prompt is encrypted on your device, remains encrypted through
+# Venice, and is only decrypted inside a verified TEE."; "TEE and E2EE models require a Venice Pro subscription."), so
+# Pro, Pro Plus and Max have AI chats. Free's Anonymous and Private modes aren't end-to-end encrypted.
 plans:
   - id: venice.free
     name: Free
@@ -180,6 +184,7 @@ plans:
       ai.api-credits: true
       ai.integrations: [api, custom-assistants]
       ai.chat-storage: on-device
+      encryption.end-to-end: [chats]
     inferred:
       ai.reasoning:
         reason: 'Its About page lists a model marked “TEXT · REASONING” (Kimi K3) among its models, and Pro has “All Pro models access”; no page says which plan has it.'
@@ -223,6 +228,7 @@ plans:
       ai.api-credits: true
       ai.integrations: [api, custom-assistants]
       ai.chat-storage: on-device
+      encryption.end-to-end: [chats]
     inferred:
       ai.reasoning:
         reason: 'Its About page lists a model marked “TEXT · REASONING” (Kimi K3) among its models, and Pro Plus has everything in Pro; no page says which plan has it.'
@@ -276,6 +282,7 @@ plans:
       ai.api-credits: true
       ai.integrations: [api, custom-assistants]
       ai.chat-storage: on-device
+      encryption.end-to-end: [chats]
     inferred:
       ai.reasoning:
         reason: 'Its About page lists a model marked “TEXT · REASONING” (Kimi K3) among its models, and Max has everything in Plus; no page says which plan has it.'

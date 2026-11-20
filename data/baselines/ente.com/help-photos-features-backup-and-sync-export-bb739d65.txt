@@ -1,0 +1,304 @@
+url: https://ente.com/help/photos/features/backup-and-sync/export
+method: fetch
+saved: 2026-11-19
+
+Export | Ente Help
+Skip to content Ente Help
+SearchK
+Appearance
+Menu Return to top
+Sidebar Navigation
+Photos
+Introduction
+Getting Started
+Overview
+Installation
+Sign up
+Gallery mode
+Migration
+Daily use
+Migration
+Introduction
+From Google Photos
+From Apple Photos
+From Amazon Photos
+From Proton Drive
+From your hard disk
+Exporting your data
+Features
+Account
+Overview
+Family plans
+Passkeys
+App lock
+Referral program
+Legacy
+Backup and Sync
+Overview
+Watch folders
+Duplicate detection
+Export
+Albums and Organization
+Albums
+Auto-add people
+Archiving
+Hidden photos
+Deleting photos
+Uncategorized
+Storage optimization
+Sharing and Collaboration
+Sharing
+Library sharing
+Collaboration
+Comments and likes
+Public links
+Custom domains
+Embed albums
+Search and Discovery
+Overview
+Machine learning
+Magic search
+Face recognition
+Memory Lane
+Map and location
+Jump to Date
+Utilities
+Android gallery integration
+Cast
+CLI
+Collage
+Detect Text (OCR)
+Guest view
+QR codes in photos
+Home Widgets
+Notifications
+Rituals
+Swipe to Select
+Video editor
+Video streaming
+FAQ
+Account Creation
+Gallery Mode
+Advanced Features
+Albums and Organization
+Backup and Sync
+Metadata and Editing
+Migration
+Search and Discovery
+Security and Privacy
+Sharing and Collaboration
+Storage and Plans
+Troubleshooting
+Auth
+Introduction
+Features
+Overview
+Offline mode
+FAQ
+General
+Installation
+Enteception
+Privacy disclosure
+Migration
+Introduction
+From Authy
+From Microsoft Authenticator
+From Steam
+From Others
+Export
+Troubleshooting
+Offline codes unavailable
+Linux system authentication
+Windows
+Locker
+Introduction
+Getting Started
+Overview
+Installation
+Sign up
+First item
+Family setup
+Features
+Item Types
+Overview
+Documents
+Personal Notes
+Account Credentials
+Physical Records
+Organization
+Overview
+Collections
+Trash
+Search
+Sharing
+Overview
+Share with users
+Public links
+Ente Paste
+Security
+Overview
+Encryption
+Lock screen
+Legacy
+Overview
+Legacy Kits
+FAQ
+Getting Started
+Item Types
+Organization
+Sharing
+Legacy
+Security
+Troubleshooting
+Ensu
+Introduction
+How it works
+Features
+Overview
+FAQ
+CLI
+Introduction
+Installation
+Accounts
+Photos
+Auth
+Paste
+Administration
+Automation
+Migration
+Troubleshooting
+Changelog
+Toys
+Paste
+Introduction
+Send your first paste
+How encryption works
+FAQ
+2of3
+Introduction
+Getting started
+How it works
+FAQ
+QR
+Self-hosting
+Quickstart
+Installation
+Requirements
+Quickstart script (Recommended)
+Docker Compose
+Manual setup (without Docker)
+Environment variables and defaults
+Configuration
+Post-installation steps
+Upgrade
+Administration
+User management
+Reverse proxy
+Object storage
+Ente CLI
+Backup
+Development
+Building from source
+Building mobile apps
+Using Lima for development
+Community Guides
+Ente via Tailscale
+Running Ente using systemd
+Ente on Windows
+Ente-Photos on Kubernetes (community helm-chart)
+Troubleshooting
+General
+Docker / quickstart
+Updated images
+Uploads
+Ente CLI
+On this page
+Export ​
+Export allows you to download your entire Ente library or specific albums to local storage. This creates a local backup of your photos while keeping them safely stored in Ente's cloud.
+Why use export? ​
+Export is useful for:
+Local backups: Keep a copy of your photos on your computer or NAS
+Data portability: Export your data in a standard format you can use anywhere
+Redundancy: Have multiple copies of your precious memories
+Offline access: Keep a complete local copy for when you're without internet
+Export options ​
+Desktop continuous export ​
+The desktop app offers continuous export, which automatically exports new items as they're uploaded to Ente. The web app does not support export.
+How to set up:
+Open Settings > Export data
+Choose a destination folder on your computer
+Enable "Continuous export"
+The app will automatically export new items in the background
+Important notes:
+The desktop app must be running for continuous export to work
+Exports happen in the background without interrupting your work
+Mirrors album changes (new files, album moves, and deletions) so your export reflects the latest album state
+Incremental exports only download new or changed files
+The web app does not support export; use the desktop app or CLI
+CLI export ​
+For advanced users and automation, use the Ente CLI to export via command line. The CLI is particularly useful for:
+Automated exports with cron jobs
+Exports from headless servers
+NAS sync setups
+What gets exported ​
+Album structure ​
+Your album structure is fully preserved during export. Each album becomes a separate folder with your photos organized exactly as they are in Ente.
+Example structure:
+export-folder/
+├── Vacation 2024/
+│ ├── photo1.jpg
+│ └── photo2.jpg
+├── Family/
+│ └── photo3.jpg
+└── Best Photos/
+└── photo1.jpg # Same file in multiple albums
+Metadata preservation ​
+Metadata is exported as separate JSON files alongside your photos. The original files are not modified. Ente Desktop and the current Ente CLI both use a metadata/ folder.
+photo.jpg
+metadata/photo.jpg.json
+The previous CLI used .meta/ instead. Learn more about the current layout in Photos.
+The JSON format matches Google Takeout format, so tools that support Google Takeout imports can read Ente's exported metadata.
+For details about the metadata format, see Metadata and Editing FAQ.
+Files in multiple albums ​
+If a photo exists in multiple albums:
+In Ente: Counts as 1 file (storage counted once)
+On export: Appears in each album folder
+This is why your export size may be larger than your Ente storage usage. The CLI can save space by sharing originals through hard links.
+Shared albums on export ​
+All shared albums, including albums shared with you as well as albums shared by you, are exported.
+Export limitations ​
+Two-way sync not supported ​
+Exports create a one-way sync from Ente to your local storage. Changes to exported files do not sync back to Ente.
+IMPORTANT
+Do not export to the same folder that you're watching for uploads. This will cause:
+Duplicate files
+Export stalling
+Undefined behavior
+Best practice: Use separate folders for:
+Upload source (watch folders)
+Export destination (local backups)
+Network drives (NAS) ​
+Exporting to network drives generally works better than importing from them:
+File system interaction is simpler for exports
+Performance is usually acceptable
+Windows UNC path issue: If exporting to a UNC path (\\server\share), map it to a network drive letter first. File separators don't work correctly with UNC paths and the export won't start.
+Learn more in Troubleshooting NAS issues.
+Incremental exports ​
+Both desktop continuous export and CLI exports are incremental:
+Only new or changed files are downloaded
+Gracefully handles interruptions
+Safe to stop and restart without re-downloading everything
+Saves time and bandwidth
+Related FAQs ​
+How can I backup my data locally outside Ente?
+Does export preserve album structure?
+Does export preserve metadata?
+Can I do 2-way sync with exports?
+Why is my export size larger than my Ente storage?
+Can I export to a network drive (NAS)?
+Related topics ​
+CLI - Command-line tool for automated exports
+Watch folders - Automatic uploads (the counterpart to export)
+Edit this page
+Pager Previous pageDuplicate detection
+Next pageAlbums

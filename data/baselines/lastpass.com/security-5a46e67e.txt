@@ -1,0 +1,413 @@
+url: https://www.lastpass.com/security
+method: fetch
+saved: 2026-11-19
+
+Transparent Security & Customer Data Protection - LastPass
+Skip to Content
+EN
+English
+Español
+Deutsch
+Français
+Italiano
+Nederlands
+Português
+Blog
+Resource Center
+Case studies
+The AI & SaaS Security Guide
+Webinars
+Product demos
+Events
+All resources
+Trust Center
+Compliance Center
+Security architecture
+LastPass University
+Product demos
+On-demand LastPass Business demos
+Report
+Stay ahead with the latest threat intel
+Support
+Help
+Support Center
+Self-service library of resources and guides for all LastPass products.
+Community forum
+System status
+Talk to support
+Personal support for all LastPass’ subscribed customers.
+Download LastPass apps
+LastPass works across all devices.
+Contact sales
+Submit sales inquiry
+Chat with sales
+Request a demo
+Find a partner
+Log in
+EN
+English
+Español
+Deutsch
+Français
+Italiano
+Nederlands
+Português
+Try Free
+Why LastPass?
+Overview
+Why LastPass?
+Create and store secure passwords for yourself, your team or business.
+How LastPass works
+Remember fewer passwords and log in faster with our browser extension.
+Security architecture
+LastPass zero-knowledge security model keeps your data private even from us.
+Compare LastPass
+Compare LastPass competitors, plans, and features in one place
+Key Features
+Password management
+Save and autofill
+Password generator
+Password sharing
+Passkeys
+Dark web monitoring
+Security dashboard
+All features
+Get Personal free
+Free LastPass Premium trial, no credit card required.
+Get Business free
+Free LastPass Business trial, no credit card required.
+Contact sales
+Let our experts help you find the right plan and successfully deploy LastPass.
+Download LastPass apps
+LastPass works across all devices.
+Personal
+Personal Plans
+Personal
+Sync passwords across all devices, monitor password health, data breaches and much more.
+Families
+Premium password management for family or group of 6 people.
+Plus
+New
+Premium password management and VPN together in one plan.
+Compare plans
+FOR INDIVIDUALS
+Password vault
+Save & autofill
+Mobile Smart Scanner
+VPN
+New
+Passkeys
+Automatic device sync
+Emergency access
+Personal password sharing
+All features
+Get Personal free
+30-day free LastPass Premium trial, no credit card required.
+Get Families free
+30-day free LastPass Families trial, no credit card required.
+Get started with LastPass Free
+Limited to 1 device type and basic password management features.
+Business
+Business Plans
+Business
+Designed for businesses of all sizes, from small startups to enterprises.
+Business Max
+Simplify secure access straight from the browser with more admin control.
+Teams
+For single teams just getting started with password management.
+MSP
+Designed to keep your clients' credentials protected and private.
+Compare plans
+For admins
+User management
+AI Monitoring & Protect
+New
+SaaS Monitoring & Protect
+Web Monitoring & Protect
+New
+Business sharing
+Multifactor authentication
+Integrations
+Single Sign-on
+Identity management
+All features
+Solutions by role
+Marketing teams
+Legal teams
+HR teams
+Business leaders
+IT admins
+All solutions by role
+Try Business free
+Free LastPass Business trial, no credit card required.
+E-Book
+Explore how LastPass supports ASD Essential Eight compliance
+Report
+The LastPass 2026 State of AI and SaaS Security Report
+Pricing
+Partners
+LastPass Partner Program
+Partner program overview
+Join the LastPass Partner Program to provide even more value to your customers.
+Managed Service Providers
+Resellers
+Cloud marketplaces
+Technology Alliance Partners
+Partner Login
+Start MSP free trial
+Grow new revenue streams by meeting customer's security needs.
+Contact partner team
+Looking for help or interested in becoming a LastPass partner? Get in touch with our partner team.
+Find a Partner
+Connect with trusted LastPass Partners to support your security needs.
+Blog
+Resource Center
+Case studies
+The AI & SaaS Security Guide
+Webinars
+Product demos
+Events
+All resources
+Trust Center
+Compliance Center
+Security architecture
+LastPass University
+Product demos
+On-demand LastPass Business demos
+Report
+Stay ahead with the latest threat intel
+Support
+Help
+Support Center
+Self-service library of resources and guides for all LastPass products.
+Community forum
+System status
+Talk to support
+Personal support for all LastPass’ subscribed customers.
+Download LastPass apps
+LastPass works across all devices.
+Try free
+Contact sales
+Submit sales inquiry
+Chat with sales
+Request a demo
+Find a partner
+Log in
+EN
+English
+Español
+Deutsch
+Français
+Italiano
+Nederlands
+Português
+Blog
+Resource Center
+Case studies
+The AI & SaaS Security Guide
+Webinars
+Product demos
+Events
+All resources
+Trust Center
+Compliance Center
+Security architecture
+LastPass University
+Product demos
+On-demand LastPass Business demos
+Report
+Stay ahead with the latest threat intel
+Support
+Help
+Support Center
+Self-service library of resources and guides for all LastPass products.
+Community forum
+System status
+Talk to support
+Personal support for all LastPass’ subscribed customers.
+Download LastPass apps
+LastPass works across all devices.
+Get LastPass free
+Contact sales
+Submit sales inquiry
+Chat with sales
+Request a demo
+Find a partner
+Log in
+Trust Center
+OverviewSecurityCompliancePrivacyResources
+Trust Center
+OverviewSecurityCompliancePrivacyResources
+Security
+Your Security Is Our Top Priority
+Security and privacy are ever evolving. So is LastPass.
+Zero-knowledge model
+Your data is kept secret, even from us. Only you can unlock your encrypted vault with your Master Password.
+Top-tier security measures
+LastPass uses AES-256 data encryption plus PBKDF2 hashing with SHA-256 salting.
+Private by design
+LastPass maintains a global data privacy program designed to protect the data of customers, users, and end-users.
+How we secure LastPass
+LastPass implements robust internal safeguards to reinforce our unwavering commitment to enterprise-grade security and trust.
+Industry-tested compliance
+LastPass holds third-party security certifications like ISO 27001, SOC2 Type II, SOC3, BSI C5, TRUSTe, and more.
+Regular expert security audits
+LastPass employs trusted, world-class security organizations to conduct routine audits and testing of the LastPass service and infrastructure.
+Bug bounty program
+LastPass futureproofs its security measures by supporting a bug bounty program where white-hat hackers can submit found bugs and vulnerabilities.
+Responsible disclosure
+LastPass users have direct access to our security intelligence team to report and investigate potential vulnerabilities and attacks.
+Proactive security features
+Password generator
+Generate strong, unique passwords to protect all your accounts, new and old.
+Data breach monitoring
+Automatically monitor and detect if your information has been exposed online.
+Security dashboard
+Find and update weak and reused passwords from a single security hub.
+Save and autofill
+Autofill credentials only on websites where the URL is a match.
+Single sign-on (SSO)
+Improve security and the user experience with single sign-on for cloud, legacy, and on-site apps.
+Multifactor authentication
+Fortify all your accounts by adding extra layers of security prior to obtaining access.
+Adaptive authentication
+Secure endpoints and balance the user experience wth risk-based, dynamic contextual authentication.
+Password sharing
+Safely share passwords, files, and sensitive documents with friends, family, or team members.
+Cybersecurity training and development
+Blog
+LastPass Labs
+Your hub for the latest cybersecurity intelligence.
+Read recent posts
+Training
+Business admin training
+Guidance to achieve a successful roll out and improve employee password management habits.
+Start admin training
+Training
+End user training
+Make the most of LastPass. Learn the ins and outs of your vault to fully protect your digital life.
+Start user training
+Built on a foundation of security expertise
+Millions
+Customers secure their passwords with LastPass
+100,000+
+Businesses choose LastPass
+Trust Center
+Your single source for the latest security, privacy, compliance, and system performance information.
+Visit Trust Center
+LastPass encryption model
+Your data is kept secret, even from us. Learn how LastPass protects your data with a local-only encryption model.
+Learn more about encryption
+Cybersecurity terminology
+Learn the basics of cybersecurity education and terms so you can prevent and respond to security incidents.
+Read the article
+Compliance Center
+View the latest LastPass system statuses, certifications, privacy policies, and other security documentation.​
+Visit Compliance Center
+Stringent security meets global compliance. You get that and more with LastPass.
+Start Business trial Contact sales
+Free 14-day LastPass Business trial. No credit card required.
+Products
+Home Page
+What is a password manager?
+Why LastPass?
+How is LastPass secure?
+How LastPass works
+Pricing
+Business Max
+Business
+Teams
+Families
+Plus
+New
+Premium
+MSP
+Compare LastPass
+Security Features
+All Features
+Solutions
+AI Monitoring & Protect
+New
+SaaS Monitoring & Protect
+Web Monitoring & Protect
+New
+Password sharing
+Authentication
+Integrations
+For enterprises
+For small businesses
+For marketing teams
+For legal teams
+For HR teams
+For Financial Services
+For Professional Services
+For Education Institutions
+All Solutions
+Resources
+Resource Center
+Case studies
+The AI & SaaS Security Guide
+Events
+Webinars
+On-demand Demos
+Trust Center
+Threat Intel
+Compliance Center
+LastPass University
+Password Generator
+Username Generator
+LastPass Authenticator
+Cybersecurity posts
+LastPass content for agents
+Support
+Support Center
+Reddit community
+Community forum
+Service status
+My account
+Security vulnerability disclosure
+Vault login
+Admin login
+Contact support
+Get LastPass
+Start free trial
+Google Play download
+App Store download
+Browser Extensions
+Company
+About Us
+Careers
+We're hiring
+Leadership
+Newsroom
+Legal Center
+Compliance
+Contact Us
+Partners
+Partner program overview
+MSP
+Resellers
+Find a Partner
+Partner login
+Affiliate partners
+Contact Sales
+See in action how LastPass can protect your business. Request a demo today.
+Want to use LastPass Business now? Start 14-day Free Trial
+Chat with sales experts
+Contact Sales
+Install Extension
+Download
+© 2026 LastPass US LP. All rights reserved.
+Privacy Notice
+Terms of Service
+Imprint
+Cookie Preferences
+Your Privacy Choices
+English
+English
+Español
+Deutsch
+Français
+Italiano
+Nederlands
+Português

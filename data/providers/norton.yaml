@@ -291,6 +291,18 @@ perks:
 # v20241010124716461, last modified 2025-09-24), and its VPN pages name none (ca.norton.com/products/norton-vpn and
 # /feature/vpn-server-locations, us.norton.com/products/norton-vpn). Those pages mention no RAM-only servers and no way
 # to connect your own devices to each other, so both are false.
+# The password and authenticator features added 2026-11-19 (the owner's design, categories.md), read that day with Edge
+# from Canada in its support centre, for Norton Password Manager on every plan:
+# - Imports "from browsers as well as from other password manager applications such as Dashlane, 1Password, and
+#   LastPass" as .csv files ("select the .csv file"), its own export among them ("Norton Password Manager (CSV)"),
+#   support article v125566479; exports "as a CSV file" (v5466274).
+# - No emergency access, offline vault or end-to-end encryption on the pages read: its password manager page
+#   (ca.norton.com/feature/password-manager) says only "Your data is encrypted and stored more securely in your online
+#   vault".
+# - Authenticator: "The Authenticator feature in the Norton Password Manager mobile app generates a unique 6-digit
+#   temporary code every 30 seconds" (v20260526111120853, last modified 2026-11-10), from "Scan the QR code displayed on
+#   the website" or "Enter the secret key". No page names an export of the codes. The plans' item types don't list 2FA
+#   codes yet (notes.md).
 plans:
   # AntiVirus Plus: "1 PC, Mac, tablet, or phone" with Scam Protection, "Antivirus, malware, ransomware,
   # and hacking protection", Password Manager and 2 GB Cloud Backup, and no VPN (each country's cards). The US page
@@ -308,6 +320,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       antivirus.devices: 1
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
@@ -418,6 +436,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       antivirus.devices: 1
       platforms: [windows, macos]
       antivirus.behavioural: true
@@ -457,6 +481,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       antivirus.devices: 3
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
@@ -495,6 +525,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -611,6 +647,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -663,6 +705,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -716,6 +764,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -819,6 +873,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -882,6 +942,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -937,6 +1003,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -993,6 +1065,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1096,6 +1174,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1159,6 +1243,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1215,6 +1305,12 @@ plans:
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1307,6 +1403,12 @@ plans:
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1375,6 +1477,12 @@ plans:
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1438,6 +1546,12 @@ plans:
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1537,6 +1651,12 @@ plans:
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1602,6 +1722,12 @@ plans:
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1675,6 +1801,12 @@ plans:
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: false
       vpn.server-countries: 100
@@ -1743,6 +1875,12 @@ plans:
     features:
       password-manager: true
       password-manager.item-types: [login, credit-card]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       platforms: [web, browser-extension, android, ios]
     notes: 'Free: a password manager for your logins and cards, as a browser extension, a web app and Android and iPhone apps.'
     prices:

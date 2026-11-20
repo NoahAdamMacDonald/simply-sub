@@ -1,0 +1,1172 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1), read with Edge from Canada and with a plain
+# fetch (curl): ente.com's home page (its pricing section, with the plan data the page loads), its Auth, Locker, Ensu,
+# About and Contact pages, its Terms and Conditions and Privacy Policy, its help centre (ente.com/help: the Photos FAQ's
+# Storage and Plans, Security and Privacy and Account Creation, the Photos account, family plan, passkey, legacy,
+# installation and export guides, every Ente Auth article, the Locker credentials article), three blog posts (its
+# Cure53 audit of 2023, the CERN-sponsored audit of 2025, Pricing update) and its GitHub SECURITY.md; the home page again
+# through US, UK, Irish, Australian, New Zealand, German, French, Dutch, Spanish and Italian exits. ente.io now sends
+# every page to ente.com, so ente.io is in its domains.
+# Pricing: the home page's pricing section (ente.com/#pricing, the Terms' "Paid Plans, their Storage Limits and,
+# corresponding fees" link), whose Monthly and Annually switch shows Starter (50 GB), Popular (200 GB), Pro (1000 GB) and
+# Pro+ (2000 GB), each monthly and yearly, and "10GB free forever". The page fills the prices from the plan data it
+# loads, which follows the visitor's country: "£2.99" through a UK exit and "€2.99" through Irish, German, French, Dutch,
+# Spanish and Italian exits, each country's own; and a bare "$2.99" through US, Australian and New Zealand exits alike,
+# the same list as the page's own built-in plan data and the help centre's worked examples ("50 GB monthly plan
+# ($2.99/month)"). Its FAQ says "We keep a single price globally because our infrastructure and payment costs are
+# billed to us in USD/EUR", so the "$" list is US dollars, the only dollar it can be (Stremio's and Devin's precedent),
+# stored for everywhere (GLOBAL), flagged for the owner (notes.md). Canada sees a list of its own in a bare "$" ($3.99 a
+# month and $41.88 a year for 50 GB, $7.99 and $83.88 for 200 GB, $15.99 and $167.88 for 1000 GB, $31.99 and $323.88 for
+# 2000 GB), read from Canada in Edge: not the US list, and no page names its currency (CA$, C$ or
+# CAD), so it isn't stored and the GLOBAL list stands for Canada (notes.md). No page says the prices include tax: the
+# Terms say subscribers "will pay, if applicable, all applicable customs, duties, sales, use, value added or other
+# taxes". None is a first-term offer: "We don't offer a separate renewal or loyalty discount, so your plan renews at the
+# regular price." Students' 30% off, referral storage and partner discount codes are offers (notes).
+# Region checklist for CA and US, 2026-11-19: 1. ente.com has language paths only (/de/, /fr/, /nl/, /es/, /it/, /tr/),
+# no country paths; 2. a language picker only; 3. the page's plan data (the prices above, no country or currency code;
+# its structured data still names an older "0.99" EUR list); 4. the checkout is in the web app after signing up, so not
+# opened; 5. the help centre's "Does Ente offer regional pricing?" (above); 6. Edge from Canada, a plain fetch, and Edge
+# through a US exit; 7. no bill offered.
+# Its individual plans: Ente Photos Free and its four paid storage plans, every one with Ente Locker (100 items free, 1000
+# paid), and Ente Auth, free for everyone. Plans above 2 TB are by request ("If you have any queries regarding pricing
+# or require a plan above 2TB, please contact support@ente.com."), not priced. No lifetime plan ("We don't offer
+# lifetime plans."). Ensu, its on-device AI app, sells nothing (notes.md).
+# Bundles: none. Official resellers: none (no page names a shop; its Shop sells merchandise, and "Friends' discounts"
+# are other services' codes for Ente subscribers). App stores bill its iOS plans: partners, not listed.
+id: ente
+name: Ente
+aliases: [ente photos, ente auth, ente locker, ente.io]
+website: https://ente.com
+domains: [ente.io]
+category: storage
+spendCategory: software
+billingCurrency: { GLOBAL: USD, GB: GBP, IE: EUR, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
+# Its help centre's "How can I cancel my subscription?" (Settings > Account > Manage subscription > Cancel subscription,
+# or the app store's settings for a subscription billed there).
+cancelUrl: https://ente.com/help/photos/faq/storage-and-plans
+sources: { pricing: 'https://ente.com/#pricing' }
+
+# Ways to pay (M11.5), read 2026-11-19 in the help centre's Storage and Plans FAQ: cards through Stripe on the web,
+# desktop and Android, the App Store on iOS, PayPal for yearly plans only, by emailed invoice ("Only annual plans are
+# available via PayPal (monthly plans not supported)", renewed by hand), and crypto (the same FAQ, and BitPay among the
+# privacy policy's payment services). No page names a card network ("all major prepaid and credit card providers"), so
+# no acceptedNetworks.
+paymentMethods:
+  - methods: [card, app-store, paypal, crypto]
+    page: 'Storage and Plans FAQ'
+    url: https://ente.com/help/photos/faq/storage-and-plans
+    quotes:
+      - 'On Web, Desktop and Android, Stripe helps us process payments from all major prepaid and credit card providers.'
+      - 'On iOS, we (have to) use the billing platforms provided by the app store.'
+      - 'We support annual subscriptions over PayPal.'
+      - 'If you would like to change your payment method entirely (for example, switch between an app store, card, PayPal, or crypto), please contact support@ente.com.'
+
+# Renewal day (M11.5), read 2026-11-19 in its Terms: a plan bought from Ente renews on the day of the month it began; in a
+# month without that day it moves to the 1st of the next month (the catalog's same-date takes the shorter month's last
+# day: notes.md). App store plans follow the store.
+renewalAnchor:
+  kind: same-date
+  page: Terms and Conditions
+  url: https://ente.com/terms
+  quotes:
+    - 'Any other recurring Paid Plan Subscriptions will renew on the same day of month as it was established, except in cases where the day is not available due to a short month, in which case the renewal date will be moved to the first day of the following month.'
+  lastVerified: 2026-11-19
+
+# Owner (M11.2), read 2026-11-19: its about page names no company; its Terms are an agreement with Ente Technologies,
+# Inc., which its privacy policy says is headquartered in the US (its contact page gives "1111B S Governors Ave #6032"
+# in Dover, Delaware, with offices in Bengaluru and Amsterdam). Private: no page names a listing.
+owner:
+  name: Ente Technologies, Inc.
+  page:
+    name: Terms and Conditions
+    url: https://ente.com/terms
+  quotes:
+    - 'These Terms and Conditions ("Agreement", or "Terms") are a legally binding agreement between Ente Technologies, Inc. ("Ente," "we," "us," "our") and'
+  country:
+    code: US
+    page:
+      name: Privacy Policy
+      url: https://ente.com/privacy
+    quotes:
+      - 'We are headquartered in United States of America.'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  One Ente account works in Ente Photos, Ente Auth and Ente Locker. Paid plans are for Photos storage, shared with up to
+  5 family members, and raise Locker to 1000 items; Ente Auth is free. PayPal pays for yearly plans only, by emailed
+  invoice, renewed by hand.
+
+# Source code (M11.5): its Auth page links its GitHub repository (github.com/ente/ente, "Fully open source, end-to-end
+# encrypted cloud", "AGPL-3.0"), and its help centre documents running its server yourself (Self-hosting). Its home
+# page: "open source", "audited", "self-hostable". So fully open, and self-hostable.
+sourceRepo:
+  url: https://github.com/ente/ente
+  page:
+    name: Ente Auth
+    url: https://ente.com/auth
+  quotes:
+    - 'Ente is fully open source. You can export and import your data. No lockins.'
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: Photos for iOS and iPadOS, Android, macOS, Windows and Linux and the web
+# (its installation guide: "You can also access Ente Photos directly in your browser without installing anything at
+# photos.ente.com."), and Auth on the App Store, Play Store, F-Droid, the web, macOS, Linux and Windows (its Auth page);
+# Locker on iOS, Android and the web. Sign-in: an email address and password, "You may be asked to verify your email
+# with a 6-digit code", and as a second step "TOTP (Time-based One-Time Passwords)", "WebAuthn/FIDO2 for hardware
+# security keys" or a passkey, which "serve as a second factor (2FA) for your Ente account, not as a replacement for
+# your password" (Account Creation FAQ), so no passkey sign-in. Support: support@ente.com and its Discord community
+# (help centre home), Free's "Community support" against paid plans' "Human support" (the pricing section). App
+# languages: its website's picker (English, Deutsch, Français, Nederlands, Español, Italiano, Türkçe). No pause: you
+# cancel and the plan runs to its end (Storage and Plans FAQ). No parental controls: a family plan shares storage only
+# ("Family plans are only for sharing storage space, not for sharing photos automatically.").
+features:
+  platforms: [windows, macos, linux, android, ios, web]
+  account.sign-in: [password, email-code, totp, security-key]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, de, it]
+  software.open-source: fully-open
+  software.self-hostable: true
+
+# Perks (M11.6), the pricing section's lines that no feature describes, in its words: Ente Locker's items (its app for
+# documents, notes and credentials: "Locker works alongside your password manager rather than replacing it", so it isn't
+# a password manager), the paid plans' three copies of your data ("1 replica" on Free) and partner discounts, its
+# trusted contacts for your account ("Legacy Contacts", the home page; "Ente offers a legacy feature that allows you to
+# designate trusted contacts who can access your account if something happens to you."), and Ente Auth's use without an
+# account ("Use without backups", "Offline mode", "Use without an account", its Auth page).
+perks:
+  - id: locker-100-items
+    name: 100 items on Locker
+  - id: locker-1000-items
+    name: 1000 items on Locker
+  - id: three-replicas
+    name: 3 replicas
+  - id: friends-discounts
+    name: Friends' discounts
+  - id: legacy-contacts
+    name: Legacy Contacts
+  - id: auth-offline-mode
+    name: 'Offline mode: use without an account'
+
+# Storage (storage.cloud), read 2026-11-19 on the pricing section: 10, 50, 200, 1000 and 2000 GB, which Ente counts in
+# GiB ("Ente on the other hand, computes your storage quota in GibiBytes (GiBs) by dividing your total bytes uploaded by
+# 1024 x 1024 x 1024 ."). Every paid plan is a family plan: "You can invite up to 5 family members to your plan.
+# Including yourself, a total of 6 people can share a single subscription while paying only once." (account.users 6;
+# Free "cannot: Set up family plans"). End-to-end encrypted on every plan: "Your Files, their metadata and any derived
+# indexes (including but not limited to Biometric Information such as face geometry) are stored end-to-end encrypted."
+# (privacy policy), and Locker's items ("Ente Locker is an end-to-end encrypted app for securely storing your important
+# items and sensitive information."), so files and notes.
+# Ente Auth (passwords), read 2026-11-19 on its Auth page and help centre: an authenticator only ("Open source 2FA
+# authenticator, with end-to-end encrypted backups"), so password-manager false and authenticator.included true.
+# - Imports: QR codes ("Scan the QR code"), plain text files of otpauth links ("Plain text files must be in the following
+#   format:" otpauth://totp/...), Google Authenticator's transfer QR codes (Auth FAQ, "How do I import from Google
+#   Authenticator if it shows several QR codes?"), and other apps' files: "Ente Auth natively supports imports from many
+#   2FA providers." (2FAS Authenticator, Aegis Authenticator, andOTP, Bitwarden, Google Authenticator, LastPass, OTP Auth,
+#   Proton, Raivo OTP, and its migration guides for Authy, Microsoft Authenticator and Steam).
+# - Exports: "Export: Export your codes in plain text, as an encrypted file, or automatically via the CLI." (Features),
+#   the plain text being otpauth links that Auth and other apps import, and "Yes, you can export your codes as HTML QR
+#   codes and then scan them in Google Authenticator to import them." (Auth FAQ); each entry can also be shown "as QR
+#   code". So otpauth, an encrypted backup and a plain backup file.
+# - End-to-end encrypted: its synced codes ("Your codes sync across all your devices, end-to-end encrypted.") and its
+#   backups ("Auth provides end-to-end encrypted cloud backups so you don't have to worry about losing your tokens."),
+#   so passwords (an authenticator's vault, the registry's words) and backups.
+plans:
+  - id: ente.photos-free
+    name: Photos Free
+    link: https://ente.com/#pricing
+    features:
+      storage.cloud: 10
+      encryption.end-to-end: [files, notes]
+      support.channels: [community]
+    perks: [locker-100-items, legacy-contacts]
+    notes: 'Ente Photos with 10 GB "free forever", kept as one copy ("1 replica"), and 100 items in Ente Locker. A free account unused for 12 months is deleted after email warnings.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+
+  - id: ente.photos-starter
+    name: Photos Starter
+    link: https://ente.com/#pricing
+    features:
+      storage.cloud: 50
+      account.users: 6
+      encryption.end-to-end: [files, notes]
+    perks: [locker-1000-items, three-replicas, friends-discounts, legacy-contacts]
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 29.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 29.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 29.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 29.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 29.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 29.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 29.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 29.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+
+  - id: ente.photos-popular
+    name: Photos Popular
+    link: https://ente.com/#pricing
+    features:
+      storage.cloud: 200
+      account.users: 6
+      encryption.end-to-end: [files, notes]
+    perks: [locker-1000-items, three-replicas, friends-discounts, legacy-contacts]
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 59.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 59.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 59.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 59.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 59.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 59.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 59.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 59.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+
+  - id: ente.photos-pro
+    name: Photos Pro
+    link: https://ente.com/#pricing
+    features:
+      storage.cloud: 1000
+      account.users: 6
+      encryption.end-to-end: [files, notes]
+    perks: [locker-1000-items, three-replicas, friends-discounts, legacy-contacts]
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 119.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 119.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 119.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 119.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 119.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 119.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 119.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 119.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+
+  - id: ente.photos-pro-plus
+    name: Photos Pro+
+    link: https://ente.com/#pricing
+    features:
+      storage.cloud: 2000
+      account.users: 6
+      encryption.end-to-end: [files, notes]
+    perks: [locker-1000-items, three-replicas, friends-discounts, legacy-contacts]
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 23.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 239.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 23.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 239.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 23.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 239.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 23.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 239.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 23.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 239.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 23.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 239.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 23.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 239.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 23.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 239.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: 'https://ente.com/#pricing',
+        }
+
+  - id: ente.auth
+    name: Auth
+    link: https://ente.com/auth
+    categories: [passwords]
+    features:
+      password-manager: false
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator, other-apps]
+      authenticator.export: [otpauth, encrypted-backup, plain-backup]
+      encryption.end-to-end: [passwords, backups]
+    perks: [auth-offline-mode]
+    notes: 'Free and open source, for everyone. Sign in with an Ente account to sync your codes end-to-end encrypted, or use it on one device without an account.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://ente.com/auth,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge: its Terms and Conditions (last updated May 05, 2026)
+# and Privacy Policy (October 16, 2026), which the Terms name as the whole agreement ("This Agreement along with our
+# Privacy Policy constitutes the entire agreement"); its apps are open source (AGPL-3.0, its Auth page), with no other
+# licence. The help centre's Storage and Plans, Security and Privacy and Account Creation FAQs and Auth FAQ, its blog's
+# audit posts, and its GitHub security policy. Not read: the app stores' own terms for iOS purchases. Its sign-up form
+# needs an email address, which wasn't entered.
+policies:
+  links:
+    - name: 'Terms and Conditions'
+      url: https://ente.com/terms
+    - name: 'Privacy Policy'
+      url: https://ente.com/privacy
+    - name: 'Storage and Plans FAQ'
+      url: https://ente.com/help/photos/faq/storage-and-plans
+    - name: 'Security and Privacy FAQ'
+      url: https://ente.com/help/photos/faq/security-and-privacy
+    - name: 'Account Creation FAQ'
+      url: https://ente.com/help/photos/faq/account-creation
+    - name: 'Exporting your photos'
+      url: https://ente.com/help/photos/features/backup-and-sync/export
+    - name: 'Ente Auth FAQ'
+      url: https://ente.com/help/auth/faq
+    - name: 'Ente Auth'
+      url: https://ente.com/auth
+    - name: 'Security audit (2023)'
+      url: https://ente.com/blog/cryptography-audit/
+    - name: 'CERN-sponsored audit (2025)'
+      url: https://ente.com/blog/cern-audit/
+  ratings:
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'Its apps send no usage analytics, and their crash reports are anonymous. But its website counts your visits with PostHog, and it gives no way to turn that off.'
+      sources:
+        - url: https://ente.com/privacy
+          quote: 'We do not collect analytics about how you use our app features, and crash reports (if any) are anonymized.'
+        - url: https://ente.com/privacy
+          quote: 'Website analytics PostHog'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It doesn’t sell your data. It shares it with companies that help run the service and with its own subsidiaries.'
+      sources:
+        - url: https://ente.com/privacy
+          quote: 'We do not sell your personal information, nor do we intend to do so.'
+        - url: https://ente.com/privacy
+          quote: 'There are times when Personal Information that you have shared with us may be shared by Ente with others to enable us to provide you over Services, including contractors, service providers, and third parties ("Partners") and subsidiaries.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads and no cookies: it earns its money from subscriptions, not from advertising.'
+      sources:
+        - url: https://ente.com/privacy
+          quote: 'We do not set or use Cookies on our website and app.'
+        - url: https://ente.com/help/photos/faq/security-and-privacy
+          quote: 'Our pricing model allows us to profitably provide this service without relying on advertising or selling your data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'Your photos never train AI, its own or anyone else’s. Face recognition and search run on your own device.'
+      sources:
+        - url: https://ente.com/help/photos/faq/security-and-privacy
+          quote: 'Your photos and ML data are never used to train any AI models, neither by Ente nor by any third parties.'
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your photos, files and codes are locked on your device before they’re uploaded, and only you hold the key, so Ente can’t see them.'
+      sources:
+        - url: https://ente.com/privacy
+          quote: 'Your Files, their metadata and any derived indexes (including but not limited to Biometric Information such as face geometry) are stored end-to-end encrypted.'
+        - url: https://ente.com/privacy
+          quote: 'All of your files and the metadata related to those files are stored encrypted, and only you hold the decryption keys.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'After you delete your account, your files are gone for good after 7 days. Other data about you may stay up to 60 days, then it’s made anonymous.'
+      sources:
+        - url: https://ente.com/help/photos/faq/security-and-privacy
+          quote: "After 7 days, your Ente Photos, Ente Auth and Ente Locker data is permanently deleted and can't be recovered."
+        - url: https://ente.com/privacy
+          quote: 'After account termination, we may retain your Data for sixty (60) days, or as warranted by your jurisdiction ("Retention Period"), unless an enforcement action is likely under our Terms.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account and everything in it yourself, at any time, from the app’s settings.'
+      sources:
+        - url: https://ente.com/help/photos/faq/security-and-privacy
+          quote: 'You can delete your account at any time by using the "Delete account" option in the settings.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'You can download all your photos as the original files, with their details in a common format other apps read. Ente Auth exports your codes too.'
+      sources:
+        - url: https://ente.com/help/photos/features/backup-and-sync/export
+          quote: 'Export allows you to download your entire Ente library or specific albums to local storage.'
+        - url: https://ente.com/help/photos/features/backup-and-sync/export
+          quote: "The JSON format matches Google Takeout format, so tools that support Google Takeout imports can read Ente's exported metadata."
+        - url: https://ente.com/help/auth/faq
+          quote: 'Yes, you can export your codes as HTML QR codes and then scan them in Google Authenticator to import them.'
+      action:
+        name: 'How to export your photos'
+        url: https://ente.com/help/photos/features/backup-and-sync/export
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over data when a court order, a law or a government asks. It holds little it could read, but doesn’t promise to tell you or publish a report.'
+      sources:
+        - url: https://ente.com/privacy
+          quote: 'We will disclose personal information (i) to comply with any court order, law, or legal process, including to respond to any government or regulatory request'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Your files are kept in three copies in three EU countries. Some data can be reached from the US, under the EU’s standard rules for sending data abroad.'
+      sources:
+        - url: https://ente.com/help/photos/faq/security-and-privacy
+          quote: 'We store 3 copies of your data across 3 different providers in 3 different EU countries'
+        - url: https://ente.com/privacy
+          quote: 'Our servers or our third-party hosting services partners are located in Europe.'
+        - url: https://ente.com/privacy
+          quote: "As applicable, we require that our Partners, affiliates, and subsidiaries sign data processing agreements and/or agree to the European Union's model contract for the transfer of personal data to third countries"
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with only an email address and a password. Its pages don’t say whether an email alias works.'
+      sources:
+        - url: https://ente.com/terms
+          quote: 'For setting up an Account, they will be required to (a) enter their email address, and (b) set up a password ("Password") (collectively, the "Account Information").'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      plans: [ente.auth]
+      tier: great
+      reason: 'Ente Auth works without any account: your codes stay on your device, and you give nothing to sign up.'
+      sources:
+        - url: https://ente.com/help/auth/faq
+          quote: 'Yes. Choose Use without backups to use Ente Auth offline without an account.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel in the app’s settings, and your plan keeps working until the end of the time you paid for.'
+      sources:
+        - url: https://ente.com/help/photos/faq/storage-and-plans
+          quote: 'For a subscription purchased directly from Ente, open Settings > Storage/Subscription > Cancel subscription, or Settings > Account > Manage subscription > Cancel subscription.'
+        - url: https://ente.com/help/photos/faq/storage-and-plans
+          quote: 'Your paid plan continues until its expiry date.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'No refunds: what you pay is final, though your plan runs to the end of the time you paid for. It refunds charges made after you cancel.'
+      sources:
+        - url: https://ente.com/terms
+          quote: 'Unless otherwise provided by applicable laws or by a particular Service offer, all Purchases are final and non-refundable.'
+        - url: https://ente.com/terms
+          quote: 'Any payments processed after an effective Cancellation or Termination will be promptly refunded by us.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'If it changes its prices, it only says it will update its pricing page. It doesn’t promise to tell you first.'
+      sources:
+        - url: https://ente.com/terms
+          quote: 'In the event that we modify the Paid Plans and their respective fees ("Fees") in the future, we will update that on the aforementioned link.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial that turns into a paid plan: its free plan stays free, and you choose when to pay.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say paid plans renew on their own, but not that it reminds you before they do.'
+      pages:
+        - https://ente.com/terms
+        - https://ente.com/help/photos/faq/storage-and-plans
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and billing help name no fees beyond the price and your local taxes.'
+      pages:
+        - https://ente.com/terms
+        - https://ente.com/help/photos/faq/storage-and-plans
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      tier: great
+      reason: 'You can switch plans whenever you like. The change happens at once, and what you already paid counts toward the new plan either way.'
+      sources:
+        - url: https://ente.com/help/photos/faq/storage-and-plans
+          quote: 'Your new plan will go into effect immediately, and you only have to pay the difference.'
+        - url: https://ente.com/help/photos/faq/storage-and-plans
+          quote: 'Your new plan will go into effect immediately. Any extra amount you have paid will be credited to your account.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee settles disagreements instead of a court, and you can’t join a group lawsuit, unless you mail it a letter saying no within 30 days of first agreeing.'
+      sources:
+        - url: https://ente.com/terms
+          quote: 'PLEASE NOTE THAT THESE TERMS CONTAIN A BINDING AND MANDATORY ARBITRATION PROVISION AND CLASS ACTION/JURY TRIAL WAIVER PROVISION.'
+        - url: https://ente.com/terms
+          quote: 'USERS HAVE THE RIGHT TO OPT OUT OF BINDING ARBITRATION WITHIN THIRTY (30) DAYS OF THE DATE USERS FIRST ACCEPTED THE TERMS OF THIS SECTION BY WRITING TO: ENTE, RE: OPT-OUT, 1111B S GOVERNORS AVE #6032, DOVER, DE 19904.'
+      action:
+        name: 'How to opt out of arbitration, by post'
+        url: https://ente.com/terms
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms whenever it wants, and if you keep using it, that counts as saying yes.'
+      sources:
+        - url: https://ente.com/terms
+          quote: 'We reserve the right, at our sole discretion, to change or modify this Agreement at any time. Your continued use of our Services confirms your acceptance of our updated Agreement.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or close your account for any reason, even if serving you is no longer worth its while, and its terms promise no warning or refund.'
+      sources:
+        - url: https://ente.com/terms
+          quote: "We reserve the right to suspend or terminate a Subscriber's Account and their license to use our Services for any reason, including, but not limited to, if we reasonably believe:"
+        - url: https://ente.com/terms
+          quote: '(c) the provision of our Services to them is no longer commercially viable'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'It takes no rights over your photos and files beyond what it needs to store, back up and share them for you.'
+      sources:
+        - url: https://ente.com/terms
+          quote: "These Terms don't give us any rights to a Subscriber's Files and Data except for the limited rights that enable us to offer the Services."
+        - url: https://ente.com/terms
+          quote: 'solely for the purposes of providing our Services and in accordance with these Terms and the Privacy Policy'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'Its terms say it isn’t responsible if your stored files are deleted or fail to be kept, so you should keep copies of your own.'
+      sources:
+        - url: https://ente.com/terms
+          quote: '(iii) the deletion of, or the failure to store or to transmit, any content and other communications maintained by our websites or apps;'
+        - url: https://ente.com/terms
+          quote: '(vi) shall maintain copies of all Data stored by them on our Platform'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: good
+      reason: 'A free account you don’t use for 12 months is deleted, after three warning emails. A paid account never is.'
+      sources:
+        - url: https://ente.com/terms
+          quote: 'In case of inactivity, we will send 3 advance email reminders to the email address associated with the free account before deletion, and the first such reminder will be sent at least one month before deletion.'
+        - url: https://ente.com/help/photos/faq/storage-and-plans
+          quote: 'Free accounts with no active paid subscription are deleted after 12 consecutive months of inactivity.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'All its apps are open source: anyone can read, change and share their code, and even run its server.'
+      sources:
+        - url: https://ente.com/auth
+          quote: 'Ente is fully open source. You can export and import your data. No lockins.'
+        - url: https://ente.com/auth
+          quote: 'AGPL-3.0'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside security firms have checked its apps, encryption and servers, and it published their reports. You can report security flaws, but it pays no bug bounty.'
+      sources:
+        - url: https://ente.com/blog/cryptography-audit/
+          quote: "We're happy to announce that Ente's architecture and source code have been successfully audited by Cure53, in collaboration with Symbolic Software."
+        - url: https://ente.com/blog/cern-audit/
+          quote: 'Ente, specifically the server side - both code, and infrastructure on which it runs - was audited by a team of 5 researchers from the German cybersecurity firm Cure53 over a period of 2 weeks as part of a CERN sponsored audit.'
+        - url: https://ente.com/help/photos/faq/security-and-privacy
+          quote: 'If you believe you have found a security vulnerability, please responsibly disclose it by emailing security@ente.com or using this link instead of opening a public issue.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: great
+      reason: 'A paid plan can be shared with up to 5 other people, each with their own private account, at no extra cost.'
+      sources:
+        - url: https://ente.com/help/photos/faq/storage-and-plans
+          quote: 'You can invite up to 5 family members to your plan. Including yourself, a total of 6 people can share a single subscription while paying only once.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its desktop app downloads and installs its own updates. Its pages don’t say it changes anything else on your device.'
+      sources:
+        - url: https://ente.com/help/photos/faq/account-creation
+          quote: 'Ente desktop includes auto-update functionality - whenever updates are deployed, the app will automatically download and install them.'
+      lastVerified: 2026-11-19

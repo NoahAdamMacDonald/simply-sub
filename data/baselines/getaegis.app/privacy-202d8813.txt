@@ -1,0 +1,10 @@
+url: https://getaegis.app/privacy
+method: fetch
+saved: 2026-11-19
+
+Aegis Authenticator
+Privacy policy
+Aegis Authenticator does not collect any data from your device.
+Camera access is only used for scanning QR codes.
+If you believe this policy has been violated, please let us know.
+Privacy Policy © Copyright 2025 Beem Development, all rights reserved.

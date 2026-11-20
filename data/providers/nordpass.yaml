@@ -1,0 +1,716 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1), read with Edge from Canada: nordpass.com's
+# pricing page (its 2-year and 1-year plan views, its FAQ answers and offer notes), its personal plans, about, security
+# and press pages; Nord Account's legal pages (my.nordaccount.com/legal/: the General Terms, Subscription Terms, NordPass
+# Additional Terms, the General Privacy Policy, the NordPass Privacy Notice, the Cookie Policy and the Subscription
+# Renewal Prices list); its help centre's articles through its Zendesk API (support.nordpass.com, a plain fetch); its
+# trust centre (trust.nordpass.com). nordpass.com/plans/, /family-password-manager/, /download/ and its blog's audit posts
+# showed Cloudflare's "Performing security verification" to Edge (headless and headed), a plain fetch and Mullvad
+# Browser: not clicked through, so not read.
+# Pricing: nordpass.com/pricing/ prices by where the visitor is; from Canada it names CA$. Personal plans are sold for 1
+# or 2 years ("1-month plan (Business plans only)"). Both are first-term offers: "CA$45.48 CA$31.08 for the first 12
+# months" and "CA$102.33 CA$48.33 for the first 27 months" (Premium), "CA$89.88 CA$56.28" and "CA$202.23 CA$86.13"
+# (Family), the struck price the regular one. The Subscription Terms renew every plan of a year or longer "annually for
+# one (1) year Renewal Periods", so only the yearly renewal price is stored, and no 2-year price (NordVPN's precedent).
+# The yearly prices come from Nord's Subscription Renewal Prices list (my.nordaccount.com/legal/pricing/, "Last updated
+# June 9, 2026"), which names each country's currency ("Canada", "Price in CAD", "NordPass Premium 1-year", "45.48") and
+# matches Canada's pricing page (CA$45.48 and CA$89.88): the US US$35.88 and US$71.88, the UK £27.48 and £53.88, the
+# "Euro zone" €35.88 and €71.88 (Ireland, Germany, France, the Netherlands, Spain, Italy), Australia A$49.08 and A$97.08,
+# and New Zealand "Other countries" in USD, US$35.88 and US$71.88 ("For countries and regions where the local currency
+# is not supported, Nord products are billed in U.S. dollars (USD)."). No page says its prices include tax ("All
+# displayed prices do not include VAT.", the pricing page; "We will add the sales tax, VAT, GST/PST, or other mandatory
+# tax", the list).
+# Other countries' pricing pages: read through US, UK, Irish, Australian, New Zealand and euro countries' exits on
+# 2026-11-19, they showed Cloudflare's check (the UK's page loaded with its prices still "Loading"), so each country's
+# yearly prices are the list's (notes.md).
+# Region checklist for CA and US, 2026-11-19: 1. no country paths (language paths only); 2. no country or currency
+# picker; 3. Canada's page names CA$; 4. checkout not opened; 5. the renewal list names Canada's and the US's prices;
+# 6. Edge from Canada; US exits met Cloudflare's check; 7. no bill offered.
+# Plans: Free, Premium and Family. Teams, Business and Enterprise are business plans, left out.
+# Bundles: none sold as a bundle of separate catalog plans: "you can add NordVPN to your security bundle with NordPass
+# when you buy or upgrade your plan on your Nord Account" (the pricing FAQ) is a Nord Account checkout, and NordVPN's
+# Complete and up include "Cross-platform password manager" (NordPass): a NordVPN plan, noted in notes.md.
+# Official resellers: none for personal plans; its "NordPass distributors" and partner pages are for businesses.
+# App stores (Apple, Google Play) bill it: partners, not listed.
+# Free use: NordPass Free, a plan of its own, with a 30-day Premium trial.
+
+id: nordpass
+name: NordPass
+aliases: [nord pass]
+website: https://nordpass.com
+# Nord Account (my.nordaccount.com) holds its terms, privacy policy and renewal price list.
+domains: [nordaccount.com]
+category: passwords
+spendCategory: software
+# Charged in the price list's currency: "The displayed prices are charged upon the automatic renewal of the
+# subscription plans in the currency in which the first payment was made." and "For countries and regions where the
+# local currency is not supported, Nord products are billed in U.S. dollars (USD)." (the renewal list).
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help article on cancelling ("Log in to your Nord Account." ... "Select the "cancel auto-renewal" to confirm.").
+cancelUrl: https://support.nordpass.com/hc/en-us/articles/360002450037-How-to-cancel-my-subscription
+sources: { pricing: https://nordpass.com/pricing/ }
+# Ways to pay (M11.5), read 2026-11-19: its help article names cards, PayPal, Sofort (Klarna), Google Pay, Apple Pay,
+# crypto and the app stores, and Nord's General Terms prepaid and gift cards. No NordPass page read names a card
+# network (the pricing page's "What payment methods does NordPass support?" shows another question's answer), so no
+# acceptedNetworks: the card shows "Card (networks not verified)".
+paymentMethods:
+  - methods: [card, paypal, klarna, google-pay, apple-pay, crypto, app-store]
+    page: 'What payment methods do you accept?'
+    url: https://support.nordpass.com/hc/en-us/articles/360002449077-What-payment-methods-do-you-accept
+    quotes:
+      - 'You can purchase a NordPass subscription with a credit card, debit card, PayPal, Sofort (Klarna), Google Pay, Apple Pay, or cryptocurrencies. In addition, you can make a payment through the Apple Store or the Google Play Store.'
+  - methods: [gift-card]
+    page: 'General Terms of Service'
+    url: https://my.nordaccount.com/legal/terms-of-service/
+    quotes:
+      - 'Payments made using prepaid cards or gift cards will not be refunded if such refunds are not supported by the provider of the card.'
+# Renewal day (M11.5, M11.21), read 2026-11-19: its Subscription Terms charge a yearly renewal "fourteen (14) days prior
+# to the start of the Renewal Period" (the date you signed up a term on), so a renewal is charged 14 days early.
+# Monthly plans, business only here, are "Charged on the day of the auto-renewal".
+renewalAnchor:
+  kind: same-date
+  page: Subscription Terms
+  url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+  quotes:
+    - 'All other plans: Charged fourteen (14) days prior to the start of the Renewal Period.'
+  chargedBefore: { days: 14 }
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its about page says "NordPass is developed by Nord Security"; the country is NordSec
+# B.V.'s Amsterdam address in Nord's General Privacy Policy, as for NordVPN. Its General Terms are with nordvpn S.A. of
+# Panama City (its NordPass Additional Terms' notice address: "nordvpn S.A." "Panama City, Republic of Panama"). Private:
+# no page names a listing.
+notes: Its terms are with nordvpn S.A., a company in Panama, part of Nord Security.
+owner:
+  name: Nord Security
+  website: https://nordsecurity.com
+  page:
+    name: About us
+    url: https://nordpass.com/about-us/
+  quotes:
+    - 'NordPass is developed by Nord Security, a company leading the global market of cybersecurity products'
+  country:
+    code: NL
+    page:
+      name: General Privacy Policy
+      url: https://my.nordaccount.com/legal/privacy-policy/
+    quotes:
+      - "For the purposes of the GDPR, Nord's representative in the European Economic Area (EEA) is NordSec B.V. (email: representative@nordsec.com; postal address: Fred. Roeskestraat 115, 1076 EE Amsterdam, the Netherlands)."
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: "The NordPass application is compatible with these operating systems:
+# Windows 10 and up", "macOS 13 and up", "Linux: any system that supports snap 64-bit", "Android 9.0 and up", "iOS 18.0
+# and up", and its extension for Chrome, Firefox, Opera, Edge and Safari (Operating Systems that support NordPass), and
+# its web vault ("You can export items using the Desktop application (Windows, macOS, Apple Silicon macOS, Linux) or
+# WebVault."). Sign-in: a Nord Account's email and Master Password, then "authenticator applications" or "a security key"
+# (How to enable Multi-Factor Authentication), or Google ("If you are using Google to sign in to your Nord Account",
+# Passkeys FAQs). Support: "NordPass provides 24/7 customer support via live chat and email" (no phone). App languages:
+# "English", "Deutsch (German)", "Français (French)", "Italiano (Italian)", "Español (Spanish)", "Nederlands (Dutch)",
+# "Lietuvių (Lithuanian)" (How to change NordPass language; Dutch and Lithuanian have no registry value). Open source:
+# "No, NordPass is a closed-source software." (its personal page's FAQ). No pause; no parental controls (the Family
+# plan's owner invites members to "six separate encrypted vaults").
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension]
+  account.sign-in: [password, totp, security-key, sso]
+  support.channels: [email, chat, 24-7]
+  software.open-source: proprietary
+  languages.interface: [en, fr, es, de, it]
+
+# Password manager features, read 2026-11-19 on the pricing page's cards and the help centre:
+# - Plans: "NordPass Free: This version only allows users to have one active session on one device." and "The Premium
+#   version also offers additional security features, such as: Authenticator, Data Breach Scanner, Password Health,
+#   Email Masking, Secure Item Sharing, File Attachments, Emergency Access" (Premium vs Free version of NordPass);
+#   Family: "all the benefits of a premium subscription for six different accounts". The pricing cards' screen-reader
+#   text says "Feature not included NordPass Authenticator" on Premium and Family, while their icon is the included
+#   one and the help article (updated 2026-11-17) lists Authenticator as Premium's: the help article is taken
+#   (notes.md).
+# - Items: "passwords, passkeys, credit cards, personal information, secure notes, and other sensitive data" (What is
+#   NordPass?), on every plan; Premium and Family add 2FA codes in password items ("Select the "Add Two-factor Code"
+#   button.") and Email Masking ("generate masked email addresses").
+# - Health: Password Health "indicates passwords that appear to be weak, reused, or old" and "checks both your saved
+#   and new passwords against a database of publicly known, compromised passwords" (Premium and Family).
+# - Sharing (Premium and Family): items with other users, with "the permissions granted", and links ("Link expires
+#   after: 1 hour, 1 day, 7 days, 14 days, or 30 days.", "Can be viewed: up to 100 times or unlimited.").
+# - Import: "LastPass: CSV", "Keeper: CSV, JSON", "1Password: CSV, 1PUX", "KeePass: CSV, XML", "Bitwarden: CSV, JSON",
+#   "ProtonPass: JSON, ZIP", a "Spreadsheet" option (CSV), and on phones "Import from another app" ("For apps that don’t
+#   support CXP, use the NordPass browser extension to import a CSV file."). No KDBX. Passkeys: "There is no option to
+#   import or export NordPass passkeys to password managers."
+# - Export: "Save the .CSV file on your device." (How to export passwords from NordPass?), every plan.
+# - Emergency access: "available on desktop apps, Android apps, and Web Vault for NordPass Premium users (including
+#   individual Premium and Family plans)".
+# - Offline: "you can still access your items with Offline Mode even if you are not connected to a network" (view
+#   only), every plan.
+# - End-to-end: "NordPass encrypts all your data locally on your device before it’s uploaded to the cloud." (its
+#   security page, "End-to-end encryption") and zero-knowledge (its privacy notice): the vault (passwords).
+# - Authenticator (Premium and Family): 2FA codes added with "Enter code manually" or "Scan QR code" (otpauth). No page
+#   read offers exporting the codes: authenticator.export is empty (notes.md).
+# - Data Breach Scanner (Premium and Family): dark web monitoring.
+plans:
+  - id: nordpass.free
+    name: Free
+    link: https://nordpass.com/pricing/
+    features:
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, identity, secure-note]
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+    notes: 'Unlimited passwords, but logged in on one device at a time. No sharing, password health or breach alerts.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordpass.com/pricing/
+  - id: nordpass.premium
+    name: Premium
+    link: https://nordpass.com/pricing/
+    features:
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, email-alias]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    notes: 'Logged in on all your devices, with 2FA codes, email masking, file attachments, sharing and emergency access. Sold for 1 or 2 years; both renew yearly.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 45.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: US
+        currency: USD
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: GB
+        currency: GBP
+        amount: 27.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IE
+        currency: EUR
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: AU
+        currency: AUD
+        amount: 49.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NZ
+        currency: USD
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: DE
+        currency: EUR
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: FR
+        currency: EUR
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NL
+        currency: EUR
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: ES
+        currency: EUR
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IT
+        currency: EUR
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+  - id: nordpass.family
+    name: Family
+    link: https://nordpass.com/pricing/
+    features:
+      account.users: 6
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, email-alias]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    notes: 'Premium for six people, each with their own vault. Sold for 1 or 2 years; both renew yearly.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 89.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: US
+        currency: USD
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: GB
+        currency: GBP
+        amount: 53.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IE
+        currency: EUR
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: AU
+        currency: AUD
+        amount: 97.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NZ
+        currency: USD
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: DE
+        currency: EUR
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: FR
+        currency: EUR
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NL
+        currency: EUR
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: ES
+        currency: EUR
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IT
+        currency: EUR
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19: Nord's General Terms, Subscription Terms (incorporated "by
+# reference into the Terms"), NordPass Additional Terms, its General Privacy Policy, NordPass Privacy Notice and Cookie
+# Policy, all at my.nordaccount.com, which nordpass.com's footer links as its "Terms of Service" and "Privacy Policy":
+# the same General Terms, Subscription Terms, General Privacy Policy and Cookie Policy that NordVPN's file rates (they
+# cover NordVPN, NordPass and NordLocker), so the general clauses are graded as NordVPN's are, and a shared document
+# could follow (notes.md). Also its renewal price list, pricing page, security page and help articles (export,
+# dormant accounts, account deletion, plan changes, audits). Its apps' licence is the General Terms' "License terms"
+# section. Not read: the sign-up form (not opened); its business terms and privacy policy (business.nordsec.com, for
+# business plans); its blog's audit posts (Cloudflare's check).
+policies:
+  links:
+    - name: 'General Terms of Service'
+      url: https://my.nordaccount.com/legal/terms-of-service/
+    - name: 'Subscription Terms'
+      url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+    - name: 'NordPass Additional Terms'
+      url: https://my.nordaccount.com/legal/terms-of-service/nordpass/
+    - name: 'General Privacy Policy'
+      url: https://my.nordaccount.com/legal/privacy-policy/
+    - name: 'NordPass Privacy Notice'
+      url: https://my.nordaccount.com/legal/privacy-policy/nordpass/
+    - name: 'Cookie Policy'
+      url: https://my.nordaccount.com/legal/cookie-policy/
+    - name: 'Subscription Renewal Prices'
+      url: https://my.nordaccount.com/legal/pricing/
+    - name: 'Pricing'
+      url: https://nordpass.com/pricing/
+    - name: 'Security'
+      url: https://nordpass.com/security/
+    - name: 'Does NordPass save passwords on their servers?'
+      url: https://support.nordpass.com/hc/en-us/articles/360002378338-Does-NordPass-save-passwords-on-their-servers
+    - name: 'How to export passwords from NordPass?'
+      url: https://support.nordpass.com/hc/en-us/articles/360007646477-How-to-export-passwords-from-NordPass
+    - name: 'Why do dormant accounts get deleted?'
+      url: https://support.nordpass.com/hc/en-us/articles/40284545674769-Why-do-dormant-accounts-get-deleted
+    - name: 'How to change NordPass plan'
+      url: https://support.nordpass.com/hc/en-us/articles/360002454638-How-to-change-NordPass-plan
+  ratings:
+    - topic: privacy.data-collection
+      tier: good
+      reason: 'Its apps collect only what they need to work. Usage statistics and ad data are extra, and other companies get them only if you agree.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/nordpass/
+          quote: 'By default, we collect only what is necessary for the operation of Applications, the provision of our Services and providing technical support for you. The collection of analytics and advertising data is optional and may be managed by you.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/nordpass/
+          quote: 'As set out in our Privacy Policy, third-party providers for analytics or advertising purposes are engaged only when you provide your consent.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its websites pass what their cookies collect to analytics and ad companies for its ads. You can only stop it by turning off third-party cookies in each browser.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'We share information gathered by cookies and other tracking technologies with our data analytics and advertising partners for our advertising.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'you may opt-out of such processing of your personal data by disabling third-party cookies.'
+      action:
+        name: 'How to manage cookie preferences'
+        url: https://my.nordaccount.com/legal/cookie-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its websites use ad cookies that follow the pages you visit to show you its ads elsewhere. You can opt out, but only in each browser’s cookie settings.'
+      sources:
+        - url: https://nordpass.com/pricing/
+          quote: 'This website uses cookies to personalize your experience and may share data with partners for advertising and analytics. You can adjust preferences or opt out in Privacy Controls.'
+        - url: https://my.nordaccount.com/legal/cookie-policy/
+          quote: 'These cookies record your visit to our Websites, other pages you have visited, and the links you have clicked.'
+        - url: https://my.nordaccount.com/legal/cookie-policy/
+          quote: 'You have the option to modify or revoke non-essential cookies at any time.'
+      action:
+        name: 'How to manage cookie preferences'
+        url: https://my.nordaccount.com/legal/cookie-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and NordPass notice don’t say whether anything you send trains AI models.'
+      pages:
+        [
+          https://my.nordaccount.com/legal/privacy-policy/,
+          https://my.nordaccount.com/legal/privacy-policy/nordpass/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your vault is locked on your own device, and NordPass has no way to open it or see your Master Password.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/nordpass/
+          quote: 'NordPass has no technical means to access your encrypted passwords, secure notes, or other items stored in your vaults because we built NordPass based on zero-knowledge architecture.'
+        - url: https://support.nordpass.com/hc/en-us/articles/360002378338-Does-NordPass-save-passwords-on-their-servers
+          quote: 'Your Master Password, encryption, and decryption keys never reach our servers.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it, with some set times: payment records for 10 years, and marketing emails for up to 2 years after you stop paying.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'Nord will only keep your personal data for as long as it is necessary to provide you with our Services, or for as long as we have other legitimate grounds to do so (but not longer than permitted or required by law).'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'We retain billing and payment information for ten (10) years after your last transaction to comply with accounting, tax, and financial regulations.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'We may continue sending you marketing emails, push notifications, and/or in-app messages for up to two (2) years after your Subscription ends, unless you opt out earlier.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your Nord Account yourself at any time, with your vault. It keeps only the payment records the tax law requires.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'You can delete your Account at any time.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'We retain billing and payment information for ten (10) years after your last transaction to comply with accounting, tax, and financial regulations.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download everything in your vault yourself, as a CSV file other password managers can read.'
+      sources:
+        - url: https://support.nordpass.com/hc/en-us/articles/360007646477-How-to-export-passwords-from-NordPass
+          quote: 'This article will show you how to export your Vault items from NordPass.'
+        - url: https://support.nordpass.com/hc/en-us/articles/360007646477-How-to-export-passwords-from-NordPass
+          quote: 'Save the .CSV file on your device.'
+      action:
+        name: 'How to export your passwords'
+        url: https://support.nordpass.com/hc/en-us/articles/360007646477-How-to-export-passwords-from-NordPass
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'Police must follow Panama’s legal process to ask it for data, and it says it usually has nothing to give. It doesn’t say it tells you, or name a report on requests.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'In most cases, we have no data to share.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'they must follow the appropriate legal process set out under the laws of the Republic of Panama (such as being submitted through a mutual legal assistance treaty or via letters rogatory) and must meet all applicable legal standards.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can be sent to other countries, such as the US, with legal safeguards such as the EU’s standard contract terms.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'For example, your personal data may be transferred internationally, including to countries where Nord operates or where our trusted third-party service providers are located (such as the United States).'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'Standard Contractual Clauses'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To sign up you give an email address and a password, or use your Google account, and a way to pay for a paid plan.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'To access and use any of our Services, you must set up an Account by providing certain information (such as your email address and password).'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can turn off renewal in your Nord Account at any time, and keep using it to the end of the time you paid for.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'If you have purchased an automatically renewing Subscription on our Websites and would like to stop it from automatically renewing, you can do so at any time from your Nord Account'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'You will continue to receive access to the Services until the end of the remaining Subscription period.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get all your money back within 30 days of your first purchase only. After it renews, you keep the time you paid for but get nothing back.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'Please note that terminated Services contracts may be refunded on the basis of the Money Back Guarantee only within thirty (30) days following your initial purchase.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'Once a Services contract is renewed after the initial Service period, it cannot be refunded on the basis of the Money-Back Guarantee, unless the applicable law provides otherwise'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      regions: [GB, DE, NL]
+      tier: good
+      reason: 'In the UK, Germany and the Netherlands, a plan longer than a month is refunded in full within 30 days of each renewal, and after that for the months left.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'A Subscription for a period longer than one (1) month that has been renewed and purchased from Germany, Netherlands, or the United Kingdom, is eligible for either: (i) a full refund, if the refund request is made within thirty (30) days of being charged for automatic renewal; or (ii) a pro rata (partial) refund for the period left in your renewed Subscription (beginning the month after you request the refund), if the aforementioned thirty (30) days term has passed.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price never touches time you have paid for. It tells you first, and emails the new yearly price 30 days before charging, so you can cancel.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'Any changes to prices will not affect your current Subscription period and will only affect you when renewing the Subscription.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'We will notify you in advance of such changes, and you will have the opportunity to cancel the auto-renewal of your Subscription prior to incurring the new charges.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+          quote: 'We will send you a notification reminding you about the upcoming Renewal Period and specifying the then-current renewal price thirty (30) days before we are due to charge you (except for users of monthly and shorter Subscriptions).'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: great
+      reason: 'Its 30-day Premium trial needs no card, so it can’t turn into a paid plan on its own.'
+      sources:
+        - url: https://nordpass.com/pricing/
+          quote: 'No. We don’t require you to provide credit card information to start the free trial. You only need to provide payment details when you purchase a plan, and we will only charge you once your payment process is completed.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      tier: great
+      reason: 'Its personal plans are all a year or longer, and it emails you the renewal price 30 days before every renewal.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+          quote: 'We will send you a notification reminding you about the upcoming Renewal Period and specifying the then-current renewal price thirty (30) days before we are due to charge you (except for users of monthly and shorter Subscriptions).'
+        - url: https://nordpass.com/pricing/
+          quote: '1-month plan (Business plans only)'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms show the price and the taxes before you pay, and say nothing about other fees.'
+      pages:
+        [
+          https://my.nordaccount.com/legal/terms-of-service/,
+          https://my.nordaccount.com/legal/terms-of-service/subscription/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving from Premium to Family happens at once, for the rest of the time you paid for. The new price starts when you renew.'
+      sources:
+        - url: https://support.nordpass.com/hc/en-us/articles/360002454638-How-to-change-NordPass-plan
+          quote: 'If you change from the Premium plan to the Family plan, your plan will be converted to the Family plan immediately for the remainder of your current billing cycle.'
+        - url: https://support.nordpass.com/hc/en-us/articles/360002454638-How-to-change-NordPass-plan
+          quote: 'Your subscription to the Family plan will automatically renew on your next renewal date.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'A dispute goes to the courts of Panama, where the company is, not to a private referee. Where your country’s law lets you use your own courts, you can.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'You and Nord agree that any judicial proceedings to resolve claims relating to the Terms will be brought before the courts of Panama.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'If you reside in a country (including countries of the European Union) where the law provides consumers with the right to bring disputes in their local courts, the mandatory provisions of the local laws of your country of residence shall apply.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about big changes ahead of time, without saying how long ahead, and you can leave by deleting your account.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'We will notify you of any material changes to the Terms that affect your rights or obligations in advance by reasonable means (such as in-app notifications, messages on our Websites, or by email).'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'You can end your relationship with us at any time after the effective date of the updated Terms by deleting your Account and/or not accessing our Websites.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can suspend or close your account as it sees fit, with or without warning, if you break the law or its terms even once. It usually warns you first, and its terms don’t promise a refund.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'We reserve the right to, at any time and in our sole discretion to suspend and/or terminate the Accounts and/or Services (with or without notice) of any users who violate any applicable laws or the Terms, whether it is a repeated violation or a single instance.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'Usually, we will send you a prior notice before suspending or terminating your Account and/or your access to the Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'The files you attach stay yours: its terms take no rights over them.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/nordpass/
+          quote: 'we do not claim ownership of it. Your Content remains yours and you are fully liable for it and its use on or through NordPass Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change how its services work at any time. If it shuts a whole service down, it refunds the time you have left.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'We reserve the right to modify or update the operation of the Services at our sole discretion, at any time, for any reason, and without notice or liability.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'If you have purchased a Service directly from Nord and Nord permanently discontinues it prior to the end of your Subscription period, excluding any discontinuation of ancillary features or functionalities of the Service, Nord will refund you such prepaid fees pro rata based on the remaining Subscription period after the discontinuation'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: good
+      reason: 'It may delete a free account left unused for 3 years, after three warning emails. A paid account is never treated as unused.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/nordpass/
+          quote: 'A NordPass Account will be deemed as "dormant" and considered expired if it remains inactive for a continuous period of thirty-six (36) months.'
+        - url: https://support.nordpass.com/hc/en-us/articles/40284545674769-Why-do-dormant-accounts-get-deleted
+          quote: 'Before an inactive account is deleted, we send three warning emails:'
+        - url: https://my.nordaccount.com/legal/terms-of-service/nordpass/
+          quote: 'Accounts with an active Premium or Family Version will not be classified as dormant and will not be subject to deletion under this section.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use its apps for yourself, not for a business, on devices you own or control.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'This License is granted solely for personal, non-commercial use and its validity is based on your continued compliance with the Terms.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Cure53, an outside security firm, has checked it, it holds ISO 27001 and SOC 2 certificates, and it pays hackers who find bugs. The full reports aren’t public.'
+      sources:
+        - url: https://support.nordpass.com/hc/en-us/articles/360002378338-Does-NordPass-save-passwords-on-their-servers
+          quote: 'NordPass has successfully finished an independent security audit by Cure53, a well-respected third-party auditor.'
+        - url: https://nordpass.com/security/
+          quote: 'industry certifications like ISO 27001 and SOC 2 Type 2'
+        - url: https://nordpass.com/security/
+          quote: 'That’s why we employ white hat hackers to help us find any bugs or weak spots – so we can make NordPass’ security even stronger.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms make you keep anyone else out of your account. Family gives each of its 6 people an account of their own instead.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'No sharing of Accounts'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'You are responsible for maintaining the confidentiality of your Account, and for preventing any third party from accessing/using your Account.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms say you should install its updates, but not whether its apps update themselves or change other settings.'
+      pages: [https://my.nordaccount.com/legal/terms-of-service/]
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Renewal prices may be tested on you
+      tier: poor
+      reason: 'It may try different renewal prices on different people to see how they react, so the price you renew at can differ from the list.'
+      sources:
+        - url: https://my.nordaccount.com/legal/pricing/
+          quote: 'Nord reserves the right to conduct A/B price testing (“Testing“) as part of its business operations.'
+        - url: https://my.nordaccount.com/legal/pricing/
+          quote: 'The displayed renewal prices may be subject to Testing.'
+      lastVerified: 2026-11-19

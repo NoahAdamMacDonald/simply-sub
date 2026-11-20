@@ -1,0 +1,76 @@
+url: https://2fas.com/pass/privacy-policy/
+method: fetch
+saved: 2026-11-19
+
+2FAS Pass | Privacy Policy
+MENU
+HomeHome
+Password ManagerPassword Manager 2FAS Pass Mobile App
+2FAS Pass Browser Extension
+2FAS Share
+Pricing
+AuthenticatorAuthenticator 2FAS Auth Mobile App
+2FAS Auth Browser Extension
+Donate
+About usAbout
+Help CenterHelp Center
+Get the appsGet the apps
+Privacy Policy - 2FAS Pass
+Effective Date: June 27, 2025
+Last updated: June 27, 2025
+Two Factor Authentication Service, Inc. (“2FAS,” “we,” or “us”) provides 2FAS Pass, a mobile application and browser extension that allows users to store and manage passwords locally or via end-to-end encrypted cloud sync. This Privacy Policy describes how we handle personal information in connection with 2FAS Pass.
+1. Data We Collect
+We do not collect or store your passwords, credentials, or vault contents. All sensitive data is encrypted on your device and, if cloud sync is enabled, encrypted before transmission.
+We may collect anonymous crash reports via Firebase Crashlytics, device and OS type for technical support, or purchase and subscription data (processed by Apple or Google only). We do not link this information to specific users.
+2. Optional Sync
+Cloud synchronization (e.g., iCloud or Google Drive) is optional and fully encrypted. We do not have access to the encrypted data or the encryption keys.
+3. What We Don’t Collect
+We do not access your vault contents, require you to register or create an account, or collect any contact information unless you contact us directly. The app and browser extension do not use advertising trackers, or behavioral analytics.
+4. Third Parties
+App store platforms process subscriptions. Any crash or sync data is handled by third-party service providers under terms that prohibit use for unrelated purposes. We do not sell, share, or use personal data for advertising.
+5. Your Rights
+If you contact us and share personal information (e.g., support requests), you may request deletion at any time by emailing [email protected].
+6. Changes
+We may update this Privacy Policy. Updates will be posted in the app or on our website. Continued use after an update indicates your acceptance.
+About us
+Press kit
+Terms of Service
+Privacy Policy
+Open-source Licenses
+Site settings
+Authenticator
+Products
+2FAS Auth Mobile App
+2FAS Auth Browser Extension
+Resources
+Donations
+How to enable 2FA
+Quick Browser Extension Check
+Check generated token
+Your branding
+Your 2FA guide
+Open-source Licenses
+Comparisons
+Google Authenticator vs. 2FAS Auth
+Authy vs. 2FAS Auth
+Microsoft Authenticator vs. 2FAS Auth
+Duo vs. 2FAS Auth
+Policies
+2FAS Auth Privacy Policy
+2FAS Auth EULA
+Password manager
+Products
+2FAS Pass Mobile App
+2FAS Pass Browser Extension
+Resources
+2FAS Pass Pricing
+2FAS Pass Recovery
+Open-source Licenses
+Policies
+2FAS Pass Privacy Policy
+2FAS Pass EULA
+Support
+Help Center
+Support
+Connect
+© 2026 Two Factor Authentication Service, Inc. All rights reserved.

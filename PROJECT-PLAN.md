@@ -2300,6 +2300,11 @@ in every D1 `json` column search parses.
     (`mozilla-vpn`, sold in the 57 countries its terms list), Cloudflare (`cloudflare`: its free 1.1.1.1 resolver, WARP
     and WARP+), PureVPN (`purevpn`) and hide.me (`hide-me`). Atlas VPN closed in 2024 and Mullvad's public DNS on
     2026-11-02.
+  - **Passwords, batch 1** (2026-11-19): authenticators (included, import, export), password managers' import, export,
+    emergency access and offline vaults, and what is end-to-end encrypted in the registry, with every password plan's
+    value; Bitwarden (`bitwarden`, with its Authenticator), 1Password (`1password`), Ente (`ente`: Auth beside Photos),
+    2FAS (`2fas`), Aegis (`aegis`), KeePass (`keepass`), KeePassXC (`keepassxc`) and KeePassDX (`keepassdx`), volunteer
+    projects; LastPass (`lastpass`) and NordPass (`nordpass`), which NordVPN's Complete and higher plans include.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)
@@ -2451,7 +2456,8 @@ in every D1 `json` column search parses.
 - **As built** (2026-11-13):
   - **Catalog:** a stated renewal day's optional `chargedBefore` (`days` 1 to 90, `upTo: true` when the page says "up
     to"), its quotes saying it (core's `namesChargedBefore`: the days, then before or prior to the subscription's end,
-    expiry, anniversary or renewal; "up to" only with `upTo`). A charge before a subscription "ends" says the date you
+    expiry, anniversary or renewal; "up to" only with `upTo`; the days as a numeral or spelled out with it in brackets,
+    NordPass's "fourteen (14) days prior", 2026-11-20). A charge before a subscription "ends" says the date you
     signed up too (`namesRenewalAnchor` with it), since a yearly term ends on that date a year on. Only yearly periods:
     every page that says it speaks of yearly terms, and Norton's bill monthly plans on the day. The extraction answer
     takes it, kept as far as its checked quotes go. `data/schema/` regenerated.

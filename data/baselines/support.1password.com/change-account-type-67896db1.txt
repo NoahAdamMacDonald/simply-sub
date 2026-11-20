@@ -1,0 +1,149 @@
+url: https://support.1password.com/change-account-type/
+method: fetch
+saved: 2026-11-19
+
+Change your 1Password account type | 1Password Support Skip to main content
+Your browser is out of date. For the best experience, upgrade your browser now.
+Menu Home
+Tour
+Families
+Business
+Developers
+Pricing
+Security
+Download
+Support
+Blog
+Sign in
+Sign in
+Get started free
+1Password Support
+Popular searches
+Export
+Forgot password
+Virtual cards
+Secret Key
+Passkeys
+Emergency Kit
+Two-factor authentication
+Change password
+On this page
+Using 1Password
+Account management
+Change your 1Password account type
+[change, convert, upgrade, downgrade, switch]
+Change your 1Password account type Learn how to switch your subscription to 1Password Families, 1Password Teams, or 1Password Business. Or switch to an individual account.
+Using 1PasswordAccount management Help
+If you started your subscription with an in-app purchase, you won’t be able to change your account type yourself. Contact 1Password Support.
+Whether you’re branching out on your own, adding to your family, starting a new business, or rolling out 1Password to a large company, you can change your account type at any time.
+From an individual account
+From a family account
+From a team or business
+If you have an individual account
+If you have an individual account, you can upgrade to 1Password Families.
+Sign in to your account on 1Password.com and select Billing in the sidebar.
+Under “Families,” select Switch plan.
+Learn more about 1Password Families.
+If you have a family account
+Upgrade to 1Password Teams or 1Password Business
+If you have a family account, you can upgrade to 1Password Teams or 1Password Business. Sign up for a new team or business account, then migrate to the new account:
+Sign up for 1Password Teams or 1Password Business.
+Move your items to your new account.
+Invite people from your family account to the new team or business account, and make sure they follow the steps to join the team and move their items.
+Delete your original family account. This will permanently erase the information for everyone in the account.
+Learn more about 1Password Teams and 1Password Business.
+Switch to an individual account
+If you’re the only person in your family account, you can change to an individual account.
+Sign in to your account on 1Password.com and select Billing in the sidebar.
+Under “Individual,” select Switch plan.
+Learn how to remove a family member’s account. After you remove a family member, they’ll have 30 days to migrate their data to a new 1Password account before they’re fully removed. You’ll need to wait for 30 days to pass or until the family member finishes their migration before you can change to an individual account.
+If you have a team or business account
+Switch to an individual account
+If you’re the only person in your organization or business account, you can change to an individual account.
+Sign in to your account on 1Password.com and select Billing in the sidebar.
+Under “Individual,” select Switch plan.
+Learn how to remove a team member’s account.
+Switch to a family account
+Important
+If you switch to a family account, you can’t change your subscription back to 1Password Teams or Business. You’ll need contact 1Password Support for help.
+If you have a team or business account, you can switch to 1Password Families:
+Sign in to your account on 1Password.com and select Billing in the sidebar.
+Under “Families,” select Switch plan.
+Learn more about 1Password Families.
+If your organization or business account has over 5 team members, you'll be charged for additional family members when you switch to a family account. Learn more about billing for 1Password Families.
+Switch to a team or business account
+If you have a team account, you can switch to 1Password Business. If you have a business account, you can switch to 1Password Teams.
+Sign in to your account on 1Password.com and select Billing in the sidebar.
+Choose your account option and select Switch plan.
+Team Starter Pack subscriptions have a limit of 10 team members. If your business account has more than 10 users, you won't be able to switch to a team account. Learn how to delete a team member's account.
+Get help
+If you have an individual account and you need to join an existing family, team, or business account, ask the appropriate person to add you to the account:
+To join a family account, ask a family organizer to send you an invitation.
+To join a team or business account, ask an owner or administrator to send you an invitation.
+Learn more
+About 1Password Families
+About 1Password Business
+Administrators: Get started with 1Password
+Was this article helpful?
+Yes, thanks!
+Not really
+Glad to hear it! If you have anything you'd like to add, feel free to contact us.
+Sorry to hear that. Please contact us if you'd like to provide more details.
+Published: August 17, 2026
+1Password
+Pricing
+Families
+Teams
+Business
+Small Business
+Enterprise
+Watchtower
+Developers
+Learn more
+Tour
+Password Generator
+Username Generator
+Security
+Privacy
+Customers
+Password Manager
+Resources
+Webinars
+1Password University
+Secrets Management
+Support
+Help & Documentation
+Community
+Contact Support
+Locations
+Europe
+Canada
+United States
+Company
+About
+Partnerships
+Affiliate
+Press
+Gift Cards
+We’re Hiring!
+Podcast
+Newsletter
+Legal Center
+Downloads
+macOS
+iOS
+Windows
+Android
+Linux
+Web Browser
+Command Line
+Browser extensions
+© 2026 1Password. All rights reserved.
+Terms of Service
+- Privacy Policy
+- Cookie Policy
+- Accessibility
+- Your Privacy Choices
+4711 Yonge St, 10th Floor, Toronto, Ontario, M2N 6K8, Canada.
+Find us on
+1Password on Mastodon

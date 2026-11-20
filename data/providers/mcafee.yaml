@@ -192,6 +192,16 @@ perks:
 # also connect to 5 devices simultaneously with unlimited bandwidth.", its auto-renewal page). Its VPN page
 # (en-us/vpn.html) says of its servers only "We don't log or track what you do online"; no page read mentions RAM-only
 # servers or a way to connect your own devices to each other, so both are false.
+# The password and authenticator features added 2026-11-19 (the owner's design, categories.md), read that day with Edge
+# from Canada in its support centre (mcafee.com/support/s/article/<id>), for its password manager on every plan: "True
+# Key is McAfee's password manager." (000001701):
+# - Imports from "a browser or another password manager" (000001765), in a format no page names. It exports ("Next to
+#   Export Data, select Export.", 000001916) a file "not locked like your data in True Key", in a format no page names
+#   either, so password-manager.export is left out (notes.md).
+# - Offline: "With Basic security settings, you can open the True Key browser extension while offline." (000001701). No
+#   emergency access.
+# - No authenticator: it stores "Logins, Safe Notes, and Wallet items" (000001701). No end-to-end encryption: "True Key
+#   encrypts the data while it travels." (000001709).
 plans:
   # McAfee WebAdvisor: "McAfee® WebAdvisor FREE", "Search confidently and browse safely with our free WebAdvisor.", a
   # browser extension that warns of risky sites and downloads. No antivirus, so not a free plan of its suites.
@@ -225,6 +235,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.dark-web-monitoring: true
       security.file-shredder: true
       vpn.included: true
@@ -346,6 +360,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.dark-web-monitoring: true
       security.file-shredder: true
       vpn.included: true
@@ -469,6 +487,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.dark-web-monitoring: true
       security.file-shredder: true
       vpn.included: true
@@ -518,6 +540,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.dark-web-monitoring: true
       security.data-exposure: [footprint]
       security.file-shredder: true
@@ -626,6 +652,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.dark-web-monitoring: true
       security.data-exposure: [footprint]
       security.file-shredder: true
@@ -669,6 +699,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.dark-web-monitoring: true
       security.data-exposure: [footprint, removal]
       security.file-shredder: true
@@ -776,6 +810,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.dark-web-monitoring: true
       security.data-exposure: [footprint, removal]
       security.file-shredder: true
@@ -882,6 +920,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.dark-web-monitoring: true
       security.data-exposure: [footprint, removal]
       security.file-shredder: true
@@ -992,6 +1034,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.credit-monitoring: 1
       security.dark-web-monitoring: true
       security.data-exposure: [footprint, removal]
@@ -1053,6 +1099,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.credit-monitoring: 1
       security.dark-web-monitoring: true
       security.data-exposure: [footprint, removal]
@@ -1113,6 +1163,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.credit-monitoring: 1
       security.dark-web-monitoring: true
       security.data-exposure: [footprint, removal]
@@ -1176,6 +1230,10 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
       security.credit-monitoring: 1
       security.dark-web-monitoring: true
       security.data-exposure: [footprint, removal]

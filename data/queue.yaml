@@ -587,6 +587,48 @@
   source: own
   status: done
   date: 2026-11-19
+- id: ente
+  name: Ente
+  website: https://ente.com
+  category: storage
+  source: own
+  status: done
+  date: 2026-11-20
+- id: 2fas
+  name: 2FAS
+  website: https://2fas.com
+  category: passwords
+  source: own
+  status: done
+  date: 2026-11-20
+- id: aegis
+  name: Aegis
+  website: https://getaegis.app
+  category: passwords
+  source: own
+  status: done
+  date: 2026-11-20
+- id: keepassxc
+  name: KeePassXC
+  website: https://keepassxc.org
+  category: passwords
+  source: own
+  status: done
+  date: 2026-11-20
+- id: keepassdx
+  name: KeePassDX
+  website: https://www.keepassdx.com
+  category: passwords
+  source: own
+  status: done
+  date: 2026-11-20
+- id: nordpass
+  name: NordPass
+  website: https://nordpass.com
+  category: passwords
+  source: own
+  status: done
+  date: 2026-11-20
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -1090,7 +1132,8 @@
   source: wikidata
   wikidata: Q56319818
   sitelinks: 26
-  status: queued
+  status: done
+  date: 2026-11-20
 - id: playstation-now
   name: PlayStation Now
   website: https://www.playstation.com/ps-now
@@ -1117,7 +1160,8 @@
   source: wikidata
   wikidata: Q762660
   sitelinks: 25
-  status: queued
+  status: done
+  date: 2026-11-20
 - id: owncloud
   name: ownCloud
   website: https://owncloud.com
@@ -1301,7 +1345,8 @@
   source: wikidata
   wikidata: Q2150861
   sitelinks: 19
-  status: queued
+  status: done
+  date: 2026-11-20
 - id: google-one
   name: Google One
   website: https://one.google.com
@@ -1317,7 +1362,8 @@
   source: wikidata
   wikidata: Q2418462
   sitelinks: 18
-  status: queued
+  status: done
+  date: 2026-11-20
 - id: samsung-health
   name: Samsung Health
   website: https://health.apps.samsung.com
@@ -1581,7 +1627,9 @@
   source: wikidata
   wikidata: Q4042120
   sitelinks: 10
-  status: queued
+  status: out-of-scope
+  date: 2026-11-20
+  note: "Discontinued: its own site says it's no longer actively maintained and points to KeePassXC (in the catalog)"
 - id: vidio
   name: Vidio
   website: https://www.vidio.com

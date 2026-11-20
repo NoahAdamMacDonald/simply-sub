@@ -192,6 +192,22 @@ perks:
 # password manager", kaspersky.ca/plus) and Premium ("Fast, Unlimited VPN (worth $33.99 per year)", /premium). Its VPN
 # page and VPN FAQ (/vpn-secure-connection, /vpn-secure-connection/faq) mention no RAM-only servers or way to connect
 # your own devices to each other, so both are false.
+# The password and authenticator features and end-to-end encryption added 2026-11-19 (the owner's design,
+# categories.md), read that day with Edge from Canada in its help (support.kaspersky.com) and on
+# kaspersky.ca/password-manager, for its password manager on Plus and Premium:
+# - Imports a CSV file ("specify the CSV file you want to import data from"), from "LastPass, KeePass, Dashlane,
+#   1Password, and Norton Identity" and from browsers ("Import from browser"), its help's all-in-one page; exports to
+#   text ("The application will copy your notes and credentials to a TXT file.", there) and to an encrypted backup ("The
+#   backup copy is stored in encrypted form in EDB format.", Back up data), which a new vault can import.
+# - Offline, inferred: "A vault is an encrypted file that contains all of your accounts, notes, and other data." kept on
+#   your computer (How Kaspersky Password Manager protects your data), and it syncs only "If you are connected to My
+#   Kaspersky" (Sync data across devices). No emergency access on the pages read.
+# - Authenticator: "Kaspersky Password Manager can also generate and save one-time passwords to the vault." and
+#   "One-time passwords can be added only in the mobile version of Kaspersky Password Manager by scanning a QR code,
+#   manually, or by importing entries from Google Authenticator." (Use Authenticator; Import accounts from Google
+#   Authenticator, for Android). No export of them is named.
+# - End-to-end: "Zero-knowledge principle" ("Nobody can view your passwords or data – not even Kaspersky.",
+#   kaspersky.ca/password-manager).
 plans:
   - id: kaspersky.standard
     name: 'Standard'
@@ -327,6 +343,13 @@ plans:
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [encrypted, text]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -341,6 +364,13 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
       antivirus.anti-theft: [locate, lock, wipe]
+    inferred:
+      password-manager.offline:
+        reason: 'Its vault is an encrypted file on your computer, and syncing it through My Kaspersky is optional, so it opens without a connection.'
+        page:
+          name: 'How Kaspersky Password Manager protects your data'
+          url: https://support.kaspersky.com/kpm-for-windows/24.1/85882
+        lastVerified: 2026-11-19
     perks: [hdd-health]
     notSoldIn:
       - regions: [US]
@@ -401,6 +431,13 @@ plans:
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [encrypted, text]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -415,6 +452,13 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
       antivirus.anti-theft: [locate, lock, wipe]
+    inferred:
+      password-manager.offline:
+        reason: 'Its vault is an encrypted file on your computer, and syncing it through My Kaspersky is optional, so it opens without a connection.'
+        page:
+          name: 'How Kaspersky Password Manager protects your data'
+          url: https://support.kaspersky.com/kpm-for-windows/24.1/85882
+        lastVerified: 2026-11-19
     perks: [hdd-health]
     notSoldIn:
       - regions: [US]
@@ -449,6 +493,13 @@ plans:
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [encrypted, text]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -463,6 +514,13 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
       antivirus.anti-theft: [locate, lock, wipe]
+    inferred:
+      password-manager.offline:
+        reason: 'Its vault is an encrypted file on your computer, and syncing it through My Kaspersky is optional, so it opens without a connection.'
+        page:
+          name: 'How Kaspersky Password Manager protects your data'
+          url: https://support.kaspersky.com/kpm-for-windows/24.1/85882
+        lastVerified: 2026-11-19
     perks: [hdd-health]
     notSoldIn:
       - regions: [US]
@@ -513,6 +571,13 @@ plans:
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [encrypted, text]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -527,6 +592,13 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
       antivirus.anti-theft: [locate, lock, wipe]
+    inferred:
+      password-manager.offline:
+        reason: 'Its vault is an encrypted file on your computer, and syncing it through My Kaspersky is optional, so it opens without a connection.'
+        page:
+          name: 'How Kaspersky Password Manager protects your data'
+          url: https://support.kaspersky.com/kpm-for-windows/24.1/85882
+        lastVerified: 2026-11-19
     perks:
       [
         hdd-health,
@@ -579,6 +651,13 @@ plans:
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [encrypted, text]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -593,6 +672,13 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
       antivirus.anti-theft: [locate, lock, wipe]
+    inferred:
+      password-manager.offline:
+        reason: 'Its vault is an encrypted file on your computer, and syncing it through My Kaspersky is optional, so it opens without a connection.'
+        page:
+          name: 'How Kaspersky Password Manager protects your data'
+          url: https://support.kaspersky.com/kpm-for-windows/24.1/85882
+        lastVerified: 2026-11-19
     perks:
       [
         hdd-health,
@@ -651,6 +737,13 @@ plans:
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [encrypted, text]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -665,6 +758,13 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
       antivirus.anti-theft: [locate, lock, wipe]
+    inferred:
+      password-manager.offline:
+        reason: 'Its vault is an encrypted file on your computer, and syncing it through My Kaspersky is optional, so it opens without a connection.'
+        page:
+          name: 'How Kaspersky Password Manager protects your data'
+          url: https://support.kaspersky.com/kpm-for-windows/24.1/85882
+        lastVerified: 2026-11-19
     perks:
       [
         hdd-health,

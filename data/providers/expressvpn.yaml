@@ -238,6 +238,22 @@ perks:
 # credit report" (no page names the credit bureaus: inferred, below), and "eligible U.S. subscribers on the Advanced
 # plan can receive up to $3 million* in coverage, while eligible U.S. subscribers on the Express Pro plan can receive up
 # to $5 million.*", underwritten by American Bankers Insurance Company of Florida.
+# The password and authenticator features and end-to-end encryption added 2026-11-19 (the owner's design,
+# categories.md), read that day with Edge from Canada in its knowledge hub, for ExpressKeys (Advanced and Express Pro)
+# and ExpressAI (every tier):
+# - ExpressKeys imports "from other password managers or browsers" (What is ExpressKeys?), as CSV files ("You can import
+#   your current passwords from LastPass, Dashlane, 1Password, and Bitwarden as CSV files.", the extension's release
+#   notes; "you can import your data from Chrome using a CSV file", How to import passwords from Chrome to ExpressKeys),
+#   and exports "as an Encrypted ZIP or CSV file" (How to export data stored in ExpressKeys). No emergency access or
+#   offline vault among its features (What is ExpressKeys?).
+# - Authenticator: "Built-in 2FA authenticator: Generate time-based one-time passwords (TOTPs) for accounts with 2FA
+#   enabled." (What is ExpressKeys?), from a setup key ("Enter your setup key and select Confirm.") or "a QR code, which
+#   is an option in the ExpressKeys app for Android and iOS" (How to add and generate 2FA codes). No export of the codes
+#   is named.
+# - End-to-end: ExpressKeys ("ExpressKeys uses zero-knowledge encryption to protect your data.", What is ExpressKeys?;
+#   "Keys Data stored in ExpressKeys is secured with zero-knowledge encryption.", its privacy policy) and ExpressAI's
+#   saved chats on every tier ("Your history is protected with zero-access, end-to-end encryption", How to save your
+#   encrypted chats).
 plans:
   - id: expressvpn.basic
     name: Basic
@@ -262,6 +278,7 @@ plans:
       ai.assistant: true
       ai.web-search: true
       ai.chat-storage: encrypted-cloud
+      encryption.end-to-end: [chats]
     featureLabels:
       email.aliases: ExpressMailGuard aliases
       ai.assistant: ExpressAI
@@ -478,6 +495,13 @@ plans:
       password-manager.item-types: [login, passkey, credit-card, secure-note, totp]
       password-manager.health: [breached, weak, reused]
       password-manager.sharing: [share-to-user, share-link, link-expiry, link-view-limit]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords, chats]
     featureLabels:
       email.aliases: ExpressMailGuard aliases
       ai.assistant: ExpressAI
@@ -681,6 +705,13 @@ plans:
       password-manager.item-types: [login, passkey, credit-card, secure-note, totp]
       password-manager.health: [breached, weak, reused]
       password-manager.sharing: [share-to-user, share-link, link-expiry, link-view-limit]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords, chats]
     featureLabels:
       email.aliases: ExpressMailGuard aliases
       ai.assistant: ExpressAI
@@ -883,6 +914,13 @@ plans:
       password-manager.item-types: [login, passkey, credit-card, secure-note, totp]
       password-manager.health: [breached, weak, reused]
       password-manager.sharing: [share-to-user, share-link, link-expiry, link-view-limit]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords, chats]
       security.dark-web-monitoring: true
       security.data-exposure: [removal]
       security.credit-monitoring: 1
@@ -952,6 +990,13 @@ plans:
       password-manager.item-types: [login, passkey, credit-card, secure-note, totp]
       password-manager.health: [breached, weak, reused]
       password-manager.sharing: [share-to-user, share-link, link-expiry, link-view-limit]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords, chats]
       security.dark-web-monitoring: true
       security.data-exposure: [removal]
       security.credit-monitoring: 1

@@ -1,0 +1,479 @@
+url: https://bitwarden.com/help/delete-your-account/
+method: fetch
+saved: 2026-11-19
+
+Delete an Account or Organization | Bitwarden
+...
+Log In
+Get Started
+Business Sales
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Business salesGet startedLog In
+Docs Courses
+Plans & Pricing
+DocsCourses
+HomeRelease Notes Account Access Create a Bitwarden Account
+Choose My Server
+My Master Password
+Forgot My Master Password
+Can't Access Two-Step Login
+Log in & Unlock Understand Log in vs. Unlock
+Automatic Logout or Lock
+New Device Login Protection
+Log in to Multiple Accounts
+Use Single Sign-On Log in with SSO
+Add a Trusted Device
+Link SSO
+More Log in & Unlock Methods Log in with Device
+Log in & Unlock with Passkeys
+Synchronized Unlock
+Unlock with Biometrics
+Unlock with PIN
+Two-Step Login Why Use Two-Step Login?
+Set up Two-Step Login Two-Step Login Methods
+Authenticator Two-Step Login
+Email Two-Step Login
+Duo Two-Step Login
+YubiKey OTP Two-Step Login
+Passkey Two-Step Login
+Recovery Code for Two-Step Login
+Can't Access Two-Step Login
+Two-Step Login FAQs
+Emergency Access About Emergency Access
+Add & Manage Trusted Emergency Contacts
+Request & Grant Emergency Access
+Password Manager Password Manager Overview
+Get Started Password Manager Web App
+Password Manager Browser Extensions
+Password Manager Mobile Apps
+Password Manager Desktop Apps
+Your Vault Vault Items Vault Items
+File Attachments
+Custom Fields
+Vault Navigation Search your Vault
+Filter your Vault
+Folders
+Favorites
+Security Tools Integrated Authenticator
+Username & Password Generator
+Password & Generator History
+Vault Health Reports
+Browser Extension Vault Health Reports
+Change At-Risk Passwords
+Master Password Re-Prompt
+Manage Devices
+Appearance Change App Appearance
+Localization
+Sync your Vault
+Client App Settings
+Keyboard Shortcuts
+Autofill Autofill From... Autofill from Browser Extension
+Autosave from Browser Extension
+Autofill from iOS App
+Autofill from Android App
+More Autofill Options Fill Assist
+Autofill Passkeys
+Autofill Cards & Identities
+Autofill Custom Fields
+Autofill Basic Auth Prompts
+Block Autofill on Specific Sites
+Block Autosave on Specific Sites
+Troubleshoot Autofill Form URIs for Autofill
+Deactivate My Browser's Built-in Password Manager
+Troubleshoot Android Autofill
+Autofill FAQs
+Import & Export Import to your Vault or Collections
+Import Guides Import from LastPass
+Import from 1Password
+Import from Keeper
+Import from Dashlane
+Import from Chrome, Edge, & Chromium Browsers
+Import from macOS & Safari
+Import from Firefox
+Import from KeePass
+Import from Password Safe
+Import from Myki
+Export Vault Data
+Encrypted Exports
+Import from a Custom File
+Import & Export FAQs
+Organization Members Share Items
+My Items
+Transfer Items to Organization
+Change At-Risk Passwords
+Bitwarden Send About Send
+Create & Edit a Send
+Receive a Send
+Send Lifespan
+Send Privacy
+Send from CLI
+Send Encryption
+Developer Tools API Password Manager APIs
+CLI Password Manager CLI
+CLI Authentication via API Key
+CLI Authentication Challenges
+SSH About SSH
+SSH Agent
+More More Platforms Using Bitwarden Offline
+Bitwarden on Apple Watch
+Bitwarden for DuckDuckGo macOS Browser
+Use Bitwarden in Firefox Private Windows
+Safari Web Extension
+Troubleshooting uMatrix and NoScript access rules
+Troubleshoot Mobile with Bitwarden Support
+Desktop App Feature Support
+Password Manager FAQs
+Bitwarden Authenticator Bitwarden Authenticator
+Sync Verification Codes
+Import & Export Authenticator Data
+Secrets Manager Secrets Manager Overview
+Get Started Secrets Manager Quick Start
+Developer Quick Start
+Log in to Secrets Manager
+Manage your Organization
+Your Secrets Projects
+Secrets
+Machine Accounts
+Access Tokens
+Secret Decryption
+Import & Export Import Data
+Export Data
+Developer Tools Secrets Manager CLI
+Secrets Manager SDK
+Integrations Ansible
+GitHub Actions
+GitLab CI/CD
+Jenkins Integration
+Secrets Manager Kubernetes Operator
+Terraform Provider
+More Secrets Manager FAQs
+Admin Console Organizations Overview
+Organizations Quick Start
+Manage Shared Items Collections About Collections
+Create Collections
+Assign Users to Collections
+Collection Permissions
+Collection Settings
+Import Organization Items Import to an Organization
+Import from a Custom File
+Export Organization Items Export Organization Items
+Encrypted Exports
+Share Items
+Hyperlink Organization Items
+Manage Members Invite & Manage Members
+Member Roles
+Groups
+Automatic Confirmation
+Change Members’ Account Email & Name
+Revoke & Remove Temporarily Revoke Access
+Permanently Remove Access
+Delete Organization Member Accounts
+Account Recovery About Account Recovery
+Set Up Account Recovery
+Recover a Member Account
+My Account Was Recovered
+Sponsored Families Sponsored Families for Members
+Sponsored Families for Non-Members
+Sponsored Families FAQs
+SCIM About SCIM
+JumpCloud SCIM
+Microsoft Entra ID SCIM
+Okta SCIM
+OneLogin SCIM Integration
+Ping Identity SCIM Integration
+Directory Connector About Directory Connector
+Directory Connector Desktop App
+Directory Connector CLI
+Directory Connector File Storage
+Sync Options and Filters
+Clear Sync Cache
+Schedule a Sync
+LDAP or Active Directory
+Sync with Microsoft Entra ID
+Google Workspace Directory
+Sync with Okta
+Sync with OneLogin
+Onboarding and Succession Guide
+Oversight & Visibility SIEM Integrations Blumira SIEM
+Elastic SIEM
+Huntress SIEM
+Microsoft Sentinel SIEM
+Panther SIEM
+Rapid7 SIEM
+Splunk SIEM
+Sumo Logic SIEM
+Generic HEC Integration
+Non-native SIEM
+Event Logging Event Logs
+Monitoring Event Logs
+Claimed Domains Claimed Domains
+Claimed Accounts
+Access Intelligence
+Enterprise Policies
+Vault Health Reports
+Custom Fill Assist Rules
+Single Sign-On About Single Sign-On
+SSO Decryption Options
+Add Members with JIT
+SSO Guides ADFS SAML
+ADFS OIDC
+Auth0 SAML
+AWS SAML
+Cloudflare Zero Trust SSO
+Duo SAML
+Generic SAML
+Generic OIDC
+Google SAML
+JumpCloud SAML
+Keycloak SAML
+Microsoft Entra ID SAML
+Microsoft Entra ID OIDC
+Okta SAML
+Okta OIDC
+OneLogin SAML
+Ping Identity SAML
+Ping Identity OIDC
+Trusted Devices About Trusted Devices
+Setup SSO with Trusted Devices
+Approve a Trusted Device
+SSO FAQs
+Onboarding Customer Success Hub
+Bitwarden Onboarding Playbook
+Customer Activation Kit
+Member Signup Workflows
+Deploy Client Apps Deploy Browser Extensions using GPOs, Linux Policies, & .plist Files
+Deploy Browser Extensions with Intune
+Deploy Desktop Apps with Intune
+Deploy Mobile Apps with Intune
+Connect Managed Devices
+Deactivate Browser Password Managers Using Device Management
+Bitwarden Public API
+More Organizations FAQs
+Product highlights and recent updates
+Bitwarden for Enterprise Features Datasheet
+Teams and Enterprise Migration Guide
+LastPass Enterprise Migration Guide
+Ownerless Organizations
+Proof-of-Concept Project Checklist
+Prepare your Trial Organization for Production
+Provider Portal Provider Portal Overview
+Provider Portal Quick Start
+Provider Users
+Start a Client Organization
+Ongoing Administration
+Unlink Client Organization
+Provider Event Logs
+Provider Billing
+Providers FAQs
+Business Unit Portal Business Unit Portal
+Business Unit Portal Quick Start
+Self-host Plan for Deployment Self-host Bitwarden
+Self-host Checklist
+Self-host an Organization
+Migrate to a New Server
+Deploy & Configure Deploy with Docker Linux Standard Deployment
+Linux Manual Deployment
+Linux Offline Deployment
+Windows Standard Deployment
+Windows Offline Deployment
+Lite Deployment
+Marketplace Deployments
+Configure Self-hosted environment with forward proxy
+Deploy with Helm Self-host with Helm
+Traffic Routing
+AWS EKS Deployment
+Azure AKS Deployment
+OpenShift Deployment
+Add rawManifest Files
+Configuration Options Environment Variables
+Certificate Options
+Database Options
+Connect to an External MSSQL Database
+Migrate from Default to External MSSQL
+Configure Push Relay
+Kerberos Integration
+Kubernetes Service Accounts
+SMTP Configurations
+Optional Features Self-hosting Send
+Self-hosting SCIM
+Self-hosting Families Sponsorships
+Connect Clients Connect Managed Devices
+Connect Individual Clients
+Key Connector About Key Connector
+Deploy Key Connector
+System Administrator Portal
+License Organizations or Premium
+Update a Server
+Backup Server Data
+Networking Requirements
+Server Logs
+Self-host FAQs
+Security Bitwarden Security Whitepaper
+Data Encrypted Data
+Administrative Data
+Data Storage
+Data Privacy for Website Icons
+Encryption Encryption Protocols
+Encryption Key Derivation
+Invoked Crypto Libraries
+Encryption Key Rotation
+Account Fingerprint Phrase
+Software Development Server & Client Versioning
+Software Release Support
+Trusted Communications About Trusted Communications
+Bitwarden Domains, Endpoints, & URLs
+Identify Legitimate Emails from Bitwarden
+Emails from Bitwarden Servers
+Compliance, Audits, and Certifications
+Bitwarden Subprocessors
+Server Regions
+Security FAQs
+Plans & Pricing Password Manager Password Manager Plans
+Upgrade from Individual to Organization
+Premium Renewal
+Organization Renewal
+Secrets Manager Secrets Manager Plans
+Sign up for Secrets Manager
+View & Update Billing Details
+Payment Methods
+Invoices & Receipts
+Taxes on Bitwarden Purchases
+Manage Subscription Seats in Your Organization
+Delete an Account or Organization
+Cancel a Subscription
+Billing FAQs
+Plans & Pricing
+On this page
+Delete an individual account
+Delete an organization
+On this page
+Contact support
+Page Options
+Delete an Account or Organization
+warning
+Deleting an account or organization is permanent, cannot be undone or restored, and will delete all associated vault data. You may want to export data before proceeding with account or organization delete:
+Export individual vault data.
+Export organization vault data.
+Deleting a Bitwarden account or organization permanently deletes the account or organization and all data that is associated with it. Bitwarden does not "soft delete" any data.
+Deleting an account or organization does not automatically cancel a subscription. Learn how to cancel a subscription before deleting an account.
+If you are locked out of your vault and deleting your account so that you can create a new one, contact us and we can help transfer your subscription to the new account.
+Delete an individual account
+To delete your individual account:
+Without logging in Web app Mobile Desktop
+To delete your account without needing to log in (for example, if you have lost your master password):
+Open https://vault.bitwarden.com/#/recover-delete (or https://vault.bitwarden.eu/#/recover-delete, or https://<example>/#/recover-delete if you're self-hosting) in a web browser.
+Enter the Email Address associated with the account to issue a deletion confirmation email.
+In your inbox, open the email and verify you want to delete this Bitwarden account.
+If you are deleting your account to start a new one, here are a few next steps:
+If you delete a Bitwarden account that has a premium subscription associated with it, contact us and we will reapply your existing subscription to the new account.
+If you were able to successfully export your vault data prior to deletion, you can easily import it into the new account.
+note
+If you are the sole owner of an organization, you can't delete your account until you add a second owner to the organization or delete the organization itself. If you've forgotten your master password, contact us from the email address that owns the organization.
+The email address associated with your deleted account should be available to re-register with Bitwarden, should you wish to do so, immediately.
+To delete your Bitwarden account using the web app:
+Go to Settings → My account.
+Scroll down to Danger Zone and select Delete account.:
+My account settings
+You will be prompted to enter your master password to confirm you have the authority to take this action.
+To delete your Bitwarden account using the mobile app:
+Select the Settings tab.
+Select Account security.
+Scroll to the bottom and select Delete account.
+Confirm that you want to Delete account.
+You will be prompted to enter your master password to confirm you have the authority to take this action.
+To delete your Bitwarden account using the desktop app:
+From the menu bar select Account → Delete account.
+Enter your master password and select Delete account.
+Organization owners, admins, and some custom role members may be able to delete member accounts.
+Delete an organization
+Only organization owners can delete an organization. (If you are an organization member, you can instead leave the organization.) To delete an organization:
+Open the Admin Console:
+Product switcher
+Select the Organization you want to delete. Then, go to Settings → Organization info.
+Scroll down to the Danger Zone and select Delete Organization.
+When prompted, enter your master password to confirm you have the authority to take this action.
+Suggest changes to this page
+Suggest changes to this page
+How can we improve this page for you?
+For technical, billing, and product questions, please contact support
+Page Options
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Cloud Status
+Check status
+On this page
+Delete an individual account
+Delete an organization
+On this page
+Solutions
+For IT Teams
+For healthcare
+For financial services
+For law firms
+For marketing agencies
+For government
+For the public sector
+For agentic AI security
+For MSPs
+Bitwarden across industries
+For Developers
+Developer hub
+Secrets Manager
+Passwordless.dev and passkeys
+Products
+Plans and pricing
+Integrations
+Downloads
+Self-hosting
+Business
+Enterprise
+Teams and Businesses
+Personal
+Families
+Individuals
+Bitwarden Authenticator
+Bitwarden Send
+Passkeys and passwordless
+Resources
+Resource center
+Help and documentation
+Case studies
+Security compliance
+Open source
+Bitwarden vs. alternatives
+Blog
+Courses
+Community forums
+Open Source Security Summit
+Creator collaborations
+Survey room
+Newsfeed
+Free Tools
+Password generator
+Passphrase generator
+Password strength tester
+Username generator
+Company
+About
+Careers
+Press Room
+Partners
+Events
+Contact support
+© 2026 Bitwarden, Inc.TermsPrivacyCookie SettingsSitemap
+Language English ( United States ) English ( United Kingdom ) Deutsch ( Deutschland ) Español ( Latinoamérica ) Français ( France ) Italiano ( Italia ) 日本語 ( 日本 ) Nederlands ( Nederland ) Português ( Brasil ) Svenska ( Sverige )

@@ -1,0 +1,294 @@
+url: https://1password.com/security
+method: fetch
+saved: 2026-11-19
+
+Password Security Manager: Key Principles | 1Password Skip to Main Content 1Password for Agents: Give AI Agents access, not your passwords. Learn more Sign in
+Sign inGet started free
+Business
+Business
+Enterprise
+Small Teams
+Consumer Goods
+SaaS and Technology
+Financial Services
+Unified Access
+Enterprise Password Manager
+Credential Broker
+Privileged Access
+SaaS Manager
+Device Trust
+Comparison
+Pricing
+Access reviews
+Access requests
+Credential governance
+Developer watchtower
+Extended device compliance
+Integrations
+License management
+Posture checks
+Secrets management
+Watchtower and insights
+Explore more features
+AI agent identity
+AI agent security
+AI spend management
+Credential management
+Cyber insurance and compliance
+Device security
+Passwordless
+SaaS access governance
+Shadow IT discovery
+SaaS offboarding
+SaaS spend management
+Zero standing privileges
+Talk to sales
+View plans
+Community
+Personal
+Individuals
+Families
+How it works
+Meta Muse
+Grok Bot
+Instinct
+Autofill
+Dark web monitoring
+Secure password sharing
+Travel mode
+Zero knowledge encryption
+Password generator
+Username generator
+Demos
+Compare password managers
+Apple Passwords
+Bitwarden
+Dashlane
+Google Password Manager
+Keeper
+LastPass
+Nordpass
+Holiday sale: Save 25%
+Help and documentation
+Community
+Developers
+Partners
+Managed Service Providers
+Channel partners
+Partners Overview
+Enterprise Password Manager MSP Edition
+1Password Marketplace
+Demos
+AWS
+Crowdstrike
+Drata
+Perplexity
+Tailscale
+1Password Partner Portal
+MSP Edition login
+Become a partner
+1Password is the Official Cybersecurity Partner of Oracle Red Bull Racing
+Resources
+Our security model
+Password Management
+1Password Security Research
+Blog
+Customer stories
+Webinars
+Credentials management
+Device security
+SaaS management
+View all demos
+macOS
+Windows
+iOS
+Android
+Browser extension
+Linux
+Command line
+Talk to sales
+Help and documentation
+Community
+2026 Gartner® Magic Quadrant™ for SaaS Management Platforms
+Pricing
+Talk to sales
+Get started free
+Security is not just a feature. It’s our foundation.
+Every design decision in 1Password begins with the safety and privacy of your data in mind.
+Compare plans
+Contact sales
+Uncompromising commitment to security
+Everything 1Password does is guided by principles that put your safety first. One of these principles is that only you should have the keys required to decrypt your data.
+Privacy by design
+Our dual-key model ensures that even we can't see exactly what you've saved in 1Password. And we can't use, lose, or abuse data that we don't have.
+Learn about our privacy
+Encryption you can count on
+We use proven, industry-recommended encryption algorithms to protect your data. Cryptography prevents anyone from seeing items they’re not supposed to – servers and people can be tricked, but cryptography cannot.
+Learn about our security
+Made for people
+You don’t have to be a security expert to use 1Password. It’s simple to use, despite being very complex. We want the secure thing to do to also be the easy thing.
+More about our approach
+Open about our design
+We are open and explicit about the security design of our systems so that we can continually improve. We are regularly assessed by independent experts to scrutinize our security design to make sure our approach is rock solid.
+More about our design
+What makes 1Password so secure
+1Password security goes far beyond end-to-end encryption. We’ve taken additional steps to limit your exposure to threats outside of 1Password. Learn about our security model.
+Unique dual-key encryption
+Your account is secured with two powerful layers of protection: a password – which we never store and only you know – and a 128-bit encrypted Secret Key.
+Protect data in transit
+Secure Remote Password authenticates your account without sending your credentials over the Internet. This prevents anyone from stealing your data while it’s in transit.
+Alerts you to security breaches
+Watchtower alerts you to password breaches and other security problems with your saved items.
+Only works in verified browsers
+1Password only fills your details after it verifies that your browser has been signed by an identified developer.
+Removes secrets from your clipboard
+To prevent people or clipboard tools from learning your secrets, 1Password regularly removes item details from the clipboard.
+Always requires your input
+To protect your data from shoulder surfers and browser-based attacks, 1Password only displays or fills data when you tell it to.
+Security with the proof to back it up
+We adhere to industry standards and regulations so you can be sure your personal or company info is safe. And we protect against evolving threats with third-party testing and the industry’s largest bug bounty.
+Industry standards
+1Password is SOC 2 type 2 certified and complies with the most stringent industry standards for data confidentiality, integrity, and availability.
+Read our SOC 2 report
+Open and verified
+We collaborate with other security experts to make sure our security is rock solid, and we publish the results of independent audits on our website.
+Learn more about our security audits
+Take a deeper dive into security
+Our security model
+See what makes our multi-layered security approach so powerful.
+See how it works
+1Password’s security design
+Explore our entire security design in our white paper.
+Explore white paper
+Cybersecurity resource kit
+Protect yourself at home and work from security threats.
+See cybersecurity kit
+Extending access management
+Zero trust requires going beyond traditional identity and access management.
+Discover how it works
+Security for everyone
+BUSINESS 1Password for businesses
+Secure every app, device, and identity your employees are using with powerful access management.
+Explore business
+PERSONAL Families and individuals
+Get peace of mind for yourself and your family with a simple-to-use password manager.
+Explore personal
+DEVELOPER 1Password for developers
+Develop faster with 1Password. Streamline secret management from your first line of code all the way into production.
+Explore developer
+Sign up for our business newsletter
+Get the latest on 1Password security sent directly to your inbox. See our latest product updates, upcoming events, and exciting announcements with our business security newsletter.
+Security
+English
+Deutsch
+Español
+Français
+Italiano
+日本語
+한국어
+Português
+简体中文
+繁體中文
+English
+Show options
+Downloads
+macOS
+Windows
+iOS
+Android
+Browser
+Linux
+CLI
+Unified Access Platform
+Unified Access
+Enterprise Password Manager
+Credential Broker
+Privileged Access
+SaaS Manager
+Device Trust
+Products and Tools
+Personal password manager
+Password generator
+Username generator
+Comparison
+Demos
+Switch
+Pricing
+Features
+Autofill
+Access reviews
+Access requests
+Credential governance
+Developer watchtower
+Posture checks
+Extended Device Compliance
+SaaS Manager integrations
+SaaS discovery
+SaaS workflows
+IT Asset Management
+License management
+Watchtower insights
+Secrets Management
+Password sharing
+Two-factor authentication
+Passkeys
+Solutions
+AI spend management
+Zero standing privileges
+Passwordless
+Device Security
+Shadow IT Discovery
+SaaS Access Governance
+SaaS Offboarding
+SaaS Spend Management
+Credential management
+Cyber insurance and compliance
+Agentic AI security
+Resources
+1Password Security Research
+Webinars
+Customer stories
+Resource library
+Blog
+Security
+Privacy
+Developers
+Developer documentation
+Developer community
+Secrets management
+Bug bounty
+Support
+Help and documentation
+Community
+Customer support
+Privacy support
+Company
+About
+We're hiring!
+Press
+Podcast
+Newsletter
+Legal Center
+Trust Center
+Partners
+Partnerships overview
+1Password for MSPs
+Password Manager - MSP edition
+1Password Marketplace
+For students
+Downloads
+macOS
+Windows
+iOS
+Android
+Browser
+Linux
+CLI
+Terms of Service
+Cookie Policy
+Your Privacy Choices
+Privacy Policy
+Accessibility
+Sitemap
+© 2026 1Password. All rights reserved.
+4711 Yonge St, 10th Floor, Toronto Ontario, M2N 6K8, Canada

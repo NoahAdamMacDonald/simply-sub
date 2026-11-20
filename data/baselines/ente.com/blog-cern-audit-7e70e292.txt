@@ -1,0 +1,24 @@
+url: https://ente.com/blog/cern-audit/
+method: fetch
+saved: 2026-11-19
+
+Ente completes CERN sponsored audit
+Download
+PricingBlogAboutHelpLogin
+PricingBlogAboutDownloadHelp
+30k Sign up
+Ente completes CERN sponsored audit
+November 03, 2025
+manav@ente.com
+Ente, specifically the server side - both code, and infrastructure on which it runs - was audited by a team of 5 researchers from the German cybersecurity firm Cure53 over a period of 2 weeks as part of a CERN sponsored audit. No data integrity issues were found, and 12 of the 15 security related issues were fixed by the Ente team during the audit itself.
+The audit covered all the apps - Photos, Auth, and the upcoming Locker - since the same code and infrastructure powers the entire platform. You can read Cure53's full report here. All changes are already in the latest Docker image.
+CERN is a heavy user of Ente, and we are grateful for them both for being one of our earliest trendsetting customers, and for taking the initiative to improve the security of the open source ecosystem by sponsoring the audit.
+We'd also like to thank Cure53 - working with them was a lot of fun!
+Back to all posts
+CompanyAboutNewsJobsMedia Kit
+ProductsPhotosAuthLockerEnsu
+ExploreFriendsToysShopTalks
+Open SourceMobileWebDesktopCLI
+TechnologyEncryptionReplicationMachine learning
+CompareGoogle Photos vs EnteApple Photos vs EnteDropbox vs Ente
+ContactHelpArticlesPrivacyTerms

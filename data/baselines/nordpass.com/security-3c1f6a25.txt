@@ -1,0 +1,221 @@
+url: https://nordpass.com/security/
+method: fetch
+saved: 2026-11-19
+
+NordPass Security: A Comprehensive Review of Its Features and Benefits | NordPass
+Skip to main content Business Plans
+Teams
+Business
+Enterprise
+Nordpass vs others
+Key features
+Secure sharing
+Sharing Hub
+Data Breach Scanner
+Password Generator
+Built-in Authenticator
+Autofill & Autosave
+All business features
+Solution for
+IT teams
+Marketing & Advertising
+Finance
+Corporate Services
+Manufacturing
+Non-profits
+Compliance
+NIS2
+ISO 27001
+NIST
+SOC 2
+Get a Quote
+Start Business Trial
+Personal Plans
+Personal
+Family
+Get NordPass
+Key features
+Secure sharing
+Password Health
+Data Breach Scanner
+Email Masking
+Passkeys
+All features
+Get NordPass
+Pricing
+Partners Partner network
+Partnerships overview
+NordPass for MSPs
+NordPass distributors
+Let's talk
+Let's talk
+Resources Product help
+Business onboarding
+Whitepaper
+Security architecture
+Help Center
+Knowledge hub
+Case studies
+Blog
+Content center
+Featured
+Weakest corporate passwords
+Most Common Passwords
+Dark web monitor for business
+Phishing attack showcase
+Help Center
+Login Personal
+Vault access
+View and manage passwords in the NordPass extension
+Subscription management
+View, upgrade or cancel my Nord Security subscriptions
+Business
+Admin Panel access
+Manage all aspects of onboarded organization from a single secure place
+MSP Panel access
+Manage my organization's account and its members
+Start Business TrialGet a Quote
+Here’s everything that makes NordPass secure
+Learn about all the technologies, certifications, frameworks, and initiatives that ensure NordPass security is strong and your company data is well-protected.
+Start Free Trial
+No credit card required
+Request Demo
+Personalized session
+The core elements of NordPass security
+Every design choice we make follows a “security-first” approach, so you get strong, reliable protection across the board.
+Zero-knowledge architecture
+Built with the zero-knowledge principle in mind, NordPass ensures that no one – not even our company – can see what you and your team store in your vaults. Each user’s data is secured in its own isolated environment to prevent unauthorized access.
+End-to-end encryption
+NordPass encrypts all your data locally on your device before it’s uploaded to the cloud. That way, even if the organization’s encoded data ends up in malicious hands, it will be completely unreadable to bad actors.
+XChaCha20 algorithm
+NordPass is currently the only major password manager using XChaCha20 encryption – widely considered to be the most advanced encryption algorithm available today. It works faster and is easier to implement than other encryption protocols, delivering top-level protection for your most sensitive data.
+Bug bounty program
+We’re always working to keep our infrastructure and our customers’ data as safe as possible. That’s why we employ white hat hackers to help us find any bugs or weak spots – so we can make NordPass’ security even stronger.
+Regular audits
+Our product undergoes regular internal reviews and independent third-party security audits. These not only help confirm that our security measures are effective, but also allow us to identify areas for future improvement.
+Authentication based on
+OAuth 2.0
+NordPass uses the OAuth 2.0 protocol as its centralized identity provider and authorization server for business authentication to streamline access control and reduce the risk of unauthorized access.
+This setup follows official standards from the Internet Engineering Task Force (IETF) and fully aligns with today’s best security practices.
+Start Free Trial
+No credit card required
+Request Demo
+Personalized session
+Encryption technology explained
+NordPass uses a multi-layer encryption setup to protect your data. It combines symmetric encryption for vault contents with asymmetric encryption to secure the encryption keys and their exchange.
+Each user has a unique pair of encryption keys: a public key and a private key. The public key is kept on NordPass servers and is shareable, while the private key is stored on your device. To keep it safe, your private key is encrypted locally using XChaCha20-Poly1305-IETF.
+When you log in with your Master Password, NordPass uses the Argon2id algorithm combined with a 16-byte salt to derive a Master Key, which is used to decrypt your private key.
+Once the app is unlocked, your private key is briefly stored in secure memory and used to decrypt the data encryption key (DEK) – a symmetric key that protects your vault contents. The DEK is encrypted with your public key, so only your private key can unlock it. When you lock the app, your private key is wiped from memory to prevent any access.
+Symmetric encryption (secret-key cryptography)
+XChaCha20 encrypts data in a continuous stream, offering faster performance than traditional block ciphers like AES – especially when handling large or variable-sized data. Thanks to its lightweight design, XChaCha20 allows for quick encryption and decryption, making it ideal for real-time use cases like password management.
+Asymmetric encryption (public-key cryptography)
+NordPass uses a combination of X25519 and XSalsa20 encryption for key exchanges, XSalsa20 stream cipher for encryption, and Poly1305 for MAC authentication. X25519 is an elliptic-curve Diffie-Hellman (ECDH) algorithm that allows two parties to securely exchange keys over insecure channels. Similar to XChaCha20, the XSalsa20 stream cipher is highly efficient, offering both speed and security across various hardware platforms. It's especially useful in scenarios where low-latency encryption is critical.
+With NordPass, your organization always stays in control of its data. When an employee creates an item, they get instant access to it and can manage it right away. If that employee leaves, their items don’t disappear – they stay with the organization and can easily be reassigned to someone else. Plus, the organization can recover employees’ accounts without any risk of losing data. This is all made possible by public-key cryptography, which keeps your data secure while making management, recovery, and reassignment smooth and hassle-free.
+Reliable and secure cloud storage
+NordPass is hosted on Amazon Web Services (AWS). As a widely recognized and trusted cloud service provider, AWS uses strong encryption and takes careful measures to keep its servers secure.
+Additionally, NordPass stores customer vault items in separate AWS data centers across the US and EU to ensure they’re instantly available and kept secure at all times.
+Start Free Trial
+No credit card required
+Request Demo
+Personalized session
+Other ways we keep your data safe and private
+Secure software development life cycle (SSDLC)
+At Nord Security, we follow the secure software development life cycle (SSDLC) for every product we build – including NordPass. While the traditional software development life cycle (SDLC) model helps to organize the steps of software development and boost efficiency, the secure SDLC version takes it a step further by adding security checks at every stage. This way, everyone involved is thinking not just about what the software needs to do, but also how to keep it secure.
+Logs
+App logs are saved on the user’s device and are primarily used for troubleshooting. They do not contain any data that could identify the user or their device. Only the user can view the logs, which can then be shared with the Support team to help identify and fix any issues. Some critical error logs are automatically sent to the API, but only if the user has enabled crash reporting in their settings (such logs are not linked to any account and cannot be used to identify the user).
+Data privacy
+Your privacy is our priority. At NordPass Business, we take all the necessary steps to secure your data, whether it’s technical, physical, or administrative. When providing our services, we are committed to the principles of data privacy laws, making sure all data is processed legally, kept to a minimum, and handled with a focus on managing risks. You can read more about how we protect your data in our Privacy Policy.
+Get started with NordPass today
+Access your accounts easily and securely from anywhere, on any device.
+Start Free Trial
+No credit card required
+Request Demo
+Personalized session
+Frequently asked questions
+Is NordPass Safe?
+Yes, NordPass is generally safe to use. It stands out as a reliable, continuously improving, and secure credential management solution thanks to its strong technological foundations, including zero-knowledge architecture, end-to-end encryption, the XChaCha20 algorithm, an encrypted password vault, and AWS cloud storage. Each NordPass security feature is designed to help protect sensitive business data, while industry certifications like ISO 27001 and SOC 2 Type 2, regular internal and external audits, a bug bounty program, and data privacy compliance further strengthen its security approach.
+How does NordPass’ zero-knowledge architecture actually protect your business?
+The NordPass zero-knowledge architecture protects your business by making sure that only your team can access the data stored in your vaults. All vault data is encrypted locally on the user’s device before it reaches NordPass servers, so even NordPass cannot view, read, or decrypt what your company stores.
+Each user’s data is also kept in an isolated environment, helping prevent unauthorized access between accounts. This means that even if encrypted company data were intercepted or exposed, it would remain unreadable without the right encryption keys and Master Password.
+NordPass
+Pricing
+Personal
+Family
+Teams
+IT Teams
+Business
+Enterprise
+Features
+Programs
+Affiliate
+Influencers
+Partners
+MSP
+Non-profits
+Resources
+Blog
+Passkeys
+Most Common Passwords
+Frequently forgotten passwords
+Whitepaper
+Case studies
+Business Onboarding Hub
+Business VPN
+Free tools
+Username Generator
+Business Name Generator
+Password Generator
+Password Strength Checker
+Data Breach Scanner
+Password Sharer
+Company
+About Us
+Trust Center
+Press Area
+Careers
+Help Center
+Contact Us
+Discover
+Nord Security
+NordVPN
+NordLayer
+NordLocker
+NordStellar
+Coveron
+Saily
+Apps
+iOS
+Android
+Windows
+macOS
+Linux
+Web vault
+CLI
+Extensions
+Chrome
+Firefox
+Safari
+Opera
+Edge
+Apps
+iOS
+Android
+Windows
+macOS
+Linux
+Web vault
+CLI
+Extensions
+Chrome
+Firefox
+Safari
+Opera
+Edge
+Privacy Policy
+Privacy Policy (Business)
+Terms of Service
+Terms of Service (Business)
+Cookie Preferences
+DPA
+© 2026 Nord Security. All Rights Reserved
+Deutsch English Español Français Italiano Lietuvių

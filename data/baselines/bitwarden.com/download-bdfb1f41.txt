@@ -1,0 +1,305 @@
+url: https://bitwarden.com/download/
+method: fetch
+saved: 2026-11-19
+
+Download the Bitwarden Password Manager App for iPhone, Android, Chrome, Safari, and More | Bitwarden
+NEW! Protect privileged credentials with time-bound credential leasing, automated password rotation, and access rules: Learn how >
+Business
+Personal
+Pricing
+Downloads
+Resources
+Search
+Get Started FreeTalk to SalesLog In
+Back to main menuBusiness Plans
+
+Teams and Businesses Get secure sharing and event logs
+Get secure sharing and event logs
+
+Enterprise Add SSO, policies, and self-hosting
+Add SSO, policies, and self-hosting
+Products
+
+Password Manager From small teams to enterprise
+
+Secrets Manager For developers and DevOps teams
+For developers and DevOps teams
+Key Features
+
+Access Intelligence Actionable view of vault security
+Actionable view of vault security
+
+Centralized Ownership Secure the credential lifecycle
+Secure the credential lifecycle
+
+Least-privilege Sharing Share across teams without exposure
+Share across teams without exposure
+
+SSO Integration Easy provisioning and access
+Easy provisioning and access
+
+Self-hosting Bitwarden On-prem or private cloud
+On-prem or private cloud
+
+See All Integrations
+
+See All Tools and Features See All Features
+Solutions
+Agentic AI
+Identity Security
+Industries
+Public Sector
+Healthcare
+Financial Services
+IT/Saas
+Legal
+Marketing
+Explore Plans
+ Help and Resources|Community
+Back to main menuPersonal Plans
+
+Individual Security for yourself
+Security for yourself
+
+Family A shared vault for six users
+A shared vault for six users
+Do more with Bitwarden
+Password Generator Strong passwords in one click
+Strong passwords in one click
+Integrated TOTP Autofill 2FA codes with passwords
+Autofill 2FA codes with passwords
+Secure Sharing Files that disappear after viewing
+Files that disappear after viewing
+Passwordless Passkey management and unlock with biometrics
+Passkey management and unlock with biometrics
+Vault Health Find at-risk passwords fast
+Find at-risk passwords fast
+Get Premium Protection
+Never worry about your passwords again.
+Create Your Account
+Explore Plans
+Explore Plans
+ Help and Resources|Community
+Back to main menuResources Resource Library
+Resource Center
+Blog
+Events
+Success Stories
+Comparison
+Security & Trust
+Security Compliance
+Open Source
+Bug Bounty Program
+Open Source Security Summit
+Bitwarden Security Whitepaper
+Training
+Help Center
+Courses
+Community Forum
+Enterprise Services
+Business
+Plans
+
+Teams and Businesses Get secure sharing and event logs
+Get secure sharing and event logs
+
+Enterprise Add SSO, policies, and self-hosting
+Add SSO, policies, and self-hosting
+Products
+
+Password Manager From small teams to enterprise
+
+Secrets Manager For developers and DevOps teams
+For developers and DevOps teams
+Key Features
+
+Access Intelligence Actionable view of vault security
+Actionable view of vault security
+
+Centralized Ownership Secure the credential lifecycle
+Secure the credential lifecycle
+
+Least-privilege Sharing Share across teams without exposure
+Share across teams without exposure
+
+SSO Integration Easy provisioning and access
+Easy provisioning and access
+
+Self-hosting Bitwarden On-prem or private cloud
+On-prem or private cloud
+
+See All Integrations
+
+See All Tools and Features See All Features
+Solutions
+Agentic AI
+Identity Security
+Industries
+Public Sector
+Healthcare
+Financial Services
+IT/Saas
+Legal
+Marketing
+Explore Plans
+ Help and Resources|Community
+Personal
+Plans
+
+Individual Security for yourself
+Security for yourself
+
+Family A shared vault for six users
+A shared vault for six users
+Do more with Bitwarden
+Password Generator Strong passwords in one click
+Strong passwords in one click
+Integrated TOTP Autofill 2FA codes with passwords
+Autofill 2FA codes with passwords
+Secure Sharing Files that disappear after viewing
+Files that disappear after viewing
+Passwordless Passkey management and unlock with biometrics
+Passkey management and unlock with biometrics
+Vault Health Find at-risk passwords fast
+Find at-risk passwords fast
+Get Premium Protection
+Never worry about your passwords again.
+Create Your Account
+Explore Plans
+Explore Plans
+ Help and Resources|Community
+Pricing
+Downloads
+Resources
+Resource Library
+Resource Center
+Blog
+Events
+Success Stories
+Comparison
+Security & Trust
+Security Compliance
+Open Source
+Bug Bounty Program
+Open Source Security Summit
+Bitwarden Security Whitepaper
+Training
+Help Center
+Courses
+Community Forum
+Enterprise Services
+Get Started FreeGet Started FreeTalk to SalesTalk to SalesLog InLog In
+Download Bitwarden on all devices
+Access your sensitive information on any device with secure cloud sync.
+Visit get.bitwarden.com to be sent to the right download for your device.
+Browser extension Desktop Web App Mobile CLI Authenticator app
+Web browser extensions
+Install the Bitwarden browser extension into your favorite web browser for a seamless browsing experience.
+Edge Chrome Safari Firefox Opera DuckDuckGo Vivaldi Brave Tor
+ Edge
+When it comes to online security, the default doesn't do. Your passwords deserve the most secure safeguards - not to mention privacy that isn’t tied to a major tech company. Switch to the Bitwarden browser extension - Voted #1 by G2 and ditch the Edge’s basic built-in password manager. Make the switch today.
+Download Now
+Why Choose Bitwarden
+Desktop Applications
+Install Bitwarden on macOS, Windows, and Linux desktops with native applications. See supported features for each version.
+Windows MacOS Linux
+ Windows
+Windows (11 - x86, x64, and arm64)
+Standard Installer
+Portable App for Flash Drives (does not auto update)
+Windows Store
+Chocolatey Package Manager
+choco install bitwarden
+Why Choose Bitwarden
+Some options are not capable of automatic updates and are labeled as such. You should always keep Bitwarden applications up to date.
+Web Application
+Bitwarden Vault
+Access your password manager from any web browser with the Bitwarden web app.
+Access the Web Application
+Mobile applications
+Take your password manager on the go with mobile apps for your phone or tablet.
+Bitwarden Password Manager for Apple
+Download on the App StoreWhy Choose Bitwarden
+Bitwarden Password Manager for Android
+Get It On Google PlayWhy Choose Bitwarden
+More mobile options
+Bitwarden F-Droid app
+Repository
+URL: https://mobileapp.bitwarden.com/fdroid/repo
+Fingerprint: BC54EA6FD1CD5175BCCCC47C561C5726E1C3ED7E686B6DB4B18BAC843A3EFE6C
+Instructions
+Install the F-Droid client app.
+Scan the QR code from above or manually copy/paste the Bitwarden repository information into the F-Droid client app under Settings.
+Add the Bitwarden repository to the F-Droid client app.
+Refresh your F-Droid client app under the Categories tab.
+Install Bitwarden from the F-Droid client app listing.
+Limitations
+Since the Bitwarden F-Droid build does not include Firebase Messaging, push notifications for live sync updates of your vault will not work. Manual vault syncing is required.
+Command Line Interface
+Use the powerful Bitwarden command line interface (CLI) to write and execute scripts on your vault.
+Bitwarden Authenticator
+Join millions who trust Bitwarden for their security needs. Download Bitwarden Authenticator today for free and start protecting your accounts with enterprise-grade multi-factor authentication.
+Bitwarden Authenticator for Apple
+Download on the App StoreWhy Choose Bitwarden
+Bitwarden Authenticator For Android
+Get It On Google PlayWhy Choose Bitwarden
+Have questions? We're here to help
+Talk To Sales
+Visit The Help Center
+Solutions
+For IT Teams
+For healthcare
+For financial services
+For law firms
+For marketing agencies
+For government
+For the public sector
+For agentic AI security
+For MSPs
+Bitwarden across industries
+For Developers
+Developer hub
+Secrets Manager
+Passwordless.dev and passkeys
+Products
+Plans and pricing
+Integrations
+Downloads
+Self-hosting
+Business
+Enterprise
+Teams and Businesses
+Personal
+Families
+Individuals
+Bitwarden Authenticator
+Bitwarden Send
+Passkeys and passwordless
+Resources
+Resource center
+Help and documentation
+Case studies
+Security compliance
+Open source
+Bitwarden vs. alternatives
+Blog
+Courses
+Community forums
+Open Source Security Summit
+Creator collaborations
+Survey room
+Newsfeed
+Free Tools
+Password generator
+Passphrase generator
+Password strength tester
+Username generator
+Company
+About
+Careers
+Press Room
+Partners
+Events
+Contact support
+© 2026 Bitwarden, Inc.TermsPrivacyCookie SettingsSitemap
+Language English ( United States ) English ( United Kingdom ) Deutsch ( Deutschland ) Español ( Latinoamérica ) Français ( France ) Italiano ( Italia ) 日本語 ( 日本 ) Nederlands ( Nederland ) Português ( Brasil ) Svenska ( Sverige )

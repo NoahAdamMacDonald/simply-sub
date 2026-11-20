@@ -1,0 +1,65 @@
+url: https://community.lastpass.com/kb/articles/43-update-payment-method%EF%BB%BF
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Learn
+Connect
+Support
+Discover
+Guidelines
+Sign In
+SUPPORT ARTICLES
+Support Articles
+View All
+Support Articles
+Update payment method
+You can update your payment method for your LastPass account when needed, for example, when your payment card expires. The steps for updating your payment method will vary, depending on whether you purchased your LastPass subscription through payment card or on a mobile device.
+Important:
+For LastPass subscriptions purchased on a mobile device, see the instructions for updating payment and billing information for your Apple or Google account directly on your iOS or Android device, respectively.
+If you cannot see the option to update your payment method, it means that auto-renewal is not enabled, and you will need to renew your subscription no later than 30 days before the end of your billing period or repurchase after your subscription expires.
+Before you begin: Determine which LastPass plan you are subscribed to before proceeding:
+What type of LastPass subscription does my company have?
+What type of LastPass personal subscription do I have?
+Update your payment information as follows:
+Log in to LastPass and access your vault by doing either of the following:
+In your web browser toolbar, select the LastPass extension icon and select Vault.
+Go to
+LastPass - Sign In and log in with your email address and master password.
+Log in to the LastPass for Desktop app.
+Depending on your LastPass subscription, do one of the following:
+LastPass subscription
+Instructions
+LastPass Business Max,
+LastPass Business,
+LastPass Teams using the new Admin Console
+Select Open Admin Console in the left navigation menu.
+Select the user account drop-down menu in the upper right of the toolbar, then select Company profile.
+Select Update payment method in the Payment method section.
+Make your changes, and then save them.
+LastPass Families
+Select Account settings in the left navigation menu.
+Under Account Information in the Links section, select My Account.
+Select Update Payment Method.
+Restriction: Only the family owner can update the payment method.
+Make your changes, and then save them.
+LastPass Premium
+Select Account settings in the left navigation menu.
+Under Account Information in the Links section, select My Account.
+Select Update Payment Method.
+Make your changes, and then save them.
+Troubleshooting: If you cannot see the option to update your payment method, it means that auto-renewal is not enabled, and you will need to renew your subscription no later than 30 days before the end of your billing period or repurchase after your subscription expires.
+Results: You have updated your payment method.
+Troubleshooting
+If you are using the LastPass for Safari extension and cannot see the My Account option, go to LastPass - My Account or log in to your vault using another browser.
+Related Articles
+Update billing address
+Was this article helpful?
+YesNo
+Be the first one to vote!
+This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service
+Loading
+On This Page
+LastPass Families
+LastPass Premium
+This is an embed external element. It can be deleted using the delete key or the backspace key. To view the full element, press the preview button below.

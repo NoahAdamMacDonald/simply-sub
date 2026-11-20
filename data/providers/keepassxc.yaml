@@ -1,0 +1,322 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1), read from Canada with a plain fetch
+# (keepassxc.org serves every page whole; its GitHub repository and security policy too) and with Edge (its Transifex
+# project's language list): its home, download, team (contact and imprint), donate, privacy and security audits pages,
+# its Documentation & FAQ page, its Getting Started Guide and User Guide, its 2.8.0 release post, and its GitHub
+# repository and security policy. Pages, each quoted where it's used:
+# Pricing: none. KeePassXC is free, open-source software you run on your own computer: "Free and open source." and "No
+# cloud, no ads, no subscriptions." (its home page). It has no account and no servers for your passwords, so its one plan
+# is free, priced for everywhere. Donations (PayPal, Patreon, GitHub Sponsors, SEPA and Wero, Liberapay, Open
+# Collective and three cryptocurrencies, its donate page) cover "a few expenses" and buy nothing, so they aren't plans
+# and no ways to pay are listed.
+# Region checklist, 2026-11-19: not needed: one free download for every country, with no prices.
+# Bundles: none. Official resellers: none; it sells nothing. Its Windows build is also in the Microsoft Store, free.
+# Free use: its one plan is free.
+# KeePassX (queued as keepassx): its own site says "KeePassX is no longer actively maintained." and "You might want to
+# switch to KeePassXC which is based on KeePassX." (keepassx.org/news, 9 December 2021): rejected with a note (notes.md).
+id: keepassxc
+name: KeePassXC
+website: https://keepassxc.org
+category: passwords
+spendCategory: software
+# Nothing to cancel: it's free, with no account. Its home page says so ("No cloud, no ads, no subscriptions.").
+cancelUrl: https://keepassxc.org/
+sources: { pricing: https://keepassxc.org/ }
+# Owner (M11.2), read 2026-11-19: no company. Its team page names the KeePassXC team by its members' handles and says
+# it's "an international team"; every page's footer says "© 2016 – 2026 KeePassXC Team", and its donate page signs
+# "Sincerely, your KeePassXC Team". Its imprint names one member (Janek Bevendorff, Weimar, Germany) as the legal
+# contact, and its Windows installer "is signed by a secure certificate owned by DroidMonkey Apps, LLC" (its Getting
+# Started Guide), a member's company that signs it, not one that runs the project. A volunteer project (Jellyfin's
+# precedent, the owner's choice of 2026-11-11) with no country, since the team is international (notes.md).
+owner:
+  name: KeePassXC Team
+  volunteer: true
+  page:
+    name: The Team
+    url: https://keepassxc.org/team/
+  quotes:
+    - 'The KeePassXC team is formed by droidmonkey phoerious hifi louib varjolintu'
+    - 'Please note: We are an international team who speak a few different languages'
+  lastVerified: 2026-11-19
+# Source code (M11.5): its home page links its GitHub repository; GPLv3, with no server of its own, so fully open.
+sourceRepo:
+  url: https://github.com/keepassxreboot/keepassxc
+  page:
+    name: KeePassXC
+    url: https://keepassxc.org/
+  quotes:
+    - 'The source code is completely open source under the GPLv3 license and openly available on GitHub.'
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: "You can run KeePassXC on Windows, macOS, and Linux systems." (its home
+# page) and its browser extension, KeePassXC-Browser, for Firefox, Chrome, Edge and other browsers (its download page and
+# FAQ). No mobile app: "We don't have our own mobile app" (its FAQ, which recommends KeePassDX and KeePass2Android for
+# Android, Strongbox and KeePassium for iOS). Sign-in: no account; you unlock your database with a master password, a key
+# file and "YubiKey/OnlyKey challenge-response support" (its Getting Started Guide), so password and security-key (a key
+# file has no registry value; Quick Unlock with Windows Hello or Touch ID only reopens a database already unlocked once).
+# Support: its Matrix and IRC chat rooms and GitHub issue tracker ("Please report any bugs you encounter at our GitHub
+# issue tracker", its Getting Started Guide); email only for legal matters ("No user questions via email, please!", its
+# imprint). App languages: its Transifex project (linked from its documentation's "translating"), read in Edge: English,
+# French, Spanish, German, Italian, Portuguese (Brazil and Portugal), Korean and Chinese (China and Taiwan) are 100%
+# translated; Japanese is 95% and Arabic 82%, under Jellyfin's 97%, so they're left out; no Hindi. Its repository ships
+# each of them (share/translations). Not self-hostable: it's a desktop app with no server. No pause (nothing to pay)
+# and no parental controls.
+features:
+  platforms: [windows, macos, linux, browser-extension]
+  account.sign-in: [password, security-key]
+  support.channels: [community]
+  languages.interface: [en, fr, es, de, it, pt, ko, zh]
+  software.open-source: fully-open
+
+# Password features, read 2026-11-19 (KeePassXC 2.8.0):
+# - Items: entries with "usernames, passwords, URLs, attachments, and notes" (its home page), "TOTP storage and
+#   generation", passkeys ("Support for passkeys using the browser integration", its Getting Started Guide) and SSH keys
+#   for its SSH Agent ("It can automatically add SSH keys from your KeePassXC database to a running SSH agent when
+#   unlocked", its FAQ). So login, totp, passkey and ssh-key.
+# - Health: "Database reports (password health, HIBP, and statistics)" (its Getting Started Guide: HIBP is Have I Been
+#   Pwned, a breach check), saved searches "such as finding expired and weak passwords" (its User Guide), and a
+#   "password reuse tooltip in database reports" (its 2.8.0 changelog). So breached, weak and reused.
+# - Sharing: KeeShare, "KeeShare allows you to share a subset of your credentials with others and vice versa." by
+#   sharing a group (its User Guide), so share-vault.
+# - Import: "Import databases from CSV, 1Password, Bitwarden, Proton Pass, and KeePass1 formats" (its Getting Started
+#   Guide); its User Guide lists "Bitwarden (.json)", "Proton Pass (.json)" and "Remote database (.kdbx)", and KDBX is
+#   its native format ("KeePassXC currently uses the KeePass 2.x (.kdbx) password database formats KDBX 3.1 and KDBX 4
+#   as its native file formats.", its FAQ), with Database → Merge From Database. So csv, json, kdbx and other-managers.
+# - Export: "Database export to CSV, XML, and HTML formats" (its Getting Started Guide), its own encrypted KDBX file
+#   ("Create, open, and save databases in the KDBX format (KeePass Compatible)"), and KeeShare's export of a group to a
+#   container with its own password ("The password to use for this share container", its User Guide). So csv, kdbx and
+#   encrypted (notes.md). Passkeys export alone, as JSON ("Exported passkeys are stored in JSON format using the .passkey
+#   file extension."), isn't a database export, so no json.
+# - Offline: "in an offline, encrypted file that can be stored in any location" (its home page). No emergency access.
+# - Authenticator: "Once set up, KeePassXC can calculate TOTP codes like any authenticator app, such as Google
+#   Authenticator." (its User Guide). Import: you paste the secret ("paste the secret code from the website"), and a
+#   setup key pasted by hand is the registry's otpauth; no page says it scans QR codes or reads another app's backup, so
+#   otpauth only. Export: "You can also view the secret and configuration as a QR code for exporting to a mobile
+#   device." (its User Guide), so otpauth.
+# - End-to-end encryption: none stated in those words. "Your passwords remain encrypted at all times and no data is
+#   stored on remote servers" (its home page), but no page says "end-to-end" or "zero-knowledge", so
+#   encryption.end-to-end is left out (categories.md's rule); privacy.content-access grades the same fact.
+# - Sync: none of its own: "Cloud synchronization with Dropbox, Google Drive, OneDrive, ownCloud, Nextcloud etc. can be
+#   easily accomplished by simply storing your KeePassXC database inside your shared cloud folder" (its FAQ).
+plans:
+  - id: keepassxc.free
+    name: Free
+    link: https://keepassxc.org/download/
+    features:
+      password-manager: true
+      password-manager.item-types: [login, totp, passkey, ssh-key]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-vault]
+      password-manager.import: [csv, json, kdbx, other-managers]
+      password-manager.export: [csv, kdbx, encrypted]
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [otpauth]
+    notes: 'Free and open source (GPLv3). A desktop app for Windows, macOS and Linux with a browser extension; your passwords stay in one encrypted KDBX file that you keep and sync wherever you like. It has no phone app of its own: it suggests KeePassDX or KeePass2Android on Android, and Strongbox or KeePassium on iPhone.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://keepassxc.org/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch. KeePassXC has no account, no sign-up and no
+# terms of service: you download free software under the GPLv3 ("KeePassXC is released under the GPLv3.", every page's
+# footer; its Getting Started Guide carries the licence's disclaimers). Its privacy policy covers its website (statistics
+# with a self-hosted Matomo, anonymized) and says the apps send nothing. So the topics about an account and a contract
+# are not-applicable, with why. Read for security: its security audits page (ANSSI's CSPN of 2.7.9, Zaur Molotnikov's
+# review of 2.7.4), its FAQ's audit answer, its GitHub security policy, and its 2.8.0 release post's security fixes.
+# KeePassXC-Browser, its browser extension, is covered by the same privacy policy. The Microsoft Store, Flathub and
+# Linux distributions that ship it have their own terms, not read.
+policies:
+  links:
+    - name: 'Privacy policy'
+      url: https://keepassxc.org/privacy/
+    - name: 'KeePassXC (home page)'
+      url: https://keepassxc.org/
+    - name: 'Download'
+      url: https://keepassxc.org/download/
+    - name: 'Documentation and FAQ'
+      url: https://keepassxc.org/docs/
+    - name: 'Getting Started Guide'
+      url: https://keepassxc.org/docs/KeePassXC_GettingStarted
+    - name: 'User Guide'
+      url: https://keepassxc.org/docs/KeePassXC_UserGuide
+    - name: 'The Team (contact and imprint)'
+      url: https://keepassxc.org/team/
+    - name: 'Security policy (GitHub)'
+      url: https://github.com/keepassxreboot/keepassxc/security/policy
+  ratings:
+    - topic: privacy.data-collection
+      tier: great
+      reason: 'The app sends nothing about you to anyone. Its website counts visits only in a way that can’t tell who you are, and you can turn even that off.'
+      sources:
+        - url: https://keepassxc.org/privacy/
+          quote: 'At no time will any of your stored personal data be sent to us or a third party.'
+        - url: https://keepassxc.org/privacy/
+          quote: 'All collected data is used for statistical purposes only, does not allow personal identification and is not shared with any third parties.'
+        - url: https://keepassxc.org/privacy/
+          quote: 'You can opt out of browser data collection at any time by clicking this opt-out link and following the instructions.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It shares nothing: the app never sends your data anywhere, and its website’s visit statistics stay on its own server, run by its web host only.'
+      sources:
+        - url: https://keepassxc.org/privacy/
+          quote: 'At no time will any of your stored personal data be sent to us or a third party.'
+        - url: https://keepassxc.org/privacy/
+          quote: 'Statistics are generated using a self-hosted Matomo installation.'
+        - url: https://keepassxc.org/privacy/
+          quote: 'Uberspace.de are only responsible for providing the needed IT infrastructure and do not access or use your data directly.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads and no tracking, in the app or on its website.'
+      sources:
+        - url: https://keepassxc.org/
+          quote: 'We do the heavy lifting in a no-nonsense, ad-free, tracker-free, and cloud-free manner.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'KeePassXC never receives your passwords or anything you write: they stay in your own file, so there’s nothing it could train AI on.'
+      pages:
+        - https://keepassxc.org/privacy/
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Only you can open your passwords: they stay encrypted all the time, and nothing is kept on anyone’s servers.'
+      sources:
+        - url: https://keepassxc.org/
+          quote: 'Your passwords remain encrypted at all times and no data is stored on remote servers, so you stay in full control of your data.'
+        - url: https://keepassxc.org/privacy/
+          quote: 'KeePassXC and KeePassXC-Browser are run locally on your computer.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'Your passwords stay in your own file. Its website deletes visit logs after 90 days and detailed reports after a year, keeping only overall trends.'
+      sources:
+        - url: https://keepassxc.org/privacy/
+          quote: 'Visitor logs are deleted after 90 days and detailed reports after 12 months. Only basic trend metrics are kept after this time.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'KeePassXC keeps nothing of yours: the app runs on your computer and your passwords are a file you keep and delete yourself.'
+      sources:
+        - url: https://keepassxc.org/privacy/
+          quote: 'KeePassXC and KeePassXC-Browser are run locally on your computer.'
+        - url: https://keepassxc.org/privacy/
+          quote: 'At no time will any of your stored personal data be sent to us or a third party.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'You can take everything with you: your passwords are in the standard KeePass file many other apps open, and you can export them to CSV, XML or HTML yourself.'
+      sources:
+        - url: https://keepassxc.org/docs/KeePassXC_GettingStarted
+          quote: 'Create, open, and save databases in the KDBX format (KeePass Compatible)'
+        - url: https://keepassxc.org/docs/KeePassXC_GettingStarted
+          quote: 'Database export to CSV, XML, and HTML formats'
+      action:
+        name: 'How to export your database'
+        url: https://keepassxc.org/docs/KeePassXC_UserGuide#_exporting_databases
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its pages don’t say what it does if police or governments ask. It never holds your passwords; only its website keeps visit statistics.'
+      pages:
+        - https://keepassxc.org/privacy/
+        - https://keepassxc.org/team/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'Your passwords stay in your own file, wherever you keep it. Its website’s data is with its web host, but it doesn’t say in which country.'
+      pages:
+        - https://keepassxc.org/privacy/
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up: you download it free and use it on your own computer, without an account or any personal details.'
+      sources:
+        - url: https://keepassxc.org/download/
+          quote: 'Keep your passwords safe on the computer you trust. No clouds. No 3rd parties.'
+        - url: https://keepassxc.org/privacy/
+          quote: 'KeePassXC and KeePassXC-Browser are run locally on your computer.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      status: not-applicable
+      reason: 'There’s no account and no terms of service to agree to, so no dispute clause: KeePassXC is free software you use under the GPLv3.'
+      pages:
+        - https://keepassxc.org/docs/KeePassXC_GettingStarted
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      status: not-applicable
+      reason: 'There are no terms of service to change. KeePassXC is free software under the GPLv3, and the copy you have stays yours under it.'
+      pages:
+        - https://keepassxc.org/docs/KeePassXC_GettingStarted
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      status: not-applicable
+      reason: 'There’s no KeePassXC account to close: you download it and use it without signing up.'
+      pages:
+        - https://keepassxc.org/download/
+        - https://keepassxc.org/privacy/
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      status: not-applicable
+      reason: 'Nothing you store goes to KeePassXC: your passwords stay in your own file, so it takes no rights over them.'
+      pages:
+        - https://keepassxc.org/privacy/
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: great
+      reason: 'Nothing can be taken away: it’s free, open-source software under the GPLv3 that you keep, with no subscriptions.'
+      sources:
+        - url: https://keepassxc.org/
+          quote: 'Your passwords remain encrypted at all times and no data is stored on remote servers, so you stay in full control of your data. No cloud, no ads, no subscriptions.'
+        - url: https://keepassxc.org/
+          quote: 'KeePassXC is released under the GPLv3.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no KeePassXC account to close for not using it.'
+      pages:
+        - https://keepassxc.org/privacy/
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'It’s open source under the GPLv3: anyone may read, change and share it.'
+      sources:
+        - url: https://keepassxc.org/
+          quote: 'The source code is completely open source under the GPLv3 license and openly available on GitHub. Feel free to inspect, share, and contribute!'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Independent experts have checked it: France’s cyber security agency certified version 2.7.9, and a security consultant reviewed it in 2023. You can report flaws privately.'
+      sources:
+        - url: https://keepassxc.org/
+          quote: 'KeePassXC 2.7.9 has been awarded a security Visa by the French National Cybersecurity Agency (ANSSI).'
+        - url: https://keepassxc.org/docs/
+          quote: 'Yes, an audit was conducted by Zaur Molotnikov, an independent security consultant, and completed on January 19, 2023.'
+        - url: https://github.com/keepassxreboot/keepassxc/security/policy
+          quote: 'To report a security issue, please use one of the following methods:'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: great
+      reason: 'Share your passwords with anyone you like: it can share a group of them with other people through a shared file.'
+      sources:
+        - url: https://keepassxc.org/docs/KeePassXC_UserGuide
+          quote: 'KeeShare allows you to share a subset of your credentials with others and vice versa.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: great
+      reason: 'It never goes online without your say-so: it contacts a server only when you ask it to, for example to fetch a website’s icon.'
+      sources:
+        - url: https://keepassxc.org/docs/
+          quote: 'KeePassXC will never access any network resource without your explicit prior consent.'
+        - url: https://keepassxc.org/privacy/
+          quote: 'KeePassXC in particular will only ever contact a server on the Internet as per explicit request from the user (e.g., in order to download a website favicon for an entry).'
+      lastVerified: 2026-11-19
