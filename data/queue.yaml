@@ -1598,7 +1598,7 @@
   sitelinks: 15
   status: rejected
   date: 2026-11-20
-  note: "In the catalog as comodo (the brand rule: Internet Security is its plan)"
+  note: 'In the catalog as comodo (the brand rule: Internet Security is its plan)'
 - id: aparat
   name: Aparat
   website: https://www.aparat.com
@@ -1827,7 +1827,7 @@
   sitelinks: 9
   status: rejected
   date: 2026-11-20
-  note: "A plan of Emsisoft (emsisoft), by the brand rule, not a provider of its own"
+  note: 'A plan of Emsisoft (emsisoft), by the brand rule, not a provider of its own'
 - id: kugou
   name: KuGou
   website: https://www.kugou.com
@@ -1857,7 +1857,7 @@
   sitelinks: 8
   status: out-of-scope
   date: 2026-11-20
-  note: "Discontinued: activevirusshield.com answers 404 (2026-11-20)"
+  note: 'Discontinued: activevirusshield.com answers 404 (2026-11-20)'
 - id: immunet
   name: Immunet
   website: https://www.immunet.com
@@ -1867,7 +1867,7 @@
   sitelinks: 8
   status: out-of-scope
   date: 2026-11-20
-  note: "Discontinued: Cisco ended it on 2024-01-01 (university IT notices); immunet.com no longer answers (2026-11-20)"
+  note: 'Discontinued: Cisco ended it on 2024-01-01 (university IT notices); immunet.com no longer answers (2026-11-20)'
 - id: tresorit
   name: Tresorit
   website: https://tresorit.com
