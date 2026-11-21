@@ -1,0 +1,187 @@
+url: https://products.drweb.com/win/security_space/?lng=en
+method: fetch
+saved: 2026-11-20
+
+Dr.Web Security Space
+By continuing to use this website, you are consenting to Doctor Web’s use of cookies and other technologies related to the collection of visitor statistics.
+Learn more
+OK
+For home
+For business
+Support
+Information for users
+*]:border-b
+lg:[&>*]:border-b-[#eaf7e7]
+lg:hover:[&>*]:border-b-[#2d960a]
+" @click.outside="users_dropdown = false">
+Renew a license
+Find a partner
+Activate your Dr.Web license
+Documentation
+Download distributions
+Technical support
+Information for partners
+*]:border-b
+lg:[&>*]:border-b-[#eaf7e7]
+lg:hover:[&>*]:border-b-[#2d960a]
+" @click.outside="partners_dropdown = false">
+Become our partner
+Partner portal
+Technology partnerships
+*]:border-b
+lg:[&>*]:border-b-[#eaf7e7]
+lg:hover:[&>*]:border-b-[#2d960a]
+" x-ref="extra_menu">
+Anti-cyberfraud center
+Anti-virus lab
+Licensing center
+Licenses and certificates
+Career
+Press center
+About Doctor Web
+Contacts
+$refs.search_input.focus());">
+*]:border-b
+[&>*]:border-b-[#eaf7e7]
+hover:[&>*]:border-b-[#2d960a]
+"
+@click.outside="account = false"
+x-show="$store.user.login === false"
+>
+Doctor Web's site
+My Dr.Web Portal for home
+My Dr.Web Portal for business
+My Dr.Web for service subscribers
+Dr.Web vxCube
+Dr.Web FixIt!
+Doctor Web's site
+*]:transition [&>*:empty]:hidden text-accent-primary-active hover:text-accent-primary-hover text-base ::]" href="https://www.drweb.com/user/profile/?from=widget&lng=en&ref=https%3A%2F%2Fproducts.drweb.com%2Fwin%2Fsecurity_space%2F%3Flng%3Den" target="_blank">
+Edit profile
+Sign out
+CN
+JP
+EN
+FR
+ES
+IT
+KZ
+UZ
+ID
+Wait, don't go! Let us take care of your device's security
+Dr.Web Security Space
+1 PC | 2 months
+&dollar;6
+Add to cart
+Find out more
+Dr.Web Security Space
+Comprehensive protection for your computer from all types of Internet threats
+Buy now – prices start at &dollar;31 / year
+Trial
+System requirements
+More for less!
+Protect your computer and smartphone at a special price
+Find out more
+Do you already have a Dr.Web license?
+You can renew it at 25% off
+Go to renewal
+Find out more about renewals
+Dr.Web Security Space
+Foils attempts to steal your personal data, filters spam, and warns you against visiting phishing sites
+Prevents attackers from exploiting software vulnerabilities
+Keeps your online transactions secure and your correspondence in instant messengers and elsewhere confidential
+Flexible settings help keep your children's digital world safe
+Prevents intruders from accessing your camera and microphone
+Protects devices from brand-new threats
+Prevents unauthorised removable devices from connecting to your computer, keeps your confidential data safe from theft, and prevents viruses from finding their way into your system
+Renew at 25% off
+Select the term of your license and the number of computers
+License period
+&]:border-[#69B42E] aria-expanded:border-edges-focus pl-3 pr-11 text-base min-h-[40px] py-[7px] ::]" x-listbox:button x-tw="listbox__button">
+:empty]:hidden !max-h-72 absolute w-max opacity-0 ::]" x-cloak x-effect="!static && ($el.style.scale = open ? 1 : 0)" x-listbox:options="{"closeByStyle":true,"open":false,"static":false,"strategy":"absolute"}" x-tw="listbox__options">
+1 year
+2 years
+3 years
+Number of computers
+&]:border-[#69B42E] aria-expanded:border-edges-focus pl-3 pr-11 text-base min-h-[40px] py-[7px] ::]" x-listbox:button x-tw="listbox__button">
+:empty]:hidden !max-h-72 absolute w-max opacity-0 ::]" x-cloak x-effect="!static && ($el.style.scale = open ? 1 : 0)" x-listbox:options="{"closeByStyle":true,"open":false,"static":false,"strategy":"absolute"}" x-tw="listbox__options">
+1 computer
+2 computers
+3 computers
+4 computers
+5 computers
+{
+if ("en" == "en" || "en" == "cn" || "en" == "ja") {
+$el.innerText = "&dollar;" + Func_formatPrice("en", value);
+} else {
+$el.innerText = Func_formatPrice("en", value) + " &dollar;"
+}
+})'
+>0
+(excl.VAT*)
+Buy
+*VAT will be calculated and indicated after proceeding to purchase and selecting the country
+Download a Dr.Web Security Space demo
+Free for 1 month
+No technical support
+Protection for 1 computer
+Windows
+macOS
+Linux 32 bit
+Linux 64 bit
+Download
+Close modal
+To download a free trial, please fill out the fields below.
+Name
+Email
+Make sure you provide a valid email address so that you can receive a Dr.Web download link.
+Never received the email containing your product download link? Check your spam folder and the other folders in your mailbox. Perhaps, the message accidentally ended up in one of them.
+I have read and agree to the Privacy Policy
+I consent to receiving personalised offers, news and other information at the email address.
+Get the trial
+response.status = "preparation", })[response.status] || $dialog.close" class="[:: border-transparent disabled:bg-surface-tertiary hover:bg-accent-primary-hover text-chars-tertiary bg-accent-primary-active group/btn inline-flex items-center justify-center gap-2 relative disabled:text-chars-disabled focus-visible:outline focus-visible:outline-1 focus-visible:outline-edges-focus focus-visible:-outline-offset-1 transition-colors leading-none rounded border whitespace-nowrap text-base h-[40px] px-5 ::]" x-data="{"color":"","disabled":false,"icon_name":"","icon_only":false,"icon_side":"right","id":"","loading":false,"side_left":"","side_right":true,"size":"m","text":"OK","view":"primary","width":""}" x-tw="btn">
+OK
+Features
+Windows
+macOS
+Linux
+The most extensive feature set for comprehensive computer protection
+Acts as a reliable barrier against malware and can cure already-infected systems. Protects against brand-new threats, targeted attacks and zero-day vulnerabilities
+Using Doctor Web's cloud infrastructure, checks webpages in real time and warns users about phishing and potentially dangerous sites
+Efficiently filters out spam in any language, with near-zero false negatives
+Offers configurable restricted access to unwanted web resources by URL keywords
+Prevents unauthorized external access to your computer
+Prevents malware from exploiting software vulnerabilities used to penetrate computers
+Provides protection against encryption ransomware
+Keeps files in user-selected folders safe from tampering or deletion (configuration is required)
+Blocks access to webcams and microphones, preventing covert recordings
+Lets users disable access to USB devices, including webcams and cameras
+Provides centralized security for every device in your home network
+Развернуть
+Reliable protection adapted for Apple
+Prevents malware from infecting a system and can cure any detected infections
+Checks visited webpages in real time, filters out phishing and potentially dangerous sites
+Detects spam in mail traffic in any language
+Blocks children’s access to objectionable Internet content by screening sites matching specified keywords
+Prevents attempts to gain unauthorized access to your computer
+Blocks malware that takes advantage of software flaws to penetrate a system
+Instantly checks suspicious links using Doctor Web's cloud technologies
+Specialized protection for computers running Linux
+Efficiently detects and neutralizes malicious programs and cures infected files
+Makes Internet surfing safe by scanning all webpages in real time
+Reliably filters out unwanted emails, regardless of the language
+Allows flexible configuration of website access policies, protecting children from unwanted content
+Monitors network connections and prevents system intrusion attempts
+Protects systems from attacks exploiting vulnerabilities in installed software
+Enhances security with instant cloud-based link checking
+System requirements
+For home
+For business
+Support
+Information for users
+Information for partners
+Press center
+Contacts
+Doctor Web © 2003 —
+Doctor Web is an anti-virus security company whose products are marketed under the brand name Dr.Web
+Safe development and deployment practices
+Privacy Policy

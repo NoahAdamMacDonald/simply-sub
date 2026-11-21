@@ -1,0 +1,347 @@
+url: https://company.f-secure.com/en/about-us/our-story
+method: browser
+saved: 2026-11-20
+
+Skip to main content
+Home
+For partners
+About F‑Secure
+Global
+About us
+Careers
+For media
+Newsroom
+Sustainability
+For investors
+Contact us
+Over 35 years of history in cyber security
+F‑Secure has been at the fore­front of cyber security for three decades, witnessing cyber crime develop from digital vandalism into a multi­trillion dollar industry. And since 1988 our industry-leading innovation, award-winning products and net­work of top partners have enabled us to protect consumers around the world.
+Browse through the time­line and find out more about our story.
+Risto Siilas­maa
+1988
+F‑Secure established under the name Data Fellows
+F‑Secure is first established under the name Data Fellows by Petri Allas and Risto Siilas­maa. Principle operations included training computer users and building customized data­base systems for industrial customers.
+1989
+The WWW is born
+Sir Timothy John Berners-Lee invented the World Wide Web: he implemented the first successful communication between a Hyper­text Transfer Protocol (HTTP) client and server via the internet some­time around mid-November.
+It took four more years for the first web­site to go live.
+LOADING
+1990
+From training to the AV business
+One of F‑Secure’s training subjects was data security and dealing with computer viruses. Ari Hyppönen, co-author of a book about viruses in 1989, was in constant communication with Fridrik Skulason, an Ice­lander with a passion for analyzing viruses. Frisk had written a set of command line driven anti­virus utilities and Risto and Ari got an idea for commercializing those.
+LOADING
+1991
+F‑Secure launches its first heuristic scanner
+The company launched its first major soft­ware development project and created the first heuristic scanner for anti­virus products. Sales were minimal as most companies had to be convinced that there actually was such a thing as a computer virus. Viruses were MUCH rarer then than they are today.
+LOADING
+1992
+First bout of public hysteria due to a computer virus
+As March 6, 1992 approached, computer owners and users became very concerned about the Michelangelo virus. Although PCs were not nearly as wide­spread as today, there was a great rush for virus detectors and virus protection programs. F‑Secure began a project that eventually resulted in a product called Grape­vine (later renamed Vine­yard).
+LOADING
+1993
+F‑Secure attends its first CeBIT
+F‑Secure attended CeBit in Hannover, its first inter­national fair, and introduced Vine­yard. It was in beta and crashed every five minutes.
+LOADING
+1994
+World’s first computer security web­site launched
+Data Fellows set up the world’s first computer security web­site, complete with a comprehensive virus encyclopedia. Micro­soft, IBM, and Apple followed later in the year. Mikko Hyppönen, who worked in F‑Secure Ltd’s F‑PROT support, presented a paper about Retro­viruses at the Virus Bulletin ’94 conference.
+LOADING
+1995
+Share the file, share the virus
+The first virus that infected Micro­soft Word files, Concept, became one of the most common viruses in the world because it could infect any OS capable of running Word.
+1995 was also the year F‑Secure launched the first on-access, real-time anti­virus product for Windows desk­tops and lap­tops.
+LOADING
+1996
+F‑Secure receives EU award
+The European Union awarded F‑Secure the European IT Grand Prize award.
+F‑Secure launched its first VPN product based on SSH. Having a commercial SSH product available was an absolute must for big companies.
+F‑PROT from F‑Secure was chosen as the official anti­virus product of Europe’s Football Champion­ship Tournament.
+LOADING
+1997
+F‑Secure Anti-Virus
+F‑Secure’s popular F‑PROT Professional for Windows could be upgraded to a multi-layered virus protection system performing multiple simultaneous scans with multiple scanning engines, including on-demand and real-time scans, thanks to the ground-breaking Counter­Sign™ technology invented by F‑Secure.
+The Cruel Virus shipped on CD-ROM driver floppies the same year.
+LOADING
+1998
+Do you remember the “Cult of the Dead Cow”?
+Back Orifice was a remote control tool released by the Cult of the Dead Cow (cDc) group. The trojan horse allowed an intruder to monitor and tamper with Windows 95 and Windows 98 computers over the internet.
+F‑Secure introduced its first heuristic virus scanner of Windows executables and launched its first integrated, policy managed security solution.
+Mikko Hyppönen, Ari Hyppönen, Risto Siilas­maa filed a patent for computer virus screening.
+LOADING
+1999
+Largest virus out­breaks so far in history
+The three largest virus out­breaks in history (so far) occurred during March, April, and June of 1999: Melissa, CIH and Zipped­Files infected several hundreds of thousands of computers world­wide.
+Data Fellows was reborn as F‑Secure Corporation and listed on the Helsinki Exchanges.
+Happy99 was the first email virus. It greeted you with Happy New Year 1999 and emailed itself to all contacts in your address book.
+LOADING
+2000
+The computer worm that broke millions of hearts
+Love­letter is still one of the biggest out­breaks of all time. It spread via email attachments and over­wrote many of the crucial files on the PCs it infected. This out­break was an incredibly successful attempt at social engineering. Using the promise of love, it convinced millions to open the attachment, causing an estimated $5.5 billion in damage world­wide.
+F‑Secure entered the mobile security market.
+Ari Hyppönen filed a patent for F‑Secure’s encryption technology.
+LOADING
+2001
+Code Red — a worm that spread without requiring user inter­action
+The first worm that spread without requiring any user inter­action at all. Spreading around the world in mere minutes, Code Red hid from detection and carried out various functions.
+F‑Secure launched the first instant security alert service notifying pagers, PDAs and mobile phones of major virus out­breaks. It also released the first Pocket PC encryption solution for stored emails, contacts and calendars.
+LOADING
+2002
+First Anti­virus for mobile phones
+F‑Secure launched its first anti­virus product for mobile phones with the Nokia Communicator product family.
+F‑Secure placed its strategic focus on anti­virus. The company also delivered its first over-the-air updated anti­virus product.
+LOADING
+2003
+Slammer, Blaster, and Sobig hit — F‑Secure fights back
+Net­work worms require just a few lines of code and vulnerability to spark real world trouble. Slammer took down Bank of America’s ATM net­work and 911 services in Seattle. Even the air traffic control system was not immune. Some versions waited for a couple of days after infecting a machine before turning affected machines into email proxy servers. The result? Massive spam. AOL alone reported stopping more than 20 million infected messages on one day.
+F‑Secure offers hosted security services.
+The first mobile phone virus in history, Cabir targeted Nokia smart­phones running the Symbian operating system.
+LOADING
+2004
+F‑Secure Labs launches first anti­virus industry blog
+The company’s weblog is launched to report on data security events. “News from the Labs” has established a loyal following among security specialists and has grown to be an authoritative source in breaking Internet security threats.
+F‑Secure is named the fastest growing listed anti­virus company. The company delivers the first mobile anti­virus solution distributed by mobile phone manufacturer Nokia.
+Notable malware developments included Mydoom spreading over email and the Kazaa Peer-to-Peer (P2P) net­work. Sasser came in through vulnerable net­work ports and slowed or crashed net­works from Australia to Hong Kong to the UK.
+LOADING
+2005
+F‑Secure Black­light launches
+F‑Secure became the first anti­virus company to release root­kit detection technology, F‑Secure Black­light.
+F‑Secure Mobile Anti-Virus is launched on the retail market and the F‑Secure Messaging Security Gate­way appliance began tackling spam.
+In 2005, Sony included a music player program and a root­kit on its CDs that controlled how the owner could access the audio tracks. The result was a media fire­storm and a class-action law­suit that ended with Sony offering users money and free down­loads.
+LOADING
+2006
+100th ISP partner­ship
+F‑Secure signed its 100th Service Provider contract with the Taiwanese online gaming house Gamania. Frost & Sullivan gave its market penetration leader­ship award to F‑Secure.
+Risto Siilas­maa ceded his position of CEO to Kimmo Alkio and takes the position of Chair­man of the Board.
+LOADING
+2007
+In the eye of the Storm (Worm)
+Seven years after Love­letter, Storm Worm capitalized on our collective fear of bad weather and first spread generally via an email message with the subject line “230 dead as storm batters Europe”. Once the attachment was open, a Trojan back­door and a root­kit forced the PC to join a bot­net. Bot­nets are armies of zombie computers that can be used to, among other thing, send out tons of spam. And this one sucked in ten million computers.
+The security as a service concept is launched to business customers and consumers.
+LOADING
+2008
+Happy 20th anniversary
+F‑Secure leads security industry in developing “in-the-cloud” technology with the real-time protection net­work — the fastest protection in the online world.
+F‑Secure Online Backup, offering unlimited online backup capacity for broad­band users, is launched as a service through ISPs.
+Mebroot was a root­kit built to hide from the root­kit detectors that quickly became part of many Internet security suites. Conficker quickly took millions of computers all over the globe. It exploits both flaws along with Windows and weak pass­words along with several advanced techniques.
+Hackfu, a unique cyber security event, was born and became an annual tradition.
+LOADING
+2009
+F‑Secure’s next step into the cloud
+F‑Secure acquires Steek SA, a leading European soft­ware provider for online storage and data management solutions to fixed line and mobile operators.
+F‑Secure was awarded the title of best Finnish listed company by economic daily Kauppa­lehti and banking group OP-Pohjola and CEO Kimmo Alkio got the title of best Finnish CEO of an IT company by Finnish financial analysts.
+LOADING
+2010
+The trouble with cyber espionage
+Stuxnet hit the news all over the world. An unusually large Windows worm — about 1000% larger than the typical computer worm, it most likely spread through USB devices. It infects a system, hides itself with a root­kit and sees if the infected computer is connected to a Siemens Simatic factory system. If the worm finds a connection, it then changes the commands sent from the Windows computer to the PLC Programmable Logic Controllers, i.e., the boxes that actually control the machinery. Once running on the PLC, it looks for a specific factory environment. If this is not found, it does nothing.
+It was probably developed by a government.
+F‑Secure launched Anti-Theft for Mobile and Share for operators as well as started Safe and Savvy, a new blog for anyone interested in staying safe online, practicing smarter social net­working and protecting irreplaceable content.
+LOADING
+2011
+Mikko Hyppönen on a special cyber adventure
+Mikko Hyppönen travels to Pakistan to find the authors of the first PC virus (Brain) and gives a TED talk. Pirkka Palo­mäki named “CTO of the year” by Technology Academy of Finland.
+F‑Secure entered into Latin America markets with a Telefonica and several other partner­ships.
+F‑Secure Internet Security 2011 received Product of the Year Award by AV-Comparatives.
+LOADING
+2012
+Christian Fredrikson starts as F‑Secure President and CEO.
+Later in the year, European Commission named F‑Secure CEO to Board of New European Cloud Partner­ship.
+F‑Secure’s corporate business strategy was recognized as top-ranked by The Forrester Wave, End­point Security report.
+Flame is lame? Flame was used for targeted cyber espionage in the Middle East. Suggestions that Flame was created by a government and, like Stuxnet and Duqu, was the product of a nation-state were met with ridicule.
+LOADING
+2013
+HAPPY 25th ANNIVERSARY
+2013 was a special year for us — we were celebrating our 25th anniversary.
+2013 was also the year when we launched two new products providing security from the cloud and a next generation cloud storage service. Younited by F‑Secure — secure and fun online storage that integrates other popular cloud services such as Face­book, Drop­box or Picasa. F‑Secure FREEDOME empowers safe and anonymous surfing whilst tele­porting you to many virtual locations to enjoy local online services. F‑Secure KEY lets the user manage all credentials to the services she uses in a smart and easy way.
+LOADING
+2014
+F‑Secure launches FREEDOME
+A user-friendly VPN solves top online privacy and security challenges with just one button. F‑Secure FREEDOME empowers safe and anonymous surfing whilst tele­porting you to many virtual locations to enjoy local online services.
+LOADING
+2015
+F‑Secure makes big push toward becoming a leading cyber security provider for enter­prises
+2015 saw F‑Secure setting its sight on becoming a leading cyber security provider for enter­prises. F‑Secure sold its Younited personal cloud service to Synchronoss to hone its focus on security. And later in the year, F‑Secure acquired nSense — the Nordic’s leading cyber security provider.
+LOADING
+2016
+Comprehensive security for consumers and a new detection and response solution for businesses
+F‑Secure TOTAL combines award-winning internet security and virtual private net­work (VPN) products into a single subscription that gives consumers comprehensive protection for their personal information and devices.
+F‑Secure launches Rapid Detection and Response service to help companies handle the most sophisticated cyber attacks.
+Samu Konttinen takes over as F‑Secure’s CEO and President.
+LOADING
+2017
+F‑Secure’s cyber security services business continues to grow
+$ansom­ware out­break and the devastating NotPetya attacks.
+LOADING
+2018
+MWR Info­Security joins F‑Secure
+F‑Secure acquires independent cyber security consultancy MWR Info­Security. Along with the acquisitions of Inverse Path and Digital Assurance, this establishes F‑Secure as a major cyber security provider on every continent.
+LOADING
+2019
+Project Black­fin
+F‑Secure launches a new research project to further develop the decentralized artificial intelligence (AI) mechanisms currently used in its detection and response technologies. Project Black­fin is a multi-year research effort aimed at investigating how to apply collective intelligence in the cyber security domain.
+It aims to challenge the assumption that effective AI should mimic human intelligence.
+LOADING
+2020
+F‑Secure ID PROTECTION launches
+F‑Secure introduces ID PROTECTION to protect consumers’ personal information from data breaches and identity theft. ID PROTECTION also protects online accounts by storing pass­words in a secure vault.
+Juhani Hintikka is appointed the President and CEO of F‑Secure Corporation.
+LOADING
+2021
+New F‑Secure TOTAL, 8th and 9th AV-Test awards and the first cloud-based platform for businesses
+F‑Secure launches TOTAL 3.0 for service provider partners, combining online security, identity protection and VPN into a single app. TOTAL simplifies protection for consumers at home and on the go.
+F‑Secure wins its eighth and ninth Best Protection Awards from AV-TEST for home and business users respectively, along with a Best Performance award for home users. F‑Secure is the only company with products that have won an AV-TEST Best Protection award in seven out of the last 10 years, giving it the most consistent track record in the industry.
+F‑Secure launches Elements for businesses, a modular platform that combines end­point protection, end­point detection and response, vulnerability management, and collaboration protection for cloud services including Micro­soft Office 365.
+LOADING
+2022
+Two cyber security companies are born in a partial demerger
+F‑Secure’s corporate cyber security unit is renamed With­Secure™. In a demerger completed on 30 June 2022, the former consumer security business is separated into a new independent company, F‑Secure Corporation, and is listed on Nasdaq Helsinki on 1 July 2022.
+Timo Laaksonen is appointed the President and CEO of F‑Secure.
+LOADING
+2023
+F‑Secure combines forces with Lookout Life
+F‑Secure acquires the consumer security business of Lookout Inc. Driven by a shared commitment to protect people’s digital lives, the acquisition greatly strengthens F‑Secure’s presence in the US.
+LOADING
+2024
+F‑Secure Total receives the Best Usability Award from AV-TEST
+AV-TEST awarded F‑Secure Total with the Best Usability Award for Consumer Users under Windows, proving that F‑Secure delivers brilliantly simple security to make every digital moment more secure, for everyone.
+F‑Secure established under the name Data Fellows
+1988
+F‑Secure established under the name Data Fellows
+The WWW is born
+From training to the AV business
+F‑Secure launches its first heuristic scanner
+First bout of public hysteria due to a computer virus
+F‑Secure attends its first CeBIT
+World’s first computer security web­site launched
+Share the file, share the virus
+F‑Secure receives EU award
+F‑Secure Anti-Virus
+Do you remember the “Cult of the Dead Cow”?
+Largest virus out­breaks so far in history
+The computer worm that broke millions of hearts
+Code Red — a worm that spread without requiring user inter­action
+First Anti­virus for mobile phones
+Slammer, Blaster, and Sobig hit — F‑Secure fights back
+F‑Secure Labs launches first anti­virus industry blog
+F‑Secure Black­light launches
+100th ISP partner­ship
+In the eye of the Storm (Worm)
+Happy 20th anniversary
+F‑Secure’s next step into the cloud
+The trouble with cyber espionage
+Mikko Hyppönen on a special cyber adventure
+Christian Fredrikson starts as F‑Secure President and CEO.
+HAPPY 25th ANNIVERSARY
+F‑Secure launches FREEDOME
+F‑Secure makes big push toward becoming a leading cyber security provider for enter­prises
+Comprehensive security for consumers and a new detection and response solution for businesses
+F‑Secure’s cyber security services business continues to grow
+MWR Info­Security joins F‑Secure
+Project Black­fin
+F‑Secure ID PROTECTION launches
+New F‑Secure TOTAL, 8th and 9th AV-Test awards and the first cloud-based platform for businesses
+Two cyber security companies are born in a partial demerger
+F‑Secure combines forces with Lookout Life
+F‑Secure Total receives the Best Usability Award from AV-TEST
+1890
+1900
+1910
+1920
+1930
+1940
+1950
+1960
+1970
+1980
+1990
+2000
+2010
+2020
+2030
+2040
+2050
+2060
+2070
+2080
+2090
+2100
+1978
+1979
+1981
+1982
+1983
+1984
+1985
+1986
+1987
+1988
+1989
+1991
+1992
+1993
+1994
+1995
+1996
+1997
+1998
+1999
+2001
+2002
+2003
+2004
+2005
+2006
+2007
+2008
+2009
+2011
+2012
+2013
+2014
+2015
+2016
+2017
+2018
+2019
+2021
+2022
+2023
+2024
+2025
+2026
+2027
+2028
+2029
+2031
+2032
+F‑SECURE TIMELINE
+F‑Secure makes every digital moment more secure, for everyone.
+Subscribe to newsletter
+Home
+Products
+Renew subscription
+Articles
+Free tools
+My F‑Secure
+Contact support
+For partners
+Why partner with us?
+For operators
+For retail
+For banks
+For insurers
+Affiliate program
+Contact us
+About us
+Our story
+Careers
+For media
+Newsroom
+Sustainability
+Contact us
+For investors
+Global
+Terms of service
+Privacy policy
+Cookies
+Accessibility
+© F-Secure 2026

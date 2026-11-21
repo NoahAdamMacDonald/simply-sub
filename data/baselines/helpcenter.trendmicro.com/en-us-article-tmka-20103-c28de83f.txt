@@ -1,0 +1,437 @@
+url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+method: fetch
+saved: 2026-11-20
+
+Trend Micro VPN v6.x Data Collection Notice
+| Trend Micro Help Center
+You’re offline. This is a read only version of the page.
+Learn more
+How to translate this page
+Your browser can translate this page automatically. Here's how:
+Chrome / Edge: A translation bar usually appears at the top. Click Translate. If not, right-click anywhere on the page and select Translate to [your language].
+Firefox: Install the Firefox Translations add-on, then click the translate icon in the address bar.
+Safari (iPhone / iPad): Tap the aA icon in the address bar, then tap Translate Website.
+⚠️ SECURITY ALERT: Important PHP Website Vulnerability You Should Know About >>>
+Looking for business support?
+Help Center
+SIGN IN
+Product Help
+Account Help
+Download and Install
+Get Help
+SIGN IN
+Search
+All Products
+Premium Security
+Maximum Security
+Internet Security
+Antivirus+ Security
+Mobile Security for Android
+Antivirus for Mac
+Mobile Security for iOS
+Dr. Cleaner
+Password Manager
+ID Security
+VPN Proxy One Pro
+Home Network Security
+Security for Microsoft Edge
+Security for Google Chrome
+Cleaner One Pro
+Antivirus One
+ID Protection
+What brings you here today?
+🔑 I want to activate my subscription.
+📥 I need help installing my Trend Micro.
+➕ I want to add a new device.
+🔼 I want to upgrade my Trend Micro.
+🔄 I want to renew my Trend Micro.
+Windows
+Maximum Security
+Internet Security
+Antivirus+ Security
+Mac & iOS
+Antivirus for Mac
+Mobile Security for iOS
+Network Security
+Home Network Security
+Trend Micro VPN
+Anti Scam and Spam
+Trend Micro ScamCheck
+Android
+Mobile Security for Android
+AI Companion
+TrendLife Kaleida NEW
+Data & Privacy
+ID Protection
+Browser Protection
+Security for Microsoft Edge
+Security for Google Chrome
+Premium Services
+Service Bundles
+Ala Carte
+Free Tools
+Cleaner One Pro
+Ad Blocker for Mac
+Password Generator
+More Support
+Cybersecurity Learning Center
+Troubleshooting
+Vulnerability Disclosures
+Support
+TMKA-20103
+Print
+Trend Micro VPN v6.x Data Collection Notice
+Views:
+Default Collection
+Trend Micro VPN automatically collects and transmits the following data, some of which may be considered personal data in certain jurisdictions, after installing/enabling the product. It is necessary to collect this data to provide the security functions on this product. Therefore, you cannot disable these features. If you do not want Trend Micro to access this data, you should uninstall and stop using the product.
+License Check
+DESCRIPTION
+To check that the license is updated.
+DATA COLLECTED
+Email account
+Password
+First Name
+Last Name
+Language
+Phone Number (Japan only)
+IAP information
+IAP token
+Purchase time
+Activation Key
+FEATURE LOCATION
+This feature cannot be disabled.
+FEATURE SETTINGS
+[Back to top]
+Data collected by SPN and provide monthly report
+DESCRIPTION
+Trend Micro uses this data to provide a monthly report to users who purchase multiple device licenses.
+Trend Micro VPN also uses this data to improve product stability, usability, and performance.
+The following marketing activities are based on this data:
+New feature research
+User experience/ features satisfaction survey
+Promotion
+Product health monitoring
+Users behavior analysis
+DATA COLLECTED
+Malicious URLs list
+OS version
+Location
+Language
+Device model
+Device network status
+Enabled features status
+Mac address
+Device Name
+FEATURE LOCATION
+This feature cannot be disabled. If you do not want this data to be collected, please uninstall the application from your device.
+FEATURE SETTINGS
+[Back to top]
+Log collection
+Crash report collected by third-party service
+Firebase
+Appcenter
+DESCRIPTION
+Product logs are necessary to solve problems reported by our customers.
+Manual log collection is only used when the support center requests the logs.
+Crash / issue logs (auto-feedback) collects the crash / issue logs in real-time for problems where there may be a timing issue and logs may be difficult to collect manually.
+DATA COLLECTED
+Device model
+OS version
+App version
+Network connection status
+Gateway BSSID
+ISP carrier name
+IP address
+SIM card country code
+TMVPN logs
+TMVPN and system crash logs
+FEATURE LOCATION
+This feature cannot be disabled. If you do not want this data to be collected, please uninstall the application from your device.
+FEATURE SETTINGS
+[Back to top]
+Integrated modules from third-party service providers
+AppsFlyer
+Firebase
+Google Analytics
+Appcenter
+DESCRIPTION
+Trend Micro VPN uses this data to improve product stability, usability, and performance.
+Marketing activities are based on this data.
+DATA COLLECTED
+Data collected and feedback by SDK
+Data includes:
+Device model
+OS version
+App version
+Number of users and sessions
+Session duration
+Operating systems
+ISP carrier name
+Location
+First launch data
+App launch data
+App updates
+In-app purchases
+In-app status information
+In-app events
+License status
+Features use and operations (events and screens)
+FEATURE LOCATION
+This feature cannot be disabled. If you do not want this data to be collected, please uninstall the application from your device.
+FEATURE SETTINGS
+[Back to top]
+Configurable Features
+Trend Micro VPN includes the following features, which may collect and transmit the following data, some of which may be considered personal in certain jurisdictions, to Trend Micro. You can disable any of these features at any time to prevent the corresponding data from being sent to Trend Micro.
+Connection Protection and Website Filter by using VPN
+DESCRIPTION
+Enable VPN will allow Trend Micro VPN to protect devices from Web based threats and network hacking attacks.
+DATA COLLECTED
+Scanned URL
+FEATURE LOCATION
+Main Menu
+FEATURE SETTINGS
+Main Page > Enable VPN
+[iOS]
+[Android]
+[Mac]
+[UWP]
+[Back to top]
+Log Collection
+Crash report collected by third-party service:
+HockeyApp
+Integrated modules from third-party service providers:
+AppsFlyer
+Firebase
+Google Analytics
+Appcenter
+DESCRIPTION
+Device ID is the information that help us to associate the user non-anonymous date and user behaviors.
+The following activities are based on the data associate of Device ID:
+Analyzes / fixes the crash and issues for specific device and user
+Issue log auto-feedback by device and user
+Analyzes the user behaviors by device and user
+DATA COLLECTED
+Device ID
+FEATURE LOCATION
+First time launch > Privacy and Personal Data Collection Disclosure
+Main page > Settings
+FEATURE SETTINGS
+First time launch > Privacy and Personal Data Collection Disclosure > I agree to share anonymous usage data to help improve this software
+[iOS]
+[Android]
+[UWP]
+[Mac]
+Main page > Settings > Agree to share crash data
+[iOS]
+[Android]
+[UWP]
+[Mac]
+[Back to top]
+To see where the collected data is processed, refer to our list of data centers and authorized data subprocessors and their locations.
+Keywords: -
+Comments (0)
+Add a comment
+Name
+Email
+Comment
+English
+English
+日本語
+繁體中文
+Product Support
+Maximum Security
+Antivirus for Mac
+Mobile Security (Android)
+Mobile Security (iOS)
+ID Protection
+Trend Micro VPN
+Trend Micro ScamCheck
+Other Support
+TrendLife Kaleida
+Account Help
+Download and Install
+Troubleshooting
+Vulnerability
+Cybersecurity Learning Center
+About Trend Micro Support
+Premium Services
+Sitemap
+Privacy Policy
+Business Support
+Data Collection Disclosure
+Contact Support
+Copyright © 2026 Trend Micro Incorporated. All rights reserved.
+×
+Modal header
+One fine body…
+Dismiss
+Save
+Home
+LAST UPDATED: JUL 23, 2025
+Default Collection
+Trend Micro VPN automatically collects and transmits the following data, some of which may be considered personal data in certain jurisdictions, after installing/enabling the product. It is necessary to collect this data to provide the security functions on this product. Therefore, you cannot disable these features. If you do not want Trend Micro to access this data, you should uninstall and stop using the product.
+License Check
+DESCRIPTION
+To check that the license is updated.
+DATA COLLECTED
+Email account
+Password
+First Name
+Last Name
+Language
+Phone Number (Japan only)
+IAP information
+IAP token
+Purchase time
+Activation Key
+FEATURE LOCATION
+This feature cannot be disabled.
+FEATURE SETTINGS
+[Back to top]
+Data collected by SPN and provide monthly report
+DESCRIPTION
+Trend Micro uses this data to provide a monthly report to users who purchase multiple device licenses.
+Trend Micro VPN also uses this data to improve product stability, usability, and performance.
+The following marketing activities are based on this data:
+New feature research
+User experience/ features satisfaction survey
+Promotion
+Product health monitoring
+Users behavior analysis
+DATA COLLECTED
+Malicious URLs list
+OS version
+Location
+Language
+Device model
+Device network status
+Enabled features status
+Mac address
+Device Name
+FEATURE LOCATION
+This feature cannot be disabled. If you do not want this data to be collected, please uninstall the application from your device.
+FEATURE SETTINGS
+[Back to top]
+Log collection
+Crash report collected by third-party service
+Firebase
+Appcenter
+DESCRIPTION
+Product logs are necessary to solve problems reported by our customers.
+Manual log collection is only used when the support center requests the logs.
+Crash / issue logs (auto-feedback) collects the crash / issue logs in real-time for problems where there may be a timing issue and logs may be difficult to collect manually.
+DATA COLLECTED
+Device model
+OS version
+App version
+Network connection status
+Gateway BSSID
+ISP carrier name
+IP address
+SIM card country code
+TMVPN logs
+TMVPN and system crash logs
+FEATURE LOCATION
+This feature cannot be disabled. If you do not want this data to be collected, please uninstall the application from your device.
+FEATURE SETTINGS
+[Back to top]
+Integrated modules from third-party service providers
+AppsFlyer
+Firebase
+Google Analytics
+Appcenter
+DESCRIPTION
+Trend Micro VPN uses this data to improve product stability, usability, and performance.
+Marketing activities are based on this data.
+DATA COLLECTED
+Data collected and feedback by SDK
+Data includes:
+Device model
+OS version
+App version
+Number of users and sessions
+Session duration
+Operating systems
+ISP carrier name
+Location
+First launch data
+App launch data
+App updates
+In-app purchases
+In-app status information
+In-app events
+License status
+Features use and operations (events and screens)
+FEATURE LOCATION
+This feature cannot be disabled. If you do not want this data to be collected, please uninstall the application from your device.
+FEATURE SETTINGS
+[Back to top]
+Configurable Features
+Trend Micro VPN includes the following features, which may collect and transmit the following data, some of which may be considered personal in certain jurisdictions, to Trend Micro. You can disable any of these features at any time to prevent the corresponding data from being sent to Trend Micro.
+Connection Protection and Website Filter by using VPN
+DESCRIPTION
+Enable VPN will allow Trend Micro VPN to protect devices from Web based threats and network hacking attacks.
+DATA COLLECTED
+Scanned URL
+FEATURE LOCATION
+Main Menu
+FEATURE SETTINGS
+Main Page > Enable VPN
+[iOS]
+[Android]
+[Mac]
+[UWP]
+[Back to top]
+Log Collection
+Crash report collected by third-party service:
+HockeyApp
+Integrated modules from third-party service providers:
+AppsFlyer
+Firebase
+Google Analytics
+Appcenter
+DESCRIPTION
+Device ID is the information that help us to associate the user non-anonymous date and user behaviors.
+The following activities are based on the data associate of Device ID:
+Analyzes / fixes the crash and issues for specific device and user
+Issue log auto-feedback by device and user
+Analyzes the user behaviors by device and user
+DATA COLLECTED
+Device ID
+FEATURE LOCATION
+First time launch > Privacy and Personal Data Collection Disclosure
+Main page > Settings
+FEATURE SETTINGS
+First time launch > Privacy and Personal Data Collection Disclosure > I agree to share anonymous usage data to help improve this software
+[iOS]
+[Android]
+[UWP]
+[Mac]
+Main page > Settings > Agree to share crash data
+[iOS]
+[Android]
+[UWP]
+[Mac]
+[Back to top]
+To see where the collected data is processed, refer to our list of data centers and authorized data subprocessors and their locations.
+Was this article helpful?
+thumb_up
+Yes
+thumb_down
+No
+Thank you for your feedback!
+Feedback entity isn't available at the moment. Try again later.
+We’d love to hear your thoughts.
+Let us know what you think about this article.
+(You can choose more than one option.)
+I followed the steps, but it didn’t solve my problem.
+The information wasn’t accurate.
+It was confusing and hard to follow.
+I couldn’t find the information I needed.
+I’m not happy with the product or the issues I'm having.
+Others (Please specify below:)
+*This form is for feedback purposes only. If you have any questions, kindly chat with our Trend Companion.
+*Do not include any personal information.
+Submit Feedback
+GET SMARTER PROTECTION AGAINST SCAMS!
+Protect yourself and your iOS and Android devices against scam texts, spam calls, and deepfakes with Trend Micro ScamCheck. Scan the QR code to get it now.

@@ -1,0 +1,167 @@
+url: https://www.f-secure.com/en/legal/terms
+method: fetch
+saved: 2026-11-20
+
+License terms | F‑Secure Skip to main content Legal
+Home
+For partners
+About F‑Secure
+Global
+Privacy
+Privacy statement
+F‑Secure Total
+F‑Secure Mobile Security
+F‑Secure Sense
+Support tool
+Surveys
+Websites
+Terms
+F‑Secure VPN
+F‑Secure Mobile Security
+Community forums
+Remote support
+Websites
+Accessibility
+Accessibility statement for f-secure.com
+Accessibility statement for My F-Secure
+Whistleblowing
+Legal
+Privacy
+Privacy statement
+F‑Secure Total
+F‑Secure Mobile Security
+F‑Secure Sense
+Support tool
+Surveys
+Websites
+Terms
+F‑Secure VPN
+F‑Secure Mobile Security
+Community forums
+Remote support
+Websites
+Accessibility
+Accessibility statement for f-secure.com
+Accessibility statement for My F-Secure
+Whistleblowing
+Home
+For partners
+About F‑Secure
+Global
+Choose your country
+Global
+Danmark
+Deutschland
+España
+France
+Italia
+Nederland
+Norge
+Polska
+Suomi
+Sverige
+United Kingdom
+United States
+日本
+License terms
+October 2025
+These Terms cover all F‑Secure services, soft­ware, and web applications licensed by or made available to you, including support tools, web portals, firmware, hard­ware, and services directly supporting your use thereof, related documentation and any updates and upgrades to any of the above (together the “Soft­ware”). These Terms also apply to such programs that are made available to you under a purchased license or related agreement, where these Terms are referenced.
+IMPORTANT — BEFORE INSTALLING OR USING F-SECURE SOFTWARE, CAREFULLY READ, OR IF YOU ARE UNDERAGED HAVE YOUR LEGAL GUARDIAN READ, THESE LICENSE TERMS (“TERMS”). BY OPTING TO ACCEPT, BY INSTALLING, COPYING, OR USING THE SOFTWARE OR SOFTWARE-BASED SERVICE YOU (EITHER AN INDIVIDUAL OR AN ENTITY) WARRANT THAT YOU HAVE READ THESE TERMS, UNDERSTAND THEM, AND AGREE TO BE LEGALLY BOUND BY THEM. IF YOU DO NOT AGREE TO ALL OF THE TERMS, DO NOT OPT TO ACCEPT, INSTALL, COPY, OR USE THE SOFTWARE.
+You acknowledge and accept that the Soft­ware is subject to specific limitations such as purpose of use and certain technical requirements, including but not limited to operating system, storage space, geographical location, and network connectivity. Please be aware that the Soft­ware may not be available and/or allowed in your country of residence.
+Soft­ware license
+Subject to the payment of applicable fees and subject to these Terms, you are granted a non-exclusive, non-transferable, non-assignable, revocable limited right to use the Soft­ware as specified in these Terms for the time period separately agreed upon between you and F‑Secure or its distributors.
+You may:
+A) install and use the Soft­ware only on as many units (typically handheld devices, personal computers, servers, or other hard­ware, jointly referred to as “Device”) as stated in the Soft­ware, F‑Secure License Certificate, applicable invoice, product packaging, or agreement where these Terms have been referenced. If the Soft­ware is shared through a network or the Soft­ware is used to filter traffic at servers, firewalls, or gate­ways, you must have a license for either scanning capacity or for the total number of users whom the Soft­ware provides services to. In such cases, you may install the Soft­ware on as many units as needed (not applicable to F‑Secure Sense);
+B) create copies of the Soft­ware for installation and backup purposes only; and
+C) extend the number of licenses by purchasing more licenses.
+License limitations
+You may not:
+A) install and use the Soft­ware against these Terms, the F‑Secure License Certificate, or other related documentation;
+B) distribute copies of the Soft­ware to a third party, electronically transfer the Soft­ware to a computer belonging to a third party, or permit a third party to copy the Soft­ware, except and to the extent where such activity is expressly stated in related documentation;
+C) modify, adapt, translate, rent, lease, resell, distribute, or create derivative works based on the Soft­ware and/or related files (including but not limited to databases, news, descriptions, and other content) or any part thereof;
+D) decompile, reverse engineer, disassemble, or otherwise reduce the Soft­ware and/or related files (including but not limited to databases, news, descriptions, and communications between applications) to any human-perceivable form (except to the limited extent permitted under mandatory copyright legislation) as the Soft­ware contains or may contain trade secrets of F‑Secure and its licensors;
+E) use the documentation for any other purpose than to support your use of the Soft­ware;
+F) disclose any license authorization code provided for installing or using the application to any third party, excluding a license with multiple use rights requiring disclosure to such other users;
+G) use the Soft­ware or any portion thereof to implement any product or service to operate on or in connection with the Soft­ware for any other purpose than for which the Soft­ware is provided;
+H) change the radio parameters of any hard­ware against its certification in your locality;
+I) where the Soft­ware includes an Automatic Update Agent component, use such component to publish, distribute, and/or obtain soft­ware or content (i) not specifically related to F‑Secure products and/or services and (ii) not security-related (or any updates to any such soft­ware or content); or
+J) in any event use the Soft­ware for the following purposes: (i) Harvesting or distributing any private information, copyrighted content, or trade secrets that you do not have rights to harvest or distribute; (ii) Distributing content that is unlawful, libellous, pornographic, abusive, harassing, threatening, or that contains content or code with destructive features; (iii) Accessing or distributing child pornography or bestiality; (iv) Spamming; (v) Malware, botnets, phishing, denial-of-service attacks, illegal hacking, unauthorized port scanning, or unauthorized access; (vi) Impersonating another person; (vii) Violating other persons’ legal rights; (viii) Violating applicable laws, including but not limited to the export and recycling laws of your jurisdiction for the specific products; (ix) Other invasive or fraudulent purposes, or uses that may interfere with the operation of the Soft­ware or other users’ ability to use the Soft­ware; or (x) Managing any content that is against the permissible content guidelines maintained by third parties from whom you have acquired the Soft­ware.
+Please contact F‑Secure directly if you are interested in any other rights to the Soft­ware than those granted in these Terms.
+Additional license terms for beta, free, and evaluation software versions
+These restrictions apply in addition to the above, when you use, download, or install a trial, beta, or free version of the Soft­ware or you are granted a license by F‑Secure or its distributor expressly for evaluation purposes. In such cases, the Soft­ware is prone to changes and may have enhanced advertising features. You acknowledge that, because the right to use the Soft­ware is free; (i) F‑Secure has no obligation to provide support or maintenance services for the Soft­ware, and (ii) F‑Secure may at any time terminate your license to the Soft­ware or the availability thereof, terminate or change any of its features, or limit or convert free features to chargeable. A fixed-term license is granted for the sole purpose of evaluating the Soft­ware or using the Soft­ware as a supplementary or case-specific tool, and only for the specified trial period, which begins on the date that the Soft­ware is first installed or registered. After the fixed term you must either buy the Soft­ware license from F‑Secure or its distributor, or destroy and stop using the Soft­ware.
+When using the Sense soft­ware application under a free subscription, the terms of this Section do not apply.
+Open source licenses
+You acknowledge that certain components of the Soft­ware may be covered by open source soft­ware licenses (“OSS Licenses”). Some of these OSS Licenses require that the distributor makes the soft­ware available in source code format (“Open Source Components”). Rights of use to Open Source Components are granted to you directly by the respective rights holders according to the respective applicable license texts. When so required by the terms of OSS Licenses, such OSS Licenses relating to respective Open Source Components are located in the installation directory of the Soft­ware or in such other place as indicated in the Soft­ware.
+Title
+Title, ownership rights, and intellectual property rights in the Soft­ware remain with F‑Secure and/or its licensors. F‑Secure and its licensors reserve any and all rights not expressly granted to you.
+Limited warranty and disclaimers
+Disclaimer of warranty on soft­ware. THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT ANY WARRANTY OTHER THAN WHAT IS EXPLICITLY STATED HEREIN. F-SECURE, ITS LICENSORS AND DISTRIBUTORS DO NOT GUARANTEE THE SOFTWARE OR RELATED DOCUMENTATION IN TERMS OF THEIR CORRECTNESS, ACCURACY, RELIABILITY, OR OTHERWISE. F-SECURE AND ITS LICENSORS AND DISTRIBUTORS EXPRESSLY DISCLAIM ALL IMPLIED WARRANTIES, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF TITLE, AVAILABILITY, PERFORMANCE, NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE. YOU ASSUME THE ENTIRE RISK AS TO THE RESULTS AND PERFORMANCE OF THE SOFTWARE.
+Some jurisdictions do not allow the limitation or exclusion of express or implied warranties, so the above exclusion may not apply to you, and you may have other rights, which may vary according to your jurisdiction.
+US consumer warranty for hard­ware
+In the USA, F‑Secure provides a voluntary manufacturer’s one (1) year limited warranty for hard­ware (“Warranty”). The Warranty provides rights that may be separate to the rights provided to you by consumer law, including but not limited to those relating to non-conforming goods. Hence, the Warranty benefits are in addition to, and not instead of, rights provided by consumer law in the USA.
+The Warranty begins from the date of original purchase of the hard­ware from F‑Secure or an F‑Secure authorized reseller. If there is a defect during the warranty period, F‑Secure, at its option and to the extent required by law, will (a) repair the hard­ware at no charge using new parts or parts that are equivalent to new in reliability and performance, (b) exchange the product with a functionally equivalent product that is new or equivalent to new in reliability and performance, or (c) refund the original purchase price. This Warranty excludes damage resulting from accidents, abuse, or other causes that can be determined not to be defects in materials and workmanship, including but not limited to when the hard­ware has been used or maintained in a manner not conforming to the user documentation and Terms. The removal, defacing, and/or altering of the original factory serial number or modifying or repairing the hard­ware without authorization from F‑Secure will void this warranty.
+All warranties, conditions, and other terms not set out in this warranty document are excluded from the Warranty, except for the rights entitled to you by the laws of your jurisdiction. F‑Secure does not warrant, represent, or undertake that it will be able to repair or replace the hard­ware under this Warranty without risk to or loss of information and/or data stored on the hard­ware. In no event will F‑Secure be liable for (a) any losses that were not caused by F‑Secure’s breach of this Warranty, (b) any loss or damage that was not, at the time of the purchase of the hard­ware, a reasonably foreseeable consequence of F‑Secure breaching this Warranty, or (c) losses relating to any business, loss of profits, loss of data, or loss of opportunity. The provisions of this Warranty shall not apply to (1) death or personal injury, (2) fraud or gross negligence, (3) fraudulent misrepresentation, or (4) any other liability that cannot be limited or excluded as a matter of law.
+Certain states or countries may not allow limitations on the warranty’s duration, or allow exclusion or limitation of incidental or consequential damages. Therefore, the above limitations or exclusions may not apply to you. Note that this Warranty gives you specific legal rights, and you may also have other rights, which vary according to your state or country. For a full under­standing of your rights, you may consult the laws of your state, province, or country. To submit a warranty claim, please contact F‑Secure Customer Care as outlined below. Please be prepared to provide your proof of purchase for any warranty claims.
+Limitation of liability
+Limitation of liability for certain categories of damages. IN NO EVENT AND UNDER NO LEGAL THEORY, INCLUDING BUT NOT LIMITED TO TORT OR CONTRACT, SHALL F-SECURE, ITS EMPLOYEES, OR OFFICERS, ITS LICENSORS, ITS DISTRIBUTORS, OR ITS SUPPLIERS BE LIABLE TO YOU FOR ANY SPECIAL, CONSEQUENTIAL, INCIDENTAL, OR INDIRECT DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF REVENUE OR PROFIT, LOST OR DAMAGED DATA OR FILES, DEVICE OR APPLICATION NON-PERFORMANCE, FAILURE OR MALFUNCTION, OR OTHER COMMERCIAL OR ECONOMIC LOSS ARISING OUT OF THE USE OF, OR INABILITY TO USE, THE SOFTWARE, RELATED DOCUMENTATION OR THIRD-PARTY SERVICES, EVEN IF F-SECURE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+Limitation of aggregate liability. F-SECURE’S, ITS LICENSORS’ AND ITS DISTRIBUTORS’ MAXIMUM AGGREGATE LIABILITY TO YOU FOR ACTUAL DAMAGES FOR ANY CAUSE WHATSOEVER SHALL IN NO EVENT EXCEED THE AMOUNT PAID BY YOU FOR THE SOFTWARE. IN CASE OF DAMAGE RESULTING FROM A FAILURE OF THE SOFTWARE LEADING TO LOSS, CORRUPTION, UNAUTHORIZED DISCLOSURE, OR EXTENDED UNAVAILABILITY OF THE CONTENT, THE LIABILITY SHALL BE EXPRESSLY LIMITED TO THE AMOUNT PAID FOR YOUR LICENSE TO THE SOFTWARE FOR SIX MONTHS IMMEDIATELY PRECEDING SUCH FAILURE.
+Unalienable consumer rights, beneficiaries to terms. Some jurisdictions do not allow the limitation or exclusion of liability so the above limitation or exclusion may not apply to you or may apply to you only in part. Nothing contained in these Terms shall prejudice the statutory rights of any party dealing as a consumer. F‑Secure is acting also on behalf of its employees, distributors, licensors, suppliers, and affiliates to disclaim, exclude, and restrict obligations, warranties, and liability as provided in these Terms, but in no other respects and for no other purpose.
+Limitation of liability under German and Austrian laws. In respect of licenses purchased by consumers residing in Germany or Austria, the following limitations of liabilities shall apply in lieu of sections 1 and 2 above: Concerning claims for damages, claims for compensation of expenses and other liability claims, whether arising in contract, tort, breach of statutory duty, or otherwise under this license, the following applies: F‑Secure, its licensors, its distributors or its suppliers shall be liable without restriction for i) damage caused intentionally or through gross negligence, ii) for claims according to the German/Austrian Product Liability Act and iii) in the case of violating life, body, or health. In case of simple negligence, the following applies: F‑Secure, its licensors, its distributors, or its suppliers shall only be liable insofar as it has breached an essential contractual obligation (cardinal contractual obligation). This liability shall be restricted to the contractually typical and foreseeable damage in the case of material and pecuniary damages.
+Compensation for damages or loss. You shall indemnify, defend and hold harmless F‑Secure, its employees, officers, licensors, distributors, and suppliers (collectively the “Indemnitees”) against (i) any and all costs, charges, claims, damages, liabilities incurred, and/or proceedings taken against any of the Indemnitees due to your illegal conduct and/or violation of rights of third parties, (ii) without limitation outside legal counsel and consultants fees resulting thereof; and/or (ii) any damage that you may cause through your use of the Software.
+Privacy and data collection
+Data collection. You acknowledge that F‑Secure needs to collect and process certain data relating to your devices and/or network for us to provide you our services. Since the data collected and how it is used varies per type and version of Software, more detailed information on personal data processing can be found in the relevant F‑Secure privacy policies. Such policies are available via the Software user interface and/or on the F‑Secure website. The following summarizes what kind of data the Software typically collects and for what purpose.
+Technical and security data. For F‑Secure to secure your device and your digital life, most of our Software must collect and process data on your device and your use of Software. This data typically consists of object security data, analysis results, statistics, file metadata, Software usage metrics, and other similar data. Our design principle is to seek to limit our capability to link this type of data to you personally.
+Personal data. F‑Secure also collects and processes data in a manner that is personally identifiable to you. Such data typically consists of i) data that you actively send to us (for example contact and registration information, information to solve a support issue) and ii) data automatically collected by the Software or triggered by your use of particular features (for example license allocation, device, and software information, user account activity, geographic location of your device, operation system, etc.), and iii) limited data sets from the above “Technical and security data” (for example the name of blocked malware).
+Transfers, disclosures, and compliance. F‑Secure may utilize its affiliates or sub-contractors to undertake any of the above data processing activities. F‑Secure may disclose specific data to its distributors or operator partners where so described in the applicable F‑Secure privacy policy. Such parties may be located in the EEA or outside the EEA. F‑Secure may also process and disclose data where it is necessary to do so to pursue legitimate interests in accordance to applicable laws.
+Authorizations from you to F-Secure
+For the Soft­ware to function as intended, you authorize F‑Secure, on your behalf, to copy suspicious files containing executable code from your Device or from your third-party service accounts linked to the Soft­ware to F‑Secure backend systems, so F‑Secure can more effectively analyze them for malicious activity.
+Feedback
+For any direct feed­back, ideas, and improvement suggestions that you provide to F‑Secure (together “Feed­back”), you give F‑Secure a worldwide, non-exclusive transferrable, sublicensable, free right to make use of such Feed­back in any of our products and business for the duration of the legal protection granted by applicable copyright or industrial property rights laws, regulations and inter­national treaties and conventions.
+General
+Changes. F‑Secure is constantly improving its services. F‑Secure reserves the right to modify features or functionality of the Software. F‑Secure makes such changes, for example to provide you with better products or services, to adjust the Software to changes in the market or regulations, and to take into account any subsequent technical constraints. Hence, F‑Secure reserves the right to upgrade and make changes to the Software from time to time. Such changes may include, but are not limited to adding new features or removing existing features. Where such an upgrade or change is not automated but provided to you as a voluntary option, you should use the latest version of the Software for optimized security and usability. F‑Secure further reserves the right to end the maintenance and support for certain versions of the Software (including versions designed to be used in certain operation systems), which may lead to the Software becoming inoperable. Use of the Software, for which the maintenance is discontinued, is not recommended and such use is entirely at your own responsibility. More information on product life cycles is available on the F‑Secure website. As the Software is likely to evolve during your subscription, F‑Secure may need to revise these Terms in connection with updates and the revised Terms shall upon acceptance apply to the corresponding versions of the Software. The use of the Software with updates is not possible without accepting the updated Terms when required. When you accept a new version of the Terms upon installing the service to a new Device or updating the version on a current Device, the new version shall automatically cover all Devices and installations of your subscription (does not overrule app stores’ terms).
+If any part of these Terms is found void and unenforceable, it will not affect the validity of the rest of the Terms, which shall remain valid and enforceable.
+Data transfer costs. You acknowledge that use of the Software may result in additional data transfer costs. Such added costs may vary according to the type of Device / connection / operator network and you, not F‑Secure, are responsible for such costs.
+Additional terms. The Software may contain web applications, web portals, or third-party software (“Sites”). The use of such Sites may be subject to additional terms. You agree to review such additional terms of use and only use such Sites accordingly. Such Sites may also be those of F‑Secure’s distributor or of other third parties. Where Sites are provided by a third party, F‑Secure has no liability for such Sites.
+Availability. You are informed and hereby accept that all or part of the Software may be temporarily unavailable or non-operational for repairs, upgrades, maintenance, or for reasons beyond F‑Secure’s reasonable control (force majeure). F‑Secure, its licensors or its distributors shall not be held liable for the consequences of such interruptions and shall undertake to restore the availability and operation of the Software as rapidly as reasonably possible, depending on the technical constraints encountered.
+Termination. Without prejudice to any other rights of termination or expiration in these Terms or under contract or law; F‑Secure may terminate your license to the Software immediately without notice if you are in breach of any of these Terms or use the Software’s functions for purposes other than those indicated in the official documentation. In the context of F‑Secure Sense, termination means the termination of the security services provided to you under the respective subscription. Upon termination of the security services for F‑Secure Sense you may, regardless of the termination, continue to use the F‑Secure Sense application and hardware without the security services. These Terms therefore survive termination, and remain in force in respect of the F‑Secure Sense application and hardware without security services.
+Where F‑Secure observes that you are using the Soft­ware i) in breach of these Terms, ii) other applicable terms or iii) its intended purpose or iv) in a manner that could jeopardize its use by a third party (for example by monopolizing the access bandwidth) or to cause harm to a third party; F‑Secure reserves the right (i) to not renew your license, (ii) to limit your use of the Soft­ware or part thereof, and (iii) to terminate the license. In the event that the agreement between F‑Secure and F‑Secure’s distributor providing you with the Soft­ware is terminated, F‑Secure or its distributor may notify you of premature termination of your license. You shall not be entitled to a refund, damages, or other compensation from F‑Secure as a result of such termination. All restrictions of use shall survive termination.
+Export restrictions. You acknowledge and agree that the Software may be subject to restrictions and controls imposed by national laws and regulations, including but not limited to European Union export regulations or the United States Export Administration Act (collectively “Export Rules”). You agree and certify that neither the Software nor any direct product thereof is being or will be acquired, shipped, transferred, or re-exported, directly or indirectly, into any country for which such export is prohibited under the Export Rules and the regulations thereunder, nor will it be used for any purpose prohibited by the same. By using the Software, you are acknowledging and agreeing to the foregoing, and you are representing and warranting that you will comply with the Export Rules when either exporting or re-exporting or importing the Software or any underlying information technology. Further, you represent and warrant that you are not a national of any US embargoed country, or a party listed in the U.S. Table of Denial Orders or U.S. Treasury Department’s list of Specially Designated Nationals.
+U.S. Government license rights. If this license is acquired for or on behalf of the United States of America, its agencies and/or instrumentalities (“U.S. Government”), you acknowledge that the Software and the documentation are “commercial computer software” and respectively “commercial computer software documentation” as those terms are defined for purposes of the Federal Acquisition Regulations (FARs) in the case of procurement by civilian agencies (48 C.F.R. 2.101) and the Department of Defense Federal Acquisition Regulation Supplement (DFARS) in the case of procurement by units of the Department of Defense (48 C.F.R. 252.227-7014(a)(1) and (5)). Consistent with 48 C.F.R. 12.212 of FARs and 48 C.F.R. 227.7202 of DFARS and other applicable regulations, any use, modification, reproduction, release, performance, display, disclosure, or distribution of the Software and documentation by or for the U.S. Government shall be governed solely by these Terms and shall be prohibited except to the extent expressly permitted by these Terms.
+High-risk activities. The Software is not fault-tolerant unless expressly stated in the product documentation and is not designed, manufactured, or intended for use or resale as control equipment in hazardous environments that require fail-safe performance, such as in the operation of nuclear facilities, aircraft navigation or communication systems, air traffic control, direct life support machines, or weapons systems, in which the failure of the Software could lead directly to death, personal injury, or severe physical or environmental damage (“High Risk Activities”). F‑Secure and its suppliers specifically disclaim any express or implied warranty of fitness for High Risk Activities.
+Governing law and dispute resolution. Unless otherwise stated below, these Terms shall be governed under the laws of Finland without regard to conflict of laws, rules, and principles, and without regard to the United Nations Convention of Contracts for the International Sale of Goods. The courts of Finland shall have the exclusive jurisdiction and venue to adjudicate any dispute arising out of these Terms.
+In the case of licenses purchased within or on behalf of licensees residing within the United States or operating under the laws of the United States, the governing law of these Terms shall be the laws of the State of New York without regard to conflict of laws, rules, and principles, and without regard to the United Nations Convention of Contracts for the Inter­national Sale of Goods. In such cases, the exclusive jurisdiction and venue to adjudicate any dispute arising out of these Terms shall be of the federal and state courts located in New York.
+In respect of licenses purchased by consumers residing outside Finland or the United States, these Terms may be governed by the mandatory local laws of such jurisdictions. Where F‑Secure should elect not to insist upon enforcing its rights in line with these Terms, this shall not be interpreted as a waiver of F‑Secure’s right to enforce the same in the future.
+In the event that you are a consumer residing in the EU, and a conflict concerning these Terms cannot be resolved by you and F‑Secure or F‑Secure’s respective distributor in amicable negotiations, you may resort to your local national dispute resolution body for consumer disputes. You may find the full list of competent dispute resolution bodies in your jurisdiction at consumer-redress.ec.europa.eu.
+Contact details
+If you have any questions regarding these Terms, please visit the support section at f-secure.com/support. For customer support-related issues, please contact your service provider directly.
+F‑Secure makes every digital moment more secure, for everyone.
+Subscribe to newsletter
+Home
+Products
+Renew subscription
+Articles
+Free tools
+My F‑Secure
+Contact support
+For partners
+Why partner with us?
+For operators
+For retail
+For banks
+For insurers
+Affiliate program
+Contact us
+About us
+Our story
+Careers
+For media
+Newsroom
+Sustainability
+Contact us
+For investors
+Global
+Terms of service
+Privacy policy
+Cookies
+Accessibility
+© F-Secure 2026

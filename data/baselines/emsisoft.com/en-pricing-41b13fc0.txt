@@ -1,0 +1,257 @@
+url: https://www.emsisoft.com/en/pricing/
+method: browser
+saved: 2026-11-20
+
+Emsisoft
+Why Emsisoft
+Protection
+Business Security
+Enterprise Security + EDR
+MSP Security
+Anti-Malware Home
+Mobile Security
+Remediation
+Emsisoft Remediation Kit
+Commandline Scanner
+Ransomware Decryption
+Partners
+Managed Service Providers
+Third Party Integrations
+Security Operations Centers
+Resellers
+Affiliates
+Pricing
+Buy online
+Buy from local partner
+Renew license
+Layered threat protection.
+Top-notch customer support.
+Anti-Malware Home
+Protect 1-5 PCs at home with our award winning dual-engine scanner, web protection and behavior blocker.
+CAD 28.58
+PC/year
+Total: CAD 85.73/year
+Please contact our sales team for custom pricing.
+1
+3
+5
+PCs (Windows, macOS)
+1
+2
+3
+year
+Buy Now
+Keeps your home PC safe. Includes:
+Super fast dual-engine scanner with quarantine and cleaning. Finds and removes all types of malware and unwanted programs.
+Multi-layered protection with real-time scanning, web protection, anti-phishing, behavior blocker and anti-ransomware.
+Emergency Kit Maker: portable scanner to clean PCs of family and friends.
+Basic remote management via MyEmsisoft, web and app.
+Email & live chat customer support.
+Business Security
+Layered endpoint protection with centralized management, optimized for small to medium size organizations.
+CAD 2.62
+endpoint/month
+Total: CAD 7.86/month
+Billed every year
+Please contact our sales team for custom pricing.
+endpoints (Windows, macOS)
+1
+2
+3
+year
+Buy Now
+Keeps your business endpoints safe, with:
+Comprehensive scanning and remediation of any existing threats like viruses, ransomware, bots, zero-day exploits, backdoors, spyware and other malware.
+Layered protection, using multiple technological approaches on endpoints to stop attacks before they can cause any damage.
+Signature based scanning using two major scan engines, web protection through firewall layer and browser extensions, behavior blocking to catch new and unknown threats including ransomware.
+Protection for Windows servers and clients. No separate server licenses needed.
+Command line scanner included.
+Full remote management via web and app.
+Fast 1-click deployment.
+Protection and permission policies.
+Advanced reporting.
+Email & API notifications.
+User permissions management.
+Up to 2 workspace admins/managers.
+Up to 10 protection & permission policies.
+Email & live chat customer support.
+Maximum Protection
+Enterprise Security + EDR
+Full endpoint detection and response with complete remote management and visibility, perfect for medium to large size organizations.
+CAD 4.77
+endpoint/month
+Total: CAD 14.30/month
+Billed every year
+Please contact our sales team for custom pricing.
+endpoints (Windows, macOS)
+1
+2
+3
+year
+Buy Now
+All Business Security features, plus:
+Full EDR with centralized incidents management, analytics and remediation for full visibility of endpoints and potential post-breach investigation with cloud based forensics.
+In-depth threat details including event timeline, process execution trees and raw data log access. Extended log retention time.
+AI-assisted advanced threat hunting tools, suspicious activity alerts and threat triaging via MITRE ATT&CK framework behavior patterns.
+Third party SOC/SIEM integration. Highly customizable real-time export of security related events to a Syslog compatible server.
+Advanced device management workflow tools. Active Directory integration with automatic discovery of new devices and users. Support for relay devices to proxy and cache updates. Permissions management down to single-user level.
+Unlimited workspace admins/managers.
+Unlimited protection & permission policies.
+Email & live chat customer support.
+Skip-the-line priority support.
+Call-back service (8am-9pm ET).
+Secure encrypted payment processing and order fulfillment is handled by our trusted e‑commerce partner 2Checkout.
+Compare Emsisoft protection plans
+Anti-Malware Home Business Security Enterprise Security + EDR
+Finding and removing malware
+Dual-engine virus and malware detection
+Super fast system scans (1-2 min)
+PUP/unwanted programs detection
+Advanced infection cleaning
+Safe quarantine of suspicious files
+Scan exclusions/allow list
+Scheduled scans
+Windows Explorer integration
+Command line interface included
+Emergency Kit maker included
+Preventing new infections
+Multi-layered real-time protection
+Web Protection
+Anti-phishing
+Browser security
+File Guard
+Behavior Blocker
+Anti-Ransomware
+Exploit prevention
+System manipulation prevention
+Application hardening
+Advanced Persistent Threat (APT) protection
+Fileless malware protection
+False positives verification
+Protection exclusions/allow list
+Hourly automatic updates
+Emergency network lockdown mode
+Shutdown & uninstall prevention via password
+Windows Firewall monitoring and hardening
+Windows RDP attack detection
+Removable Device Control
+Endpoint detection and response (EDR)
+Suspicious behavior monitoring
+On endpoint only On endpoint and in cloud. High-confidence events only On endpoint and in cloud. All confidence levels events
+Incidents retention time
+365 days 365 days
+Raw log data retention time
+0 days 30 days
+Local detections on devices
+Quick allow/quarantine/block everywhere
+Device isolation
+Execution tree & timeline
+MITRE ATT&CK tactics & techniques
+Deep threat insights
+Rollback
+Workspace-wide threat hunting
+Raw Log Queries with Threat Hunting
+Incident Response Playbooks
+Application Inventory
+SOC/SIEM integration via Syslog
+Centralized management
+Management Console included
+Simplified Fully featured Fully featured
+Industry leading mirror view
+Web access & mobile app
+“Local only” management mode
+“Local & remote” management mode
+“Remote only” management mode
+Traffic caching relay devices (multiple)
+Incident investigation tools
+Forensics & audit logs
+Remote scans & quarantine
+Device isolation
+Device health & system overview
+Email, webhook & push notifications
+Advanced reporting
+Logs and reports retention time
+30 days 180 days 365 days
+Protection policies for device groups
+Permission policies for user groups
+Granular permissions for individual users
+Maximum protection policies
+10 10 Unlimited
+Maximum permission policies
+10 10 Unlimited
+Maximum workspace managers
+2 2 Unlimited
+Invite Emsisoft partners (MSPs) to manage workspace
+REST Web API for all features
+Task automation & Windows Server features
+Scheduled scans
+Command line interface included
+Email notifications for relevant events
+Monitoring of file shares and connected storage
+Protection without logged in users
+Silent mode/gaming mode
+Windows Server OS supported
+Active Directory integration
+Automatic detection of new devices
+Remote deployment through relay devices
+Dedicated Emsisoft benefits
+Money back guarantee
+Malware removal assistance
+Always get the latest version
+Certified protection
+Privacy conscious design
+Email & live chat support
+Skip-the-line priority support
+Call-back service (8am-9pm ET)
+See details See details See details
+Trusted by customers all over the world
+Awards and recognition
+You might ask…
+What do I receive after I submit my order?
+Is the online ordering process safe?
+Do you have special pricing for schools, charities or governments?
+Is there a money back guarantee?
+What does Auto-renewal mean?
+Newsletter
+Malware never sleeps. Be sure to stay up-to-date on emerging threats.
+Subscribe
+Emsisoft requires collection and processing of certain personal data to provide the services. Please confirm that you have read and accept the terms of our Privacy Policy
+Emsisoft > Pricing
+PRODUCTS
+Emsisoft Business Security
+Emsisoft Enterprise Security
+Emsisoft Remediation Kit
+Emsisoft Anti-Malware Home
+Emsisoft Emergency Kit
+Emsisoft Mobile Security
+KEY BENEFITS
+Layered Protection
+Anti-Ransomware
+Centralized Management
+Endpoint Detection & Response
+Threat Hunting
+Ransomware Rollback
+Behavior AI
+KNOWLEDGE
+News Blog
+Enterprise Security
+Malware Lab
+Product User Guides
+Video Tutorials
+SUPPORT
+Contact Us
+Submit a suspicious file
+COMPANY
+About Us
+Our Customers
+Awards & Reviews
+Press Center
+Careers
+Webinars
+Podcast
+© 2003-2026 Emsisoft - 11/21/2026 - Legal Notice - Terms - Privacy Policy - Cookie Policy - System Status -
+English
+Deutsch
+FrançaisEmsisoft
+worldwide
+Emsisoft YouTube Emsisoft LinkedIn Emsisoft Facebook Emsisoft Twitter

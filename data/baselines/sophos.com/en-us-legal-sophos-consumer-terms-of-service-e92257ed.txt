@@ -1,0 +1,334 @@
+url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+method: fetch
+saved: 2026-11-20
+
+Sophos Consumer Terms of Service
+Skip to Content
+Get started
+Experiencing a cyberattack? Get help now
+Sign in
+Sophos Fusion
+Partner Portal
+Sophos Home
+English (US) Open language switcher
+Products
+Defense system overview
+Defense system overview
+Sophos Fusion
+Sophos Fusion sign in
+Sophos AI
+Integrations marketplace
+Threat intelligence
+Free trial
+Endpoint security
+Endpoint security
+Endpoint protection (next-gen antivirus)
+EDR - Endpoint detection and response
+Server protection
+Mobile security
+Security operations
+Security operations
+XDR - Extended detection and response
+Next-Gen SIEM
+Sophos AI Defense
+Sophos CISO Advantage
+Identity security
+Identity security
+ITDR - Identity threat detection and response
+Network security and infrastructure
+Network security and infrastructure
+Next-gen firewall (NGFW)
+NDR - Network detection and response
+Network switches
+Wireless access points
+Backup and recovery
+Workspace protection
+Workspace protection
+Workspace protection
+Protected Browser
+Zero trust network access (ZTNA)
+DNS Protection
+Email Monitoring System
+Email security
+Email security
+Email and phishing protection
+Employee awareness training
+Cloud security
+Cloud security
+Cloud workload protection
+Explore managed detection and response with Sophos MDR.
+Services
+Defense system overview
+Defense system overview
+Sophos Fusion
+Sophos Fusion sign in
+Sophos AI
+Integrations marketplace
+Threat intelligence
+Free trial
+Managed services
+Managed services
+MDR - Managed detection and response
+IR - Incident response services
+Vulnerability management (Managed risk)
+Professional services
+Professional services
+Security Services Retainer
+DFIR & readiness services
+Security testing & assessment services
+Deployment services
+TAM services
+Complimentary tools
+Complimentary tools
+NIST assessment
+NIS2 assessment
+Experiencing a breach? Get immediate help.
+Solutions
+Use cases
+Use cases
+Defend my business 24/7
+Stop ransomware attacks
+Secure remote and hybrid employees
+Address cyber insurance requirements
+Protect my Microsoft environment
+Enable Cloud-native security
+All solutions
+Industries
+Industries
+Education
+Finance and banking
+Government
+Healthcare
+Manufacturing
+Retail
+Protect your business around the clock with managed detection and response.
+Why Sophos
+Why Sophos
+Why Sophos
+Awards and recognition
+Case studies
+Competitor comparisons
+About us
+About us
+Company
+Events
+Press
+Careers
+Trust center
+Trust center
+Trust Center overview
+Sophos Fusion security
+Secure design
+Responsible disclosure
+ESG
+Corporate policy
+Cybersecurity guidance
+Central logging
+Business certifications
+Hardware production certification
+Privacy
+Security tabletop guidelines
+Incident response
+Digital operational resilience act
+CISO playbooks
+Trusted by more than 600,000 customers worldwide. Read their stories.
+Partners
+Sophos partners
+Sophos partners
+Partner program
+Partner portal login
+Partner care
+Partner training
+Partner blog
+Partner ecosystem
+Partner ecosystem
+Channel partners
+Managed service providers (MSPs)
+OEM
+Integrations and APIs
+Find a Sophos partner near you.
+Resources
+Threat intelligence
+Threat intelligence
+X-Ops threat research
+SophosLabs Intelix
+AI research
+Threat profiles
+Threat library
+Threat research blog
+Vulnerability Advisories
+Resource center
+Resource center
+View all resources
+Case studies
+Reports
+Webinars
+White papers
+Cybersecurity explained
+Blogs
+Blogs
+Sophos Blog
+Products and services
+Threat research
+AI research
+Security operations
+Sophos Life
+Sophos insights
+Partner Blog
+Support
+Get help (Support)
+Get help (Support)
+Emergency incident response
+Support portal
+Support plans
+Customer success
+Contact Sophos support
+Contact partner care
+Support resources
+Support resources
+Downloads and updates
+Sophos Techvids
+Sophos status page
+Security advisories
+Submit a threat
+Product Support
+Product Support
+Product documentation
+Sophos community forums
+Sophos Firewall
+Sophos Endpoint
+Sophos XDR
+Sophos Central
+Sophos Email
+Training
+Training
+Sophos Academy
+Experiencing a breach? Get immediate help.
+Get started
+Legal
+Overview
+Privacy
+Agreements terms & conditions
+Global trade compliance
+Policies
+Terms and Conditions
+Sophos Consumer Terms of Service Sophos End User Terms of Use
+Sophos Consumer Terms of Service
+Licensing Entitlement and Usage Guidelines
+Sophos Consumer Terms of Service
+Effective Date: January 15, 2022
+IMPORTANT NOTICE: THIS SOPHOS CONSUMER TERMS OF SERVICE IS SUBJECT TO BINDING ARBITRATION AND A WAIVER OF CLASS ACTION RIGHTS AS DETAILED IN SECTION 10. PLEASE READ IT CAREFULLY AS IT AFFECTS HOW DISPUTES ARE RESOLVED.
+Thank you for selecting software and services offered by Sophos Limited (referred to as “Sophos,” “we,” “us,” “our”). Sophos provides certain software and services (software and services collectively referred to as the “Services”), use of any of the Services is subject to the Sophos Terms of Service (the “Terms”).
+PLEASE READ THESE TERMS CAREFULLY, AS THEY GOVERN YOUR USE OF THE SERVICES. THESE TERMS FORM A LEGAL AGREEMENT BETWEEN YOU AND SOPHOS. YOU AGREE TO BE BOUND BY THESE TERMS BY EITHER: (1) CLICKING “I AGREE,” INDICATING ACCEPTANCE ELECTRONICALLY; (2) INSTALLING OR ACCESSING OR USING THE SOFTWARE AND/OR SERVICES VIA OUR WEBSITE; OR (3) CREATING AN ACCOUNT FOR THE SERVICES. IF YOU DO NOT AGREE TO THE TERMS, PLEASE DO NOT USE THE SERVICES.
+1. Privacy. Your privacy is important to us. Please review the Sophos Privacy Notice to understand how and why we collect, use, and share your personal data through our websites and Services and how you can exercise your rights on your personal data.
+2. Access and Use of the Services
+2.1 Your Rights to Use the Services. The Services are solely for your personal and non-commercial use. We grant you a limited, non-exclusive, non-transferable, license to access and use the Services you have subscribed to and as permitted by these Terms. Except for this limited license, no other right, title, or interest are transferred to you. Certain Services may use or provide content, which includes any data, information, code, video, images, text, software, music, sound, photographs, graphics, messages, features, or other materials (“Content”). You will have access to the applicable Content during your subscription.
+2.2 Restrictions on Use of the Services. You agree not to, nor permit any third party to: (a) use the Services in a manner that violates any applicable law, regulation or these Terms; (b) reproduce, modify, copy, sell, trade, lease, rent or resell the Services; (c) decompile, disassemble, or reverse engineer the Services; (d) circumvent any technical protection measures in the Services; (e) use a multi-user Service to track and monitor any other person without their consent; (f) violate the rights of others or harm others; (g) install the Services on more devices than you are permitted to (including by failing to delete the Services from a device before you sell or transfer ownership of it); (h) exceed any applicable content storage or bandwidth limitation; (i) interfere with anyone else’s use of the Services; (j) continue to use the Services after your rights to use the Services have expired or been terminated; or (k) use the Services for any illegal or fraudulent purposes. Additionally, if you are blocked by Sophos from accessing or using the Service (including blocking your IP address), you agree not to implement any measures to circumvent such blocking (e.g., by masking your IP address or using a proxy IP address).
+2.3 Eligibility. You must be 18 or older to purchase our Services. Users under the age of majority in the applicable jurisdiction may only use the Services with the consent of a parent or legal guardian who has accepted these Terms.
+2.4 Registration. You will need an account to access and use the Services. You must provide and maintain accurate, current, and complete information. Some Services may allow you to register your family members (including, but not limited to a parent, child or minor, spouse or domestic partner) or their devices to use the Services. If you are enrolling a family member, you agree that the information you provide to us about yourself or the family member is true and accurate and that you are duly authorized to provide us this information, and to monitor their accounts, on their behalf. You further agree to these Terms on their behalf. If the authorization from a family member is revoked, you agree to promptly remove that member’s device and/or information from the Services.
+2.5 Securing Your Account. You are solely responsible for any and all activities that occur under your account, and for ensuring that you keep your username and password safe. You agree to (a) immediately notify us of any unauthorized use of your password or account or any other breach of security, and (b) ensure that you exit from your account at the end of each session when accessing the Services.
+3. Subscriptions and Fees
+3.1 Free Services. We may sometimes offer certain Services (including any pre-release or beta features) free of charge. These Terms apply to such free Services too, unless we have specified otherwise in the applicable website. Some limitations may apply, and we will let you know what these are when we make the free Services available to you. You can use free Services for as long as we make them available. Without limiting any other provision of these Terms, free Services are provided on an “as is” basis and you acknowledge and agree that all use of such free Services at your sole risk.
+3.2 Free Trials; Special Offers. We may offer Services on a free trial basis (“Free Trial”) for a period of time specified at our discretion. If we offer you a Free Trial, the specific terms of your Free Trial will be provided at signup and/or in the promotional materials describing the Free Trial, and your use of the Free Trial is subject to your compliance with such specific terms. Except as may otherwise be provided in the specific terms for the Free Trial offer, Free Trials are only available to users who have not previously subscribed to the Services in connection with which the Free Trial is being offered. We reserve the right to modify or terminate Free Trials at any time, without notice and in our sole discretion. Unless you cancel before the expiration of your Free Trial, your paid subscription may automatically begin at the then-applicable published price. You may not receive a separate notice that your Free Trial is about to end or has ended, or that your paid subscription has begun. If we offer any special offer, your subscription will automatically renew at the currently published price after the expiration of the special offer unless cancelled by you in a timely manner.
+3.3 Automatic Renewal. Your subscription to the Services will be automatically renewed (subject to applicable law) for another subscription period of equal length (for example, monthly or annually) and at the then-current price for such subscription, unless otherwise stated in the terms of an applicable special offer. You acknowledge that billing may not occur on the same date of each month, depending on when you signed up for the Services. By way of example, if you sign up for a monthly subscription on July 31, you will be billed on/near August 31, September 30, etc.). We reserve the right to change the terms of your subscription, including price, from time to time. We will attempt to give you advance notice of any such price changes prior to the next billing cycle, but we will not be able to notify you of any changes in applicable taxes. Any price change will take effect at the next subscription renewal date. If you do not wish to accept a price change, you may cancel your subscription. Additional cancellation or renewal terms may be provided to you on the website for the Services.
+3.4 Payment Method. You represent and warrant that the payment information you provided is accurate and that you are authorized to use the payment method provided. If you do not pay any fees when due, or if your payment information is not accurate, current, and complete and you do not notify us promptly when such information changes, we may suspend or terminate your account and refuse any use of the Services. If you do not notify us of updates to your payment method (e.g., credit card expiration date), to avoid interruption of the Services, we or our service provider(s) may participate in programs supported by your card provider (e.g., updater services, recurring billing programs, etc.) to try to update your payment information, and you authorize us or our service provider(s) to continue billing your account with the updated information. If you enter into a new transaction for the Services, including restarting your subscription, adding Services or changing Services, you agree that we or our service provider(s) may charge your payment method on file for the applicable subscription fees (and applicable taxes).
+3.5 Money Back Guarantee. Certain Services may include a Money Back Guarantee if you are not satisfied for any reason. For such Services, you may receive a refund of the fees paid for any reason, within thirty (30) days of the date of purchase.
+3.6 Cancellations. You may cancel your subscription to the Services at any time before the end of the current billing period or before the end of any Free Trial. Except as set forth in these Terms or as described on the applicable website at the time you make a purchase, all payments for Service subscriptions are non-refundable, and there are no refunds or credits for unused or partially used subscriptions even if you cancel a subscription during the subscription term. Upon cancellation you will be able to access the Services through the end of the subscription term, but you will not have any access to Services after the subscription term ends.
+4. Intellectual Property Rights
+4.1 Ownership Rights. The Services and the Content are protected by copyright, patent, trademark, trade secret or other proprietary rights and laws. As between us and you, we own and retain all right, title, and interest in and to the Services and the Content, including all applicable intellectual property rights.
+4.2 Feedback. If you submit to us feedback and/or reviews, suggestions, comments, information, or ideas relating to the Services (“Feedback”), you acknowledge that Sophos and its affiliated companies will be entitled to the unrestricted use and dissemination of these Feedback for any purpose, commercial, or otherwise, without acknowledgment or compensation to you. You agree that any Feedback you provide to Sophos and/or its affiliated companies are non-confidential.
+4.3 Copyright Complaints. It is our policy to respond to notices of alleged copyright infringement which may include, in appropriate circumstances and at our discretion, disabling a user’s ability to transmit and/or store material claimed to be the subject of infringing activity and/or terminating such user’s ability to use the Services. For more information, please review our Digital Millennium Copyright Act (“DMCA”) Policy.
+5. Third Party Content and Sites. The Services may include Content (as defined in Section 2.1) of third-parties, or may allow you to access Content on a third party website (“Third Party Content”). The Services may also provide, or third parties may provide, links or other access to third party sites and services (“Third Party Sites”). Such Third Party Content and Third Party Sites may be subject to third party terms of service and privacy policies. You should review such third party terms of service and privacy policies before accessing or using Third Party Content or Third Party Sites. We will not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with your use of or reliance on any Third Party Content and Third Party Sites.
+6. Your Content. With respect to the Content (as defined in Section 2.1) you transmit, upload, or create using the Services or share with other users or recipients or any information you provide to us (collectively, “Your Content”), you grant us a non-exclusive, royalty-free license to use Your Content to perform our obligations (including to provide the Service and related support) and to exercise our rights under these Terms. Additionally, you acknowledge, consent, and agree that we may access, preserve, and disclose Your Content if required to do so by law or in a good faith belief that such access, preservation, or disclosure is permitted by law or reasonably necessary or appropriate for any of the following reasons: (1) to comply with legal process; (2) to enforce these Terms or other contracts with you, including investigation of potential violations thereof; (3) to respond to claims that Your Content violates the rights of third parties; and (4) to protect the rights, property, or personal safety of us, our agents and affiliates, our users, and the public. This includes exchanging information with other companies and organizations for fraud protection and spam/malware prevention, and similar purposes. You represent and warrant that Your Content: (i) does not infringe upon any intellectual property rights and rights of publicity, (ii) does not violate any third-party rights, (iii) is not illegal, tortious, false, inaccurate, or misleading and/or may be reasonably considered to be defamatory, libelous, hateful, offensive, unlawfully threatening, or unlawfully harassing to anyone or invasive of another’s privacy, or (iv) does not contain virus, Trojan horse, worm, or other disruptive or harmful software or data. We have no responsibility or liability for any of Your Content and we have no obligation to retain your account or Your Content for any period of time beyond what may be required by applicable law, or as otherwise in our discretion.
+7. Indemnity. To the fullest extent permitted by law, you agree to indemnify and hold Sophos and its affiliates and their officers, employees, directors and agents harmless from any from any and all claims, demands, losses, damages, costs, and expenses, including reasonable attorneys’ fees, arising out of or relating to your use of the Services, any of Your Content, your violation of these Terms, or your violation of any rights of another (collectively referred to as "Claims"). Sophos reserves the right, in its sole discretion and at its own expense, to assume the exclusive defense and control of any Claims. You agree to reasonably cooperate as requested by Sophos in the defense of any Claims.
+8. DISCLAIMER OF WARRANTIES
+YOUR USE OF THE SERVICES AND CONTENT IS ENTIRELY AT YOUR OWN RISK. TO THE EXTENT PERMITTED BY APPLICABLE LAW, SOPHOS AND ITS SUPPLIERS EXPRESSLY DISCLAIM ALL WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NONINFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS.
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, SOPHOS AND ITS SUPPLIERS MAKE NO WARRANTY THAT (I) THE SERVICES WILL MEET YOUR REQUIREMENTS, (II) THE SERVICES WILL BE UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE, (III) THE RESULTS THAT MAY BE OBTAINED FROM THE USE OF THE SERVICES WILL BE ACCURATE OR RELIABLE, OR (IV) THE QUALITY OF ANY PRODUCTS, SERVICES, INFORMATION, OR OTHER MATERIAL ACCESSED OR OBTAINED BY YOU THROUGH THE SERVICES WILL MEET YOUR EXPECTATIONS. WE DO NOT WARRANT THIRD PARTY PRODUCTS OR SERVICES.
+9. LIMITATION OF LIABILITY
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW AND REGARDLESS OF WHETHER ANY REMEDY SET FORTH HEREIN FAILS OF ITS ESSENTIAL PURPOSE, IN NO EVENT SHALL SOPHOS OR ANY OF ITS THIRD-PARTY LICENSORS AND SUPPLIERS OR THE CONTRIBUTORS OF INCLUDED SOFTWARE BE LIABLE TO YOU FOR, OR TO THOSE CLAIMING THROUGH YOU FOR, ANY INDIRECT, CONSEQUENTIAL, INCIDENTAL OR SPECIAL DAMAGE OR LOSS OF ANY KIND INCLUDING, BUT NOT LIMITED TO, LOSS OF PROFITS, LOSS OF CONTRACTS, BUSINESS INTERRUPTIONS, COST OF SUBSTITUTE GOODS OR SERVICES, LOSS OF OR CORRUPTION OF DATA HOWEVER CAUSED AND WHETHER ARISING UNDER CONTRACT OR TORT (INCLUDING WITHOUT LIMITATION NEGLIGENCE), AND INCLUDING WITHOUT LIMITATION ANY LOSS OR DAMAGE RELATED TO ANY THIRD PARTY SOFTWARE EVEN IF SOPHOS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. THE LIMITATIONS IN THIS CLAUSE SHALL APPLY NOTWITHSTANDING THE FAILURE OF THE ESSENTIAL PURPOSE OF ANY REMEDY.
+SOME STATES AND JURISDICTIONS INCLUDING MEMBER COUNTRIES OF THE EUROPEAN ECONOMIC AREA, DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES OR THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES. ACCORDINGLY, SOME OF THE ABOVE LIMITATIONS SET FORTH ABOVE MAY NOT APPLY TO YOU. IF YOU ARE DISSATISFIED WITH ANY PORTION OF THE SERVICES OR WITH THESE TERMS, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USE OF THE SERVICES.
+IF ANY LIMITATION, EXCLUSION, DISCLAIMER OR OTHER PROVISION CONTAINED IN THESE TERMS IS HELD TO BE INVALID FOR ANY REASON BY A COURT OF COMPETENT JURISDICTION AND SOPHOS BECOMES LIABLE THEREBY FOR LOSS OR DAMAGE THAT MAY LAWFULLY BE LIMITED, SUCH LIABILITY WHETHER IN CONTRACT, TORT (INCLUDING WITHOUT LIMITATION NEGLIGENCE) OR OTHERWISE, WILL NOT EXCEED THE LESSER OF (i) THE FEE PAID BY YOU AND (ii) SOPHOS’S CURRENTLY PUBLISHED LIST PRICE FOR THE SERVICES.
+IN NO EVENT SHALL SOPHOS’S AGGREGATE LIABILITY TO YOU ARISING OUT OF OR IN CONNECTION WITH THESE TERMS, FROM ALL CAUSES OF ACTION AND THEORIES OF LIABILITY (INCLUDING WITHOUT LIMITATION NEGLIGENCE), EXCEED THE LESSER OF (i) THE FEE PAID BY YOU AND (ii) SOPHOS’S CURRENTLY PUBLISHED LIST PRICE FOR THE SERVICES.
+SOPHOS DOES NOT LIMIT OR EXCLUDE ITS LIABILITY FOR (i) DEATH OR PERSONAL INJURY CAUSED BY NEGLIGENCE, (ii) FRAUDULENT MISREPRESENTATION, OR (iii) ANY OTHER LIABILITY TO THE EXTENT THAT SUCH LIABILITY CANNOT BE EXCLUDED OR LIMITED BY APPLICABLE LAW.
+10. Disputes and Mandatory Arbitration
+THIS SECTION 10 APPLIES TO RESIDENTS OF THE UNITED STATES AND CANADA, AND THOSE WHO ATTEMPT TO COMMENCE LITIGATION WITHIN THE UNITED STATES. PLEASE READ THIS SECTION CAREFULLY – IT MAY SIGNIFICANTLY AFFECT YOUR LEGAL RIGHTS, INCLUDING YOUR RIGHT TO FILE A LAWSUIT IN COURT.
+10.1 Initial Dispute Resolution. Our customer support department is available by email at [email protected] to answer any questions or concerns you may have regarding the Services or these Terms. Most disputes, claims, or disagreements can be resolved efficiently and informally by contacting our customer support department. You and Sophos agree to try to resolve any dispute, claim, or disagreement informally for thirty (30) days before initiating a lawsuit or arbitration.
+10.2 Binding Arbitration. If the parties are unable to resolve the dispute, claim, or disagreement through the customer support process above, then you or Sophos may initiate binding arbitration as the sole means to resolve such dispute, claim, or disagreement subject to the terms set forth below. Specifically, all claims arising out of or relating to these Terms (including their formation, performance and breach), the parties’ relationship with each other and/or your use of the Services shall be finally settled by binding arbitration administered by JAMS in accordance with the provisions of its Streamlined Arbitration and Procedures, excluding any rules or procedures governing or permitting class or representative actions.
+Except as set forth in Section 10.2, the arbitrator, and not any federal, state or local court or agency, shall have exclusive authority to resolve all disputes arising out of or relating to the interpretation, applicability, enforceability or formation of these Terms, including, but not limited to any claim that all or any part of these Terms are void or voidable, whether a claim is subject to arbitration, and any dispute regarding the payment of JAMS administrative or arbitrator fees (including the timing of such payments and remedies for nonpayment). The arbitrator will be empowered to grant whatever relief would be available in a court under law or in equity. You and Sophos agree that the arbitrator may allow the filing of dispositive motions if they are likely to efficiently resolve or narrow issues in dispute. The arbitrator’s award shall be written, and binding on you and Sophos and may be entered as a judgment in any court of competent jurisdiction. No arbitration award or decision will have any preclusive effect as to issues or claims in any dispute with anyone who is not a named party to the arbitration.
+The Streamlined Arbitration Rules governing the arbitration may be accessed at www.jamsadr.com or by calling JAMS at (800) 352-5267. If you commence arbitration in accordance with these Terms, you will be required to pay $250 to initiate the arbitration. To the extent the filing fee for the arbitration exceeds the cost of filing a lawsuit, the arbitrator may require Sophos to pay the additional cost. You are responsible for your own attorneys’ fees unless the arbitration rules and/or applicable law provide otherwise. If the arbitrator finds the arbitration to be non-frivolous, Sophos will pay all of the actual filing and arbitrator fees for the arbitration, provided your claim does not exceed $75,000. For claims above $75,000, fees and costs will be determined in accordance with applicable JAMS rules. The arbitration rules permit you to recover attorney’s fees in certain cases.
+Any arbitration demand or counterclaim asserted by either you or Sophos must contain sufficient information to provide fair notice to the other party of the asserting party’s identity, the claims being asserted, and the factual allegations on which they are based. The arbitrator and/or JAMS may require amendment of any demand or counterclaim that does not satisfy these requirements. The arbitrator has the right to impose sanctions in accordance with JAMS Rule 24 for any claims the arbitrator determines to be frivolous or improper (under the standard set forth in Federal Rule of Civil Procedure 11).
+You and Sophos agree that JAMS has discretion to modify the amount or timing of any administrative or arbitration fees due under JAMS’s Rules where it deems appropriate, provided that such modification does not increase the costs to you, and you waive any objection to such fee modification. You and Sophos also agree that a good-faith challenge by either you or Sophos to the fees imposed by JAMS does not constitute a default, waiver, or breach of this Section 10 while such challenge remains pending before JAMS, the arbitrator, and/or a court of competent jurisdiction.
+You and Sophos understand that, absent this mandatory provision, the parties would have the right to sue in court and have a jury trial. You and Sophos further understand that, in some instances, the costs of arbitration could exceed the costs of litigation and the right to discovery may be more limited in arbitration than in court.
+10.3 Location. If you are a resident of the United States, arbitration will take place at any reasonable location within the United States convenient for you. For residents in Canada, arbitration shall be initiated in the County of New York, State of New York, United States of America, and you and Sophos agree to submit to the personal jurisdiction of any federal or state court in New York County, New York, in order to compel arbitration, to stay proceedings pending arbitration, or to confirm, modify, vacate, or enter judgment on the award entered by the arbitrator.
+10.4 Class Action Waiver. You and Sophos further agree that any arbitration shall be conducted in their individual capacities only and not as a class action or other representative action, and you and Sophos expressly waive the right to file a class action or seek relief on a class basis. YOU AND SOPHOS AGREE THAT EACH PARTY MAY BRING CLAIMS AGAINST THE OTHER ONLY IN ITS INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING. If there is a final judicial determination that applicable law precludes enforcement of this paragraph’s limitations as to a particular remedy, then that remedy (and only that remedy) must be severed from the arbitration and may be sought in court. You and Sophos agree, however, that any adjudication of remedies not subject to arbitration shall be stayed pending the outcome of any arbitrable claims and remedies.
+10.5 Exception - Litigation of Intellectual Property and Small Claims Court Claims. Notwithstanding the parties’ decision to resolve all disputes through arbitration, either party may bring an action in state or federal court to protect its intellectual property rights (“intellectual property rights” means patents, copyrights, moral rights, trademarks, and trade secrets, but not privacy or publicity rights). Either party may also elect to have disputes or claims resolved in a small claims court that are within the scope of that court’s jurisdiction. Either party may also seek a declaratory judgment or other equitable relief in a court of competent jurisdiction regarding whether a party’s claims are time-barred or may be brought in small claims court in your state and county of residence. Seeking such relief shall not waive a party’s right to arbitration under these Terms.
+10.6 30-Day Right to Opt-Out. You have the right to opt-out and not be bound by the arbitration and class action waiver provisions set forth above by sending written notice of your decision to opt-out to [email protected] with the subject line, “ARBITRATION AND CLASS ACTION WAIVER OPT-OUT.” The notice must be sent within 30 days of your first use of the Service, otherwise you shall be bound to arbitrate disputes in accordance with the terms of those paragraphs. If you opt-out of these arbitration provisions, Sophos also will not be bound by them.
+10.7 Changes to this Section. Sophos will provide 30 days’ notice of any changes to Section 10 of these Terms. Changes will become effective on the 30th day. If you continue to use the Services after the 30th day, you agree that any unfiled claims of which Sophos does not have actual notice are subject to the revised clause.
+FOR ANY DISPUTE NOT SUBJECT TO ARBITRATION YOU AND SOPHOS AGREE TO SUBMIT TO THE PERSONAL AND EXCLUSIVE JURISDICTION OF AND VENUE IN THE FEDERAL AND STATE COURTS LOCATED IN BOSTON, MA. YOU FURTHER AGREE TO ACCEPT SERVICE OF PROCESS BY MAIL, AND HEREBY WAIVE ANY AND ALL JURISDICTIONAL AND VENUE DEFENSES OTHERWISE AVAILABLE.
+11. Governing Law. If you are in United States or Canada, these Terms and the relationship between you and Sophos shall be governed by the laws of the Commonwealth of Massachusetts, and if you are in any other country, these Terms and the relationship between you and Sophos shall be governed by the laws of England and Wales, without regard to conflict of law provisions. You agree that the United Nations Conventions on Contracts for the International Sale of Goods (1980) is specifically excluded from and does not apply to these Terms. NOTHING IN THESE TERMS WILL DIMINISH ANY RIGHTS YOU MAY HAVE UNDER EXISTING CONSUMER PROTECTION LEGISLATION OR OTHER APPLICABLE LAWS IN YOUR JURISDICTION THAT MAY NOT BE WAIVED BY CONTRACT.
+12. Updates and Modifications to Services. We regularly release upgrades, enhancements and modifications to Services (“Updates”). Once an Update becomes available, we may stop supporting the previous version of the Services. To make sure you can use new features we develop, you agree to install or let us install Updates when we make them available. Updates may have new minimum system requirements and it is your responsibility to ensure that any device you use with the Services meets such minimum system requirements. We may also temporarily or permanently discontinue the Services (or any part thereof) with or without notice. If we permanently discontinue the Services in their entirety, we will provide you with pro-rated refund for any remaining term on the subscription. You agree that we will not be liable to you or to any third party for any modification, or discontinuance of the Services (except for the pro-rated refund for the remainder of the subscription term for permanent discontinuance of the Services in their entirety).
+13. Modifications to Terms of Service. Except with regard to Section 10 above regarding dispute resolution, we reserve the right, at our sole discretion, to update or modify these Terms prospectively at any time and the modifications will be effective when posted on our website for the Services or when we notify you by other means. It is important that you review these Terms whenever we modify them because your continued use of the Services after we have posted the updated Terms indicates your agreement to the modifications.
+14. Language. The official language of these Terms is English. Any translation of these Terms is done for local requirements and in the event of a conflict between the English and any non-English version, the English version of these Terms shall govern.
+15. Survival of Terms. Upon any termination, discontinuation, or cancellation of the Services or your account, the following Sections will survive: 4 (Intellectual Property Rights), 7 (Indemnity), 8 (Disclaimer of Warranty), 9 (Limitation of Liability), 10 (Disputes and Mandatory Arbitration), 11 (Governing Law), 14 (Language), 15 (Survival of Terms), and 18 (General).
+16. Export Restrictions. You acknowledge that the Services, any the underlying software and related technical data (collectively, "Controlled Technology") may be subject to restrictions under export control laws and regulations of the United States government, specifically the U.S. Export Administration Regulations, and the law of any country where Controlled Technology is imported or re-exported. You represent and warrant that you and any user you add to the Services are not: (a) prohibited from receiving the Services under the laws of the United States, England, Wales, or other applicable jurisdiction; or (b) subject to any export control or sanctions prohibitions issued by the U.S., UK, EU, or other applicable jurisdiction. You will not export or re-export any part of the Services, in violation of these laws and regulations, directly or indirectly.
+17. Termination and Suspension. We may terminate your access to and use of the Services for any or no reason, or if you breach any material terms of these Terms, including if you do not pay your subscription fees. Upon our termination notice, you must stop using the Services, and we may immediately deactivate or delete your account and Your Content (as defined in Section 6) and/or bar any further access to Your Content or the Services. We may terminate any Services offered for free or as a Free Trial at any time. Additionally, we may suspend your account or your access to and use of the Services without notice to you if we reasonably suspect that you have not complied with any of the provisions of these Terms.
+18. General. These Terms constitute the entire agreement between us and govern your use of the Services. Our failure to exercise or enforce any right or provision of these Terms will not constitute a waiver of such right or provision. If any provision of these Terms is found by a court of competent jurisdiction to be invalid, you and we nevertheless agree that the court should endeavor to give effect to the parties’ intentions as reflected in the provision, and the other provisions of these Terms remain in full force and effect. You agree that regardless of any statute or law to the contrary, any claim or cause of action arising out of or related to use of the Services or these Terms must be filed within one (1) year after such claim or cause of action arose or be forever barred. You may not assign these Terms without our prior written permission. Any purported assignment without such permission shall be void. We may assign or transfer these Terms, in whole or in part, without restriction. The section titles in these Terms are for convenience only and have no legal or contractual effect. Notices to you may be made via either email or regular mail or by posting on the website for the Services. Under no circumstances shall Sophos be held liable for any delay or failure in performance resulting directly or indirectly from an event beyond its reasonable control.
+Defense System
+Defense system overview
+Endpoint security
+Security operations
+Identity security
+Network security
+Networking infrastructure
+Email security
+Cloud security
+Calculator
+Services
+Managed services
+Advisory services
+Professional services
+Technical Account Manager
+Solutions
+Featured solutions
+Industries
+Public cloud security
+Use cases
+Compliance
+Why Sophos
+Awards and recognition
+Blog
+Case studies
+Competitor comparison
+Trust center
+About us
+Partners
+Sophos partners
+Resellers
+Become a partner
+Partner training
+Resources
+Threat intelligence
+Resource center
+Customer training
+Secureworks
+Product Terms
+HitmanPro
+Overview
+HitmanPro
+HitmanPro.Alert
+Support
+Get help
+Support resources
+Product support
+Get Started
+Try for free
+Legal
+General
+Modern Slavery Statement
+Speak Out
+English (US)
+Cookies Settings
+Terms
+Privacy
+Legal
+© 2026 Sophos Ltd. All rights reserved.

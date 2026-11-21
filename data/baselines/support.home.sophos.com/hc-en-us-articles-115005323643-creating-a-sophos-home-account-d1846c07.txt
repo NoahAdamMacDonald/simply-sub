@@ -1,0 +1,122 @@
+url: https://support.home.sophos.com/hc/en-us/articles/115005323643-Creating-a-Sophos-Home-account
+method: fetch
+saved: 2026-11-20
+
+Creating a Sophos Home account – Sophos Home Help
+TEST
+Free Trial
+Sign in
+Submit a request
+Managing a Sophos Home Account
+Learn about creating an account, signing in, and updating your account information.
+Sophos Home Help
+Accounts and Licensing
+Managing a Sophos Home Account
+Articles in this section
+Creating a Sophos Home account
+Email address confirmation
+Signing in to your Sophos Home Dashboard
+Changing your Sophos Home account password
+How to change your Sophos Home account email address
+Configuring email alerts
+Deleting your Sophos Home account
+Changing a device name
+Removing a device from the Sophos Home Dashboard
+Creating a Sophos Home account
+Sophos Home Support
+November 19, 2026 20:43
+Updated
+Your Sophos Home account provides access to the Sophos Home dashboard. On the dashboard, you can view and manage all your devices, protect additional computers, access live Support, and more.
+Premium and Trial Users: Account creation happens during the installation process. There is no separate sign-up step.
+Coupon Holders: Use this article instead Create an account and add a coupon
+Install Sophos Home and create your account
+The Sophos Home installation process includes account creation.
+To activate your Premium subscription, complete the installation and account creation first. Activation is a one-time process, click here for more information.
+Before you begin
+Remove any 3rd party Antivirus software to avoid conflicts
+Temporarily disable Firewalls, VPN software or network restrictions during the installation process (you can re-enable them afterward).
+Installation process
+Access the Sophos Home page to start the download
+Wait for the Sophos Home Installer to finish downloading
+Open the downloaded file to Install Sophos Home
+Run the installer and follow the New User steps to create an account
+Confirm your email with the code sent to it
+Follow the prompts to complete the installation
+What happens next?
+Your Trial account will last for 30 days, and will provide Premium Features for up to 3 devices.
+Once the Trial expires, the antivirus stops working. To stay protected, activate your Premium License key or a coupon.
+Further securing your account
+Please visit MFA - How to enable Multi-Factor authentication for additional security steps to help secure your Sophos Home account.
+Troubleshooting and FAQ
+"Sorry, that email is already in use" message
+If you see the message "Sorry, that email is already in use" when trying to create a new Sophos Home account, it means that the email address you're trying to use is already associated with an existing Sophos Home account.
+This is because your Sophos Home license key or coupon can only be used with a single Sophos Home account. You cannot create multiple accounts using the same email address.
+To resolve this issue, you'll need to use the email address and account that's already associated with your Sophos Home license or coupon.
+How to Proceed:
+Uninstall Sophos Home so that you can re-install it using your account.
+Log in to your existing Sophos Home account using the email address that's giving you the "email already in use" via
+Use the Add Device option to download Sophos Home from your account.
+Install Sophos Home with the newly downloaded file.
+See the "How to Reinstall Sophos Home" article for step-by-step instructions on re-protecting your devices through your existing account.
+Action required-Almost done... Create your account
+The message "Action Required - Almost done... Create your account" indicates that Sophos Home was not linked to an account when it was installed.
+This is normal for new users who haven’t created a Sophos Home account yet.
+Existing users may see this if they downloaded the trial installer instead of installing from their Dashboard.
+How to fix it
+If you do not have an account, click Create account and follow the instructions.
+If you already have an account, follow the steps in How to reinstall Sophos Home to reinstall using your existing account.
+Frequently Asked Questions
+How do I activate a Premium License Key?
+Follow the steps listed in the Sophos Home License Key activation article.
+Once completed, all installations linked to your account will become Premium.
+How do I protect additional computers?
+Follow this article to Protect additional devices
+How do I configure Sophos Home?
+Getting started guide
+Why do I see that my key or coupon is already used?
+Your Sophos Home account is your one-way location for all installations and settings. As such, you can only activate one account with your Premium key or coupon. You do not need to reactivate your license or coupon every time you install or re-install Sophos Home. Use the additional devices article to protect or re-protect up to 10 devices, no need to reactivate your key!
+How do I check that my account has been activated with Premium/Trial/ Coupons?
+1. Sign in to https://my.sophos.com
+2. Click on the account name at the top right > My account
+3. Type your password and click Unlock
+4 . You'll see your subscription status reflecting either Trial, Premium or Expired accordingly.
+I am a paid customer. How do I check the status of my purchase?
+To check your account's expiration date, payment method, billing information and more, you will need to use our third-party cleverbridge's Purchase Lookup Tool. This will create a secure email sent directly to you for your review and management of your subscription.
+I have installed Sophos Home without using my Premium account. How can I fix this?
+Sophos Home Features are enabled via your Sophos Home account, you will have to re-install Sophos Home to benefit from them. Follow these steps to re-install: How to reinstall Sophos Home
+Related information
+Sophos Home - Getting started guide
+Downloading Sophos Home installer
+Installing Sophos Home on Windows computers
+Installing Sophos Home on Mac computers
+Facebook
+Twitter
+LinkedIn
+Was this article helpful?
+821 out of 2589 found this helpful
+Didn't find this helpful? Click here to leave feedback!
+Every comment submitted via this form is read (by a human) but we do not reply to specific technical questions. For technical support, please see Contacting Sophos Home Support
+Return to top
+Related articles
+Sophos Home - Getting started guide
+Signing in to your Sophos Home Dashboard
+Activating your Sophos Home Premium License key
+How to re-install Sophos Home
+Email address confirmation
+Sophos Home
+Free Trial
+Company
+Support
+Business Solutions
+Security Center
+Affiliates
+Stay Connected
+Facebook
+Instagram
+Linkedin
+RSS feed
+Twitter
+©1997-2026 Sophos Ltd. All rights reserved.
+Legal
+Privacy
+Cookies

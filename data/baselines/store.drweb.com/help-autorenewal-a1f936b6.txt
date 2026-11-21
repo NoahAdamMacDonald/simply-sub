@@ -1,0 +1,43 @@
+url: https://store.drweb.com/help/autorenewal
+method: fetch
+saved: 2026-11-20
+
+Online store
+Web page cannot be displayed
+Your browser is not currently supported
+Sorry, we couldn't display the web page because your browser is outdated and unsupported.
+Please update your software.
+How does Automatic Renewal work for a product in an order?
+1. What is Automatic Renewal?
+Automatic renewal allows you to extend the current license for the next term without your participation.
+Processing and payment of the order for the renewal of the current license occur automatically before the expiration of the current license.
+This saves time: we ourselves will extend your license by sending you a notification and confirmation of the license renewal.
+Automatic renewal will ensure your licenses run continuously.
+2. How to enable?
+When placing an order:
+- check the box “I purchase automatic renewal and agree with the terms of renewal”;
+- select a payment method that supports auto-renewal, for example, payment by credit card.
+3. Payment
+For licenses with a validity of six months or more:
+30 days prior to the expiration of the current license, you will receive a letter of notification with detailed information to the email address, which was provided when placing an order for the current license. Attempts to pay will be made automatically 20, 10 and 0 days before the expiration of the current license.
+For licenses with a validity of less than six months:
+9 days prior to the expiration of the current license, you will receive a notification letter with detailed information to the email address, which was provided when placing the order for the current license. Attempts to pay will be made automatically 2, 1 and 0 days before the expiration of the current license.
+Attention! The notification letter will indicate the cost of license renewal, including the discount at the time of the order.
+4. Delivery
+The license will be renewed automatically after the expiration of the current license.
+5. How to disable?
+To disable automatic renewal, you need to:
+- at any time before paying for the next license on your order page follow the “Disable” link;
+- click on the link “About auto-renewal” from the letter that you will receive to your email address before the payment for automatic renewal. Click on the link "Disable";
+- contact Noventiq Ecommerce support service at: drweb.eu@noventiq.com.
+Customer support
+drweb.eu@noventiq.com
+Help
+Order payment General Questions
+© Doctor Web 2003 - 2026
+Doctor Web is a cybersecurity company focused on threat detection, prevention and response technologies
+Noventiq
+Orders are processed by Doctor Web's partner - Noventiq Ecommerce
+Cookie Policy Privacy Policy
+Our website uses cookies. If you continue using the website, you consent to our Privacy Policy.
+ОК

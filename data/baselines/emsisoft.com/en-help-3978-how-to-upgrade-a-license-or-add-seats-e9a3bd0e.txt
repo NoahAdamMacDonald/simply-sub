@@ -1,0 +1,89 @@
+url: https://www.emsisoft.com/en/help/3978/how-to-upgrade-a-license-or-add-seats/
+method: fetch
+saved: 2026-11-20
+
+How to upgrade a license or add seats How to upgrade a license or add seats Emsisoft
+Search for: Search
+Why Emsisoft
+Protection Compare editions
+Business Security
+Enterprise Security + EDR
+MSP Security
+Anti-Malware Home
+Mobile Security
+Remediation Remediation Kit
+Commandline Scanner
+Ransomware Decryption
+Partners Partners
+Managed Service Providers
+Third Party Integrations
+Security Operations Centers
+Resellers
+Affiliates
+Pricing Buy Online
+Buy from local partner
+Renew license
+Search for:
+Licensing & Billing
+How to upgrade a license or add seats
+December 29, 2022
+min read
+When you need to protect more devices than your license allows, you can upgrade your current subscription through your Management Console at MyEmsisoft portal on https://my.emsisoft.com , click on your workspace and then on “settings”.
+From there you can choose the new total amount of seats or the new plan.
+You can then click on “renew now / upgrade now” to be forwarded to a shopping cart. The next page will pro-rate the unused time of your subscription and reduce its final cost before you pay.
+Your 1, 2 or 3 years subscription will start from the moment the payment is made, which will become your new billing and renewal date.
+Please note that If you are deployed with an alternative RMM such as Atera, Kabuto or Syncro, it’s advised to contact your distributor for further assistance.
+Rate this item: 1.00 2.00 3.00 4.00 5.00 Submit Rating
+No votes yet.
+Please wait...
+Similar topics
+31/10/2023 Introducing Enhanced License Management
+30/08/2022 How do I renew my subscription through the management console?
+30/08/2022 I want to delete my account
+30/08/2022 How do I cancel the auto-renewal?
+30/08/2022 How do I update my payment details?
+30/08/2022 How to check when my license expires?
+Newsletter
+Malware never sleeps. Be sure to stay up-to-date on emerging threats.
+Subscribe Emsisoft requires collection and processing of certain personal data to provide the services. Please confirm that you have read and accept the terms of our Privacy Policy
+Emsisoft > Help > Frequently Asked Questions > Licensing & Billing > How to upgrade a license or add seats
+PRODUCTS
+Emsisoft Business Security
+Emsisoft Enterprise Security
+Emsisoft Remediation Kit
+Emsisoft Anti-Malware Home
+Emsisoft Emergency Kit
+Emsisoft Mobile Security
+KEY BENEFITS
+Layered Protection
+Anti-Ransomware
+Centralized Management
+Endpoint Detection & Response
+Threat Hunting
+Ransomware Rollback
+Behavior AI
+Knowledge
+News Blog
+Enterprise Security
+Malware Lab
+Product User Guides
+Video Tutorials
+Support
+Contact Us
+Submit a suspicious file
+COMPANY
+About Us
+Our Customers
+Awards & Reviews
+Press Center
+Careers
+Webinars
+Podcast
+© 2003-2026 Emsisoft - 11/20/2026 - Legal Notice - Terms - Privacy Policy - Cookie Policy - System Status - English English
+Deutsch
+Français
+Emsisoft YouTube
+Emsisoft LinkedIn
+Emsisoft Facebook
+Emsisoft Twitter
+Emsisoft RSS Feed

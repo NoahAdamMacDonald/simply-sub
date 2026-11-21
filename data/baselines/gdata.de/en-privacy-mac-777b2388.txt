@@ -1,0 +1,146 @@
+url: https://www.gdata.de/en/privacy/mac
+method: fetch
+saved: 2026-11-20
+
+Privacy Policy for G DATA Antivirus Software for Mac: G DATA CyberDefense AG
+Skip to content Business
+Consumer
+Support
+About us
+My G DATA
+EN
+Platform
+Services
+Partner
+Resources
+Contact sales
+Security
+Online privacy
+For mobile devices
+Free trial
+Shop
+Privacy Policy for G DATA Antivirus Software for Mac
+In the following, we would like to inform you about which personal data G DATA processes and for what purposes this is done. We also inform you about other important details regarding data protection, such as your rights.
+With G DATA Antivirus Software for Mac (hereinafter: “G DATA Antivirus Software”), we offer you protection against viruses, Trojans, phishing, and other malware. To this end, the G DATA Antivirus Software comprises several components, each of which processes personal data.
+Detailed information about the individual modules of the G DATA antivirus software and how we process your data can be found below:
+1. Data Controller and Data Protection Officer
+The controller responsible for the data processing described below, within the meaning of data protection regulations, is:
+G DATA CyberDefense AG
+Königsallee 178 a
+D-44799 Bochum
+Germany
+Email: info@gdata.de
+You can also send any further questions regarding data protection by email to: dsgvo@gdata.de
+Data Protection Officer:
+Bastian Rogles
+G DATA CyberDefense AG
+Königsallee 178 a 44799 Bochum
+Our Data Protection Officer can be reached at the following email address: DSB@gdata.de
+2. General Information on Data Processing
+a) Scope of personal data processing
+We generally process our users’ personal data only to the extent necessary to provide our services or to enable the use of our software.
+b) Legal basis for the processing of personal data
+G DATA processes personal data exclusively in accordance with the General Data Protection Regulation.
+To the extent that we obtain your consent for the processing of personal data, Article 6(1)(a) of the GDPR serves as the legal basis.
+When processing personal data necessary for the performance of a contract to which the data subject is a party, Article 6(1)(b) of the GDPR serves as the legal basis. This also applies to processing operations necessary for the initiation of a contract (pre-contractual measures).
+To the extent that the processing of personal data is necessary to comply with a legal obligation to which our company is subject, Article 6(1)(c) of the GDPR serves as the legal basis.
+If the processing is necessary to safeguard a legitimate interest of our company or a third party, and the interests, fundamental rights, and freedoms of the data subject do not override the aforementioned interest, Article 6(1)(f) of the GDPR serves as the legal basis for the processing.
+c) No automated decision-making
+Automated processing of personal data, which consists of using such personal data to evaluate certain personal aspects relating to a natural person, in particular to analyze or predict aspects concerning that natural person’s work performance, economic situation, health, personal preferences, interests, reliability, behavior, location, or movements, does not take place within the scope of the data processing described.
+3. Purposes and Legal Bases of Data Processing
+a) Registration for Antivirus Software (Mac)
+To activate your product, we ask you for your name and email address during the registration process on our product website. You may voluntarily provide additional personal data, as well as the name of the retailer from whom you purchased this version.
+When you activate a license, we link this information to your registration number. We use this data to assign the license to you and to activate it. The access credentials for your product will be sent to the email address you provided after activation.
+This data is processed to fulfill our contract or pre-contractual measures with you regarding the use of G DATA antivirus software in accordance with Art. 6(1)(b) of the GDPR.
+b) Malware Detection
+G DATA antivirus software performs malware detection in various modules (including malware scan, behavior monitoring) to identify malicious software, detect suspicious application behavior, and improve our detection techniques. Under certain circumstances, suspicious files or characteristics of these files (e.g., checksums, file sizes, file paths) are transmitted to G DATA’s servers to be checked for security there.
+In the event that the G DATA antivirus software suspects or identifies a malware finding, we process unique identifiers per device and application installation (e.g., unique identifiers of application installations, operating system used, or malware detections, as well as your IP address), along with checksums of the files identified by our application as potentially harmful and checksums of the associated paths. This data is processed to fulfill our contract with you regarding the use of the respective G DATA antivirus software. We do not store your IP address. We do not associate the transmitted data with your customer account.
+We also use this data for statistical analysis of detected malware and its spread, as well as to improve our analysis methods. As part of the Malware Information Initiative (MII), files identified as malicious and the associated file paths may also be transmitted. You may object to the transmission of this data to G DATA within the scope of the MII at any time with future effect. To do so, you can use the corresponding opt-out option in the settings of the G DATA antivirus software. The transmitted data is anonymized and cannot be associated with your customer account.
+This data is processed to fulfill our contract with you regarding the use of the G DATA antivirus software in accordance with Art. 6(1)(b) of the GDPR.
+c) Antivirus Software Updates
+G DATA antivirus software performs regular signature updates to maintain malware protection. In doing so, the current system configuration, including the version numbers of the G DATA antivirus software components, is also transmitted. In this process, we process your IP address and the information you provided during registration to verify your license status. The transmitted data is required solely for the update process and is deleted afterward.
+This data is processed to fulfill our contract with you regarding the use of G DATA antivirus software in accordance with Art. 6(1)(b) of the GDPR.
+d) Web Protection (Optional Module)
+If you activate the “Web Protection,” “Anti-Phishing,” or “Parental Controls” module, G DATA antivirus software sends URLs accessed from your device to our server. We process this data to provide you with an assessment of the security of the accessed URL. The transmitted data is anonymized and cannot be linked to your customer account.
+This data is processed to fulfill our contract, in accordance with Art. 6(1)(b) GDPR.
+e) Support Tool (Optional)
+The “Collect System Information” support tool documents issues with the G DATA product. In the event of a problem, the user may, at their own discretion, contact G DATA to, for example, submit a support request. In doing so, G DATA stores data related to this specific request, such as contact information, details about your hardware and software, and log data.
+All data collected using this support tool is used exclusively for communication with the user and for troubleshooting and resolution by G DATA. Information and data related to the provision of support are also processed by G DATA for support research purposes and to maintain a history of support requests.
+Data collected during the provision of support is not used for secondary purposes or disclosed to third parties. The user has the option to review all collected files and remove unwanted files and personal data before uploading. Data is transmitted in encrypted form. The data is stored for the duration of the support request’s processing and then deleted.
+Our basis for using the Support Tool is our legitimate interest in the timely and reliable processing of support requests (pursuant to Art. 6(1)(f) GDPR). Our basis for using the support tool is the existing contractual relationship (pursuant to Art. 6(1)(b) GDPR) if your inquiry concerns a support request related to an existing contract or the conclusion of a contract. Otherwise, our legitimate interest lies in the timely and reliable processing of support requests (pursuant to Art. 6(1)(f) GDPR), provided your request is not related to your contractual relationship.
+f) Newsletters and Advertising
+If you give your consent, we use your contact information (name, email address) to conduct surveys and marketing campaigns, including sending our newsletter and information about product updates. In addition, we conduct analyses by individually measuring, storing, and evaluating open rates and click-through rates in recipient profiles for the purpose of tailoring future communications to your interests.
+You can find all details regarding the marketing activities we conduct in the privacy policy on our website.
+g) Invoice dispatch
+If an invoice is issued, it will be sent to the email address on file in our system.
+This data is processed to fulfill our contract with you regarding the use of the antivirus software in accordance with Article 6(1)(b) of the GDPR.
+4. Recipients or categories of recipients of the data
+No personal data is transferred to external recipients for the provision of the G DATA antivirus software.
+5. Transfer to third countries
+Third countries are all countries outside the European Economic Area (EEA). The European Economic Area includes all countries of the European Union as well as the countries of the so-called European Free Trade Area. These are Norway, Iceland, and Liechtenstein.
+No transfers to third countries are planned in the context of the G DATA antivirus software.
+6. Retention periods for your data
+The data subject’s personal data will be deleted or blocked as soon as the purpose for which it was stored no longer applies. Data may also be stored if this is required by European or national legislation in EU regulations, laws, or other provisions to which we, as the data controller, are subject.
+We store your registration and user data for the entire duration of your license and delete it no later than three months after the end of your license.
+We delete further contract- and tax-related data in accordance with the legal requirements of 10 years from the calendar year of the license’s expiration.
+7. Your Data Subject Rights
+With regard to the data processing described here, you have various data subject rights as regulated by the GDPR.
+Right of access (Art. 15 GDPR) – You have the right to request information from us regarding your stored personal data. Upon request, we will provide you with a copy of the data being processed.
+Right to rectification (Art. 16 GDPR) – You may request that we rectify any inaccurate personal data.
+Right to erasure (Art. 17 GDPR) – You have the right to request that we erase your personal data. We are obligated to erase your personal data, among other things, if it is no longer necessary for the purposes for which it was collected or otherwise processed, if you have withdrawn your previously given consent, or if the data has been processed unlawfully.
+Right to Restriction of Processing (Art. 18 GDPR) – Under certain conditions, you have the right to request that we restrict the processing of your personal data. This includes situations where you contest the accuracy of your personal data and we must verify your objection. In such cases, we may not further process your data—with the exception of storage—until the issue of accuracy has been resolved.
+Right to data portability (Art. 20 GDPR) – You have the right to receive the personal data concerning you that we hold in a structured, commonly used, and machine-readable format, provided that the data processing is based on your consent or a contract.
+Right to Withdraw Consent at Any Time (Art. 7 GDPR) – If our data processing is based on your consent, you have the right to withdraw your consent at any time. The lawfulness of the processing carried out on the basis of your consent prior to its withdrawal remains unaffected by the withdrawal.
+Right to object at any time (Art. 21 GDPR) - If our processing of your data is based on the performance of a task carried out in the public interest or in the exercise of official authority (Art. 6(1)(e) GDPR), or if the data processing is based on our legitimate interests, you have the right to object to the processing of your personal data at any time on grounds relating to your particular situation. We will then cease processing unless we can demonstrate compelling legitimate grounds for the processing that override your interests in having the processing cease.
+You may object to the processing of your personal data for direct marketing purposes at any time without restriction.
+Right to lodge a complaint (Art. 77 GDPR) - You also have the right to lodge a complaint with a data protection supervisory authority. To do so, you may contact the data protection supervisory authority at your usual place of residence or at our company headquarters. The address of the supervisory authority responsible for us is:
+State Commissioner for Data Protection and Freedom of Information, North Rhine-Westphalia
+Kavalleriestrasse 2–4
+40213 Düsseldorf
+8. Final Provisions
+G DATA reserves the right to amend this Privacy Policy at any time to ensure it always complies with current legal requirements or to reflect changes to the services described in the Privacy Policy, e.g., upon the introduction of new services or changes to G DATA Business Software.
+#CyberVertrauen
+Platform
+Endpoint Security
+XDR
+Security Awareness
+Mail Protection
+Service
+IT Security Consulting
+Incident Response Service
+Incident Response Retainer
+Penetration Test
+MXDR
+Partner
+Become a partner
+Partner Portal Login
+XDR for Managed Service Providers
+For consumers
+Free trial
+Forgot password
+Product activation
+Change product
+Renew license
+About us
+Who we are
+Jobs & career
+Trust Center
+Contact & directions
+Press
+Code of conduct
+Facts
+Support
+Customer service
+Downloads
+Online help
+Report a security vulnerability
+Submit a suspicious file or URL
+Withdraw from contract here
+Cancel contract
+Payment & shipping
+Terms & conditions
+Cancellation policy
+EULA
+Privacy policy
+Imprint
+© 2026 G DATA CyberDefense AG

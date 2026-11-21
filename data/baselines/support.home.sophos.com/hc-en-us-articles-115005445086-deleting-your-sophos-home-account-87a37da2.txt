@@ -1,0 +1,81 @@
+url: https://support.home.sophos.com/hc/en-us/articles/115005445086-Deleting-your-Sophos-Home-account
+method: fetch
+saved: 2026-11-20
+
+Deleting your Sophos Home account – Sophos Home Help
+TEST
+Free Trial
+Sign in
+Submit a request
+Managing a Sophos Home Account
+Learn about creating an account, signing in, and updating your account information.
+Sophos Home Help
+Accounts and Licensing
+Managing a Sophos Home Account
+Articles in this section
+Creating a Sophos Home account
+Email address confirmation
+Signing in to your Sophos Home Dashboard
+Changing your Sophos Home account password
+How to change your Sophos Home account email address
+Configuring email alerts
+Deleting your Sophos Home account
+Changing a device name
+Removing a device from the Sophos Home Dashboard
+Deleting your Sophos Home account
+Sophos Home Support
+November 06, 2026 14:15
+Updated
+You can delete your Sophos Home account in the Settings section of the dashboard.
+Before deleting your account, make sure that you understood the following reminders:
+This action cannot be reversed.
+You will no longer be able to modify the Sophos Home software on the managed devices but will continue to run until you uninstall it.
+Deleting your Sophos Home account will not cancel your billing settings. Please refer to:
+How to change or review your billing and payment information for Sophos Home Premium subscriptions
+Instructions
+To delete your Sophos Home account:
+Sign in to your Sophos Home Dashboard
+Click on your login name on the upper right of the dashboard then choose My Account
+Enter your Sophos Home account password to unlock the settings.
+Click on the Delete My Account button located at the bottom of the page.
+Follow the prompts to enter the verification code
+Note: The code is valid for 10 minutes and is sent to the email address that is registered to this account.
+Code email will be sent via no-reply@mail.home.sophos.com
+On the Delete Account confirmation prompt, click on the Confirm button.
+Note: Due to security reasons, users must delete their own accounts.
+Related information
+Uninstalling Sophos Home on Windows computers
+Uninstalling Sophos Home on Mac computers
+Creating a Sophos Home account
+Signing in to Sophos Home account
+Facebook
+Twitter
+LinkedIn
+Was this article helpful?
+86 out of 234 found this helpful
+Didn't find this helpful? Click here to leave feedback!
+Every comment submitted via this form is read (by a human) but we do not reply to specific technical questions. For technical support, please see Contacting Sophos Home Support
+Return to top
+Related articles
+How to change or review your billing and payment information for Sophos Home Premium subscriptions
+Uninstalling Sophos Home on Windows computers
+Removing a device from the Sophos Home Dashboard
+Changing your Sophos Home account password
+Unable to install/uninstall Sophos Home on Mac computers - Advanced users
+Sophos Home
+Free Trial
+Company
+Support
+Business Solutions
+Security Center
+Affiliates
+Stay Connected
+Facebook
+Instagram
+Linkedin
+RSS feed
+Twitter
+©1997-2026 Sophos Ltd. All rights reserved.
+Legal
+Privacy
+Cookies

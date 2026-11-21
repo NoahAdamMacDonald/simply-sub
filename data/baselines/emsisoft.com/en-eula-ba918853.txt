@@ -1,0 +1,108 @@
+url: https://www.emsisoft.com/en/eula/
+method: fetch
+saved: 2026-11-20
+
+Emsisoft End User License Agreement (EULA)
+Emsisoft
+Why Emsisoft
+Protection
+Compare editions
+Business Security
+Enterprise Security + EDR
+MSP Security
+Anti-Malware Home
+Mobile Security
+Remediation
+Emsisoft Remediation Kit
+Commandline Scanner
+Ransomware Decryption
+Partners
+Partners
+Managed Service Providers
+Third Party Integrations
+Security Operations Centers
+Resellers
+Affiliates
+Pricing
+Buy online
+Buy from local partner
+Renew license
+Emsisoft End User License Agreement (EULA)
+Please read this agreement carefully! By installing the delivered software, you agree to be bound by the terms and conditions of the agreement below. If you do not agree to these terms and conditions, terminate the installation procedure and do not use the delivered software any further. Violation of these terms and conditions could constitute copyright infringement, resulting in civil and criminal proceedings.
+1. License
+1.1. The Licenser is Emsisoft Ltd, located in 6 Cube Court, Richmond 7020, New Zealand. The object of this license agreement is the granting of a nontransferable and nonexclusive right of use authorization for the computer programs recorded on the data media, including the program description, user manual and documentation, to you, the Licensee. For the sake of simplicity, the entire package is referred to hereinafter as “Software”.
+1.2. The terms and conditions of this agreement shall also apply to Software updates issued in the future. Upon formation of this license agreement, you also agree to a maintenance agreement under which you will receive regular updates of the delivered software.
+2. Scope of License
+2.1. The Software may be used solely for the term of this agreement and solely on a single computer system (a central computer) and at a single location. The use of the Software in networks or on multiple PCs may take place subject to the purchase of additional network or multiple user licenses that have been issued for the number of PCs on which this Software will be used. If you do not have the appropriate license, agreement must be reached with us and the necessary number of supplementary licenses purchased. The simultaneous transfer of the Software to another computer is illegal. In particular, it is illegal to make the Software licensed for single or multiple use accessible by any means and/or directly or indirectly available for use or exploitation to third parties for compensation or free of charge. In particular, any use of the Software on servers is also illegal, insofar as it serves to screen the data traffic of third parties for malware, etc., even if such parties are contracting partners of the Licensee (e.g. Access or Mailbox clients). Exploitation of the Software for these purposes requires the express written consent of the Licenser. Products and product editions marked as “freeware” or “free software” must be used exclusively by you or members of your household solely for private non-commercial purposes, and commercial use requires the express written consent of the Licenser or purchase of licenses for commercial use. Products that are marked as “portable” may be used on multiple PCs.
+2.2. Diskettes, CDs or other copies of the Software may not be transmitted for any purpose, including private purposes, unless we expressly consent to this transmission in writing. Without our written consent, the Software – with the exception of interventions permitted by law – may not be decompiled, re-engineered, disassembled or in any other way presented in a form that can be recognized by humans. Furthermore, without our written consent, the Software may not be modified, adapted, sold or surrendered by any means to third parties for use free of charge or for compensation, insofar as this is not permitted according to this agreement or is imperative under statutory regulations.
+3. Warranty
+3.1. We warrant that within the meaning of the documentation and in accordance with the state of art at the moment of delivery the Software is free of defect and fundamentally usable, without however being sufficient for all possible application conditions. You acknowledge that under the current state of technology the development of error-free software is not possible. This applies in large degree to the field of combating malware, where new viruses, Trojan horses, worms and comparable programs constantly arise that have been specially created to circumvent malware protection programs.
+3.2. We do not warrant, therefore, that the Software can be used for all of your requirements, or that the functions contained in the Software can be used uninterrupted and error-free in combination with any and all the data, programs and computer systems you desire, or that it can be ruled out that other software errors might arise as a result of corrections to software errors. In addition, we do not provide warranty for errors, disruptions or damage that are attributable to unskilled operation, transport damage, operating system errors, modified operating system components, interfaces and parameters or the use of unsuitable organizational media and data media.
+3.3. The warranty shall expire if without our written consent you yourself carry out or a third party carries out modifications or reconditioning of the Software. We also cannot acknowledge expenses incurred in this context. We shall accept no responsibility whatsoever for software that is used, expanded or damaged, or that, among other things, is used in a manner that differs from the contractually agreed terms of use, unless the modification, expansion or damage was not the cause of the defect.
+3.4. We must be informed in writing of any defects in the Software within no more than eight days – for consumers, however, by expiry of the statutory periods – after they have been identified; otherwise the warranty shall lapse. The warranty period shall amount by mutual consent to two years for consumers; otherwise it amounts to six months.
+3.5. The licensor delivers the software in the basic languages German, English and French and does not guarantee the correctness of further software localizations that come with it. The corresponding translators are solely responsible for contents and maintenance of these supplementary language packs.
+3.6. You are aware of and accept that the software also detects and alerts so-called “Potentially Unwanted Programs” (PUPs) that do not comply with the specifications of malware, but are mostly to be considered unwanted software due to certain behavior patterns.
+4. Damage claims
+4.1. Damage claims against us are excluded, insofar as liability does not occur as a result of intent or gross negligence as prescribed by law. The disclaimer of warranty pertains in particular as well to damages by viruses or similar programs, since according to the state of art it is not possible to effectively combat malware 100% of the time. Liability for consequential loss, including loss of profit, and for indirect damages is also excluded. Furthermore, any liability of ours for damages that arise from unauthorized interventions is also excluded, as is liability for defective operation or installation.
+4.2. We strongly recommend that you make regular backup copies of the data found on your computers. Insofar as you do not comply with this duty to mitigate loss, we shall not be liable for damages arising from this violation. This limitation of liability does not apply, if the event causing the damage was caused by gross negligence or intent; however, even during the assessment of compensation the missing backup copy shall be regarded as contributory negligence.
+4.3. You know and accept, under your own responsibility that details of detected and manually quarantined objects, blocked websites, hosts and programs as well as created configurations, so called “application rules” can be sent to Emsisoft servers.
+4.4. You know and accept that a guaranteed detection of malware is technically not possible and that the Software may cause “false alerts”, especially with behavior based detection of malicious code.
+5. Commencement and term of the license agreement
+5.1. This agreement shall come into effect by mutual consent between you and us, but no later than by the actual installation of this software undertaken by you on a PC. Express mutual consent can be stated in writing, by regular mail, by e-mail or also by personal pickup or receipt.
+5.2. This agreement runs for the minimum period originally agreed to between you and us in accordance with the separate agreement (see invoice). During the contractual period, we will continuously improve, maintain and update the Software delivered to you. In particular, we will ensure that the Software will also recognize previously unrecognized malware, and similar software. We will make the necessary program updates available via the online update feature of the Software. Should it be necessary to replace existing software products because of technical developments, you will get the new software from us for new installation. In this case, our customer center is at your disposal.
+5.3. A fee will be agreed upon for the granted license as well as regularly executed updates under the maintenance agreement. We reserve the right to modify prices. If price increases are announced, you are entitled to terminate the contract relationship with due observance of the contractual notice period.
+5.4. This agreement runs for a minimum of the term chosen by you. Further use of this Software is illegal upon expiry of this contractual relationship. In this event you are obligated to destroy the original data medium including all copies and documentation. Further use of the Software beyond the day on which the agreement was terminated shall constitute copyright violation.
+5.5. If you violate one of the terms and conditions of this agreement, in particular with regard to the scope of the rights granted to you, we are entitled to terminate this agreement with immediate effect. In this event, any further use of the Software is also illegal.
+6. Final Provisions
+6.1. This agreement is subject to New Zealand law to the exclusion of the UN rights of purchase. Legal venue for all disputes arising from this agreement and on the occasion of its termination is the competent court for commercial matters in Nelson, NZ. If, however, you are a consumer, the applicable venue is your place of general jurisdiction. To be legally valid, modifications and supplements to this agreement require the written form and the legally binding signature of the contracting partner; this also applies to the revocation of the written form requirement.
+Terms of Service
+By using our paid and free of cost desktop and online services, you agree to our Terms of Service.
+Privacy Policy
+We require collection and processing of certain personal data to provide the services, as outlined in our Privacy Policy.
+If you do not agree with the terms and conditions of this license agreement, an agreement between us shall not be formed, and you shall not be entitled to install or activate the Software. If, however, you proceed to install and/or activate it, you thereby declare your agreement with the terms and conditions of the license. If you want to terminate this contract, please contact us.
+Newsletter
+Malware never sleeps. Be sure to stay up-to-date on emerging threats.
+Subscribe
+Emsisoft requires collection and processing of certain personal data to provide the services. Please confirm that you have read and accept the terms of our Privacy Policy
+Emsisoft > Emsisoft End User License Agreement (EULA)
+PRODUCTS
+Emsisoft Business Security
+Emsisoft Enterprise Security
+Emsisoft Remediation Kit
+Emsisoft Anti-Malware Home
+Emsisoft Emergency Kit
+Emsisoft Mobile Security
+KEY BENEFITS
+Layered Protection
+Anti-Ransomware
+Centralized Management
+Endpoint Detection & Response
+Threat Hunting
+Ransomware Rollback
+Behavior AI
+Knowledge
+News Blog
+Enterprise Security
+Malware Lab
+Product User Guides
+Video Tutorials
+Support
+Contact Us
+Submit a suspicious file
+COMPANY
+About Us
+Our Customers
+Awards & Reviews
+Press Center
+Careers
+Webinars
+Podcast
+© 2003-2026 Emsisoft - 11/21/2026 - Legal Notice - Terms - Privacy Policy - Cookie Policy - System Status - English English
+Deutsch
+Français
+Emsisoft
+worldwide
+Emsisoft YouTube
+Emsisoft LinkedIn
+Emsisoft Facebook
+Emsisoft Twitter

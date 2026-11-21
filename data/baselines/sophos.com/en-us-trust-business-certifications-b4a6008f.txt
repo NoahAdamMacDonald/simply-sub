@@ -1,0 +1,413 @@
+url: https://www.sophos.com/en-us/trust/business-certifications
+method: fetch
+saved: 2026-11-20
+
+Sophos Security Compliance and Certifications - Sophos Trust Center
+Skip to Content
+Get started
+Experiencing a cyberattack? Get help now
+Sign in
+Sophos Fusion
+Partner Portal
+Sophos Home
+English (US) Open language switcher
+Products
+Defense system overview
+Defense system overview
+Sophos Fusion
+Sophos Fusion sign in
+Sophos AI
+Integrations marketplace
+Threat intelligence
+Free trial
+Endpoint security
+Endpoint security
+Endpoint protection (next-gen antivirus)
+EDR - Endpoint detection and response
+Server protection
+Mobile security
+Security operations
+Security operations
+XDR - Extended detection and response
+Next-Gen SIEM
+Sophos AI Defense
+Sophos CISO Advantage
+Identity security
+Identity security
+ITDR - Identity threat detection and response
+Network security and infrastructure
+Network security and infrastructure
+Next-gen firewall (NGFW)
+NDR - Network detection and response
+Network switches
+Wireless access points
+Backup and recovery
+Workspace protection
+Workspace protection
+Workspace protection
+Protected Browser
+Zero trust network access (ZTNA)
+DNS Protection
+Email Monitoring System
+Email security
+Email security
+Email and phishing protection
+Employee awareness training
+Cloud security
+Cloud security
+Cloud workload protection
+Explore managed detection and response with Sophos MDR.
+Services
+Defense system overview
+Defense system overview
+Sophos Fusion
+Sophos Fusion sign in
+Sophos AI
+Integrations marketplace
+Threat intelligence
+Free trial
+Managed services
+Managed services
+MDR - Managed detection and response
+IR - Incident response services
+Vulnerability management (Managed risk)
+Professional services
+Professional services
+Security Services Retainer
+DFIR & readiness services
+Security testing & assessment services
+Deployment services
+TAM services
+Complimentary tools
+Complimentary tools
+NIST assessment
+NIS2 assessment
+Experiencing a breach? Get immediate help.
+Solutions
+Use cases
+Use cases
+Defend my business 24/7
+Stop ransomware attacks
+Secure remote and hybrid employees
+Address cyber insurance requirements
+Protect my Microsoft environment
+Enable Cloud-native security
+All solutions
+Industries
+Industries
+Education
+Finance and banking
+Government
+Healthcare
+Manufacturing
+Retail
+Protect your business around the clock with managed detection and response.
+Why Sophos
+Why Sophos
+Why Sophos
+Awards and recognition
+Case studies
+Competitor comparisons
+About us
+About us
+Company
+Events
+Press
+Careers
+Trust center
+Trust center
+Trust Center overview
+Sophos Fusion security
+Secure design
+Responsible disclosure
+ESG
+Corporate policy
+Cybersecurity guidance
+Central logging
+Business certifications
+Hardware production certification
+Privacy
+Security tabletop guidelines
+Incident response
+Digital operational resilience act
+CISO playbooks
+Trusted by more than 600,000 customers worldwide. Read their stories.
+Partners
+Sophos partners
+Sophos partners
+Partner program
+Partner portal login
+Partner care
+Partner training
+Partner blog
+Partner ecosystem
+Partner ecosystem
+Channel partners
+Managed service providers (MSPs)
+OEM
+Integrations and APIs
+Find a Sophos partner near you.
+Resources
+Threat intelligence
+Threat intelligence
+X-Ops threat research
+SophosLabs Intelix
+AI research
+Threat profiles
+Threat library
+Threat research blog
+Vulnerability Advisories
+Resource center
+Resource center
+View all resources
+Case studies
+Reports
+Webinars
+White papers
+Cybersecurity explained
+Blogs
+Blogs
+Sophos Blog
+Products and services
+Threat research
+AI research
+Security operations
+Sophos Life
+Sophos insights
+Partner Blog
+Support
+Get help (Support)
+Get help (Support)
+Emergency incident response
+Support portal
+Support plans
+Customer success
+Contact Sophos support
+Contact partner care
+Support resources
+Support resources
+Downloads and updates
+Sophos Techvids
+Sophos status page
+Security advisories
+Submit a threat
+Product Support
+Product Support
+Product documentation
+Sophos community forums
+Sophos Firewall
+Sophos Endpoint
+Sophos XDR
+Sophos Central
+Sophos Email
+Training
+Training
+Sophos Academy
+Experiencing a breach? Get immediate help.
+Get started
+Trust Center
+Overview
+Security Advisories
+Secure Design
+Guidance
+Architecture
+Responsible disclosure
+Security testing
+Incident response
+Compliance Compliance and certifications
+Hardware product certification
+Privacy Data protection overview
+Product datasheets
+Notices
+Governance Corporate policies
+Customer and Partner Agreements
+ESG Data Points
+Sophos AI Principles in Cybersecurity
+Responsible AI FAQs
+Environmental Health and safety
+Environmental sustainability
+E-waste
+Envenance Take-Back Solution
+Resilience Root Cause Analyses
+Service Status
+Business Continuity
+Security compliance and certifications
+Sophos continuously monitors evolving regulatory standards across the globe. We incorporate the latest relevant controls into our organisation, products, and technology to help our customers meet their compliance obligations.
+Compliance frameworks
+CSA STAR
+Sophos is listed as a Trusted Cloud Provider with the Cloud Security Alliance (CSA) and has attained CSA STAR Level 1 status. The self-assessment can be downloaded from the CSA Registry website.
+ACCREDITATION
+View CSA STAR Registry Listing
+SOC 2
+Validates how we manage customer data across security, availability, confidentiality, and privacy.
+ACCREDITATION
+*Request access to report
+ISO 27001:2022
+Demonstrates integration of security, privacy, and ongoing improvement into our daily operations.
+ACCREDITATION
+Sophos certificate (PDF)
+Statement of Applicability (PDF)
+RESOURCES
+Compliance guide (PDF)
+ISO 27017:2015
+Establishes information security controls that are specific to public cloud environments.
+ACCREDITATION
+Sophos certificate (PDF)
+Statement of Applicability (PDF)
+ISO 27018:2019
+Establishes information security controls for protecting personally identifiable information (PII) data in public cloud environments.
+ACCREDITATION
+Sophos certificate (PDF)
+Statement of Applicability (PDF)
+TX-RAMP
+Products certified under the Texas Risk and Authorization Management Program (TX-RAMP) demonstrate compliance with rigorous security standards required for Texas state agencies and public institutions.
+ACCREDITATION
+Taegis MDR Certificate
+Sophos Cloud Certificate
+PCI DSS
+Protects credit card data by ensuring secure storage, transmission, and handling of payment info.
+ACCREDITATION
+*Request access to report
+RESOURCES
+See how we help
+Compliance guide (PDF)
+C5 Germany
+Established by the German Federal Office for Information Security (BSI) to define a comprehensive set of security and compliance requirements for cloud service providers.
+ACCREDITATION
+*Request access to report
+HIPAA
+Protects the privacy and security of medical records and health information in the U.S. healthcare industry.
+ACCREDITATION
+*Request access to report
+RESOURCES
+See how we help
+Compliance guide (PDF)
+GDPR
+Ensures data protection and privacy for individuals in the EU and EEA, including data transfers beyond these regions.
+RESOURCES
+See how we help
+Compliance guide (PDF)
+CPRA
+Expands California consumer privacy rights and protections, with new enforcement through the CPPA.
+RESOURCES
+Compliance guide (PDF)
+CMMC
+U.S. Department of Defense framework for protecting sensitive information across the Defense Industrial Base (DIB).
+RESOURCES
+See How we Help
+Product Applicability Guide
+HITRUST CSF
+Combines multiple standards to manage risk and ensure compliance across the healthcare industry.
+RESOURCES
+Compliance guide (PDF)
+NIS2
+Sets stricter cybersecurity rules across the EU for infrastructure and digital service providers.
+RESOURCES
+See how we help
+Read the whitepaper
+Compliance guide (PDF)
+Digital Operational Resilience Act (DORA 2022/2554)
+The EU’s Digital Operational Resilience Act (DORA 2022/2554) regulates financial entities through contractual requirements with technology providers, including cybersecurity.
+RESOURCES
+See how we help
+Whitepaper
+SOX
+US federal law enacted to improve corporate governance and provide more transparency for investors.
+RESOURCES
+See how we help
+Compliance guide (PDF)
+CIPA
+Establishes technologic requirements to protect children from harmful content online.
+RESOURCES
+See how we help
+Compliance guide (PDF)
+NIS Directive
+The first piece of EU-wide legislation on cybersecurity, it provides legal measures to boost the overall level of cybersecurity in the EU.
+RESOURCES
+Compliance guide (PDF)
+POPI
+South African data protection law designed to safeguard personal information and establishes rights for individuals to have control over their personal data.
+RESOURCES
+Compliance guide (PDF)
+NIST CSF
+Framework based on five core functions to manage cybersecurity risks: identify, protect, detect, respond, and recover.
+RESOURCES
+Compliance guide (PDF)
+NYDFS
+The New York State Department of Financial Services (NYDFS) regulates financial institutions and services operating in New York State.
+RESOURCES
+Compliance guide (PDF)
+Ohio DPA
+State-level legislation designed to protect Ohioans’ sensitive personal information and establishes cybersecurity standards for organizations to follow.
+RESOURCES
+Compliance guide (PDF)
+ASD
+Data sovereignty and security solutions for organizations in Australia that have strict national or local regulatory or policy requirements
+RESOURCES
+How Sophos supports Essential Eight
+Compliance guide (PDF)
+CIS Controls
+Set of best practices and cybersecurity requirements developed by the Center of Internet Security (CIS)
+RESOURCES
+See how we help
+Compliance guide (PDF)
+*Reports available to interested parties once an NDA has been signed. Please contact your account manager or Sophos sales to request a copy.
+Defense System
+Defense system overview
+Endpoint security
+Security operations
+Identity security
+Network security
+Networking infrastructure
+Email security
+Cloud security
+Calculator
+Services
+Managed services
+Advisory services
+Professional services
+Technical Account Manager
+Solutions
+Featured solutions
+Industries
+Public cloud security
+Use cases
+Compliance
+Why Sophos
+Awards and recognition
+Blog
+Case studies
+Competitor comparison
+Trust center
+About us
+Partners
+Sophos partners
+Resellers
+Become a partner
+Partner training
+Resources
+Threat intelligence
+Resource center
+Customer training
+Secureworks
+Product Terms
+HitmanPro
+Overview
+HitmanPro
+HitmanPro.Alert
+Support
+Get help
+Support resources
+Product support
+Get Started
+Try for free
+Legal
+General
+Modern Slavery Statement
+Speak Out
+English (US)
+Cookies Settings
+Terms
+Privacy
+Legal
+© 2026 Sophos Ltd. All rights reserved.

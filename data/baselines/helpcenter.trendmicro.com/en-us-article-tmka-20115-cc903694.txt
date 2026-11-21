@@ -1,0 +1,625 @@
+url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+method: fetch
+saved: 2026-11-20
+
+Trend Micro Maximum Security Data Collection Notice
+| Trend Micro Help Center
+You’re offline. This is a read only version of the page.
+Learn more
+How to translate this page
+Your browser can translate this page automatically. Here's how:
+Chrome / Edge: A translation bar usually appears at the top. Click Translate. If not, right-click anywhere on the page and select Translate to [your language].
+Firefox: Install the Firefox Translations add-on, then click the translate icon in the address bar.
+Safari (iPhone / iPad): Tap the aA icon in the address bar, then tap Translate Website.
+⚠️ SECURITY ALERT: Important PHP Website Vulnerability You Should Know About >>>
+Looking for business support?
+Help Center
+SIGN IN
+Product Help
+Account Help
+Download and Install
+Get Help
+SIGN IN
+Search
+All Products
+Premium Security
+Maximum Security
+Internet Security
+Antivirus+ Security
+Mobile Security for Android
+Antivirus for Mac
+Mobile Security for iOS
+Dr. Cleaner
+Password Manager
+ID Security
+VPN Proxy One Pro
+Home Network Security
+Security for Microsoft Edge
+Security for Google Chrome
+Cleaner One Pro
+Antivirus One
+ID Protection
+What brings you here today?
+🔑 I want to activate my subscription.
+📥 I need help installing my Trend Micro.
+➕ I want to add a new device.
+🔼 I want to upgrade my Trend Micro.
+🔄 I want to renew my Trend Micro.
+Windows
+Maximum Security
+Internet Security
+Antivirus+ Security
+Mac & iOS
+Antivirus for Mac
+Mobile Security for iOS
+Network Security
+Home Network Security
+Trend Micro VPN
+Anti Scam and Spam
+Trend Micro ScamCheck
+Android
+Mobile Security for Android
+AI Companion
+TrendLife Kaleida NEW
+Data & Privacy
+ID Protection
+Browser Protection
+Security for Microsoft Edge
+Security for Google Chrome
+Premium Services
+Service Bundles
+Ala Carte
+Free Tools
+Cleaner One Pro
+Ad Blocker for Mac
+Password Generator
+More Support
+Cybersecurity Learning Center
+Troubleshooting
+Vulnerability Disclosures
+Support
+TMKA-20115
+Print
+Trend Micro Maximum Security Data Collection Notice
+Views:
+Default Collection
+Trend Micro Maximum Security automatically collects and transmits the following data, some of which may be considered personal data in certain jurisdictions after installing/enabling the product. It is necessary to collect this data to provide the security functions on this product. Therefore, you cannot disable these features. If you do not want Trend Micro to access this data, you should uninstall and stop using the product.
+To see where this data is processed, refer to our list of data centers and authorized data subprocessors and their locations.
+Google Analytics
+DESCRIPTION
+Google Analytics data is used to improve user experience.
+DATA COLLECTED
+IP Address
+FEATURE LOCATION
+This feature cannot be disabled.
+[Back to top]
+Installation
+DESCRIPTION
+The data is used for troubleshooting when there is an installation error and to properly identify your computer and network environment in order to provide better support.
+DATA COLLECTED
+Product Debug Logs
+IP Address
+MAC address
+Gateway BSSID
+Gateway MAC address
+Computer name
+FEATURE LOCATION
+This feature cannot be disabled.
+[Back to top]
+License Management
+DESCRIPTION
+License Management uses collected data to identify customers' accounts for support service purposes and to remind users to use relevant in-product features, products and services and if user opts in, to introduce new features, products and services to the user.
+DATA COLLECTED
+Email address
+Password
+First name
+Last name
+Computer name
+Physical address (Japan)
+Phone number (Japan)
+Birthday (Japan)
+IP address
+MAC address
+FEATURE LOCATION
+This feature cannot be disabled.
+Note: Only applies to new customers with full licenses that choose to create a Trend Micro Account using the product during installation.
+[Back to top]
+Active Update
+DESCRIPTION
+Active Update collects IP data to allow Trend Micro to know whether this device has the latest protection against the latest malware.
+DATA COLLECTED
+IP address
+FEATURE LOCATION
+This feature cannot be disabled.
+[Back to top]
+Error Log Auto Feedback
+DESCRIPTION
+Trend Micro uses this data to troubleshoot any issues encountered while using the product.
+DATA COLLECTED
+Product debug logs and dumps
+System information
+Windows system event logs
+IP address
+FEATURE LOCATION
+This feature cannot be disabled.
+[Back to top]
+Configurable Features
+Trend Micro Maximum Security includes the following features, which may collect and transmit the following data, some of which may be considered personal in certain jurisdictions, to Trend Micro. You can disable any of these features at any time to prevent the corresponding data from being sent to Trend Micro.
+Share threat information with Trend Micro
+DESCRIPTION
+Sharing threat information with the Smart Protection Network allows Trend Micro to rapidly identify and address new threats.
+Share threat information with Trend Micro controls the data collected by the following features:
+Manual Scan
+Scheduled Scan
+Real-time Scan
+Active Monitoring
+Browser Exploit Prevention
+Firewall Booster
+DATA COLLECTED
+Malware detection records (File name, File path, IP address, URL, Registry key, Registry value, Detected program name/path)
+Firewall records (Source IP and port number, Destination IP and port number)
+Secure Erase - deleted file name
+Wi-Fi Advisor records (detected app name, app ID, app MAC, NIC ID, NIC name, NIC MAC address)
+FEATURE LOCATION
+Main Console > Other Settings > Smart Protection Network > Share threat information with Trend Micro
+Note:If you only want to disable the data collection for a specific feature, disable each feature separately using the related product screens. Refer to the Online Help for more information.
+[Back to top]
+Share computer performance information with Trend Micro
+DESCRIPTION
+Trend Micro uses this data to optimize the performance of your devices and design new features to further protect our customers.
+DATA COLLECTED
+MAC address
+File name
+System information
+Product settings
+IP address
+Browser setting
+Installed applications
+Running processes
+URL (Users choose to open websites automatically in Pay Guard, or disable this feature)
+Product UI shown
+- User interaction with product UI
+FEATURE LOCATION
+Main Console > Other Settings > Smart Protection Network > Share computer performance information with Trend Micro
+[Back to top]
+Web Threat Protection
+DESCRIPTION
+The data collected is used to enhance detection rate and reduce false alarms.
+DATA COLLECTED
+IP address
+URL
+File name
+File path
+Original URL
+Browser’s user agent
+FEATURE LOCATION
+Main Console > Settings > Internet & Email Controls > Web Threats > Block potentially dangerous websites
+[Back to top]
+Protect Another Device
+DESCRIPTION
+This data is used to let users know which detected devices are protected by Trend Micro products.
+Do not scan your network using Protect Another Device if you do not want to transmit data to Trend Micro.
+DATA COLLECTED
+MAC address
+Gateway SSID
+Gateway MAC address
+IP address
+Hostname
+FEATURE LOCATION
+Welcome Page
+Main Console > Device > Protect Another Device > Choose
+Main Console > Protect Another Device > Scan your network to find devices
+Popups
+[Back to top]
+Trend Micro Toolbar
+DESCRIPTION
+URLs you access are collected and checked against our threat intelligence database to prevent you from accessing malicious websites and protect you from online threats.
+DATA COLLECTED
+Unrated URL
+IP address
+FEATURE LOCATION
+Main Console > Privacy > Privacy Scanner > Configure
+Main Console > Privacy > Social Networking Protection > Configure
+[Back to top]
+Support Tool
+DESCRIPTION
+Data collected is used to troubleshoot users' issues.
+To opt-out of data collection, users should not use the Support Tool to report issues.
+DATA COLLECTED
+Debug logs from Trend Micro products
+Modules
+System information
+Device name
+Account name
+File path
+Detected suspicious files
+FEATURE LOCATION
+Support Tool Console - For debug log collection in Tab (A) Debug:
+Users can choose to automatically send log data to Trend Micro.
+Support Tool Console - For malicious log collection in Tab (B) Threats:
+[Back to top]
+Single Password
+DESCRIPTION
+Password data is used to allow customers to access their Trend Micro products settings and Vault.
+To opt-out of data collection, users should not set up password protection.
+DATA COLLECTED
+Email address
+Password
+Password hint
+FEATURE LOCATION
+Main Console > Settings > Other Settings > Password
+[Back to top]
+Anti Spam Toolbar
+DESCRIPTION
+Email data is used for Mail Phishing Score.
+To opt-out of data collection, users should not use this feature.
+DATA COLLECTED
+Spam email
+Email reported by users as not spam
+FEATURE LOCATION
+Main Console > Settings > Internet & Email Controls > Spam & Emailed Files
+[Back to top]
+Email Defender
+DESCRIPTION
+Email data is used for scam mail and malicious mail detection.
+To opt-out of data collection, users should not use this feature.
+Do not include personal information when reporting a false alarm.
+Sharing threat information allows Trend Micro to rapidly identify and address new threats.
+Note:Malicious detection records collection is not applied to Trend Micro Toolbar for Firefox.
+DATA COLLECTED
+Email Sender
+Email Subject
+Email Content
+User comments
+Malicious detection records (Sender’s full email address, URL, and phone number)
+FEATURE LOCATION
+Enable Email Defender
+Report False Alarm
+Email Defender
+View Details
+[Back to top]
+Dangerous Website Notification Scanning
+DESCRIPTION
+The feature will scan notification URLs inside the browser preference file.
+DATA COLLECTED
+Notification URLs
+File path of browser preference file
+OS notification information
+FEATURE LOCATION
+User can turn off notification scan through the Main Console
+Main Console > Settings > Internet & Email Controls > Web Threats > Block potentially dangerous website notifications
+[Back to top]
+Unwanted Notification Blocker
+DESCRIPTION
+This feature checks the Allow notification setting of your Chrome and Edge browsers. When dangerous and suspicious websites are found, the feature changes their notification setting from Allow to Block.
+DATA COLLECTED
+SPN GUID of your Trend Micro security software
+File paths of your browser settings
+URLs in your browser’s Allow notification list
+URL rating results
+Installed software
+Installed extensions
+Raw notification payload from wpndatabase.db
+OS notification information
+OS Version
+OS language
+FEATURE LOCATION
+Please choose non feedback version if you do not wish to feedback data to Trend Micro.
+[Back to top]
+Trend AI App Protection
+DESCRIPTION
+This feature can be disabled with following setting on Main Console.
+DATA COLLECTED
+File sha1
+File path
+FEATURE LOCATION
+Main Console > Data > AI App Protection
+This setting will disable the feedback related to AI App Protection feature, if you want totally disable the feedback, you can disable the option through the following:
+Main Console > Setting > Check if Programs try to make unauthorized change to system settings that could threaten your security
+Please note if you disable the setting above, Trend Micro will not monitor and block any suspicious behavior for the system.
+[Back to top]
+See also
+Trend Micro Security for Microsoft Edge Data Collection Notice
+Troubleshooting Tool (Air Support) Data Collection Notice
+Password Manager for Desktop Data Collection Notice
+Keywords: Maximum Security Data Collection Notice
+Comments (0)
+Add a comment
+Name
+Email
+Comment
+English
+English
+日本語
+繁體中文
+Product Support
+Maximum Security
+Antivirus for Mac
+Mobile Security (Android)
+Mobile Security (iOS)
+ID Protection
+Trend Micro VPN
+Trend Micro ScamCheck
+Other Support
+TrendLife Kaleida
+Account Help
+Download and Install
+Troubleshooting
+Vulnerability
+Cybersecurity Learning Center
+About Trend Micro Support
+Premium Services
+Sitemap
+Privacy Policy
+Business Support
+Data Collection Disclosure
+Contact Support
+Copyright © 2026 Trend Micro Incorporated. All rights reserved.
+×
+Modal header
+One fine body…
+Dismiss
+Save
+Home
+LAST UPDATED: SEP 17, 2026
+Default Collection
+Trend Micro Maximum Security automatically collects and transmits the following data, some of which may be considered personal data in certain jurisdictions after installing/enabling the product. It is necessary to collect this data to provide the security functions on this product. Therefore, you cannot disable these features. If you do not want Trend Micro to access this data, you should uninstall and stop using the product.
+To see where this data is processed, refer to our list of data centers and authorized data subprocessors and their locations.
+Google Analytics
+DESCRIPTION
+Google Analytics data is used to improve user experience.
+DATA COLLECTED
+IP Address
+FEATURE LOCATION
+This feature cannot be disabled.
+[Back to top]
+Installation
+DESCRIPTION
+The data is used for troubleshooting when there is an installation error and to properly identify your computer and network environment in order to provide better support.
+DATA COLLECTED
+Product Debug Logs
+IP Address
+MAC address
+Gateway BSSID
+Gateway MAC address
+Computer name
+FEATURE LOCATION
+This feature cannot be disabled.
+[Back to top]
+License Management
+DESCRIPTION
+License Management uses collected data to identify customers' accounts for support service purposes and to remind users to use relevant in-product features, products and services and if user opts in, to introduce new features, products and services to the user.
+DATA COLLECTED
+Email address
+Password
+First name
+Last name
+Computer name
+Physical address (Japan)
+Phone number (Japan)
+Birthday (Japan)
+IP address
+MAC address
+FEATURE LOCATION
+This feature cannot be disabled.
+Note: Only applies to new customers with full licenses that choose to create a Trend Micro Account using the product during installation.
+[Back to top]
+Active Update
+DESCRIPTION
+Active Update collects IP data to allow Trend Micro to know whether this device has the latest protection against the latest malware.
+DATA COLLECTED
+IP address
+FEATURE LOCATION
+This feature cannot be disabled.
+[Back to top]
+Error Log Auto Feedback
+DESCRIPTION
+Trend Micro uses this data to troubleshoot any issues encountered while using the product.
+DATA COLLECTED
+Product debug logs and dumps
+System information
+Windows system event logs
+IP address
+FEATURE LOCATION
+This feature cannot be disabled.
+[Back to top]
+Configurable Features
+Trend Micro Maximum Security includes the following features, which may collect and transmit the following data, some of which may be considered personal in certain jurisdictions, to Trend Micro. You can disable any of these features at any time to prevent the corresponding data from being sent to Trend Micro.
+Share threat information with Trend Micro
+DESCRIPTION
+Sharing threat information with the Smart Protection Network allows Trend Micro to rapidly identify and address new threats.
+Share threat information with Trend Micro controls the data collected by the following features:
+Manual Scan
+Scheduled Scan
+Real-time Scan
+Active Monitoring
+Browser Exploit Prevention
+Firewall Booster
+DATA COLLECTED
+Malware detection records (File name, File path, IP address, URL, Registry key, Registry value, Detected program name/path)
+Firewall records (Source IP and port number, Destination IP and port number)
+Secure Erase - deleted file name
+Wi-Fi Advisor records (detected app name, app ID, app MAC, NIC ID, NIC name, NIC MAC address)
+FEATURE LOCATION
+Main Console > Other Settings > Smart Protection Network > Share threat information with Trend Micro
+Note:If you only want to disable the data collection for a specific feature, disable each feature separately using the related product screens. Refer to the Online Help for more information.
+[Back to top]
+Share computer performance information with Trend Micro
+DESCRIPTION
+Trend Micro uses this data to optimize the performance of your devices and design new features to further protect our customers.
+DATA COLLECTED
+MAC address
+File name
+System information
+Product settings
+IP address
+Browser setting
+Installed applications
+Running processes
+URL (Users choose to open websites automatically in Pay Guard, or disable this feature)
+Product UI shown
+- User interaction with product UI
+FEATURE LOCATION
+Main Console > Other Settings > Smart Protection Network > Share computer performance information with Trend Micro
+[Back to top]
+Web Threat Protection
+DESCRIPTION
+The data collected is used to enhance detection rate and reduce false alarms.
+DATA COLLECTED
+IP address
+URL
+File name
+File path
+Original URL
+Browser’s user agent
+FEATURE LOCATION
+Main Console > Settings > Internet & Email Controls > Web Threats > Block potentially dangerous websites
+[Back to top]
+Protect Another Device
+DESCRIPTION
+This data is used to let users know which detected devices are protected by Trend Micro products.
+Do not scan your network using Protect Another Device if you do not want to transmit data to Trend Micro.
+DATA COLLECTED
+MAC address
+Gateway SSID
+Gateway MAC address
+IP address
+Hostname
+FEATURE LOCATION
+Welcome Page
+Main Console > Device > Protect Another Device > Choose
+Main Console > Protect Another Device > Scan your network to find devices
+Popups
+[Back to top]
+Trend Micro Toolbar
+DESCRIPTION
+URLs you access are collected and checked against our threat intelligence database to prevent you from accessing malicious websites and protect you from online threats.
+DATA COLLECTED
+Unrated URL
+IP address
+FEATURE LOCATION
+Main Console > Privacy > Privacy Scanner > Configure
+Main Console > Privacy > Social Networking Protection > Configure
+[Back to top]
+Support Tool
+DESCRIPTION
+Data collected is used to troubleshoot users' issues.
+To opt-out of data collection, users should not use the Support Tool to report issues.
+DATA COLLECTED
+Debug logs from Trend Micro products
+Modules
+System information
+Device name
+Account name
+File path
+Detected suspicious files
+FEATURE LOCATION
+Support Tool Console - For debug log collection in Tab (A) Debug:
+Users can choose to automatically send log data to Trend Micro.
+Support Tool Console - For malicious log collection in Tab (B) Threats:
+[Back to top]
+Single Password
+DESCRIPTION
+Password data is used to allow customers to access their Trend Micro products settings and Vault.
+To opt-out of data collection, users should not set up password protection.
+DATA COLLECTED
+Email address
+Password
+Password hint
+FEATURE LOCATION
+Main Console > Settings > Other Settings > Password
+[Back to top]
+Anti Spam Toolbar
+DESCRIPTION
+Email data is used for Mail Phishing Score.
+To opt-out of data collection, users should not use this feature.
+DATA COLLECTED
+Spam email
+Email reported by users as not spam
+FEATURE LOCATION
+Main Console > Settings > Internet & Email Controls > Spam & Emailed Files
+[Back to top]
+Email Defender
+DESCRIPTION
+Email data is used for scam mail and malicious mail detection.
+To opt-out of data collection, users should not use this feature.
+Do not include personal information when reporting a false alarm.
+Sharing threat information allows Trend Micro to rapidly identify and address new threats.
+Note:Malicious detection records collection is not applied to Trend Micro Toolbar for Firefox.
+DATA COLLECTED
+Email Sender
+Email Subject
+Email Content
+User comments
+Malicious detection records (Sender’s full email address, URL, and phone number)
+FEATURE LOCATION
+Enable Email Defender
+Report False Alarm
+Email Defender
+View Details
+[Back to top]
+Dangerous Website Notification Scanning
+DESCRIPTION
+The feature will scan notification URLs inside the browser preference file.
+DATA COLLECTED
+Notification URLs
+File path of browser preference file
+OS notification information
+FEATURE LOCATION
+User can turn off notification scan through the Main Console
+Main Console > Settings > Internet & Email Controls > Web Threats > Block potentially dangerous website notifications
+[Back to top]
+Unwanted Notification Blocker
+DESCRIPTION
+This feature checks the Allow notification setting of your Chrome and Edge browsers. When dangerous and suspicious websites are found, the feature changes their notification setting from Allow to Block.
+DATA COLLECTED
+SPN GUID of your Trend Micro security software
+File paths of your browser settings
+URLs in your browser’s Allow notification list
+URL rating results
+Installed software
+Installed extensions
+Raw notification payload from wpndatabase.db
+OS notification information
+OS Version
+OS language
+FEATURE LOCATION
+Please choose non feedback version if you do not wish to feedback data to Trend Micro.
+[Back to top]
+Trend AI App Protection
+DESCRIPTION
+This feature can be disabled with following setting on Main Console.
+DATA COLLECTED
+File sha1
+File path
+FEATURE LOCATION
+Main Console > Data > AI App Protection
+This setting will disable the feedback related to AI App Protection feature, if you want totally disable the feedback, you can disable the option through the following:
+Main Console > Setting > Check if Programs try to make unauthorized change to system settings that could threaten your security
+Please note if you disable the setting above, Trend Micro will not monitor and block any suspicious behavior for the system.
+[Back to top]
+See also
+Trend Micro Security for Microsoft Edge Data Collection Notice
+Troubleshooting Tool (Air Support) Data Collection Notice
+Password Manager for Desktop Data Collection Notice
+Was this article helpful?
+thumb_up
+Yes
+thumb_down
+No
+Thank you for your feedback!
+Feedback entity isn't available at the moment. Try again later.
+We’d love to hear your thoughts.
+Let us know what you think about this article.
+(You can choose more than one option.)
+I followed the steps, but it didn’t solve my problem.
+The information wasn’t accurate.
+It was confusing and hard to follow.
+I couldn’t find the information I needed.
+I’m not happy with the product or the issues I'm having.
+Others (Please specify below:)
+*This form is for feedback purposes only. If you have any questions, kindly chat with our Trend Companion.
+*Do not include any personal information.
+Submit Feedback
+GET SMARTER PROTECTION AGAINST SCAMS!
+Protect yourself and your iOS and Android devices against scam texts, spam calls, and deepfakes with Trend Micro ScamCheck. Scan the QR code to get it now.

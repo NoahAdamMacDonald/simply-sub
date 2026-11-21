@@ -1,0 +1,73 @@
+url: https://www.gdata.de/help-en/consumer/MyGdata/MyGDataFAQ/terminateLicenseViaMyGDATA/
+method: fetch
+saved: 2026-11-20
+
+Cancelling a license/subscription via the My G DATA portal :: Online Documentation
+| Online Documentation
+In this project
+Deutsch
+English
+Polski
+Français
+Nederlands
+Italiano
+Español
+Português
+Consumer
+My G DATA
+My G DATA web portal
+View "My devices"
+View "VPN"
+View "ID Protection"
+View "My contract"
+View "My invoices"
+View "Account settings"
+View "Support"
+Frequently asked questions (FAQs) and additional information about My G DATA
+Our Security Solutions
+G DATA Antivirus for Windows
+G DATA Antivirus for Mac
+G DATA Internet Security
+G DATA Total Security
+G DATA Mobile Security Android
+G DATA Mobile Security iOS
+The G DATA Mobile Security Center
+G DATA VPN
+G DATA Identity Protection
+Version history AV products for Windows
+Current version
+Version history AV products for Mac
+Current version
+Help Center
+Frequently asked questions
+Help and workarounds
+My G DATA FAQ
+Description of the user interface of the consumer products
+System requirements across operating systems
+Products, components and features that are no longer supported (End of Life)
+Consumer
+Cancelling a license/subscription via the My G DATA portal
+Cancelling a license/subscription via the My G DATA portal
+To terminate a G DATA License or cancel a subscription via the My G DATA Portal, first log in to
+My G DATA with your credentials.
+After successfully logging in, navigate to the "My Contract" view and click on Cancel contract.
+A new window will open, and you have the option of canceling ordinarily or extraordinarily.
+Ordinary cancellation
+Ordinary cancellation must take place within the periods stipulated in the contract. In the current View, you have the option
+of setting a date for the cancellation. Furthermore, you can inform us about your reasoning for the termination. If you do
+not specify a date, the subscription will be canceled at the earliest possible date.
+Giving a reason for termination is completely voluntary, but it helps G DATA a lot to improve our products.
+Confirm the cancellation by clicking Cancel subscription. After confirming the cancellation, you will see a summary
+of all relevant data. You can print out this information sheet if you wish.
+You will then also receive confirmation of the cancellation with all relevant data by e-mail.
+Extraordinary cancellation
+Extraordinary cancellation before the end of the contractually agreed term requires a valid reason. Please make sure you
+have such justification.
+Then enter the date for the cancellation and confirm the process by clicking Cancel subscription. After confirming
+the cancellation, you will see a summary of all relevant data. You can print out this information sheet if you wish.
+You will then also receive confirmation of the cancellation with all relevant data by e-mail.
+Content © 2026 G DATA CyberDefense AG. All rights reserved.
+This page was built by using the Antora default UI, The source code for this UI is licensed under the terms of the MPL-2.0 license
+Impressum
+Datenschutzerklärung
+Kontakt

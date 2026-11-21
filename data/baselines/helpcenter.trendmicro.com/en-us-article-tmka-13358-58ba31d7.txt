@@ -1,0 +1,205 @@
+url: https://helpcenter.trendmicro.com/en-us/article/TMKA-13358
+method: fetch
+saved: 2026-11-20
+
+How to Export Passwords from Trend Micro ID Protection Vault
+| Trend Micro Help Center
+You’re offline. This is a read only version of the page.
+Learn more
+How to translate this page
+Your browser can translate this page automatically. Here's how:
+Chrome / Edge: A translation bar usually appears at the top. Click Translate. If not, right-click anywhere on the page and select Translate to [your language].
+Firefox: Install the Firefox Translations add-on, then click the translate icon in the address bar.
+Safari (iPhone / iPad): Tap the aA icon in the address bar, then tap Translate Website.
+⚠️ SECURITY ALERT: Important PHP Website Vulnerability You Should Know About >>>
+Looking for business support?
+Help Center
+SIGN IN
+Product Help
+Account Help
+Download and Install
+Get Help
+SIGN IN
+Search
+All Products
+Premium Security
+Maximum Security
+Internet Security
+Antivirus+ Security
+Mobile Security for Android
+Antivirus for Mac
+Mobile Security for iOS
+Dr. Cleaner
+Password Manager
+ID Security
+VPN Proxy One Pro
+Home Network Security
+Security for Microsoft Edge
+Security for Google Chrome
+Cleaner One Pro
+Antivirus One
+ID Protection
+What brings you here today?
+🔑 I want to activate my subscription.
+📥 I need help installing my Trend Micro.
+➕ I want to add a new device.
+🔼 I want to upgrade my Trend Micro.
+🔄 I want to renew my Trend Micro.
+Windows
+Maximum Security
+Internet Security
+Antivirus+ Security
+Mac & iOS
+Antivirus for Mac
+Mobile Security for iOS
+Network Security
+Home Network Security
+Trend Micro VPN
+Anti Scam and Spam
+Trend Micro ScamCheck
+Android
+Mobile Security for Android
+AI Companion
+TrendLife Kaleida NEW
+Data & Privacy
+ID Protection
+Browser Protection
+Security for Microsoft Edge
+Security for Google Chrome
+Premium Services
+Service Bundles
+Ala Carte
+Free Tools
+Cleaner One Pro
+Ad Blocker for Mac
+Password Generator
+More Support
+Cybersecurity Learning Center
+Troubleshooting
+Vulnerability Disclosures
+Support
+TMKA-13358
+Print
+How to Export Passwords from Trend Micro ID Protection Vault
+Views:
+Need a copy of your saved passwords and secure notes? This guide shows you how to export your Trend Micro ID Protection Vault data to your device, and how to open the files once they download.
+🔔 Important Note: The Export Vault Data feature is available on the Trend Micro ID Protection web portal only — not in the mobile app or browser extension.
+Step 1: Sign In and Open Your Vault
+Open your browser and visit the Trend Micro ID Protection website.
+Click on the key logo on the left to access the Vault.
+Sign in with your Trend Micro Account.
+Enter again your registered email for your Trend Micro Account and your password.
+Enter again your Trend Micro Account password. This will open your Vault.
+🔔 Important Note: Being asked for your password more than once is normal — it's an extra security check before your Vault opens.
+Step 2: Export Your Vault Data
+Click the Export Vault Data icon you see on the upper right, then click Export.
+An Export vault data window will open showing:
+Description: "Download a copy of your vault data to your device."
+Important:
+Your passwords will be exported as plain text and visible to anyone who opens the file.
+Save the file somewhere safe and delete it when you no longer need it.
+What will be exported: the number of passwords and secure notes currently in your Vault (for example, "42 passwords" and "5 secure notes").
+File name: ID Protection vault export [current date].zip
+Confirm the item counts and file name, then click Export data. (Click Cancel to close the window without exporting.)
+The file ID Protection vault export [date].zip will download automatically to your device's default download location.
+Step 3: Locate and Use Your Exported Files
+Go to your browser's Downloads folder (or wherever your browser saves files) and locate the ZIP file.
+Unzip or extract the ZIP file. Inside, you will find two CSV files:
+Passwords [date].csv – contains your Display name, Account, Password, Website, and Notes for each saved password.
+Secure Notes [date].csv – contains the Title and Content of each saved secure note.
+Because passwords are exported in plain, readable text, store the extracted files in a secure location and delete them as soon as you no longer need them.
+Step 4: Import Your Passwords
+If you want to move these passwords into a new device, a fresh installation, or another password manager, use your exported Passwords [date].csv file with the import guide below:
+How to Import Passwords from CSV to ID Protection
+🔔 Important Note: Secure notes cannot currently be re-imported through the CSV import feature; the import guide covers passwords only.
+Keywords: export passwords ID Protection, export vault data, ID Protection vault export, download passwords Trend Micro, backup passwords, export CSV passwords, password manager export, secure notes export, save passwords to file, ID Protection web portal, Trend Micro Password Manager export, export passwords to new device, vault export zip, how to export my passwords
+Comments (0)
+Add a comment
+Name
+Email
+Comment
+English
+English
+日本語
+繁體中文
+Product Support
+Maximum Security
+Antivirus for Mac
+Mobile Security (Android)
+Mobile Security (iOS)
+ID Protection
+Trend Micro VPN
+Trend Micro ScamCheck
+Other Support
+TrendLife Kaleida
+Account Help
+Download and Install
+Troubleshooting
+Vulnerability
+Cybersecurity Learning Center
+About Trend Micro Support
+Premium Services
+Sitemap
+Privacy Policy
+Business Support
+Data Collection Disclosure
+Contact Support
+Copyright © 2026 Trend Micro Incorporated. All rights reserved.
+×
+Modal header
+One fine body…
+Dismiss
+Save
+Home
+LAST UPDATED: AUG 17, 2026
+Need a copy of your saved passwords and secure notes? This guide shows you how to export your Trend Micro ID Protection Vault data to your device, and how to open the files once they download.
+🔔 Important Note: The Export Vault Data feature is available on the Trend Micro ID Protection web portal only — not in the mobile app or browser extension.
+Step 1: Sign In and Open Your Vault
+Open your browser and visit the Trend Micro ID Protection website.
+Click on the key logo on the left to access the Vault.
+Sign in with your Trend Micro Account.
+Enter again your registered email for your Trend Micro Account and your password.
+Enter again your Trend Micro Account password. This will open your Vault.
+🔔 Important Note: Being asked for your password more than once is normal — it's an extra security check before your Vault opens.
+Step 2: Export Your Vault Data
+Click the Export Vault Data icon you see on the upper right, then click Export.
+An Export vault data window will open showing:
+Description: "Download a copy of your vault data to your device."
+Important:
+Your passwords will be exported as plain text and visible to anyone who opens the file.
+Save the file somewhere safe and delete it when you no longer need it.
+What will be exported: the number of passwords and secure notes currently in your Vault (for example, "42 passwords" and "5 secure notes").
+File name: ID Protection vault export [current date].zip
+Confirm the item counts and file name, then click Export data. (Click Cancel to close the window without exporting.)
+The file ID Protection vault export [date].zip will download automatically to your device's default download location.
+Step 3: Locate and Use Your Exported Files
+Go to your browser's Downloads folder (or wherever your browser saves files) and locate the ZIP file.
+Unzip or extract the ZIP file. Inside, you will find two CSV files:
+Passwords [date].csv – contains your Display name, Account, Password, Website, and Notes for each saved password.
+Secure Notes [date].csv – contains the Title and Content of each saved secure note.
+Because passwords are exported in plain, readable text, store the extracted files in a secure location and delete them as soon as you no longer need them.
+Step 4: Import Your Passwords
+If you want to move these passwords into a new device, a fresh installation, or another password manager, use your exported Passwords [date].csv file with the import guide below:
+How to Import Passwords from CSV to ID Protection
+🔔 Important Note: Secure notes cannot currently be re-imported through the CSV import feature; the import guide covers passwords only.
+Was this article helpful?
+thumb_up
+Yes
+thumb_down
+No
+Thank you for your feedback!
+Feedback entity isn't available at the moment. Try again later.
+We’d love to hear your thoughts.
+Let us know what you think about this article.
+(You can choose more than one option.)
+I followed the steps, but it didn’t solve my problem.
+The information wasn’t accurate.
+It was confusing and hard to follow.
+I couldn’t find the information I needed.
+I’m not happy with the product or the issues I'm having.
+Others (Please specify below:)
+*This form is for feedback purposes only. If you have any questions, kindly chat with our Trend Companion.
+*Do not include any personal information.
+Submit Feedback
+GET SMARTER PROTECTION AGAINST SCAMS!
+Protect yourself and your iOS and Android devices against scam texts, spam calls, and deepfakes with Trend Micro ScamCheck. Scan the QR code to get it now.

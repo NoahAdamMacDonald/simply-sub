@@ -1,0 +1,65 @@
+url: https://help.totalav.com/en/tech/av/setup/-/av-setup-managing-device
+method: fetch
+saved: 2026-11-20
+
+Managing a Device
+Help & Support Center
+Go To My Dashboard
+Setup Support Menu
+TotalAV Setup
+Download and Installation
+System Requirements
+How to Download and Install TotalAV
+Issues with Downloading or Installing TotalAV
+Where Are My Paid Features
+Managing Your Device
+Add a Device
+Manage Your Device
+Uninstall and Removal
+How to Uninstall TotalAV
+Managing a Device
+Here you will be able to see how to manage your devices across our product dashboard. If you wish to revoke a license from a device that is no longer in use, please follow the steps below.
+If you'd like to buy more licenses, see our store page here.
+Desktop
+Mobile
+Revoking a License
+Remove
+Click on the three dots under the actions tab and select the remove button.
+Confirm
+Click on the remove button to confirm this is the device that you’d like to remove a license from.
+Successful Removal
+The pop-up will appear at the bottom of the dashboard saying Device Removed Successfully.
+Device Removed
+In the image below, the device you have removed the licensing from will become unlicensed and will no longer have premium access to your TotalAV application.
+The action of removing licensing from a device will remove it from your subscription. Should you wish to re-add that device back onto your subscription, simply reinstall and log back into the TotalAV application.
+The process outlined above applies to Total Adblock, Total WebShield, and Total VPN as well.
+Revoking a License
+Remove
+Tap on the three dots under the actions tab and select the remove button.
+Confirm
+Tap on the remove button to confirm this is the device that you’d like to remove a license from.
+Successful Removal
+A pop-up will appear at the bottom of the dashboard saying “Device removed successfully”.
+Device Removed
+The device you have removed the licensing from, will become unlicensed and will no longer have premium access to your TotalAV application.
+The action of removing licensing from a device will vary depending on the specific device. It may either become unlicensed, requiring manual removal, or it will remove both the license and the device from Manage Installs automatically.
+The process outlined above applies to Total Adblock, Total WebShield, and Total VPN as well.
+Did this answer your question?
+YesNo
+Thanks for the feedback!
+CS
+DA
+DE
+ES
+FR
+IT
+NL
+NO
+PL
+PT
+SV
+TR
+Privacy Policy
+EULA
+Terms & Conditions
+Uninstall

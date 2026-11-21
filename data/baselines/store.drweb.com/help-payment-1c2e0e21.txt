@@ -1,0 +1,32 @@
+url: https://store.drweb.com/help/payment
+method: fetch
+saved: 2026-11-20
+
+Online store
+Web page cannot be displayed
+Your browser is not currently supported
+Sorry, we couldn't display the web page because your browser is outdated and unsupported.
+Please update your software.
+Order Payment
+How to pay for an order?
+Use the order payment method that is the most convenient for you. Noventiq Ecommerce online store offers you the following options:
+VISA, MASTERCARD
+PayPal
+Wire transfer
+Digital payment security
+Your confidential data (the card credentials, the registration data, etc.) are not submitted to the online store. Their processing is 100% secured and no one can access the personal and banking data of our client - even our online store.
+When working with banking card data, we use Payment Card Industry Data Security Standard (PCI DSS) developed by Visa and MasterCard international payment systems. PCI DSS ensure secure processing of Holder's banking card credentials.
+Our data transfer technology is based on Secure Sockets Layer (SSL), Verified by Visa, and Secure Code protocols, as well as private banking networks with enterprise-class security. These features guarantee the security of banking card transactions.
+In what currency my order will be paid?
+Payment by the Buyer for Products is made at the price established in the corresponding Product Description on web pages of Online store, by method and within the terms agreed by the Buyer at the time of order placement.
+Customer support
+drweb.eu@noventiq.com
+Help
+Order payment General Questions
+© Doctor Web 2003 - 2026
+Doctor Web is a cybersecurity company focused on threat detection, prevention and response technologies
+Noventiq
+Orders are processed by Doctor Web's partner - Noventiq Ecommerce
+Cookie Policy Privacy Policy
+Our website uses cookies. If you continue using the website, you consent to our Privacy Policy.
+ОК

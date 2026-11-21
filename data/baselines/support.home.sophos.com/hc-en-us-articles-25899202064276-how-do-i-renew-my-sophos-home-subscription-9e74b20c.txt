@@ -1,0 +1,102 @@
+url: https://support.home.sophos.com/hc/en-us/articles/25899202064276-How-do-I-renew-my-Sophos-Home-subscription
+method: fetch
+saved: 2026-11-20
+
+How do I renew my Sophos Home subscription? – Sophos Home Help
+TEST
+Free Trial
+Sign in
+Submit a request
+Managing your Subscription
+Sophos Home Help
+Accounts and Licensing
+Managing your Subscription
+Articles in this section
+How do I renew my Sophos Home subscription?
+Sophos Home your license has expired
+Activating your Sophos Home Premium License key
+How to change or review your billing and payment information for Sophos Home Premium subscriptions
+Adding a coupon to your Sophos Home account
+Support information on Sophos Anti-Virus purchased from Staples
+How do I renew my Sophos Home subscription?
+Sophos Home Support
+November 21, 2026 03:37
+Updated
+Applies to: Sophos Home Premium
+Read this first
+By default, Sophos Home Premium subscriptions auto-renew to help prevent a lapse in protection. You can turn auto-renewal off at any time, see Disable auto-renewal below.
+If you already have a Sophos Home subscription and want to buy a different one (for a different price or length), you’ll need to:
+Turn off auto-renewal,
+Wait for your current subscription to expire, then
+Buy the subscription you want.
+Please note:
+You can’t convert a Sophos Home subscription into a business subscription.
+You can’t extend a subscription beyond 3 years.
+Disable auto-renewal
+Paid subscriptions:
+Our payments partner, cleverbridge, sends a secure email after you place an order. That email includes options to manage your subscription, including turning off auto-renewal. To keep your data safe, the email expires after 30 days, but don't worry, you can trigger a new one any time using our Purchase Lookup Tool
+Free trial:
+After 30 days, the free trial ends. We don’t collect payment information during the trial, so it can’t auto-renew. To stay protected, you can purchase Sophos Home Premium here:: Buy Sophos Home
+How do I check if my Subscription is about to renew or expire?
+Automated notifications:
+Our payments partner, cleverbridge, will send renewal emails, to the email account you purchased your subscription with, around the time your paid subscription renews. Use the Purchase lookup if you need more information, or if you haven't received the email yet.
+You can also check your subscription status in the Sophos Home Dashboard:
+Sign in to your Sophos Home Dashboard https://my.sophos.com
+Click your email address (top right)
+Select My Account
+Look under Subscriptions to find the date and status
+To quickly understand what you’re seeing:
+If it says “Renews”, auto-renewal is ON and your subscription will renew on the listed date.
+If it says “Expires”, auto-renewal is OFF and your subscription will end on the listed date.
+Use Manage, or the cleverbridge email mentioned above, to make changes.
+How can I reinstate an expired subscription?
+To continue using Sophos Home, you’ll need to renew your subscription (or purchase one if you were using a trial).
+In the Sophos Home app, click Renew now to purchase or renew.
+Or sign in to your Sophos Home Dashboard and click Renew Now or Upgrade Now.
+Important: Use the same email address you used before. This helps your existing installations upgrade automatically.
+Need to change your email? See> Change your account email
+Need more help? See> Your license has expired
+Do I need to update Sophos Home after I renew my subscription?
+For automatic renewals:
+No. You don’t need to update Sophos Home after you renew, as long as you use the same email address you used when you installed Sophos Home.
+Sophos Home links to your account, so once you renew (or purchase again after expiration), your protection should turn back on automatically.
+For manual renewals, or expired trials:
+After purchasing Sophos Home, you must activate your license key following these steps:
+Activating your Sophos Home Premium License key
+Important: Use the same email address as your existing Sophos Home account. This helps your existing installations upgrade automatically.
+Need to change your email? See> Change your account email
+Need more details? Check out> Your license has expired
+Related articles
+Change/review billing and payment information
+Your license has expired
+Facebook
+Twitter
+LinkedIn
+Was this article helpful?
+36 out of 114 found this helpful
+Didn't find this helpful? Click here to leave feedback!
+Every comment submitted via this form is read (by a human) but we do not reply to specific technical questions. For technical support, please see Contacting Sophos Home Support
+Return to top
+Related articles
+How to change or review your billing and payment information for Sophos Home Premium subscriptions
+Sophos Home your license has expired
+Activating your Sophos Home Premium License key
+Signing in to your Sophos Home Dashboard
+Adding a coupon to your Sophos Home account
+Sophos Home
+Free Trial
+Company
+Support
+Business Solutions
+Security Center
+Affiliates
+Stay Connected
+Facebook
+Instagram
+Linkedin
+RSS feed
+Twitter
+©1997-2026 Sophos Ltd. All rights reserved.
+Legal
+Privacy
+Cookies

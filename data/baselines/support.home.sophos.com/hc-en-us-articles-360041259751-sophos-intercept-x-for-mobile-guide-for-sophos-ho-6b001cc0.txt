@@ -1,0 +1,87 @@
+url: https://support.home.sophos.com/hc/en-us/articles/360041259751-Sophos-Intercept-X-For-Mobile-Guide-for-Sophos-Home-customers
+method: browser
+saved: 2026-11-20
+
+TEST
+FREE TRIAL SIGN IN
+Sophos Intercept X for Mobile
+Sophos Home Help Getting started Sophos Intercept X for Mobile
+Articles in this section
+Sophos Intercept X For Mobile - Guide for Sophos Home customers
+Sophos Intercept X for Mobile - Setting up the Password Safe
+Sophos Intercept X For Mobile - Guide for Sophos Home customers
+Sophos Home Support
+1 day ago Updated
+What is Sophos Intercept X For Mobile?
+What devices are supported?
+Sophos Intercept X For Mobile Features
+How do I install Sophos Intercept X on my device?
+Will my mobile devices show up on my Sophos Home Dashboard?
+Where can I find release notes for Sophos Intercept X For Mobile?
+Configuration and troubleshooting guides
+What is Sophos Intercept X For Mobile?
+Sophos Intercept X For Mobile helps protect your mobile device with device, network, and application security. The free, un‑managed app is available for iOS and Android.
+Note: Chrome OS protection is available only in managed business environments and isn’t supported by Sophos Home Support
+There are two editions:
+Un‑managed (Free): for individuals on iOS/Android devices.
+Anyone can download and use the free, un‑managed Intercept X For Mobile app on iOS and Android. Sophos Home Premium (paid) customers are eligible for support from Sophos Home Support for issues with their un‑managed mobile devices and the free app.
+Managed (Business): requires a license and management via Sophos Central/Sophos Mobile. See Intercept X for Mobile product page. Managed editions are not supported by Sophos Home.
+What devices are supported?
+For individual/un-managed use, Intercept X For Mobile is available for free on the Apple App Store and Google Play, supporting iOS and Android devices.
+Sophos Home Premium (paid) customers can contact Sophos Home support to receive assistance for their unmanaged installations of Intercept X For Mobile.
+Key Features
+Available features will vary per OS, as well as per subscription type.
+The Managed version (for companies) contains additional features that are not available on the Free version (individuals / Sophos Home Premium users). If you are a business customer, please visit this site instead.
+List of features per OS:
+Sophos Intercept X for Mobile help (iOS)
+Sophos Intercept X for Mobile help (Android)
+How do I install Sophos Intercept X For Mobile on my device?
+From the Sophos Home Dashboard on your phone: Use Add device on your mobile browser to jump to the appropriate store; then install the app on your device.
+Direct install: Open the store on your device and search for Sophos Intercept X For Mobile.
+Apple Store, Google Store
+Visibility in Sophos Home Dashboard: Mobile devices protected with Intercept X for Mobile don’t appear in the Sophos Home dashboard. Manage them directly on the device.
+Will my mobile devices show up on my Sophos Home Dashboard?
+No. As the tool is separate from Sophos Home, these devices will not show up in your Sophos Home dashboard. They will be managed via the protected mobile device instead. Sophos Home Premium customers can contact support if they need assistance with their devices.
+Where can I find release notes for Sophos Intercept X For Mobile?
+Release notes are published here: https://community.sophos.com/products/mobile/b/blog
+Configuration and troubleshooting
+Known Issues: Sophos Known Issues list - Sophos Intercept X For Mobile
+iOS help files: Sophos Intercept X For Mobile help (iOS)
+Android help files:
+Sophos Intercept X For Mobile Configuration for Android
+FAQ on App Reputation
+Android: Permissions required by Sophos mobile security application
+Installation and removal:
+Sophos Intercept X For Mobile - Installation process
+Sophos Intercept X For Mobile - How to uninstall the application from your device
+Facebook Twitter LinkedIn
+Was this article helpful?
+772 out of 1072 found this helpful
+Didn't find this helpful? Click here to leave feedback!
+Every comment submitted via this form is read (by a human) but we do not reply to specific technical questions. For technical support, please see Contacting Sophos Home Support
+Recently viewed articles
+How do I renew my Sophos Home subscription?
+General FAQ
+Deleting your Sophos Home account
+Creating a Sophos Home account
+Related articles
+Sophos Intercept X for Mobile - Installation process for Sophos Home customers
+Sophos Home - Getting started guide
+How to change or review your billing and payment information for Sophos Home Premium subscriptions
+Sophos Home for macOS shows that this device is vulnerable
+Running a full system scan on Mac
+Sophos Home
+Free Trial
+Company
+Support
+Business Solutions
+Security Center
+Affiliates
+Stay Connected
+Facebook
+Instagram
+Linkedin
+RSS feed
+Twitter
+©1997-2026 Sophos Ltd. All rights reserved.
+Legal Privacy Cookies
