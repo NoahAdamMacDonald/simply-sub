@@ -1,0 +1,45 @@
+url: https://kb.f-secure.com/s/article/How-to-cancel-F-Secure-SAFE-or-TOTAL-subscription-and-auto-renewal-feature?language=en_US
+method: browser
+saved: 2026-11-20
+
+Skip to Navigation
+Skip to Main Content
+FSecure Knowledge logo. Links to home page.
+Type here to search...
+Home
+Help Forum
+Support Articles
+Preferred Language
+English (US)
+How to end or cancel my F-Secure subscription?
+How to end or cancel a F-Secure Internet Security, TOTAL, VPN, or ID Protection subscription?
+8.8.2025Knowledge
+ENVIRONMENTS
+Help Environments
+F-Secure Internet Security
+F-Secure TOTAL
+F-Secure ID Protection
+F-Secure VPN
+My F-Secure
+ISSUE/SYMPTOM/QUESTION
+Help Issue/Symptom/Question
+How to end or cancel my F-Secure Internet Security, TOTAL, VPN or ID Protection subscription? I would like to terminate my F-Secure subscription. I don't want to renew or use my F-Secure subscription anymore, what can I do?
+RESOLUTION
+Help Resolution
+If your account is set up with Manual Renewal (you can check this on your My F-Secure account under Subscription), then you can just let your subscription run out. If you let your subscription run out, with Manual Renewal, your subscription will expire once the days left on your subscription are used.
+If you want to cancel the automatic renewal of your subscription, follow these steps:
+Log in to My F-Secure account
+Select Subscription
+Select Cancel automatic renewal
+Now your subscription will end automatically if you do not manually renew.
+If you have an automatic renewal that you have bought from a 3rd party provider, such as Bredband2, Power or EDV Buchversand, please contact your provider in order to cancel your subscription.
+In case you want to use the 30-day-money-back guarantee and get a refund for the F-Secure product, please contact the F-Secure support and provide the reference number of the order.
+Once you have canceled your F-Secure subscription and don't want to buy a new one, you can also delete your F-Secure account as follows:
+Log in to the F-Secure account with your email address and password (the login is still possible despite canceled subscription)
+Click on Menu
+Go to Account settings
+Choose I want to permanently delete my account
+Note: The F-Secure software installed on your devices won't be uninstalled automatically. You need to do it manually. In case of problems, you can use our uninstallation tool.
+All Articles
+Administer
+How to end or cancel my F-Secure subscription?

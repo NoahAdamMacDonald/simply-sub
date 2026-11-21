@@ -1,0 +1,887 @@
+url: https://www.opentext.com/about/security-acknowledgements
+method: fetch
+saved: 2026-11-20
+
+Security Acknowledgements | OpenText
+OpenText home page.
+Why OpenText
+Products
+Solutions
+Services
+Partners
+Support
+Resources
+Contact
+⟵Back to primary navigation Why OpenText
+Why OpenText
+Empowering people
+Deploy anywhere
+AI leadership
+⟵Back toWhy OpenTextmenu Why OpenText
+OverviewWhy OpenText
+OpenText brings decades of expertise to help you unlock data, connect people and processes,
+and fuel AI with trust
+Manage and connect data
+Unify data seamlessly across your enterprise to eliminate silos, improve collaboration,
+and reduce risks
+AI-ready information
+Get AI-ready and transform your data into structured, accessible, optimized information
+Built-in security and compliance
+Meet regulatory and compliance requirements and protect your information throughout
+its lifecycle
+⟵Back toWhy OpenTextmenu Empowering people
+OverviewEmpowering people
+OpenText helps people manage content, automate work, use AI, and collaborate to boost
+productivity
+Customers
+See how thousands of companies around the world are succeeding with innovative solutions
+from OpenText
+Employees
+Our people are our greatest asset; they are the life of the OpenText brand and values
+Corporate Responsibility
+Learn how we aspire to advance societal goals and accelerate positive change
+Partners
+Find a highly skilled OpenText partner with the right solution to enable digital transformation
+⟵Back toWhy OpenTextmenu Deploy anywhere
+OverviewDeployment options
+Explore scalable and flexible deployment options for global organizations of any size
+Sovereign cloud
+Local control. Global scale. Trusted AI
+Private cloud
+Unlock the value of the cloud while maintaining control and compliance
+On-premises
+Maintain full control of your data on your own infrastructure
+Public cloud
+Protect, scale, and use business information in your cloud of choice
+⟵Back toWhy OpenTextmenu AI leadership
+OverviewAviator AI
+See information in new ways
+OpenText™ Aviator™
+AI that understands your business, your data, and your goals
+OpenText™ Content Aviator™
+Power work with AI content management and an intelligent AI content assistant
+OpenText™ Fax Aviator™
+Turn every fax into instant action with AI
+OpenText™ Service Management Aviator™
+Empower users, service agents, and IT staff to find the answers they need
+OpenText™ Software Delivery Aviator™
+Enable faster app delivery, development, and automated software testing
+OpenText™ Trading Grid™ Aviator™
+Unlock AI-powered knowledge, insights, and guided action across your supply chain
+OpenText™ Aviator™ Studio
+A place where you can build, deploy, and iterate on agents in your data's language
+OpenText™ Aviator™ AI Services
+Professional services experts who help you on your AI journey
+About OpenText
+Find an OpenText product
+Product A-Z
+Product Name Changes
+⟵Back to primary navigation Products
+Find an OpenText product
+Product A-Z
+Product Name Changes
+Aviator AI
+Business Network
+Content
+Cybersecurity
+Application Delivery Management
+Experience and Fax
+Legal Tech
+Observability and Service Management
+APIs
+Device and Data Protection
+⟵Back toProductsmenu Aviator AI
+OverviewAviator AI
+See information in new ways
+OpenText™ Aviator™
+AI that understands your business, your data, and your goals
+OpenText™ Content Aviator™
+Power work with AI content management and an intelligent AI content assistant
+OpenText™ Fax Aviator™
+Turn every fax into instant action with AI
+OpenText™ Service Management Aviator™
+Empower users, service agents, and IT staff to find the answers they need
+OpenText™ Software Delivery Aviator™
+Enable faster app delivery, development, and automated software testing
+OpenText™ Trading Grid™ Aviator™
+Unlock AI-powered knowledge, insights, and guided action across your supply chain
+OpenText™ Aviator™ Studio
+A place where you can build, deploy, and iterate on agents in your data's language
+OpenText™ Aviator™ AI Services
+Professional services experts who help you on your AI journey
+⟵Back toProductsmenu Business Network
+OverviewBusiness Network
+Connect once, reach anything with a secure B2B integration platform
+Supply Chain Orchestration
+OpenText™ Trading Grid™
+OpenText™ Trading Grid™ e-Invoicing
+B2B Integration
+OpenText™ B2B Integration Essentials
+OpenText™ B2B Integration Foundation
+OpenText™ B2B Integration Enterprise
+OpenText™ Data Integrator
+Secure Collaboration
+OpenText™ Core Collaboration Access
+OpenText™ Core Secure Access
+Supply Chain Traceability
+OpenText™ Aviator™ IoT
+OpenText™ Core Product Traceability Service
+Supply Chain Insights
+OpenText™ Trading Grid™ Command Center
+Industry Applications and Services
+OpenText™ Financial Hub
+OpenText™ EMR Integration
+OpenText™ SWIFT Service Bureau
+OpenText™ Trading Grid™ Aviator™(AI)
+Revolutionize connectivity across the internet of clouds
+⟵Back toProductsmenu Content
+OverviewContent
+Reimagine knowledge with AI-ready content management solutions
+Document Management
+OpenText™ Content Management
+OpenText™ Core Content Management
+OpenText™ Documentum™ Content Management
+AI Content Management
+OpenText™ Content Aviator™
+OpenText™ Knowledge Discovery
+OpenText™ File Content Extraction
+Capture and Intelligent Document Processing
+OpenText™ Capture
+OpenText™ Core Capture
+OpenText™ Vendor Invoice Management for SAP® Solutions
+Process Automation
+OpenText™ Process Automation
+Business Integrations
+Content Cloud integrations for SAP® Solutions
+OpenText™ Content Management for SAP® SuccessFactors®
+OpenText™ Core Content Management for SAP® SuccessFactors®
+Content Cloud integrations for Microsoft 365®
+Content Cloud integrations for Salesforce®
+Content Cloud solutions for Guidewire
+Information Archiving
+OpenText™ Information Archive
+OpenText™ Core Archive for SAP® Solutions
+Industry Solutions
+OpenText™ Content Management for Engineering
+OpenText™ Content Management for Government
+OpenText™ Documentum™ Content Management for Engineering
+OpenText™ Documentum™ Content Management for Life Sciences
+Information Governance
+eDiscovery and Legal Solutions
+OpenText™ Content Aviator™(AI)
+Supercharge intelligent workspaces with AI to modernize work
+⟵Back toProductsmenu Cybersecurity
+OverviewCybersecurity
+Integrated cybersecurity solutions for enterprise protection
+Application Security
+OpenText™ Fortify™ Remediation Aviator™
+OpenText™ Fortify™ on Demand
+OpenText™ Fortify™ SAST
+OpenText™ Fortify™ DAST
+OpenText™ Fortify™ Software Composition Analysis
+OpenText™ Fortify™ Open Source Select
+Data Security
+OpenText™ Voltage™ Data Security Platform
+OpenText™ Voltage™ SecureData Servers
+OpenText™ Voltage™ Structured Data Manager
+Security Operations
+OpenText™ Threat Detection and Response
+OpenText™ Network Detection & Response
+OpenText™ Enterprise Security Manager
+OpenText™ Behavioral Signals
+OpenText™ Adversary Signals
+OpenText™ Security Log Analytics
+OpenText™ Threat Intelligence
+Identity & Access Management
+OpenText™ NetIQ™ Access Manager
+OpenText™ NetIQ™ Identity Governance
+OpenText™ NetIQ™ Privileged Access Manager
+OpenText™ NetIQ™ Identity Manager
+OpenText™ NetIQ™ Advanced Authentication
+OpenText™ NetIQ™ Identity Foundation
+OpenText™ Data Access Governance
+Digital Forensics and Incident Response
+OpenText™ Endpoint Forensics & Response
+OpenText™ Forensic
+OpenText™ Endpoint Investigator
+OpenText™ Information Assurance
+OpenText™ Mobile Investigator
+OpenText™ Forensic Equipment
+OpenText Cybersecurity for SMBs & MSPs
+Purpose built data protection and security solutions
+⟵Back toProductsmenu Application Delivery Management
+OverviewApplication Delivery Management
+Ship better software—faster—with AI-driven DevOps automation, testing, and quality
+DevOps Platform
+OpenText™ Core Software Delivery Platform
+Functional Testing
+OpenText™ Functional Testing
+OpenText™ Functional Testing for Developers
+OpenText™ Functional Testing Lab for Mobile and Web
+PPM and Strategic Portfolio Management
+OpenText™ Project and Portfolio Management
+Quality Management
+OpenText™ Software Delivery Management
+OpenText™ Application Quality Management
+Performance Engineering
+OpenText™ Core Performance Engineering
+OpenText™ Professional Performance Engineering
+OpenText™ Enterprise Performance Engineering
+OpenText™ Service Virtualization
+OpenText™ Software Delivery Aviator™(AI)
+Elevate millions of developers with AI-powered DevOps experiences
+⟵Back toProductsmenu Experience and Fax
+OverviewExperience and Fax
+Reimagine conversations with unforgettable customer experiences
+Web and Mobile Experiences
+OpenText™ Web CMS
+OpenText™ Core Web Optimization
+Messaging and Fax
+Digital Fax Solutions
+OpenText™ Fax
+OpenText™ Core Fax
+OpenText™ Core Messaging
+Customer Communications
+OpenText™ Core Communications
+OpenText™ Communications
+OpenText™ Output Transformation Server
+OpenText™ Document Accessibility
+Digital Asset Management
+OpenText™ Core Digital Asset Management (DAM)
+OpenText™ Digital Asset Management (DAM)
+Customer Journey and Data
+OpenText™ Core Journey
+OpenText™ Customer Data
+OpenText™ Contact Center Analytics
+OpenText™ Fax Aviator™(AI)
+Turn faxes into workflow-ready data with AI
+⟵Back toProductsmenu Legal Tech
+OverviewLegal Tech
+Make smarter decisions with AI-powered legal software and services
+OpenText™ eDiscovery
+Accelerate eDiscovery with AI-driven speed and precision
+OpenText™ Investigation
+Optimize strategy with early case assessment and investigation tools
+OpenText™ Core Insight
+Get smarter eDiscovery with advanced TAR and automated document review
+OpenText™ Core Legal Hold
+Automate legal holds to eliminate risky and time-consuming processes
+OpenText™ Legal Knowledge Management
+Unlock knowledge and legal insights across content silos
+⟵Back toProductsmenu Observability and Service Management
+OverviewObservability and Service Management
+Get the clarity needed to cut the cost and complexity of IT operations
+Service Management
+OpenText™ Service Management
+Observability
+OpenText™ Core Application Observability
+OpenText™ Core Infrastructure Observability
+OpenText™ Core Cloud Network Observability
+OpenText™ Network Operations Management
+OpenText™ Network Node Manager
+OpenText™ Network Observability
+AIOps
+OpenText™ AI Operations Management
+Automation and Vulnerability Remediation
+OpenText™ Automation Center
+OpenText™ Cloud Management
+OpenText™ Network Automation
+CMDB and Asset Management
+OpenText™ Asset Management
+OpenText™ Universal Discovery and CMDB
+OpenText™ Service Management Aviator™(AI)
+Redefine Tier 1 business support functions with self-service capabilities from private
+generative AI
+⟵Back toProductsmenu APIs
+OverviewAPIs
+Extend the value of your OpenText solutions by building integrations, automation and
+custom experiences
+OpenText™ API Services
+Build it your way with OpenText Cloud APIs that create the real-time information flows
+that enable custom applications and workflows
+OpenText™ API Technical Documentation
+⟵Back toProductsmenu Device and Data Protection
+OverviewDevice and Data Protection
+Protect what matters, recover when it counts
+Enterprise Data Backup and Disaster Recovery Solutions
+OpenText™ Data Protector
+OpenText™ Data Protector for Cloud Workloads
+Hybrid Work, Email, and Team Collaboration
+OpenText™ Hybrid Workspaces
+OpenText™ Filr
+OpenText™ GroupWise
+OpenText™ Open Enterprise Server
+Unified Endpoint Management Tools
+OpenText™ Endpoint Management
+OpenText™ ZENworks Suite
+OpenText™ ZENworks Service Desk
+OpenText™ ZENworks Configuration Management
+OpenText™ ZENworks Endpoint Security Management
+OpenText™ ZENworks Full Disk Encryption
+OpenText™ ZENworks Patch Management
+OpenText™ ZENworks Asset Management
+Email Archiving, E-Discovery, Data Archiving Compliance
+OpenText™ Retain Unified Archiving
+OpenText™ Enterprise Messaging
+Connectivity and Document Management
+OpenText™ AppEnhancer
+OpenText™ Content Manager
+Product A-Z
+Product Name Changes
+Latest product releases
+⟵Back to primary navigation Solutions
+Trusted Data & AI
+Information Reimagined
+Artificial Intelligence
+Industry
+Enterprise Application
+⟵Back toSolutionsmenu Trusted Data & AI
+OverviewTrusted Data & AI
+Secure information management meets trusted AI
+OpenText™ Aviator™ Studio
+A place where you can build, deploy, and iterate on agents in your data's language
+OpenText™ Discovery
+A set of tools to help ingest data and automate metadata tagging to fuel AI
+OpenText™ Data Compliance
+A suite of services and APIs that make governance proactive and persistent
+OpenText™ Aviator™ AI Services
+Professional services experts who help you on your AI journey
+⟵Back toSolutionsmenu Information Reimagined
+OverviewInformation Reimagined
+Get greater visibility and sharper insights from AI-driven information management.
+Ready to see how?
+Knowledge reimagined
+Transform daily work with enterprise content management powered by AI
+Service Management reimagined
+Cut the cost and complexity of IT service management, AIOps, and observability
+Connections reimagined
+AI-powered B2B integration for supply chain success
+Conversations reimagined
+Drive value, growth, and loyalty with connected customer experiences
+Engineering reimagined
+Agile development and software delivery? It only seems impossible
+Security reimagined
+Cybersecurity for the Enterprise
+Decisions reimagined
+Unlock insights with AI data analytics
+⟵Back toSolutionsmenu Artificial Intelligence
+OverviewAviator AI
+See information in new ways
+OpenText™ Aviator™
+AI that understands your business, your data, and your goals
+OpenText™ Content Aviator™
+Power work with AI content management and an intelligent AI content assistant
+OpenText™ Fax Aviator™
+Turn every fax into instant action with AI
+OpenText™ Service Management Aviator™
+Empower users, service agents, and IT staff to find the answers they need
+OpenText™ Software Delivery Aviator™
+Enable faster app delivery, development, and automated software testing
+OpenText™ Trading Grid™ Aviator™
+Unlock AI-powered knowledge, insights, and guided action across your supply chain
+OpenText™ Aviator™ Studio
+A place where you can build, deploy, and iterate on agents in your data's language
+OpenText™ Aviator™ AI Services
+Professional services experts who help you on your AI journey
+⟵Back toSolutionsmenu Industry
+OverviewIndustry solutions
+Improve efficiency, security, and customer satisfaction with OpenText
+Energy and resources
+Transform energy and resources operations with cloud, cybersecurity, and AI
+Financial services
+Boost customer experience, compliance, and efficiency with AI
+Government
+Reimagine your mission with government-secure information management
+Healthcare and life sciences
+Improve care delivery and patient engagement with AI-powered solutions
+Legal
+Modernize legal teams with automated, AI-powered legal tech solutions
+Manufacturing
+Modernize manufacturing operations and logistics to reduce costs and ensure compliance
+Retail and consumer goods
+Enhance consumer engagement with omnichannel retail solutions and AI
+⟵Back toSolutionsmenu Enterprise Application
+OverviewSolutions for Enterprise Applications
+Run processes faster and with less risk
+Maximize sustained growth, value, and innovation with intelligent enterprise solutions
+from OpenText and SAP
+Learn more
+Connect content to business processes for better productivity and stronger governance
+Learn more
+Optimize Salesforce effectiveness by bringing together transactional data and unstructured
+content
+Learn more
+Information Reimagined
+⟵Back to primary navigation Services
+Services
+Professional Services
+Customer Success Services
+Support Services
+Managed Services
+Learning Services
+⟵Back toServicesmenu Services
+OverviewServices
+Accelerate digital transformation with guidance from certified experts
+Professional Services
+Modernize your information management with certified experts
+Customer Success Services
+Meet business goals with expert guidance, managed services, and more
+Support Services
+Turn support into your strategic advantage
+Managed Services
+Free up your internal teams with expert IT service management
+Learning Services
+Discover training options to help users of all skill levels effectively adopt and
+use OpenText products
+⟵Back toServicesmenu Professional Services
+OverviewProfessional Services
+Modernize your information management with certified experts
+Advisory services
+Deployment and integration services
+Cloud and platform modernization services
+IT process innovation services
+Cyber resilience services
+AI services
+⟵Back toServicesmenu Customer Success Services
+OverviewCustomer Success Services
+Meet business goals with expert guidance, managed services, and more
+Private cloud services
+Public cloud services
+On-premises services
+⟵Back toServicesmenu Support Services
+OverviewSupport Services
+Turn support into your strategic advantage
+Advanced customer support
+Premium support
+Flexible credits
+Customer success
+⟵Back toServicesmenu Managed Services
+OverviewManaged Services
+Free up your internal teams with expert IT service management
+Application managed services
+Optimize assist
+B2B managed services
+⟵Back toServicesmenu Learning Services
+OverviewLearning Services
+Discover training options to help users of all skill levels effectively adopt and
+use OpenText products
+Learning paths
+User adoption
+Subscriptions
+Certifications
+What's new
+Book a consultation
+⟵Back to primary navigation Partners
+Find a Partner
+Cloud Partners
+Enterprise Application Partners
+Partner Solutions
+Resources for Partners
+⟵Back toPartnersmenu Find a Partner
+OverviewFind a partner
+Find a highly skilled OpenText partner with the right solution to enable digital transformation
+Browse Partner Directory (All Partners)
+Strategic Partners
+Solution Extension (SolEx) Partners
+OEM Solutions
+Featured Partners
+Public Cloud Partners
+Enterprise Application
+⟵Back toPartnersmenu Cloud Partners
+OverviewCloud Partners
+OpenText partners with leading cloud infrastructure providers to offer the flexibility
+to run OpenText solutions anywhere
+Migrate, optimize and manage information management solutions on AWS
+Learn more
+Optimize performance and reduce costs with applications deployed on a secure, globally
+scaled platform
+Learn more
+Accelerate migration and modernization with deployment in a highly secure and compliant
+public cloud
+Learn more
+⟵Back toPartnersmenu Enterprise Application Partners
+OverviewEnterprise Application Partners
+OpenText partners with top enterprise app providers to unlock unstructured content
+for better business insights
+Maximize sustained growth, value, and innovation with intelligent enterprise solutions
+from OpenText and SAP
+Learn more
+Connect content to business processes for better productivity and stronger governance
+Learn more
+Optimize Salesforce effectiveness by bringing together transactional data and unstructured
+content
+Learn more
+⟵Back toPartnersmenu Partner Solutions
+OverviewPartner Solutions
+Discover flexible and innovative offerings designed to add value to OpenText solutions
+Application Marketplace
+Solution Extensions (SolEx)
+⟵Back toPartnersmenu Resources for Partners
+OverviewResources for Partners
+Discover the resources available to support and grow Partner capabilities
+Partner Portal
+Register an Opportunity
+Become a Partner
+Partner Directory
+Become a Partner
+Partner Portal
+⟵Back to primary navigation Support
+OverviewCustomer Support
+Get expert product and service support to accelerate issue resolution and keep business
+flows running efficiently
+OpenText Support
+Log in to your support portal
+Manage licenses
+Pay my bill
+Advanced Customer Support
+Premium support
+Flexible credits
+Customer success
+Communities
+My Support forums
+Developer forums
+Get support
+⟵Back to primary navigation Resources
+OverviewResources
+Explore detailed services and consulting presentations, briefs, documentation and
+other resources
+Customer stories
+Explore customer success stories
+Share your story
+Resource library
+Executive thought leadership
+Analyst reports
+Assets and collateral
+Webinars
+Demos
+Events
+Events & webinars listing
+OpenText World
+OpenText Summits
+Blogs
+Executive blogs
+Technologies
+Line of business
+Industries
+Communities
+My Support forums
+Developer forums
+OpenText Navigator
+Navigator Champions
+Navigator Academy
+Marketplace
+See how we are helping customers
+Latest product releases
+Search OpenText Choose your country. Current selection is the English US website. My Account
+Login
+Cloud logins
+Get support
+Partner Portal
+Developer
+Contact Toggle navigation
+Edit Page
+Choose your region:
+Americas
+Brasil (Português)
+Canada (English)
+Canada (Français)
+United States (English)
+Europe, Middle East and Africa
+Deutschland (Deutsch)
+España (Español)
+France (Français)
+Sverige (Svenska)
+United Kingdom (English)
+Asia–Pacific
+Australia (English)
+日本 (日本語)
+한국 (한국어)
+中国 (简体中文)
+台灣 (繁體中文)
+Corporate Governance
+Security Acknowledgements
+Reporting a Security Vulnerability
+OpenText reviews all reports of security vulnerabilities affecting OpenText products and services. Customers can report a vulnerability in one of our products or solutions by contacting Customer Support with details of the vulnerability.
+To report a vulnerability in one of our corporate websites, products, or services, please report the details to security@opentext.com. For critical issues, you can use our PGP key to encrypt the details of the disclosure.
+Acknowledgements
+OpenText acknowledges those that have reported defects to OpenText, helping us provide secure, robust products for our customers.
+2026
+Vaibhav Kumar Srivastava (Esecforte Technologies pvt ltd)
+Mo’men Elmady
+Andrej Šimko of Accenture
+Arnout Engelen
+Tobias Diehl
+Sofiane Benbourahla
+Abdelrahman Fathy
+Taha Afous
+Christopher Whipp
+Nickita Khylkouski
+Ravi Kumawat
+David Crees ( Abstract Shield )
+Armin Emamdoust
+Muhamad Fachri Funandar
+Sonny of WatchTowr
+Juliano Feitosa Loureiro | CyberSecurity | IG (@julianouser)
+Manimaran Damodaran
+Siddesh Ningappa
+Awab Abdalmotaleb - 0xmystr0
+Nguyen Nhi
+Nidhir Bhatt
+Lee Kai Xuan
+2025
+Hariprasath Pugazhendhi
+Eraianbu PA
+Syed Mushfik Hasan Tahsin (@smhtahsin33)
+조우연 Cho Woo-yeon
+Harsh Maheta
+Adib Farhan Sayuti | NetByteSec
+Manimaran Damodaran
+Harshil Soni (Bitbreacher)
+Mahmoud Barkat
+Hussein Bahmad (NTT Data)
+Amine Ismail @ Mandiant
+David Lebrun @ Mandiant
+Simon Lemire @ Mandiant
+Stefan Olaru
+Simon | Hornetsecurity
+Ryan "Roll4Combat" Bonner
+Pelinsu Vural
+Armin Stock | Federal Office for Migration and Refugees (German BAMF)
+Pruthvi Kolhe
+Gaëtan Ferry & Guillaume Valadon (GitGuardian)
+Wong Nirwan
+Lockheed Martin Red Team
+Mateusz "MaTTallica" Klement
+Siddesh Ningappa
+Dylan Pindur - Assetnote
+Adam Kues - Assetnote
+Tomais Williamson - Assetnote
+Inetum Hacking team
+Ángel M Sequeira
+@cr33pb0y
+Andrej Šimko of Accenture
+Harrison Neal
+Zahir Uddin Ahmad
+Harrison Neal
+Aashutosh Devkota
+Gaurang Maheta
+Blake Askew
+Troy Fisher, IBM X-Force Red
+Artem Brylev | Deiteriy Lab
+2024
+Infoziant Security
+Amine Ismail @ Mandiant
+David Lebrun @ Mandiant
+Maksymilian Kubiak [Afine Team]
+Sławomir Zakrzewski [Afine Team]
+Vladi Fidchuk
+Ofir Moskovitch
+Gaurang Maheta
+Joe Haskins (Edgescan)
+Davide Brian Di Campi
+Massimiliano Brolli
+Ahmad Alassaf
+Nirjhar Banik
+Marco Apolonio
+Mikko Carreon
+Adam Silviu
+Communications Security Establishment, CSE
+Ahmed Ramzy
+Aditya Singh
+Abhinav Ruttala
+Burhan Ahmed
+Damian Strobel (DSecured)
+Dima Pravytskyi
+Murat Altindis
+Kamil Bernasiński
+Digvijay Varman
+Rajveersinh Parmar (Cognisys Group)
+Ariel Rachamim
+Omri Inbar
+Mohamed Elleuch
+Blaine Herro (Yahoo! Inc. VRT)
+Levani Abesadze
+Wiktoria Lewandowska
+Vaibhav Srivastava (eSecForte Technologies Pvt. Ltd.)
+AKHIL C.D. (akhil-c-d-661abb292)
+Mario Tesoro
+Ofir Moskovitch
+Nicolas Alexandrovič (T-Mobile Czech Republic, a.s.)
+2023
+Noah Farmer @ Dvuln
+Mohamed Salah (xInSanity)
+Kolja Grassmann (cirosec GmbH)
+Alain Rödel (Neodyme)
+Kirwin Webb @ Dvuln
+Noah Farmer @ Dvuln
+NITIN YADAV
+Sathish K
+Gaurang Maheta
+Paweł Zdunek @AFINE team
+Daniel Riebel and Vanessa Hermann @ MSG
+TIM Security Red Team Research
+Mateusz "MaTTallica" Klement
+Kasper Karlsson @ Omegapoint
+Jamieson Vincenti O'Reilly @ Dvuln
+Dua Junaid
+Thabane Nqobile Mkhwebane
+Abdelrahman Ibrahim Farg
+Richard Rohrkemper @ Early Warning Security
+Nikhil Rane
+Trim Kadriu
+Can Yoleri - Egemen Koçhisarlı (corcik)
+Devansh Chauhan
+omidxrz
+Ved Jai Hind
+Swapnil Kothawade
+Suaib S - felcity
+Yeshwanth & Praveen
+HADESTeam-HexToR
+Tushar Bhosale
+Ahtisham UL Haq
+Jens Trinh (mgm security partners gmbh)
+Durvesh Kolhe
+Dzianis Skliar
+Ritik Raj
+Nehal Zaman
+George Mathias
+2022
+Lockheed Martin Red Team
+Atos / SEC Consult Vulnerability Lab
+Crosspoint Labs
+WithSecure
+Pawan Rawat
+picar0jsu
+2021
+rgod
+Michael DePlante (@izobashi)
+Burhan Ahmed
+Armin Stock – Atos / SEC Consult Vulnerability Lab
+Jaaziel Sam Carlos
+Jarom Brown
+Sheikh Rishad
+2020
+Chris Mazzula
+Cristiano Maruti
+Jeremiah Fowler / Security Discovery
+Scott Sturrock
+Sohail Shaikh (D34D)
+2019
+Ayaz
+2017
+Charafeddine Nassiri
+Guru Prasad Mullangi
+Jakub Palaczynski
+Macall Salugsugan
+Marcin Woloszyn
+Neha Goswami
+Pawel Gocyla
+Steven Hampton
+Taha Ibrahim DRAIDIA
+2016
+Juan Manuel Fernández Torres
+2015
+Adrian Vollmer (SySS GmbH)
+Ahmed Adel Abdelfattah
+Ahmed Jerbi
+Ala Arfaoui
+Alton Alaba
+Aworunse Matthew Temmy
+Jay Patel
+Qusai A. Al-Haddad
+Rafael Pablos (multiple)
+SaifAllah benMassaoud
+2014
+Abdul Wasay
+Achanta Varun Chowdary
+Amaresh Pattanayak
+Ankur Parsai
+Ayoub Nait Lamine
+Guillermo Gabarrín
+Hardik Tailor
+Juan Broullón
+Kamil Sevi
+Karthik Reddy
+Kishor Sonawane
+Koutrouss Naddara
+Krishna Chaitanya Kadaba
+Mohamed A. Baset
+Monendra Sahu
+Nakul Mohan
+Nitin Goplani
+Osanda Malith Jayathissa
+Pavan Shinde
+Rakesh Mane
+Sangeetha Rajesh
+Satish Kumar
+Somil Keswani (2)
+Tushar Parab
+Yassine Aboukir
+2013
+Abhisek Das
+Danish Tariq
+Devjeet Singh
+ESNC GmbH
+Harsha Vardhan Boppana
+Harish Kumar
+Jared Perry
+Jigar Thakkar
+Kamil Sevi
+Noman Ramzan
+Pralhad Chaskar
+Rahul Singh
+Rakesh Singh
+Ravindra Singh Rathore
+Sandeep Sodhi
+Sebastian Neef
+Shahee Mirza
+S.Venkatesh
+Tushar Kumbhare
+Vikas Chopalli
+Vinesh Redkar
+Yehia Mamdouh
+OpenText footer
+Resources for Resources for
+Careers
+Developers
+Investors
+Partners
+Suppliers
+Corporate overview Corporate overview
+About us
+Leadership
+Board of Directors
+Corporate governance
+What is... What is...
+Information Management
+Artificial Intelligence
+Cybersecurity
+Content Management
+Digital Transformation
+Application Delivery Management
+News & Events News & Events
+Press room
+Events & Webinars
+OpenText World
+OpenText Summits
+Blogs
+Quick links Quick links
+Executive thought leadership
+Customer stories
+Learning Paths
+Demos
+Contact us Contact us
+How can we help?
+Global locations
+Customer support
+1-800-499-6544 Call us now!
+Privacy Policy
+Terms of Use
+Cookie Policy
+Cookies Settings
+Forward-Looking Statement
+OpenText on LinkedIn
+OpenText on Twitter
+OpenText on Youtube
+Copyright © 2026 Open Text Corporation. All Rights Reserved.
+Powered by OpenText™ Web CMS

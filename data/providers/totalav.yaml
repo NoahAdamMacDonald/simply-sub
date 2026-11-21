@@ -1,0 +1,1960 @@
+# Researched by hand on 2026-11-20 (M11.15, security batch 2), read with Edge from Canada and, for the other countries'
+# prices, through a US, UK, Irish, German, French, Dutch, Spanish, Italian, Australian and New Zealand exit; its legal
+# pages, product pages and help centre (help.totalav.com, server-rendered) with a plain fetch. Pages, each quoted where
+# it's used:
+# Pricing: its Subscription Pricing Matrix (totalav.com/subscription-pricing-matrix: "The below renewal prices are in
+# effect as of the date noted.", "Subscription renewal rates effective: 05 Jan 2026"), the regular price of every plan
+# and period in "$ USD", "£ GBP", "€ EUR", "$ CAD" and "$ AUD" (its currency tabs, which load the page's own tables): the
+# same number in each currency. Each product page's "Buy Now" opens its checkout (secure.totalav.com), which names the
+# country and currency it charges in its form ("country" CA, "currency" CAD; "Total Today (CAD)"; "Total Today (AUD)")
+# and the renewal ("I agree to pay $99 today for the first year which will auto renew at $99 annually"): read
+# 2026-11-20 from Canada (CA$99, CA$129, CA$149, the matrix's CAD prices), and for Plus through each exit: the US's and
+# New Zealand's in US dollars (their form's "currency" USD, "country" US and NZ: New Zealand has no price list of its
+# own), the UK's £99, the euro countries' 99 €, Australia's AU$99. Its product pages showed the same yearly prices with
+# no first-year discount ("$99 / year", "£99 / year", "99 € / year"); its offers ("Introductory pricing may be
+# available to first-time customers. Renewals are billed at the regular rate unless otherwise stated.") are left out.
+# Periods: the matrix and the product pages' FAQ ("We offer monthly, quarterly, biannual, and annual subscription plans
+# that automatically renew unless canceled.") sell Plus monthly, every 3 months, every 6 months and yearly, and Internet
+# Security and Total Security monthly, every 6 months and yearly ("-" for quarterly); the product pages' checkout sells
+# the year. No price says it includes tax: its terms add sales tax in the US ("sales taxes applicable to a Subscription
+# for customers based in the United States and certain other jurisdictions are the responsibility of the customer") and
+# include VAT in its pounds and euros ("VAT is included in all GBP and Euro prices displayed on the Total Security
+# Group’s sites"), on its terms rather than the pages that price them, and core's tax wording doesn't read "VAT is
+# included", so no price is marked as including tax.
+# Region checklist for CA and US, 2026-11-20: 1. no country paths (language paths /de/, /fr/... and ?forceLang=); 2. the
+# matrix's currency tabs; 3. the checkout form's country and currency; 4. each plan's checkout from Canada, up to the
+# payment form; 5. its help centre's billing articles; 6. Edge from Canada and through a US exit; 7. no bill offered.
+# Not listed: the matrix's legacy plans "no longer available for new purchases" (Total AV Premium, the 2019 to 2025
+# Antivirus Pro, Internet Security and Total Security), and its other add-ons (Unlimited Protection, Family Protection,
+# Home Protection, Advanced Cloud Scanning, Identity Theft Protection, Smartphone Optimizer, Total Drive).
+# Bundles: none. Official resellers: its help names the shops that sell its gift cards ("Simply purchase one of our gift
+# cards from a valid retailer (Amazon, Costco, and LifeStyle)"), whose subscriptions "do not automatically renew": named,
+# but their shop pages weren't read, so not listed. Apple's App Store and Google Play bill its in-app subscriptions
+# (partners, not listed).
+# Free use: TotalAV Free Antivirus, its free plan below.
+
+id: totalav
+name: TotalAV
+website: https://www.totalav.com
+category: security
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help centre's "Cancel a Subscription": "You can disable auto-renewal at any time using our simple cancellation
+# process — no need to contact support."
+cancelUrl: https://help.totalav.com/en/billing/-/cancel-a-subscription
+sources: { pricing: https://www.totalav.com/subscription-pricing-matrix }
+# Owner (M11.2), read 2026-11-20: its privacy policy and terms name Total Security Limited (England, company 10161957) and
+# Total Security U.S. LLC (Boston), "each of which are a part of Point Wild"; Point Wild's own Our Story page: "Pango
+# Group merges with Total Security, a global leader in the field of cybersecurity, and combined company rebrands to Point
+# Wild." (December 2024). Point Wild's privacy policy gives its legal name ("Point Wild Holdings, Inc. f/k/a Pango Group,
+# Inc.") and its address, for the country. Private: no page names a listing.
+owner:
+  name: Point Wild Holdings, Inc.
+  website: https://www.pointwild.com
+  page:
+    name: 'Privacy Policy'
+    url: https://legal.totalav.com/privacy
+  quotes:
+    - 'We are a part of Point Wild (formerly known as Pango).'
+  country:
+    code: US
+    page:
+      name: 'Privacy Policy (Point Wild)'
+      url: https://www.pointwild.com/legal/privacy-policy/
+    quotes:
+      - '“Point Wild” means and refers to Point Wild Holdings, Inc. f/k/a Pango Group, Inc. or Pango Group'
+      - 'Boston, Massachusetts, 02210'
+    lastVerified: 2026-11-20
+  lastVerified: 2026-11-20
+# Ways to pay and card networks (M11.5), read 2026-11-20: its help centre's "Accepted Payment Methods" (Visa, MasterCard,
+# Amex, Discover), its terms (cards, PayPal, Apple Pay and Google Pay "subject to availability in your region", gift
+# cards "In some jurisdictions"), Canada's checkout (a card form, PayPal and Google Pay) and its cancelling article (the
+# App Store and Google Play bill in-app subscriptions). The other countries' checkouts, as saved through the exits, show
+# only "PURCHASE SECURELY" and name no way to pay, so the methods are the terms' and help's, for every region.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.totalav.com/en/billing/-/accepted-payment-methods
+    quotes: ['Visa', 'MasterCard', 'Amex', 'Discover']
+paymentMethods:
+  - methods: [card, paypal, apple-pay, google-pay]
+    page: 'Terms of Service'
+    url: https://legal.totalav.com/terms
+    quotes:
+      - 'We accept major credit and debit cards (e.g., Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, and Google Pay, subject to availability in your region.'
+  - methods: [gift-card]
+    page: 'Gift Cards FAQ'
+    url: https://help.totalav.com/en/billing/-/gift-cards-faq
+    quotes:
+      - 'Simply purchase one of our gift cards from a valid retailer (Amazon, Costco, and LifeStyle), redeem it, and your subscription will be activated.'
+  - methods: [app-store]
+    page: 'Cancel a Subscription'
+    url: https://help.totalav.com/en/billing/-/cancel-a-subscription
+    quotes:
+      - 'If you purchased a subscription through the Apple App Store®, you will need to manage your subscription through your Apple account.'
+# Renewal day (M11.5): its terms renew "end of each Billing Cycle" and its help "at the end of each billing term", which
+# name no day. (One of the US checkout's wordings, "renews automatically each year, starting one year from today", says
+# the date you signed up, but other readings of the same checkout didn't say it.)
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://legal.totalav.com/terms
+    - https://help.totalav.com/en/billing/-/how-auto-renewal-works
+  lastVerified: 2026-11-20
+# Lab results (M11.2), read 2026-11-20: AV-TEST's newest Windows test of home-user products, July and August 2026 (report
+# 261416, TotalAV 6.6 & 6.7). Its October 2026 page lists no TotalAV result. AV-Comparatives' and SE Labs' aren't listed
+# (data/raters.yaml).
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/protectednet-totalav-6.6--6.7-261416/
+    tested: TotalAV 6.6 & 6.7, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 5.5/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/protectednet-totalav-6.6--6.7-261416/
+    tested: TotalAV 6.6 & 6.7, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/protectednet-totalav-6.6--6.7-261416/
+    tested: TotalAV 6.6 & 6.7, Windows 11
+
+# General features, read 2026-11-20. Platforms: "Advanced security tools available across Windows, Mac, Android, and
+# iOS." (its product pages) and its WebShield and Total Password browser extensions ("Install Total WebShield for
+# Microsoft Edge", "Add Total Password to Your Microsoft Edge Browser"). Sign-in: a password (its terms: "Registration as
+# a user or subscriber to the Services may require both a username and a password."); its help names no two-factor
+# sign-in for the TotalAV account (cancelling asks for a code sent by email). Support: its help centre's contact form and
+# support@totalav.com (its terms; their "24/7 billing support team" is billing's only). App languages: its website's
+# language picker (English, Dansk, Deutsch, Français, Español, Italiano, Nederlands, Norsk, Polski, Português, Svenska,
+# Česky, Türkçe; the registry lists six of them). No parental controls, no pause.
+features:
+  platforms: [windows, macos, android, ios, browser-extension]
+  account.sign-in: [password]
+  support.channels: [email]
+  languages.interface: [en, fr, es, de, it, pt]
+
+# Perks (M11.6): what its comparison table lists that no feature describes, in its words.
+perks:
+  - id: total-adblock
+    name: Total Adblock
+
+# Categories (M11.3): an antivirus first. Internet Security and Total Security include Total VPN ("Total VPN is included
+# with TotalAV™ Internet Security and Total Security plans"), so they're VPN plans too; Total Security includes Total
+# Password ("Total Password6 is included exclusively in the Total Security plan"), so it's a password manager plan too.
+# Neither Total VPN nor Total Password is another catalog provider's plan, so they're features here.
+# Features, read 2026-11-20: each product page's comparison table ("Real-Time Antivirus Protection", "Zero-Day Cloud
+# Scanning", "PUA Protection", "Phishing Scam Protection", "Ransomware Protection", "System Tune-Up Tools", "Disk
+# Cleaner", "Browser Manager & Cleaner", "iOS & Android Protection" on all three; "Total Adblock" and "Total VPN" on
+# Internet Security and Total Security; "Total Password" on Total Security. The text shows every row on every page; the
+# ticks are in each product page's HTML (saved, and joined to each page's saved text): the table hides Plus's tick for
+# the last three rows and Internet Security's for the last, and the Internet Security page's own small-screen table
+# ticks "Total Adblock" and "Total VPN" and crosses "Total Password") and devices ("4 Devices", "6 Devices", "8
+# Devices"); "Schedule Smart Scans: Run automated scans on your schedule"; "Data Breach Monitoring: Monitor your email
+# for appearances in known public breach data and receive alerts" (every plan's page; its footnote: "Data Breach
+# Monitoring relies on publicly available breach data and does not include private or unreleased breach records.");
+# WebShield, "Included with all TotalAV™ security plans", which blocks "fake, scam, phishing & 'spoofed' websites" and
+# "Stop Intrusive Trackers"; its help's Quick Scan and Full System Scan ("Customize your Scans"), the iPhone app's SPAM
+# text detector ("Users of TotalAV for iPhone can benefit from a SPAM text detector.", "If a website is dangerous, the
+# message gets blocked."), and its notifications' silent mode ("With silent mode enabled TotalAV will not disturb you
+# when using apps on fullscreen.", the paid plans' app). Behaviour-based detection, from its help's real-time protection
+# articles: "Real-Time Protection checks for virus-like behavior and will stop any suspicious activities, notifying you
+# and stopping any files or malicious processes that could be harmful to your computer." No page read says it recovers
+# encrypted files, scans for vulnerable software, or has a firewall or anti-theft (its Android App Lock locks apps behind
+# a PIN), so those are false or left out (the product pages, its help centre's TotalAV articles).
+# Total VPN, read 2026-11-20: its VPN page ("With OpenVPN and IKEv2 protocols available", "our VPN kill switch", "over
+# 35 country locations", listing 36 countries under "Plan Availability"), its help's in-app VPN settings (IKEv2,
+# OpenVPN TCP and UDP, "VPN Circuit Breaker": "internet access is suspended to prevent leaks"), and "What is Total VPN?"
+# ("Total VPN does not track, log, or store your browsing history", no audit named). No page read states a data limit
+# or unlimited data, a device count of its own, RAM-only servers or a way to connect your own devices, so unlimited
+# traffic, RAM-only servers and connecting your own devices are false and the data and device counts are left out. The
+# standalone Total VPN app's help is the one rule for both of these: what the app does follows the plans' own VPN (its
+# page and the in-app VPN's settings), and the Total VPN brand's policy is inferred from that help. Split tunnelling: the
+# standalone app's help describes it ("How to use Total VPN Split Tunneling", with its Hydra protocol and "over 90
+# countries"), but the plans' VPN page and the in-app VPN's settings don't name it, so false. No-logs: only that help's
+# "What is Total VPN?" states it, so it's inferred for the plans' Total VPN.
+# Total Password, read 2026-11-20 in its help: logins, "Credit Cards", "Secure Notes" and "Identities"; "It will
+# identify and pinpoint any weak or old passwords", a leak checker against "Have I been Pwned", and Security Reports'
+# "weak / duplicate passwords"; imports "from 1Password, Chrome browser, Dashlane, Firefox browser, LastPass and Sticky
+# Password" and "a password file in the .csv format"; exports "either CSV or Password-protected File"; "Internet
+# connection required for cloud sync and autofill" (no offline vault named) and no emergency access named; "Total
+# Password does not provide it's own 2FA" (its two-factor sign-in uses another authenticator app, so no authenticator).
+# End-to-end encryption, inferred: no page says end-to-end or zero-knowledge, but "Every password you use is encrypted
+# locally on your computer before it ever leaves your device." and "we do not store your Master Password on our data
+# servers so that we do not have any access to your account" say TotalAV can't read them, the registry's test.
+plans:
+  # TotalAV Free Antivirus (its page, totalav.com/free-antivirus): a scan that finds and removes threats, no real-time
+  # protection ("you can activate a trial of our real-time protection").
+  - id: totalav.free
+    name: 'Free Antivirus'
+    link: https://www.totalav.com/free-antivirus
+    features:
+      antivirus.included: true
+      antivirus.real-time: false
+      antivirus.scans: [on-demand]
+    notes: 'A free scan that finds malware, unwanted apps and privacy problems and lets you quarantine or delete them. No real-time protection: that needs a paid plan.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/free-antivirus
+  # Plus ("Total AV Plus" in the matrix, the product page at /product/antivirus-pro), 4 devices.
+  - id: totalav.plus
+    name: 'Plus'
+    link: https://www.totalav.com/product/antivirus-pro
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.optimizer: true
+      antivirus.vulnerability-scan: false
+      antivirus.activity-modes: true
+      security.anti-tracker: true
+      security.dark-web-monitoring: true
+      antivirus.devices: 4
+    featureLabels:
+      antivirus.scam-protection: Scam websites; spam texts on iPhone only
+      security.dark-web-monitoring: Your email, in publicly known breaches only
+    addOnIds:
+      [totalav.additional-device, totalav.total-vpn, totalav.total-password, totalav.total-adblock]
+    notes: 'Real-time antivirus, ransomware and phishing protection, scheduled scans and tune-up tools on 4 devices; its spam text filter is for iPhone. Total VPN, Total Password and Total Adblock are add-ons.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 11.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: CA
+        currency: CAD
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 35.00
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: CA
+        currency: CAD
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 59.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: CA
+        currency: CAD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+  # Internet Security, 6 devices: Plus with Total VPN and Total Adblock.
+  - id: totalav.internet-security
+    name: 'Internet Security'
+    link: https://www.totalav.com/product/internet-security
+    categories: [security, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.optimizer: true
+      antivirus.vulnerability-scan: false
+      antivirus.activity-modes: true
+      security.anti-tracker: true
+      security.dark-web-monitoring: true
+      antivirus.devices: 6
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 36
+      vpn.protocols: [openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: false
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    featureLabels:
+      antivirus.scam-protection: Scam websites; spam texts on iPhone only
+      security.dark-web-monitoring: Your email, in publicly known breaches only
+    perks: [total-adblock]
+    inferred:
+      vpn.no-logs-policy:
+        reason: 'Only the stand-alone Total VPN app’s help states it (“Total VPN does not track, log, or store your browsing history.”); the plans include Total VPN, but its own pages don’t say so.'
+        page:
+          name: 'What is Total VPN? (Total VPN help)'
+          url: https://help.totalav.com/en/tech/tvpn/-/tvpn-what-is-total-vpn
+        lastVerified: 2026-11-20
+    addOnIds: [totalav.additional-device, totalav.total-password]
+    notes: 'Plus on 6 devices, with Total VPN (OpenVPN and IKEv2, a kill switch, 36 countries) and Total Adblock. Its spam text filter is for iPhone.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: CA
+        currency: CAD
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 69.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: CA
+        currency: CAD
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 129.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+  # Total Security, 8 devices: Internet Security with Total Password.
+  - id: totalav.total-security
+    name: 'Total Security'
+    link: https://www.totalav.com/product/total-security
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms]
+      antivirus.optimizer: true
+      antivirus.vulnerability-scan: false
+      antivirus.activity-modes: true
+      security.anti-tracker: true
+      security.dark-web-monitoring: true
+      antivirus.devices: 8
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 36
+      vpn.protocols: [openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: false
+      vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      password-manager: true
+      password-manager.item-types: [login, credit-card, secure-note, identity]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+    featureLabels:
+      antivirus.scam-protection: Scam websites; spam texts on iPhone only
+      security.dark-web-monitoring: Your email, in publicly known breaches only
+    perks: [total-adblock]
+    inferred:
+      vpn.no-logs-policy:
+        reason: 'Only the stand-alone Total VPN app’s help states it (“Total VPN does not track, log, or store your browsing history.”); the plans include Total VPN, but its own pages don’t say so.'
+        page:
+          name: 'What is Total VPN? (Total VPN help)'
+          url: https://help.totalav.com/en/tech/tvpn/-/tvpn-what-is-total-vpn
+        lastVerified: 2026-11-20
+      encryption.end-to-end:
+        reason: 'No page says end-to-end or zero-knowledge, but its help says “Every password you use is encrypted locally on your computer before it ever leaves your device.”, and that it doesn’t keep your master password, “so that we do not have any access to your account”.'
+        page:
+          name: 'Password Encryption (Total Password help)'
+          url: https://help.totalav.com/en/tech/tpw/tpw-setup/-/password-encryption
+        lastVerified: 2026-11-20
+    addOnIds: [totalav.additional-device]
+    notes: 'Internet Security on 8 devices, with the Total Password manager (logins, cards, notes and identities, with leaked and weak password checks). Its spam text filter is for iPhone.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: CA
+        currency: CAD
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 79.00
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: CA
+        currency: CAD
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 149.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+
+# Add-ons (its matrix's "Additional Service" rows, regular yearly prices, the same number in each currency): an extra
+# device, and Total VPN, Total Password and Total Adblock for plans without them ("Both services can be bought separately
+# alongside the Antivirus Plus plan."; Total Password "Available as a standalone service with an active paid TotalAV™
+# subscription"). Price only: each grants no plan of its own.
+addOns:
+  - id: totalav.additional-device
+    name: 'Additional Device'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 40.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+  - id: totalav.total-vpn
+    name: 'Total VPN'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+  - id: totalav.total-password
+    name: 'Total Password'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+  - id: totalav.total-adblock
+    name: 'Total Adblock'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: US
+        currency: USD
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: GB
+        currency: GBP
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IE
+        currency: EUR
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: AU
+        currency: AUD
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NZ
+        currency: USD
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: DE
+        currency: EUR
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: FR
+        currency: EUR
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: NL
+        currency: EUR
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: ES
+        currency: EUR
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+      - region: IT
+        currency: EUR
+        amount: 59.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.totalav.com/subscription-pricing-matrix
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-20 with a plain fetch: its Terms of Service (last updated 11th March
+# 2026: its apps' licence too, which its footer's "EULA" link opens, and the agreement its checkout's "I agree to the
+# Terms of Service and Privacy Policy" names, Germany's adding "our withdrawal policy", the terms' own withdrawal
+# section), its Privacy Policy (effective 28th November 2025, which the terms include: "Your submission of personal
+# information through the Services is governed by our Privacy Policy , which is hereby incorporated into these Terms by
+# reference"), its Cookie Policy, its "Your Privacy & Data" page (its requests form), its help centre's billing, device
+# and Total Password articles, its product pages' FAQ and notes, and Canada's checkout. Read but holding no worse
+# clause: its Cookie Policy (essential first-party cookies, one of which is "Timestamp used to control orderform pricing
+# after an uninstall"). Not read: the Data Privacy Framework Privacy Policy it links on pango.co (another company's site),
+# a gift card's own terms (on each card), the standalone Total VPN, Total Adblock and Total Drive apps' terms (its own
+# terms cover them as "Service Specific Terms"). No vulnerability disclosure page or bug bounty was found on its sites
+# (totalav.com/.well-known/security.txt sends to its home page) or Point Wild's.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://legal.totalav.com/terms
+    - name: 'Privacy Policy'
+      url: https://legal.totalav.com/privacy
+    - name: 'Your Privacy & Data (requests)'
+      url: https://legal.totalav.com/data-privacy
+    - name: 'Free Antivirus'
+      url: https://www.totalav.com/free-antivirus
+    - name: 'Cancel a Subscription'
+      url: https://help.totalav.com/en/billing/-/cancel-a-subscription
+    - name: 'Refunds & Money-Back Guarantee'
+      url: https://help.totalav.com/en/billing/-/refunds-and-money-back-guarantee
+    - name: 'Managing a Device'
+      url: https://help.totalav.com/en/tech/av/setup/-/av-setup-managing-device
+    - name: 'What is Total VPN?'
+      url: https://help.totalav.com/en/tech/tvpn/-/tvpn-what-is-total-vpn
+    - name: 'Password Encryption (Total Password)'
+      url: https://help.totalav.com/en/tech/tpw/tpw-setup/-/password-encryption
+    - name: 'Master Password Access (Total Password)'
+      url: https://help.totalav.com/en/tech/tpw/tpw-settings/-/access-to-your-master-password
+    - name: 'Exporting passwords (Total Password)'
+      url: https://help.totalav.com/en/tech/tpw/tpw-settings/-/how-to-export-passwords-from-total-password
+    - name: 'Checkout (Canada)'
+      url: https://secure.totalav.com/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It collects how you use its apps and site, and your device details, to study and improve them. You can object only by sending a request through its privacy page.'
+      sources:
+        - url: https://legal.totalav.com/privacy
+          quote: 'To analyze the accuracy, effectiveness, usability, or popularity of the Services,'
+        - url: https://legal.totalav.com/privacy
+          quote: 'We (and other entities) may automatically collect information relating to your interactions with us and the Services, including, but not limited to, browser type, IP address, pages visited and other activities on the Services, device type, time and date of visit'
+        - url: https://legal.totalav.com/data-privacy
+          quote: 'Request to restrict the processing of your data'
+      action:
+        name: 'Your Privacy & Data (requests)'
+        url: https://legal.totalav.com/data-privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares what you do on its site, and a coded copy of your email or phone number, with ad companies such as Meta. You can turn off the matching in your account, but its ad cookies only browser by browser.'
+      sources:
+        - url: https://legal.totalav.com/privacy
+          quote: 'We share personal information for cross-context behavioral advertising or targeted advertising purposes as described in the Privacy Policy but do not otherwise engage in “sales” of personal information as defined by state laws.'
+        - url: https://legal.totalav.com/privacy
+          quote: 'You have the right to opt-out of your data being used for these advanced matching and targeted advertising purposes at any time by updating your marketing preferences in your control panel or by contacting us at privacy@totalav.com .'
+        - url: https://legal.totalav.com/privacy
+          quote: 'If you delete your cookies or use a different browser or mobile device, you may need to renew your opt-out choices exercised through the DAA Webchoices tool.'
+      action:
+        name: 'Your Privacy & Data (requests)'
+        url: https://legal.totalav.com/data-privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Ad companies track you on its site to show you its ads on other sites, and it uses your data to choose the ads you see in its apps. You can opt out, but the ad cookie choices work only browser by browser.'
+      sources:
+        - url: https://legal.totalav.com/privacy
+          quote: 'For advertising and marketing our Services, including to personalize the content and advertising that you see on the Services'
+        - url: https://legal.totalav.com/privacy
+          quote: 'Advertising cookies, pixel tags and other Technologies - These cookies, and other Technologies are used to deliver adverts more relevant to you and your interests.'
+        - url: https://legal.totalav.com/privacy
+          quote: 'If you delete your cookies or use a different browser or mobile device, you may need to renew your opt-out choices exercised through the DAA Webchoices tool.'
+      action:
+        name: 'Your Privacy & Data (requests)'
+        url: https://legal.totalav.com/data-privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you send it trains AI models.'
+      pages: [https://legal.totalav.com/privacy, https://legal.totalav.com/terms]
+      lastVerified: 2026-11-20
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Total Password encrypts your passwords on your own device before they’re sent, and TotalAV doesn’t keep your master password, so it can’t open your vault.'
+      sources:
+        - url: https://help.totalav.com/en/tech/tpw/tpw-setup/-/password-encryption
+          quote: 'Every password you use is encrypted locally on your computer before it ever leaves your device.'
+        - url: https://help.totalav.com/en/tech/tpw/tpw-settings/-/access-to-your-master-password
+          quote: 'Your privacy is our top priority which is the main reason why we do not store your Master Password on our data servers so that we do not have any access to your account.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it for its business, with no set time. If you stop paying for Total Password, your vault is deleted after 120 days.'
+      sources:
+        - url: https://legal.totalav.com/privacy
+          quote: 'We retain personal information that we collect for as long as we need to use it in connection with our business and in accordance with our standard practices or in compliance with applicable laws.'
+        - url: https://legal.totalav.com/terms
+          quote: 'However, if no payment is received prior to the end of such grace period, your account will be deemed abandoned and all of its content will be permanently deleted.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to delete your data with the form on its privacy page. It doesn’t say how long that takes.'
+      sources:
+        - url: https://legal.totalav.com/data-privacy
+          quote: 'Request that your personal data is deleted'
+        - url: https://legal.totalav.com/privacy
+          quote: 'Request erasure of your personal data.'
+      action:
+        name: 'Your Privacy & Data (Erase My Data)'
+        url: https://legal.totalav.com/data-privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data, or for it to be sent to another company, with the form on its privacy page.'
+      sources:
+        - url: https://legal.totalav.com/data-privacy
+          quote: 'Request a copy of your personal data'
+        - url: https://legal.totalav.com/data-privacy
+          quote: 'Request to transfer your data from us'
+      action:
+        name: 'Your Privacy & Data (Access My Data)'
+        url: https://legal.totalav.com/data-privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      plans: [totalav.total-security]
+      tier: good
+      reason: 'Total Password lets you export your passwords yourself, as a CSV file or a password-protected file.'
+      sources:
+        - url: https://help.totalav.com/en/tech/tpw/tpw-settings/-/how-to-export-passwords-from-total-password
+          quote: 'Select either CSV or Password-protected File'
+      action:
+        name: 'Exporting passwords from Total Password'
+        url: https://help.totalav.com/en/tech/tpw/tpw-settings/-/how-to-export-passwords-from-total-password
+      lastVerified: 2026-11-20
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may hand your information to others when it decides it should, including for a government request it thinks appropriate and to protect its own interests, not only when the law requires.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'Nothing contained in these Terms prevent Us from disclosing your information to third parties if We determine that such disclosure is reasonably necessary to: (i) comply with any applicable law, regulation, legal process, or appropriate government request;'
+        - url: https://legal.totalav.com/terms
+          quote: '(iv) protect Our rights, property, safety, or interest; or (v) perform a task carried out in the public interest'
+      lastVerified: 2026-11-20
+    # Its offices' addresses say nothing of where data is kept; the only location text is the section for the EEA and
+    # the UK, rated below.
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'Outside Europe and the UK, its privacy policy doesn’t say where it keeps your data, or how it’s protected when it moves.'
+      pages: [https://legal.totalav.com/privacy]
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In Europe and the UK, your data can go to other countries such as the US, under approved safeguards (the Data Privacy Framework or the EU’s standard contracts).'
+      sources:
+        - url: https://legal.totalav.com/privacy
+          quote: 'Many of our external third parties as well as our corporate affiliates are based outside the EEA and the UK so their processing of your personal data will involve a transfer of data outside the EEA and the UK.'
+        - url: https://legal.totalav.com/privacy
+          quote: 'we do so on the basis of an approved adequacy regulation, such as the Data Privacy Framework (as described below under the “Data Privacy Framework” section) or (where this is not available) legally-approved Standard Contractual Clauses'
+      lastVerified: 2026-11-20
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To buy it, its checkout asks for your email address, your street address and post code, and your payment card.'
+      sources:
+        - url: https://secure.totalav.com/
+          quote: 'Email Address'
+        - url: https://secure.totalav.com/
+          quote: 'Post Code'
+      lastVerified: 2026-11-20
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You turn off renewal in your online account, with a code sent to your email, and keep it until your time runs out. You must do it at least a day before it renews.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'If you do not want your Subscription to auto-renew at the end of a Subscription Term or Billing Cycle, you may cancel any time during your Subscription Term, provided your cancellation request or election is made at least one (1) day before the end of your then-current Billing Cycle.'
+        - url: https://help.totalav.com/en/billing/-/cancel-a-subscription
+          quote: 'This will stop your subscription from renewing at the end of your current billing period. Your services will remain fully active until that time, and no further charges will be made.'
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      tier: good
+      reason: 'You can get all your money back within 30 days of buying or renewing a yearly or six-month plan, and within 14 days for monthly and three-month plans. Your access ends once refunded.'
+      sources:
+        - url: https://help.totalav.com/en/billing/-/refunds-and-money-back-guarantee
+          quote: 'Annual or biannual subscriptions - Eligible for a full refund within 30 days of the initial purchase or renewal date.'
+        - url: https://help.totalav.com/en/billing/-/refunds-and-money-back-guarantee
+          quote: 'Monthly, quarterly, or add-on services - Eligible for a full refund within 14 days of the initial purchase or renewal date, even if billed annually.'
+      lastVerified: 2026-11-20
+    - topic: billing.price-changes
+      tier: good
+      reason: 'It emails you before a price change: up to 30 days ahead on yearly plans and 10 days on monthly ones. The new price starts with your next billing period, so you can cancel first.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'provided that we will provide you with notice of such changes applicable to you via email, up to 30 days in advance if you have an annual Subscription, or 10 days in advance if you have a monthly Subscriptions.'
+        - url: https://legal.totalav.com/terms
+          quote: 'Unless otherwise specified in a notice to you, any changes to the Subscription Fees will take effect as of the Billing Cycle immediately following our notice to you.'
+      lastVerified: 2026-11-20
+    # Neutral, as for McAfee, Norton, Malwarebytes, Webroot and F-Secure: its pages say nothing about a reminder either
+    # way.
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its free app offers a trial of real-time protection. A trial may need your card and turns into a paid plan unless you cancel in your account at least a day before it ends.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'You may be required to enter your billing information to sign up for the Free Trial.'
+        - url: https://legal.totalav.com/terms
+          quote: 'You may cancel any time during the trial period and you will not be charged so long as you cancel at least 24 hours prior to the end of your Free Trial through your account dashboard.'
+        - url: https://www.totalav.com/free-antivirus
+          quote: 'you can activate a trial of our real-time protection which will block threats before they get a chance to infect your computer.'
+      lastVerified: 2026-11-20
+    # Its terms promise "up to thirty (30) days" (its help says the same); a product page's footnote says "at least 30
+    # days", and the terms win for what's promised.
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you before a yearly plan renews, up to 30 days ahead. Monthly plans get no reminder.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'For annual or multi-year Subscriptions, We will notify you of your upcoming renewal via email to the email address you used to enroll in a Service with us (each a “Renewal Notice”) up to thirty (30) days prior to your renewal date.'
+        - url: https://legal.totalav.com/terms
+          quote: 'Renewal Notices will not be provided to users who are enrolled in a monthly Subscription plan, which will automatically renew and be charged each month without additional notice.'
+      lastVerified: 2026-11-20
+    # Its own checkouts' totals equal the price; the processor's or card issuer's fees and the conversion at "the
+    # applicable exchange rate" (no markup stated) are for paying in another way or currency.
+    - topic: billing.fees
+      tier: neutral
+      reason: 'It names no fees of its own. You pay any fees your card issuer or payment company charges, and a currency it doesn’t sell in is converted at the exchange rate of the day.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: '(d) agree to pay any processing fees that are charged by the third-party payment processors or Payment Card issuer.'
+        - url: https://legal.totalav.com/terms
+          quote: 'If your local currency is not supported by your account or available on our site, the price payable for Services will be converted to a currency We offer our pricing in, using the applicable exchange rate, at the time of purchase or any charge for Services.'
+      lastVerified: 2026-11-20
+    - topic: billing.plan-changes
+      tier: great
+      reason: 'When you switch plans, it changes the plan from the day you choose and gives you a credit or charges the difference.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'In the event you switch your Subscription plan or selection, We will send you an email confirming the plan change, reflect any change in fees (including by providing a credit or amount owed) due to the difference in changing plans, and the Billing Cycle and Renewal Price for the updated plan.'
+        - url: https://legal.totalav.com/terms
+          quote: 'Your plan switch will be effective as of the date shown in your account profile and confirmation email, which will generally be tied to the date you elect to switch your plan.'
+      lastVerified: 2026-11-20
+    # The terms conflict: the US section's arbitration also covers "a customer in a jurisdiction where binding arbitration
+    # is permitted under applicable law" (most of Canada, Australia and New Zealand among them), while the section for
+    # "Users Outside of the United States" gives your local courts. Read broadly, the arbitration clause is the
+    # provider-wide grade; the UK's and the EU's consumers keep their own courts, so they're Great.
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Its terms send disputes to a private referee (an arbitrator), with no group lawsuits, for US customers and anyone where the law allows it, though another section gives people outside the US their own courts.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'If you are a United States based customer or a customer in a jurisdiction where binding arbitration is permitted under applicable law, then you agree any complaint or dispute not informally resolved with Us (including Our service providers, affiliated entities, or Indemnified Parties) shall be resolved through binding arbitration as described in this subsection (B) and the Arbitration Agreement set forth in the following subsection (C).'
+        - url: https://legal.totalav.com/terms
+          quote: 'Any arbitration under these Terms will take place on an individual basis; class arbitrations and class actions are not permitted.'
+        - url: https://legal.totalav.com/terms
+          quote: 'if you are a customer who resides in a jurisdiction where you have a legal right to opt out of arbitration in accordance with laws applicable to you – you may exercise your legal right to opt out.'
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: great
+      reason: 'In the UK and the EU, your country’s consumer laws let you take a dispute to the courts where you live, or to a consumer dispute body there.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'If you reside in a country (including countries of the European Union) where laws provide consumers the right to bring disputes in their local courts, then, in such cases, mandatory provisions of the local laws of your country of residence shall apply.'
+        - url: https://legal.totalav.com/terms
+          quote: 'You and Total Security irrevocably agree that the courts of the country in which you reside shall have non-exclusive jurisdiction to settle any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with this Agreement (including your use of the Services) or its subject matter or formation.'
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It can change its terms at any time. For a change that matters, it says it will try to tell you first, by email or in its apps, with no set time.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'If a revision materially alters your rights, as determined by Us in its sole discretion, We will use reasonable efforts to notify you in advance of the change becoming effective, which may include sending a notification to the email address(es) associated with your account or displaying a pop-up or banner within the Services.'
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your service at any time, for any reason, without warning. A refund is up to it.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'We may terminate your use of the Services or discontinue providing access to the Services at any time and for any reason'
+        - url: https://legal.totalav.com/terms
+          quote: 'any termination of your access to the Services may be effected without prior notice'
+        - url: https://legal.totalav.com/terms
+          quote: 'All refunds are issued at Our sole discretion and any refund request may be denied for any or no reason.'
+      lastVerified: 2026-11-20
+    - topic: legal.content-rights
+      status: not-stated
+      reason: 'Its terms take rights only over feedback and reviews you send, not over your passwords or anything else you store.'
+      pages: [https://legal.totalav.com/terms]
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change its apps and plans, and needn’t keep any feature.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'You understand and agree We reserve the right to make changes to our Services or Software, or the Subscriptions We offer, and We have no obligation to provide any Updates or to continue to provide or enable any particular features, functionality, tools, or content.'
+      lastVerified: 2026-11-20
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://legal.totalav.com/terms, https://legal.totalav.com/privacy]
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its apps are for your own personal, non-business use, under a licence it can take back, and you may not publish speed or other tests of them without its permission.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'limited, revocable, nonexclusive, personal, non-transferable and non-assignable, term-limited license to install and use the Software and to access the Services, during your applicable Subscription Term, for personal and noncommercial and personal use'
+        - url: https://legal.totalav.com/terms
+          quote: 'except with Our prior written permission, publish or perform any performance or benchmark tests or analysis relating to the Services;'
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it has security measures. No outside audit, certification or way to report a security flaw is named on its pages.'
+      sources:
+        - url: https://legal.totalav.com/privacy
+          quote: 'Total Security has implemented security measures in place designed to protect against the loss, misuse, and alteration of your personal information.'
+      lastVerified: 2026-11-20
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'Total VPN says it doesn’t log your browsing, with no outside check. But its privacy policy lists browsing and search history among what it collects, and it doesn’t say for how long.'
+      sources:
+        - url: https://help.totalav.com/en/tech/tvpn/-/tvpn-what-is-total-vpn
+          quote: 'Your online activities remain private—Total VPN does not track, log, or store your browsing history.'
+        - url: https://legal.totalav.com/privacy
+          quote: 'Internet or other electronic network activity information (such as browsing history, search history, or interactions with a website or email);'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms say your account is only for you and no one else may use it, though a plan covers several devices.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'Your account is exclusively for you, and it should not be for use by other third parties for any purpose.'
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      tier: great
+      reason: 'Beyond your plan’s number of devices there’s no limit: you can take a device off your plan in your account and put another on.'
+      sources:
+        - url: https://help.totalav.com/en/tech/av/setup/-/av-setup-managing-device
+          quote: 'If you wish to revoke a license from a device that is no longer in use, please follow the steps below.'
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      tier: neutral
+      reason: 'Its updates can change or remove its own features. On phones, your device’s settings decide whether updates install by themselves.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'Updates may also modify or delete certain features, functionality, tools, or content in their entirety.'
+        - url: https://legal.totalav.com/terms
+          quote: 'For the mobile app, depending on your mobile device settings, when your mobile device is connected to the internet either: (a) the Updates will automatically download and install; or (b) you may receive notice of or be prompted to download and install available Updates.'
+      lastVerified: 2026-11-20
+    - topic: other.notable
+      title: 'It can change how often you’re billed'
+      tier: poor
+      reason: 'It may switch your plan’s renewal, say from yearly to monthly, and charge the new amount, telling you by email or with the receipt when it renews.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'From time to time, the Subscription Terms or plans we offer may change, or We may deem it operationally necessary for us to update or amend your renewal term (e.g. from annual to monthly) to continue Our provision of Service.'
+        - url: https://legal.totalav.com/terms
+          quote: 'you will receive an email notice or receipt reflecting the change and amount charged upon successful renewal.'
+      lastVerified: 2026-11-20

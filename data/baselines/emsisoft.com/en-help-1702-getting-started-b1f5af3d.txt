@@ -1,0 +1,97 @@
+url: https://www.emsisoft.com/en/help/1702/getting-started/
+method: browser
+saved: 2026-11-20
+
+Emsisoft
+Why Emsisoft
+Protection
+Business Security
+Enterprise Security + EDR
+MSP Security
+Anti-Malware Home
+Mobile Security
+Remediation
+Remediation Kit
+Commandline Scanner
+Ransomware Decryption
+Partners
+Managed Service Providers
+Third Party Integrations
+Security Operations Centers
+Resellers
+Affiliates
+Pricing
+Buy Online
+Buy from local partner
+Renew license
+EMSISOFT EMERGENCY KIT
+Getting Started
+NOVEMBER 18, 2022
+2 MIN READ
+Emsisoft Emergency Kit is a fully portable dual-engine cleaning toolkit that can be used to scan for and remove malware and potentially unwanted programs (PUPs) from your PC. It works well in conjunction with other antivirus software (see the note below) and can be used if you suspect that your computer is infected but your existing security solution is unable to deal with the threat.
+Downloading Emsisoft Emergency Kit
+You can download Emsisoft Emergency Kit here, or if you’re already using Emsisoft Anti-Malware, you can create one using that product via these instructions. It’s free for private use and is fully portable, which means no installation is required. Emsisoft Emergency Kit Pro is available for business and other for-profit use. The downloaded package unpacks to “C:\EEK” by default, or another specified destination of your choice. Because it is fully portable, you can keep it up to date on the computer, and copy it to a USB stick or other portable media as needed to use on other computers running supported Windows versions, which are listed on the Emsisoft Emergency Kit and Emsisoft Emergency Kit Pro product pages, linked above.
+Note: If you don’t need the software anymore, just delete the whole folder and the shortcut at any time. If it refuses to delete due to a file in use, restart the computer to unload it and try again.
+Running Emsisoft Emergency Kit
+Double-click the ‘Start Emergency Kit Scanner’ program in the ‘C:\EEK’ or other folder the program was unpacked to. If Windows issues an alert and asks for your permission to run the program, allow it to run with elevated rights by clicking yes.
+Also included is the Emsisoft Emergency Kit Commandline Scanner, usable via the ‘Start Commandline Scanner’ program if you prefer to use a command line interface. It will open an elevated command prompt where the a2cmd.exe program may be used for scanning. Information on using it will appear when the command prompt opens.
+The software can also be started from a read-only device such as CD/DVD/BD or any write-protected USB-devices. While online updates are not possible in that case, the software itself remains fully functional for scanning and cleaning, without risking an accidental infection of the drive or disk it is on.
+Note: Emsisoft Emergency Kit is redundant where Emsisoft Anti-Malware is present, and the two should not be run together on the same system. Emsisoft Anti-Malware is capable of everything and more that Emsisoft Emergency Kit is, other than Emsisoft Emergency Kit’s portability.
+If you need to update Emsisoft Emergency Kit for distribution using a system where Emsisoft Anti-Malware is present, temporarily shut down Emsisoft Anti-Malware, update Emsisoft Emergency Kit, then start Emsisoft Anti-Malware again. Emsisoft Anti-Malware can be shut down by right-clicking its system tray icon in the corner of your screen, near the time. Starting it again can be done by restarting the computer, or using its Windows start menu icon.
+Rate this item:
+1.00
+2.00
+3.00
+4.00
+5.00
+Submit Rating
+Rating: 4.2/5. From 6 votes.
+Similar topics
+Emsisoft Emergency Kit
+How to Deal With Detected Threats
+How to Configure Emsisoft Emergency Kit
+Making Your Own Portable Emsisoft Emergency Kit
+Emsisoft Emergency Kit Commandline Scanner
+Using the Emsisoft Emergency Kit Scanner
+Newsletter
+Malware never sleeps. Be sure to stay up-to-date on emerging threats.
+Subscribe
+Emsisoft requires collection and processing of certain personal data to provide the services. Please confirm that you have read and accept the terms of our Privacy Policy
+Emsisoft > Help > User Guides > Emsisoft Emergency Kit > Getting Started
+PRODUCTS
+Emsisoft Business Security
+Emsisoft Enterprise Security
+Emsisoft Remediation Kit
+Emsisoft Anti-Malware Home
+Emsisoft Emergency Kit
+Emsisoft Mobile Security
+KEY BENEFITS
+Layered Protection
+Anti-Ransomware
+Centralized Management
+Endpoint Detection & Response
+Threat Hunting
+Ransomware Rollback
+Behavior AI
+KNOWLEDGE
+News Blog
+Enterprise Security
+Malware Lab
+Product User Guides
+Video Tutorials
+SUPPORT
+Contact Us
+Submit a suspicious file
+COMPANY
+About Us
+Our Customers
+Awards & Reviews
+Press Center
+Careers
+Webinars
+Podcast
+© 2003-2026 Emsisoft - 11/20/2026 - Legal Notice - Terms - Privacy Policy - Cookie Policy - System Status -
+English
+Deutsch
+Français
+Emsisoft YouTube Emsisoft LinkedIn Emsisoft Facebook Emsisoft Twitter

@@ -1,0 +1,317 @@
+url: https://www.f-secure.com/en/legal/privacy/total
+method: fetch
+saved: 2026-11-20
+
+F‑Secure Total privacy notice | F‑Secure Skip to main content Legal
+Home
+For partners
+About F‑Secure
+Global
+Privacy
+Privacy statement
+F‑Secure Total
+F‑Secure Mobile Security
+F‑Secure Sense
+Support tool
+Surveys
+Websites
+Terms
+F‑Secure VPN
+F‑Secure Mobile Security
+Community forums
+Remote support
+Websites
+Accessibility
+Accessibility statement for f-secure.com
+Accessibility statement for My F-Secure
+Whistleblowing
+Legal
+Privacy
+Privacy statement
+F‑Secure Total
+F‑Secure Mobile Security
+F‑Secure Sense
+Support tool
+Surveys
+Websites
+Terms
+F‑Secure VPN
+F‑Secure Mobile Security
+Community forums
+Remote support
+Websites
+Accessibility
+Accessibility statement for f-secure.com
+Accessibility statement for My F-Secure
+Whistleblowing
+Home
+For partners
+About F‑Secure
+Global
+Choose your country
+Global
+Danmark
+Deutschland
+España
+France
+Italia
+Nederland
+Norge
+Polska
+Suomi
+Sverige
+United Kingdom
+United States
+日本
+F‑Secure Total privacy notice
+May 2026
+In brief
+In this notice, F‑Secure Total refers to the security solutions provided by F‑Secure Corporation through the F‑Secure product to protect computers, tablets, and smartphones. Depending on your subscription, this service can include endpoint protection, Virtual Private Network (VPN), password management, SMS smishing protection, Chrome protection, and breach detection components, as well as a management portal to help you better manage your licenses across your devices and those of your family members.
+The applicable sections of this policy therefore depend on the components included in your subscription.
+To summarize privacy in this service:
+we ask for your name, email address, and/or phone number;
+we analyze and secure, but do not read, share, or sell any of your traffic;
+the focus of data collection is not on you, but on your device and our service; and
+the portal provides limited visibility among those who share the same subscription.
+General principles
+What do we collect and why?
+This outlines our general approach to data collection, purposes of collection, legal grounds, sources of data, and retention. This section applies to all users and its principles apply to the features below unless otherwise specified.
+Customer relationship data
+The service collects a varying set of data depending on where you download or purchase the service.
+Application stores: number of purchased licenses; purchase history for F‑Secure products; price and time of purchase; order number; technical environment (e.g. operating system) of your device; unique identifiers (e.g. Android marketing identifier); service statistics per device; other similar non-sensitive device and service data.
+F‑Secure e-store: In addition to the above; name, email address, language, address, country, zip code, Internet Protocol (IP) address, payment type. More detailed information can be found from our e-store.
+Service portal: To help you in managing your subscriptions and settings and to help us help you better in case of problems, the following data from all of the devices and users in the subscription is visible to those who share the same subscription: user name, device name, profile name, first name, last name.
+Service provider partner: If you have subscribed to the service via your service provider, the data set we collect varies per service provider partner, but is limited to the above data. We also exchange some such data as explained below under Transfers and disclosures.
+Support: In cases where we provide you with personal support services, we may need to ask you for additional information.
+Customer relationship data is used to:
+deliver the services to you (including identifying authorized users and managing licenses);
+enable the use of parental controls, such as restricting online content, where enabled by your service provider partner;
+provide help and support to you;
+maintain, develop, and enhance the services and your customer experience and do troubleshooting and performance measurement;
+improve the functionality of the services and related websites;
+track the services that you have bought and used so that we can manage your customer relationship and communicate with you;
+send you information about the services, for example to inform you of expiring licenses, new versions and features, digital security in general, related services; arrange competitions and conduct customer satisfaction surveys.
+Technical user data
+The service automatically collects the following data about you, your device, and the service:
+language;
+device model, name, operating system, and version, as well as unique identifiers, including your mobile device’s IMEI and MSISDN code;
+service statistics per device, e.g. how many times the user has locked or unlocked the device or what kind of setting profiles the user has enabled or created;
+installed application names (if app control is supported by the device and is enabled);
+other substantially similar device and service data.
+This data is used to:
+deliver the services to you (including identifying authorized users and managing licenses);
+enable the use of parental controls, such as viewing and restricting installed applications;
+provide help and support to you;
+maintain, develop, and enhance the services and your customer experience and do troubleshooting and performance measurement;
+improve the functionality of the services and related websites;
+track the services that you have bought and used so that we can manage your customer relationship and communicate with you;
+send you information about the services, for example to inform you of expiring licenses, new versions and features, digital security in general, related services; arrange competitions and conduct customer satisfaction surveys.
+Legal grounds
+F‑Secure processes your data so that we can provide you with our services that you have made a contract for or are in the process of doing so. Such contracts may be made either directly with F‑Secure or with another entity (such as our webstore or service provider partner) that has tendered our services to you.
+By using our services, you are our client. To interact with you and to provide our services to our clients, we must process some data on you. Such processing typically occurs when you communicate with us or our business partners relating to our services, install and use our services, fill out a form or survey, register to use our services, submit information through our web solutions, enter a contest or sweepstakes, register your email address with us, or send us email.
+The service user interface may also provide you with other settings to adjust your preferences.
+Since we need the data to pursue the above legitimate activities, we have a right to process relevant personal data. This right typically takes place in the form of contract performance, legitimate interest, or consent.
+Sources of data
+While we collect the majority of the above-mentioned data directly from you or your device, we also receive data from our affiliates, distribution partners (such as service providers and retailers), and corporate entities from whom you have purchased the services. Such entities may be our resellers, but also include our external webstore partners. We also acquire some basic personal data (order data on purchases) and aggregate analytical data from app stores in which our services are sold. Such other sources may further include subcontractors who have provided you with support for our services, or advertising partners who have assisted us in conducting our marketing activities.
+We do this to create a seamless customer experience and to have the necessary information for solving support cases.
+Typical examples of third-party sources are:
+information on your purchase made in our external webstore,
+we acquire your credentials from previous sign-in data from our service provider reseller partner, so that we can provide our service to you directly,
+we acquire your contact data from corporate decision-maker registries for marketing purposes, and
+when you use your social media account to register to our services, we collect the email address from your account to enable us to authenticate your registration and to contact you.
+Retention
+Personally identifiable user data is retained for the duration of an active service subscription plus for the grace period of six months thereafter. This is to allow customers to re-engage their expired subscription. Thereafter, the customer account will be scheduled for removal. This removal leads to the deletion or anonymization of any personal data related to the account.
+If you have purchased the service via our service provider partners, the account deletion is controlled by that partner. When the partner notifies us that your subscription has been terminated, F‑Secure subsequently removes the account and deletes or anonymizes personal data related to the account.
+If we have received your information when providing you with technical support, the information is stored as long as the respective support case remains unsolved. Once solved, the information is gradually deleted or anonymized within two years from closing the case.
+This text complements the service-specific retention times. The default rule under the law is that personal data should be deleted or anonymized once it is no longer needed for its purpose.
+However, some personal data needs to be nonetheless stored for longer periods of varying lengths due to varying reasons.
+Typical reasons why we deviate from the primary retention times include the following examples:
+grace periods and backups (e.g. keeping your personal data stored for a designated time after the end of your subscription, so that we can safeguard the data against erroneous deletion);
+applicable laws require us to store the data (e.g. to keep track of the purchase and payment of our services);
+to pursue available remedies or to limit any damages that we may sustain (e.g. due to an ongoing dispute or investigation);
+to solve or contain a recurring problem or to have enough information to respond to future issues (e.g. your support ticket related to a problem that was not permanently corrected during your customership);
+to prevent fraudulent activity (e.g. to enforce a ban on our community);
+your personal data is incorporated to other data for a secondary purpose (e.g. retaining logs);
+other similar circumstances, where there continues to be a legitimate need for the ongoing storage of personal data.
+The final removal of your account may be delayed to avoid disturbing the other interactions you have with us. This is the case when you have an F‑Secure account (e.g. you have subscribed to our consumer services with your email address) and also i) have an F‑Secure Community account or ii) you continue to subscribe to our marketing messages. The F‑Secure Community account deletion policy is set out in its terms of service. You can opt out from our marketing messages at any time.
+Security data
+What do we collect and why? The service sends queries on potential malicious activities or protected devices and networks to F‑Secure Security Cloud. F‑Secure Security Cloud is a cloud-based system for cyber threat analysis that is operated by F‑Secure. With the Security Cloud, F‑Secure can maintain an up-to-date overview of the global threat landscape and protect our customers against new threats the moment they are first found. While we limit the processing of any information that could be considered sensitive by our users, we collect the minimum amount of user and organization information for the purpose of providing high quality protection to our users. The collected data may contain:
+Files that are blocked by F‑Secure for a security reason, and related metadata. The metadata includes for example file hash, file name and file path. We need to analyze files and emails for malicious content and behaviors for your protection. Files are processed in a safe environment to catch harmful behaviors. Collection of this data helps F‑Secure to keep a global threat situation map that allows reacting quickly to new threats.
+Web addresses that you have tried to visit but have been blocked by F‑Secure for a security reason or which exhibit potentially malicious behavior, and related metadata. The metadata includes for example response headers. A site may get blocked based on selected protection preferences and parental control reasons. The collected information also allows protection against phishing and ransomware attacks.
+VPN feature
+What do we collect and why? We offer two versions of the VPN feature: the old VPN and the new VPN. This section explains how both versions process your data in relation to the VPN feature.
+The VPN feature collects online communications information. Our guiding principle is that we do not seek to spy on the exact content of your private communications. We only analyze your communications traffic to provide you the service and to keep your data transfers clean. This means that:
+we need to process some metadata (such as volume, country, IP address) of your traffic when providing the service to you;
+as an information security company, we analyze the traffic for suspicious or malicious files and destinations (i.e. URLs);
+we filter traffic based on Family Rules, which you can take into use in the application;
+we automatically screen the traffic to inhibit usage that is against our acceptable use policy; and
+the service collects statistics to give you a view of your browsing history via the service. F‑Secure is not able to identify you based on this data.
+Service provisioning logging: When the service is taken into use or a license is modified at later stages of the lifecycle, the provisioning log data is collected. This is done in order to enable and diagnose successful provisioning to authorized devices, detect abuse of the service, and as a precaution for disaster recovery in case it is needed. This log contains the IP address of the client, a random device ID generated by the service, the time of access, the country code obtained via a GeoIP lookup of the client IP address, and other similar technical device data.
+We do not keep any logs about connections established through the VPN service to external addresses. We cannot link the IP address of your browsing destination to you.
+To protect the service against fraudulent use, we maintain temporary logs that contain the duration of the VPN sessions, VPN connection timestamps, the amount of data transferred, the device ID, source public IP address of the user, and host name from where the VPN client connects to our service. Traffic anomalies that look like a potential abuse of our service (such as port scanning, spamming, or DDoS attacks) are detected by our service and will be logged as well. The logs are stored for 90 days, and can be used to deal with any misuse of our service or attacks against F‑Secure.
+Retention of data related to the VPN feature VPN service provisioning log entries are retained for one year, after which they are deleted. VPN service log events for provisioned devices are retained for three months, after which they are deleted.
+The new VPN feature F‑Secure engages a third-party provider for the purposes of providing the VPN feature to you. To provide the service to you, both F‑Secure and the third-party provider process the data described in the above sections.
+You can determine whether you are using the old or new VPN feature by going to the Settings on your F‑Secure app and checking the available protocols. The old VPN version has OpenVPN and IPSec/IKEv2 protocols, while the new VPN version comes with Hydra, WireGuard and IPSec.
+Password vault feature
+What do we collect and why? The password vault feature collects service statistics per device; for example, how many times the user has used the service, as well as the license creation time, the number of purchased licenses, and the types of services that each user has subscribed to, the devices connected to the service, as well as the unique device identifiers.
+F‑Secure provides you with an encrypted password vault;
+we monitor your chosen data to see if it has come up in any data breaches; and
+we show you what data of yours has been leaked and how to mitigate the situation.
+Stored passwords and other personal data in Password Vault: Your passwords and other information, such as credit and debit card details and personal notes, are stored on servers hosted by F‑Secure and locally on your client devices in an encrypted format. The encryption key is the end-user master password, and this master password is never exposed outside the service on your device. It is also not possible to acquire a hosted password file without an authenticated client belonging to the user.
+In summary, in their stored format, the files hosted by F‑Secure are not decryptable or identifiable in terms of who they belong to.
+F‑Secure account information is not linked to any of the password data managed by the service.
+ID monitoring features
+What do we collect and why? Personal identifiers: When the identity of the service user is managed by F‑Secure, we ask for the following information about you and other users: name, username, email address, and phone number.
+When the identity of the service user is managed by a service provider partner, the service provider may provide us with the same information (your email address, name, and phone number), or an alternative identifier, directly from its systems upon your subscription to our services.
+F‑Secure manages the identifiers that you wish to monitor, presents you with the findings, and otherwise processes such findings as stated in this policy.
+We ask you for an email addresses — or other identifiers — that you wish to monitor for potential breaches. You can also monitor the data of your family members for breaches, provided that you have their approval to do so.
+If you query an email address via the web tool, the full findings are only provided to the email address that you enter.
+To monitor your assets more effectively, F‑Secure engages a third-party provider for the purposes of detecting and collecting information on data breaches that relate to the data (e.g, an email address) that F‑Secure monitors for you.
+Retention of data related to breach detection When you query the breaches related to your email address via the web tool, the findings of such queries are only processed for the time necessary to deliver and present the findings to you. We store queried email addresses for a period necessary to prevent misuse of the web tool.
+If you have purchased the service via our service provider partners, the account deletion is controlled by that partner. When the partner notifies us that your subscription has been terminated, F‑Secure subsequently removes the account and deletes or anonymizes personal data related to the account.
+Scam protection features
+The scam protection features operate strictly on your explicit consent. Enabling the scam protection features requires you to opt in to the data collection and processing required to provide the service, and you can opt out of further processing at any time.
+Scam scanner When you use Scam scanner, you submit an image or a publicly accessible image URL, and the Scam scanner analyzes the content for scam indicators and returns a verdict. The content you submit may include personal data depending on what is visible in the image. You should avoid submitting content that you do not want to be processed for this purpose.
+We process submitted content to deliver the scanning service to you, to return a verdict, and to count your usage against your subscription quota. We also collect anonymized telemetry (such as file extension, file size, scan events, scam confidence score, and a transaction identifier) in which your data is anonymized to operate, secure, and improve the feature. The legal basis for providing the scan and counting usage against your quota is performance of our contract with you. The legal basis for anonymized telemetry, deduplication via hashing, security, abuse prevention, and service improvement is our legitimate interest.
+Submitted images are stored in our backend for up to 30 days, after which they are automatically deleted. Pseudonymous records used to count your quota and to provide usage statistics (linked to your account) are retained for as long as you have an F‑Secure account.
+SMS scam protection The text message scam protection feature reviews messages that are received from an unknown sender (when the sender’s number is not saved in your contacts) and collects the following information from text messages:
+The text message content (for example, any links to harmful content)
+The sender of the text message
+The request’s region of origin and the language of the message.
+The scam protection feature retains personal data only for the purpose of making the verdict on whether the message is a scam. The verdict is based on information extracted from the text message, including URLs. The text message is anonymized within a month of the verdict. The remaining parts of the text messages that were given a safe or unknown verdict are deleted within 18 months. We retain only non-personal information, for example the verdict and its justification, as well as malicious text messages and some examples of fully anonymized text messages to train the AI to better recognize scams.
+The text message scam protection feature uses artificial intelligence (AI). We use AWS Translate to translate text messages that are not in English following a no-trace policy, which means that AWS will not retain any of your personal data. All other AI functionality is fully in our control and its sole purpose is to recognize scam text messages.
+Chrome protection The Chrome protection feature for Android asks you to give permissions to use Accessibility Service and Display Overlay. The purpose of this feature is to visually show you which pages are safe. However, this feature does not collect any additional data from you; you can find more information about the browsing protection feature in the “Security data” section. You can revoke the permission to use Accessibility Service and Display Overlay on your Android device at any time.
+Analytics data
+General
+We consider you a client of F‑Secure, not a client of the individual service. Hence, data collected by different services (e.g. Total) and interactions (e.g. contacting support) are combined to your F‑Secure account. However, we do not aggregate data against our specific privacy principles (for example, we maintain a hands-off approach to your traffic inside our VPN service).
+For us to learn when and how you use our service, to enhance it, and to learn how customers find out about the service, the service collects data on installation success, installation and activation paths, performance, operation environment, connections, used features, etc. We do this so that we can create services that are of value to you and our other customers.
+To respect our own core privacy promise, your actual communications traffic is not used as a basis for analytics.
+This section outlines our general practices for the collection and processing of data for analytics purposes.
+When speaking about F‑Secure data analytics, it comprises both reused service data, reused security data, and the data that is collected for analytics purposes to begin with.
+We want to give you a more personal customer experience and provide you with even better services in the future. For that we need to track usage patterns and create customer segments. For example, what features are used most, where the service fails, what needs fixing, and how you found out about our services.
+What do we collect and why? The data that we process for the purposes of data analytics include things like device identifier and relations between devices / users / user groups, operation environment, service operation time, license type (trial or paid version), device metrics (such as phone model and operating system, language), partial IP address, service errors, problematic files and URLs, service performance data, how you interact with our services (such as which features are used and how often), the domain name from which you connect to the service, elements clicked, timestamps, regional location, effectiveness of our in-service messaging, service activation (such as tracking that you have received the related messages and that installation was successful), installation and activation paths, service performance, connections, data routing, quota, and other similar data.
+We do not sacrifice your privacy: Where we differ from most companies doing this is in that we understand how the ecosystem works and go through great pains to select our few partners with care, removing all data that is not absolutely necessary for the above purpose. You can naturally opt out from the collection of analytics data at any time via the service settings.
+When we process the data for analytical or statistical purposes, we pseudonymize the data. In other words, our data analysts do not know the individual to which a specific data set refers to. The pseudonymization is only reversed in specified use cases. For example, when we communicate with you, we connect the results — not the full data — of our data analytics to your email address. Another example is that we may use the data to resolve issues you may have with our product, when providing you with technical support services.
+We also limit such added analytics only to the surface of our services and keep them at arm’s length from the core privacy areas of our services. For example, we do not have any external analytics in our Security Cloud or in the traffic inside our VPN service.
+Service data and security data We need to automatically collect and process relevant data for our services to work, to enhance them, and to provide them to you. The data is processed to:
+provide F‑Secure services to secure our customers’ networks and devices as well as the confidentiality and availability of the data therein;
+enable F‑Secure to detect emerging threats and security-relevant trends among all of its customers, so that our services can keep on par with evolving threats;
+enable F‑Secure to provide a centralized security service framework across multiple continents to a large number of customers and service provider partners.
+The data processing by the services is mandatory for the efficient protection of the device/network and a prerequisite for F‑Secure’s capability to provide its contracted services. As such processing is inseparable from the services that we provide to you, this gives us a valid need to process your data and a justification to do so.
+For consumer products, this right takes place in the form of contract performance. In some cases, processing may take place in the form of legitimate interest and we may also have a legal obligation to process data for specified purposes.
+Legal grounds We also reuse the above service data and security data for data analytics purposes. Data analytics are an integral part of our service delivery, as nearly all F‑Secure services are dependent on our infrastructure to properly operate. Our data analytics enables us to direct that infrastructure to support your use of the services.
+Where our services collect data that is only needed for the purpose of gaining more insight on how people use the services, but is not necessary for providing our services, we do so only with your separate consent. You also have the right to withdraw your consent later, should you wish to do so. The legal grounds for data that is solely collected for analytics purposes is thus consent.
+Opting out: We really appreciate your help in improving our services. However, if you want to minimize all data traffic towards F‑Secure, we respect that. Those of our services that employ additional analytics give you the choice on whether to contribute. You can opt out at any time from the subsequent collection of analytical data that is non-essential to our service provisioning.
+If you have not opted in to additional analytics data collection, our messaging directed to you will be based only on the service data collection (the data that we collect in any case to provide you with the services) and some of our messaging is likely to be less relevant.
+Secondary uses In addition to the above primary legal grounds for data collection, we may also need to use and/or continue to store data i) to meet a legal obligation to process data for specified purposes, or ii) under the grounds of legitimate interest. For an example list of situations where we may resort to such justifications, see the Other disclosures section.
+Retention of analytics data In our data analytics activities, we combine analytics data with the service data. The resulting combined data set then continues to be processed based on a legitimate interest. The previously collected analytical data is retained as part of the service statistics, as its retroactive removal would break the statistics. When you cease subscribing to our services (i.e. your account is deleted), the analytical data related to your service use will be reverted to anonymous data, and we are no longer able to associate it with you.
+Security
+Information on the security practices that we employ to keep your data secure.
+We apply strict security measures to protect the confidentiality, integrity, and availability of your personal data when transferring, storing, or processing it.
+We use physical, administrative, and technical security measures to reduce the risk of loss, misuse, or unauthorized access, disclosure, or modification of your personal data.
+All personal data is stored on secure servers operated by F‑Secure or our service provider partners with access limited to authorized personnel only.
+Transfers and disclosures
+Commercial transfers and disclosures: If you have subscribed to the service via our partner, such as a telecommunications service provider, that partner may undertake some of the activities listed above in our stead (such as user authentication or communications). We also exchange with the partner such above listed data (e.g. status of your subscription, installation success, service in active use, data collected for resolving a technical support case) as is necessary and proportional. We do the above exchanges to provide you with a smooth customer experience and support services, and to communicate with you in a consistent manner. We do not sell or disclose your VPN data to any third parties unless we are required under law.
+Criminal investigations: F‑Secure respects lawful warrants and court orders of the jurisdictions applicable to us. We provide information to the authorities when it is required of us under law, but not otherwise. Such occurrences include investigations and prosecutions of serious crimes and other qualified illegal activities. After all, our goal is to secure your privacy when browsing the web, not securing your anonymity when committing crimes. We carefully review the lawfulness of each request and ensure that our users’ constitutional rights to privacy are protected.
+Related to data breach queries: F‑Secure engages a third-party provider for the purposes of monitoring your data (e.g. an email address) for breaches that relate to the same data.
+Related to the new VPN feature: F‑Secure engages a third-party provider for the purposes of providing the new VPN feature to you.
+Sales and delivery We exchange (both disclose and receive) some of your personal data with our distribution partners (service providers, webstores, etc.), who market, distribute, administer, and support our services. We provide these companies access to such personal data that they may need for their agreed activities. The logic of this data sharing is to provide a seamless customer experience. This includes activities such as customer management, service support, incident management and problem resolution, direct marketing, and invoicing.
+Our distribution partners are likely to have a pre-existing customer relationship with you. Such partners and corporate customers process your personal data as an independent entity, based on their applicable privacy policies. Regardless, our distribution partners must also comply with the agreements and legislation when handling your personal data. Each such entity is by default independently responsible for its own treatment of personal data, for its own purposes.
+Subcontracting We may transfer or disclose some of your personal data to F‑Secure group companies and our subcontractors who help us create the services.
+Where our clients’ personal data needs to be transferred or disclosed to our subcontractors, we require, in our contracts with them, that they use such information solely for providing their agreed services (for example, to solve a support case, to send it to logistics partners for product delivery, or to send marketing mails on our behalf). We require our subcontractors to process data pertaining to you in a manner that is consistent with our statements herein.
+International transfers F‑Secure operates globally. Consequently, some of our affiliates, subcontractors, distributors, and service provider partners are located in multiple countries, including outside the European Economic Area to ensure the global reach and availability of our services. Depending on the scope of your interactions with F‑Secure, your personal information may be stored in or accessed from multiple countries. The locations of F‑Secure affiliates can be viewed from F‑Secure’s public web pages.
+When we transfer personal data to other jurisdictions, including outside the European Economic Area, we secure such transfers of personal data according to the requirements of the law. We do this by imposing appropriate technical and contractual safeguards on relevant subcontractors and F‑Secure group companies, for example by using data transfer clauses that are approved by the European Union — the fixed content of such clauses is available here.
+Additionally, F‑Secure complies with the EU-U.S. Data Privacy Framework (EU-U.S. DPF) as set forth by the U.S. Department of Commerce. F‑Secure has certified to the U.S. Department of Commerce that it adheres to the EU-U.S. Data Privacy Framework Principles (EU-U.S. DPF Principles) with regard to the processing of personal data received from the European Union in reliance on the EU-U.S. DPF. If there is any conflict between the terms in this privacy policy and the EU-U.S. DPF Principles, the Principles shall govern. To learn more about the Data Privacy Framework (DPF) program, and to view our certification, please visit the Data Privacy Framework website.
+In compliance with the EU-U.S. DPF, F‑Secure commits to refer unresolved complaints concerning our handling of personal data received in reliance on the EU-U.S. DPF to JAMS, an alternative dispute resolution provider based in the United States. If you do not receive timely acknowledgment of your DPF Principles-related complaint from us, or if we have not addressed your DPF Principles-related complaint to your satisfaction, please visit jamsadr.com/submit for more information or to file a complaint. The services of JAMS are provided at no cost to you. If you have a complaint that we have violated the DPF Principles that has not been resolved by other means, you may have the ability to invoke binding arbitration following the procedure explained on the DPF website. F‑Secure is subject to the investigatory and enforcement powers of the Federal Trade Commission (FTC).
+We only do global or cross-border data transfers for a good reason and after assessing the resulting privacy risk. When we transfer your personal data onward to a third party, we remain liable under the DPF Principles if the data is processed in a manner inconsistent with the DPF Principles.
+We store more sensitive customer data within Finland or the European Economic Area and keep it under our own control.
+Other uses and disclosures There are circumstances not covered by this privacy policy where the use or disclosure of personal data may be justified or permitted, or where we may be obligated by applicable laws to disclose information without acquiring your consent or independent of service provisioning.
+For example, F‑Secure respects lawful warrants, court orders of the jurisdictions applicable to us, and public authorities, including to meet national security or law enforcement requirements.
+Similarly, there may be other circumstances where there is a justifiable legitimate interest to disclose limited sets of information to a third party. Examples of such disclosures include cases where we need to protect ourselves against liability or to prevent fraudulent activity, where we analyze your use of our products to ensure that our products are working the way you would expect them to and that we are able to react to adverse experiences, where it is necessary to solve or contain an ongoing problem, or where we need to meet the legitimate information requirements of our insurers or governmental regulatory agencies. In any such action, we will act according to the applicable laws.
+We may also need to transfer your personal data as part of a corporate transaction, such as a sale, merger, spin-off, or other corporate reorganization of F‑Secure, where the information is provided to the new controlling entity in the regular course of business. F‑Secure group discloses and transfers data internally as required by our then current operational model. We do, however, limit the disclosures internally to only those group companies, units, teams, and individuals who have a need to know such information for the intended purposes of processing it.
+We weigh each disclosure requirement carefully and take the possibility of such disclosure requests into account when deciding where and how we store your personal data.
+Sources While we collect the majority of the above-mentioned data directly from you or your device, we also receive data from our affiliates, distribution partners (such as operators and retailers), and corporate entities from whom you have purchased the services. Such entities may be our resellers, but also include our external webstore partners. We also acquire some basic personal data (order data on purchases) and aggregate analytical data from app stores in which our services are sold. Such other sources may further include subcontractors who have provided you with support for our services, or advertising partners who have assisted us in conducting our marketing activities.
+We do this to create a seamless customer experience and to have the necessary information for solving support cases.
+Typical examples of third-party sources are:
+information on your purchase made in our external webstore,
+we acquire your credentials from previous sign-in data from our operator reseller partner, so that we can provide our service to you directly,
+we acquire your contact data from corporate decision-maker registries for marketing purposes, and
+when you use your social media account to register to our services, we collect the email address from your account to enable us to authenticate your registration and to contact you.
+Analytics data exchange Because of the technical environment (that is, the internet, the app store ecosystem, and social media), we are not able to do all of the collection and activities related to data analytics ourselves. We have to exchange some data (such as Android marketing identifier and other like identifiers) with our online analytics and marketing partners to enable our digital analytics and marketing activities. The vast majority of the data that we have on you is not shared with others.
+Some of our subcontractors who provide us with analytical capabilities for our products may also create and publish aggregate reports on the data that they have collected. In such cases, the statistics and aggregate reports do not contain any data that could be linked to any individual person.
+Third parties Our services are provided in conjunction with our partners and our services and websites may embed or interoperate with third-party services. This privacy document only applies to personal data as long as that data is within F‑Secure’s realm of influence. Where your personal data is processed by other entities for their independent purposes, such other party is responsible for processing your personal data in a justified manner in accordance to their policies as well as for fulfilling your rights under data protection laws.
+The most prevalent such scenarios are the following:
+Webstore: Our webstore is partially run by a third-party reseller. While the data you enter in the registration phase is handled under F‑Secure policies, our webstore providers’ policies apply to the actual purchase and related activities.
+Device location queries: When you query the location of your device via our services, the map provider needs to process the related geographical data. On publication of this notice, F‑Secure uses Google maps in our device location and search features. Google privacy policies shall apply accordingly to your use of these features.
+Data protection compliancy notice
+We always apply strict security measures to protect the confidentiality and integrity of your personal data.
+Device administrator rights are required for the application to perform, and F‑Secure is using the respective permissions in full accordance with Google Play policies and with the active consent of the user. Device administrator permissions are used for the parental control features, in particular:
+To prevent children from removing the application without parental guidance
+Browsing protection
+Your rights
+Information on your statutory rights and how to contact us.
+You can view the findings of data breaches relating to your monitored assets from the service. To get more information or to exercise your statutory rights relating to detection and collection of information on data breaches that relate to such findings, please contact our third-party provider.
+You have the right to the data that we have on you. In particular, you have the following rights to the personal data that we hold on you:
+Access and rectification: You have the right to ask us what personal data we have on you and to get a copy of the data that we can identify pertaining to you in this context. Should you find any errors (e.g. obsolete information) in such data, we urge you to contact our customer care to resolve the issue. Some of our service portals allow you to update your customer information. For such, you should update any changes to your personal data, for example change of address or email address. If you cannot update the changes yourself, you may inform us of the necessary changes.
+Objection: You are entitled to object to certain processing of personal data, including for example the processing of your personal data for marketing purposes or when we otherwise base our processing of your data on a legitimate interest. In the latter case, you need to establish a legally valid rationale for your objection.
+Right to be forgotten: You also have the right to request us to cease storing your personal data and erase it. In this case you need to establish a legally valid rationale for your request.
+Portability: You also have the right to ask for personal data that you yourself have provided — pursuant to a contract or your consent. You may request the data in a structured, commonly used, and machine-readable format and further that the data is transmitted to another controller, where technically feasible.
+Withdrawing consent: In cases where the processing is based on your consent, you have the right to withdraw your consent at any time via relevant settings. For identifiable service analytics data, you can find the settings in the service user interface. You also have the right to opt out from our marketing communications via the preference center accessible through the link.
+Restriction: If you establish that the data we have on you is incorrect or we have no legal right to use it, you may request that we cease any further processing of your personal data, and merely keep it in store until the issue is resolved.
+You can exercise your rights via our customer care function. The links to contact us are in the Contact information section.
+Note that there may be situations where our confidentiality obligations, our right of professional secrecy, and/or our obligations to provide our services (e.g. to your employer) may prohibit us from disclosing or deleting your personal data or otherwise prevent you from exercising your rights. Your above rights are also dependent on the legal grounds based on which we process your personal data.
+If you have any complaints about how we process your personal data, or would like further information, please contact us at any time. If you feel that we are not enabling your statutory rights, you have the right to lodge a complaint with a supervisory authority. In most cases, this authority is the Finnish Data Protection Ombudsman (tietosuoja.fi).
+Additional terms for Californian residents
+We protect your rights under the California Consumer Privacy Act and Californian Privacy Rights Act (CCPA and CPRA).
+Learn more You can read about the categories and sources of personal information as well as the purposes for collecting personal information in the What we collect and why and Legal grounds sections of this privacy notice respectively. Your rights to your personal information are explained in the Your rights section of this privacy notice. We will not discriminate against you for having exercised your rights. We will not sell your personal information, and we have not sold any personal information in the past 12 months.
+Contact information
+If you have any questions or concerns about the matters discussed in our privacy policies, please contact:
+F‑Secure Corporation
+Tammasaarenkatu 7
+00180 Helsinki
+Finland
+How to contact us:
+Please contact us via the support channels available on our website.
+In privacy matters, you can also contact F‑Secure by sending a message to privacy@f-secure.com. Note that this email address is not monitored for data subject requests. If you wish to exercise your rights as a data subject, please use the above support channels instead.
+General
+Information on definitions and change management Definitions
+This is what we mean when we make certain references within this policy.
+Client, you, refers to any data subjects who buy, register for use, or use our services, whose devices and data traffic are protected by our services, or who may have submitted personally identifiable information to us. This information may have been submitted through the use of our services, websites, telephone, email, registration forms, or other similar channels.
+Personal data refers to any information on private individuals that is identifiable to them or their family or household members. This information may include names, email and mailing addresses, telephone numbers, billing and account information, and other, more technical information that can be linked to you, your device, or the behavior of either, that we process while providing our services.
+Services refer to any services or products that are manufactured or distributed by F‑Secure, including software, web solutions, tools, and related support services.
+Service provider partner refers to a third party that sells and distributes F‑Secure products, for example mobile and broadband service providers, banks, and insurance companies. The F‑Secure product may be co-branded with the service provider’s brand.
+Website refers to the f-secure.com website or any other website that F‑Secure hosts or controls, including subsites and browser-based service portals.
+Changes
+This version of the policy clarifies, updates, and replaces the previous version. To continue keeping this document up to date, we will make changes and additions to this from time to time also in the future.
+We will publish the changed policy document on our website or at another interaction point where it has previously been made available. If the changes are significant, we may also notify you by other means. Any changes will apply starting from the date that we publish the revised policy document.
+F‑Secure makes every digital moment more secure, for everyone.
+Subscribe to newsletter
+Home
+Products
+Renew subscription
+Articles
+Free tools
+My F‑Secure
+Contact support
+For partners
+Why partner with us?
+For operators
+For retail
+For banks
+For insurers
+Affiliate program
+Contact us
+About us
+Our story
+Careers
+For media
+Newsroom
+Sustainability
+Contact us
+For investors
+Global
+Terms of service
+Privacy policy
+Cookies
+Accessibility
+© F-Secure 2026

@@ -1,0 +1,1470 @@
+url: https://www.watchguard.com/wgrd-psirt/advisories
+method: browser
+saved: 2026-11-20
+
+Skip to content
+Security Advisories
+Report a Vulnerability
+Vulnerability Disclosure Policy
+Trust Center
+Subscribe
+RSS Feed
+Security Advisories
+FILTERS
+CRITICALITY
+Critical
+High
+Medium
+Low
+Informational
+AFFECTED PRODUCT
+AuthPoint Authentication Gateway
+Dimension
+Endpoint Security
+Fireware OS
+IPSec VPN Client (NCP)
+Mobile VPN with SSL Client
+Panda Dome
+SSO Agent
+SSO Client
+SSO Terminal Services Agent
+Secure Wi-Fi
+WatchGuard AP
+WatchGuard Agent
+WatchGuard Cloud
+WatchGuard System Manager
+SOFTWARE VERSION
+Show advisories affecting this version
+PUBLISHED BETWEEN
+185 of 185 shown
+Published WatchGuard CVEs and advisories
+SEVERITY SUMMARY
+PRODUCT / PLATFORM
+AFFECTED
+NOT AFFECTED
+PUBLISHED
+8.6 CVE-2026-81430 Dimension Arbitrary File Write in System Upgrade Process
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+4.8 CVE-2026-81434 Dimension Reflected XSS in Device Configuration History Page
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+9.3 CVE-2026-84322 Dimension Session Hijack via Exposed Session Tokens in Management API
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+9.3 CVE-2026-86094 Dimension Session Hijack via Exposed Session Tokens in Diagnostic Logs
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+8.6 CVE-2026-86126 Dimension CSRF Vulnerability in User Management Allows Super Administrator Account Creation
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+9.3 CVE-2026-86130 Dimension Improper Authentication in Log Collection Service Allows Unauthenticated Remote Code Execution
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+8.7 CVE-2026-93911 Dimension SQL Injection in Log Collector Allows Remote Code Execution
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+8.7 CVE-2026-93912 Dimension Code Injection in Log Notification Processing Allows Remote Code Execution
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+8.6 CVE-2026-93914 Dimension Improper Input Validation in Database Snapshot Restore Allows Root Code Execution
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+7.7 CVE-2026-93915 Dimension Missing Authorization in System Settings Endpoint Allows Remote Code Execution
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+8.6 CVE-2026-93916 Dimension Insufficient Session Expiration Allows Persistent Super Administrator Access
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+8.6 CVE-2026-93917 Dimension Improper Authorization in Device Registration Allows Managed Device Takeover
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+8.6 CVE-2026-103579 Dimension CRLF Injection in Email Server Configuration Allows Remote Code Execution
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+8.6 CVE-2026-103580 Dimension OS Command Injection in Package Update Allows Remote Code Execution as Root
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+5.3 CVE-2026-126037 Dimension Broken Access Control in Device Summary Allows Unauthorized Data Disclosure
+Dimension
+>= 2.0, < 2.3.2
+>= 2.3.2
+2026-11-19
+Info WGSA-2026-0034 NGINX2Root Vulnerability
+—
+—
+—
+2026-11-18
+8.5 CVE-2026-57907 WatchGuard Endpoint Protection Local Privilege Escalation in Console-Service Communication Allows SYSTEM Code Execution
+Endpoint Security
+>= 0, < 8.00.26.0011
+>= 8.00.26.0011
+2026-11-10
+8.9 CVE-2026-121637 WatchGuard AuthPoint Gateway Improper HMAC Validation in LDAP Authentication Callback Allows Forged Authentication Results
+AuthPoint Authentication Gateway
+>= 1.0, < 7.6.0
+>= 7.6.0
+2026-11-04
+9.1 CVE-2026-121638 WatchGuard AuthPoint Gateway Improper Certificate Validation Allows Man-in-the-Middle Attacks
+AuthPoint Authentication Gateway
+>= 1.0, < 7.6.0
+>= 7.6.0
+2026-11-04
+9.2 CVE-2026-121639 WatchGuard AuthPoint Gateway Improper Authentication Allows Unauthenticated Denial of Service
+AuthPoint Authentication Gateway
+>= 1.0, < 7.6.0
+>= 7.6.0
+2026-11-04
+9.1 CVE-2026-121640 WatchGuard AuthPoint Gateway Capture-replay Allows Unauthorized Administrative Actions
+AuthPoint Authentication Gateway
+>= 1.0, < 7.6.0
+>= 7.6.0
+2026-11-04
+Crit WGSA-2026-0033 Linux Kernel IPv4 Use-After-Free Vulnerability (CVE-2026-98432)
+Dimension
+>= 2.0
+—
+Fireware OS
+2025.1, >= 12.0
+—
+WatchGuard AP
+>= 1.0
+—
+2026-11-03
+5.6 CVE-2026-82332 Fireware OS Improper Authentication in AuthPoint MFA Verification Allows Session Hijacking
+Fireware OS
+>= 2025.1, < 2026.4, >= 12.7, < 12.12.4
+>= 2026.4, >= 12.12.4
+2026-10-27
+8.6 CVE-2026-90442 Fireware OS Authenticated Stack Buffer Overflow in certd Allows Denial of Service
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+7.2 CVE-2026-90464 Fireware OS Missing Command Validation allows Authenticated Arbitrary File Modification as Root
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+8.7 CVE-2026-90465 Fireware OS Missing Authentication in FireCluster Sync Allows Privilege Escalation
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+8.7 CVE-2026-93434 Fireware OS XPath Injection in SSH Authentication Allows Blind Extraction of Configuration Secrets
+Fireware OS
+—
+>= 12.0, < 12.5.22
+>= 12.5.22
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+2026-10-27
+9.2 CVE-2026-93857 Fireware OS Pre-Authentication Stack Buffer Overflow in SIP Proxy Allows Remote Code Execution
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+7.2 CVE-2026-93862 Fireware OS Out-of-Bounds Read in FireCluster Sync Allows Denial of Service
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+7.1 CVE-2026-93864 Fireware OS Link Following in firewalld Allows Local Arbitrary File Overwrite as Root
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+9.2 CVE-2026-93865 Fireware OS Missing Authentication in FireCluster Sync Daemon Allows Remote Root Action Injection
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+9.2 CVE-2026-93866 Fireware OS Pre-Authentication Integer Overflow in Access Portal Allows Out-of-Bounds Write
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+9.1 CVE-2026-103593 Fireware OS Stack Buffer Overflow in Logging Service Allows Remote Code Execution
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+9.5 CVE-2026-103594 Fireware OS Stack Buffer Overflow in WireGuard Configuration Allows Remote Code Execution
+Fireware OS
+>= 2026.2, < 2026.4, >= 12.12, < 12.12.4
+>= 2026.4, >= 12.12.4
+2026-10-27
+6.0 CVE-2026-104381 Fireware OS Missing Authentication in FireCluster State Sync Allows BOVPN Tunnel Denial of Service
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+8.7 CVE-2026-111107 Fireware OS NULL Pointer Dereference in Management Interface Allows Unauthenticated Denial of Service
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+9.2 CVE-2026-112709 Fireware OS Heap Buffer Overflow in AD Authentication Service Allows Pre-Authentication Remote Code Execution
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+9.2 CVE-2026-112710 Fireware OS Heap Buffer Overflow in AD Authentication Service Allows Pre-Authentication Remote Code Execution
+Fireware OS
+Default
+>= 2025.1, < 2026.4, >= 12.0, < 12.12.4
+>= 2026.4, >= 12.12.4
+T15/T35
+>= 12.0, < 12.5.22
+>= 12.5.22
+2026-10-27
+6.1 CVE-2026-113881 Fireware OS Stack Buffer Overflow in VPN Network Access Enforcement Allows Unprivileged Code Execution
+Fireware OS
+>= 2025.1, < 2026.4, >= 12.9, < 12.12.4
+>= 2026.4, >= 12.12.4
+2026-10-27
+5.7 CVE-2026-115495 Mobile VPN with SSL Client for Windows: Cleartext Transmission of VPN Credentials over Local Management Socket
+Mobile VPN with SSL Client
+>= 12.0, < 2026.4
+>= 2026.4
+2026-10-27
+6.9 CVE-2026-96293 Endpoint Security Cleartext Storage of FileVault Recovery Key in Log File
+WatchGuard Agent
+>= 0, < 1.17.23.0000
+>= 1.17.23.0000
+2026-10-22
+7.3 CVE-2026-115253 WatchGuard Agent Incorrect Permission Assignment in Log Directory Allows Local Log Tampering
+WatchGuard Agent
+>= 0, < 1.25.14.0000
+>= 1.25.14.0000
+2026-10-22
+Info WGSA-2026-0032 PHP2Shell (CVE-2026-109618 and CVE-2026-109619)
+—
+—
+—
+2026-10-21
+9.3 CVE-2026-13043 WatchGuard Endpoint Security Missing Authentication in Kernel Memory Access Driver Allows Arbitrary Kernel Memory Access
+Endpoint Security
+>= 0, < 8.00.26.0012
+>= 8.00.26.0012
+2026-10-01
+8.7 CVE-2026-86134 Fireware OS Pre-Authentication NULL Pointer Dereference Allows Remote Denial of Service
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-30
+7.5 CVE-2026-13046 Fireware OS Deserialization of Untrusted Data in samld Allows Remote Code Execution
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+EUCC
+>= 12.11, < 12.11.10
+>= 12.11.10
+2026-09-29
+8.2 CVE-2026-13224 Fireware OS Path Traversal in WebUI Management Agent Allows Arbitrary Local File Read
+Fireware OS
+—
+>= 12.0, < 12.5.21
+>= 12.5.21
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+2026-09-29
+7.1 CVE-2026-18105 Fireware OS Uncontrolled Resource Consumption in Diagnostic Tasks Allows Denial of Service
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+8.6 CVE-2026-18145 Fireware OS Stack-based Buffer Overflow in spamd Allows Remote Code Execution
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+8.7 CVE-2026-81433 Fireware OS Pre-Authentication Stack Buffer Overflow in fingerd Allows Remote Code Execution
+Fireware OS
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+2026-09-29
+7.2 CVE-2026-86101 Fireware OS Authorization Bypass in SAML Login Allows Unauthorized SSLVPN Access
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+8.7 CVE-2026-86104 Fireware OS Resource Exhaustion in Login Process Allows Denial of Service
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+5.3 CVE-2026-86105 Fireware OS Improper Authorization in Access Portal Reverse Proxy
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+8.2 CVE-2026-86128 Fireware OS NULL Pointer Dereference in NetFlow IPv6 Traffic Processing Allows Remote Denial of Service
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+9.2 CVE-2026-86131 Fireware OS Code Injection in BOVPN Over TLS Client Allows Remote Code Execution
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+8.2 CVE-2026-86132 Fireware OS Pre-Authentication Integer Underflow in iked Allows Denial of Service
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+8.2 CVE-2026-86133 Fireware OS Pre-Authentication Integer Underflow in iked Allows Remote Denial of Service
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+7.1 CVE-2026-86136 Fireware OS Missing Authorization in wgagent Management API Allows Denial of Service - Variant A
+Fireware OS
+Default
+>= 2026.0, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+7.1 CVE-2026-90441 Fireware OS Missing Authorization in wgagent Management API Allows Denial of Service - Variant B
+Fireware OS
+Default
+>= 2026.3, < 2026.3.2, >= 2025.0, < 2026.2.3, >= 12.0, < 12.12.3
+>= 2026.3.2, >= 2026.2.3, >= 12.12.3
+T15/T35
+>= 12.0, < 12.5.21
+>= 12.5.21
+2026-09-29
+9.3 CVE-2026-86102 WatchGuard AP Command Injection in Internal Management API Allows Command Execution
+WatchGuard AP
+>= 1.0, < 3.4.8
+>= 3.4.8
+2026-09-28
+8.6 CVE-2026-87969 WatchGuard AP Authenticated Command Injection in Diagnostic CLI
+WatchGuard AP
+>= 1.0, < 3.4.8
+>= 3.4.8
+2026-09-28
+9.3 CVE-2026-101891 WatchGuard AP Improper Access Control in API Service Allows Unauthenticated Access
+WatchGuard AP
+>= 1.0, < 3.4.8
+>= 3.4.8
+2026-09-28
+7.4 CVE-2026-95676 AuthPoint Gateway Improper Authentication in LDAP Sync Allows First-Factor Authentication Bypass
+AuthPoint Authentication Gateway
+>= 4.2.2, < 7.5.1
+>= 7.5.1
+2026-09-23
+Med WGSA-2026-0031 Etherleak (CVE-2003-0001)
+Fireware OS
+>= 2025.0, < 2026.2.1, >= 12.0, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+2026-09-11
+7.0 CVE-2026-86135 Dimension CSRF Vulnerability in Database Snapshot Creation Allows Denial of Service
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-09-08
+9.3 CVE-2026-13086 Fireware OS Stack-Based Buffer Overflow in Mobile Security epm Endpoint
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+8.7 CVE-2026-13108 Dimension Denial-of-Service
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+9.3 CVE-2026-19313 Fireware OS Pre-Authentication Heap Buffer Overflow in iked Allows Remote Code Execution
+Fireware OS
+Default
+>= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.2.2, >= 12.12.2
+T15/T35
+>= 2026.3, < 2026.3.1, >= 12.0, < 12.5.20
+>= 2026.3.1, >= 12.5.20
+2026-08-27
+8.7 CVE-2026-19314 Fireware OS Integer Underflow in iked Allows Unauthenticated Denial of Service (DoS)
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+9.3 CVE-2026-19315 Fireware OS Pre-Authentication Type Confusion in iked Allows Remote Code Execution
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+8.7 CVE-2026-19316 Fireware OS Pre-Authentication Double Free in iked Allows Denial of Service (DoS)
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+8.7 CVE-2026-19317 Fireware OS Pre-Authentication Out-of-Bounds Read in iked Allows Denial of Service (DoS)
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+9.3 CVE-2026-19318 Fireware OS Pre-Authentication Stack Buffer Overflow in iked Allows Remote Code Execution
+Fireware OS
+Default
+>= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.2.2, >= 12.12.2
+T15/T35
+>= 2026.3, < 2026.3.1, >= 12.0, < 12.5.20
+>= 2026.3.1, >= 12.5.20
+2026-08-27
+8.6 CVE-2026-78008 Fireware OS Authenticated Buffer Overflow in wgagent
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+8.7 CVE-2026-78009 Fireware OS Out-of-Bounds Read in iked Allows Unauthenticated Denial of Service (DoS)
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+8.7 CVE-2026-78010 Fireware OS Stack-Based Buffer Overflow in iked Allows Unauthenticated Denial of Service
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+8.7 CVE-2026-78011 Fireware OS Integer Underflow in Iked Allows Unauthenticated Denial of Service (DoS)
+Fireware OS
+Default
+>= 2026.3, < 2026.3.1, >= 2025.0, < 2026.2.2, >= 12.0, < 12.12.2
+>= 2026.3.1, >= 2026.2.2, >= 12.12.2
+T15/T35
+>= 12.0, < 12.5.20
+>= 12.5.20
+2026-08-27
+5.1 CVE-2026-78047 Dimension Stored XSS in Scheduled Report Task
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+5.1 CVE-2026-78103 Dimension Log Server Configuration Lock Bypass Vulnerability
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+9.3 CVE-2026-78174 WatchGuard Dimension Session Hijack via Exposed Session Tokens in Diagnostic Logs
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+5.3 CVE-2026-78495 Dimension Server-Side Request Forgery via Remote Backup Connection Test
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+5.1 CVE-2026-78498 Dimension Server-Side Request Forgery via Email Server Test Settings
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+5.1 CVE-2026-78499 Dimension SSRF via FTP Server Test Connection
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+5.1 CVE-2026-78500 Dimension Blind SSRF via Database Test Connection Feature
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+8.4 CVE-2026-78610 Dimension CSRF Vulnerability in Administrator Passphrase Change Endpoint
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+8.6 CVE-2026-78612 Dimension SQL Injection in Scheduled Report
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+8.6 CVE-2026-78613 Dimension SQL Injection in Log Viewer
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+8.6 CVE-2026-78614 Dimension SQL Injection in Audit Report
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+4.6 CVE-2026-78615 WatchGuard Dimension Reflected DOM-Based XSS in Report Detail Page
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+4.8 CVE-2026-78616 Dimension Stored XSS via Trusted CA Certificate Configuration
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+6.3 CVE-2026-78617 WatchGuard Dimension Web UI Authentication Brute-Force Due to Missing Rate Limiting
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+6.9 CVE-2026-78618 Dimension Business Logic Flaw Allows Chained Backend Object Operations
+Dimension
+>= 2.0, < 2.3.1
+>= 2.3.1
+2026-08-27
+6.9 CVE-2026-81851 Fireware OS Heap-Based Buffer Overflow in iked Allows Denial of Service
+Fireware OS
+Default
+>= 2025.0, < 2026.2.1, >= 12.0, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.18
+>= 12.5.18
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-08-27
+9.4 CVE-2026-57909 WatchGuard Agent path traversal allows unauthenticated remote code execution
+WatchGuard Agent
+>= 0, < 1.25.13.0000
+>= 1.25.13.0000
+2026-08-25
+9.3 CVE-2026-57910 WatchGuard Agent improper authentication allows unauthenticated remote code execution
+WatchGuard Agent
+Linux
+>= 0, < 1.17.01.0000
+>= 1.17.01.0000
+macOS
+>= 0, < 1.17.21.0000
+>= 1.17.21.0000
+Windows
+>= 0, < 1.25.13.0000
+>= 1.25.13.0000
+2026-08-25
+7.7 CVE-2026-8247 WatchGuard Firebox admd Out of Bounds Write Vulnerability
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1, >= 11.0
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+8.6 CVE-2026-13050 WatchGuard Firebox networkd Out of Bounds Write Vulnerability
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1, >= 11.8
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+8.6 CVE-2026-13053 WatchGuard Firebox Authenticated Out of Bounds Write in Management CLI Command Handler
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1, >= 11.0
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+8.6 CVE-2026-13054 WatchGuard Firebox Arbitrary File Write via Path Traversal in Management Web UI
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1, >= 11.0
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+7.3 CVE-2026-13079 WatchGuard Mobile VPN with SSL Windows Client Local Privilege Escalation
+Mobile VPN with SSL Client
+>= 12.0, < 2026.2.1
+>= 2026.2.1
+2026-07-02
+8.7 CVE-2026-13084 Null Pointer Dereference in WatchGuard Fireware OS iked Process
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1, >= 11.10.2
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+9.2 CVE-2026-13368 WatchGuard Firebox Race Condition and Use-After-Free in Mobile VPN with IKEv2 LDAP Authentication
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1
+>= 2026.2.1, >= 12.0, < 12.12.1, >= 11.10.2, <= 11.12.4+541730
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+6.9 CVE-2026-13371 WatchGuard Firebox Management Web UI Denial of Service via Unsafe Deserialization
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+4.8 CVE-2026-13373 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in Tigerpaw Technology Integration Configuration
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.4, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.4, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.4, < 12.11.9
+>= 12.11.9
+2026-07-02
+4.8 CVE-2026-13374 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in ConnectWise Technology Integration Configuration
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.4, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.4, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.4, < 12.11.9
+>= 12.11.9
+2026-07-02
+4.8 CVE-2026-13375 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in Autotask Technology Integration Configuration
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 2025.1, <= 2026.2, >= 12.4, < 12.12.1
+>= 2026.2.1, > 2026.2, >= 12.12.1
+T15/T35
+>= 12.4, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.4, < 12.11.9
+>= 12.11.9
+2026-07-02
+4.8 CVE-2026-13376 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in spamBlocker Module
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+4.8 CVE-2026-13377 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in SIP Proxy Configuration
+Fireware OS
+—
+>= 12.0, < 12.11.9
+>= 12.11.9
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.0, < 12.5.19
+>= 12.5.19
+2026-07-02
+8.6 CVE-2026-13383 WatchGuard Firebox ikestubd Out of Bounds Write Vulnerability
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.1, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.1, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.1, < 12.11.9
+>= 12.11.9
+2026-07-02
+8.6 CVE-2026-13384 WatchGuard Firebox wgagent Out of Bounds Write Vulnerability
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.1, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+T15/T35
+>= 12.1, < 12.5.19
+>= 12.5.19
+EUCC
+>= 12.1, < 12.11.9
+>= 12.11.9
+2026-07-02
+8.6 CVE-2026-13722 WatchGuard Firebox Firmware Image Validation Bypass in WatchGuard Fireware OS
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1, >= 11.0, <= 11.12.4+541730
+>= 2026.2.1, >= 12.12.1, > 11.12.4+541730
+T15/T35
+>= 12.0
+—
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+5.9 CVE-2026-13728 WatchGuard Firebox Hardcoded Fallback Encryption Key in Access Portal Resource Credential Database
+Fireware OS
+Default
+>= 2025.1, < 2026.2.1, >= 12.0, < 12.12.1
+>= 2026.2.1, >= 12.12.1
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-07-02
+8.5 CVE-2026-6787 Usage of a hard-coded cryptographic key in WatchGuard Agent allows inclusion of code into existing process
+WatchGuard Agent
+>= 1.0.0.0, < 1.25.03.0000
+>= 1.25.03.0000
+2026-05-06
+8.5 CVE-2026-6788 Uncontrolled search path in PluginLauncher allows SYSTEM code execution in WatchGuard Agent
+WatchGuard Agent
+>= 1.0.0.0, < 1.25.03.0000
+>= 1.25.03.0000
+2026-05-06
+7.1 CVE-2026-41286 Stack-based Buffer Overflow in WatchGuard Agent Discovery Service on Windows Causes Denial of Service - Variant B
+WatchGuard Agent
+>= 1.0.0.0, < 1.25.03.0000
+>= 1.25.03.0000
+2026-05-06
+7.3 CVE-2026-41288 WatchGuard Agent on Windows Privilege Escalation Vulnerability
+WatchGuard Agent
+>= 1.0.0.0, < 1.25.03.0000
+>= 1.25.03.0000
+2026-05-06
+High WGSA-2026-00013 WatchGuard Agent on Windows Local Privilege Escalation to SYSTEM via Chained Agent Service Vulnerabilities
+WatchGuard Agent
+>= 1.25.0, < 1.25.03.0000
+>= 1.25.03.0000
+2026-05-06
+7.1 CVE-2026-41287 Stack-based Buffer Overflow in WatchGuard Agent Discovery Service on Windows Causes Denial of Service - Variant A
+WatchGuard Agent
+>= 1.0.0.0, < 1.25.03.0000
+>= 1.25.03.0000
+2026-05-06
+8.6 CVE-2026-3987 WatchGuard Firebox Arbitrary File Write vis Path Traversal in Fireware Web UI
+Fireware OS
+>= 2025.1, < 2026.2, >= 12.6.1, < 12.12
+>= 2026.2, >= 12.12
+2026-04-01
+High WGSA-2026-00008 Multiple Vulnerabilities in AppArmor AKA CrackArmor
+Dimension
+All versions
+—
+2026-04-01
+8.4 CVE-2026-4266 WatchGuard Firebox Insecure Deserialization in Fireware Access Portal
+Fireware OS
+Default
+>= 2025.1, < 2026.2, >= 12.1, < 12.12
+>= 2026.2, >= 12.12
+EUCC
+>= 12.1, < 12.11.9
+>= 12.11.9
+2026-03-30
+7.1 CVE-2026-4315 WatchGuard Firebox Cross-Site Request Forgery (CSRF) in Fireware Web UI
+Fireware OS
+Default
+>= 2025.1, < 2026.2, >= 12.0, < 12.12, >= 11.8, <= 11.12.4+541730
+>= 2026.2, >= 12.12, > 11.12.4+541730
+T15/T35
+>= 12.0, < 12.5.18
+>= 12.5.18
+EUCC
+>= 12.0, < 12.11.9
+>= 12.11.9
+2026-03-30
+5.1 CVE-2026-3343 WatchGuard Firebox Reflected Cross-Site-Scripting (XSS) Vulnerability in Fireware Web UI
+Fireware OS
+>= 2025.1, < 2026.1.2, >= 12.7, < 12.11.8
+>= 2026.1.2, >= 12.11.8
+2026-03-03
+6.9 CVE-2026-3344 WatchGuard Firebox System Integrity Check Bypass
+Fireware OS
+Default
+>= 2025.1, < 2026.1.2, >= 12.0, < 12.11.8
+>= 2026.1.2, >= 12.11.8
+T15/T35
+>= 12.0, < 12.5.17
+>= 12.5.17
+2026-03-03
+7.0 CVE-2026-1498 WatchGuard Firebox LDAP Injection
+Fireware OS
+Default
+>= 2025.1, < 2026.1, >= 12.0, < 12.11.7
+>= 2026.1, >= 12.11.7
+T15/T35
+>= 12.0, < 12.5.16
+>= 12.5.16
+2026-01-30
+Med WGSA-2026-00002 NCP IPSec VPN Client MSI Installer Privilege Escallation (NCPVE-2025-0626)
+IPSec VPN Client (NCP)
+>= 15.0, < 15.33
+>= 15.33
+2026-01-29
+9.3 CVE-2025-14733 WatchGuard Firebox iked Out of Bounds Write Vulnerability
+Fireware OS
+Default
+>= 2025.1, < 2025.1.4, >= 12.0, < 12.11.6, >= 11.10.2, <= 11.12.4+541730
+>= 2025.1.4, >= 12.11.6, > 11.12.4+541730
+T15/T35
+>= 12.0, < 12.5.15
+>= 12.5.15
+FIPS
+>= 12.0, < 12.3.1+728352
+>= 12.3.1+728352
+2025-12-19
+7.5 CVE-2025-1547 WatchGuard Firebox Authenticated Stack Overflow in Certificate Request Command
+Fireware OS
+Default
+>= 12.0, <= 12.11.3
+> 12.11.3
+T15/T35
+>= 12.0, < 12.5.13
+>= 12.5.13
+2025-12-04
+8.2 CVE-2025-1545 WatchGuard Firebox XPath Injection Vulnerability in Web CGI
+Fireware OS
+Default
+>= 2025.1, < 2025.1.3, >= 12.0, < 12.11.5, >= 11.11, <= 11.12.4+541730
+>= 2025.1.3, >= 12.11.5, > 11.12.4+541730
+T15/T35
+>= 12.0, < 12.5.14
+>= 12.5.14
+2025-12-04
+6.3 CVE-2025-1910 WatchGuard Mobile VPN with SSL Local Privilege Escalation via Update Package
+Mobile VPN with SSL Client
+>= 11.0, < 12.11.3
+>= 12.11.3
+2025-12-04
+4.8 CVE-2025-6946 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in IPS Configuration
+Fireware OS
+Default
+>= 12.0, < 12.11.3
+>= 12.11.3
+T15/T35
+>= 12.0, < 12.5.13
+>= 12.5.13
+2025-12-04
+8.7 CVE-2025-11838 WatchGuard Firebox iked Memory Corruption Vulnerability
+Fireware OS
+>= 2025.1, <= 2025.1.3, >= 12.6.1, <= 12.11.5
+> 2025.1.3, > 12.11.5
+2025-12-04
+8.6 CVE-2025-12026 WatchGuard Firebox Authenticated Out of Bounds Write in certd
+Fireware OS
+Default
+>= 2025.1, < 2025.1.3, >= 12.0, <= 12.11.5
+>= 2025.1.3, > 12.11.5
+T15/T35
+>= 12.0, < 12.5.14
+>= 12.5.14
+2025-12-04
+8.6 CVE-2025-12195 WatchGuard Firebox Authenticated Out of Bounds Write in Management CLI IPSec Configuration
+Fireware OS
+Default
+>= 2025.1, < 2025.1.3, >= 12.0, < 12.11.5, >= 11.0, <= 11.12.4+541730
+>= 2025.1.3, >= 12.11.5, > 11.12.4+541730
+T15/T35
+>= 12.0, < 12.5.14
+>= 12.5.14
+2025-12-04
+8.6 CVE-2025-12196 WatchGuard Firebox Authenticated Out of Bounds Write in Management CLI Ping Command
+Fireware OS
+Default
+2025.1, >= 12.0, < 12.11.5
+>= 12.11.5
+T15/T35
+>= 12.0, < 12.5.14
+>= 12.5.14
+2025-12-04
+4.8 CVE-2025-13936 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in Tigerpaw Technology Integration Configuration
+Fireware OS
+Default
+2025.1, >= 12.0, < 12.11.5
+>= 12.11.5
+T15/T35
+>= 12.0, < 12.5.14
+>= 12.5.14
+2025-12-04
+4.8 CVE-2025-13937 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in ConnectWise Technology Integration Configuration
+Fireware OS
+Default
+>= 2025.1, < 2025.1.3, >= 12.0, < 12.11.5
+>= 2025.1.3, >= 12.11.5
+T15/T35
+>= 12.0, < 12.5.14
+>= 12.5.14
+2025-12-04
+4.8 CVE-2025-13938 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in Autotask Technology Integration Configuration
+Fireware OS
+—
+12.0
+—
+Default
+2025.1, >= 12.0, < 12.11.5
+>= 12.11.5
+2025-12-04
+4.8 CVE-2025-13939 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in Gateway Wireless Controller
+Fireware OS
+Default
+>= 2025.1, < 2025.1.3, >= 12.0, < 12.11.5, >= 11.7.2, <= 11.12.4+541730
+>= 2025.1.3, >= 12.11.5, > 11.12.4+541730
+T15/T35
+>= 12.0, < 12.5.14
+>= 12.5.14
+2025-12-04
+6.7 CVE-2025-13940 WatchGuard Firebox Boot Time System Integrity Check Bypass
+Fireware OS
+>= 2025.1, < 2025.1.3, >= 12.8.1, < 12.11.5
+>= 2025.1.3, >= 12.11.5
+2025-12-04
+6.3 CVE-2025-1549 WatchGuard Mobile VPN with SSL Local Privilege Escallation
+Mobile VPN with SSL Client
+>= 12.0, < 12.11.3
+>= 12.11.3
+2025-10-29
+8.9 CVE-2025-4106 WatchGuard Firebox leftover debug code vulnerability
+Fireware OS
+Default
+>= 12.0, < 12.11.3
+>= 12.11.3
+T15/T35
+>= 12.0, < 12.5.13
+>= 12.5.13
+2025-10-24
+9.3 CVE-2025-9242 WatchGuard Firebox iked Out of Bounds Write Vulnerability
+Fireware OS
+Default
+>= 2025.0, < 2025.1.1, >= 12.0, < 12.11.4, >= 11.0, <= 11.12.4+541730
+>= 2025.1.1, >= 12.11.4, > 11.12.4+541730
+T15/T35
+>= 12.0, < 12.5.13
+>= 12.5.13
+FIPS
+>= 12.0, < 12.3.1+722811
+>= 12.3.1+722811
+2025-09-17
+4.8 CVE-2025-6947 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in SIP Proxy Configuration
+Fireware OS
+Default
+>= 12.0, < 12.11.3
+>= 12.11.3
+T15/T35
+>= 12.0, < 12.5.13
+>= 12.5.13
+2025-09-15
+6.9 CVE-2025-6999 WatchGuard Firebox Authentication Portal Request Smuggling Vulnerability
+Fireware OS
+>= 12.0, < 12.11.3
+>= 12.11.3
+2025-09-15
+Med WGSA-2025-00009 Pre-authentication Denial of Service attack in OpenSSH
+Dimension
+—
+All versions
+Fireware OS
+>= 12.0.0, < 12.11.3
+>= 12.11.3
+Secure Wi-Fi
+—
+All versions
+2025-07-10
+4.8 CVE-2025-4804 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in Hotpot Configuration
+Fireware OS
+Default
+>= 12.0, < 12.11.2
+>= 12.11.2
+T15/T35
+>= 12.5, < 12.5.13
+>= 12.5.13
+2025-05-16
+4.8 CVE-2025-4805 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in Acces Portal Configuration
+Fireware OS
+>= 12.0, < 12.11.2
+>= 12.11.2
+2025-05-16
+6.3 CVE-2025-2781 WatchGuard Mobile VPN with SSL Local Privilege Escalation via Non-Standard Installation Directory
+Mobile VPN with SSL Client
+>= 11.0, < 12.11.2
+>= 12.11.2
+2025-03-28
+6.3 CVE-2025-2782 WatchGuard Terminal Services Agent Local Privilege Escalation via Non-Standard Installation Directory
+SSO Terminal Services Agent
+>= 12.0, < 12.11.2
+>= 12.11.2
+2025-03-28
+5.1 CVE-2025-0178 WatchGaurd Firebox Host Header Injection Vulnerability
+Fireware OS
+Default
+>= 12.0, < 12.11.1
+>= 12.11.1
+T15/T35
+>= 12.0, < 12.5.13
+>= 12.5.13
+2025-02-14
+4.8 CVE-2025-1071 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in spamBlocker Module
+Fireware OS
+Default
+>= 12.0, < 12.11.1
+>= 12.11.1
+T15/T35
+>= 12.0, < 12.5.13
+>= 12.5.13
+2025-02-14
+4.8 CVE-2025-1239 WatchGuard Firebox Stored Cross-Site-Scripting (XSS) Vulnerability in Blocked Sites List
+Fireware OS
+Default
+>= 12.0, < 12.11.1
+>= 12.11.1
+T15/T35
+>= 12.0, < 12.5.13
+>= 12.5.13
+2025-02-14
+8.5 CVE-2024-8424 WatchGuard Endpoint Protection Privilege Escalation in PSANHost Enables Arbitrary File Delete as SYSTEM
+Endpoint Security
+>= 8.00.00.0000, < 8.00.23.0000
+>= 8.00.23.0000
+Panda Dome
+>= 22.00.00, < 22.03.00
+>= 22.03.00
+2024-11-07
+9.3 CVE-2024-6592 WatchGuard Firebox Single Sign-On Agent Protocol Authorization Bypass
+SSO Agent
+>= 12.0, <= 12.10.2
+> 12.10.2
+SSO Client
+macOS
+>= 12.0, <= 12.5.4
+> 12.5.4
+Windows
+>= 12.0, <= 12.7
+> 12.7
+2024-09-25
+9.3 CVE-2024-6593 WatchGuard Firebox Single Sign-On Agent Management Interface Authentication Bypass
+SSO Agent
+>= 12.0, <= 12.10.2
+> 12.10.2
+2024-09-25
+8.7 CVE-2024-6594 WatchGuard Firebox Single Sign-On Client Denial-of-Service
+SSO Client
+>= 12.0, <= 12.7
+> 12.7
+2024-09-25
+High WGSA-2024-00013 Blast-RADIUS CHAP and PAP Authentication Vulnerability CVE-2024-3596
+Dimension
+All versions
+—
+Fireware OS
+All versions
+—
+Secure Wi-Fi
+—
+All versions
+2024-07-10
+8.6 CVE-2024-4944 Mobile VPN with SSL Local Privilege Escalation Vulnerability
+Mobile VPN with SSL Client
+>= 12.0, < 12.10.4
+>= 12.10.4
+2024-07-09
+8.6 CVE-2024-5974 Firebox Authenticated Buffer Overflow Vulnerability
+Fireware OS
+Default
+>= 11.9.4, < 12.10.4
+>= 12.10.4
+T15/T35
+>= 12.0, < 12.5.12+701324
+>= 12.5.12+701324
+2024-07-09
+Crit WGSA-2024-00012 OpenSSH regreSSHion (CVE-2024-6387)
+Dimension
+—
+All versions
+Fireware OS
+>= 12.0, < 12.10.4-b701004
+>= 12.10.4-b701004
+Secure Wi-Fi
+—
+All versions
+2024-07-01
+High WGSA-2024-00009 CVE-2024-3661 Impact of TunnelVision Vulnerability
+IPSec VPN Client (NCP)
+Windows macOS
+All versions
+—
+Mobile VPN with SSL Client
+Windows macOS
+All versions
+—
+2024-06-07
+High WGSA-2024-00008 Diffie-Hellman Key Agreement Protocol Weaknesses CVE-2002-20001 & CVE-2022-40735
+Fireware OS
+>= 12.0, < 12.10
+>= 12.10
+WatchGuard System Manager
+>= 12.0, < 12.10
+>= 12.10
+2024-04-22
+Info WGSA-2024-00007 XZ Utils supply chain compromise (CVE-2024-3094)
+—
+—
+—
+2024-04-04
+Info WGSA-2024-00005 lighttpd denial of service vulnerability (CVE-2022-41556)
+—
+—
+—
+2024-02-16
+Info WGSA-2024-00004 Ivanti Connect Secure and Ivanti Policy Secure Gateway Vulnerabilities
+—
+—
+—
+2024-02-02
+Info WGSA-2023-00009 Apache Struts Remote Code Execution Vulnerability (CVE-2023-50164)
+—
+—
+—
+2023-12-15
+High WGSA-2023-00010 FRR Dynamic Routing Denial of Service Vulenrabilities
+Fireware OS
+>= 12.1.1, < 12.10.1
+>= 12.10.1
+2023-12-15
+Crit WGSA-2023-00008 Heap Buffer Overflow in libwebp WebP Codec
+Dimension
+—
+All versions
+Fireware OS
+—
+All versions
+Secure Wi-Fi
+—
+All versions
+WatchGuard Cloud
+—
+All versions
+2023-11-01
+Med WGSA-2023-00001 OpenSSH Server 9.1 Double Free Vulnerability (CVE-2023-25136)
+Dimension
+—
+All versions
+Fireware OS
+—
+All versions
+Secure Wi-Fi
+—
+All versions
+2023-03-22
+Info WGSA-2022-00021 OpenSSL CVE-2022-3602 and CVE-2022-3786
+—
+—
+—
+2022-11-01
+High WGSA-2022-00020 OpenVPN Unauthenticated Access To Control Channel Data (CVE-2020-15078)
+Fireware OS
+Default
+>= 12.0, < 12.8.1
+>= 12.8.1
+T15/T35
+>= 12.5.0, < 12.5.10
+>= 12.5.10
+FIPS
+>= 12.3.1, < 12.3.1-b675192
+>= 12.3.1-b675192
+2022-07-05
+Med WGSA-2022-00013 WatchGuard Firebox Authenticated Arbitrary File Read Vulnerability
+Fireware OS
+Default
+>= 12.0, < 12.8
+>= 12.8
+T15/T35
+>= 12.5, < 12.5.10
+>= 12.5.10
+2022-06-23
+Med WGSA-2022-00018 Firebox Local Privilege Escallation Vulnerability
+Fireware OS
+Default
+>= 12.0, < 12.8.1
+>= 12.8.1
+T15/T35
+>= 12.5, < 12.5.10
+>= 12.5.10
+2022-06-23
+Med WGSA-2022-00012 OpenSSL Command Injection Vulnerability (CVE-2022-1292)
+—
+—
+—
+2022-05-20
+High WGSA-2022-00011 OpenSSL Certificate Processing DoS Vulnerability (CVE-2022-0778)
+Dimension
+—
+All versions
+Fireware OS
+Default
+>= 12.0, < 12.8-b659436
+>= 12.8-b659436
+T15/T35
+>= 12.5, < 12.5.9-b655824
+>= 12.5.9-b655824
+FIPS
+>= 12.3.0, < 12.3.1_U2
+>= 12.3.1_U2
+Secure Wi-Fi
+—
+All versions
+WatchGuard System Manager
+>= 12.0, < 12.8-b656510
+>= 12.8-b656510
+2022-04-14
+Info WGSA-2022-00010 Java Spring Framework RCE aka Spring4Shell (CVE-2022-22965)
+—
+—
+—
+2022-03-30
+Info WGSA-2022-00001 Polkit pkexec Local Privilege Escalation Vulnerability (CVE-2021-4034)
+—
+—
+—
+2022-01-26
+High WGSA-2021-00005 WatchGuard Firebox WebUI Business Logic Vulnerability
+Fireware OS
+Default
+>= 12.0, < 12.7.2-b652282
+>= 12.7.2-b652282
+T15/T35
+>= 12.5.0, < 12.5.9-b652189
+>= 12.5.9-b652189
+FIPS
+>= 12.3.1, < 12.3.1-b652336
+>= 12.3.1-b652336
+2021-12-30
+Info WGSA-2021-00003 Log4j2 Remote Code Execution Vulnerability aka Log4Shell (CVE-2021-44228)
+—
+—
+—
+2021-12-09
+High WGSA-2021-00002 WatchGuard Mobile VPN with SSL MacOS Privilege Escalation Vulnerability
+Mobile VPN with SSL Client
+>= 12.0, < 12.7.2
+>= 12.7.2
+2021-08-05
+High WGSA-2021-00001 WatchGuard Firebox Privilege Escalation Vulnerability
+Fireware OS
+Default
+>= 12.0, < 12.7.1
+>= 12.7.1
+T15/T35
+>= 12.5.0, < 12.5.8
+>= 12.5.8
+FIPS
+>= 12.3.1, < 12.3.1-B675192
+>= 12.3.1-B675192
+2021-08-02
+High WGSA-2019-00002 Inferring and Hijacking VPN-Tunneled TCP Connections
+Fireware OS
+—
+All versions
+2019-12-09
+High WGSA-2019-00001 TCP SACK PANIC – Kernel Vulnerabilities
+Dimension
+>= 2.0, <= 2.1.2-b596545
+> 2.1.2-b596545
+Fireware OS
+Default
+>= 12.0, < 12.5.1-b605447
+>= 12.5.1-b605447
+FIPS
+>= 12.3.1-b584973, < 12.3.1-b675192
+>= 12.3.1-b675192
+Secure Wi-Fi
+>= 8.0.0, < 8.8.0-179
+>= 8.8.0-179
+2019-06-18
+Info WGSA-2018-00001 Foreshadow Speculative Execution Attacks
+Dimension
+—
+All versions
+Fireware OS
+—
+All versions
+2018-08-14
+Copyright © 1996-2026 WatchGuard Technologies, Inc. All Rights Reserved.
+Trust Center
+California Collection Notice
+Do Not Sell or Share My Personal Information
+RSS Feed

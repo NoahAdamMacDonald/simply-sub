@@ -2312,6 +2312,12 @@ in every D1 `json` column search parses.
     Authenticator) and Microsoft Authenticator (a free plan of `microsoft-365`). Account sharing grades the terms'
     clause, each family plan its own rating. Apple's and Google's free managers wait for the storage section's Apple
     and Google providers; Psono and Passbolt sell to companies, and Buttercup and Firefox Lockwise have closed.
+  - **Antivirus, batch 2** (2026-11-20): Trend Micro (`trend-micro`, its plans by country), F-Secure (`f-secure`), G DATA
+    (`g-data`), Emsisoft (`emsisoft`), Webroot (`webroot`, OpenText's: its US and international line-ups), Sophos Home
+    (`sophos-home`), TotalAV (`totalav`), Panda Dome (`panda-dome`, WatchGuard's), Comodo (`comodo`), ZoneAlarm
+    (`zonealarm`, Check Point's), Dr.Web (`dr-web`, prepaid licences) and Windows Security (a free plan of
+    `microsoft-365`). Core reads Spanish and Italian tax wording before the tax's name ("incluyen IVA"). Immunet and AOL
+    Active Virus Shield have closed; ClamAV waits for triage.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)

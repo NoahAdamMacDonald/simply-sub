@@ -1,0 +1,1889 @@
+# Researched by hand on 2026-11-20 (M11.15, security batch 2), read from Canada with Edge and a plain fetch: each
+# country's trendmicro.com home pages (/en_ca/, /en_us/, /en_gb/, /en_ie/, /de_de/, /fr_fr/, /en_nl/, /es_es/, /it_it/,
+# /en_au/, /en_nz/), which price in their own currency whoever reads them (their price data names it: "CAD", "USD",
+# "GBP", "EUR", "AUD", "NZD", in data-price-currency or the buy link's "currency=", while Canada's, the US's,
+# Australia's and New Zealand's visible text shows a bare "$"; each priced page's HTML is saved with its price data,
+# Europe's and, by a second plain fetch the same day, Canada's, the US's, Australia's and New Zealand's); its checkout
+# (checkout.trendmicro.com) and auto-renewal terms in Edge; its help centre (helpcenter.trendmicro.com, which also
+# answers as helpcenter.trendlife.com), consumer terms, privacy notices, trust centre and investor pages with a plain
+# fetch; AV-TEST's page. TrendLife is Trend Micro's consumer brand. Pages, each quoted where it's used:
+# Pricing: each product page holds its store's price data for each term and device count, with a sales price, a
+# "renewal" price and a list price (data-price-renewal-price, data-price-msrp; Australia's and New Zealand's Maximum
+# Security, a regular and a sales price). "The introductory purchase price today is valid for the first term of your new
+# subscription. Your subscription renews each year at the then-current subscription renewal price." (every product page),
+# so the renewal price is stored (Canada's and the US's Internet Security renew at 81.95 in the price data,
+# data-price-renewal-price="81.95", below its 83.95 list price, the only figure their visible text shows).
+# The 2-year terms renew yearly ("12 month renewal terms if you have a 12, 24 or 36 month subscription", its
+# auto-renewal terms; "your subscription will automatically renew for a 1-year term", its consumer terms): first terms,
+# so only yearly prices are stored (Norton's precedent). No page sells monthly billing. No price includes tax: "Prices
+# don't include local taxes such as VAT or sales tax; these will be added at checkout based on where you live."
+# (its consumer terms; Canada's checkout shows "Estimated Tax").
+# What each country sells: its menu and plan pages. Canada and the US: Antivirus+ Security, Internet Security, Maximum
+# Security, Premium Security Suite, Personal Protection Suite, ID Protection and Trend Micro VPN. The UK and Ireland:
+# Antivirus+, Internet Security, Maximum Security and Premium Security Suite; Germany, France, the Netherlands, Spain and
+# Italy: Antivirus+, Internet Security and Maximum Security. Australia and New Zealand: their own range (Maximum Security
+# for 1 device, Maximum Security Plus, Security Suite Pro, Pro Plus, Ultimate in Australia only, Personal Protection
+# Suite for 4 devices, ID Protection, VPN for 2 devices). A plan whose features or devices differ by country is a plan of
+# its own (Norton's precedent): 22 plans. Each is priced for the device count its page shows first; the larger counts
+# Australia's suites also sell are in their notes.
+# Region checklist for CA and US, 2026-11-20: 1. country paths (/en_ca/, /en_us/); 2. its region picker (the same
+# paths); 3. the price data in each product page names CAD or USD; 4. Canada's checkout (Premium Security Suite), up to
+# the payment form, says "CAD 154.95" struck and "CAD 109.95"; 5. its help centre's renewal and payment articles; 6.
+# Edge and a plain fetch; 7. no bill offered.
+# Not drafted: Mobile Security for Android and iOS and Trend Micro ScamCheck alone (sold in their apps: their pages show
+# only download buttons and "Start your free 30-day trial"), Cleaner One Pro and Unzip One (utilities), Premium and
+# Ultimate Service Bundles (support services), Home Network Security (hardware), Deepfake Inspector and Trend Micro Check
+# (free tools with no antivirus), and the UK's and euro countries' Trend Micro VPN (their pages offer only "Free
+# Download", no price).
+# Bundles: none beyond its own suites (plans here). Official resellers: none named; its checkout sells through "our
+# preferred international seller Reach US, CA, UK, EU, or AU" (its merchant of record, like Avira's Cleverbridge, not a
+# shop of its own), and its help centre says Best Buy and internet providers sell it ("For Best Buy purchases, call
+# 1-888-237-8289."): retailers, not named as official resellers. App stores bill its mobile apps: partners, not listed.
+# Free use: HouseCall (its free scanner) and ID Protection's free version (plans below).
+
+# Coverage: trend-micro.antivirus-plus and trend-micro.internet-security in AU and NZ: their menus list neither (their
+# range starts at Maximum Security), read 2026-11-20.
+# Coverage: trend-micro.maximum-security in GB, IE, DE, FR, NL, ES, IT, AU and NZ: Canada's and the US's own plan, with
+# dark web monitoring; Europe sells trend-micro.maximum-security-europe, Australia and New Zealand their own range.
+# Coverage: trend-micro.maximum-security-europe in CA, US, AU and NZ: the UK's and the euro countries' plan.
+# Coverage: trend-micro.premium-security-suite in US, GB, IE, DE, FR, NL, ES, IT, AU and NZ: Canada's own plan (the US's
+# and the UK's and Ireland's are plans of their own; the other euro countries' and Australia's and New Zealand's menus
+# list no Premium Security Suite).
+# Coverage: trend-micro.premium-security-suite-us in CA, GB, IE, DE, FR, NL, ES, IT, AU and NZ: the US's own plan.
+# Coverage: trend-micro.premium-security-suite-europe in CA, US, DE, FR, NL, ES, IT, AU and NZ: the UK's and Ireland's
+# plan.
+# Coverage: trend-micro.personal-protection-suite in US, GB, IE, DE, FR, NL, ES, IT, AU and NZ: Canada's own plan; the
+# UK's and the euro countries' menus list no Personal Protection Suite.
+# Coverage: trend-micro.personal-protection-suite-us in CA, GB, IE, DE, FR, NL, ES, IT, AU and NZ: the US's own plan.
+# Coverage: trend-micro.personal-protection-suite-4-devices in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New
+# Zealand's plan.
+# Coverage: trend-micro.id-protection in GB, IE, DE, FR, NL, ES and IT: their menus list no ID Protection.
+# Coverage: trend-micro.id-protection-plus in CA: listed (its soldIn), priced in a bare "$" copied from the US page:
+# Canada's page repeats the US's "Pick your plan" table ("$69.99 / year", "$129.99"), with insurance "for U.S.
+# CUSTOMERS ONLY", and its price data holds Standard's CAD price only (Plus is bought in its app), read 2026-11-20.
+# Coverage: trend-micro.id-protection-plus in GB, IE, DE, FR, NL, ES, IT, AU and NZ: their menus list no ID Protection,
+# and Australia's and New Zealand's pages list Standard only.
+# Coverage: trend-micro.vpn and trend-micro.vpn-5-devices in GB, IE, DE, FR, NL, ES, IT, AU and NZ: the UK's and the euro
+# countries' VPN pages show only "Free Download", no price; Australia and New Zealand sell trend-micro.vpn-2-devices.
+# Coverage: trend-micro.vpn-2-devices in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New Zealand's plan.
+# Coverage: trend-micro.maximum-security-1-device, trend-micro.maximum-security-plus, trend-micro.security-suite-pro and
+# trend-micro.security-suite-pro-plus in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New Zealand's range.
+# Coverage: trend-micro.security-suite-ultimate in CA, US, GB, IE, DE, FR, NL, ES, IT and NZ: Australia's only (New
+# Zealand's menu doesn't list it, and its page there leads to Security Suite Pro Plus).
+
+id: trend-micro
+name: Trend Micro
+website: https://www.trendmicro.com
+# Its help centre and account pages also answer as helpcenter.trendlife.com and account.trendlife.com (TrendLife, its
+# consumer brand).
+domains: [trendlife.com]
+category: security
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help centre's "Auto Renew: What It Is and How to Manage It": "Select Stop Auto Renew." in your TrendLife account's
+# Licenses tab.
+cancelUrl: https://helpcenter.trendmicro.com/en-us/article/TMKA-14380
+sources: { pricing: https://www.trendmicro.com/en_ca/forHome.html }
+# Owner (M11.2), read 2026-11-20: its consumer terms name the company and its brand ("TrendLife is the branded business
+# unit of Trend Micro that provides consumer products and services") and, for Japan, "Trend Micro Incorporated (Japan)";
+# Canada's and the US's contracts are with "Trend Micro Incorporated, Irving, TX, USA", its US office. Its country is
+# Japan, where it is incorporated and listed. Shares: its investor relations page. No page read names a majority holder.
+owner:
+  name: Trend Micro Incorporated
+  website: https://www.trendmicro.com
+  page:
+    name: 'Consumer Terms of Use (TrendLife)'
+    url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+  quotes:
+    - 'TrendLife is the branded business unit of Trend Micro that provides consumer products and services'
+    - 'Trend Micro Incorporated (Japan)'
+  country:
+    code: JP
+  stock:
+    listings:
+      - { exchange: Tokyo Stock Exchange, symbol: '4704' }
+    page:
+      name: 'Investor Relations'
+      url: https://www.trendmicro.com/en_us/about/investor-relations.html
+    quotes:
+      - 'Traded: Tokyo Stock Exchange Prime Market'
+      - 'Ticker Code: 4704'
+    lastVerified: 2026-11-20
+  lastVerified: 2026-11-20
+# Ways to pay and card networks (M11.5), read 2026-11-20 in its help centre's "What Payment Methods Can I Use For Trend
+# Micro Online Purchase?" (its online store: Visa, MasterCard, EuroCard, Discover, American Express, Diner's Club and
+# JCB cards, PayPal and Google Pay; Diner's Club is `other`, and EuroCard is Mastercard's European name) and its renewal
+# guide (the same three ways). App stores bill its mobile apps (its consumer terms). Canada's checkout showed "Credit /
+# Debit Card".
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, discover, amex, jcb, other]
+    url: https://helpcenter.trendmicro.com/en-us/article/tmka-18342
+    quotes:
+      - 'Visa®'
+      - 'MasterCard®'
+      - 'Discover®'
+      - 'American Express®'
+      - 'JCB'
+      - 'Diner’s Club®'
+paymentMethods:
+  - methods: [card, paypal, google-pay]
+    page: 'What Payment Methods Can I Use For Trend Micro Online Purchase?'
+    url: https://helpcenter.trendmicro.com/en-us/article/tmka-18342
+    quotes:
+      - 'The Trend Micro Online Store accept several payment options including:'
+      - 'Visa®'
+      - 'PayPal'
+      - 'Google Pay'
+  - methods: [app-store]
+    page: 'Consumer Terms of Use (TrendLife)'
+    url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+    quotes:
+      - 'If you purchased through an app store such as Google Play or the Apple App Store, billing and payment information related to that purchase is held by the app store provider under their own privacy policy and retention practices, which are outside our control.'
+# Renewal day (M11.5, M11.21): its consumer terms renew a subscription "at the end of each term" (a year on from the day you
+# bought), and its help centre charges "up to 15 days before your subscription expires" ("Is Auto-Renewal Enabled When
+# Purchasing a Trend Micro Subscription?", and its account help: "you will be charged up to 15 days before the expiry
+# date"). Two other articles of the same date say the charge falls "on your subscription's expiration date" (TMKA-14380,
+# TMKA-12954): the earlier charge is kept, so the app charges a new yearly item 15 days early at most.
+renewalAnchor:
+  kind: same-date
+  page: 'Is Auto-Renewal Enabled When Purchasing a Trend Micro Subscription?'
+  url: https://helpcenter.trendmicro.com/en-us/article/TMKA-12771
+  quotes:
+    - 'If you are subscribed to Auto Renewal , you will see a charge on your payment method up to 15 days before your subscription expires.'
+  chargedBefore: { days: 15, upTo: true }
+  lastVerified: 2026-11-20
+# Lab results (M11.2), read 2026-11-20: AV-TEST's newest test of Trend Micro, May and June 2026 (report 261319, Internet
+# Security 17.9); it isn't in the July and August round. AV-Comparatives' and SE Labs' aren't listed (data/raters.yaml).
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 5.0/6.0
+    date: 2026-06
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/june-2026/trend-micro-internet-security-17.9-261319/
+    tested: Internet Security 17.9, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-06
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/june-2026/trend-micro-internet-security-17.9-261319/
+    tested: Internet Security 17.9, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-06
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/june-2026/trend-micro-internet-security-17.9-261319/
+    tested: Internet Security 17.9, Windows 11
+
+# General features, read 2026-11-20. Sign-in: a TrendLife account's password, with two-factor codes from an
+# "Authenticator App", "Text Message" or "Email" (TMKA-09872), and Google or Apple sign-in ("If you use your Google or
+# Apple account to sign in", TMKA-18903). Support: "Email support • Phone support during business hours • 24/7 live chat
+# support" and its community forums (its consumer terms). App languages: no page lists them (its help centre is in
+# English, Japanese and Chinese; its country sites in their languages), so left out. No pause: auto-renewal is turned off,
+# not paused.
+features:
+  account.sign-in: [password, totp, sms, email-code, sso]
+  support.channels: [email, phone, chat, community, 24-7]
+
+# Perks (M11.6): what the plan pages and its help centre's comparison list that no feature describes, in their words.
+perks:
+  - id: ai-app-protection
+    name: AI App Protection
+  - id: privacy-scanner
+    name: Privacy Scanner
+  - id: data-theft-prevention
+    name: Data Theft Prevention
+  - id: scamcheck
+    name: Trend Micro ScamCheck
+  - id: social-media-monitoring
+    name: Social Media Account Monitoring
+  - id: premium-service
+    name: Premium Service
+  - id: web-threat-protection
+    name: Web Threat Protection
+  - id: data-leak-check
+    name: Personal Data Leak Check
+  - id: credit-freeze
+    name: Credit Freeze Assistance
+  - id: lost-wallet
+    name: Lost Wallet Assistance
+  - id: equifax-credit-protect
+    name: Equifax Credit Protect (12-month)
+
+# Features (read 2026-11-20): each plan page and its comparison table, the help centre's "Which Trend Micro Security
+# Features Fit My Needs?" (TMKA-19015, last updated 2026-09-15), the data collection notices and the VPN and ID Protection
+# help.
+# - Windows apps (Antivirus+, Internet Security, Maximum Security): "Virus and Spyware Protection", "Web Threat
+#   Protection", "Anti-Spam", "Anti-Phishing", "Ransomware Protection" (Folder Shield), "Authenticate Wi-Fi Networks and
+#   Hotspots", "Windows Firewall Booster", "Block Malicious Links in Email", "Gamer-Friendly Mute Mode", "Pay Guard"
+#   (secure banking browser) and "AI App Protection" on all three; Internet Security and Maximum Security add "Privacy
+#   Scanner", "Data Theft Prevention", "Secure Erase", "PC Health Checkup" and "Parental Controls" (time and content
+#   limits: "Allow children to explore the web safely, with both time and content limits."). Scans: its data collection
+#   notices list "Manual Scan", "Scheduled Scan" and "Real-time Scan" for every Windows app (Antivirus+'s too, TMKA-20179).
+#   No ransomware file recovery, cryptomining, vulnerability-scan or anti-theft wording on any page. "Windows Firewall
+#   Booster" is, as its name says, a helper for Windows' own firewall; no page names a firewall of Trend Micro's own, so
+#   antivirus.network has only the Wi-Fi check (the catalog's rule since 2026-11-20: a firewall only where the provider
+#   has its own).
+# - Behaviour-based detection: no page names it; inferred from its pages' "proactive protection" against
+#   "never-before-seen attacks" and its notices' "Active Monitoring".
+# - Password manager: "Password Manager is no longer supported as of November 16, 2025" (TMKA-12258); its suites manage
+#   passwords in ID Protection's vault, which imports "from a CSV File" exported from other managers ("Kaspersky Password
+#   Manager Data", "LastPass", "Google Password Manager", TMKA-19071) and exports "two CSV files" of passwords and secure
+#   notes (TMKA-13358). No page names an authenticator, emergency access, an offline vault or end-to-end encryption
+#   ("Manages and encrypts passwords" only).
+# - Trend Micro VPN: "Unlimited Bandwidth: Uses high-end servers with no speed, traffic, or bandwidth limitation.", "Web
+#   Threat Prevention: Blocks malicious websites, fraud, and online scams", servers in 17 countries (Australia, Canada,
+#   France, Germany, Israel, Italy, Japan, the Netherlands, New Zealand, Saudi Arabia, South Africa, Switzerland,
+#   Singapore, Taiwan, the UAE, the UK and the US, TMKA-20109). No page names its protocols, a kill switch, split
+#   tunnelling, RAM-only servers, a way to connect your own devices or a no-logs policy, so those are false or left out.
+# - Identity: ID Protection's "Dark Web Monitoring", "Anti-tracking" and "Password Manager" (Standard and Plus), and
+#   Plus's "24/7/365 Identity Theft Resolution Specialists" and "Up to $1 Million Identity Fraud Insurance" ("available
+#   for U.S. CUSTOMERS ONLY").
+plans:
+  # Antivirus+ Security: "1 Device" ("Windows, Mac" on its card; the Mac's is Antivirus for Mac, whose page sells the same
+  # subscription). Its Windows app has no parental controls, PC Health Checkup or Secure Erase (TMKA-19015).
+  - id: trend-micro.antivirus-plus
+    name: 'Antivirus+ Security'
+    link: https://www.trendmicro.com/en_ca/forHome/products/antivirus-plus.html
+    features:
+      platforms: [windows, macos]
+      antivirus.included: true
+      antivirus.devices: 1
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email]
+    perks: [ai-app-protection]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'For one Windows PC or one Mac (Antivirus for Mac). Its 2-year term renews yearly, so only the yearly price is stored.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 42.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/antivirus-plus.html
+      - region: US
+        currency: USD
+        amount: 42.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/antivirus-plus.html
+      - region: GB
+        currency: GBP
+        amount: 24.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_gb/forHome/products/antivirus-plus.html
+      - region: IE
+        currency: EUR
+        amount: 24.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ie/forHome/products/antivirus-plus.html
+      - region: DE
+        currency: EUR
+        amount: 24.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/de_de/forHome/products/antivirus-plus.html
+      - region: FR
+        currency: EUR
+        amount: 24.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/fr_fr/forHome/products/antivirus-plus.html
+      - region: NL
+        currency: EUR
+        amount: 24.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nl/forHome/products/antivirus-plus.html
+      - region: ES
+        currency: EUR
+        amount: 24.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/es_es/forHome/products/antivirus-plus.html
+      - region: IT
+        currency: EUR
+        amount: 24.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/it_it/forHome/products/antivirus-plus.html
+  # Internet Security: "Up to 3 Windows PCs ONLY" (TMKA-19015; its cards also say Mac and Chromebook, the help centre's
+  # table, which names the platform, decides), with parental controls, PC Health Checkup and Secure Erase. Canada's and
+  # the US's price is the 1-year term's data-price-renewal-price="81.95" in each page's HTML (saved with the page's text);
+  # their visible text shows only the struck list price, "$83.95", and the first-year "$59.95".
+  - id: trend-micro.internet-security
+    name: 'Internet Security'
+    link: https://www.trendmicro.com/en_ca/forHome/products/internet-security.html
+    features:
+      platforms: [windows]
+      antivirus.included: true
+      antivirus.devices: 3
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+    perks: [ai-app-protection, privacy-scanner, data-theft-prevention]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'For up to 3 Windows PCs. Canada’s and the US’s renewal price (81.95, in the page’s price data) is below the struck-through list price (83.95), the only figure the page shows. Its 2-year term renews yearly.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 81.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/internet-security.html
+      - region: US
+        currency: USD
+        amount: 81.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/internet-security.html
+      - region: GB
+        currency: GBP
+        amount: 64.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_gb/forHome/products/internet-security.html
+      - region: IE
+        currency: EUR
+        amount: 64.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ie/forHome/products/internet-security.html
+      - region: DE
+        currency: EUR
+        amount: 64.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/de_de/forHome/products/internet-security.html
+      - region: FR
+        currency: EUR
+        amount: 64.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/fr_fr/forHome/products/internet-security.html
+      - region: NL
+        currency: EUR
+        amount: 64.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nl/forHome/products/internet-security.html
+      - region: ES
+        currency: EUR
+        amount: 64.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/es_es/forHome/products/internet-security.html
+      - region: IT
+        currency: EUR
+        amount: 64.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/it_it/forHome/products/internet-security.html
+  # Maximum Security in Canada and the US: 5 devices (Windows, Mac, Android, iOS), with Mobile Security, its password
+  # manager (ID Protection's vault since Password Manager ended on 16 November 2025) and dark web monitoring ("Monitor and
+  # receive alerts if your email address, credit card, driver license, SSN, and other personal information is leaked to
+  # the internet or dark web.", its own page and table; the Premium Security Suite page's table shows it only for that
+  # suite: the plan's own page decides).
+  - id: trend-micro.maximum-security
+    name: 'Maximum Security'
+    link: https://www.trendmicro.com/en_ca/forHome/products/maximum-security.html
+    categories: [security, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 5
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+    perks: [ai-app-protection, privacy-scanner, data-theft-prevention]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'For up to 5 devices: Windows, Mac, Android and iOS. Includes ID Protection’s password vault and dark web alerts. Its 2-year term renews yearly.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 104.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/maximum-security.html
+      - region: US
+        currency: USD
+        amount: 104.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/maximum-security.html
+  # Maximum Security in the UK and the euro countries: the same app, without dark web monitoring (the UK's comparison
+  # table lists it for Premium Security Suite only).
+  - id: trend-micro.maximum-security-europe
+    name: 'Maximum Security (UK and Europe)'
+    link: https://www.trendmicro.com/en_gb/forHome/products/maximum-security.html
+    categories: [security, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 5
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+    perks: [ai-app-protection, privacy-scanner, data-theft-prevention]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'The UK’s and the euro countries’ Maximum Security: up to 5 devices with a password manager, without dark web monitoring. Its 2-year term renews yearly.'
+    prices:
+      - region: GB
+        currency: GBP
+        amount: 84.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_gb/forHome/products/maximum-security.html
+      - region: IE
+        currency: EUR
+        amount: 84.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ie/forHome/products/maximum-security.html
+      - region: DE
+        currency: EUR
+        amount: 84.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/de_de/forHome/products/maximum-security.html
+      - region: FR
+        currency: EUR
+        amount: 84.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/fr_fr/forHome/products/maximum-security.html
+      - region: NL
+        currency: EUR
+        amount: 84.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nl/forHome/products/maximum-security.html
+      - region: ES
+        currency: EUR
+        amount: 84.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/es_es/forHome/products/maximum-security.html
+      - region: IT
+        currency: EUR
+        amount: 84.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/it_it/forHome/products/maximum-security.html
+  # Premium Security Suite: Maximum Security, Mobile Security, ID Protection, Trend Micro VPN, ScamCheck and Premium Service
+  # for 10 devices. Canada's adds ID theft restoration ("24/7 Resolution specialists"); its insurance "is available FOR
+  # U.S. CUSTOMERS ONLY", so the US's is a plan of its own.
+  - id: trend-micro.premium-security-suite
+    name: 'Premium Security Suite'
+    link: https://www.trendmicro.com/en_ca/forHome/products/premium-security-suite.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 10
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email, sms, calls]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      security.identity-restoration: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks:
+      [
+        ai-app-protection,
+        privacy-scanner,
+        data-theft-prevention,
+        scamcheck,
+        social-media-monitoring,
+        premium-service,
+      ]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'Canada’s suite: up to 10 devices with Maximum Security, Mobile Security, ID Protection with identity theft restoration, Trend Micro VPN, ScamCheck and 24/7 Premium Service. Its 2-year term renews yearly.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 154.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/premium-security-suite.html
+  # The US's Premium Security Suite: Canada's, plus "Up to $1 Million Identity Fraud Insurance" (US customers only).
+  - id: trend-micro.premium-security-suite-us
+    name: 'Premium Security Suite (United States)'
+    link: https://www.trendmicro.com/en_us/forHome/products/premium-security-suite.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 10
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email, sms, calls]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 1
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks:
+      [
+        ai-app-protection,
+        privacy-scanner,
+        data-theft-prevention,
+        scamcheck,
+        social-media-monitoring,
+        premium-service,
+      ]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'The US’s suite: Canada’s, with up to $1 million of identity fraud insurance for the registered user. Its 2-year term renews yearly.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 154.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/premium-security-suite.html
+  # Premium Security Suite in the UK and Ireland: the same apps, with no identity theft restoration or insurance on their
+  # pages; ScamCheck is Android only there ("(*Android only)").
+  - id: trend-micro.premium-security-suite-europe
+    name: 'Premium Security Suite (UK and Ireland)'
+    link: https://www.trendmicro.com/en_gb/forHome/products/premium-security-suite.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 10
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email, sms, calls]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks:
+      [
+        ai-app-protection,
+        privacy-scanner,
+        data-theft-prevention,
+        scamcheck,
+        social-media-monitoring,
+        premium-service,
+      ]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'The UK’s and Ireland’s suite: up to 10 devices with Maximum Security, Mobile Security, ID Protection, Trend Micro VPN, ScamCheck (Android only) and 24/7 Premium Service. Its 2-year term renews yearly.'
+    prices:
+      - region: GB
+        currency: GBP
+        amount: 124.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_gb/forHome/products/premium-security-suite.html
+      - region: IE
+        currency: EUR
+        amount: 124.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ie/forHome/products/premium-security-suite.html
+  # Personal Protection Suite: ScamCheck, ID Protection, Trend Micro VPN and Premium Support for 5 devices, with no
+  # antivirus. Canada's has ID theft restoration; the US's adds the insurance.
+  - id: trend-micro.personal-protection-suite
+    name: 'Personal Protection Suite'
+    link: https://www.trendmicro.com/en_ca/forHome/products/personal-protection-suite.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios, browser-extension]
+      antivirus.included: false
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      security.identity-restoration: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks: [scamcheck, social-media-monitoring, premium-service, web-threat-protection]
+    notes: 'Canada’s: scam, identity and VPN protection for 1 person on up to 5 devices, with identity theft restoration and 24/7 Premium Service. It has no antivirus.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/personal-protection-suite.html
+  # The US's Personal Protection Suite: Canada's, plus the identity fraud insurance.
+  - id: trend-micro.personal-protection-suite-us
+    name: 'Personal Protection Suite (United States)'
+    link: https://www.trendmicro.com/en_us/forHome/products/personal-protection-suite.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios, browser-extension]
+      antivirus.included: false
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 1
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks: [scamcheck, social-media-monitoring, premium-service, web-threat-protection]
+    notes: 'The US’s: Canada’s, with up to $1 million of identity fraud insurance for the registered user. It has no antivirus.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/personal-protection-suite.html
+  # Australia's and New Zealand's Personal Protection Suite: 4 devices, no restoration or insurance on their pages.
+  - id: trend-micro.personal-protection-suite-4-devices
+    name: 'Personal Protection Suite (4 devices)'
+    link: https://www.trendmicro.com/en_au/forHome/products/personal-protection-suite.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: false
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks: [scamcheck, premium-service]
+    notes: 'Australia’s and New Zealand’s: scam, identity and VPN protection for 1 person on up to 4 devices, with 24/7 Premium Support. It has no antivirus. Its 2-year term renews yearly.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 119.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_au/forHome/products/personal-protection-suite.html
+      - region: NZ
+        currency: NZD
+        amount: 119.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nz/forHome/products/personal-protection-suite.html
+  # ID Protection Standard, sold alone ("Identity Protection Standard - 1 Device 12 Months"; Australia's and New Zealand's
+  # "Trend Micro ID Protection - 12 Months" has the same features): its apps for iOS and Android and its Chrome and Edge
+  # extensions.
+  - id: trend-micro.id-protection
+    name: 'ID Protection'
+    link: https://www.trendmicro.com/en_ca/forHome/products/id-protection.html
+    categories: [security, passwords]
+    features:
+      platforms: [android, ios, browser-extension, web]
+      antivirus.included: false
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+    perks: [social-media-monitoring, web-threat-protection]
+    notes: 'Its Standard plan: dark web monitoring, a password manager, anti-tracking and web threat protection, for 1 person. No identity theft restoration or insurance.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/id-protection.html
+      - region: US
+        currency: USD
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/id-protection.html
+      - region: AU
+        currency: AUD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_au/forHome/products/id-protection.html
+      - region: NZ
+        currency: NZD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nz/forHome/products/id-protection.html
+  # ID Protection Plus: the US page's "Pick your plan" table ("$69.99 / year" first, "$129.99" regular), bought in its app;
+  # its insurance is for US customers only ("Up to $1 Million Identity Fraud Insurance is available for U.S. CUSTOMERS
+  # ONLY."). Canada's page lists it in the same table, in a bare "$" copied from the US page, so it's sold in Canada
+  # (soldIn) with no Canadian price (the Coverage note); there it has no insurance, which its features can't say by
+  # country, so the notes do.
+  - id: trend-micro.id-protection-plus
+    name: 'ID Protection Plus'
+    link: https://www.trendmicro.com/en_us/forHome/products/id-protection.html
+    categories: [security, passwords]
+    features:
+      platforms: [android, ios, browser-extension, web]
+      antivirus.included: false
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 1
+    perks: [social-media-monitoring, web-threat-protection, credit-freeze, lost-wallet]
+    notes: 'Standard’s features, plus 24/7 identity theft resolution specialists, credit freeze and lost wallet help, and up to $1 million of identity fraud insurance for US customers only (none in Canada). Bought in its app; the price is its US page’s regular price. Canada’s page lists it with no Canadian price.'
+    soldIn:
+      - regions: [CA]
+        url: https://www.trendmicro.com/en_ca/forHome/products/id-protection.html
+        quotes:
+          - 'Plus $69.99 / year $129.99 (Save $60)'
+          - 'Up to $1 Million Identity Fraud Insurance is available for U.S. CUSTOMERS ONLY.'
+        lastVerified: 2026-11-20
+    prices:
+      - region: US
+        currency: USD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/id-protection.html
+  # ID Protection Free (the same table's "Free" column): anti-tracking, social media account monitoring, a personal data
+  # leak check and a password generator.
+  - id: trend-micro.id-protection-free
+    name: 'ID Protection (free)'
+    link: https://www.trendmicro.com/en_ca/forHome/products/id-protection.html
+    features:
+      platforms: [android, ios, browser-extension, web]
+      antivirus.included: false
+      security.anti-tracker: true
+    perks: [social-media-monitoring, data-leak-check]
+    notes: 'The free version of ID Protection: anti-tracking, social media account monitoring, a one-off check of whether your details have leaked, and a password generator. No password manager or dark web monitoring.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/id-protection.html
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/id-protection.html
+  # Trend Micro VPN sold alone: 1 or 5 devices in Canada and the US ("Number of devices 1 5"), each its own plan.
+  - id: trend-micro.vpn
+    name: 'Trend Micro VPN'
+    link: https://www.trendmicro.com/en_ca/forHome/products/trend-micro-vpn.html
+    categories: [vpn]
+    features:
+      platforms: [windows, macos, android, ios]
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.devices: 1
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    notes: 'For 1 device. Its regular price, with no first-year discount.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/trend-micro-vpn.html
+      - region: US
+        currency: USD
+        amount: 29.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/trend-micro-vpn.html
+  - id: trend-micro.vpn-5-devices
+    name: 'Trend Micro VPN (5 devices)'
+    link: https://www.trendmicro.com/en_ca/forHome/products/trend-micro-vpn.html
+    categories: [vpn]
+    features:
+      platforms: [windows, macos, android, ios]
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.devices: 5
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    notes: 'For 5 devices. Its regular price, with no first-year discount.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_ca/forHome/products/trend-micro-vpn.html
+      - region: US
+        currency: USD
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/trend-micro-vpn.html
+  # Australia's and New Zealand's VPN: 2 devices ("Trend Micro VPN - 2 Devices 12 Months").
+  - id: trend-micro.vpn-2-devices
+    name: 'Trend Micro VPN (2 devices)'
+    link: https://www.trendmicro.com/en_au/forHome/products/vpn.html
+    categories: [vpn]
+    features:
+      platforms: [windows, macos, android, ios]
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.devices: 2
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    notes: 'Australia’s and New Zealand’s: for 2 devices. Its 2-year term renews yearly.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_au/forHome/products/vpn.html
+      - region: NZ
+        currency: NZD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nz/forHome/products/vpn.html
+  # Australia's and New Zealand's own range (their menus and comparison table: Maximum Security, Maximum Security Plus,
+  # Security Suite Pro, Pro Plus and, in Australia only, Ultimate). Maximum Security there is sold for 1 device (or 25,
+  # whose price shows no regular price), without the password manager or dark web monitoring of North America's.
+  - id: trend-micro.maximum-security-1-device
+    name: 'Maximum Security (1 device)'
+    link: https://www.trendmicro.com/en_au/forHome/products/maximum-security.html
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 1
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+    perks: [ai-app-protection, privacy-scanner, data-theft-prevention]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'Australia’s and New Zealand’s Maximum Security for 1 device. Its price is the page’s regular price (the page names no renewal price for it); its 2-year term renews yearly.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 69.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_au/forHome/products/maximum-security.html
+      - region: NZ
+        currency: NZD
+        amount: 69.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nz/forHome/products/maximum-security.html
+  - id: trend-micro.maximum-security-plus
+    name: 'Maximum Security Plus'
+    link: https://www.trendmicro.com/en_au/forHome/products/maximum-security-plus.html
+    categories: [security, vpn]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 2
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks: [ai-app-protection, privacy-scanner, data-theft-prevention]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'Australia’s and New Zealand’s: Maximum Security with Trend Micro VPN and Cleaner One, priced for 2 devices (also sold for 4). Its 2-year term renews yearly.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_au/forHome/products/maximum-security-plus.html
+      - region: NZ
+        currency: NZD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nz/forHome/products/maximum-security-plus.html
+  - id: trend-micro.security-suite-pro
+    name: 'Security Suite Pro'
+    link: https://www.trendmicro.com/en_au/forHome/products/security-suite-pro.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 3
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks: [ai-app-protection, privacy-scanner, data-theft-prevention, premium-service]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'Australia’s and New Zealand’s: Maximum Security, Mobile Security, ID Protection, Trend Micro VPN and 24/7 phone support, priced for 3 devices (also sold for 6). Its 2-year term renews yearly.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 159.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_au/forHome/products/security-suite-pro.html
+      - region: NZ
+        currency: NZD
+        amount: 159.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nz/forHome/products/security-suite-pro.html
+  - id: trend-micro.security-suite-pro-plus
+    name: 'Security Suite Pro Plus'
+    link: https://www.trendmicro.com/en_au/forHome/products/security-suite-pro-plus.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 3
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email, sms]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks: [ai-app-protection, privacy-scanner, data-theft-prevention, premium-service, scamcheck]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'Security Suite Pro with ScamCheck (spam and scam text filtering, deepfake video call alerts), priced for 3 devices (also sold for 6). Its 2-year term renews yearly.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 179.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_au/forHome/products/security-suite-pro-plus.html
+      - region: NZ
+        currency: NZD
+        amount: 179.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_nz/forHome/products/security-suite-pro-plus.html
+  - id: trend-micro.security-suite-ultimate
+    name: 'Security Suite Ultimate'
+    link: https://www.trendmicro.com/en_au/forHome/products/security-suite-ultimate.html
+    categories: [security, vpn, passwords]
+    features:
+      platforms: [windows, macos, android, ios]
+      antivirus.included: true
+      antivirus.devices: 5
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [wifi-check]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.activity-modes: true
+      antivirus.scam-protection: [web, email, sms]
+      antivirus.optimizer: true
+      security.file-shredder: true
+      parental-control: [content-filtering, screen-time]
+      account.parental-controls: true
+      password-manager: true
+      password-manager.item-types: [login, secure-note]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: false
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 17
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    perks:
+      [
+        ai-app-protection,
+        privacy-scanner,
+        data-theft-prevention,
+        premium-service,
+        scamcheck,
+        equifax-credit-protect,
+      ]
+    featureLabels:
+      antivirus.secure-browser: 'Pay Guard'
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its plan pages promise "proactive protection" against "never-before-seen attacks", and its data collection notice lists Active Monitoring beside the real-time and scheduled scans, which it watches for threats.'
+        page:
+          name: Trend Micro Maximum Security Data Collection Notice
+          url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+        lastVerified: 2026-11-20
+    notes: 'Australia’s: Security Suite Pro Plus with Cleaner One and 12 months of Equifax Credit Protect (claimed within 90 days), priced for 5 devices (also sold for 10). Its 2-year term renews yearly.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 249.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_au/forHome/products/security-suite-ultimate.html
+  # Free use: HouseCall, its free scanner for Windows ("Free Online Security Scan", "Detect and fix viruses, worms, spyware,
+  # and other malicious threats for free."), with quick, full and custom scans and no real-time protection.
+  - id: trend-micro.housecall
+    name: 'HouseCall (free scanner)'
+    link: https://www.trendmicro.com/en_us/forHome/products/housecall.html
+    features:
+      platforms: [windows]
+      antivirus.included: true
+      antivirus.scans: [on-demand]
+    notes: 'A free scan that finds and removes malware on a Windows computer, beside your other security app. It doesn’t protect you in real time.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.trendmicro.com/en_us/forHome/products/housecall.html
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-20: its Consumer Terms of Use (TrendLife's, "Last updated: 10 August
+# 2026", the licence its checkout names "End User License Agreement", a PDF read with pdftotext), the Global Privacy
+# Notice (effective June 27, 2025, a PDF), its California Consumer Privacy Act Disclosures (a PDF), the auto-renewal terms
+# its checkout's box names (checkout.trendmicro.com/legal/terms.html, in Edge), the Terms of Service of Reach, the seller
+# its checkout names ("you will check out with our preferred international seller Reach US, CA, UK, EU, or AU and agree to
+# the Terms of Service of Reach"), the data collection notices for Antivirus+, Internet Security, Maximum Security,
+# Trend Micro VPN and ID Protection, its help centre's renewal, refund and account articles, its trust centre's
+# certifications and its security bulletins. Read for no topic: the TrendLife App privacy notice (its Kaleida companion
+# app, not these plans) and the cookie notice page (its text loads only a cookie banner). Not read: the in-app terms of
+# ScamCheck and ID Protection's app stores (Apple's and Google's).
+policies:
+  links:
+    - name: Consumer Terms of Use
+      url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+    - name: Global Privacy Notice
+      url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+    - name: Auto-Renewal Terms
+      url: https://checkout.trendmicro.com/legal/terms.html
+    - name: Reach Terms of Service (its seller)
+      url: https://www.withreach.com/terms-of-service
+    - name: Maximum Security Data Collection Notice
+      url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+    - name: Trend Micro VPN Data Collection Notice
+      url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+    - name: Auto Renew (help)
+      url: https://helpcenter.trendmicro.com/en-us/article/TMKA-14380
+    - name: Exporting passwords from ID Protection (help)
+      url: https://helpcenter.trendmicro.com/en-us/article/TMKA-13358
+    - name: Certifications (Trust Center)
+      url: https://www.trendmicro.com/en_us/about/trust-center/compliance.html
+    - name: Security bulletins
+      url: https://helpcenter.trendlife.com/en-us/vulnerability/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its security apps send usage data (Google Analytics) and error logs to improve them, which you can’t turn off. Sharing threat and performance data with it is on, and you can turn that off in the app.'
+      sources:
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+          quote: 'Google Analytics data is used to improve user experience.'
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+          quote: 'You can disable any of these features at any time to prevent the corresponding data from being sent to Trend Micro.'
+      action:
+        name: 'What its app collects, and which settings stop it'
+        url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
+      lastVerified: 2026-11-20
+    - topic: privacy.data-collection
+      plans:
+        [
+          trend-micro.premium-security-suite,
+          trend-micro.premium-security-suite-us,
+          trend-micro.premium-security-suite-europe,
+          trend-micro.personal-protection-suite,
+          trend-micro.personal-protection-suite-us,
+          trend-micro.personal-protection-suite-4-devices,
+          trend-micro.vpn,
+          trend-micro.vpn-5-devices,
+          trend-micro.vpn-2-devices,
+          trend-micro.maximum-security-plus,
+          trend-micro.security-suite-pro,
+          trend-micro.security-suite-pro-plus,
+          trend-micro.security-suite-ultimate,
+        ]
+      tier: poor
+      reason: 'Its VPN app sends your location, device details and logs to it, partly for marketing, and you can’t turn that off short of uninstalling it. You can turn off sharing usage and crash data in its settings.'
+      sources:
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+          quote: 'The following marketing activities are based on this data:'
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+          quote: 'This feature cannot be disabled. If you do not want this data to be collected, please uninstall the application from your device.'
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+          quote: 'You can disable any of these features at any time to prevent the corresponding data from being sent to Trend Micro.'
+      action:
+        name: 'What its VPN collects, and which settings stop it'
+        url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives your details from its websites to advertising companies, which can use them for their own purposes. To stop it, you have to contact it.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'we disclose personal information to third-party providers of advertising services who may use such personal information for their own purposes or to serve other customers'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'To opt out, please use the Individual Rights processes and Contact Us.'
+      action:
+        name: 'How to opt out (its privacy notice’s contacts)'
+        url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its websites use cookies for advertising. Whether they’re on before you agree depends on where you live, and turning them off is a setting in each browser.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'Cookies and other tracking technologies are used on our Website for a variety of reasons including to better understand visitor behavior and improving our Products and advertising.'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'Note that your default settings will depend on your location of as rules for such technologies differ from region to region.'
+      action:
+        name: 'How to opt out (its privacy notice)'
+        url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say whether your data trains AI models.'
+      pages:
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.content-access
+      status: not-stated
+      reason: 'Its pages say its password vault "encrypts passwords", but not whether only you can read it.'
+      pages:
+        - https://helpcenter.trendmicro.com/en-us/article/TMKA-13358
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it has a business need. Card details go within 60 days of your subscription ending; billing records stay longer for tax and audits.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'Trend Micro will keep your personal information for as long as we have an ongoing legitimate business need to do so'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'payment card details are deleted or masked within 60 days of termination, while billing, transactional and licensing records are kept for longer where tax, audit or other legal requirements apply.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to delete your data, by email or through its privacy page. It answers within the time your country’s law gives.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'To exercise any of these rights, please visit trendmicro.com/privacy or contact us at legal_notice@trendmicro.com.'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "We'll respond within the timeframe required by the law in your country."
+      action:
+        name: 'How to ask for your data to be deleted'
+        url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it for a copy of the data you gave it.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'Right to data portability – right to receive personal information you have provided to us or to ask us to transfer it to another person.'
+      action:
+        name: 'How to ask for a copy of your data'
+        url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      plans:
+        [
+          trend-micro.maximum-security,
+          trend-micro.maximum-security-europe,
+          trend-micro.premium-security-suite,
+          trend-micro.premium-security-suite-us,
+          trend-micro.premium-security-suite-europe,
+          trend-micro.personal-protection-suite,
+          trend-micro.personal-protection-suite-us,
+          trend-micro.personal-protection-suite-4-devices,
+          trend-micro.id-protection,
+          trend-micro.id-protection-plus,
+          trend-micro.security-suite-pro,
+          trend-micro.security-suite-pro-plus,
+          trend-micro.security-suite-ultimate,
+        ]
+      tier: good
+      reason: 'You can download your saved passwords and notes yourself, as CSV files any password manager can read.'
+      sources:
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-13358
+          quote: 'Unzip or extract the ZIP file. Inside, you will find two CSV files:'
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-13358
+          quote: 'Passwords [date].csv – contains your Display name, Account, Password, Website, and Notes for each saved password.'
+      action:
+        name: 'How to export your password vault'
+        url: https://helpcenter.trendmicro.com/en-us/article/TMKA-13358
+      lastVerified: 2026-11-20
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Beyond what the law requires, it may hand over your data when it decides national security, law enforcement or the public interest call for it.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'We may also disclose personal information if we determine that for purposes of national security, law enforcement or other issues of public importance, disclosure is necessary or appropriate.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can be handled outside your country, in the US and elsewhere, with the EU’s approved contracts as the safeguard.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'We may process your personal information outside the country in which you are located, including at data centers in the United States as well as other locations operated by Trend Micro, affiliates of Trend Micro or data processors engaged by Trend Micro.'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+          quote: 'When we share your personal information among Trend Micro affiliates globally, we will do this on the basis of EU Standard Contractual Clauses'
+      lastVerified: 2026-11-20
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You need a TrendLife account with a working email address. Its checkout asks for your name, address and card.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "To get started, you'll need to create a TrendLife account."
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'Make sure to use a valid email address.'
+      lastVerified: 2026-11-20
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can turn off automatic renewal in your account at any time, after a short feedback form, and keep your protection until it runs out.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "Turning it off won't affect your current subscription — you'll keep full access until it expires, at which point you'd need to renew manually."
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-14380
+          quote: "Answer the short feedback form to let us know why you're turning it off, then click Submit ."
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      tier: good
+      reason: 'You can get all your money back within 30 days of buying, for any reason, and within 30 days of a renewal you didn’t mean to have.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "If you're not happy with your product for any reason, you can request a full refund within 30 days of your purchase date — no questions asked."
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "Auto-renewal refunds: If you didn't mean to renew, you can request a refund within 30 days of the renewal date."
+      lastVerified: 2026-11-20
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price starts only at your renewal, and it emails you at least 28 days before, so you can cancel first.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "If your subscription price changes upon renewal, we'll let you know at least 28 days in advance by email."
+      lastVerified: 2026-11-20
+    - topic: billing.free-trials
+      tier: great
+      reason: 'Its free trials simply end; they don’t turn into a paid plan.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'Your trial licence expires automatically at the end of the trial period.'
+      lastVerified: 2026-11-20
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you at least 28 days before a renewal, with the price and how to cancel. Its checkout’s renewal terms say monthly subscriptions get no reminder.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "We'll always send you a reminder email at least 28 days before your renewal, clearly showing the renewal price, duration and your cancellation options."
+        - url: https://checkout.trendmicro.com/legal/terms.html
+          quote: 'Please note that monthly subscriptions will not receive a reminder email.'
+      lastVerified: 2026-11-20
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages list no fees beyond the price and taxes.'
+      pages:
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+        - https://checkout.trendmicro.com/legal/terms.html
+      lastVerified: 2026-11-20
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and help pages don’t say what happens to the time you paid for when you switch plans.'
+      pages:
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+        - https://helpcenter.trendmicro.com/en-us/article/TMKA-14380
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      tier: good
+      reason: 'Outside the US there’s no private referee: disputes go to courts, in Canada your province’s and in Australia New South Wales’. Disputes over the purchase itself go to London’s courts under its seller Reach’s terms.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'Canada – Courts of your province or territory'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'NSW courts'
+        - url: https://www.withreach.com/terms-of-service
+          quote: 'Any action or proceeding arising out of or relating to these Terms of Service must be brought in the courts of England and Wales'
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      regions: [US]
+      tier: bad
+      reason: 'In the US, disputes go to a private referee (arbitration), not a court, and you can’t join a class action. You can only refuse later changes to that rule.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'both parties agree to resolve the dispute through binding arbitration administered by the American Arbitration Association (AAA) at www.adr.org, rather than through the courts.'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'Neither party may bring or participate in a class action, representative action or collective proceeding.'
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It announces a change that affects your rights at least 30 days ahead, by email or only on its help centre, and you can leave first with a refund for the time left.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "If we make a change that materially affects your rights, we'll let you know at least 30 days in advance via the Help Centre or by email."
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "If you don't agree with the changes, you can cancel your subscription before they take effect and receive a pro-rata refund for any unused prepaid fees."
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      tier: good
+      reason: 'It can cut you off only for a serious breach of its terms, a missed payment or a security risk. When the breach can be fixed, it tells you in writing and gives you 20 days first, and you can appeal.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "Where the breach can be fixed, we'll give you written notice and 20 days to fix it before cancelling."
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'We may also act immediately, without a cure period, if you fail to make a renewal payment or you pose a security risk to the product or to others.'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'You have the right to appeal any cancellation by contacting your local Trend office.'
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      tier: good
+      reason: 'If it stops a product before your paid time ends, it offers a similar one or refunds the time left.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "If we discontinue a product or end support before your current prepaid subscription expires, we'll do our best to offer you a comparable replacement."
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "If that's not possible, we'll refund the unused portion of your subscription on a pro-rata basis."
+      lastVerified: 2026-11-20
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/notice/en-english-global-privacy-notice.pdf
+      lastVerified: 2026-11-20
+    - topic: legal.content-rights
+      status: not-stated
+      reason: 'Its terms take no licence over what you store in its password vault, and don’t say what rights it has over it.'
+      pages:
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use its apps only for yourself and your household, not for work, and never take them apart, even where the law would let you.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'you can use it for personal or household, non-commercial use on the number of devices or users shown in your purchase confirmation.'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'Try to copy (except for the back-up copy mentioned at 2.1 above), modify, reverse engineer or recreate the product'
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors certify its security (ISO 27001 and SOC 2, for its online services and data centres), and it publishes security bulletins for its home products.'
+      sources:
+        - url: https://www.trendmicro.com/en_us/about/trust-center/compliance.html
+          quote: 'Our SaaS offerings and data centers are certified under these global standards.'
+        - url: https://www.trendmicro.com/en_us/about/trust-center/compliance.html
+          quote: 'As an example of transparency and security, Trend has undergone a SOC 2 Type II audit, which outlines the internal controls we use to safeguard customer data and how well those controls are operating.'
+        - url: https://helpcenter.trendlife.com/en-us/vulnerability/
+          quote: 'Security Bulletin: Trend Micro Security Out-Of-Bounds Read Information Disclosure Vulnerability'
+      lastVerified: 2026-11-20
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'Its VPN makes no no-logs promise. Its app sends your location and IP address with its logs and crash reports, and doesn’t say how long they’re kept.'
+      sources:
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+          quote: 'Crash / issue logs (auto-feedback) collects the crash / issue logs in real-time for problems where there may be a timing issue and logs may be difficult to collect manually.'
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+          quote: 'Data collected by SPN and provide monthly report'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Everyone in your household may use your subscription, up to its number of devices, but not people outside it.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'This agreement covers you and everyone in your household who uses the product'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: "Please don't share your account with anyone outside your household."
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms limit you to the devices you paid for, but don’t say whether you can move a licence to a new device or how often.'
+      pages:
+        - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps update themselves to keep your protection current, which its terms say you agree to. Its terms describe no other changes to your device.'
+      sources:
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'For installed software, you agree to allow these updates to install automatically so your protection stays current.'
+      lastVerified: 2026-11-20

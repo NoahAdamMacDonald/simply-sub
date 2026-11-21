@@ -22,6 +22,9 @@ describe('saysTaxIncluded', () => {
       'y compris la TVA',
       'Inclusief BTW.',
       'IVA incluido.',
+      'Todos los precios incluyen IVA',
+      'El precio incluye el IVA',
+      "I prezzi includono l'IVA",
       'IVA inclusa',
       'Priset inkl. moms',
       'moms ingår',
@@ -43,6 +46,8 @@ describe('saysTaxIncluded', () => {
       'non-inclusive of VAT',
       'TVA non incluse',
       'IVA no incluido',
+      'Los precios no incluyen IVA',
+      "I prezzi non includono l'IVA",
       'zzgl. MwSt.',
       'Prices include VAT, plus applicable sales tax in the US.',
     ]) {

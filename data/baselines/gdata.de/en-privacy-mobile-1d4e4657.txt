@@ -1,0 +1,260 @@
+url: https://www.gdata.de/en/privacy/mobile
+method: fetch
+saved: 2026-11-20
+
+Privacy Policy for G DATA Mobile Applications: G DATA CyberDefense AG
+Skip to content Business
+Consumer
+Support
+About us
+My G DATA
+EN
+Platform
+Services
+Partner
+Resources
+Contact sales
+Security
+Online privacy
+For mobile devices
+Free trial
+Shop
+Privacy Policy for G DATA Mobile Applications
+G DATA Mobile Security Android
+G DATA Mobile Security iOS
+Privacy Policy for G DATA Mobile Security Android
+In the following, we would like to inform you about which personal data G DATA processes and for what purposes. We also inform you about other details that are important under data protection law, such as your rights.
+With G DATA Mobile Security for Android, you can use our malware scanner to check your device memory or downloads for malware such as Trojans, viruses or spyware and analyze the permissions of installed apps to detect suspicious behavior and phishing.
+G DATA Mobile Security for Android comprises several components, each of which processes personal data. Detailed information on individual modules can be found below:
+With G DATA Mobile Security for Android, you may use our malware scanner to scan your device memory or downloads for malicious software such as trojans, viruses or spyware and analyse the permissions of installed apps in order to find out about suspicious behaviour and phishing.
+1. Controller and data protection officer
+The controller for the data processing described below within the meaning of data protection regulations is
+G DATA CyberDefense AG
+Königsallee 178 a
+D-44799 Bochum
+Germany
+E-Mail: info@gdata.de
+You can also send further questions about data protection by e-mail to dsgvo@gdata.de
+Data Protection Officer:
+Bastian Rogles
+G DATA CyberDefense AG
+Königsallee 178 a 44799 Bochum
+Our Data Protection Officer can be reached at the following email address: DSB@gdata.de
+2. General information on data processing:
+a) Scope of the processing of personal data
+We process personal data of our users only to the extent necessary to provide our services or to use our software.
+b) Legal basis for the processing of personal data
+G DATA processes personal data exclusively on the basis of the General Data Protection Regulation.
+Insofar as we obtain your consent for the processing of personal data, Art. 6 para. 1 sentence 1 lit. a GDPR serves as the legal basis.
+When processing personal data that is necessary for the performance of a contract to which the data subject is a party, Art. 6 para. 1 sentence 1 lit. b GDPR serves as the legal basis. This also applies to processing operations that are necessary for the initiation of a contract (pre-contractual measures).
+Insofar as the processing of personal data is necessary to fulfill a legal obligation to which our company is subject, Art. 6 para. 1 sentence 1 lit. c GDPR serves as the legal basis.
+If the processing is necessary to safeguard a legitimate interest of our company or a third party and if the interests, fundamental rights and freedoms of the data subject do not outweigh the first-mentioned interest, Art. 6 para. 1 sentence 1 lit. f GDPR serves as the legal basis for the processing.
+c) No automated decision-making
+Automated processing of personal data consisting of the use of personal data to evaluate certain personal aspects relating to a natural person, in particular to analyze or predict aspects concerning that natural person's performance at work, economic situation, health, personal preferences, interests, reliability, behavior, location or movements, does not take place in the context of the data processing described.
+3. Purposes and legal bases of data processing
+a) Registration for the application (Android)
+Personal data is processed depending on the respective product variant and the selected method of purchase or registration. The processing of the data described below is not in all cases directly related to a purchase contract, but serves in particular for registration, license management and provision of the security functions. The trial ID is a pseudonymized device identifier. It is created to prevent uninterrupted free trial periods.
+G DATA Mobile Security Light (Google Play Store)
+As part of the registration for the 30-day trial period, we process the following data
+First and last name
+e-mail address
+Trial ID
+At the end of the trial period, you have the option of taking out a paid subscription.
+G DATA Mobile Security (download via the G DATA website)
+When using a previously purchased license key, the following data is processed as part of the license registration process:
+First and last name
+e-mail address
+If applicable, an optional dealer number
+As part of the registration for the 30-day trial period, we process the following data
+First and last name
+e-mail address
+Trial ID
+G DATA Mobile Security (Google Play Store)
+When purchasing the app via the Google Play Store, the purchase is made via the Google account stored on the end device.
+A Google account registered on the device is selected to register the app. A user name is generated from this account (e.g. #gvorname.nachname@google.com).
+We use this data to activate your license and ensure the proper licensing of our application. If you purchase a license via an in-app purchase, we receive information from Google about the successful completion of the purchase.
+This data is processed for the fulfillment of our contract or pre-contractual measures with you regarding the use of G DATA Mobile Security for Android in accordance with Art. 6 para. 1 sentence 1 lit. b GDPR.
+b) Malware detection and product improvement
+G DATA Mobile Security for Android performs so-called malware scans to identify malware, detect suspicious behavior of applications and improve our detection techniques. For this purpose, we process unique identifiers (IMEI, IMSI, IP address, random ID) and files identified as potentially malicious by our application for each device and application installation. We also use this data for statistical analysis of malware detected and its spread. We do not store your data. We do not assign the technical data to your customer account.
+In addition, we protect you during the malware scan with the cloud solution of our technology partner Bitdefender GmbH (Technologiezentrum Schwerte Lohbachstrasse 12 D-58239 Schwerte). For this purpose, we generate so-called "hash values" as your data, which we transfer to the Bitdefender cloud. Your hash values are evaluated in the Bitdefender cloud to confirm whether your data is malicious. Hash values of malicious files are then transferred back to us as G DATA. The data transferred to Bitdefender GmbH is deleted there.
+This data is processed to fulfill our contract or pre-contractual measures with you regarding the use of G DATA Mobile Security for Android in accordance with Art. 6 Para. 1 S.1 lit. b GDPR. Our statistical analysis is carried out on the basis of our legitimate interest in the improvement and further development of our product (pursuant to Art. 6 para. 1 lit. f GDPR).
+c) Updates to the application
+When updating software versions of G DATA Mobile Security for Android that have not been downloaded via the Google Play Store, the version number is compared with the G DATA servers. If a newer version exists, an update of the application is initialized. We process your IP address for the synchronization.
+G DATA Mobile Security for Android also carries out regular signature updates in order to maintain malware protection. We process your IP address and the information provided during registration in order to check your license status. The transferred data is only required for the update process and is then deleted.
+This data is processed to fulfill our contract with you for the use of G DATA Mobile Security for Android in accordance with Art. 6 para. 1 sentence 1 lit. b GDPR.
+d) Web protection (optional module)
+If you use the "Web Protection" module, G DATA Mobile Security for Android sends URLs accessed from your device to our servers via your web browser. We process this data to provide you with an assessment of the security of the URL accessed.
+This data is processed to fulfill our contract with you for the use of G DATA Mobile Security for Android, in accordance with Art. 6 Para. 1 S.1 lit. b GDPR. The transmitted URLs are anonymized, as they may contain personal data in individual cases. In this way, we ensure that no assignment to a customer account can be made at any time.
+e) Connection with the G DATA Mobile Security Center
+G DATA Mobile Security for Android allows you to connect your device to the G DATA Mobile Security Center. To register or connect your device to the G DATA Mobile Security Center, we process unique device identifiers and the data you provided during registration. Location data is also transmitted to the G DATA Mobile Security Center if you trigger the location of your device there or if SIM card protection with activated device location or the "Low battery location" function is triggered. For tracking, G DATA Mobile Security for Android accesses the tracking functions of the Android operating system provided by Google.
+Google Firebase - The G DATA Mobile Security Center transmits an action ID and a unique "push token" to Google's Firebase service. This identifies the corresponding device using the push token and forwards the action ID. Based on the action ID, G DATA Mobile Security Android then performs the corresponding action, e.g. locating the device. Data is transferred directly from the device to the G DATA Mobile Security Center.
+Some services in the G DATA Mobile Security Center allow you to send information to other configured devices in an emergency or to delete information on your device via other devices.
+This data is processed to fulfill our contract with you for the use of G DATA Mobile Security for Android or for the use of the G DATA Mobile Security Center in accordance with Art. 6 Para. 1 S.1 lit. b GDPR.
+Please note that your data will remain stored in the Mobile Security Center until the device is unlinked from the Mobile Security Center.
+f) Analyses
+We carry out data analyses of our users in the G DATA Mobile Security App for Android. For this purpose, we track the functions used in our application in order to optimize and further develop it according to the interests of the users. We also evaluate information on the distribution channel in order to understand where users obtain our application from.
+The legal basis for the processing of personal data is our legitimate interest in the optimization and further development of our product within the meaning of Art. 6 para. 1 lit. f) GDPR. If you do not wish your app usage to be analyzed, you can deactivate the option at any time in G DATA Mobile Security for Android under the menu item "Information" with effect for the future or object here.
+For data analysis, the G DATA Mobile Security app for Android uses the Matomo analysis service (a service provided by InnoCraft Ltd, 150 Willis St, 6011 Wellington, New Zealand, NZBN 6106769) to analyze and regularly improve the use of our app. Matomo is hosted on the servers of G DATA in order to avoid data transmission to Matomo. In addition, we have configured Matomo to protect your data so that your IP address is only recorded in abbreviated form. We therefore process your personal usage data anonymously. It is not possible for us to draw any conclusions about your person.
+This data is collected, stored and evaluated for statistical purposes and to ensure system security in order to further improve the software.
+We store the data collected by Matomo for three months.
+The following data is collected when you access our app
+App version
+App flavor
+Android version
+Device manufacturer
+Device model
+g) Newsletter and advertising
+If you give your consent, we will use your contact details (name, email address) to conduct surveys and marketing campaigns, including to send you our newsletter and information about product updates. We also carry out analyses by individually measuring, storing and evaluating opening rates and click rates in recipient profiles for the purpose of tailoring future communications to your interests.
+All details on the marketing measures we carry out can be found in the privacy policy of our website.
+h) Crash and error reports
+To analyze app crashes and improve the stability of our app, the app sends crash and error reports. In the event of an error, technical diagnostic data (e.g. time of the error, app version, operating system, device type) is automatically transmitted.
+The app also offers the option of voluntarily sending a free text message as part of an error report. The sole purpose of this is to enable support to assign and process the reported problem after prior consultation with the user.
+It is not necessary to enter personal data in this free text field. We recommend that you only provide information that is necessary for error analysis.
+The processing is based on our legitimate interest in error analysis and support services in accordance with Art. 6 para. 1 lit. f GDPR.
+4. Recipients or categories of recipients of the data
+The app is downloaded and used via the Google platform. Technically necessary data (e.g. IP address, device information) is processed by the respective platform operator. The processing is the responsibility of the respective provider.
+5. transfer to third countries
+Third countries are all countries outside the European Economic Area (EEA). The European Economic Area includes all countries of the European Union as well as the countries of the so-called European Free Trade Association. These are Norway, Iceland and Liechtenstein.
+A transfer to third countries in the context of G DATA Mobile Security is not intended.
+6. Storage duration of your data
+The personal data of the data subject will be deleted or blocked as soon as the purpose of storage no longer applies. Data may also be stored if this has been provided for by the European or national legislator in EU regulations, laws or other provisions to which we as the controller are subject.
+We store your registration and user data for the entire term of your license and delete it no later than 90 days after the end of your license. We delete further contract and tax-relevant data in accordance with the statutory requirements of 10 years from the calendar year in which the license ends.
+7. Your rights as a data subject
+With regard to the data processing listed here, you are entitled to various data subject rights that are regulated in the GDPR.
+Right to information (Art. 15 GDPR) - You have the right to request information from us about your stored personal data. Upon request, we will provide you with a copy of the data that is the subject of the processing.
+Right to rectification (Art. 16 GDPR) - You have the right to obtain from us the rectification of inaccurate personal data.
+Right to erasure (Art. 17 GDPR) - You have the right to obtain from us the erasure of your personal data. Among other things, we are obliged to erase your personal data if it is no longer necessary for the purposes for which it was collected or otherwise processed, if you have withdrawn your consent or if the data has been processed unlawfully.
+Right to restriction (Art. 18 GDPR) - Under certain conditions, you have the right to demand that we restrict processing. This includes if you dispute the accuracy of your personal data and we must verify your objection. In this case, your data may not be further processed by us, with the exception of storage, until the question of accuracy has been clarified.
+Right to data portability (Art. 20 GDPR) - You have the right to receive the personal data concerning you, which you have provided to us, in a structured, commonly used and machine-readable format, provided that the data processing is based on your consent or a contract.
+Right to withdraw consent at any time (Art. 7 GDPR) - If the data processing by us is based on your consent, you have the right to withdraw your consent at any time. The lawfulness of the processing carried out on the basis of the consent until the revocation remains unaffected by the revocation.
+Right to object at any time (Art. 21 GDPR) - If the processing of your data by us is based on the performance of a task carried out in the public interest or in the exercise of official authority (Art. 6 para. 1 sentence 1 lit. e GDPR) or if the data processing is based on legitimate interests on our part, you have the right to object to the processing of your personal data at any time for reasons arising from your particular situation. We will then terminate the processing unless we can demonstrate compelling legitimate grounds for the processing which override your interests in terminating the processing.
+You can object to the processing of your personal data for direct marketing purposes at any time without restriction.
+Right to lodge a complaint (Art. 77 GDPR) - You also have the right to lodge a complaint with a data protection supervisory authority. You can contact the data protection supervisory authority of your usual place of residence or our company headquarters. The address of the supervisory authority responsible for us is
+State Commissioner for Data Protection and Freedom of Information North Rhine-Westphalia
+Kavalleriestrasse 2 - 4
+40213 Düsseldorf
+8. Final provisions
+G DATA reserves the right to amend this Privacy Policy at any time to ensure that it always complies with current legal requirements or to implement changes to the services in the Privacy Policy, e.g. when new services are introduced or changes are made to the G DATA Business Software.
+Privacy Policy for G DATA Mobile Security iOS
+In the following, we would like to inform you about which personal data G DATA processes and for what purposes. We will also inform you about other details that are important under data protection law, such as your rights.
+With G DATA Mobile Security iOS, you can analyze the system parameters of your device and check websites in the app's own browser to detect suspicious behavior and phishing.
+G DATA Mobile Security iOS comprises several components, each of which processes personal data. Detailed information on individual modules can be found below:
+1. Controller and data protection officer
+The controller for the data processing described below within the meaning of data protection regulations is
+G DATA CyberDefense AG
+Königsallee 178 a
+D-44799 Bochum
+Germany
+E-Mail: info@gdata.de
+You can also send further questions about data protection by e-mail to dsgvo@gdata.de
+Our external data protection officer is
+Ali Tschakari
+Bitkom Servicegesellschaft mbH
+Albrechtstraße 10
+10117 Berlin.
+You can send inquiries to the following e-mail address: datenschutz@bitkom-consult.de
+2. General information on data processing:
+a) Scope of the processing of personal data
+We process personal data of our users only to the extent necessary to provide our services or to use our software.
+b) Legal basis for the processing of personal data
+G DATA processes personal data exclusively on the basis of the General Data Protection Regulation.
+Insofar as we obtain your consent for the processing of personal data, Art. 6 para. 1 sentence 1 lit. a GDPR serves as the legal basis.
+When processing personal data that is necessary for the performance of a contract to which the data subject is a party, Art. 6 para. 1 sentence 1 lit. b GDPR serves as the legal basis. This also applies to processing operations that are necessary for the initiation of a contract (pre-contractual measures).
+Insofar as the processing of personal data is necessary to fulfill a legal obligation to which our company is subject, Art. 6 para. 1 sentence 1 lit. c GDPR serves as the legal basis.
+If the processing is necessary to safeguard a legitimate interest of our company or a third party and if the interests, fundamental rights and freedoms of the data subject do not outweigh the first-mentioned interest, Art. 6 para. 1 sentence 1 lit. f GDPR serves as the legal basis for the processing.
+c) No automated decision-making
+Automated processing of personal data consisting of the use of personal data to evaluate certain personal aspects relating to a natural person, in particular to analyze or predict aspects concerning that natural person's performance at work, economic situation, health, personal preferences, interests, reliability, behavior, location or movements, does not take place in the context of the data processing described.
+3. Purposes and legal bases of data processing
+a) Registration for the application (iOS)
+If you have registered a license for G DATA Mobile Security iOS before 22.07.2025, we will ask you for your name and contact address (e-mail) during the registration process in order to carry out the license registration. In addition, we transmit unique identifiers such as a random ID and the device name. You can continue to use this user account in the app.
+If you decide to use a cross-platform license to activate the G DATA Mobile Security iOS app, we will ask you for your name and contact address (e-mail) during the registration process in order to carry out the license registration. In addition, we transmit unique identifiers such as a random ID and the device name.
+We use this data to activate your license and ensure the proper licensing of our application. If you purchase a license via an in-app purchase, we receive information from Apple about the successful completion of the purchase. No personal data is transmitted for this purpose.
+This data is processed for the fulfillment of our contract or pre-contractual measures with you regarding the use of G DATA Mobile Security iOS in accordance with Art. 6 para. 1 sentence 1 lit. b GDPR.
+b) Secure browser/OR code scanner (optional module)
+When using the Secure Browser or the QR code scanner, G DATA Mobile Security iOS sends URLs called up and scanned by your device to our servers. We process this data to provide you with an assessment of the security of the URL accessed. The transmitted data is only required for this purpose and is then deleted.
+This data is processed to fulfill our contract with you for the use of G DATA Mobile Security iOS, in accordance with Art. 6 para. 1 sentence 1 lit. b GDPR.
+c) Connection with the G DATA Mobile Security Center
+G DATA Mobile Security iOS allows you to connect your device to the G DATA Mobile Security Center. To register or connect your device to the G DATA Mobile Security Center, we process unique device identifiers and the data you provided during registration. Location data is also transmitted to the G DATA Mobile Security Center when you trigger the location of your device there or when the "Low battery location" function is triggered. For tracking, G DATA Mobile Security iOS accesses the tracking functions of the iOS operating system provided by Apple.
+Apple Push Notifications - The G DATA Mobile Security Center transmits an action ID and a unique "Device Token" to Apple's Push Notification Service. The service uses the device token to identify the corresponding device and forwards the action ID. Based on the action ID, G DATA Mobile Security iOS then performs the corresponding action, e.g. locating the device. Data is transferred directly from the device to the G DATA Mobile Security Center.
+Some services in the G DATA Mobile Security Center allow you to send information to other configured devices in an emergency.
+This data is processed to fulfill our contract with you for the use of G DATA Mobile Security iOS or for the use of the G DATA Mobile Security Center in accordance with Art. 6 Para. 1 S.1 lit. b GDPR.
+Please note that your data will remain stored in the Mobile Security Center until the device is unlinked from the Mobile Security Center.
+d) Newsletter and advertising
+If you give your consent, we will use your contact details (name, email address) to conduct surveys and marketing campaigns, including to send you our newsletter and information about product updates. We also carry out analyses by individually measuring, storing and evaluating opening rates and click rates in recipient profiles for the purpose of tailoring future communications to your interests.
+All details on the marketing measures we carry out can be found in the privacy policy of our website.
+e) Crash and error reports
+To analyze app crashes and improve the stability of our app, the app sends crash and error reports. In the event of an error, technical diagnostic data (e.g. time of the error, app version, operating system, device type) is automatically transmitted.
+The app also offers the option of voluntarily sending a free text message as part of an error report. The sole purpose of this is to enable support to assign and process the reported problem after prior consultation with the user.
+It is not necessary to enter personal data in this free text field. We recommend that you only provide information that is necessary for error analysis.
+The processing is based on our legitimate interest in error analysis and support services in accordance with Art. 6 para. 1 lit. f GDPR.
+4. Recipients or categories of recipients of the data
+The app is downloaded and used via the Apple platform.
+Technically necessary data (e.g. IP address, device information) is processed by the respective platform operator.
+The processing is the responsibility of the respective provider.
+5. transfer to third countries
+Third countries are all countries outside the European Economic Area (EEA). The European Economic Area includes all countries of the European Union as well as the countries of the so-called European Free Trade Association. These are Norway, Iceland and Liechtenstein.
+A transfer to third countries in the context of G DATA Mobile Security is not intended.
+6. Storage duration of your data
+The personal data of the data subject will be deleted or blocked as soon as the purpose of storage no longer applies. Data may also be stored if this has been provided for by the European or national legislator in EU regulations, laws or other provisions to which we as the controller are subject.
+We store your registration and user data for the entire term of your license and delete it no later than 90 days after the end of your license. We delete further contract and tax-relevant data in accordance with the statutory requirements of 10 years from the calendar year in which the license ends.
+7. Your rights as a data subject
+With regard to the data processing listed here, you are entitled to various data subject rights that are regulated in the GDPR.
+Right to information (Art. 15 GDPR) - You have the right to request information from us about your stored personal data. Upon request, we will provide you with a copy of the data that is the subject of the processing.
+Right to rectification (Art. 16 GDPR) - You have the right to obtain from us the rectification of inaccurate personal data.
+Right to erasure (Art. 17 GDPR) - You have the right to request that we erase your personal data. Among other things, we are obliged to erase your personal data if it is no longer necessary for the purposes for which it was collected or otherwise processed, if you have withdrawn your consent or if the data has been processed unlawfully.
+Right to restriction (Art. 18 GDPR) - Under certain conditions, you have the right to demand that we restrict processing. This includes if you dispute the accuracy of your personal data and we must verify your objection. In this case, your data may not be further processed by us, with the exception of storage, until the question of accuracy has been clarified.
+Right to data portability (Art. 20 GDPR) - You have the right to receive the personal data concerning you, which you have provided to us, in a structured, commonly used and machine-readable format, provided that the data processing is based on your consent or a contract.
+Right to withdraw consent at any time (Art. 7 GDPR) - If the data processing by us is based on your consent, you have the right to withdraw your consent at any time. The lawfulness of the processing carried out on the basis of the consent until the revocation remains unaffected by the revocation.
+Right to object at any time (Art. 21 GDPR) - If the processing of your data by us is based on the performance of a task carried out in the public interest or in the exercise of official authority (Art. 6 para. 1 sentence 1 lit. e GDPR) or if the data processing is based on legitimate interests on our part, you have the right to object to the processing of your personal data at any time for reasons arising from your particular situation. We will then terminate the processing unless we can demonstrate compelling legitimate grounds for the processing which override your interests in terminating the processing.
+You can object to the processing of your personal data for direct marketing purposes at any time without restriction.
+Right to lodge a complaint (Art. 77 GDPR) - You also have the right to lodge a complaint with a data protection supervisory authority. You can contact the data protection supervisory authority of your usual place of residence or our company headquarters. The address of the supervisory authority responsible for us is
+State Commissioner for Data Protection and Freedom of Information North Rhine-Westphalia
+Kavalleriestrasse 2 - 4
+40213 Düsseldorf
+8. Final provisions
+G Data reserves the right to amend this Privacy Policy at any time to ensure that it always complies with current legal requirements or to implement changes to the services in the Privacy Policy, e.g. when introducing new services or changes to the G DATA Business Software.
+#CyberVertrauen
+Platform
+Endpoint Security
+XDR
+Security Awareness
+Mail Protection
+Service
+IT Security Consulting
+Incident Response Service
+Incident Response Retainer
+Penetration Test
+MXDR
+Partner
+Become a partner
+Partner Portal Login
+XDR for Managed Service Providers
+For consumers
+Free trial
+Forgot password
+Product activation
+Change product
+Renew license
+About us
+Who we are
+Jobs & career
+Trust Center
+Contact & directions
+Press
+Code of conduct
+Facts
+Support
+Customer service
+Downloads
+Online help
+Report a security vulnerability
+Submit a suspicious file or URL
+Withdraw from contract here
+Cancel contract
+Payment & shipping
+Terms & conditions
+Cancellation policy
+EULA
+Privacy policy
+Imprint
+© 2026 G DATA CyberDefense AG

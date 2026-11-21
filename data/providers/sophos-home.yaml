@@ -1,0 +1,749 @@
+# Researched by hand on 2026-11-20 (M11.15, security batch 2), read from Canada in Edge (home.sophos.com and sophos.com
+# refuse a plain fetch from this machine; its help centre answered its Zendesk API, every article), and the other
+# countries' prices through each country's exit (the US, the UK, Ireland, Germany, France, the Netherlands, Spain,
+# Italy, Australia and New Zealand). Pages, each quoted where it's used:
+# Pricing: home.sophos.com sells one paid plan, Sophos Home Premium, for 1, 2 or 3 years, through its store
+# (buy.home.sophos.com, Cleverbridge: "The products offered through this online store are sold by Cleverbridge GmbH, an
+# authorized reseller of Sophos products"). The store prices by where the visitor is and shows each period's base price
+# struck through beside a 25% first-term discount ("CA$ 59.99", "CA$ 44.99", "For the first 1 year*"), with
+# "*Your subscription will automatically renew at the pre-discount base price (including taxes where applicable)." and,
+# for a year, "After 12 months, you will be renewed for a fee of CA$ 68.97" (CA$ 59.99 with Quebec's taxes) or "a fee of
+# $59.99" from the US; its help: "Pricing for a yearly Sophos Home Premium subscription is $59.99 (MSRP)". The base
+# prices are stored. The euro countries' carts show the same prices (€49.95, €89.95, €114.95); France's first exit met a
+# Cloudflare check, its second read the cart. The 2- and 3-year prices are kept as terms that renew as themselves: the
+# store's footnote under all three options, "*Your subscription will automatically renew at the pre-discount base price
+# (including taxes where applicable).", and the terms' "Your subscription to the Services will be automatically renewed
+# (subject to applicable law) for another subscription period of equal length" (3.3). The one renewal line read with an
+# amount is the 1-year's.
+# Tax: Canada's cart adds GST and QST ("Subtotal:", "GST (", "5%"). The euro countries' totals include VAT: Germany's
+# 1-year cart totals €37.46 (€49.95 less the 25% offer), "Includes €5.99 VAT ( 19% on €31.47 ).", and the
+# Netherlands' the same total, "Includes €6.50 VAT ( 21% on €30.96 )." Those words put the amount between "Includes"
+# and "VAT", which core's tax wording doesn't read, and no other page read says it, so no price has taxIncluded. The
+# UK's, Ireland's, France's, Spain's, Italy's, Australia's and New Zealand's totals weren't saved.
+# Region checklist for CA and US, 2026-11-20: 1. home.sophos.com/en-us is the only English path (no /en-ca/); 2. the
+# store's currency menu converts; 3. the store's prices name the currency (CA$, $ from a US exit); 4. the store's cart,
+# up to the payment form; 5. the help centre's pricing line ($59.99 MSRP); 6. Edge from Canada and through a US exit;
+# 7. no bill.
+# Bundles: none. Official resellers: none named for home users (its store is run by Cleverbridge, a payment reseller,
+# not listed; Staples once sold "Sophos Anti-Virus", a product its help article says is supported separately).
+# Free use: Sophos Home Free ended for new users ("Sophos has made a business decision to change its Sophos Home Free
+# option to a 30-day free trial for Sophos Home Premium"; accounts that switched before November 11th 2021 keep it), so
+# it isn't a plan. Its free mobile app, Sophos Intercept X for Mobile, is the free plan (below).
+
+id: sophos-home
+name: Sophos Home
+website: https://home.sophos.com
+category: security
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: AUD,
+    NZ: NZD,
+    GLOBAL: USD,
+  }
+# Its help article on renewing, which says how to turn auto-renewal off (the store's order email or its purchase
+# lookup tool) and where to see whether a subscription renews.
+cancelUrl: https://support.home.sophos.com/hc/en-us/articles/25899202064276-How-do-I-renew-my-Sophos-Home-subscription
+sources: { pricing: https://buy.home.sophos.com/1461/purl-homepremium }
+# Owner (M11.2), read 2026-11-20 in Edge: Sophos's own about page (sophos.com/en-us/company) and its company information
+# page name no owner (the latter lists its licensing and sales companies by region, and sends questions on its
+# "Ultimate Beneficial Owner" to its legal team), so its owner's own page (rule 2): Thoma Bravo's press release on
+# Sophos buying Secureworks (February 2025), linked from its portfolio page for Sophos, which lists "YEAR INVESTED"
+# "2020". Its consumer terms name the company that offers Sophos Home ("offered by Sophos Limited"), and its privacy
+# notice gives the country.
+owner:
+  name: Sophos Limited (backed by Thoma Bravo, a software investment firm)
+  page:
+    name: Sophos Completes Secureworks Acquisition (Thoma Bravo press release)
+    url: https://www.thomabravo.com/press-releases/sophos-completes-secureworks-acquisition
+  quotes:
+    - 'Sophos is backed by Thoma Bravo, a leading software investment firm.'
+  country:
+    code: GB
+    page:
+      name: Sophos Group Privacy Notice
+      url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+    quotes:
+      - 'This website is operated by Sophos Limited, a company registered in England and Wales under company number 2096520'
+    lastVerified: 2026-11-20
+  website: https://www.thomabravo.com
+  lastVerified: 2026-11-20
+# Ways to pay (M11.5), read 2026-11-20 in Edge, for the four countries whose payment step was opened in full: it lists
+# "Credit card" and "PayPal" (Canada, the US), with "SEPA Direct debit" in Germany and "iDEAL | Wero" in the
+# Netherlands; its card list names Visa, MasterCard, American Express and JCB (Canada, Germany, the Netherlands), and
+# Discover instead of JCB in the US. The other countries' carts (the UK, Ireland, France, Spain, Italy, Australia, New
+# Zealand) showed "Credit card" in view; their full lists weren't opened, so no cards or ways to pay are stored for
+# them (the lists vary by country).
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
+  DE:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
+  NL:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Visa', 'MasterCard', 'American Express', 'Discover']
+paymentMethods:
+  - methods: [card, paypal]
+    regions: [CA, US]
+    page: Checkout
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Credit card', 'PayPal']
+  - methods: [card, bank-transfer, paypal]
+    regions: [DE]
+    page: Checkout (Germany)
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Credit card', 'SEPA Direct debit', 'PayPal']
+  - methods: [card, bank-transfer, paypal]
+    regions: [NL]
+    page: Checkout (Netherlands)
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Credit card', 'iDEAL | Wero', 'PayPal']
+# Renewal day (M11.5): its consumer terms renew "for another subscription period of equal length" and bill by the date
+# you signed up, a shorter month's last day when it has none.
+renewalAnchor:
+  kind: same-date
+  page: Sophos Consumer Terms of Service
+  url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+  quotes:
+    - 'You acknowledge that billing may not occur on the same date of each month, depending on when you signed up for the Services.'
+  lastVerified: 2026-11-20
+# Lab results (M11.2): AV-TEST's newest test of Sophos Home is of December 2017 (Sophos Home 1.2 for macOS), and it isn't
+# in AV-TEST's Windows tests of 2025 and 2026, so no rating is listed. AV-Comparatives' and SE Labs' aren't listed
+# (data/raters.yaml).
+
+# General features, read 2026-11-20. Platforms: "Sophos Home can protect both Windows and Mac computers" (General FAQ;
+# "No" for Linux); phones and tablets use the separate free app. Sign-in: a password, with multi-factor authentication
+# from an authenticator app ("Setting it up requires an Authenticator app"), a browser remembered for 30 days, and
+# Direct Access from a protected computer ("access your Sophos Home dashboard directly from a PC/Mac that is protected
+# with Sophos Home"). Support: "Sophos Home Premium customers have access to dedicated support personnel Monday to
+# Friday, 9AM to 7PM Eastern US Time, via chat and webform/email" ("There is no phone support"). App languages: the
+# dashboard's "English, French, German, Italian, Japanese and Spanish" (the antivirus follows the computer's language).
+# No pause (auto-renewal is turned off instead).
+features:
+  platforms: [windows, macos]
+  account.sign-in: [password, totp, trusted-device]
+  support.channels: [chat, email]
+  languages.interface: [en, fr, de, it, ja, es]
+
+# Perks (M11.6): what its features article lists that no feature describes, in its words.
+perks:
+  - id: exploit-protection
+    name: Malicious Exploit Protection
+  - id: remote-management
+    name: Remote antivirus Management
+  - id: amsi
+    name: AMSI integration
+
+# Features, read 2026-11-20: its help centre's "Sophos Home features" table (Premium on Windows and macOS: Real-Time
+# Antivirus, Predictive AI Threat Detection (Windows), Parental Website Filtering, Web Protection, Remote antivirus
+# Management, Ransomware Security, "Advanced Web Security and Banking Protection" ("Blocks phishing sites, BITM attacks,
+# and compromised websites"), Advanced Malware Scan and Clean (Windows), AMSI integration (Windows); "Protect up to a
+# total of 10 devices"), its home page ("Blocks ransomware and rolls back any affected files"), the General FAQ
+# ("behavioral (signature-less) based detections"), the scan articles (scans you start, and "Scheduled scan" set from the
+# dashboard), "Allowing games to run along with Sophos Home" ("Sophos Home introduced Game Mode in 2024", Windows) and the
+# troubleshooting article's "privacy features to secure your webcam (Windows only)". Its banking protection is the secure
+# browser feature's banking protection (the store's name for it is kept as the label). No firewall (its Malicious
+# Traffic Detection watches connections, no more), Wi-Fi check, spam filter, anti-theft, optimizer, VPN or password
+# manager on any Sophos Home page; its keystroke encryption and the Mac's Privacy Guard were removed (their notices).
+plans:
+  - id: sophos-home.premium
+    name: Premium
+    link: https://home.sophos.com/en-us
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.devices: 10
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+      parental-control: [content-filtering]
+      account.parental-controls: true
+      security.webcam-protection: [webcam]
+    featureLabels:
+      antivirus.secure-browser: 'Advanced Web Security and Banking Protection'
+    perks: [exploit-protection, remote-management, amsi]
+    notes: 'Up to 10 Windows PCs and Macs on one account, managed from its web dashboard, for 1, 2 or 3 years. Webcam protection, game mode, AI detection and exploit protection are on Windows only. Phones and tablets use the free Intercept X for Mobile app.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: US
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: GB
+        currency: GBP
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: IE
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: DE
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: FR
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: NL
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: ES
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: IT
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: AU
+        currency: AUD
+        amount: 74.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: NZ
+        currency: NZD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: CA
+        currency: CAD
+        amount: 99.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: GB
+        currency: GBP
+        amount: 89.95
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: IE
+        currency: EUR
+        amount: 89.95
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: DE
+        currency: EUR
+        amount: 89.95
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: FR
+        currency: EUR
+        amount: 89.95
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: NL
+        currency: EUR
+        amount: 89.95
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: ES
+        currency: EUR
+        amount: 89.95
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: IT
+        currency: EUR
+        amount: 89.95
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: AU
+        currency: AUD
+        amount: 119.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: NZ
+        currency: NZD
+        amount: 129.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: CA
+        currency: CAD
+        amount: 139.99
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: US
+        currency: USD
+        amount: 139.99
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: GB
+        currency: GBP
+        amount: 114.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: IE
+        currency: EUR
+        amount: 114.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: DE
+        currency: EUR
+        amount: 114.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: FR
+        currency: EUR
+        amount: 114.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: NL
+        currency: EUR
+        amount: 114.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: ES
+        currency: EUR
+        amount: 114.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: IT
+        currency: EUR
+        amount: 114.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: AU
+        currency: AUD
+        amount: 174.99
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+      - region: NZ
+        currency: NZD
+        amount: 184.99
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://buy.home.sophos.com/1461/purl-homepremium
+  # Free use (the owner's item), read 2026-11-20: "Intercept X for Mobile is available for free" (the features article),
+  # Sophos's own app for Android and iOS, which "Anyone can download and use"; Premium customers get its support too. Its
+  # Android help: App security ("Sophos Intercept X for Mobile scans apps when they are installed. Additionally, you can
+  # configure scheduled scans and run manual scans."), Web Filtering ("To enable malicious website filtering"), Link
+  # Checker (links opened in other apps), Wi-Fi Security ("check your Wi-Fi connection for network-based threats") and
+  # an Authenticator ("generate one-time passwords"; no page says how codes are imported or exported). Its Password Safe
+  # was removed ("We removed the Password Safe feature from Intercept X for Mobile."). iOS has fewer features ("Available
+  # features will vary per OS").
+  - id: sophos-home.intercept-x-for-mobile
+    name: Intercept X for Mobile (free)
+    link: https://support.home.sophos.com/hc/en-us/articles/360041259751-Sophos-Intercept-X-For-Mobile-Guide-for-Sophos-Home-customers
+    features:
+      platforms: [android, ios]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.network: [wifi-check]
+      authenticator.included: true
+    notes: 'Sophos’s free security app for Android phones and tablets (fewer features on iPhone and iPad): it scans apps, warns about dangerous websites and links, checks Wi-Fi networks and makes two-factor codes. It doesn’t appear in the Sophos Home dashboard.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://support.home.sophos.com/hc/en-us/articles/360041259751-Sophos-Intercept-X-For-Mobile-Guide-for-Sophos-Home-customers
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-20 in Edge: the Sophos Consumer Terms of Service (the home site's
+# Legal link; they're the app's licence too, agreed by "INSTALLING OR ACCESSING OR USING THE SOFTWARE"), the Sophos Group
+# Privacy Notice (last updated 1 July 2026), its store's cart (renewal and refund lines), the help centre's billing,
+# renewal, account, MFA and support articles (Zendesk API), its trust, certification and security advisory pages. Read
+# for no topic: its cookie information page (the privacy notice's cookie section says the same). Not read: Cleverbridge's
+# own terms and privacy policy (the store's reseller), and the app stores' terms for Intercept X for Mobile. No shared
+# document applies (data/policies has none of Sophos').
+policies:
+  links:
+    - name: Consumer terms of service
+      url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+    - name: Privacy notice
+      url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+    - name: Store checkout
+      url: https://buy.home.sophos.com/1461/purl-homepremium
+    - name: Renewing and turning off auto-renewal
+      url: https://support.home.sophos.com/hc/en-us/articles/25899202064276-How-do-I-renew-my-Sophos-Home-subscription
+    - name: Deleting your account
+      url: https://support.home.sophos.com/hc/en-us/articles/115005445086-Deleting-your-Sophos-Home-account
+    - name: Creating an account
+      url: https://support.home.sophos.com/hc/en-us/articles/115005323643-Creating-a-Sophos-Home-account
+    - name: General FAQ
+      url: https://support.home.sophos.com/hc/en-us/articles/115005457983-General-FAQ
+    - name: Trust center
+      url: https://www.sophos.com/en-us/trust
+    - name: Certifications
+      url: https://www.sophos.com/en-us/trust/business-certifications
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use its websites and services, for its own analytics and to improve them. You can refuse some cookies on its websites, one browser at a time; nothing says you can turn the rest off.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'We use this information for our internal analytics purposes, and to improve the quality, relevance, and security of our Services.'
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'Because we respect your right to privacy, you can choose not to allow some types of cookies.'
+      action:
+        name: 'Cookies and your choices (privacy notice)'
+        url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It helps advertising companies show you its ads on other websites, using cookies tied to your details. You can turn off advertising cookies, but only in each browser.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'We may also help these service providers place their own cookies, by deploying a cookie that is associated with a “hashed” value associated with interest-based or demographic data, to permit advertising to be directed to you on other websites, applications or services.'
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'Because we respect your right to privacy, you can choose not to allow some types of cookies.'
+      action:
+        name: 'Cookies and your choices (privacy notice)'
+        url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It and its partners track your interests to show you more relevant ads, on its sites and elsewhere. You can block advertising cookies, but only in each browser.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'Cookies also enable us and our third-party partners to track and target the interests of our users to enhance the onsite or in-product experience through content, features, and advertisements which are more relevant to you.'
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'Because we respect your right to privacy, you can choose not to allow some types of cookies.'
+      action:
+        name: 'Cookies and your choices (privacy notice)'
+        url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy notice says it uses what you type to its support chatbot to run and improve the chatbot, but doesn’t say whether your data trains AI models.'
+      pages:
+        - https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+        - https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data as long as it needs it, and some of it after you close your account. It gives no set times.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'Even if you close your account, we will retain certain information in order to meet our legal, tax or regulatory obligations.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself, in its dashboard’s settings, at any time. It doesn’t say what happens to your data then or how soon it’s gone.'
+      sources:
+        - url: https://support.home.sophos.com/hc/en-us/articles/115005445086-Deleting-your-Sophos-Home-account
+          quote: 'You can delete your Sophos Home account in the Settings section of the dashboard.'
+      action:
+        name: 'Delete your Sophos Home account'
+        url: https://support.home.sophos.com/hc/en-us/articles/115005445086-Deleting-your-Sophos-Home-account
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it for a copy of your data with its request form.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'the right to access, delete or request portability of your personal data.'
+      action:
+        name: 'Your rights (privacy notice)'
+        url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+      lastVerified: 2026-11-20
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives data to governments and courts when it believes the law requires it, or to protect someone’s safety. It doesn’t say it will tell you or publish how often.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'to any government department, agency, court or other official bodies where we believe disclosure is necessary (i) as a matter of applicable law or regulation (such as in response to a subpoena, warrant, court order, or other legal process)'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can be stored and used in countries all over the world. It uses the EU’s standard contracts and similar safeguards to protect it.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'When you give us personal data, that data may be used, processed, or stored in countries that have data protection laws that are different to the country in which you reside.'
+        - url: https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+          quote: 'For example, these include implementing the European Commission’s Standard Contractual Clauses (SCCs) for transfers of personal data between our group companies'
+      lastVerified: 2026-11-20
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You create the account while installing it, with an email address it checks by sending a code. Paying needs your details at its store.'
+      sources:
+        - url: https://support.home.sophos.com/hc/en-us/articles/115005323643-Creating-a-Sophos-Home-account
+          quote: 'Confirm your email with the code sent to it'
+      lastVerified: 2026-11-20
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can turn off auto-renewal at any time, from its dashboard or the store’s order email, and keep using it until the time you paid for runs out.'
+      sources:
+        - url: https://support.home.sophos.com/hc/en-us/articles/25899202064276-How-do-I-renew-my-Sophos-Home-subscription
+          quote: 'You can turn auto-renewal off at any time, see Disable auto-renewal below.'
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'Upon cancellation you will be able to access the Services through the end of the subscription term, but you will not have any access to Services after the subscription term ends.'
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get all your money back within 30 days of buying. Otherwise there are no refunds, but you keep it until the end of the time you paid for.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'For such Services, you may receive a refund of the fees paid for any reason, within thirty (30) days of the date of purchase.'
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'Except as set forth in these Terms or as described on the applicable website at the time you make a purchase, all payments for Service subscriptions are non-refundable, and there are no refunds or credits for unused or partially used subscriptions even if you cancel a subscription during the subscription term.'
+      lastVerified: 2026-11-20
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price starts only at your next renewal, and it emails you the renewal price 30 days ahead, so you can cancel first.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'Any price change will take effect at the next subscription renewal date. If you do not wish to accept a price change, you may cancel your subscription.'
+        - url: https://buy.home.sophos.com/1461/purl-homepremium
+          quote: 'You will receive an email 30 days in advance advising you of the renewal price.'
+      lastVerified: 2026-11-20
+    - topic: billing.free-trials
+      tier: great
+      reason: 'Its 30-day trial asks for no payment details, so it can’t turn into a paid plan on its own.'
+      sources:
+        - url: https://support.home.sophos.com/hc/en-us/articles/25899202064276-How-do-I-renew-my-Sophos-Home-subscription
+          quote: 'We don’t collect payment information during the trial, so it can’t auto-renew.'
+      lastVerified: 2026-11-20
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you the renewal price 30 days before a 1-year subscription renews. For 2- and 3-year ones, its help says only that renewal emails come around the time it renews.'
+      sources:
+        - url: https://buy.home.sophos.com/1461/purl-homepremium
+          quote: 'You will receive an email 30 days in advance advising you of the renewal price.'
+        - url: https://support.home.sophos.com/hc/en-us/articles/25899202064276-How-do-I-renew-my-Sophos-Home-subscription
+          quote: 'Our payments partner, cleverbridge, will send renewal emails, to the email account you purchased your subscription with, around the time your paid subscription renews.'
+      lastVerified: 2026-11-20
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and store name no fees beyond the price and taxes.'
+      pages:
+        - https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+        - https://buy.home.sophos.com/1461/purl-homepremium
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      tier: good
+      reason: 'Outside the US and Canada, its terms follow the law of England and Wales, with no private referee, and keep your local consumer rights.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'if you are in any other country, these Terms and the relationship between you and Sophos shall be governed by the laws of England and Wales'
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'NOTHING IN THESE TERMS WILL DIMINISH ANY RIGHTS YOU MAY HAVE UNDER EXISTING CONSUMER PROTECTION LEGISLATION OR OTHER APPLICABLE LAWS IN YOUR JURISDICTION THAT MAY NOT BE WAIVED BY CONTRACT.'
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      regions: [US, CA]
+      tier: poor
+      reason: 'In the US and Canada, disputes go to a private referee (an arbitrator), one person at a time, not to a court or a group lawsuit, unless you email it within 30 days of first using it. Quebec’s law may limit this.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'THIS SECTION 10 APPLIES TO RESIDENTS OF THE UNITED STATES AND CANADA, AND THOSE WHO ATTEMPT TO COMMENCE LITIGATION WITHIN THE UNITED STATES.'
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'The notice must be sent within 30 days of your first use of the Service, otherwise you shall be bound to arbitrate disputes in accordance with the terms of those paragraphs.'
+      action:
+        name: 'Opting out of arbitration (terms, 10.6)'
+        url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time by posting them on its website, and using it afterwards means you accept them.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'we reserve the right, at our sole discretion, to update or modify these Terms prospectively at any time and the modifications will be effective when posted on our website for the Services or when we notify you by other means.'
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can end your access for any reason or none, and can delete your account once it tells you. Its terms promise no refund.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'We may terminate your access to and use of the Services for any or no reason, or if you breach any material terms of these Terms, including if you do not pay your subscription fees.'
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'Upon our termination notice, you must stop using the Services, and we may immediately deactivate or delete your account and Your Content'
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can drop features or stop the service. If it ends Sophos Home altogether, it refunds the time you have left.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'We may also temporarily or permanently discontinue the Services (or any part thereof) with or without notice.'
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'If we permanently discontinue the Services in their entirety, we will provide you with pro-rated refund for any remaining term on the subscription.'
+      lastVerified: 2026-11-20
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+        - https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use it only for yourself, not for business, and you may not copy or resell it or take it apart, with no exception for what the law allows.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'The Services are solely for your personal and non-commercial use.'
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: '(c) decompile, disassemble, or reverse engineer the Services'
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors certify its security (SOC 2 and ISO 27001), it runs a bug bounty, and it publishes security advisories.'
+      sources:
+        - url: https://www.sophos.com/en-us/trust/business-certifications
+          quote: 'ISO 27001:2022'
+        - url: https://www.sophos.com/en-us/trust
+          quote: 'Since 2018, our Bug Bounty community has helped uncover over 1,200 vulnerabilities, earning nearly $500,000 in rewards.'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You can add your family members and their computers, wherever they are, up to 10 computers on one account.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'Some Services may allow you to register your family members (including, but not limited to a parent, child or minor, spouse or domestic partner) or their devices to use the Services.'
+        - url: https://support.home.sophos.com/hc/en-us/articles/115005457983-General-FAQ
+          quote: 'You can protect up to 10 computers (Mac and Windows) with a Sophos Home premium account.'
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      tier: great
+      reason: 'Beyond the 10 computers your plan covers, there’s no limit: you remove one from the dashboard to protect another.'
+      sources:
+        - url: https://support.home.sophos.com/hc/en-us/articles/115005457983-General-FAQ
+          quote: 'If you have reached the limit and want to protect another computer, you must first remove an existing computer from the dashboard or purchase another Sophos Home Premium license using a different email address.'
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      tier: good
+      reason: 'It updates its own app when updates come out, as its terms say. Nothing says it changes anything else on your computer.'
+      sources:
+        - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+          quote: 'To make sure you can use new features we develop, you agree to install or let us install Updates when we make them available.'
+      lastVerified: 2026-11-20

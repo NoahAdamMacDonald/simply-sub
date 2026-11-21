@@ -1,0 +1,109 @@
+url: https://support.home.sophos.com/hc/en-us/articles/115005457983-General-FAQ
+method: fetch
+saved: 2026-11-20
+
+General FAQ – Sophos Home Help
+TEST
+Free Trial
+Sign in
+Submit a request
+Getting started with Sophos Home
+Sophos Home Help
+Getting started
+Getting started with Sophos Home
+Articles in this section
+Sophos Home - Getting started guide
+General FAQ
+Tips and considerations when using Sofia GenerativeAI Chatbot
+Sophos Home features
+Sophos Home - How to test protections installed on the computer
+Sophos Home Dashboard - History Tab
+General FAQ
+Sophos Home Support
+November 16, 2026 06:02
+Updated
+This article answers most frequently asked questions about Sophos Home.
+What is Sophos Home?
+What is the difference between Trial and Premium?
+What type of security measures does Sophos Home provide?
+Can I use Sophos Home along other security/antivirus software?
+How many computers can I add to my Sophos Home account?
+I have purchased multiple licenses. Can I combine them into a single account?
+Can I use Sophos Home for my business?
+I moved to another country, will my Sophos Home still work?
+Can I install Sophos Home on my mobile devices?
+Can I install Sophos Home on Linux?
+What happens if I install Sophos Home Premium on more than 10 computers?
+How do I contact support?
+What is Sophos Home?
+Sophos has long been a leader in securing some of the most-recognizable businesses around the world. Now we’re bringing the powerful, business-grade security that IT professional trust to your home PCs and Macs. Sophos Home takes security beyond old-school antivirus to deliver advanced, real-time protection from the latest ransomware, malicious software, and hacking attempts – all forms of developing cybercrime! Plus, it’s incredibly easy-to-use, whether you’re simply securing your own laptop or managing the security of multiple devices in the rest of the house or around the world.
+Note: Sophos Home can protect both Windows and Mac computers. You can add both types of systems to your account.
+What is the difference between Trial and Premium versions?
+Sophos Home Premium goes far beyond traditional antivirus to deliver advanced, real-time protection from the latest malware, viruses, ransomware, malicious software, hacking attempts, and more.
+It also provides options for parental web filtering, and remote antivirus management for up to 10 devices.
+Sophos Home Trial can protect up to 3 devices, and includes all Premium features until it expires (30 days).
+You can find the complete features breakdown here.
+What kind of security measures does Sophos Home utilize?
+Sophos Home uses a host of protections, combining artificial intelligence (AI/ Machine Learning), signature-based, and behavioral (signature-less) based detections. Signature-based detection allows Sophos Home to easily find and stop known malware. Behavior-based detection — combined with AI — adds the ability to discover and remove brand new, never-before-seen, “zero-day” malware. Sophos also monitors your programs and apps, stopping those that act maliciously, and allowing the user to remove them. In addition, Sophos utilizes a global database to prevent users from going to phishing sites, while scanning website code to protect against compromised sites and downloads infected by hackers.
+Can I use Sophos Home with my other security or antivirus software?
+Running two antiviruses doesn’t double your protection. All security vendors recommend removing your current antivirus before installing or running a new antivirus. Some computer maintenance software also contain antivirus-like features (such as ransomware protection, threat detection, etc... ), which will also can cause problems. See below for examples:
+Why shouldn’t I run two (or more) antiviruses at the same time?
+There are two main reasons not to do this:
+1. Two antiviruses (or security programs with antivirus-like features) will compete for resources while fighting each other. This saps your processing power, resulting in much longer load times, and possible computer crashes, and nobody wants that. Nobody.
+2. Two antiviruses (or security programs with antivirus-like features) will try to stop a threat at the same time, possibly resulting in the threat not being fully neutralized. It’s like two different police agencies trying to arrest the same criminal. They argue who’s in charge while the bad person walks away.
+Can I still run Sophos Home without uninstalling another antivirus?
+Technically, yes. But please don’t. You won’t like it. Let us help you find how to remove it!
+Check this article for removal steps.
+How many computers can I add to my Sophos Home account?
+You can protect up to 10 computers (Mac and Windows) with a Sophos Home premium account. If you have reached the limit and want to protect another computer, you must first remove an existing computer from the dashboard or purchase another Sophos Home Premium license using a different email address. The two accounts cannot be combined and must be managed separately.
+I have purchased multiple licenses. Can I combine them into a single account?
+Each Sophos Home Premium account can protect up to 10 computers, buying more licenses for the account will not change that limit. For more information regarding licensing, please visit: Sophos Home – Activating Premium License keys
+I have a small business with just a few computers, can I install Sophos Home on those computers?
+Sophos Home is intended for private, personal, and non-commercial use only. If you would like to use Sophos in a business, commercial, non-profit, religious, or government organization, we recommend to try Sophos Central for free here.
+For more information, please review our Sophos Consumer Terms of Service
+I moved to another country, will my Sophos Home still work?
+Yes. Sophos Home updates anywhere. You can also manage the security settings anytime and anywhere through a dashboard that is accessible online.
+Can I install Sophos Home on my mobile devices?
+Sophos Home Premium users may install Sophos Intercept X for Mobile and contact support if they need assistance (free users may install it and refer to our Help Center for assistance)
+Please see this article for more information: Sophos Intercept X for Mobile - Guide for Sophos Home customers
+Please, keep in mind these devices will be protected with a different product than Sophos Home, and as such, they will not appear in your Sophos Home dashboard.
+Can I install Sophos Home on Linux?
+No. Sophos Home supports Mac and Windows devices. For supported platforms, kindly refer to system requirements for installing Sophos Home.
+What happens if I install Sophos Home Premium on more than 10 computers?
+The Add Device button becomes disabled if the 10-device limit has been reached. If you have reached the limit and want to add another computer, please first remove an existing computer from your dashboard or purchase an additional license of Sophos Home.
+Who do I contact for support?
+Sophos Home Premium users have access to professional support agents from Monday to Friday, 9 a.m. to 7 p.m. Eastern time, via a chat window on the Sophos Home Dashboard or via the Sophos Home Support Page. Premium users can also get email support via the same professional support agents.
+Free and Premium users always have 24/7 access to the Sophos Home Support Knowledgebase.
+We recommend having a look at our Getting started guide for a quick guide on how to install and configure Sophos Home.
+For more details regarding support, please see visit this article: Contacting Sophos Home Support
+Facebook
+Twitter
+LinkedIn
+Was this article helpful?
+1051 out of 1648 found this helpful
+Didn't find this helpful? Click here to leave feedback!
+Every comment submitted via this form is read (by a human) but we do not reply to specific technical questions. For technical support, please see Contacting Sophos Home Support
+Return to top
+Related articles
+Sophos Home - Getting started guide
+Third Party Antivirus - Running two antivirus programs can reduce your security
+Sophos Intercept X For Mobile - Guide for Sophos Home customers
+Activating your Sophos Home Premium License key
+Sophos Home - How to test protections installed on the computer
+Sophos Home
+Free Trial
+Company
+Support
+Business Solutions
+Security Center
+Affiliates
+Stay Connected
+Facebook
+Instagram
+Linkedin
+RSS feed
+Twitter
+©1997-2026 Sophos Ltd. All rights reserved.
+Legal
+Privacy
+Cookies

@@ -1,0 +1,77 @@
+url: https://www.gdata.de/help-en/consumer/FAQ/protectAdditionalDevicesFAQ/
+method: fetch
+saved: 2026-11-20
+
+Protect additional devices with a G DATA license :: Online Documentation
+| Online Documentation
+In this project
+Deutsch
+English
+Polski
+Français
+Nederlands
+Italiano
+Español
+Português
+Consumer
+My G DATA
+My G DATA web portal
+View "My devices"
+View "VPN"
+View "ID Protection"
+View "My contract"
+View "My invoices"
+View "Account settings"
+View "Support"
+Frequently asked questions (FAQs) and additional information about My G DATA
+Our Security Solutions
+G DATA Antivirus for Windows
+G DATA Antivirus for Mac
+G DATA Internet Security
+G DATA Total Security
+G DATA Mobile Security Android
+G DATA Mobile Security iOS
+The G DATA Mobile Security Center
+G DATA VPN
+G DATA Identity Protection
+Version history AV products for Windows
+Current version
+Version history AV products for Mac
+Current version
+Help Center
+Frequently asked questions
+Help and workarounds
+My G DATA FAQ
+Description of the user interface of the consumer products
+System requirements across operating systems
+Products, components and features that are no longer supported (End of Life)
+Consumer
+Protect additional devices with a G DATA license
+Protect additional devices with a G DATA license
+With your G DATA license, you can protect up to 10 devices. You can conveniently manage your license (extension, product
+change) via My G DATA.
+To protect an additional device, proceed as follows:
+1
+Take the device on which the installation is to be performed.
+2
+Open the My G DATA WebPortal on the device and log in with your username and password.
+3
+Navigate to the view "My devices". Click on + Protect device there.
+4
+Select the operating system of the device.
+5
+Download the software either by clicking on Download software or by scanning the QR code.
+6
+Install the software on your device.
+Further information on the installation process for
+Windows,
+Android,
+iOS,
+macOS.
+7
+Once installation and activation are complete, the device is protected.
+Content © 2026 G DATA CyberDefense AG. All rights reserved.
+This page was built by using the Antora default UI, The source code for this UI is licensed under the terms of the MPL-2.0 license
+Impressum
+Datenschutzerklärung
+Kontakt

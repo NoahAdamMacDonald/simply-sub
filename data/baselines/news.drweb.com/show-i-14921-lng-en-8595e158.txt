@@ -1,0 +1,44 @@
+url: https://news.drweb.com/show/?i=14921&lng=en
+method: browser
+saved: 2026-11-20
+
+For home
+For business
+Support
+Information for users
+Information for partners
+Doctor Web's statement regarding claims of a successful attack on its infrastructure
+09.10.2024
+Corporate news | All the news
+October 9, 2024
+On October 8, 2024, a Telegram channel published information about an alleged successful cyberattack on our company's infrastructure.
+A targeted attack on our systems and services was indeed carried out in September. We reported on that immediately in this news publication while the actual crisis was still in progress: https://news.drweb.com/show/?i=14907&lng=en
+We managed to promptly thwart the attack and then proceeded by disconnecting our systems from the network for a thorough examination in accordance with our established security policy. The attackers intended to demand a ransom from Doctor Web, but we never negotiate with perpetrators. As law enforcement agencies are looking into the incident right now, we cannot give out any additional details so as to avoid interfering with the ongoing investigation.
+Most of the claims that appeared in Telegram are false. Our development environment and customer information haven't been affected by the attack. Our software module and virus database updates pose no threat whatsoever to Dr.Web users.
+At Doctor Web, we have stepped up security for all our systems and services. We're also examining the screenshots circulating in Telegram channels to ensure that no portion of our relevant data has been compromised.
+0
+Latest
+All news
+Now Dr.Web supports macOS 27 Golden Gate
+20.11.2026
+Dr.Web software updates | Dr.Web products
+Read
+Insolence beyond belief: Threat actors target information security developers on GitHub
+05.11.2026
+Real-time threat watch
+Read
+New version of Dr.Web Security Space for mobile devices is now available for download
+20.10.2026
+Dr.Web software updates | Dr.Web products
+Read
+For home
+For business
+Support
+Information for users
+Information for partners
+Press center
+Contacts
+Doctor Web © 2003 — 2026
+Doctor Web is an anti-virus security company whose products are marketed under the brand name Dr.Web
+Safe development and deployment practices
+Privacy Policy
