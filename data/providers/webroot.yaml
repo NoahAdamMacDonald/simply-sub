@@ -16,15 +16,24 @@
 # Pricing, the other countries: each product page's price picker (devices and 1 to 3 years) shows the yearly price
 # ("*Amount shown reflects annual subscription value based on 1 year MSRP.") and, for 2 and 3 years, the yearly list
 # price times the years struck through beside a lower first-term price ("Original price was CAD $99.98 • Save CAD
-# $29.99 Sale price is CAD $69.99"). AntiVirus for PC Gamers' picker stays at 1 year. The euro countries' home pages have
-# no picker: one price each, "1 Gerät/1 Jahr", "3 Geräte/1 Jahr", "5 Geräte/1 Jahr" (34,99 €, 54,99 €, 74,99 €, as
-# Ireland's). The US: each card shows a first-year
-# price beside the list price struck through ("$34.99 /first year", "$49.99 Save $15.00"), and its checkout
-# (buy.webroot.com) offers 1, 2 or 3 years, each with the list price times the years struck ("2 years of protection",
-# "$99.98 $84.99"). The terms charge renewals "as described in Your Subscription Documentation", and no page promises a
-# first term's price again, so the list prices are stored, the 2- and 3-year ones as their struck prices (ESET's
-# precedent). Security for Chromebook's and AntiVirus for PC Gamers' US checkouts strike $49.98 and $79.99 for 2 years.
-# Tax: the US checkout: "Prices on our website do not include sales tax."; no page says the other prices include tax.
+# $29.99 Sale price is CAD $69.99"). AntiVirus for PC Gamers' picker stays at 1 year. The euro countries' home pages
+# show one price each, "1 Gerät/1 Jahr", "3 Geräte/1 Jahr", "5 Geräte/1 Jahr" (34,99 €, 54,99 €, 74,99 €, as
+# Ireland's), and their "ändern" links lead back to the home page (their /home/products/av, isp and complete pages
+# redirect there). Their cart (cart.webroot.com, run by Cleverbridge), read 2026-11-20 through each country's exit,
+# changes the number of devices ("Zu schützende Geräte") and offers 2 or 3 years for more: AntiVirus for 3 devices is
+# 44,99 € and Internet Security Plus for 5 64,99 €, as Ireland's, each "ein Abonnement mit einem Preis von 44,99 €
+# pro Abrechnungsintervall" (Germany's).
+# The US: each card shows a first-year price beside the list price struck through ("$34.99 /first year", "$49.99 Save
+# $15.00"), and its checkout (buy.webroot.com) offers 1, 2 or 3 years, each with the list price times the years struck
+# ("2 years of protection", "$99.98 $84.99").
+# Stored: the yearly list prices, the struck or "MSRP" figure beside a first-year offer (Bitdefender's precedent): no
+# page promises a first term's price again, and the terms charge renewals "as described in Your Subscription
+# Documentation". The 2- and 3-year terms aren't stored: no page says what they renew as, in length or price (its
+# auto-renewal page: "We’ll automatically renew your security subscription before it expires."), and their struck
+# prices are the yearly price times the years.
+# Tax: the US checkout: "Prices on our website do not include sales tax."; the euro carts' totals include VAT
+# ("Enthält 7,18 € MwSt. (19% auf 37,81 €).", Germany's, in words core doesn't read); no page says the other prices
+# include tax.
 # Region checklist for CA and US, 2026-11-20: 1. country paths (/ca/en, the US at webroot.com/products); 2. the country
 # picker (17 sites); 3. the price picker on each product page; 4. the US checkout, up to the payment form (Canada's cart
 # wasn't opened); 5. its user guide (no prices); 6. Edge from Canada (refused), a plain fetch (no prices), Edge through a
@@ -40,11 +49,11 @@
 # webroot.smart-protection-5-devices, webroot.premium, webroot.premium-family, webroot.total-protection,
 # webroot.total-protection-family, webroot.secure-vpn, webroot.secure-vpn-5-devices and webroot.security-for-chromebook
 # in CA, GB, IE, AU, NZ, DE, FR, NL, ES and IT: the US's line-up; each of those countries' product menus lists AntiVirus,
-# Internet Security Plus, Internet Security Complete and AntiVirus for Gamers instead (read 2026-11-20).
-# Coverage: webroot.antivirus-for-gamers, webroot.antivirus-3-devices and webroot.internet-security-plus-5-devices in DE,
-# FR, NL, ES and IT: those countries' own home pages (intl.webroot.com, where their product links lead) sell AntiVirus
-# for 1 device, Internet Security Plus for 3 and Internet Security Complete for 5, a year at a time, and nothing else
+# Internet Security Plus, Internet Security Complete and (outside the euro countries) AntiVirus for Gamers instead
 # (read 2026-11-20).
+# Coverage: webroot.antivirus-for-gamers in DE, FR, NL, ES and IT: those countries' own home pages (intl.webroot.com,
+# where their product links lead) list AntiVirus, Internet Security Plus and Internet Security Complete, and not
+# AntiVirus for PC Gamers (read 2026-11-20).
 
 id: webroot
 name: Webroot
@@ -101,7 +110,9 @@ owner:
   lastVerified: 2026-11-20
 # Ways to pay (M11.5), read 2026-11-20: its consumer terms' billing parties (Webroot, a reseller or an app store) and card
 # payments, and the US checkout's "Payment Options" ("Card", "PayPal"). No page read names its card networks in words
-# (the checkout shows logos only), and Canada's and the other countries' checkouts weren't opened.
+# (the checkout shows logos only), and Canada's checkout wasn't opened. The euro countries' carts, read 2026-11-20 for
+# their prices only, show a card form and PayPal (Germany's "Kreditkarte", "PayPal"); not stored, as their full payment
+# step wasn't opened.
 paymentMethods:
   - methods: [card, app-store]
     page: Webroot Consumer Terms and Conditions
@@ -174,14 +185,18 @@ perks:
     name: Up to $25k in scam reimbursement
   - id: cloud-backup
     name: Unlimited cloud storage for 1 PC or Mac
+  - id: online-backup
+    name: 'Automatic backup and secure online storage, up to 25GB'
 
 # Features, read 2026-11-20: Canada's compare page (its ticks, read from the page's code: AntiVirus has threat protection
 # for PCs and Macs, fast scans, "Always-on security for your identity", ransomware protection, "Real-time anti-phishing
 # blocks bad sites" and "Firewall and network connection monitor"; Internet Security Plus adds smartphones and tablets,
 # "Protects account logins and passwords" and Chromebook protection; Complete adds "Eliminates traces of online
-# activity"), the US compare page (Essentials: "Firewall and network monitor", "Web Threat Shield: Blocks risky sites",
-# "Text scam detection" and "Breach monitor" (Android only), AI chat protection, Password Manager; Smart Protection adds
-# Scam Check, ID Check, the scam hotline and reimbursement, a VPN for 3 or 5 devices and identity, financial and dark web
+# activity" and, on its own page, "Protect up to 25GB of digital photos, music or other files from damage or loss with
+# cloud-based backup storage."), the US compare page (Essentials: "Firewall and network monitor", "Web Threat Shield:
+# Blocks risky sites", "Text scam detection" and "Breach monitor" (iOS and Android only), AI chat protection, Password
+# Manager; Smart Protection adds Scam Check, ID Check, the scam hotline and reimbursement, a VPN for 3 or 5 devices and
+# identity, financial and dark web
 # monitoring with "24/7 US-based support with identity restoration experts"; Premium adds "Eliminates traces of online
 # activity", "Cleans up digital clutter", "Financial and credit bureau monitoring" and "Up to $1M fraud expense
 # reimbursement"; Total Protection adds a VPN for 5 devices, "Parental controls" (Windows) and "Unlimited cloud storage
@@ -189,7 +204,9 @@ perks:
 # "The reputation and behavior of newly introduced applications" (behaviour-based detection); "Webroot launches scans
 # automatically every day" (scheduled scans, and scans you start); "The Webroot firewall works with the Windows
 # firewall"; "System Optimizer is available when you purchase Webroot Internet Security Complete or Webroot Premium
-# packages" (the speed-up tools, also in AntiVirus for PC Gamers: "Antivirus and system optimizer for your gaming PC");
+# packages" (the speed-up tools, also in AntiVirus for PC Gamers: "Antivirus and system optimizer for your gaming PC"),
+# whose Secure Erase setting can "permanently remove files in a shredding process, which overwrites the data with random
+# characters" (a file shredder);
 # "LastPass Password Manager is available only for Internet Security Plus and above licenses" (a LastPass account set up
 # through Webroot's portal; no page says which LastPass plan, so it's the password manager feature, not LastPass's
 # plan). Breach monitor "Scans the dark web to check if up to 3 emails were involved in any known data breaches"
@@ -198,8 +215,9 @@ perks:
 # sites, downloads and apps", "On-demand scans", "Password manager". No page says its password manager or apps make
 # two-factor codes (authenticator false), and
 # none names a boot-time scan, file recovery, vulnerability scan, spam filter, anti-theft, game mode or webcam control
-# (its product pages' "Webcam protection" paragraph describes no feature). Its credit monitoring names no number of
-# bureaus, so it's left out. Secure VPN (its page): "our no-log policy", "block any connection when the VPN is not active"
+# (its product pages' "Webcam protection" paragraph describes no feature). Premium's and Total Protection's "Financial
+# and credit bureau monitoring" names no number of bureaus: one, inferred. Secure VPN (its page): "our no-log policy",
+# "block any connection when the VPN is not active"
 # (kill switch), split tunnelling ("not available on Apple computers and mobile devices"), "80 locations in more than 65
 # countries"; no page states unlimited data (false, as the rule for a silent required feature says), its protocols,
 # RAM-only servers or a way to connect your own devices.
@@ -223,9 +241,10 @@ plans:
       - regions: [US]
         url: https://www.webroot.com/products/essentials/
         quotes:
+          - 'What happened to Webroot AntiVirus Basic, Webroot Internet Security Plus, Webroot Complete?'
           - 'These products are now respectively replaced by Webroot Essentials for 1, 3, or 5 devices.'
         lastVerified: 2026-11-20
-    notes: 'For 1 PC or Mac, bought for 1, 2 or 3 years (a year at a time in the euro countries). Sold outside the US, where Webroot Essentials replaced it.'
+    notes: 'For 1 PC or Mac. Sold outside the US, where Webroot Essentials replaced it. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: CA
         currency: CAD
@@ -307,86 +326,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://intl.webroot.com/it/it/home
-      - region: CA
-        currency: CAD
-        amount: 99.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/av
-      - region: GB
-        currency: GBP
-        amount: 59.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/av
-      - region: IE
-        currency: EUR
-        amount: 69.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/av
-      - region: AU
-        currency: AUD
-        amount: 99.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/av
-      - region: NZ
-        currency: NZD
-        amount: 99.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/av
-      - region: CA
-        currency: CAD
-        amount: 149.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/av
-      - region: GB
-        currency: GBP
-        amount: 89.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/av
-      - region: IE
-        currency: EUR
-        amount: 104.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/av
-      - region: AU
-        currency: AUD
-        amount: 149.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/av
-      - region: NZ
-        currency: NZD
-        amount: 149.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/av
   - id: webroot.antivirus-3-devices
     name: 'AntiVirus (3 devices)'
     link: https://www.webroot.com/ca/en/home/products/av
@@ -406,9 +345,10 @@ plans:
       - regions: [US]
         url: https://www.webroot.com/products/essentials/
         quotes:
+          - 'What happened to Webroot AntiVirus Basic, Webroot Internet Security Plus, Webroot Complete?'
           - 'These products are now respectively replaced by Webroot Essentials for 1, 3, or 5 devices.'
         lastVerified: 2026-11-20
-    notes: 'For 3 PCs or Macs, bought for 1, 2 or 3 years. Sold outside the US.'
+    notes: 'For 3 PCs or Macs. Sold outside the US. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: CA
         currency: CAD
@@ -450,86 +390,46 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/nz/en/home/products/av
-      - region: CA
-        currency: CAD
-        amount: 119.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/av
-      - region: GB
-        currency: GBP
-        amount: 79.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/av
-      - region: IE
+      - region: DE
         currency: EUR
-        amount: 89.98
+        amount: 44.99
         interval: year
-        intervalCount: 2
+        intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/av
-      - region: AU
-        currency: AUD
-        amount: 129.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/av
-      - region: NZ
-        currency: NZD
-        amount: 119.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/av
-      - region: CA
-        currency: CAD
-        amount: 179.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/av
-      - region: GB
-        currency: GBP
-        amount: 119.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/av
-      - region: IE
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159158&quantityrno_1=3&country=DE&currency=EUR&language=de
+      - region: FR
         currency: EUR
-        amount: 134.97
+        amount: 44.99
         interval: year
-        intervalCount: 3
+        intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/av
-      - region: AU
-        currency: AUD
-        amount: 194.97
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159158&quantityrno_1=3&country=FR&currency=EUR&language=fr
+      - region: NL
+        currency: EUR
+        amount: 44.99
         interval: year
-        intervalCount: 3
+        intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/av
-      - region: NZ
-        currency: NZD
-        amount: 179.97
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159158&quantityrno_1=3&country=NL&currency=EUR&language=nl
+      - region: ES
+        currency: EUR
+        amount: 44.99
         interval: year
-        intervalCount: 3
+        intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/av
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159158&quantityrno_1=3&country=ES&currency=EUR&language=es
+      - region: IT
+        currency: EUR
+        amount: 44.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159158&quantityrno_1=3&country=IT&currency=EUR&language=it
   - id: webroot.internet-security-plus
     name: 'Internet Security Plus (3 devices)'
     link: https://www.webroot.com/ca/en/home/products/isp
@@ -551,9 +451,10 @@ plans:
       - regions: [US]
         url: https://www.webroot.com/products/essentials/
         quotes:
+          - 'What happened to Webroot AntiVirus Basic, Webroot Internet Security Plus, Webroot Complete?'
           - 'These products are now respectively replaced by Webroot Essentials for 1, 3, or 5 devices.'
         lastVerified: 2026-11-20
-    notes: 'For 3 PCs, Macs, phones, tablets or Chromebooks, with a LastPass password manager. Bought for 1, 2 or 3 years (a year at a time in the euro countries); sold outside the US.'
+    notes: 'For 3 PCs, Macs, phones, tablets or Chromebooks, with a LastPass password manager. Sold outside the US. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: CA
         currency: CAD
@@ -635,86 +536,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://intl.webroot.com/it/it/home
-      - region: CA
-        currency: CAD
-        amount: 139.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/isp
-      - region: GB
-        currency: GBP
-        amount: 99.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/isp
-      - region: IE
-        currency: EUR
-        amount: 109.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/isp
-      - region: AU
-        currency: AUD
-        amount: 149.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/isp
-      - region: NZ
-        currency: NZD
-        amount: 139.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/isp
-      - region: CA
-        currency: CAD
-        amount: 209.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/isp
-      - region: GB
-        currency: GBP
-        amount: 149.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/isp
-      - region: IE
-        currency: EUR
-        amount: 164.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/isp
-      - region: AU
-        currency: AUD
-        amount: 224.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/isp
-      - region: NZ
-        currency: NZD
-        amount: 209.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/isp
   - id: webroot.internet-security-plus-5-devices
     name: 'Internet Security Plus (5 devices)'
     link: https://www.webroot.com/ca/en/home/products/isp
@@ -736,9 +557,10 @@ plans:
       - regions: [US]
         url: https://www.webroot.com/products/essentials/
         quotes:
+          - 'What happened to Webroot AntiVirus Basic, Webroot Internet Security Plus, Webroot Complete?'
           - 'These products are now respectively replaced by Webroot Essentials for 1, 3, or 5 devices.'
         lastVerified: 2026-11-20
-    notes: 'For 5 PCs, Macs, phones, tablets or Chromebooks, with a LastPass password manager. Bought for 1, 2 or 3 years (a year at a time in the euro countries); sold outside the US.'
+    notes: 'For 5 PCs, Macs, phones, tablets or Chromebooks, with a LastPass password manager. Sold outside the US. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: CA
         currency: CAD
@@ -780,86 +602,46 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/nz/en/home/products/isp
-      - region: CA
-        currency: CAD
-        amount: 199.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/isp
-      - region: GB
-        currency: GBP
-        amount: 109.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/isp
-      - region: IE
+      - region: DE
         currency: EUR
-        amount: 129.98
+        amount: 64.99
         interval: year
-        intervalCount: 2
+        intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/isp
-      - region: AU
-        currency: AUD
-        amount: 179.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/isp
-      - region: NZ
-        currency: NZD
-        amount: 179.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/isp
-      - region: CA
-        currency: CAD
-        amount: 299.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/isp
-      - region: GB
-        currency: GBP
-        amount: 164.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/isp
-      - region: IE
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159154&quantityrno_1=5&country=DE&currency=EUR&language=de
+      - region: FR
         currency: EUR
-        amount: 194.97
+        amount: 64.99
         interval: year
-        intervalCount: 3
+        intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/isp
-      - region: AU
-        currency: AUD
-        amount: 269.97
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159154&quantityrno_1=5&country=FR&currency=EUR&language=fr
+      - region: NL
+        currency: EUR
+        amount: 64.99
         interval: year
-        intervalCount: 3
+        intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/isp
-      - region: NZ
-        currency: NZD
-        amount: 269.97
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159154&quantityrno_1=5&country=NL&currency=EUR&language=nl
+      - region: ES
+        currency: EUR
+        amount: 64.99
         interval: year
-        intervalCount: 3
+        intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/isp
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159154&quantityrno_1=5&country=ES&currency=EUR&language=es
+      - region: IT
+        currency: EUR
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://cart.webroot.com/922/purl-shoppingcart?scope=checkout&cart=159154&quantityrno_1=5&country=IT&currency=EUR&language=it
   - id: webroot.internet-security-complete
     name: 'Internet Security Complete (5 devices)'
     link: https://www.webroot.com/ca/en/home/products/complete
@@ -875,16 +657,18 @@ plans:
       antivirus.scam-protection: [web]
       antivirus.devices: 5
       antivirus.optimizer: true
+      security.file-shredder: true
       password-manager: true
       authenticator.included: false
-    perks: [identity-shield]
+    perks: [identity-shield, online-backup]
     notSoldIn:
       - regions: [US]
         url: https://www.webroot.com/products/essentials/
         quotes:
+          - 'What happened to Webroot AntiVirus Basic, Webroot Internet Security Plus, Webroot Complete?'
           - 'These products are now respectively replaced by Webroot Essentials for 1, 3, or 5 devices.'
         lastVerified: 2026-11-20
-    notes: 'For 5 PCs, Macs, phones, tablets or Chromebooks, with a LastPass password manager and System Optimizer, which clears traces of what you did online. Bought for 1, 2 or 3 years (a year at a time in the euro countries); sold outside the US.'
+    notes: 'For 5 PCs, Macs, phones, tablets or Chromebooks, with a LastPass password manager, System Optimizer, which clears traces of what you did online, and up to 25 GB of cloud backup. Sold outside the US. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: CA
         currency: CAD
@@ -966,86 +750,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://intl.webroot.com/it/it/home
-      - region: CA
-        currency: CAD
-        amount: 199.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/complete
-      - region: GB
-        currency: GBP
-        amount: 129.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/complete
-      - region: IE
-        currency: EUR
-        amount: 149.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/complete
-      - region: AU
-        currency: AUD
-        amount: 199.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/complete
-      - region: NZ
-        currency: NZD
-        amount: 199.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/complete
-      - region: CA
-        currency: CAD
-        amount: 299.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ca/en/home/products/complete
-      - region: GB
-        currency: GBP
-        amount: 194.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/gb/en/home/products/complete
-      - region: IE
-        currency: EUR
-        amount: 224.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/ie/en/home/products/complete
-      - region: AU
-        currency: AUD
-        amount: 299.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/au/en/home/products/complete
-      - region: NZ
-        currency: NZD
-        amount: 299.97
-        interval: year
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/nz/en/home/products/complete
   - id: webroot.antivirus-for-gamers
     name: 'AntiVirus for PC Gamers'
     link: https://www.webroot.com/ca/en/home/products/gamer-av
@@ -1061,30 +765,15 @@ plans:
       antivirus.scam-protection: [web]
       antivirus.devices: 1
       antivirus.optimizer: true
+      security.file-shredder: true
     perks: [identity-shield]
-    notes: 'For 1 Windows gaming PC, with a system optimizer. Its pages outside the US sell 1 year at a time; the US checkout sells 1, 2 or 3 years.'
+    notes: 'For 1 Windows gaming PC, with a system optimizer. Its pages outside the US sell 1 year at a time; the US checkout also sells 2 or 3 years, not listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 39.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/gamer-av/
-      - region: US
-        currency: USD
-        amount: 79.99
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/gamer-av/
-      - region: US
-        currency: USD
-        amount: 119.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/gamer-av/
@@ -1146,29 +835,13 @@ plans:
       authenticator.included: false
       antivirus.devices: 1
     perks: [identity-shield, ai-chat-protection]
-    notes: 'The US: antivirus for 1 PC, Mac, phone or tablet, with a LastPass password manager, text scam detection and a data breach check (Android). Bought for 1, 2 or 3 years.'
+    notes: 'The US: antivirus for 1 PC, Mac, phone or tablet, with a LastPass password manager, text scam detection and a data breach check (iOS and Android). Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 49.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/essentials/
-      - region: US
-        currency: USD
-        amount: 99.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/essentials/
-      - region: US
-        currency: USD
-        amount: 149.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/essentials/
@@ -1190,29 +863,13 @@ plans:
       authenticator.included: false
       antivirus.devices: 3
     perks: [identity-shield, ai-chat-protection]
-    notes: 'The US: antivirus for 3 PCs, Macs, phones or tablets, with a LastPass password manager, text scam detection and a data breach check (Android). Bought for 1, 2 or 3 years.'
+    notes: 'The US: antivirus for 3 PCs, Macs, phones or tablets, with a LastPass password manager, text scam detection and a data breach check (iOS and Android). Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 69.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/essentials/
-      - region: US
-        currency: USD
-        amount: 139.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/essentials/
-      - region: US
-        currency: USD
-        amount: 209.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/essentials/
@@ -1234,29 +891,13 @@ plans:
       authenticator.included: false
       antivirus.devices: 5
     perks: [identity-shield, ai-chat-protection]
-    notes: 'The US: antivirus for 5 PCs, Macs, phones or tablets, with a LastPass password manager, text scam detection and a data breach check (Android). Bought for 1, 2 or 3 years.'
+    notes: 'The US: antivirus for 5 PCs, Macs, phones or tablets, with a LastPass password manager, text scam detection and a data breach check (iOS and Android). Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 89.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/essentials/
-      - region: US
-        currency: USD
-        amount: 179.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/essentials/
-      - region: US
-        currency: USD
-        amount: 269.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/essentials/
@@ -1289,29 +930,13 @@ plans:
       vpn.devices: 3
     perks:
       [identity-shield, ai-chat-protection, scam-check, id-check, scam-hotline, scam-reimbursement]
-    notes: 'The US: Essentials for 3 devices with Scam Protection (Scam Check, ID Check, a scam hotline and up to $25k scam reimbursement), Webroot Secure VPN for 3 devices, and identity, financial and dark web monitoring for 1 person with identity restoration help. Bought for 1, 2 or 3 years.'
+    notes: 'The US: Essentials for 3 devices with Scam Protection (Scam Check, ID Check, a scam hotline and up to $25k scam reimbursement), Webroot Secure VPN for 3 devices, and identity, financial and dark web monitoring for 1 person with identity restoration help. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 89.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/smart-protection/
-      - region: US
-        currency: USD
-        amount: 179.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/smart-protection/
-      - region: US
-        currency: USD
-        amount: 269.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/smart-protection/
@@ -1344,29 +969,13 @@ plans:
       vpn.devices: 5
     perks:
       [identity-shield, ai-chat-protection, scam-check, id-check, scam-hotline, scam-reimbursement]
-    notes: 'The US: Essentials for 5 devices with Scam Protection (Scam Check, ID Check, a scam hotline and up to $25k scam reimbursement), Webroot Secure VPN for 5 devices, and identity, financial and dark web monitoring for 1 person with identity restoration help. Bought for 1, 2 or 3 years.'
+    notes: 'The US: Essentials for 5 devices with Scam Protection (Scam Check, ID Check, a scam hotline and up to $25k scam reimbursement), Webroot Secure VPN for 5 devices, and identity, financial and dark web monitoring for 1 person with identity restoration help. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 99.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/smart-protection/
-      - region: US
-        currency: USD
-        amount: 199.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/smart-protection/
-      - region: US
-        currency: USD
-        amount: 299.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/smart-protection/
@@ -1387,33 +996,26 @@ plans:
       password-manager: true
       authenticator.included: false
       antivirus.optimizer: true
+      security.file-shredder: true
       security.identity-restoration: true
       security.identity-theft-insurance: 1
+      security.credit-monitoring: 1
       antivirus.devices: 5
     perks: [identity-shield, ai-chat-protection]
-    notes: 'The US: Essentials for 5 devices with System Optimizer and identity protection for 1 person: identity, credit and financial monitoring, dark web monitoring, restoration help and up to $1 million in identity theft reimbursement (insurance). Bought for 1, 2 or 3 years.'
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its compare page lists financial and credit bureau monitoring without naming the bureaus, so it counts as one.'
+        page:
+          name: 'Compare Webroot plans (US)'
+          url: https://www.webroot.com/products/compare/
+        lastVerified: 2026-11-20
+    notes: 'The US: Essentials for 5 devices with System Optimizer and identity protection for 1 person: identity, credit and financial monitoring, dark web monitoring, restoration help and up to $1 million in identity theft reimbursement (insurance). Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 129.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/premium/
-      - region: US
-        currency: USD
-        amount: 259.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/premium/
-      - region: US
-        currency: USD
-        amount: 389.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/premium/
@@ -1434,34 +1036,27 @@ plans:
       password-manager: true
       authenticator.included: false
       antivirus.optimizer: true
+      security.file-shredder: true
       security.identity-restoration: true
       security.identity-theft-insurance: 1
+      security.credit-monitoring: 1
       antivirus.devices: 10
       account.users: 10
     perks: [identity-shield, ai-chat-protection]
-    notes: 'The US: Premium for 10 devices, with identity protection for up to 10 family members and dependents. Bought for 1, 2 or 3 years.'
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its compare page lists financial and credit bureau monitoring without naming the bureaus, so it counts as one.'
+        page:
+          name: 'Compare Webroot plans (US)'
+          url: https://www.webroot.com/products/compare/
+        lastVerified: 2026-11-20
+    notes: 'The US: Premium for 10 devices, with identity protection for up to 10 family members and dependents. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 249.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/premium/
-      - region: US
-        currency: USD
-        amount: 499.99
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/premium/
-      - region: US
-        currency: USD
-        amount: 749.99
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/premium/
@@ -1482,8 +1077,10 @@ plans:
       password-manager: true
       authenticator.included: false
       antivirus.optimizer: true
+      security.file-shredder: true
       security.identity-restoration: true
       security.identity-theft-insurance: 1
+      security.credit-monitoring: 1
       parental-control: [content-filtering, screen-time]
       account.parental-controls: true
       vpn.included: true
@@ -1506,29 +1103,20 @@ plans:
         scam-reimbursement,
         cloud-backup,
       ]
-    notes: 'The US: Premium with Scam Protection, Webroot Secure VPN for 5 devices, parental controls (Windows) and unlimited cloud backup for 1 PC or Mac. Bought for 1, 2 or 3 years.'
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its compare page lists financial and credit bureau monitoring without naming the bureaus, so it counts as one.'
+        page:
+          name: 'Compare Webroot plans (US)'
+          url: https://www.webroot.com/products/compare/
+        lastVerified: 2026-11-20
+    notes: 'The US: Premium with Scam Protection, Webroot Secure VPN for 5 devices, parental controls (Windows) and unlimited cloud backup for 1 PC or Mac. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 179.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/total-protection/
-      - region: US
-        currency: USD
-        amount: 359.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/total-protection/
-      - region: US
-        currency: USD
-        amount: 539.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/total-protection/
@@ -1549,8 +1137,10 @@ plans:
       password-manager: true
       authenticator.included: false
       antivirus.optimizer: true
+      security.file-shredder: true
       security.identity-restoration: true
       security.identity-theft-insurance: 1
+      security.credit-monitoring: 1
       parental-control: [content-filtering, screen-time]
       account.parental-controls: true
       vpn.included: true
@@ -1573,29 +1163,20 @@ plans:
         scam-reimbursement,
         cloud-backup,
       ]
-    notes: 'The US: Total Protection for 10 devices, with identity protection for up to 10 people. No page says how many devices its VPN covers. Bought for 1, 2 or 3 years.'
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its compare page lists financial and credit bureau monitoring without naming the bureaus, so it counts as one.'
+        page:
+          name: 'Compare Webroot plans (US)'
+          url: https://www.webroot.com/products/compare/
+        lastVerified: 2026-11-20
+    notes: 'The US: Total Protection for 10 devices, with identity protection for up to 10 people. No page says how many devices its VPN covers. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 299.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/total-protection/
-      - region: US
-        currency: USD
-        amount: 599.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/total-protection/
-      - region: US
-        currency: USD
-        amount: 899.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/total-protection/
@@ -1613,29 +1194,13 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       vpn.devices: 3
-    notes: 'The US: Webroot Secure VPN alone, for 3 PCs, Macs, phones or tablets. Bought for 1, 2 or 3 years.'
+    notes: 'The US: Webroot Secure VPN alone, for 3 PCs, Macs, phones or tablets. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 59.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/secure-vpn/
-      - region: US
-        currency: USD
-        amount: 119.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/secure-vpn/
-      - region: US
-        currency: USD
-        amount: 179.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/secure-vpn/
@@ -1653,29 +1218,13 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       vpn.devices: 5
-    notes: 'The US: Webroot Secure VPN alone, for 5 PCs, Macs, phones or tablets. Bought for 1, 2 or 3 years.'
+    notes: 'The US: Webroot Secure VPN alone, for 5 PCs, Macs, phones or tablets. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 79.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/secure-vpn/
-      - region: US
-        currency: USD
-        amount: 159.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/secure-vpn/
-      - region: US
-        currency: USD
-        amount: 239.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/secure-vpn/
@@ -1693,29 +1242,13 @@ plans:
       antivirus.devices: 1
       password-manager: true
       authenticator.included: false
-    notes: 'The US: protection for 1 Chromebook, an app installed from Google Play, with a password manager. Bought for 1, 2 or 3 years.'
+    notes: 'The US: protection for 1 Chromebook, an app installed from Google Play, with a password manager. Also sold for 2 or 3 years; only the yearly price is listed, as no page says what a longer term renews at.'
     prices:
       - region: US
         currency: USD
         amount: 24.99
         interval: year
         intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/webroot-security-chromebook/
-      - region: US
-        currency: USD
-        amount: 49.98
-        interval: year
-        intervalCount: 2
-        autoRenew: true
-        lastVerified: 2026-11-20
-        sourceUrl: https://www.webroot.com/products/webroot-security-chromebook/
-      - region: US
-        currency: USD
-        amount: 74.97
-        interval: year
-        intervalCount: 3
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.webroot.com/products/webroot-security-chromebook/
@@ -1753,13 +1286,18 @@ policies:
       url: https://www.opentext.com/about/security-acknowledgements
   ratings:
     - topic: privacy.data-collection
-      tier: bad
-      reason: 'Its apps collect details from your device, even your internet search history and files, and it uses them to improve its products. Its terms give no way to say no.'
+      tier: poor
+      reason: 'Its apps send it details from your device, even your internet search history and files, to improve its products. Its terms give no way to stop that; its owner’s privacy policy lets you object only by asking.'
       sources:
         - url: https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
           quote: 'username of logged-in operating system user, registry keys, language, Software report log(s), running processes, temporary Internet files, Internet search history'
         - url: https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
           quote: 'improve Webroot threat intelligence data and other products and services'
+        - url: https://www.opentext.com/about/privacy
+          quote: 'You have the right to object to processing if we are able to process your information because the process forms part of our public tasks or is in our legitimate interests.'
+      action:
+        name: 'Data Subject Request Form (privacy policy)'
+        url: https://www.opentext.com/about/privacy
       lastVerified: 2026-11-20
     - topic: privacy.data-sharing
       tier: poor
@@ -1967,8 +1505,20 @@ policies:
         - https://www.opentext.com/about/privacy
       lastVerified: 2026-11-20
     - topic: legal.content-rights
+      status: not-stated
+      reason: 'Outside its online backup, its terms take no rights over your own files.'
+      pages:
+        - https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
+      lastVerified: 2026-11-20
+    - topic: legal.content-rights
+      plans:
+        [
+          webroot.internet-security-complete,
+          webroot.total-protection,
+          webroot.total-protection-family,
+        ]
       tier: poor
-      reason: 'For anything you store with it, you give it a licence that never ends, though only to run the storage service.'
+      reason: 'For anything you store in its online backup, you give it a licence that never ends, though only to run the storage service.'
       sources:
         - url: https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
           quote: 'You hereby grant Webroot and its licensors a worldwide, non-exclusive, perpetual, royalty-free license to use, copy,'
@@ -2012,16 +1562,32 @@ policies:
           quote: 'Choose the family plan to protect up to 10 family members and dependents with our comprehensive identity protection.'
       lastVerified: 2026-11-20
     - topic: service.device-limits
+      status: not-stated
+      reason: 'Outside its VPN, its terms name no limit beyond the number of devices each plan covers.'
+      pages:
+        - https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      plans:
+        [
+          webroot.smart-protection,
+          webroot.smart-protection-5-devices,
+          webroot.total-protection,
+          webroot.total-protection-family,
+          webroot.secure-vpn,
+          webroot.secure-vpn-5-devices,
+        ]
       tier: neutral
-      reason: 'It limits how often you connect: more than 300 sessions a day can get your account suspended for good.'
+      reason: 'Its VPN limits how often you connect: more than 300 sessions a day can get your account suspended for good.'
       sources:
+        - url: https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
+          quote: 'use the Services to create automated or manually excessive connections to get different IPs or for any reason.'
         - url: https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
           quote: 'Maximum allowed sessions are 300 per day, and exceeding this limit may result in'
       lastVerified: 2026-11-20
     - topic: service.software-control
-      tier: poor
-      reason: 'It can change or remove any part of its service at any time without telling you, and its terms give no way to stop that.'
-      sources:
-        - url: https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
-          quote: 'Webroot may at any time without notice discontinue or modify any characteristic of the Service.'
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves, change your settings or remove other software.'
+      pages:
+        - https://www-cdn.webroot.com/8917/4291/5582/Webroot_Consumer_Terms_and_Conditions_v.2025.1.27_-_SPS_.pdf
       lastVerified: 2026-11-20

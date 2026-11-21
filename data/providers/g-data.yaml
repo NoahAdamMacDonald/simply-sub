@@ -20,10 +20,10 @@
 # 18 months) renews yearly ("Duration in month: 24", "from 20 Nov 2028", "US$39.95 / 12 months"), so it's a first term:
 # only yearly prices are stored (Norton's precedent). No monthly billing. Taxes: Germany's "Alle Preise inkl. MwSt.",
 # France's "Tous les prix sont indiqués en TTC", Italy's "Tutti i prezzi si intendono IVA inclusa" and the Netherlands'
-# "Alle prijzen zijn inclusief btw" are taxIncluded; Spain's "Todos los precios incluyen IVA" says so too, but core's tax
-# wording doesn't read "incluyen" yet, so Spain's prices have none; the North American site says "plus VAT if
-# applicable." Each plan is priced for one device, and more devices are extra-device add-ons (ESET's precedent): every
-# store's price list rises by the same amount for each device (see addOns).
+# "Alle prijzen zijn inclusief btw" and Spain's "Todos los precios incluyen IVA" are taxIncluded, each found on the page
+# its price cites; the North American site says "plus VAT if applicable." Each plan is priced for one device, and more
+# devices are extra-device add-ons (ESET's precedent): every store's price list rises by the same amount for each device
+# (see addOns).
 # Region checklist for CA and US, 2026-11-20: 1. gdata.de/en has no country paths, and its hreflang links name only en,
 # de and de-CH; 2. the shop's currency picker (US-Dollar, Swiss francs, Euro); 3. the price data names USD, EUR or CHF,
 # not a country; 4. the international shop's checkout country list has neither Canada nor the United States (read from
@@ -272,6 +272,8 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded:
+          quote: 'Todos los precios incluyen IVA'
         lastVerified: 2026-11-20
         sourceUrl: https://www.gdata.es/antivirus-windows
     addOnIds: [g-data.extra-device-antivirus, g-data.vpn-with-security, g-data.id-protection]
@@ -369,6 +371,8 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded:
+          quote: 'Todos los precios incluyen IVA'
         lastVerified: 2026-11-20
         sourceUrl: https://www.gdata.es/internet-security
     addOnIds: [g-data.extra-device, g-data.vpn-with-security, g-data.id-protection]
@@ -469,6 +473,8 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded:
+          quote: 'Todos los precios incluyen IVA'
         lastVerified: 2026-11-20
         sourceUrl: https://www.gdata.es/total-security
     addOnIds: [g-data.extra-device, g-data.vpn-with-security, g-data.id-protection]
@@ -548,6 +554,8 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded:
+          quote: 'Todos los precios incluyen IVA'
         lastVerified: 2026-11-20
         sourceUrl: https://www.gdata.es/antivirus-mac
     addOnIds: [g-data.extra-device, g-data.vpn-with-security, g-data.id-protection]
@@ -565,6 +573,8 @@ plans:
     perks: [app-control, sim-protection]
     notes: 'The paid ("Premium") version of its Android app. Priced for 1 device: each extra device, up to 10, is an extra-device add-on. In North America the first year is US$15.95, with a one-time US$4 setup fee in its checkout.'
     prices:
+      # Canada's and the US's US$11.95 is FastSpring's renewal (its checkout: "US$11.95", "billed every year"); the
+      # page these prices cite shows only the first year's "15.95 USD", which includes the one-time US$4 setup fee.
       - region: CA
         currency: USD
         amount: 11.95
@@ -627,6 +637,8 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded:
+          quote: 'Todos los precios incluyen IVA'
         lastVerified: 2026-11-20
         sourceUrl: https://www.gdata.es/mobile-security-android
     addOnIds: [g-data.extra-device-mobile]
@@ -721,6 +733,8 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded:
+          quote: 'Todos los precios incluyen IVA'
         lastVerified: 2026-11-20
         sourceUrl: https://www.gdata.es/vpn
 
@@ -874,6 +888,8 @@ addOns:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded:
+          quote: 'Todos los precios incluyen IVA'
         lastVerified: 2026-11-20
         sourceUrl: https://www.gdata.es/internet-security
   - id: g-data.id-protection
@@ -898,8 +914,10 @@ addOns:
 # of Sale (the North American checkout's seller), its trust centre, vulnerability reporting page and disclosure policy,
 # and its help centre's contract, cancellation, deletion and end-of-life articles. Read for no topic beyond the same
 # grades: the German AGB (the same clauses), the North American licence (the same text under North Carolina's law), and
-# its cancellation (withdrawal) policy: a 14-day withdrawal that ends once you agree to start the download. Not read:
-# the checkout's own confirmation screens past the payment form, and Google Play's terms for in-app purchases.
+# its cancellation (withdrawal) policy: a 14-day withdrawal that ends once you agree to start the download. The North
+# American Mobile Security page's FastSpring checkout, with its "View Details" open (read 2026-11-20 from Canada and
+# through a US exit), is quoted for the setup fee, as the page that hosts it. Not read: the checkout's own
+# confirmation screens past the payment form, and Google Play's terms for in-app purchases.
 policies:
   links:
     - name: Terms and conditions
@@ -952,6 +970,8 @@ policies:
       url: https://www.gdata.de/en/consumer/vpn
     - name: Internet Security (North America)
       url: https://www.gdata-software.com/internet-security
+    - name: Mobile Security Android (North America), with its checkout
+      url: https://www.gdata-software.com/mobile-security-android
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -1154,12 +1174,23 @@ policies:
       lastVerified: 2026-11-20
     - topic: billing.fees
       tier: good
-      reason: 'It charges nothing beyond the price. Paying from outside the EU, your bank’s transfer or exchange fees are yours.'
+      reason: 'Its shop charges no shipping, since you download the apps. Buying from outside the EU, any duties and your bank’s transfer or exchange fees are yours.'
       sources:
         - url: https://secure.gd/shop-terms-conditions-en
           quote: '6.2 Since the product is downloaded, no shipping costs accrue.'
         - url: https://secure.gd/shop-terms-conditions-en
           quote: 'If delivery is made to countries outside of the European Union, we may incur unreasonable additional costs, such as duties, taxes or money transfer fees (transfer or foreign exchange fees charged by the banks), which you must bear.'
+      lastVerified: 2026-11-20
+    - topic: billing.fees
+      plans: [g-data.mobile-security]
+      regions: [CA, US]
+      tier: poor
+      reason: 'In North America, buying Mobile Security adds a one-time US$4 setup fee to the first year, which every buyer pays. Its checkout lists it under "View Details".'
+      sources:
+        - url: https://www.gdata-software.com/mobile-security-android
+          quote: 'One-time Setup Fee'
+        - url: https://www.gdata-software.com/mobile-security-android
+          quote: 'US$4.00'
       lastVerified: 2026-11-20
     - topic: billing.plan-changes
       tier: neutral
@@ -1207,8 +1238,8 @@ policies:
           quote: 'This License Agreement shall terminate upon USERs breach of any term contained herein.'
       lastVerified: 2026-11-20
     - topic: legal.service-changes
-      tier: poor
-      reason: 'It took the password manager out of Total Security in September 2026, saying browsers no longer support it. Its pages don’t mention money back.'
+      tier: neutral
+      reason: 'Features can change while you subscribe: it took the password manager out of Total Security in September 2026, saying browsers no longer support it.'
       sources:
         - url: https://www.gdata.de/help-en/general/GeneralInformation/eol/
           quote: 'Feature is no longer supported: G DATA Password Manager.'
@@ -1264,13 +1295,12 @@ policies:
           quote: 'With your G DATA license, you can protect up to 10 devices.'
       lastVerified: 2026-11-20
     - topic: service.device-limits
-      tier: good
-      reason: 'Each paid device is one installation, and you can add devices in My G DATA at any time.'
-      sources:
-        - url: https://www.gdata.de/en/eula
-          quote: 'USER is not entitled to use or install the software on more PC than stated in the License Certificate.'
-        - url: https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
-          quote: 'By clicking on Edit contract , you can purchase additional products and protect additional devices.'
+      status: not-stated
+      reason: 'Its licence and help pages name no limit beyond the number of devices you pay for, and don’t say how to move a licence to another device.'
+      pages:
+        - https://www.gdata.de/en/eula
+        - https://www.gdata.de/help-en/consumer/MyGdata/myGDATAPortal/ViewContract/
+        - https://www.gdata.de/help-en/consumer/FAQ/protectAdditionalDevicesFAQ/
       lastVerified: 2026-11-20
     - topic: service.software-control
       tier: good

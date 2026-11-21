@@ -6,11 +6,14 @@
 # Pricing: emsisoft.com/en/pricing prices by where the visitor is: its own price data, in the page, names the currency
 # ("currency":"CAD" from Canada, USD, GBP, EUR, AUD or NZD elsewhere) and holds Anti-Malware Home's price for 1, 3 or 5
 # PCs and 1, 2 or 3 years; the Mobile Security page holds the same for 1 or 3 devices, a year at a time. No price is
-# struck and no page speaks of a first-term price: the store's cart says what it renews at ("This is a subscription
-# product with a fee of CAD $57.13 per year." and "a fee of CAD $100.65 per 2 years", read in Edge from Canada), and the
-# terms charge each period "at the then-current Subscription Fee". The euro countries' prices are the US dollar ones in
-# euros; the Canadian, British, Australian and New Zealand prices are the US dollar ones at a set rate (CAD 1.43, GBP
-# 0.76, AUD 1.49 and NZD 1.81 to the dollar on 2026-11-20), so they can move when Emsisoft changes its rate.
+# struck and no page speaks of a first-term price: the store's cart says what each term renews at, read in Edge from
+# Canada for 1 PC ("This is a subscription product with a fee of CAD $57.13 per year.", "This is a subscription product
+# with a fee of CAD $100.65 per 2 years" and "This is a subscription product with a fee of CAD $137.26 per 3 years"), so
+# the 2- and 3-year prices are kept: each term renews for the same length at its price (the 3- and 5-PC carts weren't
+# opened). The terms charge each period "at the then-current Subscription Fee". The euro countries' prices are the US
+# dollar ones in euros; the Canadian, British, Australian and New Zealand prices are the US dollar ones at a set rate
+# (CAD 1.43, GBP 0.76, AUD 1.49 and NZD 1.81 to the dollar on 2026-11-20), so they can move when Emsisoft changes its
+# rate.
 # Tax: Canada's cart adds it ("Includes CAD $8.56 VAT (14.975% on CAD $57.13)", added to the price for a Quebec
 # address); no page says the other countries' prices include it.
 # Region checklist for CA and US, 2026-11-20: 1. no country paths (/en/, /de/, /fr/ are languages); 2. no country picker
@@ -61,26 +64,29 @@ owner:
   lastVerified: 2026-11-20
 # Ways to pay (M11.5), read 2026-11-20 in Edge from Canada: the store's checkout (2Checkout) offers card, PayPal and,
 # under "Select other methods", bank transfer; its card choices name Visa/MasterCard, American Express, Discover and
-# UnionPay. The other countries' checkouts weren't opened.
+# UnionPay. The other countries' checkouts weren't opened, so both lists are Canada's.
 acceptedNetworks:
-  GLOBAL:
+  CA:
     networks: [visa, mastercard, amex, discover, unionpay]
     url: https://store.emsisoft.com/order/checkout.php?PRODS=4549428&QTY=1&CART=1&CARD=2&SHORT_FORM=1&CLEAN_CART=1&OPTIONS4549428=1st&HIDE_CROSS_SELLING=1
     quotes: ['Visa/MasterCard', 'American Express', 'Discover', 'UnionPay']
 paymentMethods:
   - methods: [card, paypal, bank-transfer]
+    regions: [CA]
     page: Checkout
     url: https://store.emsisoft.com/order/checkout.php?PRODS=4549428&QTY=1&CART=1&CARD=2&SHORT_FORM=1&CLEAN_CART=1&OPTIONS4549428=1st&HIDE_CROSS_SELLING=1
     quotes: ['Credit Cards', 'PayPal', 'Bank transfer']
 # Renewal day (M11.5): its pricing FAQ says a licence period "starts at the day of payment processing" and renews "when
-# the license ends", and its upgrade help that the payment day "will become your new billing and renewal date": no
-# wording core reads as a day, so not-stated.
+# the license ends", its upgrade help that the payment day "will become your new billing and renewal date", and its
+# store's terms (2Checkout's) "You will be charged for Subscriptions on the day the Subscription period renews.", while
+# the checkout says it renews "before it expires": no wording core reads as a day, so not-stated.
 renewalAnchor:
   kind: not-stated
   pages:
     - https://www.emsisoft.com/en/pricing/
     - https://www.emsisoft.com/en/terms/
     - https://www.emsisoft.com/en/help/3978/how-to-upgrade-a-license-or-add-seats/
+    - https://www.2co.com/terms.html?MOR=active
   lastVerified: 2026-11-20
 # Lab results (M11.2): AV-TEST's newest test of Emsisoft is of 2016 (Anti-Malware 12.0, its Emsisoft page), ten years
 # old, and it isn't in AV-TEST's tests of 2025 and 2026, so no rating is listed. AV-Comparatives' and SE Labs' aren't
@@ -114,7 +120,10 @@ perks:
 # network lockdown mode, Windows Firewall monitoring and hardening, Silent mode/gaming mode; not Rollback, which is
 # Enterprise's), its product page ("Behavior Blocker continuously monitors all active processes", "Real-time File
 # Guard") and help (Scheduled Scan's "Don’t start scheduled scans in Game Mode"; Quick, Malware and Custom scans). Its
-# Windows Firewall monitoring is the network feature's firewall, as Malwarebytes' Windows Firewall Control is. The
+# Windows Firewall monitoring and hardening guards Windows' own firewall, so no firewall is listed (only a provider's
+# own counts). The table marks Behavior Blocker, Anti-Ransomware, Exploit prevention, the firewall monitoring, Silent
+# mode/gaming mode and the Emergency Kit maker with a Windows logo and the rest with none; the page has no legend, so
+# the plans' notes say they appear to be Windows only, and the values stay (the plans have them on Windows). The
 # product page says it "blocks fraudulent websites and emails", but its help describes only web and browser protection
 # (Web Protection, Browser Security), so scam protection is websites only. No boot-time scan, file recovery, optimizer,
 # vulnerability scan, spam filter or secure browser on any page. Platforms: "For Windows 10 (64 bit) and higher, Mac OS
@@ -122,10 +131,12 @@ perks:
 # Mobile Security (Android), its product page and user guide: "Real time protection that blocks malicious apps as they
 # arrive" (on-install scanning) and on-demand scans, Web Protection, Scam Alert ("It monitors texts, notifications, and
 # chat messages for dangerous links"), Anti-Theft ("Remote Locate", "Remote Lock", "Remote Wipe"), Account Privacy
-# (breach monitoring of your email addresses, rechecked in the background) and App Lock. Its guide's menu also names
-# Parental Control and a VPN without saying the subscription includes them, so neither is listed. The app's licence
-# activation goes through Bitdefender (its privacy policy's subprocessors: "Bitdefender SRL", "for Emsisoft Mobile
-# Security license activation").
+# (breach monitoring of your email addresses, rechecked in the background) and App Lock. Its guide also documents
+# Parental Control (a parent's and a child's app: screen time, content filtering) and a VPN (server locations) in
+# sections of their own, but no page read says the subscription includes them or what they cost, so neither is listed
+# and the plans' notes say so; the app's own "Subscription Agreement", which the guide names, wasn't read. The app's
+# licence activation goes through Bitdefender (its privacy policy's subprocessors: "Bitdefender SRL", "for Emsisoft
+# Mobile Security license activation").
 plans:
   - id: emsisoft.anti-malware-home
     name: Anti-Malware Home (1 PC)
@@ -140,10 +151,9 @@ plans:
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall]
       antivirus.activity-modes: true
     perks: [exploit-prevention, emergency-kit-maker, network-lockdown]
-    notes: 'For 1 Windows PC or Mac, bought for 1, 2 or 3 years. When a licence ends, the Windows app falls back to a free scanner without real-time protection.'
+    notes: 'For 1 Windows PC or Mac, bought for 1, 2 or 3 years. When a licence ends, the Windows app falls back to a free scanner without real-time protection. Its comparison table marks the Behavior Blocker, Anti-Ransomware, Exploit prevention, Windows Firewall monitoring and hardening, Silent mode/gaming mode and the Emergency Kit maker with a Windows logo, so they appear to be for Windows only.'
     prices:
       - region: CA
         currency: CAD
@@ -422,10 +432,9 @@ plans:
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall]
       antivirus.activity-modes: true
     perks: [exploit-prevention, emergency-kit-maker, network-lockdown]
-    notes: 'For 3 Windows PCs or Macs, bought for 1, 2 or 3 years.'
+    notes: 'For 3 Windows PCs or Macs, bought for 1, 2 or 3 years. Its comparison table marks the Behavior Blocker, Anti-Ransomware, Exploit prevention, Windows Firewall monitoring and hardening, Silent mode/gaming mode and the Emergency Kit maker with a Windows logo, so they appear to be for Windows only.'
     prices:
       - region: CA
         currency: CAD
@@ -704,10 +713,9 @@ plans:
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall]
       antivirus.activity-modes: true
     perks: [exploit-prevention, emergency-kit-maker, network-lockdown]
-    notes: 'For 5 Windows PCs or Macs, bought for 1, 2 or 3 years.'
+    notes: 'For 5 Windows PCs or Macs, bought for 1, 2 or 3 years. Its comparison table marks the Behavior Blocker, Anti-Ransomware, Exploit prevention, Windows Firewall monitoring and hardening, Silent mode/gaming mode and the Emergency Kit maker with a Windows logo, so they appear to be for Windows only.'
     prices:
       - region: CA
         currency: CAD
@@ -987,7 +995,7 @@ plans:
       antivirus.anti-theft: [locate, lock, wipe]
       security.dark-web-monitoring: true
     perks: [app-lock]
-    notes: 'For 1 Android phone or tablet, a year at a time. Its page offers 1 or 3 devices.'
+    notes: 'For 1 Android phone or tablet, a year at a time. Its page offers 1 or 3 devices. Its user guide also describes a VPN and parental controls, but no page says the subscription includes them.'
     prices:
       - region: CA
         currency: CAD
@@ -1091,7 +1099,7 @@ plans:
       antivirus.anti-theft: [locate, lock, wipe]
       security.dark-web-monitoring: true
     perks: [app-lock]
-    notes: 'For 3 Android phones or tablets, a year at a time.'
+    notes: 'For 3 Android phones or tablets, a year at a time. Its user guide also describes a VPN and parental controls, but no page says the subscription includes them.'
     prices:
       - region: CA
         currency: CAD
@@ -1207,13 +1215,21 @@ plans:
         sourceUrl: https://www.emsisoft.com/en/help/1702/getting-started/
 
 # Terms and policies (BLUEPRINT §4.10), read 2026-11-20 with a plain fetch: its Terms of Service (last updated July 10,
-# 2025: they cover "Emsisoft’s software products and online platform", and the store's checkout says "By placing this
-# order you agree to the Terms and Conditions and auto-renewal"), its End User License Agreement (the installer's
+# 2025: they cover "Emsisoft’s software products and online platform"), its End User License Agreement (the installer's
 # licence), its Privacy Policy (last updated March 4, 2024, with its transparency report and "You might ask…" answers),
-# its Cookie Policy, the pricing page's FAQ, the help centre's licensing and billing articles and its vulnerability
-# report page. Read for no topic: its legal notice (the owner's address) and its Data Processing Agreement (for
-# business customers). Not read: 2Checkout's own terms, refund policy and privacy policy (the store's reseller), and
-# Bitdefender's terms for the Mobile Security app's licence activation. No shared document applies.
+# its Cookie Policy, the pricing page's FAQ (its "full refund for any unwanted transactions within 30 days" is broader
+# than the terms, which win), the help centre's licensing and billing articles and its vulnerability report page.
+# The store's checkout says "By placing this order you agree to the Terms and Conditions and auto-renewal", and its
+# links are 2Checkout's, the store's reseller and merchant of record: its Shopper Terms and Conditions (last updated 10
+# March 2025; read 2026-11-20 through a Canada exit, as its site refused this machine's own connection after one read in
+# Edge) and its Refund Policy (read in Edge from Canada). They grade refunds (with Germany's prorated refund), renewal
+# reminders and fees; their disputes clause (your own courts, outside the US), changes to the terms (advance notice of
+# significant ones), closing an account (written notice) and price changes (notice before a subscription's amount
+# changes) are kinder than Emsisoft's own terms, which keep those grades. Read for no topic: its legal notice (the
+# owner's address), its Data Processing Agreement (for business customers) and 2Checkout's right-of-withdrawal page (its
+# terms' section 8). Not read: 2Checkout's privacy notice (only its overview showed, the rest folded), Bitdefender's
+# terms for the Mobile Security app's licence activation, and the app's own Subscription Agreement (shown in the app).
+# No shared document applies.
 policies:
   links:
     - name: Terms of Service
@@ -1224,8 +1240,6 @@ policies:
       url: https://www.emsisoft.com/en/privacy/
     - name: Cookie policy
       url: https://www.emsisoft.com/en/cookie-policy/
-    - name: Pricing FAQ
-      url: https://www.emsisoft.com/en/pricing/
     - name: Cancelling auto-renewal
       url: https://www.emsisoft.com/en/help/3984/how-do-i-cancel-the-auto-renewal/
     - name: Deleting your account
@@ -1236,6 +1250,10 @@ policies:
       url: https://www.emsisoft.com/en/help/1651/update-settings/
     - name: Vulnerability report
       url: https://www.emsisoft.com/en/help/1760/vulnerability-report-en/
+    - name: Store terms (2Checkout)
+      url: https://www.2co.com/terms.html?MOR=active
+    - name: Store refund policy (2Checkout)
+      url: https://www.2co.com/refund.html?MOR=active
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -1338,13 +1356,23 @@ policies:
           quote: 'Please note that cancelling the auto-renewal will leave your protection active until its expiry date.'
       lastVerified: 2026-11-20
     - topic: billing.refunds
-      tier: good
-      reason: 'You get all your money back within 30 days of buying. Its pricing page promises the same for any charge you didn’t want, renewals included; its terms speak only of new subscriptions.'
+      tier: neutral
+      reason: 'You get all your money back if you cancel within 30 days of first buying. After that, cancelling stops the next renewal but gives no money back, and its store (2Checkout) decides other refunds case by case.'
       sources:
-        - url: https://www.emsisoft.com/en/pricing/
-          quote: 'We’re certainly not interested in charging any money if you don’t want to use our products and always offer a full refund for any unwanted transactions within 30 days.'
         - url: https://www.emsisoft.com/en/terms/
           quote: 'You can cancel a new subscription within 30 days from the initial transaction date and you receive a full refund.'
+        - url: https://www.emsisoft.com/en/terms/
+          quote: 'If you cancel, your right to use the Services will continue until the end of your then-current subscription period and will then terminate without further charges; however, you will not receive a refund for any unused Services.'
+        - url: https://www.2co.com/refund.html?MOR=active
+          quote: "Refunds are provided at 2Checkout's sole discretion on a case-by-case basis and may not be approved, including if there is evidence of fraud, abuse, or other wrongful behavior."
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      regions: [DE]
+      tier: great
+      reason: 'In Germany, its store (2Checkout) lets you cancel a renewed plan at any time with a month’s notice and gives back what you paid for the time left.'
+      sources:
+        - url: https://www.2co.com/terms.html?MOR=active
+          quote: "If you are a Consumer in Germany, where any Subscription renewal term is for a period which is longer than one month (for example, an annual subscription), you will be entitled to cancel your Subscription during any such renewal term at any time on one month's notice and will be eligible to receive a prorated refund from us for an amount which is in proportion to what is provided until the date on which your cancellation becomes effective."
       lastVerified: 2026-11-20
     - topic: billing.price-changes
       tier: good
@@ -1363,19 +1391,24 @@ policies:
           quote: 'Emsisoft may provide portions of the additional Subscription Services without payment for a trial period, but the ability to access those Services will be terminated at the end of the trial period.'
       lastVerified: 2026-11-20
     - topic: billing.renewal-notice
-      status: not-stated
-      reason: 'Its terms, pricing page and help don’t say it reminds you before renewing.'
-      pages:
-        - https://www.emsisoft.com/en/terms/
-        - https://www.emsisoft.com/en/pricing/
-        - https://www.emsisoft.com/en/help/3984/how-do-i-cancel-the-auto-renewal/
+      tier: good
+      reason: 'Its store (2Checkout) emails you before every renewal: at least 15 days ahead, and again at least 5 working days ahead.'
+      sources:
+        - url: https://www.2co.com/terms.html?MOR=active
+          quote: 'Where you are a Consumer, we will send you a reminder notice by email ("Reminder Notice") relating to any Subscription at the following intervals:'
+        - url: https://www.2co.com/terms.html?MOR=active
+          quote: '(c) where renewal payments are made less frequently than six monthly (to the extent permitted under applicable law), at a reasonable time (but in any event no less than 5 working days) prior to the date each renewal payment becomes due.'
+        - url: https://www.2co.com/terms.html?MOR=active
+          quote: 'Where renewal payments are made every 12 months or less frequently (to the extent permitted under applicable law), we will send you at least one additional reminder notice by email at an earlier, reasonable time (but in any event no less than 15 days) prior to the date each renewal payment becomes due.'
       lastVerified: 2026-11-20
     - topic: billing.fees
-      status: not-stated
-      reason: 'Its terms and store name no fees beyond the price and taxes.'
-      pages:
-        - https://www.emsisoft.com/en/terms/
-        - https://www.emsisoft.com/en/pricing/
+      tier: neutral
+      reason: 'You pay the price and tax, unless a renewal payment fails for a reason that’s yours: then its store (2Checkout) may charge fees the law allows. A refund of a bank transfer costs you its fees.'
+      sources:
+        - url: https://www.2co.com/terms.html?MOR=active
+          quote: 'We reserve the right to cancel your Subscription and to collect any fees permitted by applicable law, if we are unable to successfully charge your payment method to renew your Subscription.'
+        - url: https://www.2co.com/refund.html?MOR=active
+          quote: 'Wire transfer and check payments: within 7 business days and you will be responsible for any fees or costs incurred in connection with such refund;'
       lastVerified: 2026-11-20
     - topic: billing.plan-changes
       tier: great

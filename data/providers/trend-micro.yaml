@@ -1,15 +1,18 @@
 # Researched by hand on 2026-11-20 (M11.15, security batch 2), read from Canada with Edge and a plain fetch: each
 # country's trendmicro.com home pages (/en_ca/, /en_us/, /en_gb/, /en_ie/, /de_de/, /fr_fr/, /en_nl/, /es_es/, /it_it/,
 # /en_au/, /en_nz/), which price in their own currency whoever reads them (their price data names it: "CAD", "USD",
-# "GBP", "EUR", "AUD", "NZD"); its checkout (checkout.trendmicro.com) and auto-renewal terms in Edge; its help centre
-# (helpcenter.trendmicro.com, which also answers as helpcenter.trendlife.com), consumer terms, privacy notices, trust
-# centre and investor pages with a plain fetch; AV-TEST's page. TrendLife is Trend Micro's consumer brand. Pages, each
-# quoted where it's used:
+# "GBP", "EUR", "AUD", "NZD", in data-price-currency or the buy link's "currency=", while Canada's, the US's,
+# Australia's and New Zealand's visible text shows a bare "$"; each priced page's HTML is saved with its price data,
+# Europe's and, by a second plain fetch the same day, Canada's, the US's, Australia's and New Zealand's); its checkout
+# (checkout.trendmicro.com) and auto-renewal terms in Edge; its help centre (helpcenter.trendmicro.com, which also
+# answers as helpcenter.trendlife.com), consumer terms, privacy notices, trust centre and investor pages with a plain
+# fetch; AV-TEST's page. TrendLife is Trend Micro's consumer brand. Pages, each quoted where it's used:
 # Pricing: each product page holds its store's price data for each term and device count, with a sales price, a
 # "renewal" price and a list price (data-price-renewal-price, data-price-msrp; Australia's and New Zealand's Maximum
 # Security, a regular and a sales price). "The introductory purchase price today is valid for the first term of your new
 # subscription. Your subscription renews each year at the then-current subscription renewal price." (every product page),
-# so the renewal price is stored (Canada's and the US's Internet Security renew at 81.95, below its 83.95 list price).
+# so the renewal price is stored (Canada's and the US's Internet Security renew at 81.95 in the price data,
+# data-price-renewal-price="81.95", below its 83.95 list price, the only figure their visible text shows).
 # The 2-year terms renew yearly ("12 month renewal terms if you have a 12, 24 or 36 month subscription", its
 # auto-renewal terms; "your subscription will automatically renew for a 1-year term", its consumer terms): first terms,
 # so only yearly prices are stored (Norton's precedent). No page sells monthly billing. No price includes tax: "Prices
@@ -55,9 +58,11 @@
 # Coverage: trend-micro.personal-protection-suite-4-devices in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New
 # Zealand's plan.
 # Coverage: trend-micro.id-protection in GB, IE, DE, FR, NL, ES and IT: their menus list no ID Protection.
-# Coverage: trend-micro.id-protection-plus in CA, GB, IE, DE, FR, NL, ES, IT, AU and NZ: priced on the US's page only
-# (Canada's page repeats the US's table in a bare "$", with insurance "for U.S. CUSTOMERS ONLY", and Plus is bought in
-# its app; Australia's page lists Standard only).
+# Coverage: trend-micro.id-protection-plus in CA: listed (its soldIn), priced in a bare "$" copied from the US page:
+# Canada's page repeats the US's "Pick your plan" table ("$69.99 / year", "$129.99"), with insurance "for U.S.
+# CUSTOMERS ONLY", and its price data holds Standard's CAD price only (Plus is bought in its app), read 2026-11-20.
+# Coverage: trend-micro.id-protection-plus in GB, IE, DE, FR, NL, ES, IT, AU and NZ: their menus list no ID Protection,
+# and Australia's and New Zealand's pages list Standard only.
 # Coverage: trend-micro.vpn and trend-micro.vpn-5-devices in GB, IE, DE, FR, NL, ES, IT, AU and NZ: the UK's and the euro
 # countries' VPN pages show only "Free Download", no price; Australia and New Zealand sell trend-micro.vpn-2-devices.
 # Coverage: trend-micro.vpn-2-devices in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New Zealand's plan.
@@ -229,7 +234,10 @@ perks:
 #   Scanner", "Data Theft Prevention", "Secure Erase", "PC Health Checkup" and "Parental Controls" (time and content
 #   limits: "Allow children to explore the web safely, with both time and content limits."). Scans: its data collection
 #   notices list "Manual Scan", "Scheduled Scan" and "Real-time Scan" for every Windows app (Antivirus+'s too, TMKA-20179).
-#   No ransomware file recovery, cryptomining, vulnerability-scan or anti-theft wording on any page.
+#   No ransomware file recovery, cryptomining, vulnerability-scan or anti-theft wording on any page. "Windows Firewall
+#   Booster" is, as its name says, a helper for Windows' own firewall; no page names a firewall of Trend Micro's own, so
+#   antivirus.network has only the Wi-Fi check (the catalog's rule since 2026-11-20: a firewall only where the provider
+#   has its own).
 # - Behaviour-based detection: no page names it; inferred from its pages' "proactive protection" against
 #   "never-before-seen attacks" and its notices' "Active Monitoring".
 # - Password manager: "Password Manager is no longer supported as of November 16, 2025" (TMKA-12258); its suites manage
@@ -260,7 +268,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -350,7 +358,9 @@ plans:
         lastVerified: 2026-11-20
         sourceUrl: https://www.trendmicro.com/it_it/forHome/products/antivirus-plus.html
   # Internet Security: "Up to 3 Windows PCs ONLY" (TMKA-19015; its cards also say Mac and Chromebook, the help centre's
-  # table, which names the platform, decides), with parental controls, PC Health Checkup and Secure Erase.
+  # table, which names the platform, decides), with parental controls, PC Health Checkup and Secure Erase. Canada's and
+  # the US's price is the 1-year term's data-price-renewal-price="81.95" in each page's HTML (saved with the page's text);
+  # their visible text shows only the struck list price, "$83.95", and the first-year "$59.95".
   - id: trend-micro.internet-security
     name: 'Internet Security'
     link: https://www.trendmicro.com/en_ca/forHome/products/internet-security.html
@@ -363,7 +373,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -382,7 +392,7 @@ plans:
           name: Trend Micro Maximum Security Data Collection Notice
           url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20115
         lastVerified: 2026-11-20
-    notes: 'For up to 3 Windows PCs. Canada’s and the US’s renewal price (81.95) is below the struck-through list price (83.95). Its 2-year term renews yearly.'
+    notes: 'For up to 3 Windows PCs. Canada’s and the US’s renewal price (81.95, in the page’s price data) is below the struck-through list price (83.95), the only figure the page shows. Its 2-year term renews yearly.'
     prices:
       - region: CA
         currency: CAD
@@ -474,7 +484,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -534,7 +544,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -634,7 +644,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -703,7 +713,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -774,7 +784,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -1011,7 +1021,10 @@ plans:
         lastVerified: 2026-11-20
         sourceUrl: https://www.trendmicro.com/en_nz/forHome/products/id-protection.html
   # ID Protection Plus: the US page's "Pick your plan" table ("$69.99 / year" first, "$129.99" regular), bought in its app;
-  # its insurance is for US customers only.
+  # its insurance is for US customers only ("Up to $1 Million Identity Fraud Insurance is available for U.S. CUSTOMERS
+  # ONLY."). Canada's page lists it in the same table, in a bare "$" copied from the US page, so it's sold in Canada
+  # (soldIn) with no Canadian price (the Coverage note); there it has no insurance, which its features can't say by
+  # country, so the notes do.
   - id: trend-micro.id-protection-plus
     name: 'ID Protection Plus'
     link: https://www.trendmicro.com/en_us/forHome/products/id-protection.html
@@ -1031,7 +1044,14 @@ plans:
       security.identity-restoration: true
       security.identity-theft-insurance: 1
     perks: [social-media-monitoring, web-threat-protection, credit-freeze, lost-wallet]
-    notes: 'Standard’s features, plus 24/7 identity theft resolution specialists, credit freeze and lost wallet help, and up to $1 million of identity fraud insurance. Bought in its app; the price is its US page’s regular price.'
+    notes: 'Standard’s features, plus 24/7 identity theft resolution specialists, credit freeze and lost wallet help, and up to $1 million of identity fraud insurance for US customers only (none in Canada). Bought in its app; the price is its US page’s regular price. Canada’s page lists it with no Canadian price.'
+    soldIn:
+      - regions: [CA]
+        url: https://www.trendmicro.com/en_ca/forHome/products/id-protection.html
+        quotes:
+          - 'Plus $69.99 / year $129.99 (Save $60)'
+          - 'Up to $1 Million Identity Fraud Insurance is available for U.S. CUSTOMERS ONLY.'
+        lastVerified: 2026-11-20
     prices:
       - region: US
         currency: USD
@@ -1185,7 +1205,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -1235,7 +1255,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -1293,7 +1313,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -1360,7 +1380,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -1427,7 +1447,7 @@ plans:
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall, wifi-check]
+      antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.anti-spam: true
       antivirus.activity-modes: true
@@ -1563,15 +1583,18 @@ policies:
           trend-micro.security-suite-pro-plus,
           trend-micro.security-suite-ultimate,
         ]
-      tier: bad
-      reason: 'Its VPN app sends your location, device details and logs to it, partly for marketing, and you can’t turn that off: it says to uninstall the app if you don’t want it.'
+      tier: poor
+      reason: 'Its VPN app sends your location, device details and logs to it, partly for marketing, and you can’t turn that off short of uninstalling it. You can turn off sharing usage and crash data in its settings.'
       sources:
-        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
-          quote: 'Trend Micro VPN also uses this data to improve product stability, usability, and performance.'
         - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
           quote: 'The following marketing activities are based on this data:'
         - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
           quote: 'This feature cannot be disabled. If you do not want this data to be collected, please uninstall the application from your device.'
+        - url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
+          quote: 'You can disable any of these features at any time to prevent the corresponding data from being sent to Trend Micro.'
+      action:
+        name: 'What its VPN collects, and which settings stop it'
+        url: https://helpcenter.trendmicro.com/en-us/article/TMKA-20103
       lastVerified: 2026-11-20
     - topic: privacy.data-sharing
       tier: poor
@@ -1728,11 +1751,13 @@ policies:
           quote: 'Your trial licence expires automatically at the end of the trial period.'
       lastVerified: 2026-11-20
     - topic: billing.renewal-notice
-      tier: great
-      reason: 'It emails you at least 28 days before every renewal, with the price and how to cancel. It sells only yearly plans.'
+      tier: good
+      reason: 'It emails you at least 28 days before a renewal, with the price and how to cancel. Its checkout’s renewal terms say monthly subscriptions get no reminder.'
       sources:
         - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
           quote: "We'll always send you a reminder email at least 28 days before your renewal, clearly showing the renewal price, duration and your cancellation options."
+        - url: https://checkout.trendmicro.com/legal/terms.html
+          quote: 'Please note that monthly subscriptions will not receive a reminder email.'
       lastVerified: 2026-11-20
     - topic: billing.fees
       status: not-stated
@@ -1779,13 +1804,15 @@ policies:
           quote: "If you don't agree with the changes, you can cancel your subscription before they take effect and receive a pro-rata refund for any unused prepaid fees."
       lastVerified: 2026-11-20
     - topic: legal.account-closure
-      tier: neutral
-      reason: 'It can cut you off for a serious breach of its terms: with 20 days to fix it when it can be fixed, at once when not. It promises no refund then.'
+      tier: good
+      reason: 'It can cut you off only for a serious breach of its terms, a missed payment or a security risk. When the breach can be fixed, it tells you in writing and gives you 20 days first, and you can appeal.'
       sources:
         - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
           quote: "Where the breach can be fixed, we'll give you written notice and 20 days to fix it before cancelling."
         - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
-          quote: 'Where the breach cannot be fixed, for example, reverse-engineering, copying or reselling the product, or other misuse of our intellectual property, we may cancel immediately.'
+          quote: 'We may also act immediately, without a cure period, if you fail to make a renewal payment or you pose a security risk to the product or to others.'
+        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
+          quote: 'You have the right to appeal any cancellation by contacting your local Trend office.'
       lastVerified: 2026-11-20
     - topic: legal.service-changes
       tier: good
@@ -1854,11 +1881,9 @@ policies:
         - https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
       lastVerified: 2026-11-20
     - topic: service.software-control
-      tier: poor
-      reason: 'Its apps update themselves, and its online services can be upgraded in ways you can’t put off or refuse.'
+      tier: good
+      reason: 'Its apps update themselves to keep your protection current, which its terms say you agree to. Its terms describe no other changes to your device.'
       sources:
         - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
           quote: 'For installed software, you agree to allow these updates to install automatically so your protection stays current.'
-        - url: https://www.trendmicro.com/content/dam/trendmicro/global/en/core/docs/trust-center/agreements/en-english-mulitcountry-consumer-eula.pdf
-          quote: 'For cloud-based products, upgrades are deployed at our discretion and you may not be able to delay or decline them.'
       lastVerified: 2026-11-20

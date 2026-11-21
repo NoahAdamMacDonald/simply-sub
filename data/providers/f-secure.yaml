@@ -5,23 +5,30 @@
 # Pricing: each site's product pages (/total, /internet-security, /vpn, /id-protection, /total/scam-protection), whose buy
 # blocks show 1, 3 and 5 devices for 1 year and 2 years (the 2 years tab's prices are in the served page). "F-Secure
 # honest pricing": "New or renew, the price is the same. No pricing games: your renewal price is the same as what any new
-# customer pays." (its tooltip on every card), so the prices shown are the regular ones. The 2-year term renews for 2
-# years at the same price (Canada's checkout: "This is a subscription order with a fee of €124.99 per 24 months.",
-# "This subscription renews automatically at the price and frequency shown in the cart above."), so both periods are
-# stored. Scam Protection is monthly only ("Scam Protection is currently only available as a monthly subscription.").
+# customer pays." (its tooltip on every Total card), so the prices shown are the regular ones. The 2-year term renews for
+# 2 years at the same price, so both periods are stored: each product's 2-year cart says so (read from Canada: Total's
+# "This is a subscription order with a fee of €124.99 per 24 months.", Internet Security's and the VPN's "a fee of €89.99
+# per 24 months", each with "This subscription renews automatically at the price and frequency shown in the cart
+# above."). Scam Protection is monthly only ("Scam Protection is currently only available as a monthly subscription.").
 # Which country: the US and UK sites price in USD and GBP; the global site, which a Canadian reader gets, prices in euros
 # ("country":"global"), and the German, French, Italian, Dutch and Spanish sites show the same euro prices. Canada's
 # checkout (read from Quebec) charged the euro price plus GST and QST, so the euro prices are GLOBAL, for Canada too; that
 # checkout also lets the buyer pick Canadian dollars at a converted amount (CA$196.26 for €124.99), not a price list of
 # its own (currencies, below). Its user guide's "Where can I buy F-Secure Total?" lists Canada, Australia and New Zealand.
-# Tax: the UK's Internet Security, VPN, ID Protection and Scam Protection pages say "*All prices include VAT." (taxIncluded
-# on those UK prices); the US pages carry the same words, which aren't US sales tax, and the Total pages don't say it.
+# Tax: the Internet Security, VPN, ID Protection and Scam Protection pages of all three sites say "*All prices include
+# VAT.". The UK's prices have taxIncluded. The global site's euro prices include VAT for buyers in the euro countries,
+# but they're GLOBAL, for Canada too, whose checkout adds tax to them ("QST (9.975% on €124.99):", "GST (5% on
+# €124.99):"), so they have none (taxIncluded would stop tax being added in Canada); euro prices of their own would need
+# the German, French, Italian, Dutch and Spanish pages saved. The US pages' words aren't US sales tax. The Total pages
+# don't say it, so the UK's Total prices have no taxIncluded.
 # Region checklist for CA and US, 2026-11-20: 1. its hreflang links name en-US and en-GB sites only (no Canadian one); 2.
 # no country picker beyond its site list ("Global" for Canada); 3. its page data names the site's country ("country":
 # "global", "us"); 4. the checkout, up to the payment form, named Quebec, Canada, euros and GST/QST; 5. its knowledge base
 # (payments, renewals, refunds); 6. Edge and a plain fetch; 7. no bill offered.
 # Not drafted: its 2-, 7-, 10-, 15-, 20- and 25-device options ("Show all options"), ID Protection's 3- and 5-device
-# options (their only difference is how many of each item it watches: in the plan's notes), Kiren by F-Secure (its
+# options (their only difference is how many of each item it watches: their prices are in the plan's notes, read in Edge
+# from each site's device tabs, where the UK's tabs read "5 devices" and "10 devices" but its cards say "3 devices | 1
+# year" and "5 devices | 1 year"), Kiren by F-Secure (its
 # mobile app, formerly F-Secure Mobile Security, sold in the app stores with no price on kiren.com), F-Secure Anti-Virus
 # and the old Internet Security (no longer sold: "purchased before February 14th, 2023"), and its free tools (Identity
 # Theft Checker, Link Checker, Online Shopping Checker, Deepfake Detector, IP checker).
@@ -150,10 +157,14 @@ ratings:
 # chatbot." "Availability: 24/7" "Language: English" (its support page) and its Help Forum (community.f-secure.com).
 # App languages: "You can choose the product language from more than 20 supported languages." with its FAQ's list
 # (English, français, Deutsch, italiano, español, português, 日本語, 繁體中文 (香港) among them; no Korean, Hindi or Arabic).
-# No pause. Parental controls: its Windows guide's Family Protection (content filtering) "is not available in all versions
-# of the app", its privacy notice ties parental controls to versions "enabled by your service provider partner", and no
-# plan page lists them, so none of these plans has them.
+# No pause. Parental controls: its user guide, which "applies to the following F-Secure subscriptions: F-Secure Total,
+# F-Secure Internet Security", has Family Protection's content filtering for a child (Strict, Moderate or Basic profiles
+# over 16 content categories, per Windows user account), with "Note: This feature is not available in all versions of the
+# app."; its privacy notice ties restricting online content to versions "enabled by your service provider partner", and
+# no plan page lists it. So Total and Internet Security have content filtering, inferred (no screen time, location or
+# reports on any page).
 features:
+  platforms: [windows, macos, android, ios]
   account.sign-in: [password, totp]
   support.channels: [chat, community, 24-7]
   languages.interface: [en, fr, de, it, es, pt, ja, zh]
@@ -210,6 +221,8 @@ plans:
       antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.activity-modes: true
+      parental-control: [content-filtering]
+      account.parental-controls: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -240,6 +253,18 @@ plans:
         page:
           name: Allowing blocked applications (Total for Windows guide)
           url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+      parental-control:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
+        lastVerified: 2026-11-20
+      account.parental-controls:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
         lastVerified: 2026-11-20
     notes: 'Antivirus, scam protection, VPN, password vault and ID monitoring for 1 device (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
     prices:
@@ -307,6 +332,8 @@ plans:
       antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.activity-modes: true
+      parental-control: [content-filtering]
+      account.parental-controls: true
       vpn.included: true
       vpn.devices: 3
       vpn.unlimited-traffic: true
@@ -337,6 +364,18 @@ plans:
         page:
           name: Allowing blocked applications (Total for Windows guide)
           url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+      parental-control:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
+        lastVerified: 2026-11-20
+      account.parental-controls:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
         lastVerified: 2026-11-20
     notes: 'Antivirus, scam protection, VPN, password vault and ID monitoring for 3 devices (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
     prices:
@@ -404,6 +443,8 @@ plans:
       antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.activity-modes: true
+      parental-control: [content-filtering]
+      account.parental-controls: true
       vpn.included: true
       vpn.devices: 5
       vpn.unlimited-traffic: true
@@ -434,6 +475,18 @@ plans:
         page:
           name: Allowing blocked applications (Total for Windows guide)
           url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+      parental-control:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
+        lastVerified: 2026-11-20
+      account.parental-controls:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
         lastVerified: 2026-11-20
     notes: 'Antivirus, scam protection, VPN, password vault and ID monitoring for 5 devices (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
     prices:
@@ -500,6 +553,8 @@ plans:
       antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.activity-modes: true
+      parental-control: [content-filtering]
+      account.parental-controls: true
     perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor]
     featureLabels:
       antivirus.secure-browser: Banking Protection
@@ -509,6 +564,18 @@ plans:
         page:
           name: Allowing blocked applications (Total for Windows guide)
           url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+      parental-control:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
+        lastVerified: 2026-11-20
+      account.parental-controls:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
         lastVerified: 2026-11-20
     notes: 'Antivirus with scam, browsing and banking protection for 1 device (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
     prices:
@@ -579,6 +646,8 @@ plans:
       antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.activity-modes: true
+      parental-control: [content-filtering]
+      account.parental-controls: true
     perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor]
     featureLabels:
       antivirus.secure-browser: Banking Protection
@@ -588,6 +657,18 @@ plans:
         page:
           name: Allowing blocked applications (Total for Windows guide)
           url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+      parental-control:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
+        lastVerified: 2026-11-20
+      account.parental-controls:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
         lastVerified: 2026-11-20
     notes: 'Antivirus with scam, browsing and banking protection for 3 devices (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
     prices:
@@ -658,6 +739,8 @@ plans:
       antivirus.network: [wifi-check]
       antivirus.secure-browser: true
       antivirus.activity-modes: true
+      parental-control: [content-filtering]
+      account.parental-controls: true
     perks: [scam-scanner, ad-blocker, cookie-popup-blocker, privacy-advisor]
     featureLabels:
       antivirus.secure-browser: Banking Protection
@@ -667,6 +750,18 @@ plans:
         page:
           name: Allowing blocked applications (Total for Windows guide)
           url: https://help.f-secure.com/product.html#home/total-windows/latest/en/allow_program_on_sys_control_blocklist_to_run-latest-en
+        lastVerified: 2026-11-20
+      parental-control:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
+        lastVerified: 2026-11-20
+      account.parental-controls:
+        reason: 'Its plan pages don’t list it. Its user guide for Total and Internet Security describes Family Protection’s content filtering for children, but notes "This feature is not available in all versions of the app."'
+        page:
+          name: Restricting online content for your children (Total for Windows guide)
+          url: https://help.f-secure.com/product.html#home/total-windows/latest/en/restricting_online_content_for_your_children-latest-en
         lastVerified: 2026-11-20
     notes: 'Antivirus with scam, browsing and banking protection for 5 devices (Windows, Mac, Android or iOS). Its shop also sells 2, 7, 10, 15, 20 and 25 devices. Prices are the same when you renew.'
     prices:
@@ -1218,8 +1313,8 @@ policies:
           quote: 'However, F-Secure products purchased through third party (e.g. resellers, retailers, vendors, services, etc.) such as Apple AppStore, are not eligible for this 30-day money-back guarantee from F-Secure.'
       lastVerified: 2026-11-20
     - topic: billing.price-changes
-      tier: neutral
-      reason: 'Renewing costs what a new customer pays, and its shop says your subscription renews at the price shown when you bought. It doesn’t say how much notice you’d get of a price rise.'
+      tier: poor
+      reason: 'Renewing costs what a new customer pays at the time. Its shop says you renew at the price shown in your cart, but no page promises to tell you before the price goes up.'
       sources:
         - url: https://www.f-secure.com/us-en/total
           quote: 'New or renew, the price is the same. No pricing games: your renewal price is the same as what any new customer pays.'
@@ -1285,26 +1380,12 @@ policies:
       lastVerified: 2026-11-20
     - topic: legal.terms-changes
       tier: neutral
-      reason: 'When its licence changes, its app asks you to accept the new version before you can keep updating. It doesn’t say how far ahead it tells you.'
+      reason: 'When its licence changes, its app asks you to accept the new version before you can keep updating, without saying how far ahead. Its VPN’s list of banned uses may also change from time to time.'
       sources:
         - url: https://www.f-secure.com/en/legal/terms
           quote: 'As the Software is likely to evolve during your subscription, F‑Secure may need to revise these Terms in connection with updates and the revised Terms shall upon acceptance apply to the corresponding versions of the Software.'
         - url: https://www.f-secure.com/en/legal/terms
           quote: 'The use of the Software with updates is not possible without accepting the updated Terms when required.'
-      lastVerified: 2026-11-20
-    - topic: legal.terms-changes
-      plans:
-        [
-          f-secure.total,
-          f-secure.total-1-device,
-          f-secure.total-5-devices,
-          f-secure.vpn,
-          f-secure.vpn-1-device,
-          f-secure.vpn-5-devices,
-        ]
-      tier: bad
-      reason: 'Its VPN rules say they’ll be changed from time to time, and don’t say you’ll be told first.'
-      sources:
         - url: https://www.f-secure.com/en/legal/terms/vpn
           quote: 'We will change and adjust the above from time to time based on new features and to keep the service clean.'
       lastVerified: 2026-11-20

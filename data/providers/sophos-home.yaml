@@ -10,9 +10,16 @@
 # for a year, "After 12 months, you will be renewed for a fee of CA$ 68.97" (CA$ 59.99 with Quebec's taxes) or "a fee of
 # $59.99" from the US; its help: "Pricing for a yearly Sophos Home Premium subscription is $59.99 (MSRP)". The base
 # prices are stored. The euro countries' carts show the same prices (€49.95, €89.95, €114.95); France's first exit met a
-# Cloudflare check, its second read the cart.
-# Tax: Canada's cart adds GST and QST ("Subtotal:", "GST (", "5%"); no page read says the other prices include tax in
-# words core reads, so no taxIncluded.
+# Cloudflare check, its second read the cart. The 2- and 3-year prices are kept as terms that renew as themselves: the
+# store's footnote under all three options, "*Your subscription will automatically renew at the pre-discount base price
+# (including taxes where applicable).", and the terms' "Your subscription to the Services will be automatically renewed
+# (subject to applicable law) for another subscription period of equal length" (3.3). The one renewal line read with an
+# amount is the 1-year's.
+# Tax: Canada's cart adds GST and QST ("Subtotal:", "GST (", "5%"). The euro countries' totals include VAT: Germany's
+# 1-year cart totals €37.46 (€49.95 less the 25% offer), "Includes €5.99 VAT ( 19% on €31.47 ).", and the
+# Netherlands' the same total, "Includes €6.50 VAT ( 21% on €30.96 )." Those words put the amount between "Includes"
+# and "VAT", which core's tax wording doesn't read, and no other page read says it, so no price has taxIncluded. The
+# UK's, Ireland's, France's, Spain's, Italy's, Australia's and New Zealand's totals weren't saved.
 # Region checklist for CA and US, 2026-11-20: 1. home.sophos.com/en-us is the only English path (no /en-ca/); 2. the
 # store's currency menu converts; 3. the store's prices name the currency (CA$, $ from a US exit); 4. the store's cart,
 # up to the payment form; 5. the help centre's pricing line ($59.99 MSRP); 6. Edge from Canada and through a US exit;
@@ -47,15 +54,19 @@ billingCurrency:
 # lookup tool) and where to see whether a subscription renews.
 cancelUrl: https://support.home.sophos.com/hc/en-us/articles/25899202064276-How-do-I-renew-my-Sophos-Home-subscription
 sources: { pricing: https://buy.home.sophos.com/1461/purl-homepremium }
-# Owner (M11.2), read 2026-11-20: its consumer terms name the company that offers it (rule 3), Sophos Limited, a private
-# company (no shares listed); its privacy notice gives the country.
+# Owner (M11.2), read 2026-11-20 in Edge: Sophos's own about page (sophos.com/en-us/company) and its company information
+# page name no owner (the latter lists its licensing and sales companies by region, and sends questions on its
+# "Ultimate Beneficial Owner" to its legal team), so its owner's own page (rule 2): Thoma Bravo's press release on
+# Sophos buying Secureworks (February 2025), linked from its portfolio page for Sophos, which lists "YEAR INVESTED"
+# "2020". Its consumer terms name the company that offers Sophos Home ("offered by Sophos Limited"), and its privacy
+# notice gives the country.
 owner:
-  name: Sophos Limited
+  name: Sophos Limited (backed by Thoma Bravo, a software investment firm)
   page:
-    name: Sophos Consumer Terms of Service
-    url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
+    name: Sophos Completes Secureworks Acquisition (Thoma Bravo press release)
+    url: https://www.thomabravo.com/press-releases/sophos-completes-secureworks-acquisition
   quotes:
-    - 'Thank you for selecting software and services offered by Sophos Limited (referred to as “Sophos,” “we,” “us,” “our”).'
+    - 'Sophos is backed by Thoma Bravo, a leading software investment firm.'
   country:
     code: GB
     page:
@@ -64,14 +75,24 @@ owner:
     quotes:
       - 'This website is operated by Sophos Limited, a company registered in England and Wales under company number 2096520'
     lastVerified: 2026-11-20
-  website: https://www.sophos.com
+  website: https://www.thomabravo.com
   lastVerified: 2026-11-20
-# Ways to pay (M11.5), read 2026-11-20 in Edge: the store's payment step lists "Credit card" and "PayPal" (Canada, the
-# US), with "SEPA Direct debit" in Germany and "iDEAL | Wero" in the Netherlands; its card list names Visa, MasterCard,
-# American Express and JCB, and Discover instead of JCB in the US. The other countries' carts showed "Credit card" in
-# view; their full lists weren't opened.
+# Ways to pay (M11.5), read 2026-11-20 in Edge, for the four countries whose payment step was opened in full: it lists
+# "Credit card" and "PayPal" (Canada, the US), with "SEPA Direct debit" in Germany and "iDEAL | Wero" in the
+# Netherlands; its card list names Visa, MasterCard, American Express and JCB (Canada, Germany, the Netherlands), and
+# Discover instead of JCB in the US. The other countries' carts (the UK, Ireland, France, Spain, Italy, Australia, New
+# Zealand) showed "Credit card" in view; their full lists weren't opened, so no cards or ways to pay are stored for
+# them (the lists vary by country).
 acceptedNetworks:
-  GLOBAL:
+  CA:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
+  DE:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://buy.home.sophos.com/1461/purl-homepremium
+    quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
+  NL:
     networks: [visa, mastercard, amex, jcb]
     url: https://buy.home.sophos.com/1461/purl-homepremium
     quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
@@ -81,6 +102,7 @@ acceptedNetworks:
     quotes: ['Visa', 'MasterCard', 'American Express', 'Discover']
 paymentMethods:
   - methods: [card, paypal]
+    regions: [CA, US]
     page: Checkout
     url: https://buy.home.sophos.com/1461/purl-homepremium
     quotes: ['Credit card', 'PayPal']
@@ -538,8 +560,8 @@ policies:
           quote: 'Even if you close your account, we will retain certain information in order to meet our legal, tax or regulatory obligations.'
       lastVerified: 2026-11-20
     - topic: privacy.data-deletion
-      tier: great
-      reason: 'You can delete your account yourself, in its dashboard’s settings, at any time.'
+      tier: good
+      reason: 'You can delete your account yourself, in its dashboard’s settings, at any time. It doesn’t say what happens to your data then or how soon it’s gone.'
       sources:
         - url: https://support.home.sophos.com/hc/en-us/articles/115005445086-Deleting-your-Sophos-Home-account
           quote: 'You can delete your Sophos Home account in the Settings section of the dashboard.'
@@ -616,10 +638,12 @@ policies:
       lastVerified: 2026-11-20
     - topic: billing.renewal-notice
       tier: good
-      reason: 'It emails you 30 days before a yearly renewal, with the price.'
+      reason: 'It emails you the renewal price 30 days before a 1-year subscription renews. For 2- and 3-year ones, its help says only that renewal emails come around the time it renews.'
       sources:
         - url: https://buy.home.sophos.com/1461/purl-homepremium
           quote: 'You will receive an email 30 days in advance advising you of the renewal price.'
+        - url: https://support.home.sophos.com/hc/en-us/articles/25899202064276-How-do-I-renew-my-Sophos-Home-subscription
+          quote: 'Our payments partner, cleverbridge, will send renewal emails, to the email account you purchased your subscription with, around the time your paid subscription renews.'
       lastVerified: 2026-11-20
     - topic: billing.fees
       status: not-stated
@@ -683,8 +707,8 @@ policies:
         - https://www.sophos.com/en-us/legal/sophos-group-privacy-notice
       lastVerified: 2026-11-20
     - topic: legal.licence
-      tier: neutral
-      reason: 'You may use it only for yourself, not for business, and you may not copy, resell or take it apart.'
+      tier: poor
+      reason: 'You may use it only for yourself, not for business, and you may not copy or resell it or take it apart, with no exception for what the law allows.'
       sources:
         - url: https://www.sophos.com/en-us/legal/sophos-consumer-terms-of-service
           quote: 'The Services are solely for your personal and non-commercial use.'
