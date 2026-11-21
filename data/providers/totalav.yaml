@@ -19,17 +19,18 @@
 # the year. No price says it includes tax: its terms add sales tax in the US ("sales taxes applicable to a Subscription
 # for customers based in the United States and certain other jurisdictions are the responsibility of the customer") and
 # include VAT in its pounds and euros ("VAT is included in all GBP and Euro prices displayed on the Total Security
-# Group’s sites"), on its terms rather than the pages that price them; Canada's checkout adds "Estimated Tax".
+# Group’s sites"), on its terms rather than the pages that price them, and core's tax wording doesn't read "VAT is
+# included", so no price is marked as including tax.
 # Region checklist for CA and US, 2026-11-20: 1. no country paths (language paths /de/, /fr/... and ?forceLang=); 2. the
 # matrix's currency tabs; 3. the checkout form's country and currency; 4. each plan's checkout from Canada, up to the
 # payment form; 5. its help centre's billing articles; 6. Edge from Canada and through a US exit; 7. no bill offered.
 # Not listed: the matrix's legacy plans "no longer available for new purchases" (Total AV Premium, the 2019 to 2025
 # Antivirus Pro, Internet Security and Total Security), and its other add-ons (Unlimited Protection, Family Protection,
 # Home Protection, Advanced Cloud Scanning, Identity Theft Protection, Smartphone Optimizer, Total Drive).
-# Bundles: none. Official resellers: none named as selling its subscription. Its help names shops that sell its gift
-# cards ("Simply purchase one of our gift cards from a valid retailer (Amazon, Costco, and LifeStyle)"), whose
-# subscriptions "do not automatically renew": not listed (their pages weren't read). Apple's App Store and Google Play
-# bill its in-app subscriptions (partners, not listed).
+# Bundles: none. Official resellers: its help names the shops that sell its gift cards ("Simply purchase one of our gift
+# cards from a valid retailer (Amazon, Costco, and LifeStyle)"), whose subscriptions "do not automatically renew": named,
+# but their shop pages weren't read, so not listed. Apple's App Store and Google Play bill its in-app subscriptions
+# (partners, not listed).
 # Free use: TotalAV Free Antivirus, its free plan below.
 
 id: totalav
@@ -59,9 +60,10 @@ sources: { pricing: https://www.totalav.com/subscription-pricing-matrix }
 # Owner (M11.2), read 2026-11-20: its privacy policy and terms name Total Security Limited (England, company 10161957) and
 # Total Security U.S. LLC (Boston), "each of which are a part of Point Wild"; Point Wild's own Our Story page: "Pango
 # Group merges with Total Security, a global leader in the field of cybersecurity, and combined company rebrands to Point
-# Wild." (December 2024). Point Wild's country from its privacy policy's address. Private: no page names a listing.
+# Wild." (December 2024). Point Wild's privacy policy gives its legal name ("Point Wild Holdings, Inc. f/k/a Pango Group,
+# Inc.") and its address, for the country. Private: no page names a listing.
 owner:
-  name: Point Wild
+  name: Point Wild Holdings, Inc.
   website: https://www.pointwild.com
   page:
     name: 'Privacy Policy'
@@ -74,13 +76,15 @@ owner:
       name: 'Privacy Policy (Point Wild)'
       url: https://www.pointwild.com/legal/privacy-policy/
     quotes:
+      - '“Point Wild” means and refers to Point Wild Holdings, Inc. f/k/a Pango Group, Inc. or Pango Group'
       - 'Boston, Massachusetts, 02210'
     lastVerified: 2026-11-20
   lastVerified: 2026-11-20
 # Ways to pay and card networks (M11.5), read 2026-11-20: its help centre's "Accepted Payment Methods" (Visa, MasterCard,
 # Amex, Discover), its terms (cards, PayPal, Apple Pay and Google Pay "subject to availability in your region", gift
 # cards "In some jurisdictions"), Canada's checkout (a card form, PayPal and Google Pay) and its cancelling article (the
-# App Store and Google Play bill in-app subscriptions).
+# App Store and Google Play bill in-app subscriptions). The other countries' checkouts, as saved through the exits, show
+# only "PURCHASE SECURELY" and name no way to pay, so the methods are the terms' and help's, for every region.
 acceptedNetworks:
   GLOBAL:
     networks: [visa, mastercard, amex, discover]
@@ -160,24 +164,33 @@ perks:
 # Features, read 2026-11-20: each product page's comparison table ("Real-Time Antivirus Protection", "Zero-Day Cloud
 # Scanning", "PUA Protection", "Phishing Scam Protection", "Ransomware Protection", "System Tune-Up Tools", "Disk
 # Cleaner", "Browser Manager & Cleaner", "iOS & Android Protection" on all three; "Total Adblock" and "Total VPN" on
-# Internet Security and Total Security; "Total Password" on Total Security; read from its markup, where Plus's column hides
-# the last three and Internet Security's the last) and devices ("4 Devices", "6 Devices", "8 Devices"); "Schedule Smart
-# Scans: Run automated scans on your schedule"; "Data Breach Monitoring: Monitor your email for appearances in known
-# public breach data and receive alerts" (every plan's page); WebShield, "Included with all TotalAV™ security plans",
-# which blocks "fake, scam, phishing & 'spoofed' websites" and "Stop Intrusive Trackers"; its help's Quick Scan and Full
-# System Scan ("Customize your Scans") and the iPhone app's SPAM text detector ("If a website is dangerous, the message
-# gets blocked."). No page read says it detects threats by their behaviour (its Real-Time Protection scans "downloads,
-# installs and executables"), recovers encrypted files, scans for vulnerable software, or has a firewall or anti-theft
-# (its Android App Lock locks apps behind a PIN), so those are false or left out (the product pages, its help centre's
-# TotalAV articles).
+# Internet Security and Total Security; "Total Password" on Total Security. The text shows every row on every page; the
+# ticks are in each product page's HTML (saved, and joined to each page's saved text): the table hides Plus's tick for
+# the last three rows and Internet Security's for the last, and the Internet Security page's own small-screen table
+# ticks "Total Adblock" and "Total VPN" and crosses "Total Password") and devices ("4 Devices", "6 Devices", "8
+# Devices"); "Schedule Smart Scans: Run automated scans on your schedule"; "Data Breach Monitoring: Monitor your email
+# for appearances in known public breach data and receive alerts" (every plan's page; its footnote: "Data Breach
+# Monitoring relies on publicly available breach data and does not include private or unreleased breach records.");
+# WebShield, "Included with all TotalAV™ security plans", which blocks "fake, scam, phishing & 'spoofed' websites" and
+# "Stop Intrusive Trackers"; its help's Quick Scan and Full System Scan ("Customize your Scans"), the iPhone app's SPAM
+# text detector ("Users of TotalAV for iPhone can benefit from a SPAM text detector.", "If a website is dangerous, the
+# message gets blocked."), and its notifications' silent mode ("With silent mode enabled TotalAV will not disturb you
+# when using apps on fullscreen.", the paid plans' app). Behaviour-based detection, from its help's real-time protection
+# articles: "Real-Time Protection checks for virus-like behavior and will stop any suspicious activities, notifying you
+# and stopping any files or malicious processes that could be harmful to your computer." No page read says it recovers
+# encrypted files, scans for vulnerable software, or has a firewall or anti-theft (its Android App Lock locks apps behind
+# a PIN), so those are false or left out (the product pages, its help centre's TotalAV articles).
 # Total VPN, read 2026-11-20: its VPN page ("With OpenVPN and IKEv2 protocols available", "our VPN kill switch", "over
 # 35 country locations", listing 36 countries under "Plan Availability"), its help's in-app VPN settings (IKEv2,
 # OpenVPN TCP and UDP, "VPN Circuit Breaker": "internet access is suspended to prevent leaks"), and "What is Total VPN?"
 # ("Total VPN does not track, log, or store your browsing history", no audit named). No page read states a data limit
 # or unlimited data, a device count of its own, RAM-only servers or a way to connect your own devices, so unlimited
-# traffic, RAM-only servers and connecting your own devices are false and the data and device counts are left out. Split
-# tunnelling: the standalone Total VPN app's help describes it ("How to use Total VPN Split Tunneling", with its Hydra
-# protocol and "over 90 countries"), but the plans' VPN page and the in-app VPN's settings don't name it, so false.
+# traffic, RAM-only servers and connecting your own devices are false and the data and device counts are left out. The
+# standalone Total VPN app's help is the one rule for both of these: what the app does follows the plans' own VPN (its
+# page and the in-app VPN's settings), and the Total VPN brand's policy is inferred from that help. Split tunnelling: the
+# standalone app's help describes it ("How to use Total VPN Split Tunneling", with its Hydra protocol and "over 90
+# countries"), but the plans' VPN page and the in-app VPN's settings don't name it, so false. No-logs: only that help's
+# "What is Total VPN?" states it, so it's inferred for the plans' Total VPN.
 # Total Password, read 2026-11-20 in its help: logins, "Credit Cards", "Secure Notes" and "Identities"; "It will
 # identify and pinpoint any weak or old passwords", a leak checker against "Have I been Pwned", and Security Reports'
 # "weak / duplicate passwords"; imports "from 1Password, Chrome browser, Dashlane, Firefox browser, LastPass and Sticky
@@ -214,19 +227,23 @@ plans:
     features:
       antivirus.included: true
       antivirus.real-time: true
-      antivirus.behavioural: false
+      antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
       antivirus.scam-protection: [web, sms]
       antivirus.optimizer: true
       antivirus.vulnerability-scan: false
+      antivirus.activity-modes: true
       security.anti-tracker: true
       security.dark-web-monitoring: true
       antivirus.devices: 4
+    featureLabels:
+      antivirus.scam-protection: Scam websites; spam texts on iPhone only
+      security.dark-web-monitoring: Your email, in publicly known breaches only
     addOnIds:
       [totalav.additional-device, totalav.total-vpn, totalav.total-password, totalav.total-adblock]
-    notes: 'Real-time antivirus, ransomware and phishing protection, scheduled scans and tune-up tools on 4 devices. Total VPN, Total Password and Total Adblock are add-ons.'
+    notes: 'Real-time antivirus, ransomware and phishing protection, scheduled scans and tune-up tools on 4 devices; its spam text filter is for iPhone. Total VPN, Total Password and Total Adblock are add-ons.'
     prices:
       - region: CA
         currency: CAD
@@ -588,13 +605,14 @@ plans:
     features:
       antivirus.included: true
       antivirus.real-time: true
-      antivirus.behavioural: false
+      antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
       antivirus.scam-protection: [web, sms]
       antivirus.optimizer: true
       antivirus.vulnerability-scan: false
+      antivirus.activity-modes: true
       security.anti-tracker: true
       security.dark-web-monitoring: true
       antivirus.devices: 6
@@ -607,9 +625,19 @@ plans:
       vpn.no-logs-policy: true
       vpn.ram-only-servers: false
       vpn.mesh: false
+    featureLabels:
+      antivirus.scam-protection: Scam websites; spam texts on iPhone only
+      security.dark-web-monitoring: Your email, in publicly known breaches only
     perks: [total-adblock]
+    inferred:
+      vpn.no-logs-policy:
+        reason: 'Only the stand-alone Total VPN app’s help states it (“Total VPN does not track, log, or store your browsing history.”); the plans include Total VPN, but its own pages don’t say so.'
+        page:
+          name: 'What is Total VPN? (Total VPN help)'
+          url: https://help.totalav.com/en/tech/tvpn/-/tvpn-what-is-total-vpn
+        lastVerified: 2026-11-20
     addOnIds: [totalav.additional-device, totalav.total-password]
-    notes: 'Plus on 6 devices, with Total VPN (OpenVPN and IKEv2, a kill switch, 36 countries) and Total Adblock.'
+    notes: 'Plus on 6 devices, with Total VPN (OpenVPN and IKEv2, a kill switch, 36 countries) and Total Adblock. Its spam text filter is for iPhone.'
     prices:
       - region: CA
         currency: CAD
@@ -883,13 +911,14 @@ plans:
     features:
       antivirus.included: true
       antivirus.real-time: true
-      antivirus.behavioural: false
+      antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled]
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
       antivirus.scam-protection: [web, sms]
       antivirus.optimizer: true
       antivirus.vulnerability-scan: false
+      antivirus.activity-modes: true
       security.anti-tracker: true
       security.dark-web-monitoring: true
       antivirus.devices: 8
@@ -911,8 +940,17 @@ plans:
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
+    featureLabels:
+      antivirus.scam-protection: Scam websites; spam texts on iPhone only
+      security.dark-web-monitoring: Your email, in publicly known breaches only
     perks: [total-adblock]
     inferred:
+      vpn.no-logs-policy:
+        reason: 'Only the stand-alone Total VPN app’s help states it (“Total VPN does not track, log, or store your browsing history.”); the plans include Total VPN, but its own pages don’t say so.'
+        page:
+          name: 'What is Total VPN? (Total VPN help)'
+          url: https://help.totalav.com/en/tech/tvpn/-/tvpn-what-is-total-vpn
+        lastVerified: 2026-11-20
       encryption.end-to-end:
         reason: 'No page says end-to-end or zero-knowledge, but its help says “Every password you use is encrypted locally on your computer before it ever leaves your device.”, and that it doesn’t keep your master password, “so that we do not have any access to your account”.'
         page:
@@ -920,7 +958,7 @@ plans:
           url: https://help.totalav.com/en/tech/tpw/tpw-setup/-/password-encryption
         lastVerified: 2026-11-20
     addOnIds: [totalav.additional-device]
-    notes: 'Internet Security on 8 devices, with the Total Password manager (logins, cards, notes and identities, with leaked and weak password checks).'
+    notes: 'Internet Security on 8 devices, with the Total Password manager (logins, cards, notes and identities, with leaked and weak password checks). Its spam text filter is for iPhone.'
     prices:
       - region: CA
         currency: CAD
@@ -1577,8 +1615,6 @@ policies:
       url: https://legal.totalav.com/privacy
     - name: 'Your Privacy & Data (requests)'
       url: https://legal.totalav.com/data-privacy
-    - name: 'Plus (product page and notes)'
-      url: https://www.totalav.com/product/antivirus-pro
     - name: 'Free Antivirus'
       url: https://www.totalav.com/free-antivirus
     - name: 'Cancel a Subscription'
@@ -1707,12 +1743,12 @@ policies:
         - url: https://legal.totalav.com/terms
           quote: '(iv) protect Our rights, property, safety, or interest; or (v) perform a task carried out in the public interest'
       lastVerified: 2026-11-20
+    # Its offices' addresses say nothing of where data is kept; the only location text is the section for the EEA and
+    # the UK, rated below.
     - topic: privacy.data-location
-      tier: poor
-      reason: 'It has offices in the UK and the US but doesn’t say where it keeps your data, or how it’s protected when it moves, outside Europe and the UK.'
-      sources:
-        - url: https://legal.totalav.com/privacy
-          quote: 'with offices at 16-18 Barnes Wallis Road, Segensworth, Fareham, Hampshire, PO15 5TT in the United Kingdom and 250 Northern Ave, Floor 3, Boston, Massachusetts in the United States.'
+      status: not-stated
+      reason: 'Outside Europe and the UK, its privacy policy doesn’t say where it keeps your data, or how it’s protected when it moves.'
+      pages: [https://legal.totalav.com/privacy]
       lastVerified: 2026-11-20
     - topic: privacy.data-location
       regions: [GB, IE, DE, FR, NL, ES, IT]
@@ -1760,9 +1796,11 @@ policies:
         - url: https://legal.totalav.com/terms
           quote: 'Unless otherwise specified in a notice to you, any changes to the Subscription Fees will take effect as of the Billing Cycle immediately following our notice to you.'
       lastVerified: 2026-11-20
+    # Neutral, as for McAfee, Norton, Malwarebytes, Webroot and F-Secure: its pages say nothing about a reminder either
+    # way.
     - topic: billing.free-trials
-      tier: poor
-      reason: 'Its free app offers a trial of real-time protection. A trial may need your card, turns into a paid plan unless you cancel at least a day before it ends, and no reminder is promised.'
+      tier: neutral
+      reason: 'Its free app offers a trial of real-time protection. A trial may need your card and turns into a paid plan unless you cancel in your account at least a day before it ends.'
       sources:
         - url: https://legal.totalav.com/terms
           quote: 'You may be required to enter your billing information to sign up for the Free Trial.'
@@ -1771,18 +1809,22 @@ policies:
         - url: https://www.totalav.com/free-antivirus
           quote: 'you can activate a trial of our real-time protection which will block threats before they get a chance to infect your computer.'
       lastVerified: 2026-11-20
+    # Its terms promise "up to thirty (30) days" (its help says the same); a product page's footnote says "at least 30
+    # days", and the terms win for what's promised.
     - topic: billing.renewal-notice
       tier: good
-      reason: 'It emails you at least 30 days before a yearly plan renews. Monthly plans get no reminder.'
+      reason: 'It emails you before a yearly plan renews, up to 30 days ahead. Monthly plans get no reminder.'
       sources:
-        - url: https://www.totalav.com/product/antivirus-pro
-          quote: 'Advance notice is provided at least 30 days before renewal for annual plans.'
+        - url: https://legal.totalav.com/terms
+          quote: 'For annual or multi-year Subscriptions, We will notify you of your upcoming renewal via email to the email address you used to enroll in a Service with us (each a “Renewal Notice”) up to thirty (30) days prior to your renewal date.'
         - url: https://legal.totalav.com/terms
           quote: 'Renewal Notices will not be provided to users who are enrolled in a monthly Subscription plan, which will automatically renew and be charged each month without additional notice.'
       lastVerified: 2026-11-20
+    # Its own checkouts' totals equal the price; the processor's or card issuer's fees and the conversion at "the
+    # applicable exchange rate" (no markup stated) are for paying in another way or currency.
     - topic: billing.fees
-      tier: poor
-      reason: 'You agree to pay any processing fees its payment companies or your card issuer charge. A currency it doesn’t sell in is converted at the exchange rate of the day.'
+      tier: neutral
+      reason: 'It names no fees of its own. You pay any fees your card issuer or payment company charges, and a currency it doesn’t sell in is converted at the exchange rate of the day.'
       sources:
         - url: https://legal.totalav.com/terms
           quote: '(d) agree to pay any processing fees that are charged by the third-party payment processors or Payment Card issuer.'
@@ -1798,22 +1840,30 @@ policies:
         - url: https://legal.totalav.com/terms
           quote: 'Your plan switch will be effective as of the date shown in your account profile and confirmation email, which will generally be tied to the date you elect to switch your plan.'
       lastVerified: 2026-11-20
+    # The terms conflict: the US section's arbitration also covers "a customer in a jurisdiction where binding arbitration
+    # is permitted under applicable law" (most of Canada, Australia and New Zealand among them), while the section for
+    # "Users Outside of the United States" gives your local courts. Read broadly, the arbitration clause is the
+    # provider-wide grade; the UK's and the EU's consumers keep their own courts, so they're Great.
     - topic: legal.disputes
-      tier: great
-      reason: 'Outside the US, you can take a dispute to the courts of the country you live in, or to a consumer dispute body there.'
+      tier: bad
+      reason: 'Its terms send disputes to a private referee (an arbitrator), with no group lawsuits, for US customers and anyone where the law allows it, though another section gives people outside the US their own courts.'
       sources:
         - url: https://legal.totalav.com/terms
-          quote: 'You and Total Security irrevocably agree that the courts of the country in which you reside shall have non-exclusive jurisdiction to settle any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with this Agreement (including your use of the Services) or its subject matter or formation.'
-      lastVerified: 2026-11-20
-    - topic: legal.disputes
-      regions: [US]
-      tier: bad
-      reason: 'In the US, disputes go to a private referee (an arbitrator), not a court, and you can’t join a group lawsuit. You can opt out only where a law gives you that right.'
-      sources:
+          quote: 'If you are a United States based customer or a customer in a jurisdiction where binding arbitration is permitted under applicable law, then you agree any complaint or dispute not informally resolved with Us (including Our service providers, affiliated entities, or Indemnified Parties) shall be resolved through binding arbitration as described in this subsection (B) and the Arbitration Agreement set forth in the following subsection (C).'
         - url: https://legal.totalav.com/terms
           quote: 'Any arbitration under these Terms will take place on an individual basis; class arbitrations and class actions are not permitted.'
         - url: https://legal.totalav.com/terms
           quote: 'if you are a customer who resides in a jurisdiction where you have a legal right to opt out of arbitration in accordance with laws applicable to you – you may exercise your legal right to opt out.'
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: great
+      reason: 'In the UK and the EU, your country’s consumer laws let you take a dispute to the courts where you live, or to a consumer dispute body there.'
+      sources:
+        - url: https://legal.totalav.com/terms
+          quote: 'If you reside in a country (including countries of the European Union) where laws provide consumers the right to bring disputes in their local courts, then, in such cases, mandatory provisions of the local laws of your country of residence shall apply.'
+        - url: https://legal.totalav.com/terms
+          quote: 'You and Total Security irrevocably agree that the courts of the country in which you reside shall have non-exclusive jurisdiction to settle any dispute or claim (including non-contractual disputes or claims) arising out of or in connection with this Agreement (including your use of the Services) or its subject matter or formation.'
       lastVerified: 2026-11-20
     - topic: legal.terms-changes
       tier: neutral
@@ -1828,6 +1878,8 @@ policies:
       sources:
         - url: https://legal.totalav.com/terms
           quote: 'We may terminate your use of the Services or discontinue providing access to the Services at any time and for any reason'
+        - url: https://legal.totalav.com/terms
+          quote: 'any termination of your access to the Services may be effected without prior notice'
         - url: https://legal.totalav.com/terms
           quote: 'All refunds are issued at Our sole discretion and any refund request may be denied for any or no reason.'
       lastVerified: 2026-11-20

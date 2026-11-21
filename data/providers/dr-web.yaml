@@ -49,7 +49,7 @@ billingCurrency: { FR: EUR, IT: EUR, GLOBAL: USD }
 cancelUrl: https://store.drweb.com/help/autorenewal
 sources: { pricing: 'https://estore.drweb.com/home/?lng=en' }
 # Owner (M11.2), read 2026-11-20: its licence names the company that owns the software (rule 3), a private company in
-# Russia; its privacy policy gives the address.
+# Russia; its privacy policy gives the address. Its about page has no sentence on who owns it.
 owner:
   name: Doctor Web
   page:
@@ -66,7 +66,9 @@ owner:
       - '3rd street Yamskogo polya, Moscow, Russia, 125124'
     lastVerified: 2026-11-20
   lastVerified: 2026-11-20
-# Ways to pay (M11.5), read 2026-11-20: its store's payment help (Noventiq's).
+# Ways to pay (M11.5), read 2026-11-20: its store's payment help (Noventiq's). The order form read (the 2-month starter
+# subscription, before a country was chosen) showed only "VISA, MASTERCARD" and "Wire transfer"; the help names PayPal
+# too, for no product or country in particular, so it's kept.
 acceptedNetworks:
   GLOBAL:
     networks: [visa, mastercard]
@@ -85,11 +87,13 @@ paymentMethods:
 # chargedBefore doesn't read.
 
 # General features, read 2026-11-20. Its account (doctor web's site) signs in with an email and a password, and My Dr.Web
-# with a serial number and email; no page offers two-step sign-in. Support channels and app languages: not read (left
-# out). No pause.
+# with a serial number and email; no page offers two-step sign-in. Support (every page's header): "24/7 Tech support",
+# "Send a message" and "A query form", "Call us +7 (495) 789-45-86" (a Moscow number), "Forum", and a "Self-support bot"
+# on Telegram (no channel value). App languages: not read (left out). No pause.
 features:
   platforms: [windows]
   account.sign-in: [password]
+  support.channels: [email, phone, community, 24-7]
 
 # Perks (M11.6): its components page's protections no feature describes, in its words.
 perks:
@@ -109,8 +113,12 @@ perks:
 #   as those used for phishing attacks"), Anti-spam, Parental control ("Blocks access to websites by URL keywords"),
 #   Firewall, "Preventive Protection" ("Dr.Web can recognise suspicious programs that have similar behaviour patterns and
 #   block their operation", its company page), "Ransomware Protection" ("Trojan-encoder protection based on behavioural
-#   rules", Windows), "Privacy" ("Blocks a device’s camera and microphone", Windows), Exploit Prevention, Data Loss
-#   Prevention and removable device access control (Windows). The kinds of scan aren't on the pages read (left out).
+#   rules"), "Privacy" ("Blocks a device’s camera and microphone"), Exploit Prevention, Data Loss Prevention and removable
+#   device access control. The components table ticks them by system (Windows, macOS, Linux): Privacy on Windows and
+#   macOS ("+ + -"); Preventive Protection, Ransomware Protection, Exploit Prevention, Data Loss Prevention and removable
+#   device control on Windows only; the firewall on Windows and macOS; anti-spam and parental control on Windows and
+#   Linux. The values stay, since the plan has them on Windows, and the notes say where (Emsisoft's precedent). The kinds
+#   of scan aren't on the pages read (its documentation, which wasn't read, would say): left out.
 #   "Protection for 1 computer" up to 5 on one licence.
 # - Security Space for mobile devices (its Android page): real-time protection of the file system, scans "upon user
 #   request", call and SMS filtering ("SMS message filtering is not available in app versions installed from Google
@@ -157,9 +165,9 @@ plans:
       security.webcam-protection: [webcam, microphone]
     featureLabels:
       antivirus.ransomware: Ransomware protection on Windows
-      security.webcam-protection: Camera and microphone blocking on Windows
+      security.webcam-protection: Camera and microphone blocking on Windows and Mac
     perks: [exploit-prevention, data-loss-prevention, device-access-control]
-    notes: 'For 1 computer (Windows, Mac or Linux), bought for 1, 2 or 3 years at a time; it renews only if you choose automatic renewal. 2, 3 and 4 PCs cost US$32.55, $34.18 and $35.89 for a year. Renewing an existing licence costs 25% less.'
+    notes: 'For 1 computer (Windows, Mac or Linux), bought for 1, 2 or 3 years at a time; it renews only if you choose automatic renewal. 2, 3 and 4 PCs cost US$32.55, $34.18 and $35.89 for a year. Renewing an existing licence costs 25% less. Behaviour-based, ransomware and exploit protection, data loss prevention and USB device control are for Windows; the firewall for Windows and Mac; anti-spam and parental control for Windows and Linux. US-dollar prices are before VAT (“excl.VAT”).'
     prices:
       - region: GLOBAL
         currency: USD
@@ -255,9 +263,9 @@ plans:
       security.webcam-protection: [webcam, microphone]
     featureLabels:
       antivirus.ransomware: Ransomware protection on Windows
-      security.webcam-protection: Camera and microphone blocking on Windows
+      security.webcam-protection: Camera and microphone blocking on Windows and Mac
     perks: [exploit-prevention, data-loss-prevention, device-access-control]
-    notes: 'For 5 computers (Windows, Mac or Linux) on one licence, bought for 1, 2 or 3 years at a time; it renews only if you choose automatic renewal. Renewing an existing licence costs 25% less.'
+    notes: 'For 5 computers (Windows, Mac or Linux) on one licence, bought for 1, 2 or 3 years at a time; it renews only if you choose automatic renewal. Renewing an existing licence costs 25% less. Behaviour-based, ransomware and exploit protection, data loss prevention and USB device control are for Windows; the firewall for Windows and Mac; anti-spam and parental control for Windows and Linux. US-dollar prices are before VAT (“excl.VAT”).'
     prices:
       - region: GLOBAL
         currency: USD
@@ -353,7 +361,7 @@ plans:
     featureLabels:
       antivirus.scam-protection: Call and text filtering (texts not in the Google Play version)
     perks: [app-lock]
-    notes: 'For 1 Android phone, tablet or Android TV, bought for 1, 2 or 3 years at a time. It can also unlock a device locked by ransomware. 2, 3 and 4 devices cost US$10.85, $11.39 and $11.96 for a year. Renewing an existing licence costs 25% less.'
+    notes: 'For 1 Android phone, tablet or Android TV, bought for 1, 2 or 3 years at a time. It can also unlock a device locked by ransomware. 2, 3 and 4 devices cost US$10.85, $11.39 and $11.96 for a year. Renewing an existing licence costs 25% less. US-dollar prices are before VAT (“excl.VAT”).'
     prices:
       - region: GLOBAL
         currency: USD
@@ -453,7 +461,7 @@ plans:
     featureLabels:
       antivirus.scam-protection: Call and text filtering (texts not in the Google Play version)
     perks: [app-lock]
-    notes: 'For 5 Android phones, tablets or Android TVs on one licence, bought for 1, 2 or 3 years at a time. Renewing an existing licence costs 25% less.'
+    notes: 'For 5 Android phones, tablets or Android TVs on one licence, bought for 1, 2 or 3 years at a time. Renewing an existing licence costs 25% less. US-dollar prices are before VAT (“excl.VAT”).'
     prices:
       - region: GLOBAL
         currency: USD
@@ -714,14 +722,19 @@ policies:
         - url: 'https://license.drweb.com/agreement/?lng=en'
           quote: 'Allowances are made for the relevant legislation of Your country of citizenship as an individual'
       lastVerified: 2026-11-20
+    # Graded from the licence, the terms themselves (Neutral would need notice you can count on; "a means and within a
+    # timeframe acceptable to the Copyright Holder" is Poor). Its privacy policy's change clause stays in the reason: only
+    # two other providers grade this topic from a privacy policy.
     - topic: legal.terms-changes
-      tier: bad
-      reason: 'It can change its privacy policy without telling you first, and the change starts as soon as it’s posted. Its licence tells you when it changes, in whatever way and time it likes.'
+      tier: poor
+      reason: 'Its licence says you’ll be told about a new version, but how and when is up to it, and using its apps afterwards means you accept it. Its privacy policy can change without telling you first.'
       sources:
-        - url: 'https://company.drweb.com/policy/?lng=en'
-          quote: '6.3. The Rights Holder can change the terms of this Policy without giving prior notice to You. A new version of the Policy comes into force as soon as it is published at company.drweb.com/policy, unless stated otherwise by the new version of the Policy.'
         - url: 'https://license.drweb.com/agreement/?lng=en'
           quote: 'You shall be notified when a new version of the Agreement enters into force by a means and within a timeframe acceptable to the Copyright Holder.'
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'By continuing to use the Software after a new amendment of the Agreement has entered into force, You accept its terms and conditions in full.'
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: '6.3. The Rights Holder can change the terms of this Policy without giving prior notice to You.'
       lastVerified: 2026-11-20
     - topic: legal.account-closure
       tier: bad

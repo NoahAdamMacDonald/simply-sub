@@ -13,8 +13,11 @@
 # use, minus its coupon and tracking, in English), for each country through its own exit with the country's store
 # (x-market, currency) that its plans page links: CAD for Canada, USD for the US, GBP for the UK (its own store,
 # purl-dome-y-uk), EUR for Ireland, Germany, France, the Netherlands, Spain and Italy (Italy's prices differ), AUD and
-# NZD. Taxes are added in Canada and the US ("QST (9.975% on CA$ 82.45)", "GST (5% on CA$ 82.45)"); the European carts'
-# "Includes €10.82 VAT" isn't wording core's taxIncluded reads, so no taxIncluded, as Malwarebytes'.
+# NZD. Taxes are added in Canada and the US ("QST (9.975% on CA$ 82.45)", "GST (5% on CA$ 82.45)"; the US's "Sales tax
+# may be applied based on your address information."). Every other country's totals include VAT or GST: the UK's, the
+# six euro countries', Australia's and New Zealand's (Germany's Essential for a year: "Total:€39.95", "Includes €6.38 VAT
+# (19% on €33.57)."; New Zealand's "Includes NZ$ 8.61 GST (15% on NZ$ 57.38)."). Core's taxIncluded doesn't read
+# "Includes <amount> VAT", so no taxIncluded, as Malwarebytes'.
 # Region checklist for CA and US, 2026-11-20: 1. no country paths (language paths /en/, /de/...); 2. no picker; 3. its
 # store links name the market and currency (x-market=canada, currencies=CAD); 4. each plan's cart from Canada and the US,
 # up to the payment form; 5. its renewal page; 6. Edge from Canada and through a US exit; 7. no bill offered.
@@ -47,18 +50,19 @@ billingCurrency:
 # Its renewal page's FAQ: "How do I cancel my subscription? Log in to your Panda account. ... Cancel subscription."
 cancelUrl: https://www.pandasecurity.com/en/renewal/
 sources: { pricing: https://www.pandasecurity.com/en/homeusers/ }
-# Owner (M11.2), read 2026-11-20: its company profile ("part of the WatchGuard portfolio of IT security solutions"), every
-# page's footer ("Panda Security, a WatchGuard Technologies brand"), its privacy policy ("our parent company WatchGuard
-# Technologies, Inc.") and WatchGuard's own privacy policy ("WatchGuard Technologies, Inc., its subsidiaries and affiliated
-# companies, including Panda Security, S.L.U."). Panda Security, S.L.U. (Bilbao, Spain) sells it. WatchGuard is private
-# (its leadership page lists Vector Capital's managing directors; no page names a listing).
+# Owner (M11.2), read 2026-11-20: its privacy policy, in its legal notice ("our parent company WatchGuard Technologies,
+# Inc."), its company profile ("part of the WatchGuard portfolio of IT security solutions"), every page's footer ("Panda
+# Security, a WatchGuard Technologies brand") and WatchGuard's own privacy policy ("WatchGuard Technologies, Inc., its
+# subsidiaries and affiliated companies, including Panda Security, S"). Panda Security, S.L.U. (Bilbao, Spain) sells it.
+# No page read names a stock listing for WatchGuard, so no `stock`.
 owner:
   name: WatchGuard Technologies, Inc.
   website: https://www.watchguard.com
   page:
-    name: 'Company profile'
-    url: https://www.pandasecurity.com/en/company-profile/
+    name: 'Legal notice and privacy policy'
+    url: https://www.pandasecurity.com/en/homeusers/media/legal-notice/
   quotes:
+    - 'Submit a job application to Panda Security (either directly or through our parent company WatchGuard Technologies, Inc.)'
     - 'Panda Security specializes in the development of endpoint security products and is part of the WatchGuard portfolio of IT security solutions.'
   country:
     code: US
@@ -71,8 +75,12 @@ owner:
   lastVerified: 2026-11-20
 # Ways to pay and card networks (M11.5), read 2026-11-20 at its store's carts (Cleverbridge), up to the payment form:
 # "Credit card" with Visa, MasterCard, American Express and JCB (Canada, the UK, Ireland, Australia, New Zealand, the
-# euro countries) or Discover instead of JCB (the US); Germany's adds "SEPA Direct debit" and PayPal, the Netherlands'
-# "iDEAL" and "Wire transfer", Australia's and New Zealand's "Wire transfer".
+# euro countries) or Discover instead of JCB (the US). Germany's and the Netherlands' yearly carts open on another way to
+# pay and name no network: Germany's networks are from its monthly cart, the Netherlands' from its yearly cart read
+# again 2026-11-20 through a Dutch exit with "Credit card" opened (its PayPal is a logo only, so not stored). Germany's
+# yearly cart adds "SEPA Direct debit" and PayPal, the Netherlands' "iDEAL | Wero" and "Wire transfer", Australia's and
+# New Zealand's yearly carts "Wire transfer", and the monthly carts of Ireland, France, Spain and Italy "SEPA Direct
+# debit" (their yearly carts don't).
 acceptedNetworks:
   GLOBAL:
     networks: [visa, mastercard, amex, jcb]
@@ -82,6 +90,14 @@ acceptedNetworks:
     networks: [visa, mastercard, amex, discover]
     url: 'https://store.pandasecurity.com/300/purl-dome-y?currencies=USS&x-track=55499&cart=iA01YPDA0S01&language=en&quantity=1&x-market=usa'
     quotes: ['Visa', 'MasterCard', 'American Express', 'Discover']
+  DE:
+    networks: [visa, mastercard, amex, jcb]
+    url: 'https://store.pandasecurity.com/300/purl-dome?currencies=EUR&x-track=51799&cart=iA001PDE0S01&language=en&quantity=1&x-market=germany'
+    quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
+  NL:
+    networks: [visa, mastercard, amex, jcb]
+    url: 'https://store.pandasecurity.com/300/purl-dome-y?currencies=EUR&x-track=52999&cart=iA01YPDA0S01&language=en&quantity=1&x-market=netherlands'
+    quotes: ['Visa', 'MasterCard', 'American Express', 'JCB']
 paymentMethods:
   - methods: [card]
     page: 'Checkout (Canada)'
@@ -97,6 +113,11 @@ paymentMethods:
     page: 'Checkout (Netherlands)'
     url: 'https://store.pandasecurity.com/300/purl-dome-y?currencies=EUR&x-track=52999&cart=iA01YPDA0S01&language=en&quantity=1&x-market=netherlands'
     quotes: ['Credit card', 'iDEAL', 'Wire transfer']
+  - methods: [card, bank-transfer]
+    regions: [IE, FR, ES, IT]
+    page: 'Checkout, monthly (France)'
+    url: 'https://store.pandasecurity.com/300/purl-dome?currencies=EUR&x-track=51699&cart=iA001PDE0S01&language=en&quantity=1&x-market=france'
+    quotes: ['Credit card', 'SEPA Direct debit']
   - methods: [card, bank-transfer]
     regions: [AU]
     page: 'Checkout (Australia)'
@@ -116,18 +137,20 @@ renewalAnchor:
     - https://www.pandasecurity.com/en/renewal/
     - 'https://store.pandasecurity.com/300/purl-dome-y?currencies=CAD&x-track=50699&cart=iA01YPDA0S01&language=en&quantity=1&x-market=canada'
   lastVerified: 2026-11-20
-# Lab results (M11.2): AV-TEST's newest test of Panda is of December 2018 (Panda Dome 18.06, its Panda Security page),
-# and it isn't in AV-TEST's Windows tests of 2025 and 2026, so no rating is listed. AV-Comparatives' and SE Labs' aren't
-# listed (data/raters.yaml).
+# Lab results (M11.2): AV-TEST files Panda under WatchGuard now, and its WatchGuard page's newest test is of October 2024
+# (Panda Dome 22.03, read 2026-11-20; Panda's plan pages cite it: "Top Product - Panda Dome", "AV Test - October 2024").
+# It's over a year old and AV-TEST has tested Panda Dome on Windows no later, so no rating is listed. AV-Comparatives'
+# and SE Labs' aren't listed (data/raters.yaml).
 
 # General features, read 2026-11-20. Platforms: "Compatible with: Windows Android Mac iOS" (each plan's page; Panda Free
-# Antivirus "Free protection for your Windows and Android devices"), and Panda Dome Passwords' browser extension ("Use the
-# browser extension or access your vault from any device"). Sign-in: a password, and "enable two-factor authentication to
-# access your Panda account" (its renewal page), which names no method. Support: "Contact us through the web form", a
+# Antivirus "Free protection for your Windows and Android devices"); Panda Dome Passwords' browser extension ("Use the
+# browser extension or access your vault from any device") comes only with Complete and Premium, so only their plans list
+# it. Sign-in: a password, and "enable two-factor authentication to access your Panda account" (its renewal page), which
+# names no method. Support: "Contact us through the web form", a
 # phone line "available 24/7 for a free diagnosis of your devices" and its forum (its support page). App languages: its
 # website's language versions (Deutsch, English, Español, Français, Italiano, Nederlands, Português, Svenska). No pause.
 features:
-  platforms: [windows, macos, android, ios, browser-extension]
+  platforms: [windows, macos, android, ios]
   account.sign-in: [password]
   support.channels: [email, phone, community, 24-7]
   languages.interface: [en, fr, es, de, it, pt]
@@ -141,9 +164,10 @@ perks:
 
 # Categories (M11.3): an antivirus first. Complete and Premium include Panda Dome Passwords ("The Panda Dome Complete plan
 # includes Panda Dome Passwords"), so they're password manager plans too; Premium includes Dome VPN Premium ("unlimited
-# data, servers in over 60 countries"), so it's a VPN plan too. The others' VPN is the free one ("VPN (150 MB/day)", which
-# connects "automatically ... with the nearest server, without the option to choose country or location"), so they
-# aren't VPN plans (notIn), Bitdefender's and Malwarebytes' precedent. Panda Dome Passwords and Dome VPN Premium are
+# data, servers in over 60 countries"), so it's a VPN plan too. The others' VPN is the free one ("VPN (150 MB/day)"; "In
+# the Free version, the connection is automatically established with the nearest server, without the option to choose
+# country or location. In all other plans, this selection is available."), so they aren't VPN plans (notIn),
+# Bitdefender's and Malwarebytes' precedent. Panda Dome Passwords and Dome VPN Premium are
 # Panda's own apps, not other catalog providers' plans, so they're features here.
 # Features, read 2026-11-20: each plan's page and the plans page's cards (Essential: "Antivirus, antimalware and
 # antispyware", "Firewall and Wi-Fi protection", "VPN (150 MB/day)", "Antiphishing and secure browsing", "Dark Web
@@ -154,18 +178,25 @@ perks:
 # through event technologies and rules against dangerous actions." and "Schedule periodic scans and/or scan your computer
 # on demand." (antivirus), "create a rescue USB drive to boot and clean those infected computers" (its rescue kit, in
 # every plan and the free one), Wi-Fi protection that "checks the security level of your home Wi-Fi network and shows
-# connected devices", anti-ransomware with "automatic backup copies of your important files" "From Panda Dome Advanced",
+# connected devices" and, "When you connect to a Wi-Fi network", "warns you of unsafe or unknown networks" (every paid
+# plan), anti-ransomware with "automatic backup copies of your important files" "From Panda Dome Advanced",
 # parental control's "content filtering" ("available for Windows devices only"), and the update manager's "Scan your
 # computer for vulnerabilities". The Dark Web Scanner is an email check ("find out whether your email account has been
 # hacked"), so only Premium's Dark Web Monitor ("continuously monitors the Dark Web and notifies you by email") is
-# monitoring. No plan page lists anti-theft per plan (its Android app's, in its privacy policy), so it's left out.
+# monitoring. Anti-theft: Panda Free Antivirus's page lists, for its Android app, "Locate your lost or stolen smartphone
+# or tablet on a map." (the free plan's locate). Its plans page offers "Remotely lock and wipe information from your
+# devices." beside every paid plan's "See plans", naming no plan or platform, and no plan page lists anti-theft, so the
+# paid plans state none (a judgement).
 # Dome VPN Premium (its VPN page): "Available for 5 Windows, Android, Mac and iOS devices", "servers in over 60 countries",
 # "No Logs Policy" (no audit named) and "P2P/Torrent Support"; no page read names its protocols, a kill switch, split
 # tunnelling, RAM-only servers or a way to connect your own devices.
-# Panda Dome Passwords (its page): "Store encrypted notes", "form-filling data" (its terms), "See if any of your passwords
-# have been exposed on the Dark Web", "Share passwords securely with the people you choose", "Import passwords easily from
-# other password managers" and "Set up an emergency contact"; no page names an export, an offline vault or 2FA codes of
-# its own ("Protect your account with biometric login and two-factor authentication (2FA)" is its own sign-in).
+# Panda Dome Passwords (its page): "Store encrypted notes", "See if any of your passwords have been exposed on the Dark
+# Web", "Share passwords securely with the people you choose" and "Import passwords easily from other password managers";
+# no page names an export, an offline vault or 2FA codes of its own ("Protect your account with biometric login and
+# two-factor authentication (2FA)" is its own sign-in). Left out: identity items (its terms' "form-filling data" names no
+# kind of item, and an inferred value would mark the whole list inferred) and emergency access ("Set up an emergency
+# contact so you never lose access to your master password" is getting back into your own account, which the registry
+# excludes).
 plans:
   # Panda Free Antivirus (Panda Dome Free): real-time antivirus, USB scanning, the rescue kit, the free VPN, the Dark Web
   # Scanner and gaming mode ("The Panda Dome Essential protection includes the main features offered in Panda Free
@@ -185,6 +216,7 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       platforms: [windows, android]
+      antivirus.anti-theft: [locate]
     inferred:
       vpn.data-allowance:
         reason: 'Its pages give its free VPN as 150 MB a day (“VPN (150 MB/day)”), which is 4.5 GB over 30 days.'
@@ -192,7 +224,9 @@ plans:
           name: 'Panda Dome Essential'
           url: https://www.pandasecurity.com/en/dome/essential/
         lastVerified: 2026-11-20
-    notes: 'Free real-time antivirus for Windows and Android, with USB scanning, a rescue kit and a VPN with 150 MB a day. Its privacy policy says the free version collects data for ads.'
+    featureLabels:
+      antivirus.anti-theft: Locate a lost phone or tablet, on Android
+    notes: 'Free real-time antivirus for Windows and Android, with USB scanning, a rescue kit and a VPN with 150 MB a day, and on Android a way to find a lost phone or tablet on a map. Its privacy policy says the free version collects data for ads.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -213,7 +247,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -592,7 +626,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -971,7 +1005,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -1350,7 +1384,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -1729,12 +1763,13 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
       vpn.ram-only-servers: false
       vpn.mesh: false
+      antivirus.devices: 25
     inferred:
       vpn.data-allowance:
         reason: 'Its pages give its free VPN as 150 MB a day (“VPN (150 MB/day)”), which is 4.5 GB over 30 days.'
@@ -1742,7 +1777,7 @@ plans:
           name: 'Panda Dome Essential'
           url: https://www.pandasecurity.com/en/dome/essential/
         lastVerified: 2026-11-20
-    notes: 'Real-time antivirus with phishing protection, a firewall and Wi-Fi check on Windows, rescue scans, and a VPN with 150 MB a day, on unlimited devices in one household (“Subject to limitations on reasonable home use.”). Sold monthly or for 1, 2 or 3 years.'
+    notes: 'Real-time antivirus with phishing protection, a firewall and Wi-Fi check on Windows, rescue scans, and a VPN with 150 MB a day, on up to 25 devices in one household (sold as “Unlimited devices”). Sold monthly or for 1, 2 or 3 years.'
     prices:
       - region: CA
         currency: CAD
@@ -2107,7 +2142,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -2489,7 +2524,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -2871,7 +2906,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -3253,7 +3288,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -3635,7 +3670,7 @@ plans:
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -3644,6 +3679,7 @@ plans:
       antivirus.ransomware: [blocking, file-recovery]
       parental-control: [content-filtering]
       account.parental-controls: true
+      antivirus.devices: 25
     inferred:
       vpn.data-allowance:
         reason: 'Its pages give its free VPN as 150 MB a day (“VPN (150 MB/day)”), which is 4.5 GB over 30 days.'
@@ -3651,7 +3687,7 @@ plans:
           name: 'Panda Dome Essential'
           url: https://www.pandasecurity.com/en/dome/essential/
         lastVerified: 2026-11-20
-    notes: 'Essential plus anti-ransomware with backups of your files, and parental controls on Windows, on unlimited devices in one household (“Subject to limitations on reasonable home use.”). Sold monthly or for 1, 2 or 3 years.'
+    notes: 'Essential plus anti-ransomware with backups of your files, and parental controls on Windows, on up to 25 devices in one household (sold as “Unlimited devices”). Sold monthly or for 1, 2 or 3 years.'
     prices:
       - region: CA
         currency: CAD
@@ -4011,13 +4047,14 @@ plans:
     categories: [security, passwords]
     notIn: [vpn]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -4029,11 +4066,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -4412,13 +4448,14 @@ plans:
     categories: [security, passwords]
     notIn: [vpn]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -4430,11 +4467,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -4813,13 +4849,14 @@ plans:
     categories: [security, passwords]
     notIn: [vpn]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -4831,11 +4868,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -5214,13 +5250,14 @@ plans:
     categories: [security, passwords]
     notIn: [vpn]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -5232,11 +5269,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -5615,13 +5651,14 @@ plans:
     categories: [security, passwords]
     notIn: [vpn]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       vpn.included: true
       vpn.data-allowance: 4.5
@@ -5633,14 +5670,14 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
+      antivirus.devices: 25
     perks: [file-encryption]
     inferred:
       vpn.data-allowance:
@@ -5655,7 +5692,7 @@ plans:
           name: 'Panda Dome Passwords Terms of Service'
           url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
         lastVerified: 2026-11-20
-    notes: 'Advanced plus the Panda Dome Passwords manager, PC clean-up, file encryption and file shredding, on unlimited devices in one household (“Subject to limitations on reasonable home use.”). Sold monthly or for 1, 2 or 3 years.'
+    notes: 'Advanced plus the Panda Dome Passwords manager, PC clean-up, file encryption and file shredding, on up to 25 devices in one household (sold as “Unlimited devices”). Sold monthly or for 1, 2 or 3 years.'
     prices:
       - region: CA
         currency: CAD
@@ -6014,13 +6051,14 @@ plans:
     link: https://www.pandasecurity.com/en/dome/premium/
     categories: [security, vpn, passwords]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       antivirus.ransomware: [blocking, file-recovery]
       parental-control: [content-filtering]
@@ -6028,11 +6066,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -6415,13 +6452,14 @@ plans:
     link: https://www.pandasecurity.com/en/dome/premium/
     categories: [security, vpn, passwords]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       antivirus.ransomware: [blocking, file-recovery]
       parental-control: [content-filtering]
@@ -6429,11 +6467,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -6816,13 +6853,14 @@ plans:
     link: https://www.pandasecurity.com/en/dome/premium/
     categories: [security, vpn, passwords]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       antivirus.ransomware: [blocking, file-recovery]
       parental-control: [content-filtering]
@@ -6830,11 +6868,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -7217,13 +7254,14 @@ plans:
     link: https://www.pandasecurity.com/en/dome/premium/
     categories: [security, vpn, passwords]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       antivirus.ransomware: [blocking, file-recovery]
       parental-control: [content-filtering]
@@ -7231,11 +7269,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -7618,13 +7655,14 @@ plans:
     link: https://www.pandasecurity.com/en/dome/premium/
     categories: [security, vpn, passwords]
     features:
+      platforms: [windows, macos, android, ios, browser-extension]
       antivirus.included: true
       antivirus.real-time: true
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.web-protection: true
       antivirus.scam-protection: [web]
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.activity-modes: true
       antivirus.ransomware: [blocking, file-recovery]
       parental-control: [content-filtering]
@@ -7632,11 +7670,10 @@ plans:
       antivirus.optimizer: true
       security.file-shredder: true
       password-manager: true
-      password-manager.item-types: [login, secure-note, identity]
+      password-manager.item-types: [login, secure-note]
       password-manager.health: [breached]
       password-manager.sharing: [share-to-user]
       password-manager.import: [other-managers]
-      password-manager.emergency-access: true
       password-manager.offline: false
       authenticator.included: false
       encryption.end-to-end: [passwords]
@@ -7651,6 +7688,7 @@ plans:
       vpn.no-logs-policy: true
       vpn.ram-only-servers: false
       vpn.mesh: false
+      antivirus.devices: 25
     perks: [file-encryption, total-care]
     inferred:
       encryption.end-to-end:
@@ -7659,7 +7697,7 @@ plans:
           name: 'Panda Dome Passwords Terms of Service'
           url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
         lastVerified: 2026-11-20
-    notes: 'Complete plus the unlimited Premium VPN (5 devices, over 60 countries), an update manager for vulnerable apps, dark web monitoring and 24/7 premium support, on unlimited devices in one household (“Subject to limitations on reasonable home use.”). Sold monthly or for 1, 2 or 3 years.'
+    notes: 'Complete plus the unlimited Premium VPN (5 devices, over 60 countries), an update manager for vulnerable apps, dark web monitoring and 24/7 premium support, on up to 25 devices in one household (sold as “Unlimited devices”). Sold monthly or for 1, 2 or 3 years.'
     prices:
       - region: CA
         currency: CAD
@@ -8045,6 +8083,8 @@ policies:
       url: https://www.pandasecurity.com/en/homeusers/free-antivirus/
     - name: 'Checkout (Canada)'
       url: 'https://store.pandasecurity.com/300/purl-dome-y?currencies=CAD&x-track=50699&cart=iA01YPDA0S01&language=en&quantity=1&x-market=canada'
+    - name: 'Checkout, unlimited devices (Canada)'
+      url: 'https://store.pandasecurity.com/300/purl-dome-y?currencies=CAD&x-track=50699&cart=iA01YPDE0SIL&language=en&quantity=1&x-market=canada'
     - name: 'Checkout, first month free (Canada)'
       url: 'https://store.pandasecurity.com/300/purl-dome?currencies=CAD&x-track=50699&cart=iA001PDE0S01&language=en&quantity=1&enablecoupon=false&coupon=WEBNEWSALE2024&x-coupon=WEBNEWSALE2024&x-market=canada&x-track=190742'
     - name: 'Checkout (France)'
@@ -8192,11 +8232,13 @@ policies:
           quote: 'Panda reserves the right to modify tariffs and price lists published on its website should it see fit. In any event, any such changes will not apply to products and services contracted prior to the modification, with the exception of concepts related to the renewal of products and/or services.'
       lastVerified: 2026-11-20
     - topic: billing.free-trials
-      tier: poor
-      reason: 'Its monthly plans start with a free month, which needs your payment details at checkout and then charges you each month. No reminder is promised before it does.'
+      tier: neutral
+      reason: 'Its monthly plans start with a free month, which asks for your card at checkout and then turns into a paid plan unless you cancel, which you can do at any time.'
       sources:
         - url: 'https://store.pandasecurity.com/300/purl-dome?currencies=CAD&x-track=50699&cart=iA001PDE0S01&language=en&quantity=1&enablecoupon=false&coupon=WEBNEWSALE2024&x-coupon=WEBNEWSALE2024&x-market=canada&x-track=190742'
           quote: 'This is a monthly subscription product. After 1 month(s), a monthly fee of CA$ 7.45 is due starting with the next billing cycle.'
+        - url: 'https://store.pandasecurity.com/300/purl-dome?currencies=CAD&x-track=50699&cart=iA001PDE0S01&language=en&quantity=1&enablecoupon=false&coupon=WEBNEWSALE2024&x-coupon=WEBNEWSALE2024&x-market=canada&x-track=190742'
+          quote: 'You can cancel anytime, effective at the end of the current subscription period.'
         - url: https://www.pandasecurity.com/en/homeusers/free-antivirus/
           quote: 'Download Panda Dome antivirus and enjoy 1 month free with smart protection powered by AI and machine learning.'
       lastVerified: 2026-11-20
@@ -8237,6 +8279,28 @@ policies:
         - url: https://www.pandasecurity.com/en/homeusers/media/legal-notice/
           quote: 'Panda reserves the right to unilaterally modify the Conditions, without prejudice to the conditions under which products have been acquired prior to such modification, with the exception of cases in which users have acquired a new product version, or if services have been modified by Panda'
       lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      plans:
+        [
+          panda-dome.complete,
+          panda-dome.complete-3-devices,
+          panda-dome.complete-5-devices,
+          panda-dome.complete-10-devices,
+          panda-dome.complete-unlimited-devices,
+          panda-dome.premium,
+          panda-dome.premium-3-devices,
+          panda-dome.premium-5-devices,
+          panda-dome.premium-10-devices,
+          panda-dome.premium-unlimited-devices,
+        ]
+      tier: poor
+      reason: 'Panda Dome Passwords’ terms can change whenever Panda decides, with no notice promised: it asks you to check them now and then, and using the app means you accept them.'
+      sources:
+        - url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
+          quote: 'Panda Security may modify the Terms of Service from time to time at its sole discretion, so we encourage you to review them periodically.'
+        - url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
+          quote: 'You will be deemed to have accepted the Terms of Service as amended if you continue to use the Application.'
+      lastVerified: 2026-11-20
     - topic: legal.account-closure
       tier: neutral
       reason: 'It can end what you bought at once, without warning, if you break its terms or licence, and doesn’t promise a refund.'
@@ -8264,6 +8328,14 @@ policies:
         - url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
           quote: 'We reserve the right to refuse to provide the Application to anyone at any time.'
       lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      plans: [panda-dome.free]
+      tier: poor
+      reason: 'Panda can end the free version’s licence at any time, without giving a reason, by telling you.'
+      sources:
+        - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
+          quote: 'PANDA and/or the licensee may terminate, without any cause whatsoever, this License Agreement at any time by informing the other'
+      lastVerified: 2026-11-20
     - topic: legal.content-rights
       status: not-stated
       reason: 'Its general terms and licence take no rights over what you store.'
@@ -8286,21 +8358,43 @@ policies:
           panda-dome.premium-unlimited-devices,
         ]
       tier: poor
-      reason: 'If you share items from Panda Dome Passwords, it takes a licence to them it can pass on, and it may keep copies of what you delete.'
+      reason: 'If you choose to share items from Panda Dome Passwords, it takes a licence to them, but only to share them as you ask. It may keep copies of what you delete.'
       sources:
         - url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
-          quote: 'you hereby grant Panda Security a worldwide, non-exclusive, royalty-free, sublicenseable and transferable license to use, reproduce, distribute, prepare derivative works of, display the Personal Content you provided'
+          quote: 'To the extent you select the options in your account enabling Panda Security to transmit such Personal Content to other persons, you hereby grant Panda Security a worldwide, non-exclusive, royalty-free, sublicenseable and transferable license to use, reproduce, distribute, prepare derivative works of, display the Personal Content you provided on the Website in the performance of the Services and in accordance with your Instructions.'
         - url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
           quote: 'You also understand and agree that Panda Security may retain, but not display, distribute, or perform, server copies of your Personal Content that have been removed or deleted.'
       lastVerified: 2026-11-20
     - topic: legal.service-changes
-      tier: neutral
-      reason: 'It may stop developing your product in favour of another, which may cost extra to move to, and it may change its services without paying you anything. It says it will tell you.'
+      tier: poor
+      reason: 'It may stop developing your product in favour of another, which may cost extra to move to, and change its services while you agree to ask nothing in return. It says it will tell you.'
       sources:
         - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
           quote: 'PANDA may cease to develop the program or product licensed by the licensee in favor of others.'
         - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
           quote: 'The licensee agrees to accept these changes without demanding any compensation whatsoever. PANDA shall notify the licensee of any such changes.'
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      plans:
+        [
+          panda-dome.complete,
+          panda-dome.complete-3-devices,
+          panda-dome.complete-5-devices,
+          panda-dome.complete-10-devices,
+          panda-dome.complete-unlimited-devices,
+          panda-dome.premium,
+          panda-dome.premium-3-devices,
+          panda-dome.premium-5-devices,
+          panda-dome.premium-10-devices,
+          panda-dome.premium-unlimited-devices,
+        ]
+      tier: poor
+      reason: 'Panda Dome Passwords’ terms let it change, pause or stop any part of the app without notice, and say it won’t owe you anything for it.'
+      sources:
+        - url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
+          quote: 'WITHOUT PRIOR NOTICE, PANDA SECURITY MAY MODIFY, SUSPEND, OR DISCONTINUE ANY ASPECT OR FEATURE OF THE APPLICATION AND/OR THE SERVICES OR YOUR USE OF THE APPLICATION AND/OR THE SERVICES.'
+        - url: https://www.pandasecurity.com/rfiles/dome/passwords/eula/Panda_Dome_Passwords_-_Terms_of_Service.pdf
+          quote: 'IF PANDA SECURITY ELECTS TO MODIFY, SUSPEND, OR DISCONTINUE ANY PART OF OR ALL OF THE APPLICATION AND/OR THE SERVICES, IT WILL NOT BE LIABLE TO YOU OR ANY THIRD PARTY.'
       lastVerified: 2026-11-20
     - topic: legal.inactivity
       status: not-stated
@@ -8337,11 +8431,13 @@ policies:
           quote: 'details about your internet, app, or network usage, including URLs or domain names of websites you visit'
       lastVerified: 2026-11-20
     - topic: service.account-sharing
-      tier: poor
-      reason: 'Its licence lets you use it only on devices you own, not lend it to anyone else. Its unlimited plans are for one household.'
+      tier: good
+      reason: 'It runs on devices you own, and you answer for anyone else who uses it there; you can’t lend or pass on your licence. Its unlimited plans are for one household. It describes no checks.'
       sources:
         - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
           quote: 'It may not be used on devices that are not the property of the licensee, nor may it be lent, rented, leased, given away, donated or transferred to another user.'
+        - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
+          quote: 'The licensee is responsible for the use of the program by others.'
         - url: https://www.pandasecurity.com/en/homeusers/
           quote: 'Unlimited license registration for one customer in one household only.'
       lastVerified: 2026-11-20
@@ -8361,21 +8457,40 @@ policies:
           panda-dome.premium-unlimited-devices,
         ]
       tier: neutral
-      reason: 'Its unlimited plans are limited to reasonable home use in one household, a limit it doesn’t put a number on.'
+      reason: 'Sold as unlimited, these plans can be turned on for up to 25 devices, for one household’s reasonable private use, and it can end the licence if it judges your use irresponsible.'
       sources:
-        - url: https://www.pandasecurity.com/en/homeusers/
-          quote: 'Unlimited devices: Subject to limitations on reasonable home use. Unlimited license registration for one customer in one household only.'
+        - url: 'https://store.pandasecurity.com/300/purl-dome-y?currencies=CAD&x-track=50699&cart=iA01YPDE0SIL&language=en&quantity=1&x-market=canada'
+          quote: 'Important: Product subject to limitations on reasonable and private home use, unlimited license registration for one customer in one household only.'
+        - url: 'https://store.pandasecurity.com/300/purl-dome-y?currencies=CAD&x-track=50699&cart=iA01YPDE0SIL&language=en&quantity=1&x-market=canada'
+          quote: 'Panda limits the activation of the product to 25 devices and expressly reserves all rights it may have, such as the right to terminate the license agreement in case the licensee does not make responsible use of the license.'
       lastVerified: 2026-11-20
     - topic: service.software-control
-      tier: poor
-      reason: 'Its updates download by themselves, and it moves programs it thinks are unwanted into quarantine, which you can turn off. Its update manager may install security certificates.'
+      tier: neutral
+      reason: 'Its updates download by themselves, and it moves programs it judges unwanted into quarantine and tells you. You can restore them, or turn that off in its settings.'
       sources:
         - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
           quote: 'The licensee acknowledges and accepts that PANDA may provide updates or additions to the program or product which are automatically downloaded onto his/her computer.'
         - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
           quote: 'Programs classified by the product as PUP will be directly moved to the quarantine folder on the licensee’s computer(s), notifying the licensee of this action.'
         - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
-          quote: 'PANDA will install updates of one or more of the following certificates'
+          quote: 'The licensee may also disable the PUP classification feature through the product settings.'
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      plans:
+        [
+          panda-dome.premium,
+          panda-dome.premium-3-devices,
+          panda-dome.premium-5-devices,
+          panda-dome.premium-10-devices,
+          panda-dome.premium-unlimited-devices,
+        ]
+      tier: poor
+      reason: 'Premium’s update manager may install or update security certificates on your PC to work, on top of the automatic updates and quarantine every plan has.'
+      sources:
+        - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
+          quote: 'Should it be necessary to properly install the Update Manager functionality, and in order to provide good service, PANDA will install updates of one or more of the following certificates:'
+        - url: https://www.pandasecurity.com/rfiles/resources/eula/EULA_Consumer_products_for_Windows_EN.pdf
+          quote: 'The licensee acknowledges and accepts that PANDA may provide updates or additions to the program or product which are automatically downloaded onto his/her computer.'
       lastVerified: 2026-11-20
     - topic: other.notable
       title: 'Its licence lets its staff visit you'
@@ -8386,10 +8501,10 @@ policies:
           quote: 'The licensee authorizes PANDA personnel to visit him/her in order to verify that the conditions of this license are met.'
       lastVerified: 2026-11-20
     - topic: other.notable
-      regions: [IE, FR, NL, ES, IT]
+      regions: [IE, FR, IT]
       title: 'Its store adds other subscriptions to your basket'
       tier: neutral
-      reason: 'In Ireland, France, the Netherlands, Spain and Italy its store puts a password manager and a VPN, each renewing yearly, in your basket with the plan. You can delete them before paying.'
+      reason: 'In Ireland, France and Italy its store puts a password manager and a VPN, each renewing yearly, in your basket with a plan paid by the year or more. You can delete them before paying.'
       sources:
         - url: 'https://store.pandasecurity.com/300/purl-dome-y?currencies=EUR&x-track=51699&cart=iA01YPDE0S01&language=en&quantity=1&x-market=france'
           quote: 'This is a yearly subscription product. After 12 month(s), a yearly fee of €34.95 is due starting with the next billing cycle.'

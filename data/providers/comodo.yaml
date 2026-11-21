@@ -13,8 +13,8 @@
 # Region checklist for CA and US, 2026-11-20: 1. no country paths; 2. the checkout's currency menu (USD by default, CAD
 # among its conversions); 3. no pricing data on its pages; 4. the checkout from Canada and the US, up to the payment form;
 # 5. no help article on prices or tax; 6. Edge from Canada and through a US exit; 7. no bill offered.
-# Not listed: its business products (Xcitium's and Comodo's platform), and its older consumer products whose pages are
-# gone (Comodo Antivirus for Mac, Mobile Security).
+# Not listed: its business products, and its older consumer products whose pages are gone (Comodo Antivirus for Mac,
+# Mobile Security).
 # Bundles: none. Official resellers: none named.
 # Free use: Comodo Internet Security (its free antivirus and firewall), its free plan below.
 
@@ -31,7 +31,7 @@ cancelUrl: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
 sources: { pricing: https://www.comodo.com/antivirus-internet-security/ }
 # Owner (M11.2), read 2026-11-20: its licence names the company it's between ("This end user license and subscriber
 # agreement is between you ... and Comodo Security Solutions, Inc."); its privacy policy gives its address in Bloomfield,
-# New Jersey. Private: no page names a listing. (Comodo's former business security arm is Xcitium, a separate company.)
+# New Jersey. Private: no page names a listing. No about page was read.
 owner:
   name: Comodo Security Solutions, Inc.
   page:
@@ -49,8 +49,9 @@ owner:
     lastVerified: 2026-11-20
   lastVerified: 2026-11-20
 # Ways to pay (M11.5), read 2026-11-20 at its checkout from Canada, up to the payment form: "Payment Options For Canada",
-# "Credit & Debit Cards" and "PayPal". Its card menu lists Visa, Mastercard, American Express, Discover, Diners Club, JCB
-# and China UnionPay, but the checkout is on secure.nurd.com and BlueSnap's site, not Comodo's own, so no acceptedNetworks.
+# "Credit & Debit Cards" and "PayPal", the same as its checkouts through a US, UK and German exit. Its card menu lists
+# Visa, Mastercard, American Express, Discover, Diners Club, JCB and China UnionPay, but the checkout is on
+# secure.nurd.com and BlueSnap's site, not Comodo's own, so no acceptedNetworks.
 paymentMethods:
   - methods: [card, paypal]
     page: 'Checkout'
@@ -84,8 +85,8 @@ renewalAnchor:
 # General features, read 2026-11-20. Platforms: "Compatible with Windows 10, 8, 7" (its Internet Security page); no other
 # platform's app is sold now. Support: its Internet Security page's "Product info & Sales & Support: 888-351-8017", "Submit
 # a Ticket" and its forum ("Our Forum is populated with fellow Comodo users and developers alike"); CIS Pro adds GeekBuddy's
-# chat, "available 24/7". App languages and sign-in: no page read lists them. No parental controls beyond its website
-# filtering's "custom block lists for different members of your family" (Pro), no pause.
+# chat, "available 24/7". App languages and sign-in: no page read lists them. Parental controls: CIS Pro's, below. No
+# pause.
 features:
   platforms: [windows]
   support.channels: [email, phone, community]
@@ -103,10 +104,18 @@ perks:
 # Antivirus combine to stop viruses and malware before they enter the PC", "Cloud-based behavior analysis system detects
 # zero-day malware INSTANTLY", "ONE-CLICK VIRUS SCANNING", "GAME MODE", "Secure Shopping" ("running your favorite browser
 # inside a security-hardened virtual environment"), "MALICIOUS WEBSITE FILTERING" ("automatically blocking dangerous
-# websites"). Its free download installs the firewall too ("Can I install only the Firewall or only the Antivirus? Yes —
-# you are given the option to install exactly the components you want during setup.", and its Firewall section's "Download
-# Now"), so the free plan has it. No page read names scheduled or boot-time scans for these plans (its comparison table's
-# "Boot Time Scans" column has no legend), ransomware recovery, a VPN, a password manager or speed-up tools.
+# websites and allows you to set up custom block lists for different members of your family"). Parental controls: the
+# Internet Security page lists "Specify parental controls to filter out inappropriate websites" and a suite that
+# "includes other layers of protection, including anti-spyware, parental controls, privacy protection", to "protect your
+# children from Internet dangers"; the free version's Web Filtering is crossed out, so CIS Pro has them. No page read
+# names scam or phishing protection beyond the website filtering. Its free download installs the firewall too ("Can I
+# install only the Firewall or only the Antivirus? Yes — you are given the option to install exactly the components you
+# want during setup.", and its Firewall section's "Download Now"), so the free plan has it. No page read names scheduled
+# or boot-time scans for these plans (its comparison table's "Boot Time Scans" column has no legend), ransomware recovery,
+# a VPN, a password manager or speed-up tools.
+# Devices: the Internet Security page's GeekBuddy section says "Each CIS Pro license covers 3 PCs" (and GeekBuddy's own
+# licence covers "up to a total of three personal computers and/or devices"), while its home-user page and checkout sell
+# CIS Pro for 1 PC at $29.99 and 3 PCs at $39.99. The plans follow the checkout, the page that sells them.
 plans:
   # Comodo Internet Security, the free version: antivirus with the sandbox and HIPS (Defense+), and the firewall.
   - id: comodo.free
@@ -140,13 +149,14 @@ plans:
       antivirus.scans: [on-demand]
       antivirus.network: [firewall]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
       antivirus.secure-browser: true
       antivirus.activity-modes: true
       antivirus.devices: 1
+      parental-control: [content-filtering]
+      account.parental-controls: true
       support.channels: [email, chat, phone, community, 24-7]
     perks: [geekbuddy, virus-free-guarantee]
-    notes: 'The free version plus website filtering, Secure Shopping (a sealed-off browser for banking) and GeekBuddy support, on 1 Windows PC. Its virus-free guarantee (repairs up to $500) is for US residents only.'
+    notes: 'The free version plus website filtering with parental controls, Secure Shopping (a sealed-off browser for banking) and GeekBuddy support, on 1 Windows PC. Its virus-free guarantee (repairs up to $500) is for US residents only.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -167,10 +177,11 @@ plans:
       antivirus.scans: [on-demand]
       antivirus.network: [firewall]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
       antivirus.secure-browser: true
       antivirus.activity-modes: true
       antivirus.devices: 3
+      parental-control: [content-filtering]
+      account.parental-controls: true
       support.channels: [email, chat, phone, community, 24-7]
     perks: [geekbuddy, virus-free-guarantee]
     notes: 'Internet Security Pro on 3 Windows PCs.'
@@ -189,9 +200,15 @@ plans:
 # installer of today's version may show a newer one, not read), which includes its privacy policy ("Comodo shall follow
 # the privacy policy posted on its website"), its Privacy Policy (effective May 10, 2022), its Website Terms & Conditions
 # (the site only), its Cookie Policy (2019) and its checkout. Read but holding no worse clause: the website terms and the
-# cookie policy. Not read: its "CSS Information Collection" page (the licence's link to it no longer resolves to a page on
-# comodo.com), BlueSnap's own terms (its checkout's processor), the GeekBuddy and Secure Shopping licences the 10.X
-# licence attaches beyond what's quoted.
+# cookie policy. The 10.X licence attaches the licences of what it includes, read whole in the same PDF: Schedule C, the
+# Comodo Dragon browser's (ad-supported, with its own search and home page settings: the notable and software control
+# below); Schedule D, GeekBuddy's (CIS Pro's support service: prices that change without notice, renewal charges without
+# notice and an account it may close at any time, rated for the two Pro plans; its support-session recordings, kept "for
+# improving customer service, internal training, and internal market research", fall under the licence's same
+# opt-out by email); Schedule E, Secure Shopping's (the same grades as the main licence). Checked across the checkouts
+# from Canada, the US, the UK and Germany: the same payment options and cancel line. Not read: its "CSS Information
+# Collection" page (the licence's link to it no longer resolves to a page on comodo.com), BlueSnap's own terms (its
+# checkout's processor).
 policies:
   links:
     - name: 'End User License and Subscriber Agreement (CIS 10.X)'
@@ -312,14 +329,16 @@ policies:
         - url: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
           quote: 'Phone*'
       lastVerified: 2026-11-20
+    # Its checkout of today says it cancels online; the 2017 licence's email is kept in the reason (the newer official
+    # page wins).
     - topic: billing.cancellation
-      tier: poor
-      reason: 'Its licence says you end a paid subscription by emailing it, which takes up to a day to process. Its checkout says you can cancel online.'
+      tier: good
+      reason: 'Its checkout says you can cancel your subscription online at any time. Its older licence asks for an email instead, which takes up to a day to process.'
       sources:
-        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
-          quote: 'Notification of termination must be sent by email to support@comodo.com. Your termination will be effective upon Comodo’s receipt and processing of the email. Processing may take up to 24 hours.'
         - url: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
           quote: 'You can cancel your subscription online at any time.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Notification of termination must be sent by email to support@comodo.com. Your termination will be effective upon Comodo’s receipt and processing of the email. Processing may take up to 24 hours.'
       lastVerified: 2026-11-20
     - topic: billing.refunds
       tier: neutral
@@ -337,6 +356,17 @@ policies:
         - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
           quote: 'Comodo may modify fees for paid products in its sole discretion. Your failure to terminate this agreement after a fee change is posted to Comodo’s website constitutes your acceptance of amended prices, which will apply upon your renewal of the Products.'
       lastVerified: 2026-11-20
+    # GeekBuddy's licence (Schedule D), which comes with CIS Pro.
+    - topic: billing.price-changes
+      plans: [comodo.internet-security-pro, comodo.internet-security-pro-3-devices]
+      tier: bad
+      reason: 'CIS Pro comes with GeekBuddy support, whose licence lets Comodo change its prices without notice.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'All fees are posted on the Comodo website and are subject to change without notice.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo may also amend its website and pricing without notice.'
+      lastVerified: 2026-11-20
     - topic: billing.free-trials
       tier: poor
       reason: 'A trial usually needs your card, and when it ends it may charge you without telling you first. You must end it before then to avoid paying.'
@@ -347,11 +377,20 @@ policies:
           quote: 'At the end of the trial period, Comodo may bill the credit card for the Products without further notice.'
       lastVerified: 2026-11-20
     - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its licence and checkout say a paid plan renews by charging your card each year, but not whether it reminds you first.'
+      pages:
+        - https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+        - https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+      lastVerified: 2026-11-20
+    # GeekBuddy's licence (Schedule D), which comes with CIS Pro.
+    - topic: billing.renewal-notice
+      plans: [comodo.internet-security-pro, comodo.internet-security-pro-3-devices]
       tier: poor
-      reason: 'It renews by charging your card each year, and no reminder before renewing is promised.'
+      reason: 'CIS Pro comes with GeekBuddy support, whose licence says Comodo may charge your card for renewals without telling you first.'
       sources:
         - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
-          quote: 'Comodo may automatically charge the credit card provided for renewing subscriptions to the Products.'
+          quote: 'Comodo may charge any fees incurred while using the Services (such as renewal fees) to the provided credit card without further notice.'
       lastVerified: 2026-11-20
     - topic: billing.fees
       status: not-stated
@@ -391,6 +430,17 @@ policies:
           quote: 'Comodo may terminate this agreement at any time by posting notice of the termination on its website or sending an email to the address provided during your registration for the Products.'
         - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
           quote: 'No refunds shall be given for any reason.'
+      lastVerified: 2026-11-20
+    # GeekBuddy's licence (Schedule D), which comes with CIS Pro.
+    - topic: legal.account-closure
+      plans: [comodo.internet-security-pro, comodo.internet-security-pro-3-devices]
+      tier: bad
+      reason: 'CIS Pro comes with GeekBuddy support, whose licence lets Comodo close your account at any time without notice, and it owes you no refund for time you paid for.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo may terminate this Agreement without notice by disabling your account or access to the Services. Comodo may disable your account or deny access to the Services at any time.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo shall not bill you any additional fees but is not obligated to provide refunds for any paid for but unused Services.'
       lastVerified: 2026-11-20
     - topic: legal.service-changes
       tier: poor
@@ -440,10 +490,23 @@ policies:
       lastVerified: 2026-11-20
     - topic: service.software-control
       tier: poor
-      reason: 'Some of its software updates itself without telling you, and installing it may install other Comodo products, which may stay switched off until you pay.'
+      reason: 'Installing it may add other Comodo products, some switched off until you pay, and a box ticked during setup makes its search engine your browser’s default and home page. You change that back in your browser.'
       sources:
         - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
-          quote: 'Some Products update automatically without notice.'
-        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
           quote: 'Installation of CIS may include installation of additional Products. Use of these Products may be disabled until you pay for the Products.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'CIS allows users to set an included search engine as the default setting in the internet browser search engine toolbars and makes that search engine as the browser home page. By checking the box during installation, you are consenting to this change.'
+      lastVerified: 2026-11-20
+    # Its licence covers Comodo's own browsers (Dragon, Schedule C), which carry ads.
+    - topic: other.notable
+      title: 'Its browser shows ads'
+      tier: neutral
+      reason: 'Its licence covers Comodo’s own web browser, which is paid for by ads and may show them, also through add-ons from other companies. You can remove the browser or those add-ons.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'The Comodo Browser is supported by advertising revenue and may display advertisements.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'The third party programs may show you a limited number of ads on your screen.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'The third party extensions or products with the browser can be uninstalled, in two ways:'
       lastVerified: 2026-11-20

@@ -9,14 +9,19 @@
 # list price (the compare page's script calls the two "listPrice" and "promoPrice"), so it is stored. Its terms renew a
 # subscription "for additional one (1) year periods", so the 2-year option is a first term that renews yearly: only
 # yearly prices are stored (Kaspersky's and Avira's precedent), and the 2-year list prices are in each plan's notes.
-# Currency: every page prices in US dollars by default; its currency menu converts the same prices into euros, Canadian,
-# Australian and Hong Kong dollars and pounds (5 devices of Extreme: US$114.95, CA$158.88, €98.16, £85.50, each a fixed
-# ratio of the US price, read 2026-11-20), so they are conversions, not price lists: one GLOBAL price in US dollars, the
-# others in `currencies` (Mullvad's precedent for converted amounts). Its checkout (estore.zonealarm.com, run by
-# 2Checkout) priced Canada in US dollars and added Canadian sales tax ("Total TAX (5%)" to "(13%)" by the exit's
-# province): prices are before tax. No page states the renewal amount itself, and the checkout's own figures don't match
-# the product pages' (5 devices of Extreme: a US$104.95 subtotal with no coupon, the page's first-payment price; 1 device:
-# US$89.95 before its "renewal" coupon, against the page's US$98.95 and US$84.95), so the list price is a judgment call.
+# Currency: the site picks it from where the reader is. Its pages read through Canadian exits show "English/CAD" in their
+# header (others "English/USD" or "English/GBP"), and the compare page's BUY links send that reader to a checkout in
+# Canadian dollars ("CURRENCY=CAD&DCURRENCY=CAD"). Its currency menu converts the US-dollar prices into euros, Canadian,
+# Australian and Hong Kong dollars and pounds at a fixed ratio (5 devices of Extreme: US$114.95, CA$158.88, €98.16,
+# £85.50, read 2026-11-20): conversions, not price lists, so they're in `currencies` (Mullvad's precedent) and every
+# country but Canada has one GLOBAL price in US dollars. Its checkout (estore.zonealarm.com, run by 2Checkout) charges
+# Canada in Canadian dollars: each paid plan's checkout, read 2026-11-20 through a Canadian exit with no coupon, states
+# its own amount (5 devices of Extreme: "Subtotal: CAD $150.08", then "Total TAX (14.975%)"), and Canada is priced from
+# those subtotals, before tax. They are 1.43 times the checkout's own US-dollar figures, which are below the product
+# pages' (5 devices of Extreme: a US$104.95 subtotal with no coupon, the page's first-payment price; 1 device: US$89.95,
+# against the page's US$98.95 and US$84.95). The three US-dollar checkouts saved first were opened with "CURRENCY=USD"
+# in the link, so they show a reader who asks for US dollars. No page or checkout states the renewal amount itself, so
+# the struck list price (GLOBAL) and the checkout's undiscounted price (Canada) are judgment calls.
 # Plans: Extreme Security NextGen (Windows, macOS, Android, iOS), Pro Antivirus + Firewall NextGen (Windows) and
 # Anti-Ransomware (Windows) for 1, 3, 5 or 10 devices, a plan per device count (Norton's precedent: what a plan protects
 # differs by count); their 25- and 50-device options are left out (more devices than a household), and so is Mobile
@@ -24,12 +29,14 @@
 # Free Firewall (Windows).
 # Region checklist for CA and US, 2026-11-20: 1. no country paths (/de, /fr, /es, /it, /hk are languages); 2. its
 # language and currency menu (conversions, above); 3. no price data names a country; 4. the checkout, up to the payment
-# form, listed Canada and charged it in US dollars; 5. its help centre's tax articles (2Checkout's US states and EU VAT);
-# 6. Edge, a plain fetch (refused) and a Canadian exit; 7. no bill. The US: the same US-dollar prices.
+# form, charges Canada in Canadian dollars and adds its sales tax ("Total TAX (12%)" to "(14.975%)" by the exit's province);
+# 5. its help centre's tax articles (2Checkout's US states and EU VAT); 6. Edge, a plain fetch (refused) and a Canadian
+# exit; 7. no bill. The US: the GLOBAL US-dollar prices.
 # Bundles: none (Extreme includes Anti-Ransomware and Mobile Security, its own products). Official resellers: none named;
 # its "Partners" page is a service-provider programme. Google Play and the App Store bill Mobile Security sold alone.
-# Lab results: AV-TEST's newest ZoneAlarm test on its site is of October 2016 (Free Antivirus + Firewall 15.0), and it
-# isn't in AV-TEST's Windows tests of 2026, so no rating is listed.
+# Lab results: AV-TEST's newest ZoneAlarm test is of December 2019 (Pro Antivirus + Firewall 15.6, also tested in August
+# and October 2019, its Check Point manufacturer page), and it isn't in AV-TEST's Windows tests of 2026, so no rating is
+# listed.
 # Its End of Support notice (2024): older ZoneAlarm versions had to be replaced by the NextGen ones to meet "US Department
 # of Commerce regulations described in document 2024-13532" (the ruling that ended Kaspersky's US sales), and valid
 # Extreme and Pro subscriptions were upgraded free.
@@ -40,13 +47,15 @@ aliases: [ZoneAlarm Extreme Security, ZoneAlarm Free Firewall, Check Point ZoneA
 website: https://www.zonealarm.com
 category: security
 spendCategory: software
-billingCurrency: { GLOBAL: USD }
+billingCurrency: { CA: CAD, GLOBAL: USD }
 # Its help article on stopping subscription payments (myAccount, My Products, "Turn off/on auto renewal").
 cancelUrl: https://support.zonealarm.com/hc/en-us/articles/360060711231-How-can-I-stop-subscription-payments-cancel-automatic-renewal
 sources: { pricing: https://www.zonealarm.com/software/extreme-security-nextgen }
 # Owner (M11.2), read 2026-11-20: its about page names Check Point and its listing; its privacy policy names Check Point
 # Software Technologies Ltd. in Tel Aviv as "ZoneAlarm’s mother company" (its terms name Zone Labs, L.L.C., "a Check
-# Point Software Technologies, Inc. Company", as the site's operator). No page read names a majority holder.
+# Point Software Technologies, Inc. Company", as the site's operator). `name` is the Ltd. that the privacy policy and
+# Check Point's disclosure policy name, the "mother company" in Tel Aviv; the about page's and terms' "Inc." is the name
+# they give the Check Point company behind Zone Labs. No page read names a majority holder.
 owner:
   name: Check Point Software Technologies Ltd.
   website: https://www.checkpoint.com
@@ -69,6 +78,7 @@ owner:
       - { exchange: NASDAQ, symbol: CHKP }
   lastVerified: 2026-11-20
 # Ways to pay (M11.5), read 2026-11-20 in its help centre: cards, PayPal, and a check or money order at checkout (other).
+# The checkouts read show a card form and "Other payment methods" (not opened), so the methods come from the help centre.
 acceptedNetworks:
   GLOBAL:
     networks: [visa, mastercard, amex, discover]
@@ -110,11 +120,14 @@ renewalAnchor:
 
 # General features, read 2026-11-20. Platforms: Windows for every plan (its system requirements), with Extreme's own list
 # below. Sign-in: myAccount takes an email address or order number and a password ("Enter your email address/order
-# number and password."); no page offers two-step sign-in. Support channels and app languages: not read (left out). No
-# pause (auto-renewal is turned off instead).
+# number and password."); no page offers two-step sign-in. Support: "Contact our support team via live chat or email",
+# "In the U.S.A call 877-966-5221" ("Open Monday-Friday 6am-7pm Pacific Standard Time", its returns page) and its
+# "Forum"; its "24/7 online help" is guides and resources, so not around the clock. App languages: not read (left out).
+# No pause (auto-renewal is turned off instead).
 features:
   platforms: [windows]
   account.sign-in: [password]
+  support.channels: [chat, email, phone, community]
 
 # Perks (M11.6): its product pages' and compare page's lines no feature describes, in their words.
 perks:
@@ -143,12 +156,19 @@ perks:
 #   PC like Antivirus does is not needed" (no scans); "compatible with all antivirus solutions", so it's labelled as
 #   ransomware protection beside another antivirus. Its Web Secure extension adds anti-phishing and content filtering.
 #   Its product page says "Windows 11/10"; the help centre's system requirements also list "ZoneAlarm Anti-Ransomware for
-#   Mac" (left out: the product page is the plan card).
+#   Mac" (left out: the product page is the plan card). It isn't an antivirus, as its label and notes say, but
+#   `antivirus.included` stays true: its ransomware, real-time, web and device-count features hang under an included
+#   antivirus, and without them its four device counts would have the same features, so the optimizer would always
+#   suggest the 1-PC plan (validation warns). A modelling gap: a ransomware tool can rank as an antivirus.
 # - Free Antivirus: "Antivirus and Anti-Spyware", "Personal Firewall", "Customizable Scan Modes", Anti-Bot (ticked on the
 #   compare page) and the same Critical and Full scans by hand and on a schedule ("Note: The following article only
 #   applies to the NEW v3.5 ZoneAlarm Free Antivirus +Firewall."); the compare page crosses out "Real-Time Cloud
-#   Security", Anti-Phishing and the rest, so real-time protection is false. Whether its "Advanced Firewall" row is
-#   ticked was hidden under the cookie notice in the screenshot: behaviour-based detection is left out.
+#   Security" ("Checks files against an always up-to-date cloud database of antivirus signatures."), Anti-Phishing and
+#   the rest. That row is the cloud signature check ("real-time verification of file signatures against up-to-date
+#   cloud-based databases", its help), not scanning files as they're used: the help's on-access scanning article ("it
+#   provides protection against viruses and spyware in real time") names no product, and no page read says whether the
+#   free version scans on access, so real-time protection is left out. Whether its "Advanced Firewall" row is ticked was
+#   hidden under the cookie notice in the screenshot: behaviour-based detection is left out.
 # - Free Firewall: a two-way firewall with Anti-Bot and no antivirus.
 # No VPN, password manager, identity protection, anti-theft, spam filter or optimizer on any ZoneAlarm page.
 plans:
@@ -157,12 +177,11 @@ plans:
     link: https://www.zonealarm.com/software/free-antivirus
     features:
       antivirus.included: true
-      antivirus.real-time: false
       antivirus.scans: [on-demand, scheduled]
       antivirus.network: [firewall]
       antivirus.devices: 1
     perks: [anti-bot]
-    notes: 'Free for one Windows PC: an antivirus you run by hand or on a schedule, with ZoneAlarm’s two-way firewall. No real-time cloud protection, anti-phishing or ransomware protection.'
+    notes: 'Free for one Windows PC: an antivirus with scans you start or schedule, and ZoneAlarm’s two-way firewall. No real-time cloud security, anti-phishing or ransomware protection.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -213,6 +232,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/software/pro-antivirus-firewall
+      - region: CA
+        currency: CAD
+        amount: 85.73
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=38658749&QTY=1&OPTIONS38658749=1PC%2C1y&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.pro-antivirus-firewall-3-pcs
     name: Pro Antivirus + Firewall (3 PCs)
@@ -237,6 +264,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/software/pro-antivirus-firewall
+      - region: CA
+        currency: CAD
+        amount: 107.18
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=38658749&QTY=1&OPTIONS38658749=3PC%2C1y&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.pro-antivirus-firewall-5-pcs
     name: Pro Antivirus + Firewall (5 PCs)
@@ -261,6 +296,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/software/pro-antivirus-firewall
+      - region: CA
+        currency: CAD
+        amount: 114.33
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=38658749&QTY=1&OPTIONS38658749=5PC%2C1y&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.pro-antivirus-firewall-10-pcs
     name: Pro Antivirus + Firewall (10 PCs)
@@ -285,6 +328,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/software/pro-antivirus-firewall
+      - region: CA
+        currency: CAD
+        amount: 214.43
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=38658749&QTY=1&OPTIONS38658749=10PC%2C1y&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.extreme-security
     name: Extreme Security NextGen (1 device)
@@ -316,6 +367,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/software/extreme-security-nextgen
+      - region: CA
+        currency: CAD
+        amount: 128.63
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=36245101&QTY=1&OPTIONS36245101=1d_es%2C1y&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.extreme-security-3-devices
     name: Extreme Security NextGen (3 devices)
@@ -347,6 +406,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/software/extreme-security-nextgen
+      - region: CA
+        currency: CAD
+        amount: 135.78
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=36245101&QTY=1&OPTIONS36245101=3d_es%2C1y&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.extreme-security-5-devices
     name: Extreme Security NextGen (5 devices)
@@ -378,6 +445,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/software/extreme-security-nextgen
+      - region: CA
+        currency: CAD
+        amount: 150.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=36245101&QTY=1&OPTIONS36245101=5d_es%2C1y&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.extreme-security-10-devices
     name: Extreme Security NextGen (10 devices)
@@ -409,6 +484,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/software/extreme-security-nextgen
+      - region: CA
+        currency: CAD
+        amount: 285.94
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=36245101&QTY=1&OPTIONS36245101=10d_es%2C1y&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.anti-ransomware
     name: Anti-Ransomware (1 PC)
@@ -426,7 +509,7 @@ plans:
     featureLabels:
       antivirus.included: Ransomware protection only, made to run beside another antivirus
     perks: [threat-emulation, threat-extraction]
-    notes: 'For 1 Windows PC: blocks ransomware and restores files it encrypted, with anti-phishing and content filtering in your browser. Not an antivirus: it runs beside one. A 2-year first term costs US$94.95, then it renews yearly.'
+    notes: 'For 1 Windows PC, beside your antivirus: it blocks ransomware and restores files it encrypted, and its browser extension adds anti-phishing and content filtering. Not an antivirus itself. A 2-year first term costs US$94.95, then it renews yearly.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -436,6 +519,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/anti-ransomware
+      - region: CA
+        currency: CAD
+        amount: 75.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=30100122&QTY=1&OPTIONS30100122=1PC_ZR%2C1Y_ZR&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.anti-ransomware-3-pcs
     name: Anti-Ransomware (3 PCs)
@@ -453,7 +544,7 @@ plans:
     featureLabels:
       antivirus.included: Ransomware protection only, made to run beside another antivirus
     perks: [threat-emulation, threat-extraction]
-    notes: 'For 3 Windows PCs, beside another antivirus. A 2-year first term costs US$129.95, then it renews yearly.'
+    notes: 'For 3 Windows PCs, beside your antivirus: it blocks ransomware and restores files it encrypted, and its browser extension adds anti-phishing and content filtering. Not an antivirus itself. A 2-year first term costs US$129.95, then it renews yearly.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -463,6 +554,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/anti-ransomware
+      - region: CA
+        currency: CAD
+        amount: 92.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=30100122&QTY=1&OPTIONS30100122=3PC_ZR%2C1Y_ZR&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.anti-ransomware-5-pcs
     name: Anti-Ransomware (5 PCs)
@@ -480,7 +579,7 @@ plans:
     featureLabels:
       antivirus.included: Ransomware protection only, made to run beside another antivirus
     perks: [threat-emulation, threat-extraction]
-    notes: 'For 5 Windows PCs, beside another antivirus. A 2-year first term costs US$149.95, then it renews yearly.'
+    notes: 'For 5 Windows PCs, beside your antivirus: it blocks ransomware and restores files it encrypted, and its browser extension adds anti-phishing and content filtering. Not an antivirus itself. A 2-year first term costs US$149.95, then it renews yearly.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -490,6 +589,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/anti-ransomware
+      - region: CA
+        currency: CAD
+        amount: 118.62
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=30100122&QTY=1&OPTIONS30100122=5PC_ZR%2C1Y_ZR&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
   - id: zonealarm.anti-ransomware-10-pcs
     name: Anti-Ransomware (10 PCs)
@@ -507,7 +614,7 @@ plans:
     featureLabels:
       antivirus.included: Ransomware protection only, made to run beside another antivirus
     perks: [threat-emulation, threat-extraction]
-    notes: 'For 10 Windows PCs, beside another antivirus. A 2-year first term costs US$279.95, then it renews yearly.'
+    notes: 'For 10 Windows PCs, beside your antivirus: it blocks ransomware and restores files it encrypted, and its browser extension adds anti-phishing and content filtering. Not an antivirus itself. A 2-year first term costs US$279.95, then it renews yearly.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -517,6 +624,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-20
         sourceUrl: https://www.zonealarm.com/anti-ransomware
+      - region: CA
+        currency: CAD
+        amount: 200.13
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.zonealarm.com/order/checkout.php?PRODS=30100122&QTY=1&OPTIONS30100122=10PC_ZR%2C1Y_ZR&CART=1&CARD=1&CURRENCY=CAD&DCURRENCY=CAD&LANG=en&SHORT_FORM=1&DESIGN_TYPE=2&ORDERSTYLE=nLWw45W5kHY=&SRC=W100001
 
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-20: its Terms of Use (the website and its
 # software, which includes the privacy policy), Privacy Policy, Cookies notice and 30-day return policy, and the help
@@ -614,20 +729,31 @@ policies:
         - https://www.zonealarm.com/terms
       lastVerified: 2026-11-20
     - topic: privacy.data-retention
-      tier: poor
-      reason: 'It keeps your data until it no longer needs it, and gives no set times.'
+      tier: bad
+      reason: 'It keeps your data until it no longer needs it, with no set times, and even after you change or delete it, it may keep it for backups, analytics or any reason it thinks fair.'
       sources:
         - url: https://www.zonealarm.com/privacy
           quote: 'We take measures to delete your Personal Data or keep it in a form that does not permit identifying you when this information is no longer necessary for the purposes for which we process it unless we are required by law to keep this information for a longer period.'
+        - url: https://www.zonealarm.com/privacy
+          quote: 'we may retain Personal Data for backups, archiving, prevention of fraud and abuse, analytics, satisfaction of legal obligations, or where we otherwise reasonably believe that we have a legitimate reason to do so.'
       lastVerified: 2026-11-20
     - topic: privacy.data-deletion
+      status: not-stated
+      reason: 'Outside Europe and the UK, its privacy policy offers no way to have your data deleted.'
+      pages:
+        - https://www.zonealarm.com/privacy
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      regions: [EU, GB]
       tier: poor
-      reason: 'Only people in Europe and the UK are offered a way to have their data deleted, by writing to it. It offers no way for everyone else.'
+      reason: 'In Europe and the UK you can ask it to delete your data by writing to its privacy officer, but only “as appropriate”: its policy says the right has exceptions and limits.'
       sources:
         - url: https://www.zonealarm.com/privacy
           quote: 'If you are located in the EEA or the UK, you have additional rights described below.'
         - url: https://www.zonealarm.com/privacy
           quote: 'You may request access the Personal Data we maintain about you, update and correct inaccuracies in your Personal Data, restrict or object to the processing of your Personal Data, have your Personal Data anonymized or deleted, as appropriate, or exercise your right to data portability to easily transfer your Personal Data to another company.'
+        - url: https://www.zonealarm.com/privacy
+          quote: 'Please note that there are exceptions and limitations to each of these rights'
       action:
         name: 'Contact its privacy officer (privacy policy)'
         url: https://www.zonealarm.com/privacy

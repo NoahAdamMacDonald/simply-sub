@@ -1345,8 +1345,9 @@ plans:
   # Security articles (Stay protected, Virus and threat protection, App and browser control, Family options) and Microsoft
   # Learn's behaviour-monitoring article. The app a person uses on every Windows 10 and 11 PC: "The Windows Security app is
   # a comprehensive security solution integrated into Windows" with "Microsoft Defender Antivirus, Windows Firewall, and
-  # Smart App Control" (Stay protected), at no cost beyond Windows itself, so a free plan of Microsoft's provider
-  # (Authenticator's precedent; Wikidata's Microsoft Defender).
+  # Smart App Control" (Stay protected), so a free plan of Microsoft's provider (Authenticator's precedent; Wikidata's
+  # Microsoft Defender). That it costs nothing beyond Windows itself is inferred from "integrated into Windows": no page
+  # read gives it a price.
   # - Real-time: "Real-time protection is a feature in the Windows Security app that continuously monitors your device".
   # - Behaviour: "Behavior monitoring is a critical Microsoft Defender Antivirus detection and protection capability",
   #   "enabled by default" (Learn).
@@ -1356,7 +1357,9 @@ plans:
   #   "you turn on Controlled folder access") and Ransomware data recovery, which restores files from OneDrive.
   # - Web: Microsoft Defender SmartScreen "protects from phishing attacks, malware, and potentially unwanted
   #   applications" (App and browser control). Firewall: "the firewall feature monitors incoming and outgoing network
-  #   traffic". Family options open Microsoft Family Safety. Exploit protection and Smart App Control: no feature.
+  #   traffic". Family options ("easy access to tools to manage your family’s digital life") open the Family Safety
+  #   website and app, another Microsoft service, which its label says. Exploit protection and Smart App Control: no
+  #   feature.
   # No device count (each Windows PC has its own), no Mac, phone, VPN or identity features (those are Defender's, with the
   # paid plans).
   - id: microsoft-365.windows-security
@@ -1377,6 +1380,7 @@ plans:
       antivirus.ransomware: Controlled folder access (off until you turn it on) and recovery from OneDrive
       antivirus.web-protection: Microsoft Defender SmartScreen
       antivirus.scans: Quick, full and custom scans, scheduled scans and the offline (boot-time) scan
+      account.parental-controls: Opens Microsoft Family Safety
     notes: 'Built into Windows 10 and 11 at no extra cost: Microsoft Defender Antivirus with real-time and behaviour-based protection, Windows Firewall, SmartScreen against phishing and bad downloads, and ransomware protection for chosen folders. On Mac and phones, the Defender app needs a paid plan.'
     prices:
       - region: GLOBAL
@@ -1677,7 +1681,8 @@ policies:
         - https://support.microsoft.com/en-us/authenticator/microsoft-authenticator-faqs
       lastVerified: 2026-11-19
     # Windows Security (read 2026-11-20): ratings of its own where the ones above come from Copilot's or Microsoft 365's
-    # pages and say nothing about it, as Authenticator's. It needs no Microsoft account. The shared documents' grades
+    # pages and say nothing about it, as Authenticator's. It comes with Windows, and its help pages mention no account of
+    # its own (no saved Microsoft page says whether a local Windows account is enough). The shared documents' grades
     # (privacy statement, services agreement) still apply; Windows' own licence terms, which cover it, weren't read.
     - topic: privacy.content-access
       plans: [microsoft-365.windows-security]
@@ -1700,7 +1705,7 @@ policies:
     - topic: legal.account-closure
       plans: [microsoft-365.windows-security]
       status: not-applicable
-      reason: 'Windows Security comes with Windows and needs no Microsoft account, so there’s no account to close.'
+      reason: 'Windows Security comes with Windows, and its help pages mention no account of its own to close.'
       pages:
         - https://support.microsoft.com/en-us/windows/security/windows-security/stay-protected-with-the-windows-security-app
       lastVerified: 2026-11-20
