@@ -1,5 +1,6 @@
 import { OutOfRequests, requestsPerPart, type Requests } from './requests';
-import type { Step } from './run';
+import type { Step, StepOptions } from './run';
+import { OutOfWrites, Writes, writesPerNight } from './writes';
 
 // A night in parts (BLUEPRINT §6.4): a Workflow instance is a part, which sends out at most requestsPerPart requests.
 // Each step gets what's left of them; one that would pass it stops the part, and the night goes on in its next part, a
@@ -29,7 +30,19 @@ export interface Memo {
 }
 
 /** A step's result as the Workflow keeps it: its value and its requests, or that it ran out. */
-type Kept<T> = { value: T; requests: number } | { out: true; requests: number; whole: boolean };
+type Kept<T> = ({ value: T } | { out: true; whole: boolean }) & {
+  requests: number;
+  /** Its KV writes and deletes. A step kept before they were counted has none. */
+  writes?: number;
+};
+
+/** The night's KV writes (writes.ts): this part's counter, and what the parts before it made. */
+export interface NightWrites {
+  writes: Writes;
+  before: number;
+  /** The most a night's steps that may wait take: writesPerNight. */
+  budget?: number;
+}
 
 /** Runs a Workflow step: once, its result kept, retried when it throws. */
 export type RunStep = <T>(name: string, task: () => Promise<T>) => Promise<T>;
@@ -38,22 +51,31 @@ export type RunStep = <T>(name: string, task: () => Promise<T>) => Promise<T>;
  * The night's steps in one part. `run` is the Workflow's step; `memo` keeps each step's result for the parts after, and
  * gives this part the earlier parts' (`read`: from the second part on), a failure too. A step that runs out of requests
  * stops the part (NightContinues), unless it had the part's whole allowance: then it never fits, and it fails like any
- * other step.
+ * other step. A step that may wait (a page check) isn't started once the night's KV writes are spent (OutOfWrites);
+ * `writes()` is the night's so far, for its next part.
  */
 export function partSteps(
   run: RunStep,
   requests: Requests,
   memo: Memo & { read: boolean },
   limit = requestsPerPart,
-): Step {
+  { writes, before, budget = writesPerNight }: NightWrites = { writes: new Writes(), before: 0 },
+): Step & { writes(): number } {
   /** This part's requests so far: each finished step's, and its failed tries' in this invocation. */
   let spent = 0;
-  return async <T>(name: string, task: () => Promise<T>): Promise<T> => {
+  /** The night's KV writes so far: the parts' before, then this part's steps', as their results record them. */
+  let written = before;
+  const step = async <T>(
+    name: string,
+    task: () => Promise<T>,
+    options: StepOptions = {},
+  ): Promise<T> => {
     const done = memo.read ? await memo.get(name) : undefined;
     if (done) {
       if ('failed' in done) throw new Error(done.failed);
       return done.value as T;
     }
+    if (options.mayWait && written >= budget) throw new OutOfWrites();
     const fail = async (error: unknown) => {
       await memo.fail(name, error instanceof Error ? error.message : String(error));
       return error;
@@ -63,15 +85,22 @@ export function partSteps(
       result = await run<Kept<T>>(name, async () => {
         const allowance = limit - spent;
         requests.start(allowance);
+        writes.start();
         try {
           const value = await task();
           await memo.put(name, value);
-          return { value, requests: requests.used };
+          return { value, requests: requests.used, writes: writes.used };
         } catch (error) {
           if (error instanceof OutOfRequests) {
-            return { out: true, requests: requests.used, whole: allowance >= limit };
+            return {
+              out: true,
+              requests: requests.used,
+              whole: allowance >= limit,
+              writes: writes.used,
+            };
           }
           spent += requests.used;
+          written += writes.used;
           throw error;
         }
       });
@@ -79,6 +108,7 @@ export function partSteps(
       throw await fail(error);
     }
     spent += result.requests;
+    written += result.writes ?? 0;
     if ('out' in result) {
       if (result.whole) {
         throw await fail(new Error(`${name} needs more than the ${limit} requests a part has`));
@@ -87,4 +117,5 @@ export function partSteps(
     }
     return result.value;
   };
+  return Object.assign(step, { writes: () => written });
 }

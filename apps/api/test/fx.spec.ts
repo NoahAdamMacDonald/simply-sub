@@ -136,6 +136,25 @@ describe('GET /fx', () => {
     expect(JSON.parse((await env.KV.get(kvKey)) ?? 'null')).toMatchObject({ date: '2026-10-23' });
   });
 
+  it("still answers with the new rates when KV won't keep them (over the day's writes)", async () => {
+    await keep(hoursAgo(13));
+    upstream.mockResolvedValue(frankfurter('2026-10-23'));
+    const full = {
+      get: env.KV.get.bind(env.KV),
+      put: async () => {
+        throw new Error('KV put() limit exceeded for the day.');
+      },
+    } as unknown as KVNamespace;
+
+    const response = await Promise.resolve(
+      app.fetch(new Request(`${BASE}/fx?base=CAD`), { ...env, KV: full }),
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.headers.get('ETag')).toBe('"fx-CAD-2026-10-23"');
+    expect(warn).toHaveBeenCalledWith("KV didn't keep the rates: Error.");
+  });
+
   it.each([
     ['answers HTTP 500', () => new Response('down', { status: 500 })],
     ['times out', () => Promise.reject(new DOMException('timed out', 'TimeoutError'))],

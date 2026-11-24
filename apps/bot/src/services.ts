@@ -44,6 +44,7 @@ import type { Services } from './run';
 import { botSearch } from './search';
 import { Requests, rethrowOutOfRequests } from './requests';
 import { kvState, type BotState, type KvLike } from './state';
+import { Writes } from './writes';
 import { bundleOwner, catalogIndex } from './targets';
 
 // The night's services in the Worker: the catalog D1, the web (polite: robots.txt, one request per URL, en-CA
@@ -56,7 +57,11 @@ const headers = { 'User-Agent': userAgent, 'Accept-Language': 'en-CA,en;q=0.9' }
 const timeoutMs = 15_000;
 const maxRobotsBytes = 500_000;
 
-export function workerServices(env: Env, requests = new Requests()): Services {
+export function workerServices(
+  env: Env,
+  requests = new Requests(),
+  writes = new Writes(),
+): Services {
   const send = requests.fetch;
   const github = new GitHub({
     token: env.GITHUB_TOKEN,
@@ -64,7 +69,8 @@ export function workerServices(env: Env, requests = new Requests()): Services {
     base: env.GITHUB_BASE,
     fetch: send,
   });
-  const state = kvState(env.KV as unknown as KvLike);
+  // Its writes counted, for the night's budget (writes.ts).
+  const state = kvState(writes.count(env.KV as unknown as KvLike));
   return {
     async readProviderIds() {
       return (await select<{ id: string }>(env.DB, 'SELECT id FROM providers ORDER BY id')).map(

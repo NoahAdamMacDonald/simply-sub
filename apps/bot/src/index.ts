@@ -3,6 +3,7 @@ import { NightContinues, partSteps } from './night';
 import { Requests } from './requests';
 import { runNight, type NightSummary } from './run';
 import { workerServices } from './services';
+import { Writes } from './writes';
 
 // The "simply-sub-bot" Worker (BLUEPRINT §6.4, §6.5, §7.7; M8.3, M3.9 to M3.11): at 03:00 UTC its cron trigger starts
 // the night's Workflow, which checks what data/automation.yaml says is due, step by step, opens or refreshes the week's
@@ -23,6 +24,8 @@ interface NightParams {
   date: string;
   /** Which part of the night this instance is, from 1. */
   part?: number;
+  /** The KV writes the parts before made (writes.ts). */
+  writes?: number;
 }
 
 /** Each part's instance id: the date's for the first, so a second trigger the same day starts nothing new. */
@@ -35,9 +38,10 @@ export class PriceCheck extends WorkflowEntrypoint<Env, NightParams> {
     event: WorkflowEvent<NightParams>,
     step: WorkflowStep,
   ): Promise<NightSummary & { part: number; goesOnFrom?: string }> {
-    const { date, part = 1 } = event.payload;
+    const { date, part = 1, writes: before = 0 } = event.payload;
     const requests = new Requests();
-    const services = workerServices(this.env, requests);
+    const writes = new Writes();
+    const services = workerServices(this.env, requests, writes);
     // A later part reads what the earlier ones' steps returned from KV, which can take a minute to reach every place.
     if (part > 1) await step.sleep('let the last part’s results reach KV', '1 minute');
     const steps = partSteps(
@@ -45,6 +49,8 @@ export class PriceCheck extends WorkflowEntrypoint<Env, NightParams> {
       (name, task) => step.do(name, stepConfig, task as never) as never,
       requests,
       services.state.night(date, part > 1),
+      undefined,
+      { writes, before },
     );
     try {
       return { ...(await runNight(date, steps, services)), part };
@@ -56,7 +62,7 @@ export class PriceCheck extends WorkflowEntrypoint<Env, NightParams> {
       await step.do(`go on in part ${part + 1}`, async () => {
         await this.env.PRICE_CHECK.create({
           id: partId(date, part + 1),
-          params: { date, part: part + 1 },
+          params: { date, part: part + 1, writes: steps.writes() },
         });
       });
       return { findings: 0, part, goesOnFrom: error.step };
