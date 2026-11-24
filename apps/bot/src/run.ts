@@ -45,6 +45,7 @@ import {
   rateTargets,
 } from './targets';
 import type { Budget, Finding } from './types';
+import { OutOfWrites, writesPerNight } from './writes';
 
 // A night of the bot (BLUEPRINT §6.4, M3.9), as the Workflow runs it: read the repository and data/automation.yaml
 // from main, choose tonight's providers (a rotating slice of the catalog, M11.8, so a night's steps stay well under a
@@ -61,7 +62,15 @@ import type { Budget, Finding } from './types';
 // GraphQL request. A step that fails is noted for the digest, which opens on its day whatever else failed.
 
 /** A Workflow step: runs once, its result kept, and retried when it throws. */
-export type Step = <T>(name: string, task: () => Promise<T>) => Promise<T>;
+export type Step = <T>(name: string, task: () => Promise<T>, options?: StepOptions) => Promise<T>;
+
+export interface StepOptions {
+  /**
+   * A page check, which waits for another night once the night's KV writes are spent (writes.ts): it throws
+   * OutOfWrites instead of running.
+   */
+  mayWait?: boolean;
+}
 
 /** What to check: each provider's and bundle's pages, every host, and every page the catalog cites. */
 export interface CatalogIndex {
@@ -153,6 +162,8 @@ const pendingPerStep = 25;
 
 export interface NightSummary {
   findings: number;
+  /** The checks left for another night: the night's KV writes were spent (writes.ts). */
+  waited?: number;
   /** The digest's pull request, opened or refreshed, on the digest's day. */
   pullRequest?: string;
   /** The discovery batch's pull request, the night its last service is done. */
@@ -297,6 +308,8 @@ export async function runNight(
 
   const checked: Record<string, IsoDate> = { ...checks };
   let findings = 0;
+  /** The checks left for another night once the night's KV writes were spent: their pages stay due. */
+  let waited = 0;
   let budget: Budget = {
     browserPages: settings.batch.browserPages,
     neurons: settings.batch.neurons,
@@ -338,19 +351,27 @@ export async function runNight(
     input: () => Promise<CheckInput>,
   ) => {
     try {
-      const result = await step(name, async () => {
-        const made = await input();
-        const keys = keysOf(made);
-        if (keys.length === 0) return { count: 0, keys, budget };
-        const found = await checkPages(made, services.pages(robots), budget);
-        await keep(found.findings, keys, today, services.state, alsoKept, owner);
-        return { count: found.findings.length, keys, budget: found.budget };
-      });
+      const result = await step(
+        name,
+        async () => {
+          const made = await input();
+          const keys = keysOf(made);
+          if (keys.length === 0) return { count: 0, keys, budget };
+          const found = await checkPages(made, services.pages(robots), budget);
+          await keep(found.findings, keys, today, services.state, alsoKept, owner);
+          return { count: found.findings.length, keys, budget: found.budget };
+        },
+        { mayWait: true },
+      );
       findings += result.count;
       budget = result.budget;
       for (const key of result.keys) checked[key] = today;
     } catch (error) {
       rethrowContinues(error);
+      if (error instanceof OutOfWrites) {
+        waited++;
+        return;
+      }
       await noteFailure(subject, `The check failed: ${message(error)}`);
     }
   };
@@ -482,6 +503,14 @@ export async function runNight(
       networks: [],
       logo: { id: reseller.id, website: reseller.website, ...committed(repository, reseller.id) },
     }));
+  }
+
+  // A person hears of checks that waited: their pages stay due, so the providers' next night takes them.
+  if (waited > 0) {
+    await noteFailure(
+      'the night’s KV writes',
+      `${waited} check${waited === 1 ? '' : 's'} waited for another night: the night had made its ${writesPerNight} KV writes.`,
+    );
   }
 
   // The Bank of Canada's series (M11.14), as often as pricing pages: a change the file doesn't have waits for the digest.
@@ -651,6 +680,7 @@ export async function runNight(
   await step('save the check dates', () => services.state.saveChecks(checked));
   return {
     findings,
+    ...(waited > 0 && { waited }),
     ...(pullRequest !== undefined && { pullRequest }),
     ...(discovery?.pullRequest !== undefined && { batch: discovery.pullRequest }),
   };

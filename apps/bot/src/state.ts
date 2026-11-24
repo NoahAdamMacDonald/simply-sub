@@ -10,6 +10,7 @@ import type { DiscoveryBatch, ServiceWork } from './discovery';
 import type { Memo } from './night';
 import type { Searches } from './search';
 import type { Finding } from './types';
+import type { Writes } from './writes';
 
 // What the bot remembers between nights (BLUEPRINT §6.4, M3.9), in the KV namespace it shares with the API under keys
 // that start with `bot:`: when each page and logo was last checked (one key, written once a night), the day the last
@@ -23,7 +24,7 @@ import type { Finding } from './types';
 export interface Pending {
   /** The page's URL, or `logo:<id>`. */
   key: string;
-  /** The night it was last checked. */
+  /** The night its findings were last written: a night that finds the same leaves the entry as it was. */
   seen: IsoDate;
   findings: Finding[];
   /**
@@ -123,11 +124,18 @@ export function kvState(kv: KvLike): BotState {
       }
       return found;
     },
+    // KV allows the free plan's account 1,000 writes and 1,000 deletes a day, and the night of 2026-11-24 used up the
+    // writes rewriting every checked page's entry only for its date. So an entry is written only when what it proposes
+    // has changed, and deleted only when it's there: reads are a hundred times cheaper.
     async putPending(pending) {
-      await kv.put(pendingKey(pending.key), JSON.stringify(pending));
+      const key = pendingKey(pending.key);
+      const stored = await kv.get(key);
+      if (stored !== null && sameProposal(JSON.parse(stored) as Pending, pending)) return;
+      await kv.put(key, JSON.stringify(pending));
     },
     async dropPending(key) {
-      await kv.delete(pendingKey(key));
+      const stored = pendingKey(key);
+      if ((await kv.get(stored)) !== null) await kv.delete(stored);
     },
     searches,
     async countSearch(month, engine) {
@@ -198,6 +206,15 @@ function parseJson(value: string | null): unknown {
   }
 }
 
+/** Whether two entries propose the same: the same findings for the same provider, whatever night they were seen. */
+function sameProposal(stored: Pending, next: Pending): boolean {
+  return (
+    stored.key === next.key &&
+    stored.owner === next.owner &&
+    JSON.stringify(stored.findings) === JSON.stringify(next.findings)
+  );
+}
+
 /** A page's KV key: a hash of its URL, since KV keys are at most 512 bytes. */
 function pendingKey(key: string): string {
   return `${pendingPrefix}${hash(key)}`;
@@ -213,10 +230,10 @@ function hash(text: string): string {
   return hashed.toString(16).padStart(8, '0');
 }
 
-/** A state in memory, for the tests. */
-export function memoryState(): BotState & { kv: Map<string, string> } {
+/** A state in memory, for the tests: its writes counted by `writes` when given. */
+export function memoryState(writes?: Writes): BotState & { kv: Map<string, string> } {
   const kv = new Map<string, string>();
-  const state = kvState({
+  const inMemory: KvLike = {
     get: async (key) => kv.get(key) ?? null,
     put: async (key, value) => void kv.set(key, value),
     delete: async (key) => void kv.delete(key),
@@ -224,6 +241,7 @@ export function memoryState(): BotState & { kv: Map<string, string> } {
       keys: [...kv.keys()].filter((key) => key.startsWith(prefix)).map((name) => ({ name })),
       list_complete: true,
     }),
-  });
+  };
+  const state = kvState(writes ? writes.count(inMemory) : inMemory);
   return Object.assign(state, { kv });
 }

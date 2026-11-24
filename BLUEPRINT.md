@@ -2357,8 +2357,8 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
   quote, a page not read. A reviewer needs only GitHub: to accept a change, merge; to reject one, revert its edit on
   the branch but keep its baseline, then merge. The nightly `Price updates` pull request of M8.3 is gone: an open one
   on `bot/price-updates` can be closed.
-- **KV:** the API's namespace, `simply-sub-kv`, with the bot's keys under `bot:` (no new resource): a few writes a
-  night, of 1,000 a day. The bot needs redeploying from main once this merges (section 7.2): its binding is new.
+- **KV:** the API's namespace, `simply-sub-kv`, with the bot's keys under `bot:` (no new resource): at most 600 writes
+  a night, of 1,000 a day (below, "The night's KV writes"). The bot needs redeploying from main once this merges (section 7.2): its binding is new.
 - **A review's commits are kept (M3.10):** the bot never rebuilds a branch whose open pull request has commits that
   aren't its own (a reviewer's: its commit messages carry `botSignature`). It comments that the week's digest is held
   instead, and the findings stay pending until that pull request is merged or closed. Text files go into the commit's
@@ -2387,6 +2387,19 @@ the digest. Now:
   reports, the digest's gathering and building, and the discovery are each caught when their tries are used up and
   noted as a `failed:` entry, so the night goes on and the week's digest lists them; the reports are let go only once a
   digest has them.
+
+**The night's KV writes (2026-11-24):** the free plan gives the account 1,000 KV writes and 1,000 deletes a day, shared
+with the API's `/fx` and `/icon`. The catalog's growth to 167 providers spent them within 20 minutes of that night's
+start: every page checked with something pending rewrote its entry only for its date, besides a write per step for the
+parts. Now:
+- **Pending entries change only when what they propose does** (`state.ts`): one a night finds the same is left as it
+  was (`seen` is the night its findings were last written), and one is deleted only when it's there.
+- **A budget** (`apps/bot/src/writes.ts`): each step's writes and deletes are counted with its result, and carried to
+  the next part. Once the night has made `writesPerNight` (600), a page check that hasn't run waits (`OutOfWrites`):
+  its pages stay due, so their provider's next night takes them, and a `failed:` entry tells the digest how many
+  waited. The steps every night needs (the check dates, the digest, the discovery) still run, in the rest of the day's.
+- **`/fx` survives a refused write** (`apps/api/src/fx.ts`), as `/icon` already did: the rates are answered, just not
+  kept.
 
 **Settings (M3.8):** `data/automation.yaml`, checked by `data:validate` against core's `automationSchema`
 (`pipeline/automation.ts`, `data/schema/automation.schema.json`): a cadence for pricing pages, policy pages, logos and

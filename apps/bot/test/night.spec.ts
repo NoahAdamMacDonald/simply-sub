@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { NightContinues, partSteps, type RunStep } from '../src/night';
 import { Requests } from '../src/requests';
-import { memoryState } from '../src/state';
+import { memoryState, type Pending } from '../src/state';
+import { OutOfWrites, Writes } from '../src/writes';
 
 // A night in parts (BLUEPRINT §6.4): a Workflow instance sends at most 50 requests out on the free plan, and the nights
 // of 2026-11-07 to 2026-11-09 failed every check after robots.txt with "Too many subrequests". Each step now gets what's
@@ -105,5 +106,62 @@ describe('a night in parts', () => {
       new NightContinues('check netflix'),
     );
     expect(first.sent).toHaveLength(10);
+  });
+
+  describe('the night’s KV writes', () => {
+    const entry: Pending = {
+      key: 'https://netflix.com/signup/planform',
+      seen: date,
+      findings: [{ kind: 'manual', subject: 'netflix', reason: 'A test finding.' }],
+    };
+
+    it('leaves a page check for another night once they’re spent, but not a step every night needs', async () => {
+      const writes = new Writes();
+      const state = memoryState(writes);
+      const names: string[] = [];
+      const step = partSteps(runner(names), new Requests(), state.night(date, false), 10, {
+        writes,
+        before: 0,
+        budget: 3,
+      });
+      // The entry, and the step's result kept for the next part: two writes.
+      await step('check mullvad', async () => (await state.putPending(entry), 'checked'), {
+        mayWait: true,
+      });
+      expect(step.writes()).toBe(2);
+      await step('check netflix', async () => 'checked', { mayWait: true });
+      expect(step.writes()).toBe(3);
+      await expect(
+        step('check proton-vpn', async () => 'checked', { mayWait: true }),
+      ).rejects.toBeInstanceOf(OutOfWrites);
+      expect(await step('save the check dates', async () => 'saved')).toBe('saved');
+      expect(names).toEqual(['check mullvad', 'check netflix', 'save the check dates']);
+      expect(step.writes()).toBe(4);
+    });
+
+    it('carries the count to the next part, which still takes the checks the last one finished', async () => {
+      const writes = new Writes();
+      const state = memoryState(writes);
+      const first = partSteps(runner([]), new Requests(), state.night(date, false), 10, {
+        writes,
+        before: 0,
+        budget: 2,
+      });
+      await first('check mullvad', async () => (await state.putPending(entry), 'checked'), {
+        mayWait: true,
+      });
+      const names: string[] = [];
+      const second = partSteps(runner(names), new Requests(), state.night(date, true), 10, {
+        writes,
+        before: first.writes(),
+        budget: 2,
+      });
+      expect(await second('check mullvad', async () => 'again', { mayWait: true })).toBe('checked');
+      await expect(
+        second('check netflix', async () => 'checked', { mayWait: true }),
+      ).rejects.toBeInstanceOf(OutOfWrites);
+      expect(names).toEqual([]);
+      expect(second.writes()).toBe(2);
+    });
   });
 });

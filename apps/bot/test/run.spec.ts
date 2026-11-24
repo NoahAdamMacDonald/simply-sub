@@ -17,6 +17,7 @@ import { NightContinues, partSteps } from '../src/night';
 import { Requests } from '../src/requests';
 import { nightSlice, runNight, sliceSize, type Services } from '../src/run';
 import { memoryState } from '../src/state';
+import { Writes } from '../src/writes';
 import { catalogIndex } from '../src/targets';
 import {
   fakeServices,
@@ -849,6 +850,31 @@ describe('a night in parts (2026-11-10)', () => {
     // The night's digest, as one part would have made it.
     expect(summary?.pullRequest).toBe('https://github.com/NoahAdamMacDonald/simply-sub/pull/1');
     expect(proposals).toEqual(whole.proposals);
+  });
+
+  it('leaves its checks for another night once the night’s KV writes are spent, and says so in the digest', async () => {
+    const writes = new Writes();
+    const state = memoryState(writes);
+    const services = await fakeServices(changedWorld(), undefined, {
+      baselines: baselinesOf(quietWorld()),
+      state,
+    });
+    const names: string[] = [];
+    const steps = partSteps(stepper(names), new Requests(), state.night(today, false), 10_000, {
+      writes,
+      before: 0,
+      budget: 0,
+    });
+    const summary = await runNight(today, steps, services);
+    expect(names.filter((name) => name.startsWith('check '))).toEqual([]);
+    expect(summary.waited).toBe(9);
+    // Their pages stay due: the check dates have only the Bank of Canada's, which isn't a page check.
+    expect(await state.checks()).toEqual({ 'bank-of-canada': today });
+    const review =
+      services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
+    expect(review).toContain(
+      '**the night’s KV writes**: 9 checks waited for another night: the night had made its 600 KV writes.',
+    );
   });
 
   it('notes a side step that fails, the Bank of Canada’s rate, and still opens the digest with it', async () => {

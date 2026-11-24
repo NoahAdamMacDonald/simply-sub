@@ -38,7 +38,13 @@ export async function ecbRates(env: Env, now: string): Promise<Rates | undefined
   const fetched = await fetchEcbRates();
   if (fetched) {
     const ecb: KeptEcbRates = { ...fetched, fetchedAt: now };
-    await env.KV.put(kvKey, JSON.stringify(ecb));
+    try {
+      await env.KV.put(kvKey, JSON.stringify(ecb));
+    } catch (error) {
+      // Over the free plan's 1,000 writes a day, say (as on 2026-11-24): the rates are still answered, just not kept,
+      // so the next request fetches them again.
+      console.warn(`KV didn't keep the rates: ${error instanceof Error ? error.name : 'unknown'}.`);
+    }
     return { ecb, stale: false, freshFor: fxFreshSeconds };
   }
   return kept.success ? { ecb: kept.data, stale: true, freshFor: 0 } : undefined;
