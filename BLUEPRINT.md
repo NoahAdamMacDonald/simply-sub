@@ -2401,6 +2401,21 @@ parts. Now:
 - **`/fx` survives a refused write** (`apps/api/src/fx.ts`), as `/icon` already did: the rates are answered, just not
   kept.
 
+**Nights that finish (2026-11-24):** no night had finished since 2026-11-21. The catalog cites about 1,850 pricing pages,
+due daily, and a night's parts send at most 40 requests each, so the nights of 2026-11-23 stopped at 20 parts ("check
+avg") and those of 2026-11-22 and 2026-11-24 with "Too many subrequests". The check dates were saved only at the end, so
+each night began again from the top of its slice, and the tidying and the digest were never reached. Now:
+- **Redirects are counted** (`requests.ts`): Cloudflare counts each hop of a redirect as a request (the Internet
+  Archive's copies always redirect), so the bot follows them itself, each hop counted, up to five.
+- **Each part keeps its check dates** (`save the check dates before <step>`), and **the providers checked longest ago
+  go first**, so a night that can't read everything goes on where the last one stopped. Daily pricing is the most a
+  page is checked, not a promise: each is read about once in the nights a full round takes.
+- **Checks have the first 32 of a night's 40 parts** (`night.ts`, `checkParts`, `maxParts`): a check past them waits
+  (`ChecksWait`), as one past the night's writes does, so the Bank of Canada's rate, the tidying, the digest and the
+  check dates always run.
+- **Pending entries are read a part at a time** (`pendingNames`, `pendingAt`): a step may make 1,000 requests to KV, and
+  the tidying reads 200 entries a step, the digest 25.
+
 **Settings (M3.8):** `data/automation.yaml`, checked by `data:validate` against core's `automationSchema`
 (`pipeline/automation.ts`, `data/schema/automation.schema.json`): a cadence for pricing pages, policy pages, logos and
 discovery (`daily`, `weekly`, `monthly` or `off`), the digest's weekday, the reviewer (`scheduled-claude`, `workers-ai`

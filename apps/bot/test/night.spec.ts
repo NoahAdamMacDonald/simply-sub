@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { NightContinues, partSteps, type RunStep } from '../src/night';
+import { ChecksWait, NightContinues, partSteps, type RunStep } from '../src/night';
 import { Requests } from '../src/requests';
 import { memoryState, type Pending } from '../src/state';
-import { OutOfWrites, Writes } from '../src/writes';
+import { Writes } from '../src/writes';
 
 // A night in parts (BLUEPRINT §6.4): a Workflow instance sends at most 50 requests out on the free plan, and the nights
 // of 2026-11-07 to 2026-11-09 failed every check after robots.txt with "Too many subrequests". Each step now gets what's
@@ -133,7 +133,7 @@ describe('a night in parts', () => {
       expect(step.writes()).toBe(3);
       await expect(
         step('check proton-vpn', async () => 'checked', { mayWait: true }),
-      ).rejects.toBeInstanceOf(OutOfWrites);
+      ).rejects.toEqual(new ChecksWait('writes'));
       expect(await step('save the check dates', async () => 'saved')).toBe('saved');
       expect(names).toEqual(['check mullvad', 'check netflix', 'save the check dates']);
       expect(step.writes()).toBe(4);
@@ -159,9 +159,26 @@ describe('a night in parts', () => {
       expect(await second('check mullvad', async () => 'again', { mayWait: true })).toBe('checked');
       await expect(
         second('check netflix', async () => 'checked', { mayWait: true }),
-      ).rejects.toBeInstanceOf(OutOfWrites);
+      ).rejects.toEqual(new ChecksWait('writes'));
       expect(names).toEqual([]);
       expect(second.writes()).toBe(2);
+    });
+
+    it('leaves page checks for another night past the parts they may take, but not the rest', async () => {
+      const writes = new Writes();
+      const state = memoryState(writes);
+      const names: string[] = [];
+      const step = partSteps(runner(names), new Requests(), state.night(date, false), 10, {
+        writes,
+        before: 0,
+        part: 4,
+        lastCheckPart: 3,
+      });
+      await expect(step('check netflix', async () => 'checked', { mayWait: true })).rejects.toEqual(
+        new ChecksWait('parts'),
+      );
+      expect(await step('build the digest', async () => 'built')).toBe('built');
+      expect(names).toEqual(['build the digest']);
     });
   });
 });

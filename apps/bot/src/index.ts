@@ -1,5 +1,5 @@
 import { WorkflowEntrypoint, type WorkflowEvent, type WorkflowStep } from 'cloudflare:workers';
-import { NightContinues, partSteps } from './night';
+import { maxParts, NightContinues, partSteps } from './night';
 import { Requests } from './requests';
 import { runNight, type NightSummary } from './run';
 import { workerServices } from './services';
@@ -15,9 +15,6 @@ const stepConfig = {
   retries: { limit: 2, delay: '30 seconds', backoff: 'exponential' },
   timeout: '10 minutes',
 } as const;
-
-/** The most parts a night takes: a night's checks and digest fit in a few, and a runaway one stops here. */
-export const maxParts = 20;
 
 interface NightParams {
   /** The night's date, UTC: the pull request's title. */
@@ -50,7 +47,7 @@ export class PriceCheck extends WorkflowEntrypoint<Env, NightParams> {
       requests,
       services.state.night(date, part > 1),
       undefined,
-      { writes, before },
+      { writes, before, part },
     );
     try {
       return { ...(await runNight(date, steps, services)), part };
