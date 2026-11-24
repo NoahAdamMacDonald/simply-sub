@@ -9,14 +9,6 @@ import type { KvLike } from './state';
 /** The KV writes and deletes a night's page checks may take: the rest of the day's 1,000 is left for the API's. */
 export const writesPerNight = 600;
 
-/** Thrown before a step that may wait (a page check) once the night's writes are spent: it's left for another night. */
-export class OutOfWrites extends Error {
-  constructor() {
-    super('The night has used its KV writes');
-    this.name = 'OutOfWrites';
-  }
-}
-
 /** Counts the KV writes and deletes of the step running now. */
 export class Writes {
   /** The writes and deletes the step running now has made. */

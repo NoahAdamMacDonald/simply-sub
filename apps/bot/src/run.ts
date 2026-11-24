@@ -25,7 +25,7 @@ import { checkPages, message, type CheckInput, type PageDeps } from './check-pag
 import { digest, digestBranch, urlOf } from './digest';
 import { discover, type DiscoveryServices } from './discovery';
 import type { RepositoryState } from './github';
-import { rethrowContinues } from './night';
+import { ChecksWait, NightContinues, rethrowContinues } from './night';
 import { bankOfCanadaFile, filesToRead, worthProposing, type Proposal } from './proposal';
 import {
   confirmsReported,
@@ -45,7 +45,7 @@ import {
   rateTargets,
 } from './targets';
 import type { Budget, Finding } from './types';
-import { OutOfWrites, writesPerNight } from './writes';
+import { writesPerNight } from './writes';
 
 // A night of the bot (BLUEPRINT §6.4, M3.9), as the Workflow runs it: read the repository and data/automation.yaml
 // from main, choose tonight's providers (a rotating slice of the catalog, M11.8, so a night's steps stay well under a
@@ -66,8 +66,8 @@ export type Step = <T>(name: string, task: () => Promise<T>, options?: StepOptio
 
 export interface StepOptions {
   /**
-   * A page check, which waits for another night once the night's KV writes are spent (writes.ts): it throws
-   * OutOfWrites instead of running.
+   * A page check, which waits for another night once the night's KV writes are spent (writes.ts), or past its parts
+   * for checks (night.ts): it throws ChecksWait instead of running.
    */
   mayWait?: boolean;
 }
@@ -159,6 +159,9 @@ const indexPart = 25;
 
 /** The most pending entries one step of the digest gathers, their baselines read in one request. */
 const pendingPerStep = 25;
+
+/** The pending entries one tidying step reads: each a KV read, and a drop two more, within a step's 1,000. */
+const tidyPerStep = 200;
 
 export interface NightSummary {
   findings: number;
@@ -307,383 +310,439 @@ export async function runNight(
   }
 
   const checked: Record<string, IsoDate> = { ...checks };
-  let findings = 0;
-  /** The checks left for another night once the night's KV writes were spent: their pages stay due. */
-  let waited = 0;
-  let budget: Budget = {
-    browserPages: settings.batch.browserPages,
-    neurons: settings.batch.neurons,
-  };
-  /** A step's failure, for the digest: its retries are used up, and the rest of the night goes on. */
-  const noteFailure = (subject: string, reason: string) =>
-    step(`note ${subject}'s failure`, () =>
-      services.state.putPending({
-        key: `failed:${subject}`,
-        seen: today,
-        findings: [{ kind: 'manual', subject, reason }],
-      }),
-    );
-  /**
-   * A step besides the checks (the Bank of Canada's rate, the digest's): when it fails, the night goes on without it,
-   * and the digest says so. A part out of requests isn't a failure: the night goes on in its next part (night.ts).
-   */
-  const noted = async <T>(
-    name: string,
-    subject: string,
-    task: () => Promise<T>,
-  ): Promise<T | undefined> => {
-    try {
-      return await step(name, task);
-    } catch (error) {
-      rethrowContinues(error);
-      await noteFailure(subject, `It failed: ${message(error)}`);
-      return undefined;
-    }
-  };
-  /**
-   * Runs one step's checks; what it found waits in KV, a pending entry per page (or logo), with the provider whose night
-   * it was checked on (M11.8).
-   */
-  const check = async (
-    name: string,
-    subject: string,
-    owner: string | undefined,
-    input: () => Promise<CheckInput>,
-  ) => {
-    try {
-      const result = await step(
-        name,
-        async () => {
-          const made = await input();
-          const keys = keysOf(made);
-          if (keys.length === 0) return { count: 0, keys, budget };
-          const found = await checkPages(made, services.pages(robots), budget);
-          await keep(found.findings, keys, today, services.state, alsoKept, owner);
-          return { count: found.findings.length, keys, budget: found.budget };
-        },
-        { mayWait: true },
-      );
-      findings += result.count;
-      budget = result.budget;
-      for (const key of result.keys) checked[key] = today;
-    } catch (error) {
-      rethrowContinues(error);
-      if (error instanceof OutOfWrites) {
-        waited++;
-        return;
-      }
-      await noteFailure(subject, `The check failed: ${message(error)}`);
-    }
-  };
-  /** Each due page's baseline, as main has it, in one request: due by its cadence, or for a reported plan. */
-  const baselines = async (urls: readonly string[], reportedHere: ReadonlySet<string>) => {
-    const read = urls.filter((url) => due.has(url) || reportedHere.has(url));
-    return read.length === 0 ? {} : services.readBaselines(read, repository.commit);
-  };
-  /** A provider with its Terms and policies (M11.8): D1's leaves them out, and its policiesUrl names their file. */
-  const withPolicies = async (provider: SnapshotProvider | undefined) =>
-    provider?.policiesUrl && !provider.policies
-      ? { ...provider, policies: await services.readPolicies(provider.policiesUrl) }
-      : provider;
-  const bundlesOf = async (ids: readonly string[]) => {
-    const found = await Promise.all(ids.map((id) => services.readBundle(id)));
-    return found.flatMap((bundle) => (bundle ? bundleTargets(bundle) : []));
-  };
-  /** What's due (or reported) of `input`, and of the pages `within` when a step takes some of a provider's. */
-  const dueOnly = (
-    input: Omit<CheckInput, 'baselines' | 'cited'>,
-    reportedHere: ReadonlySet<string> = new Set(),
-    within?: ReadonlySet<string>,
-  ): Omit<CheckInput, 'baselines' | 'cited'> => {
-    const checked = (url: string) =>
-      (due.has(url) || reportedHere.has(url)) && (within === undefined || within.has(url));
-    return {
-      ...input,
-      targets: input.targets.filter((target) => checked(target.price.sourceUrl)),
-      rates: (input.rates ?? []).filter((target) => checked(target.rates.sourceUrl)),
-      approvals: input.approvals.filter((approval) => checked(approval.url)),
-      networks: input.networks.filter((target) => checked(target.url)),
-      policyPages: (input.policyPages ?? []).filter((target) => checked(target.url)),
-    };
-  };
-
-  const plan = stepPlan(index);
-  /** Whether any of these bundles' pages is due: a step with nothing due isn't taken. */
-  const bundlesDue = (bundles: readonly string[]) =>
-    bundles.some((bundle) => (index.bundles[bundle] ?? []).some((url) => due.has(url)));
-  for (const [id, bundles] of Object.entries(plan.withProvider)) {
-    const pages = [
-      ...new Set([
-        ...(index.providers[id] ?? []),
-        ...bundles.flatMap((bundle) => index.bundles[bundle] ?? []),
-      ]),
-    ];
-    // A provider with a reported plan has all its pages looked at: its step knows which of them the reports name.
-    const tonightsPages = reportedIds.has(id) ? pages : pages.filter((url) => due.has(url));
-    const policyPages = new Set(index.policyPages[id] ?? []);
-    for (const [at, part] of chunked(tonightsPages, pagesPerStep).entries()) {
-      const within = new Set(part);
-      // Its Terms and policies, and their shared documents, only where this step checks a page they cite.
-      const policies = part.some((url) => policyPages.has(url));
-      await check(at === 0 ? `check ${id}` : `check ${id} ${at + 1}`, id, id, async () => {
-        const stored = await services.readProvider(id);
-        const provider = policies ? await withPolicies(stored) : stored;
-        const reportedHere = provider ? reportedPages(provider, countries) : new Set<string>();
-        const sets =
-          provider && policies ? await services.readPolicySets(index.policySets[id] ?? []) : [];
-        const made = dueOnly(
-          {
-            subject: id,
-            targets: [
-              ...(provider ? providerTargets(provider) : []),
-              ...(await bundlesOf(bundles)),
-            ],
-            rates: provider ? rateTargets(provider) : [],
-            approvals: provider ? approvalTargets(provider) : [],
-            networks: provider ? networksTargets(provider) : [],
-            policyPages: provider ? policyTargets(provider, sets) : [],
-          },
-          reportedHere,
-          within,
-        );
-        return {
-          ...made,
-          baselines: await baselines(urlsOf(made), reportedHere),
-          cited,
-          archived,
-          today,
-        };
-      });
-    }
-    if (logoDue(id)) {
-      await check(`check ${id}'s logo`, `${id}'s logo`, id, async () => {
-        const provider = await services.readProvider(id);
-        return {
-          subject: id,
-          targets: [],
-          approvals: [],
-          networks: [],
-          ...(provider && {
-            logo: { id, website: provider.website, ...committed(repository, id) },
-          }),
-        };
-      });
-    }
-  }
-  for (const bundles of plan.groups) {
-    if (!bundlesDue(bundles)) continue;
-    const [first = ''] = bundles;
-    await check(
-      `check ${bundles.join(', ')}`,
-      bundles.join(', '),
-      index.bundleOwners[first],
-      async () => {
-        const made = dueOnly({
-          subject: bundles.join(', '),
-          targets: await bundlesOf(bundles),
-          approvals: [],
-          networks: [],
-        });
-        return {
-          ...made,
-          baselines: await baselines(urlsOf(made), new Set()),
-          cited,
-          archived,
-          today,
-        };
-      },
-    );
-  }
-  for (const reseller of repository.resellers) {
-    if (!logoDue(reseller.id)) continue;
-    await check(`logo ${reseller.id}`, reseller.id, undefined, async () => ({
-      subject: reseller.id,
-      targets: [],
-      approvals: [],
-      networks: [],
-      logo: { id: reseller.id, website: reseller.website, ...committed(repository, reseller.id) },
-    }));
-  }
-
-  // A person hears of checks that waited: their pages stay due, so the providers' next night takes them.
-  if (waited > 0) {
-    await noteFailure(
-      'the night’s KV writes',
-      `${waited} check${waited === 1 ? '' : 's'} waited for another night: the night had made its ${writesPerNight} KV writes.`,
-    );
-  }
-
-  // The Bank of Canada's series (M11.14), as often as pricing pages: a change the file doesn't have waits for the digest.
-  if (isDue(settings.cadence.pricing, checks[bankOfCanadaKey], today)) {
-    const kept = await noted(
-      'read the Bank of Canada’s rate',
-      'the Bank of Canada’s rate',
-      async () => {
-        const files = await services.readFiles([bankOfCanadaFile], repository.commit);
-        const finding = await checkBankOfCanada(files[bankOfCanadaFile], (start) =>
-          services.bankOfCanada(start),
-        );
-        if (worthProposing(finding, today)) {
-          await services.state.putPending({
-            key: bankOfCanadaSeriesUrl,
-            seen: today,
-            findings: [finding],
-          });
-          return 1;
-        }
-        await services.state.dropPending(bankOfCanadaSeriesUrl);
-        return 0;
-      },
-    );
-    if (kept !== undefined) {
-      findings += kept;
-      checked[bankOfCanadaKey] = today;
-    }
-  }
-
-  // A page tonight's providers no longer cite, or a provider the catalog no longer has, has nothing to propose (M11.8):
-  // each provider's pending pages are tidied on its own night, as its slice comes round.
-  await noted('drop what tonight’s providers no longer cite', 'tidying the findings', async () => {
-    for (const entry of await services.state.pending()) {
-      if (entry.owner === undefined || /^(?:logo|failed):/.test(entry.key)) continue;
-      if (!ids.has(entry.owner) || (tonight.has(entry.owner) && cited[entry.key] === undefined)) {
-        await services.state.dropPending(entry.key);
-      }
-    }
-  });
-
-  let pullRequest: string | undefined;
-  const lastDigest = await noted('read the last digest', 'the last digest’s date', () =>
-    services.state.lastDigest(),
-  );
-  if (digestDue(settings, today, lastDigest)) {
-    // Steps pass each other only small data: which pending findings still stand (by their KV entry), and the review's
-    // notes by their place in that list. Each step reads the findings themselves, page texts and all, from KV. They're
-    // gathered pendingPerStep at a time, each part's baselines in one request, so no step outgrows a part (night.ts).
-    const kept: Record<string, number[]> = {};
-    let keys: string[] | undefined;
-    for (let start = 0; keys === undefined || start < keys.length; start += pendingPerStep) {
-      const name =
-        start === 0 ? 'gather the digest' : `gather the digest ${start / pendingPerStep + 1}`;
-      const known = keys;
-      const part = await noted(name, 'the digest', async () => {
-        const all = known ?? (await services.state.pending()).map((entry) => entry.key).sort();
-        const entries = await services.state.pendingOf(all.slice(start, start + pendingPerStep));
-        const pages = [
-          ...new Set(
-            entries.flatMap((entry) =>
-              entry.findings.flatMap((finding) => (finding.kind === 'page' ? [finding.url] : [])),
-            ),
-          ),
-        ];
-        const mains =
-          pages.length === 0 ? {} : await services.readBaselines(pages, repository.commit);
-        const found: Record<string, number[]> = {};
-        for (const entry of entries) {
-          const standing = stillPending(entry, index, mains, today, { alsoKept, tonight, ids });
-          if (standing.length === 0) await services.state.dropPending(entry.key);
-          else found[entry.key] = standing.map((finding) => entry.findings.indexOf(finding));
-        }
-        if (start + pendingPerStep >= all.length) await services.state.saveDigest(today);
-        return { all: known === undefined ? all : undefined, found };
-      });
-      // A part that failed leaves the rest waiting for next week's digest, which says so.
-      if (part === undefined) break;
-      keys ??= part.all ?? [];
-      Object.assign(kept, part.found);
-    }
-    const live = async () => {
-      const entries = new Map(
-        (await services.state.pending()).map((entry) => [entry.key, entry] as const),
-      );
-      return Object.entries(kept).flatMap(([key, places]) => {
-        const entry = entries.get(key);
-        return entry ? places.map((place) => entry.findings[place]) : [];
-      });
-    };
-    if (Object.keys(kept).length > 0 || reported.length > 0) {
-      // The free model's review (M3.10), within the Neurons the night's checks left and the week's review items.
-      const noReview = { added: [], notes: [], neurons: 0 };
-      const review =
-        settings.reviewer === 'workers-ai'
-          ? ((await noted('review the digest', 'the digest’s review', async () => {
-              const findings = await live();
-              const done = await reviewWithModel(
-                findings,
-                await services.readTopics(repository.commit),
-                (system, user) => services.ask(system, user),
-                settings.batch.reviewItems,
-                budget.neurons,
-              );
-              return {
-                added: done.added,
-                notes: [...done.notes].map(
-                  ([finding, note]) => [findings.indexOf(finding), note] as const,
-                ),
-                neurons: done.neurons,
-              };
-            })) ?? noReview)
-          : noReview;
-      budget = { ...budget, neurons: budget.neurons - review.neurons };
-      const reports =
-        reported.length > 0
-          ? await noted('weigh the reports', 'the price reports', async () =>
-              reportOutcomes(
-                reported,
-                await reportedPlans(reported, index, services),
-                await live(),
-              ),
-            )
-          : undefined;
-      pullRequest = await noted('build the digest', 'the digest', async () => {
-        const findings = await live();
-        const reviewed = new Map(review.notes.map(([place, note]) => [findings[place], note]));
-        const all = [...findings, ...review.added];
-        const files = await services.readFiles(filesToRead(all, today), repository.commit);
-        const made = digest(all, new Map(Object.entries(files)), today, {
-          reviewer: settings.reviewer,
-          reviewed,
-          ...(reports && { reports }),
-        });
-        return services.propose(repository, made, digestBranch);
-      });
-      // The digest has them now; one that wasn't built keeps them for the next.
-      if (reported.length > 0 && pullRequest !== undefined) {
-        await noted('drop the reports', 'the price reports', async () => {
-          for (const { plan } of reported) await services.state.dropReport(plan);
-        });
-      }
-    }
-  }
-
-  // The discovery (M3.11), with what the checks and the digest left of the night: a step of its that fails is noted
-  // (discovery.ts), and anything else that fails it is noted here.
-  let discovery: Awaited<ReturnType<typeof discover>> | undefined;
+  // A night may stop in any part, and the catalog's pages need more than a night (2026-11-24): each part keeps the
+  // check dates it got to, so the next night goes on from there rather than from the top.
   try {
-    discovery = await discover(
-      {
-        today,
-        settings,
-        repository,
-        budget,
-        due: isDue(settings.cadence.discovery, checks[discoveryKey], today),
-        searchBudgets: searchBudgets(settings, 'bot'),
-      },
-      step,
-      services.discovery,
+    let findings = 0;
+    /** The checks left for another night, and why: their pages stay due. */
+    const waited = { count: 0, reason: undefined as ChecksWait['reason'] | undefined };
+    let budget: Budget = {
+      browserPages: settings.batch.browserPages,
+      neurons: settings.batch.neurons,
+    };
+    /** A step's failure, for the digest: its retries are used up, and the rest of the night goes on. */
+    const noteFailure = (subject: string, reason: string) =>
+      step(`note ${subject}'s failure`, () =>
+        services.state.putPending({
+          key: `failed:${subject}`,
+          seen: today,
+          findings: [{ kind: 'manual', subject, reason }],
+        }),
+      );
+    /**
+     * A step besides the checks (the Bank of Canada's rate, the digest's): when it fails, the night goes on without it,
+     * and the digest says so. A part out of requests isn't a failure: the night goes on in its next part (night.ts).
+     */
+    const noted = async <T>(
+      name: string,
+      subject: string,
+      task: () => Promise<T>,
+    ): Promise<T | undefined> => {
+      try {
+        return await step(name, task);
+      } catch (error) {
+        rethrowContinues(error);
+        await noteFailure(subject, `It failed: ${message(error)}`);
+        return undefined;
+      }
+    };
+    /**
+     * Runs one step's checks; what it found waits in KV, a pending entry per page (or logo), with the provider whose night
+     * it was checked on (M11.8).
+     */
+    const check = async (
+      name: string,
+      subject: string,
+      owner: string | undefined,
+      input: () => Promise<CheckInput>,
+    ) => {
+      try {
+        const result = await step(
+          name,
+          async () => {
+            const made = await input();
+            const keys = keysOf(made);
+            if (keys.length === 0) return { count: 0, keys, budget };
+            const found = await checkPages(made, services.pages(robots), budget);
+            await keep(found.findings, keys, today, services.state, alsoKept, owner);
+            return { count: found.findings.length, keys, budget: found.budget };
+          },
+          { mayWait: true },
+        );
+        findings += result.count;
+        budget = result.budget;
+        for (const key of result.keys) checked[key] = today;
+      } catch (error) {
+        rethrowContinues(error);
+        if (error instanceof ChecksWait) {
+          waited.count++;
+          waited.reason ??= error.reason;
+          return;
+        }
+        await noteFailure(subject, `The check failed: ${message(error)}`);
+      }
+    };
+    /** Each due page's baseline, as main has it, in one request: due by its cadence, or for a reported plan. */
+    const baselines = async (urls: readonly string[], reportedHere: ReadonlySet<string>) => {
+      const read = urls.filter((url) => due.has(url) || reportedHere.has(url));
+      return read.length === 0 ? {} : services.readBaselines(read, repository.commit);
+    };
+    /** A provider with its Terms and policies (M11.8): D1's leaves them out, and its policiesUrl names their file. */
+    const withPolicies = async (provider: SnapshotProvider | undefined) =>
+      provider?.policiesUrl && !provider.policies
+        ? { ...provider, policies: await services.readPolicies(provider.policiesUrl) }
+        : provider;
+    const bundlesOf = async (ids: readonly string[]) => {
+      const found = await Promise.all(ids.map((id) => services.readBundle(id)));
+      return found.flatMap((bundle) => (bundle ? bundleTargets(bundle) : []));
+    };
+    /** What's due (or reported) of `input`, and of the pages `within` when a step takes some of a provider's. */
+    const dueOnly = (
+      input: Omit<CheckInput, 'baselines' | 'cited'>,
+      reportedHere: ReadonlySet<string> = new Set(),
+      within?: ReadonlySet<string>,
+    ): Omit<CheckInput, 'baselines' | 'cited'> => {
+      const checked = (url: string) =>
+        (due.has(url) || reportedHere.has(url)) && (within === undefined || within.has(url));
+      return {
+        ...input,
+        targets: input.targets.filter((target) => checked(target.price.sourceUrl)),
+        rates: (input.rates ?? []).filter((target) => checked(target.rates.sourceUrl)),
+        approvals: input.approvals.filter((approval) => checked(approval.url)),
+        networks: input.networks.filter((target) => checked(target.url)),
+        policyPages: (input.policyPages ?? []).filter((target) => checked(target.url)),
+      };
+    };
+
+    const plan = stepPlan(index);
+    /** Whether any of these bundles' pages is due: a step with nothing due isn't taken. */
+    const bundlesDue = (bundles: readonly string[]) =>
+      bundles.some((bundle) => (index.bundles[bundle] ?? []).some((url) => due.has(url)));
+    /**
+     * A provider's oldest check of what's due tonight ('' for never), so the providers checked longest ago go first: a
+     * night that can't read everything goes on where the last one stopped.
+     */
+    const oldestCheck = (id: string, bundles: readonly string[]) => {
+      const keys = [
+        ...[
+          ...(index.providers[id] ?? []),
+          ...bundles.flatMap((bundle) => index.bundles[bundle] ?? []),
+        ].filter((url) => due.has(url)),
+        ...(logoDue(id) ? [`logo:${id}`] : []),
+      ];
+      return keys.length === 0 ? '~' : keys.map((key) => checks[key] ?? '').sort()[0];
+    };
+    const byOldest = Object.entries(plan.withProvider)
+      .map(([id, bundles]) => ({ id, bundles, oldest: oldestCheck(id, bundles) }))
+      .sort((a, b) => a.oldest.localeCompare(b.oldest));
+    for (const { id, bundles } of byOldest) {
+      const pages = [
+        ...new Set([
+          ...(index.providers[id] ?? []),
+          ...bundles.flatMap((bundle) => index.bundles[bundle] ?? []),
+        ]),
+      ];
+      // A provider with a reported plan has all its pages looked at: its step knows which of them the reports name.
+      const tonightsPages = reportedIds.has(id) ? pages : pages.filter((url) => due.has(url));
+      const policyPages = new Set(index.policyPages[id] ?? []);
+      for (const [at, part] of chunked(tonightsPages, pagesPerStep).entries()) {
+        const within = new Set(part);
+        // Its Terms and policies, and their shared documents, only where this step checks a page they cite.
+        const policies = part.some((url) => policyPages.has(url));
+        await check(at === 0 ? `check ${id}` : `check ${id} ${at + 1}`, id, id, async () => {
+          const stored = await services.readProvider(id);
+          const provider = policies ? await withPolicies(stored) : stored;
+          const reportedHere = provider ? reportedPages(provider, countries) : new Set<string>();
+          const sets =
+            provider && policies ? await services.readPolicySets(index.policySets[id] ?? []) : [];
+          const made = dueOnly(
+            {
+              subject: id,
+              targets: [
+                ...(provider ? providerTargets(provider) : []),
+                ...(await bundlesOf(bundles)),
+              ],
+              rates: provider ? rateTargets(provider) : [],
+              approvals: provider ? approvalTargets(provider) : [],
+              networks: provider ? networksTargets(provider) : [],
+              policyPages: provider ? policyTargets(provider, sets) : [],
+            },
+            reportedHere,
+            within,
+          );
+          return {
+            ...made,
+            baselines: await baselines(urlsOf(made), reportedHere),
+            cited,
+            archived,
+            today,
+          };
+        });
+      }
+      if (logoDue(id)) {
+        await check(`check ${id}'s logo`, `${id}'s logo`, id, async () => {
+          const provider = await services.readProvider(id);
+          return {
+            subject: id,
+            targets: [],
+            approvals: [],
+            networks: [],
+            ...(provider && {
+              logo: { id, website: provider.website, ...committed(repository, id) },
+            }),
+          };
+        });
+      }
+    }
+    for (const bundles of plan.groups) {
+      if (!bundlesDue(bundles)) continue;
+      const [first = ''] = bundles;
+      await check(
+        `check ${bundles.join(', ')}`,
+        bundles.join(', '),
+        index.bundleOwners[first],
+        async () => {
+          const made = dueOnly({
+            subject: bundles.join(', '),
+            targets: await bundlesOf(bundles),
+            approvals: [],
+            networks: [],
+          });
+          return {
+            ...made,
+            baselines: await baselines(urlsOf(made), new Set()),
+            cited,
+            archived,
+            today,
+          };
+        },
+      );
+    }
+    for (const reseller of repository.resellers) {
+      if (!logoDue(reseller.id)) continue;
+      await check(`logo ${reseller.id}`, reseller.id, undefined, async () => ({
+        subject: reseller.id,
+        targets: [],
+        approvals: [],
+        networks: [],
+        logo: { id: reseller.id, website: reseller.website, ...committed(repository, reseller.id) },
+      }));
+    }
+
+    // A person hears of checks that waited: their pages stay due, so the providers' next night takes them.
+    if (waited.count > 0) {
+      await noteFailure(
+        'the night’s checks',
+        `${waited.count} check${waited.count === 1 ? '' : 's'} waited for another night: ${
+          waited.reason === 'writes'
+            ? `the night had made its ${writesPerNight} KV writes`
+            : 'the night had used its parts for checks'
+        }.`,
+      );
+    }
+
+    // The Bank of Canada's series (M11.14), as often as pricing pages: a change the file doesn't have waits for the digest.
+    if (isDue(settings.cadence.pricing, checks[bankOfCanadaKey], today)) {
+      const kept = await noted(
+        'read the Bank of Canada’s rate',
+        'the Bank of Canada’s rate',
+        async () => {
+          const files = await services.readFiles([bankOfCanadaFile], repository.commit);
+          const finding = await checkBankOfCanada(files[bankOfCanadaFile], (start) =>
+            services.bankOfCanada(start),
+          );
+          if (worthProposing(finding, today)) {
+            await services.state.putPending({
+              key: bankOfCanadaSeriesUrl,
+              seen: today,
+              findings: [finding],
+            });
+            return 1;
+          }
+          await services.state.dropPending(bankOfCanadaSeriesUrl);
+          return 0;
+        },
+      );
+      if (kept !== undefined) {
+        findings += kept;
+        checked[bankOfCanadaKey] = today;
+      }
+    }
+
+    // A page tonight's providers no longer cite, or a provider the catalog no longer has, has nothing to propose (M11.8):
+    // each provider's pending pages are tidied on its own night, as its slice comes round. A step may make at most
+    // 1,000 requests to KV, so they're read tidyPerStep at a time: the first step lists them all.
+    let names: string[] | undefined;
+    for (let start = 0; names === undefined || start < names.length; start += tidyPerStep) {
+      const known = names;
+      const tidied = await noted(
+        start === 0
+          ? 'drop what tonight’s providers no longer cite'
+          : `drop what tonight’s providers no longer cite ${start / tidyPerStep + 1}`,
+        'tidying the findings',
+        async () => {
+          const all = known ?? (await services.state.pendingNames());
+          for (const entry of await services.state.pendingAt(
+            all.slice(start, start + tidyPerStep),
+          )) {
+            if (entry.owner === undefined || /^(?:logo|failed):/.test(entry.key)) continue;
+            if (
+              !ids.has(entry.owner) ||
+              (tonight.has(entry.owner) && cited[entry.key] === undefined)
+            ) {
+              await services.state.dropPending(entry.key);
+            }
+          }
+          return known === undefined ? all : undefined;
+        },
+      );
+      // A step that failed leaves the rest for the next night.
+      if (known === undefined && tidied === undefined) break;
+      names ??= tidied ?? [];
+    }
+
+    let pullRequest: string | undefined;
+    const lastDigest = await noted('read the last digest', 'the last digest’s date', () =>
+      services.state.lastDigest(),
     );
+    if (digestDue(settings, today, lastDigest)) {
+      // Steps pass each other only small data: which pending findings still stand (by their KV entry), and the review's
+      // notes by their place in that list. Each step reads the findings themselves, page texts and all, from KV. They're
+      // gathered pendingPerStep at a time, each part's baselines in one request, so no step outgrows a part (night.ts).
+      const kept: Record<string, number[]> = {};
+      let keys: string[] | undefined;
+      for (let start = 0; keys === undefined || start < keys.length; start += pendingPerStep) {
+        const name =
+          start === 0 ? 'gather the digest' : `gather the digest ${start / pendingPerStep + 1}`;
+        const known = keys;
+        const part = await noted(name, 'the digest', async () => {
+          const all = known ?? (await services.state.pendingNames());
+          const entries = await services.state.pendingAt(all.slice(start, start + pendingPerStep));
+          const pages = [
+            ...new Set(
+              entries.flatMap((entry) =>
+                entry.findings.flatMap((finding) => (finding.kind === 'page' ? [finding.url] : [])),
+              ),
+            ),
+          ];
+          const mains =
+            pages.length === 0 ? {} : await services.readBaselines(pages, repository.commit);
+          const found: Record<string, number[]> = {};
+          for (const entry of entries) {
+            const standing = stillPending(entry, index, mains, today, { alsoKept, tonight, ids });
+            if (standing.length === 0) await services.state.dropPending(entry.key);
+            else found[entry.key] = standing.map((finding) => entry.findings.indexOf(finding));
+          }
+          if (start + pendingPerStep >= all.length) await services.state.saveDigest(today);
+          return { all: known === undefined ? all : undefined, found };
+        });
+        // A part that failed leaves the rest waiting for next week's digest, which says so.
+        if (part === undefined) break;
+        keys ??= part.all ?? [];
+        Object.assign(kept, part.found);
+      }
+      const live = async () => {
+        const entries = new Map(
+          (await services.state.pendingOf(Object.keys(kept))).map(
+            (entry) => [entry.key, entry] as const,
+          ),
+        );
+        return Object.entries(kept).flatMap(([key, places]) => {
+          const entry = entries.get(key);
+          return entry ? places.map((place) => entry.findings[place]) : [];
+        });
+      };
+      if (Object.keys(kept).length > 0 || reported.length > 0) {
+        // The free model's review (M3.10), within the Neurons the night's checks left and the week's review items.
+        const noReview = { added: [], notes: [], neurons: 0 };
+        const review =
+          settings.reviewer === 'workers-ai'
+            ? ((await noted('review the digest', 'the digest’s review', async () => {
+                const findings = await live();
+                const done = await reviewWithModel(
+                  findings,
+                  await services.readTopics(repository.commit),
+                  (system, user) => services.ask(system, user),
+                  settings.batch.reviewItems,
+                  budget.neurons,
+                );
+                return {
+                  added: done.added,
+                  notes: [...done.notes].map(
+                    ([finding, note]) => [findings.indexOf(finding), note] as const,
+                  ),
+                  neurons: done.neurons,
+                };
+              })) ?? noReview)
+            : noReview;
+        budget = { ...budget, neurons: budget.neurons - review.neurons };
+        const reports =
+          reported.length > 0
+            ? await noted('weigh the reports', 'the price reports', async () =>
+                reportOutcomes(
+                  reported,
+                  await reportedPlans(reported, index, services),
+                  await live(),
+                ),
+              )
+            : undefined;
+        pullRequest = await noted('build the digest', 'the digest', async () => {
+          const findings = await live();
+          const reviewed = new Map(review.notes.map(([place, note]) => [findings[place], note]));
+          const all = [...findings, ...review.added];
+          const files = await services.readFiles(filesToRead(all, today), repository.commit);
+          const made = digest(all, new Map(Object.entries(files)), today, {
+            reviewer: settings.reviewer,
+            reviewed,
+            ...(reports && { reports }),
+          });
+          return services.propose(repository, made, digestBranch);
+        });
+        // The digest has them now; one that wasn't built keeps them for the next.
+        if (reported.length > 0 && pullRequest !== undefined) {
+          await noted('drop the reports', 'the price reports', async () => {
+            for (const { plan } of reported) await services.state.dropReport(plan);
+          });
+        }
+      }
+    }
+
+    // The discovery (M3.11), with what the checks and the digest left of the night: a step of its that fails is noted
+    // (discovery.ts), and anything else that fails it is noted here.
+    let discovery: Awaited<ReturnType<typeof discover>> | undefined;
+    try {
+      discovery = await discover(
+        {
+          today,
+          settings,
+          repository,
+          budget,
+          due: isDue(settings.cadence.discovery, checks[discoveryKey], today),
+          searchBudgets: searchBudgets(settings, 'bot'),
+        },
+        step,
+        services.discovery,
+      );
+    } catch (error) {
+      rethrowContinues(error);
+      await noteFailure('the discovery', `It failed: ${message(error)}`);
+    }
+    if (discovery?.took) checked[discoveryKey] = today;
+    await step('save the check dates', () => services.state.saveChecks(checked));
+    return {
+      findings,
+      ...(waited.count > 0 && { waited: waited.count }),
+      ...(pullRequest !== undefined && { pullRequest }),
+      ...(discovery?.pullRequest !== undefined && { batch: discovery.pullRequest }),
+    };
   } catch (error) {
-    rethrowContinues(error);
-    await noteFailure('the discovery', `It failed: ${message(error)}`);
+    if (error instanceof NightContinues) {
+      await step(`save the check dates before ${error.step}`, () =>
+        services.state.saveChecks(checked),
+      );
+    }
+    throw error;
   }
-  if (discovery?.took) checked[discoveryKey] = today;
-  await step('save the check dates', () => services.state.saveChecks(checked));
-  return {
-    findings,
-    ...(waited > 0 && { waited }),
-    ...(pullRequest !== undefined && { pullRequest }),
-    ...(discovery?.pullRequest !== undefined && { batch: discovery.pullRequest }),
-  };
 }
 
 /**

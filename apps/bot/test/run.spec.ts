@@ -837,6 +837,81 @@ describe('a night in parts (2026-11-10)', () => {
     return { parts, summary, proposals: services.proposals };
   }
 
+  it('keeps the check dates each part got to, so a night that stops still saves its progress', async () => {
+    const state = memoryState();
+    const services = await fakeServices(changedWorld(), undefined, {
+      baselines: baselinesOf(quietWorld()),
+      state,
+    });
+    // Parts until one has finished checking a page before it stopped.
+    let names: string[] = [];
+    let stopped: unknown;
+    const checkedOne = () =>
+      names.some(
+        (name) =>
+          name.startsWith('check ') &&
+          !(stopped instanceof NightContinues && stopped.step === name),
+      );
+    for (let part = 1; part <= 10 && !checkedOne(); part++) {
+      names = [];
+      const requests = new Requests(async () => new Response('ok'));
+      const steps = partSteps(stepper(names), requests, state.night(today, part > 1), 15);
+      stopped = await runNight(today, steps, counted(services, requests)).catch(
+        (error: unknown) => error,
+      );
+    }
+    expect(stopped).toBeInstanceOf(NightContinues);
+    expect(names.at(-1)).toBe(`save the check dates before ${(stopped as NightContinues).step}`);
+    expect(Object.values(await state.checks())).toContain(today);
+  });
+
+  it('checks first the providers checked longest ago, so a night goes on where the last one stopped', async () => {
+    const state = memoryState();
+    const yesterday = addDays(today, -1);
+    await state.saveChecks(
+      Object.fromEntries(
+        [...catalogIndex([netflix, mullvad], []).providers['mullvad'], 'logo:mullvad'].map(
+          (key) => [key, yesterday],
+        ),
+      ),
+    );
+    const services = await fakeServices(quietWorld(), undefined, {
+      baselines: baselinesOf(quietWorld()),
+      state,
+    });
+    const names: string[] = [];
+    await runNight(today, stepper(names), services);
+    const checks = names.filter((name) => name.startsWith('check '));
+    expect(checks[0]).toBe('check netflix');
+    expect(checks.at(-1)).toMatch(/^check mullvad/);
+  });
+
+  it('tidies the pending findings a part at a time, within a step’s requests to KV', async () => {
+    const state = memoryState();
+    for (let n = 0; n < 450; n++) {
+      await state.putPending({
+        key: `https://gone.example/${n}`,
+        seen: today,
+        owner: 'gone',
+        findings: [
+          { kind: 'manual', subject: 'gone', reason: 'A provider no longer in the catalog.' },
+        ],
+      });
+    }
+    const services = await fakeServices(quietWorld(), undefined, {
+      baselines: baselinesOf(quietWorld()),
+      state,
+    });
+    const names: string[] = [];
+    await runNight(today, stepper(names), services);
+    expect(names.filter((name) => name.startsWith('drop what'))).toEqual([
+      'drop what tonight’s providers no longer cite',
+      'drop what tonight’s providers no longer cite 2',
+      'drop what tonight’s providers no longer cite 3',
+    ]);
+    expect(await state.pendingNames()).toEqual([]);
+  });
+
   it('goes on in new parts until it’s done, none past its requests, to the digest of one night', async () => {
     const whole = await inParts(10_000);
     expect(whole.parts).toHaveLength(1);
@@ -873,7 +948,7 @@ describe('a night in parts (2026-11-10)', () => {
     const review =
       services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
     expect(review).toContain(
-      '**the night’s KV writes**: 9 checks waited for another night: the night had made its 600 KV writes.',
+      '**the night’s checks**: 9 checks waited for another night: the night had made its 600 KV writes.',
     );
   });
 

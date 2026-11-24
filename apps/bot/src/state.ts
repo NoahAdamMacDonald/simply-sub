@@ -41,6 +41,13 @@ export interface BotState {
   lastDigest(): Promise<IsoDate | undefined>;
   saveDigest(date: IsoDate): Promise<void>;
   pending(): Promise<Pending[]>;
+  /**
+   * The pending entries' KV names, sorted, without reading them: a step may make at most 1,000 requests to KV, and
+   * 2026-11-24 had 1,399 entries, so they're read a part at a time (pendingAt).
+   */
+  pendingNames(): Promise<string[]>;
+  /** The pending entries with these KV names that are still there. */
+  pendingAt(names: readonly string[]): Promise<Pending[]>;
   /** The pending entries of these keys (pages' URLs, logo: and failed: keys) that are still there. */
   pendingOf(keys: readonly string[]): Promise<Pending[]>;
   putPending(pending: Pending): Promise<void>;
@@ -114,6 +121,24 @@ export function kvState(kv: KvLike): BotState {
         }
         cursor = page.list_complete ? undefined : page.cursor;
       } while (cursor);
+      return found;
+    },
+    async pendingNames() {
+      const names: string[] = [];
+      let cursor: string | undefined;
+      do {
+        const page = await kv.list({ prefix: pendingPrefix, ...(cursor && { cursor }) });
+        names.push(...page.keys.map(({ name }) => name));
+        cursor = page.list_complete ? undefined : page.cursor;
+      } while (cursor);
+      return names.sort();
+    },
+    async pendingAt(names) {
+      const found: Pending[] = [];
+      for (const name of names) {
+        const value = await kv.get(name);
+        if (value) found.push(JSON.parse(value) as Pending);
+      }
       return found;
     },
     async pendingOf(keys) {
