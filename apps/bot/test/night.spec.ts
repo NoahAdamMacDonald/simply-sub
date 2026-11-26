@@ -164,6 +164,26 @@ describe('a night in parts', () => {
       expect(second.writes()).toBe(2);
     });
 
+    it('goes on in a new part once this one has made its requests to KV, but for its last step', async () => {
+      const writes = new Writes();
+      const state = memoryState(writes);
+      const names: string[] = [];
+      const step = partSteps(runner(names), new Requests(), state.night(date, false), 10, {
+        writes,
+        before: 0,
+        kvCalls: 2,
+      });
+      await step('check mullvad', async () => 'checked');
+      await step('check netflix', async () => 'checked');
+      await expect(step('check proton-vpn', async () => 'checked')).rejects.toEqual(
+        new NightContinues('check proton-vpn'),
+      );
+      expect(await step('save the check dates', async () => 'saved', { always: true })).toBe(
+        'saved',
+      );
+      expect(names).toEqual(['check mullvad', 'check netflix', 'save the check dates']);
+    });
+
     it('leaves page checks for another night past the parts they may take, but not the rest', async () => {
       const writes = new Writes();
       const state = memoryState(writes);

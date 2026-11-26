@@ -2413,8 +2413,13 @@ each night began again from the top of its slice, and the tidying and the digest
 - **Checks have the first 32 of a night's 40 parts** (`night.ts`, `checkParts`, `maxParts`): a check past them waits
   (`ChecksWait`), as one past the night's writes does, so the Bank of Canada's rate, the tidying, the digest and the
   check dates always run.
-- **Pending entries are read a part at a time** (`pendingNames`, `pendingAt`): a step may make 1,000 requests to KV, and
-  the tidying reads 200 entries a step, the digest 25.
+- **Pending entries are read a part at a time** (`pendingNames`, `pendingAt`): the tidying reads 200 entries a step, the
+  digest 25.
+- **Requests to KV are counted for the part (2026-11-25):** the 1,000 requests to Cloudflare's services are the
+  instance's, not a step's, and that night's part 33 passed them ("Too many API requests"): each part read every earlier
+  step's result on its own, then tidied. Now the earlier results are read at once (a list and a bulk get of 100 keys a
+  request), as are pending entries, a drop of an entry just read doesn't read it again, and a part that has made
+  `kvCallsPerPart` (500) requests to KV starts no new step: the night goes on in the next, after saving its check dates.
 
 **Settings (M3.8):** `data/automation.yaml`, checked by `data:validate` against core's `automationSchema`
 (`pipeline/automation.ts`, `data/schema/automation.schema.json`): a cadence for pricing pages, policy pages, logos and

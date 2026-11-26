@@ -51,7 +51,8 @@ export interface BotState {
   /** The pending entries of these keys (pages' URLs, logo: and failed: keys) that are still there. */
   pendingOf(keys: readonly string[]): Promise<Pending[]>;
   putPending(pending: Pending): Promise<void>;
-  dropPending(key: string): Promise<void>;
+  /** Drops an entry; `there` when the caller has just read it, which saves reading it again. */
+  dropPending(key: string, there?: boolean): Promise<void>;
   /** The month's searches (YYYY-MM), by engine. */
   searches(month: string): Promise<Searches>;
   countSearch(month: string, engine: SearchEngine): Promise<void>;
@@ -74,6 +75,8 @@ export interface BotState {
 /** The part of Workers KV the state uses. */
 export interface KvLike {
   get(key: string): Promise<string | null>;
+  /** At most kvBulkKeys keys in one request (Workers KV's bulk get), each with its value or null. */
+  getMany(keys: readonly string[]): Promise<Map<string, string | null>>;
   put(key: string, value: string, options?: { expirationTtl?: number }): Promise<void>;
   delete(key: string): Promise<void>;
   list(options: { prefix: string; cursor?: string }): Promise<{
@@ -81,6 +84,35 @@ export interface KvLike {
     list_complete: boolean;
     cursor?: string;
   }>;
+}
+
+/** The most keys one bulk get reads: Workers KV's limit. */
+export const kvBulkKeys = 100;
+
+/**
+ * The values of `keys`, kvBulkKeys a request. A Workflow instance may make 1,000 requests to Cloudflare's services, and
+ * part 33 of 2026-11-25 passed them reading the night's step results and the pending entries one key at a time.
+ */
+async function readMany(kv: KvLike, keys: readonly string[]): Promise<Map<string, string | null>> {
+  const found = new Map<string, string | null>();
+  for (let start = 0; start < keys.length; start += kvBulkKeys) {
+    for (const [key, value] of await kv.getMany(keys.slice(start, start + kvBulkKeys))) {
+      found.set(key, value);
+    }
+  }
+  return found;
+}
+
+/** Every key with `prefix`, a list request a thousand. */
+async function listAll(kv: KvLike, prefix: string): Promise<string[]> {
+  const names: string[] = [];
+  let cursor: string | undefined;
+  do {
+    const page = await kv.list({ prefix, ...(cursor && { cursor }) });
+    names.push(...page.keys.map(({ name }) => name));
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
+  return names;
 }
 
 const checksKey = 'bot:checks';
@@ -97,6 +129,13 @@ const nightTtl = 3 * 24 * 60 * 60;
 export function kvState(kv: KvLike): BotState {
   const searches = async (month: string) =>
     JSON.parse((await kv.get(`${searchPrefix}${month}`)) ?? '{}') as Searches;
+  const pendingAt = async (names: readonly string[]) => {
+    const values = await readMany(kv, names);
+    return names.flatMap((name) => {
+      const value = values.get(name);
+      return value ? [JSON.parse(value) as Pending] : [];
+    });
+  };
   return {
     async checks() {
       return JSON.parse((await kv.get(checksKey)) ?? '{}') as Record<string, IsoDate>;
@@ -124,30 +163,11 @@ export function kvState(kv: KvLike): BotState {
       return found;
     },
     async pendingNames() {
-      const names: string[] = [];
-      let cursor: string | undefined;
-      do {
-        const page = await kv.list({ prefix: pendingPrefix, ...(cursor && { cursor }) });
-        names.push(...page.keys.map(({ name }) => name));
-        cursor = page.list_complete ? undefined : page.cursor;
-      } while (cursor);
-      return names.sort();
+      return (await listAll(kv, pendingPrefix)).sort();
     },
-    async pendingAt(names) {
-      const found: Pending[] = [];
-      for (const name of names) {
-        const value = await kv.get(name);
-        if (value) found.push(JSON.parse(value) as Pending);
-      }
-      return found;
-    },
+    pendingAt,
     async pendingOf(keys) {
-      const found: Pending[] = [];
-      for (const key of keys) {
-        const value = await kv.get(pendingKey(key));
-        if (value) found.push(JSON.parse(value) as Pending);
-      }
-      return found;
+      return pendingAt(keys.map(pendingKey));
     },
     // KV allows the free plan's account 1,000 writes and 1,000 deletes a day, and the night of 2026-11-24 used up the
     // writes rewriting every checked page's entry only for its date. So an entry is written only when what it proposes
@@ -158,9 +178,9 @@ export function kvState(kv: KvLike): BotState {
       if (stored !== null && sameProposal(JSON.parse(stored) as Pending, pending)) return;
       await kv.put(key, JSON.stringify(pending));
     },
-    async dropPending(key) {
+    async dropPending(key, there = false) {
       const stored = pendingKey(key);
-      if ((await kv.get(stored)) !== null) await kv.delete(stored);
+      if (there || (await kv.get(stored)) !== null) await kv.delete(stored);
     },
     searches,
     async countSearch(month, engine) {
@@ -201,12 +221,16 @@ export function kvState(kv: KvLike): BotState {
       await kv.delete(reportKey(plan));
     },
     night(date, read) {
-      const key = (name: string) =>
-        `${nightPrefix}${date}:${name.length > 200 ? hash(name) : name}`;
+      const prefix = `${nightPrefix}${date}:`;
+      const key = (name: string) => `${prefix}${name.length > 200 ? hash(name) : name}`;
+      /** The earlier parts' results, read at once: a few requests, not one a step. */
+      let earlier: Promise<Map<string, string | null>> | undefined;
       return {
         read,
         async get(name) {
-          const value = await kv.get(key(name));
+          earlier ??= listAll(kv, prefix).then((names) => readMany(kv, names));
+          // A result KV's list doesn't show yet (it can lag a minute) is read on its own.
+          const value = (await earlier).get(key(name)) ?? (await kv.get(key(name)));
           return value === null
             ? undefined
             : (JSON.parse(value) as { value: unknown } | { failed: string });
@@ -260,6 +284,7 @@ export function memoryState(writes?: Writes): BotState & { kv: Map<string, strin
   const kv = new Map<string, string>();
   const inMemory: KvLike = {
     get: async (key) => kv.get(key) ?? null,
+    getMany: async (keys) => new Map(keys.map((key) => [key, kv.get(key) ?? null])),
     put: async (key, value) => void kv.set(key, value),
     delete: async (key) => void kv.delete(key),
     list: async ({ prefix }) => ({

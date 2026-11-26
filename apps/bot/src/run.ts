@@ -70,6 +70,8 @@ export interface StepOptions {
    * for checks (night.ts): it throws ChecksWait instead of running.
    */
   mayWait?: boolean;
+  /** The part's last step, which runs even once the part has made its requests to KV (night.ts). */
+  always?: boolean;
 }
 
 /** What to check: each provider's and bundle's pages, every host, and every page the catalog cites. */
@@ -590,7 +592,7 @@ export async function runNight(
               !ids.has(entry.owner) ||
               (tonight.has(entry.owner) && cited[entry.key] === undefined)
             ) {
-              await services.state.dropPending(entry.key);
+              await services.state.dropPending(entry.key, true);
             }
           }
           return known === undefined ? all : undefined;
@@ -630,7 +632,7 @@ export async function runNight(
           const found: Record<string, number[]> = {};
           for (const entry of entries) {
             const standing = stillPending(entry, index, mains, today, { alsoKept, tonight, ids });
-            if (standing.length === 0) await services.state.dropPending(entry.key);
+            if (standing.length === 0) await services.state.dropPending(entry.key, true);
             else found[entry.key] = standing.map((finding) => entry.findings.indexOf(finding));
           }
           if (start + pendingPerStep >= all.length) await services.state.saveDigest(today);
@@ -737,8 +739,10 @@ export async function runNight(
     };
   } catch (error) {
     if (error instanceof NightContinues) {
-      await step(`save the check dates before ${error.step}`, () =>
-        services.state.saveChecks(checked),
+      await step(
+        `save the check dates before ${error.step}`,
+        () => services.state.saveChecks(checked),
+        { always: true },
       );
     }
     throw error;

@@ -70,7 +70,14 @@ export function workerServices(
     fetch: send,
   });
   // Its writes counted, for the night's budget (writes.ts).
-  const state = kvState(writes.count(env.KV as unknown as KvLike));
+  const kv: KvLike = {
+    get: (key) => env.KV.get(key),
+    getMany: (keys) => env.KV.get([...keys]),
+    put: (key, value, options) => env.KV.put(key, value, options),
+    delete: (key) => env.KV.delete(key),
+    list: (options) => env.KV.list(options),
+  };
+  const state = kvState(writes.count(kv));
   return {
     async readProviderIds() {
       return (await select<{ id: string }>(env.DB, 'SELECT id FROM providers ORDER BY id')).map(
