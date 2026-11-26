@@ -51,3 +51,33 @@ describe('pending entries', () => {
     expect(await state.pending()).toEqual([]);
   });
 });
+
+describe('reading in bulk (2026-11-25)', () => {
+  it('reads pending entries a hundred a request', async () => {
+    const writes = new Writes();
+    const state = memoryState(writes);
+    for (let n = 0; n < 250; n++)
+      await state.putPending({ ...entry, key: `https://example.com/${n}` });
+    writes.calls = 0;
+    const found = await state.pendingAt(await state.pendingNames());
+    expect(found).toHaveLength(250);
+    // One list, and three bulk reads.
+    expect(writes.calls).toBe(4);
+  });
+
+  it('reads the earlier parts’ step results at once, not one a step', async () => {
+    const writes = new Writes();
+    const state = memoryState(writes);
+    const first = state.night('2026-11-25', false);
+    for (let n = 0; n < 150; n++) await first.put(`check provider-${n}`, n);
+    writes.calls = 0;
+    const second = state.night('2026-11-25', true);
+    for (let n = 0; n < 150; n++) {
+      expect(await second.get(`check provider-${n}`)).toEqual({ value: n });
+    }
+    expect(writes.calls).toBe(3);
+    // A step no part has finished is read on its own.
+    expect(await second.get('build the digest')).toBeUndefined();
+    expect(writes.calls).toBe(4);
+  });
+});

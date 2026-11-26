@@ -1,6 +1,6 @@
 import { OutOfRequests, requestsPerPart, type Requests } from './requests';
 import type { Step, StepOptions } from './run';
-import { Writes, writesPerNight } from './writes';
+import { kvCallsPerPart, Writes, writesPerNight } from './writes';
 
 // A night in parts (BLUEPRINT §6.4): a Workflow instance is a part, which sends out at most requestsPerPart requests.
 // Each step gets what's left of them; one that would pass it stops the part, and the night goes on in its next part, a
@@ -61,6 +61,8 @@ export interface NightWrites {
   part?: number;
   /** The last part that starts a step that may wait: checkParts. */
   lastCheckPart?: number;
+  /** The requests to KV past which the part starts no new step: kvCallsPerPart. */
+  kvCalls?: number;
 }
 
 /**
@@ -86,7 +88,14 @@ export function partSteps(
   requests: Requests,
   memo: Memo & { read: boolean },
   limit = requestsPerPart,
-  { writes, before, budget = writesPerNight, part = 1, lastCheckPart = checkParts }: NightWrites = {
+  {
+    writes,
+    before,
+    budget = writesPerNight,
+    part = 1,
+    lastCheckPart = checkParts,
+    kvCalls = kvCallsPerPart,
+  }: NightWrites = {
     writes: new Writes(),
     before: 0,
   },
@@ -107,6 +116,9 @@ export function partSteps(
     }
     if (options.mayWait && written >= budget) throw new ChecksWait('writes');
     if (options.mayWait && part > lastCheckPart) throw new ChecksWait('parts');
+    // A part's requests to Cloudflare's services are counted for the instance, as its requests out are: past
+    // kvCalls, the night goes on in a new part (2026-11-25), but for the part's last step.
+    if (!options.always && writes.calls >= kvCalls) throw new NightContinues(name);
     const fail = async (error: unknown) => {
       await memo.fail(name, error instanceof Error ? error.message : String(error));
       return error;
